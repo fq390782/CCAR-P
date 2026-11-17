@@ -1,0 +1,154 @@
+[
+  {
+    "number": "Q-M-46",
+    "heading": "Q-M-46 (V2-D6.2)",
+    "question": "An architect compares RAG and fine-tuning for a policy\nassistant. The policies update monthly. Stakeholders ask which choice is\neasier to reverse.\n\nWhat is the correct reversal-cost comparison?",
+    "choices": {
+      "A": "Fine-tuning is easier to reverse: just retrain.",
+      "B": "RAG is easier to reverse: swap or re-ingest documents without\nretraining. Fine-tuning reversal means retraining or rollback of model\nweights with new evals.",
+      "C": "Both reverse with one config flag.",
+      "D": "Reversal cost does not matter."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: trade-off communication (reversal cost).\n2. Lifecycle stage: design communication.\n3.\n\nObjective: compare reversal cost honestly.\n4. Hard constraints: policies update monthly. Stakeholders decide on\nthe comparison.\n5. System layer: architecture decisions and trade-offs (V2-D6.2).\n\n6. Eliminate infeasible: all four are statable.\n7. Eliminate constraint-violating: A inverts the costs, C is false, D\nignores a decision axis.\n8. Compare on objective: only B prices both reversals.\n\n9. Hidden dependencies: the RAG reversal still needs re-ingest and a\nregression check.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"The policies update monthly... which\nchoice is easier to reverse.\"\n3. Requirement-to-option matrix:\n\nComparison | A | B | C | D\nRAG reversal priced | No | Yes | No | No\nFine-tune reversal priced | Wrong | Yes | No | No\n\nWhy B is right: reversing RAG means re-ingesting or swapping\ndocuments: minutes to hours, no training. Reversing fine-tuning means\nretraining or rolling back weights plus re-running evals: hours to days\nwith new risk. Monthly policy updates make this gap recur monthly.\nWhy B best meets the objective: V2-D6.2 requires benefit, cost, risk,\nand reversal cost per option. B is the only option that states both\nreversal costs.\nEvery rejected choice explained: A calls retraining easy. It is the\nexpensive path. C invents a flag that does not exist. D drops a\nrequired axis: stakeholders cannot decide without it.\nExact limitation or tradeoff: RAG reversal still needs the re-ingest\npipeline and a regression gate. \"Easier\" is not \"free.\"\nRelevant evidence (with date): reversal cost as a trade-off axis from\nlesson-D6-2 (§4), Oct 6 2026, RAG vs fine-tuning from lesson-D3-5, Oct\n6 2026.\nCounterfactual where each plausible alternative wins: A wins when the\ntraining pipeline is one click and the document set is huge. C wins\nnever. D wins never for stakeholders.\nMisconception tested: \"the better option has no reversal cost.\"\nEvery option has one. Name it.",
+    "source_section": "V2-D6.2"
+  },
+  {
+    "number": "Q-M-47",
+    "heading": "Q-M-47 (V2-D7.1)",
+    "question": "A 30-person consultancy uses Claude Code on client repos.\nClient secrets live in .env files. The team lead proposes a CLAUDE.md\nnote: \"Never read client secrets.\"\n\nWhat is the correct team configuration?",
+    "choices": {
+      "A": "The CLAUDE.md note is enough for 30 people.",
+      "B": "Use enforceable permissions in the committed settings. Deny rules on secret paths (.env, key files). Add hooks that block secret exfil. Keep CLAUDE.md for workflow guidance only.",
+      "C": "Do not use configuration. Trust the team.",
+      "D": "Use a longer CLAUDE.md note. Put the rule in bold."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: team tool configuration.\n2. Lifecycle stage: enablement.\n3.\n\nObjective: protect client secrets across 30 people.\n4. Hard constraints: client secrets in repos, 30 users, secrets must\nnever be read or exfiltrated.\n5. System layer: Claude Code team config (V2-D7.1).\n6.\n\nEliminate infeasible: all four are feasible.\n7. Eliminate constraint-violating: A, C, and D rely on guidance or\ntrust.\n8. Compare on objective: only B enforces in code.\n9.\n\nHidden dependencies: the deny rules need tests proving they fire,\nand a legitimate path for approved secret use.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"Client secrets live in .env files...\n'Never read client secrets.'\"\n3.\n\nRequirement-to-option matrix:\n\nRequirement | A | B | C | D\nBlocks the read in code | No | Yes | No | No\nBlocks exfiltration | No | Yes | No | No\nAuditable enforcement | No | Yes | No | No\n\nWhy B satisfies all hard constraints: deny rules run before the tool\nand block the read. Hooks catch exfil paths. The committed settings\napply to all 30 clones. Guidance stays in CLAUDE.md where it belongs.\nWhy B best meets the objective: V2-D7.1 is explicit: instructions vs\nenforceable permissions, and never CLAUDE.md alone for controls. B is\nthe only option that separates the two.\nEvery rejected choice explained: A is the sign-not-lock trap at team\nscale: 30 people times model non-obedience. C is no control at all. D\nis A with formatting. Bold does not enforce.\nExact limitation or tradeoff: deny rules need design time and an\nexception path, or developers route around them.\nRelevant evidence (with date): instructions vs enforceable\npermissions from lesson-D7-1 (§4), Oct 6 2026.\nCounterfactual where each plausible alternative wins: A wins for a\nsolo dev with no secrets. C wins never for client secrets. D wins\nnever as a control.\nMisconception tested: \"a written rule is a control.\" Only the rule\nthe code enforces is a control.",
+    "source_section": "V2-D7.1"
+  },
+  {
+    "number": "Q-M-48",
+    "heading": "Q-M-48 (V2-D7.2), Select TWO",
+    "question": "An engineer uses an AI assistant to write an incident\npostmortem. The draft cites a root cause and a fix. The team will act\non the fix this week.\n\nWhich TWO verifications are necessary before the team acts? Select TWO.",
+    "choices": {
+      "A": "The engineer ran the cited tests and inspected the results herself.",
+      "B": "The engineer confirmed no secrets appear in the draft or the pasted\nlogs.",
+      "C": "The draft has no typos.",
+      "D": "The draft uses the team's font.",
+      "E": "The assistant's confidence is high."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: AI-assisted work verification (multi).\n2. Lifecycle stage: operations.\n3. Objective: verify the postmortem before acting on it.\n4. Hard constraints: the team acts on the fix this week. A wrong fix\nwastes the week or harms the system.\n5. System layer: developer workflow verification (V2-D7.2).\n6. Eliminate infeasible: all five are doable.\n7. Eliminate constraint-violating: C and D are cosmetic, E is\nuncalibrated.\n8. Compare on objective: A verifies the technical claim, B verifies\nsecret safety.\n9. Hidden dependencies: the test results must be re-runnable by a\nsecond engineer.\n10. Verify: A and B. The rest are cosmetic or empty.\n\nExplanation.\n1. Correct answer: A, B.\n2. Decisive scenario phrase: \"The team will act on the fix this week.\"\n3. Requirement-to-option matrix:\n\nRequirement | A | B | C | D | E\nVerifies the technical claim | Yes | No | No | No | No\nProtects secrets | No | Yes | No | No | No\n\nA and B are necessary. Acting on the fix makes the draft's claims load-bearing. The engineer must verify the tests ran. The engineer must verify the results hold. Pasted logs are a common secret leak path. The draft needs a secret check.\nWhy A and B best meet the objective: V2-D7.2 requires verification of AI-assisted work: tests ran, results inspected, secrets protected. A and B are those three, split across two options.\nEvery rejected choice explained: C polishes prose while the fix may be wrong. D is about format. E trusts the model's self-report, which is not verification.\nExact limitation or tradeoff: verification takes engineer time. That is the price of acting on AI-drafted claims.\nRelevant evidence (with date): verification requirements from lesson-D7-2 (§4), Oct 6 2026.\nConsider a counterfactual. Each plausible alternative wins. C wins for a published report. This happens after you verify the fix. D never wins as verification. E never wins.\nThis tests a misconception. The misconception is \"the AI wrote it, so it is checked.\" The human checks it. This is the rule.",
+    "source_section": "V2-D7.2"
+  },
+  {
+    "number": "Q-M-49",
+    "heading": "Q-M-49 (V2-D7.3)",
+    "question": "The monthly model bill jumps 3x. Nothing shipped this\nmonth. The on-call engineer opens the runbook.\n\nWhat does the runbook's cost branch check first?",
+    "choices": {
+      "A": "The model's mood.",
+      "B": "Routing (are cheap queries hitting the expensive tier), context\n(oversized or duplicated context per call), and caching (cache hit rate\ndrops): the symptom-to-investigation map for cost.",
+      "C": "The office Wi-Fi.",
+      "D": "The vendor's stock price."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: operational debugging.\n2. Lifecycle stage: operate.\n3.\n\nObjective: find the cost spike's cause fast.\n4. Hard constraints: 3x bill, no shipments, on-call needs a fast path.\n5. System layer: debugging and operational resolution (V2-D7.3).\n6.\n\nEliminate infeasible: all four are statable.\n7. Eliminate constraint-violating: A, C, and D are not causes.\n8. Compare on objective: only B follows the cost investigation map.\n9.\n\nHidden dependencies: the runbook needs per-tier and per-stage cost\nbreakdowns to check the branches.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"The monthly model bill jumps 3x. Nothing\nshipped this month.\"\n3.\n\nRequirement-to-option matrix:\n\nCheck | A | B | C | D\nFollows the cost map | No | Yes | No | No\nNames real cost drivers | No | Yes | No | No\n\nWhy B is right: V2-D7.3 maps cost symptoms to route choice, context, and\ncaching investigations. A router misconfiguration, a context blowup, or\na cache outage each explain a 3x bill with no shipments.\nWhy B best meets the objective: the runbook exists so the on-call engineer checks causes in probability order instead of guessing. B is that order.\nEvery rejected choice explained: A is nonsense. C is the local network. The bill is server-side. D is the vendor's equity. It does not set the bill.\nThe map needs the cost breakdowns. Instrument the cost breakdowns in advance. You cannot debug a bill without per-stage data.\nRelevant evidence (with date): symptom-to-investigation mapping from lesson-D7-3 (§4), Oct 6 2026.\nCounterfactual where each plausible alternative wins: A wins never. C wins when the symptom is local latency. D wins never.\nMisconception tested: \"debug by intuition.\" Debug by the map. The map is the runbook's job.",
+    "source_section": "V2-D7.3"
+  },
+  {
+    "number": "Q-M-50",
+    "heading": "Q-M-50 (V2-D7.1)",
+    "question": "A data-science team wants a research subagent: web search\nand file reads for literature review. The team's main agent holds write\naccess to production data pipelines.\n\nHow must you scope the subagent?",
+    "choices": {
+      "A": "Give the subagent the same tools as the main agent for simplicity.",
+      "B": "Scope the subagent to read-only tools (search, read) with no write\naccess and no production credentials. It returns findings, and the main\nagent acts on them.",
+      "C": "No subagent. Do research in the main agent.",
+      "D": "Give the subagent write access but ask it nicely to read only."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: subagent scoping.\n2. Lifecycle stage: enablement.\n3.\n\nObjective: bound the research subagent's blast radius.\n4. Hard constraints: main agent holds production write access. Research\nneeds only search and read.\n5. System layer: scoped subagents (V2-D7.1).\n\n6. Eliminate infeasible: all four are feasible.\n7. Eliminate constraint-violating: A copies production writes, D trusts\na request.\n8. Compare on objective: only B gives the subagent exactly what the\nsubtask needs.\n\n9. Hidden dependencies: the handoff back to the main agent needs a\nfindings schema.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"web search and file reads for literature\nreview... main agent holds write access to production data pipelines.\"\n3. Requirement-to-option matrix:\n\nRequirement | A | B | C | D\nLeast privilege per subagent | No | Yes | N/A | No\nProduction writes fenced off | No | Yes | N/A | No\nSubtask still doable | Yes | Yes | Yes | Yes\n\nWhy B satisfies all hard constraints: the subagent gets search and\nread only. No write tool means no write path, whatever the model\ndecides. Production credentials never enter its context.\nWhy B best meets the objective: V2-D7.1 scopes subagents with their own tool lists under least privilege. B is the pattern: the research\nloop cannot touch what it cannot see.\nEvery rejected choice explained: A hands production writes to a loop that never needs them: maximum blast radius. C avoids the scoping question but keeps research inside the privileged loop, which is worse. D is the prompt-as-permission trap: \"ask nicely\" is not scoping.\nExact limitation or tradeoff: the findings handoff needs a schema, or the main agent misreads the research.\nRelevant evidence (with date): scoped subagents from lesson-D7-1 (§4), Oct 6 2026.\nCounterfactual where each plausible alternative wins: A wins never for least privilege. C wins when the research needs the main agent's tools. D wins never as scoping.\nMisconception tested: \"one tool list for the whole team is simpler.\" Simpler to configure, wider to breach. Scope per loop.",
+    "source_section": "V2-D7.1"
+  },
+  {
+    "number": "M1-Q01",
+    "heading": "M1-Q01 (V2-D1.1)",
+    "question": "A commercial fishing fleet files 5,000 catch reports per\nday. About 90% are standard forms. About 10% are incident narratives.\nOne hard rule: no quota filing on an unverified catch weight.\n\nWhich design fits best?",
+    "choices": {
+      "A": "One agent files every report with no checks.",
+      "B": "Deterministic rules file the 90% standard reports. Claude drafts the\nincident summaries. A code gate blocks any filing until the weight check\npasses.",
+      "C": "The most capable tier files every report with no checks.",
+      "D": "A human reviews all 5,000 reports."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"no quota filing on an unverified catch\nweight.\" Why: the fork maps fixed forms to rules and open narratives to\nClaude. The code gate enforces the hard rule on every filing. D cannot\nfit 5,000 daily reviews, and A and C have no gate. Counterfactual: D\nwins at 40 reports per day with legal risk per filing.",
+    "source_section": "V2-D1.1"
+  },
+  {
+    "number": "M1-Q02",
+    "heading": "M1-Q02 (V2-D1.1)",
+    "question": "A concert venue processes 3,000 refund requests per show. About 95% match standard policies. People dispute about 5% of the claims. Finance states one rule. Money never moves on an unchecked refund total.\n\nWhat is the best FIRST action?",
+    "choices": {
+      "A": "Build the end-to-end refund agent this week.",
+      "B": "Benchmark tiers on 1,000 past refunds.",
+      "C": "Write the constraint into the design: fork standard policies to\ndeterministic rules, route disputes to Claude, and gate every total in\ncode before payment.",
+      "D": "Draft a strict system prompt forbidding wrong refunds."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"money never moves on an unchecked refund\ntotal.\" Why: hard constraints filter the design before any build. A\nbuilds before the constraint exists. D puts a money rule in a prompt,\nwhich is guidance, not enforcement. Counterfactual: A wins for a\nthrowaway demo with no money movement.",
+    "source_section": "V2-D1.1"
+  },
+  {
+    "number": "M1-Q03",
+    "heading": "M1-Q03 (V2-D1.2), Select TWO",
+    "question": "A telehealth triage pipeline takes patient chat, checks\nsymptoms against the clinical knowledge base, and books appointments in\nthe EHR. Patient chat may contain manipulation attempts. The EHR is the\nsystem of record.\n\nWhich TWO are trust boundaries in this pipeline? Select\nTWO.",
+    "choices": {
+      "A": "Between patient chat input and symptom checking.",
+      "B": "Between the knowledge base and the model.",
+      "C": "Between the booking tool and the EHR write.",
+      "D": "Between two internal microservices with mutual TLS.",
+      "E": "Between the log writer and the log store."
+    },
+    "answer": ["A", "C"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"Patient chat may contain manipulation\nattempts. The EHR is the system of record.\" Why: untrusted patient input\ncrosses into symptom checking, so the boundary needs input screening.\nThe EHR write is the side effect, so the boundary needs authorization in\ncode. B, D, and E are internal trusted crossings.\n\nCounterfactual: D\nwins as a boundary if the microservices sit in different trust zones.",
+    "source_section": "V2-D1.2"
+  },
+  {
+    "number": "M1-Q04",
+    "heading": "M1-Q04 (V2-D1.2)",
+    "question": "A bank builds loan pre-approval: application intake,\nvalidation, credit bureau pull, model scoring, verification, decision\nletter, feedback. A wrong approval costs the bank the loan amount.\n\nWhere does verification sit?",
+    "choices": {
+      "A": "Before intake, on the raw application.",
+      "B": "After model scoring and before the decision letter, checking the\nscore inputs against the bureau data.",
+      "C": "After the decision letter is sent.",
+      "D": "Nowhere. The model scores well."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"A wrong approval costs the bank the loan\namount.\" Why: verification sits after the model and before the side\neffect. It checks the score's inputs against the trusted bureau data.\nA reviews nothing decidable, C acts after the harm, D has no control.\nCounterfactual: C wins for a reversible pre-qualification estimate.",
+    "source_section": "V2-D1.2"
+  },
+  {
+    "number": "M1-Q05",
+    "heading": "M1-Q05 (V2-D1.3)",
+    "question": "An insurer processes claims. The steps are fixed. These steps are intake, fraud screen, policy check, payout calculation, and pay. About 8% of claims need a judgment. This judgment is for ambiguous policy language.\n\nWhich pattern fits?",
+    "choices": {
+      "A": "Use a pure deterministic workflow for all claims.",
+      "B": "Use a pure autonomous agent loop for all claims.",
+      "C": "Use a hybrid. The hybrid uses a deterministic workflow for the fixed steps. It routes an agent call for the 8% ambiguous cases.\n\nIt then returns to the workflow for payout.",
+      "D": "Use an augmented single call with no tools."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is: \"Steps are fixed... 8% need judgment on ambiguous policy language.\" Fixed steps need the workflow's predictability. The ambiguous 8% needs judgment at run time. The hybrid gives each its pattern.\n\nIt uses a handoff. Counterfactual: B wins if you cannot list the step order in advance.",
+    "source_section": "V2-D1.3"
+  }
+]

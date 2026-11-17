@@ -1,0 +1,208 @@
+<h3 id="bank-mocks-h232">M4-Q27 (V2-D3.5), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1032" data-kind="prose"><strong>Scenario.</strong> A RAG pipeline for HR policies is built. The team wants
+cited answers employees can trust.</p>
+
+<p id="sec-bank-mocks-p1033" data-kind="prose"><strong>Question.</strong> Which TWO stages make citations trustworthy? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1034" data-kind="prose"><strong>Options.</strong>
+A) Grounding checks: each claim verified against its source chunk.
+B) Citation support checks: cited spans must imply the claims.
+C) Bigger chunks.
+D) More documents.
+E) A stronger model.</p>
+
+<p id="sec-bank-mocks-p1035" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1036" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "cited answers employees can trust."
+Why: trust needs verification stages: grounding plus citation support.
+C, D, and E improve retrieval or generation, not trust.
+Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h233">M4-Q28 (V2-D3.6)</h3>
+
+<p id="sec-bank-mocks-p1037" data-kind="prose"><strong>Scenario.</strong> A delivery tracker shows package locations from a
+yesterday's export. Locations update every few minutes.</p>
+
+<p id="sec-bank-mocks-p1038" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p1039" data-kind="prose"><strong>Options.</strong>
+A) Nothing. Exports are fine.
+B) Stale export for live state: locations change every few minutes.
+Put live tracking behind a tool call. Keep the export for history.</p>
+
+<p id="sec-bank-mocks-p1040" data-kind="prose">C) The bot needs a bigger model.
+D) Packages should stop moving.</p>
+
+<p id="sec-bank-mocks-p1041" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "yesterday's export. Locations update
+every few minutes." Why: live state belongs behind a tool call.
+Yesterday's locations are wrong all day. Counterfactual: A wins for
+historical reports.</p>
+
+
+<h3 id="bank-mocks-h234">M4-Q29 (V2-D3.7)</h3>
+
+<p id="sec-bank-mocks-p1042" data-kind="prose"><strong>Scenario.</strong> Four teams in three languages need the same currency
+conversion capability.</p>
+
+<p id="sec-bank-mocks-p1043" data-kind="prose"><strong>Question.</strong> Which mechanism fits?</p>
+
+<p id="sec-bank-mocks-p1044" data-kind="prose"><strong>Options.</strong>
+A) Each team builds its own converter.
+B) An MCP server with declared conversion tools. All four teams
+consume it.
+C) A CLI wrapper with text parsing.
+D) A shared spreadsheet.</p>
+
+<p id="sec-bank-mocks-p1045" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "Four teams in three languages need the
+same capability." Why: reuse across teams and languages is the MCP win
+condition. A duplicates four times. Counterfactual: A wins for one
+team in one language.</p>
+
+
+<h3 id="bank-mocks-h235">M4-Q30 (V2-D3.7), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1046" data-kind="prose"><strong>Scenario.</strong> A team integrates: (1) a shared logging capability
+needed by eight services, (2) a single admin script that shells to a
+vendor CLI.</p>
+
+<p id="sec-bank-mocks-p1047" data-kind="prose"><strong>Question.</strong> Which TWO are correct? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1048" data-kind="prose"><strong>Options.</strong>
+A) MCP server (or shared library/service) for the eight-service
+logging capability.
+B) CLI wrapper for the single admin script's vendor CLI.
+C) MCP server for the single admin script.
+D) Eight separate logging reimplementations.
+E) Manual log copying.</p>
+
+<p id="sec-bank-mocks-p1049" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1050" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;eight services... single admin
+script.&quot; Why: eight consumers justify the shared mechanism. The
+one-off CLI takes the wrapper. C pays tax for one use. D duplicates
+eight times.</p>
+
+<p id="sec-bank-mocks-p1051" data-kind="prose">Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h236">M4-Q31 (V2-D3.8)</h3>
+
+<p id="sec-bank-mocks-p1052" data-kind="prose"><strong>Scenario.</strong> A data-entry agent uses 5 tools. The SLA is 1 second.
+Tokens are fine.</p>
+
+<p id="sec-bank-mocks-p1053" data-kind="prose"><strong>Question.</strong> Which strategy fits?</p>
+
+<p id="sec-bank-mocks-p1054" data-kind="prose"><strong>Options.</strong>
+A) Progressive discovery.
+B) Monolithic context: 5 schemas up front, no round trips under the
+1-second SLA.
+C) Remove the tools.
+D) Discovery with two round trips.</p>
+
+<p id="sec-bank-mocks-p1055" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "5 tools... SLA is 1 second." Why: tiny
+surface plus tight SLA favors monolithic. Discovery's round trips risk
+the SLA for no gain. Counterfactual: A wins at 50 tools with a loose
+SLA.</p>
+
+
+<h3 id="bank-mocks-h237">M4-Q32 (V2-D4.1)</h3>
+
+<p id="sec-bank-mocks-p1056" data-kind="prose"><strong>Scenario.</strong> A meeting-action extractor must not invent action items.
+The team debates the primary metric.</p>
+
+<p id="sec-bank-mocks-p1057" data-kind="prose"><strong>Question.</strong> Which metric is primary?</p>
+
+<p id="sec-bank-mocks-p1058" data-kind="prose"><strong>Options.</strong>
+A) Actions extracted per minute.
+B) Groundedness: each action item traces to the transcript.
+C) Token cost.
+D) The model's name.</p>
+
+<p id="sec-bank-mocks-p1059" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "must not invent action items." Why: the
+requirement is truth. Groundedness measures exactly that.
+Counterfactual: C wins when the budget binds and truth is already met.</p>
+
+
+<h3 id="bank-mocks-h238">M4-Q33 (V2-D4.1)</h3>
+
+<p id="sec-bank-mocks-p1060" data-kind="prose"><strong>Scenario.</strong> A chatbot's requirement is "helpful answers." The team
+proposes CSAT at or above 4.2/5 on sampled chats.</p>
+
+<p id="sec-bank-mocks-p1061" data-kind="prose"><strong>Question.</strong> Is this sufficient as an acceptance threshold?</p>
+
+<p id="sec-bank-mocks-p1062" data-kind="prose"><strong>Options.</strong>
+A) Yes, fully.
+B) Partially: it needs the sampling method, sample size, and
+measurement cadence defined, or teams will game the sample.
+C) No. SAT never matters.
+D) Yes, and stop measuring anything else.</p>
+
+<p id="sec-bank-mocks-p1063" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "CSAT at or above 4.2/5 on sampled chats."
+Why: a threshold needs the metric, the line, and the measurement
+method. Undefined sampling invites cherry-picking. Counterfactual: A
+wins when the sampling standard is already fixed.</p>
+
+
+<h3 id="bank-mocks-h239">M4-Q34 (V2-D4.2)</h3>
+
+<p id="sec-bank-mocks-p1064" data-kind="prose"><strong>Scenario.</strong> A team keeps no holdout set: all labeled data trains the
+model, and the same data measures it.</p>
+
+<p id="sec-bank-mocks-p1065" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p1066" data-kind="prose"><strong>Options.</strong>
+A) Nothing. More training data is better.
+B) No generalization measurement: scores on training data measure
+memorization. Hold out a representative set the model never trains on.
+C) The model is too big.</p>
+
+<p id="sec-bank-mocks-p1067" data-kind="prose">D) Labels are bad.</p>
+
+<p id="sec-bank-mocks-p1068" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "the same data measures it." Why: V2-D4.2
+requires holdouts. Training-set scores flatter. Counterfactual: A wins
+never for evaluation.</p>
+
+
+<h3 id="bank-mocks-h240">M4-Q35 (V2-D4.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1069" data-kind="prose"><strong>Scenario.</strong> An eval set for a travel bot has only English queries.</p>
+
+<p id="sec-bank-mocks-p1070" data-kind="prose"><strong>Question.</strong> Which TWO drawers are absent? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1071" data-kind="prose"><strong>Options.</strong>
+A) Representative coverage of the other supported languages.
+B) Malformed cases: garbled, partial, or mistyped queries.
+C) More English queries.
+D) The training set again.
+E) Blank screens.</p>
+
+<p id="sec-bank-mocks-p1072" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1073" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "only English queries." Why: the
+representative drawer misses whole languages. The malformed drawer is
+empty though real traffic is messy. Counterfactual: E wins never as a
+drawer name.</p>
+
+
+<h3 id="bank-mocks-h241">M4-Q36 (V2-D4.3)</h3>
+
+<p id="sec-bank-mocks-p1074" data-kind="prose"><strong>Scenario.</strong> A team tests two prompts by showing prompt A on Mondays
+and prompt B on Tuesdays.</p>
+
+<p id="sec-bank-mocks-p1075" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p1076" data-kind="prose"><strong>Options.</strong>
+A) Do nothing. The days are different.
+B) The day-of-week confuses the test. Traffic is different by day. Assign users randomly.</p>
+
+<p id="sec-bank-mocks-p1077" data-kind="prose">Assign users consistently per user.
+C) You cannot test prompts.
+D) The week is too short.</p>
+
+<p id="sec-bank-mocks-p1078" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "prompt A on Mondays and prompt B on
+Tuesdays." Why: the assignment confounds the variant with the day.
+V2-D4.3 requires consistent randomized assignment. Counterfactual: A
+wins never with day-based assignment.</p>
+

@@ -1,0 +1,955 @@
+<h3 id="bank-d2-h17">Q-D2-16 (V2-D2.4)</h3>
+
+<p id="sec-bank-d2-p154" data-kind="prose"><strong>Scenario.</strong> A support agent has long conversations. Tokens per turn increase each turn. By turn 30, the context holds 60,000 tokens. The cost per turn tripled. The agent starts to drop early details.</p>
+
+<p id="sec-bank-d2-p155" data-kind="prose"><strong>Question.</strong> What is the best fix?</p>
+
+<p id="sec-bank-d2-p156" data-kind="prose"><strong>Options.</strong>
+A) Summarize the full history every turn.
+B) Switch to just-in-time retrieval for older turns plus a compaction trigger at a token threshold, keeping the working set small.
+C) Move to a tier with a larger context window.
+D) Truncate the oldest turns silently when the window fills.</p>
+
+<p id="sec-bank-d2-p157" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d2-p158" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best fix for context growth.
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d2-p159" data-kind="prose">Objective: bounded cost per turn with early details available on demand.
+4. Hard constraints: tokens grow every turn, early details still matter, cost per turn tripled.
+5. System layer: context management.
+6.</p>
+
+<p id="sec-bank-d2-p160" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: D silently drops details the agent needs, the scenario says early details matter.
+8. Compare on objective: B bounds the working set and keeps history retrievable.
+9.</p>
+
+<p id="sec-bank-d2-p161" data-kind="prose">Hidden dependencies: the compaction trigger needs a summary that preserves decisions and facts, JIT needs the history indexed.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d2-p162" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "Tokens per turn grow every turn" and "the agent starts dropping early details."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Bounds per-turn cost</td>
+<td>Partial</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Early details retrievable</td>
+<td>Risked</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>No silent loss</td>
+<td>Risked</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. JIT keeps the working set small. The compaction trigger fires at a threshold. Indexed history keeps early details one retrieval away.</li>
+
+<li>Why B best meets the objective: V2-D2.4 maps "tokens grow every turn" to just-in-time plus a compaction trigger.</li>
+
+<li>
+<div>Explain every rejected choice. A is valid but inferior. Each turn pays for a big summarization call. By turn 40, two compactions lost details. Drift compounds. C buys headroom.</div>
+
+<div>But the growth continues. The window fills later at higher cost. D is silent loss. The agent drops details the task needs. No one can see what left.</div>
+</li>
+
+<li>Exact limitation or tradeoff: B needs the compaction summary to preserve decisions, names, and numbers, a bad summary is silent loss with extra steps.</li>
+
+<li>Relevant evidence (with date): leak-to-strategy mapping from lesson-D2-4 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the history is truly disposable after each turn (then drift does not matter). C wins if the task genuinely needs the full 60,000 tokens in view and the budget covers it. D wins never as a design, silent loss is not a strategy.</li>
+
+<li>Misconception tested: a bigger window fixes context growth. It delays the bill, the growth curve is the problem, not the ceiling.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h18">Q-D2-17 (V2-D2.4)</h3>
+
+<p id="sec-bank-d2-p163" data-kind="prose"><strong>Scenario.</strong> A research assistant retrieves 20 chunks per question. Evals show answers drawn from the first and last chunks are right, but answers needing the middle chunks are often wrong or missing. The chunks are long and overlapping.</p>
+
+<p id="sec-bank-d2-p164" data-kind="prose"><strong>Question.</strong> What is the best fix?</p>
+
+<p id="sec-bank-d2-p165" data-kind="prose"><strong>Options.</strong>
+A) Retrieve 40 chunks instead of 20.
+B) Use fewer, shorter, better-placed chunks: re-chunk at document structure boundaries and rank for relevance before filling the window.
+C) Move to a more capable tier.
+D) Add explicit reasoning to the prompt.</p>
+
+<p id="sec-bank-d2-p166" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d2-p167" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best fix for a diagnosed context fault.
+2. Lifecycle stage: operation (iteration).
+3.</p>
+
+<p id="sec-bank-d2-p168" data-kind="prose">Objective: correct answers from all chunk positions.
+4. Hard constraints: the fault is positional (middle lost), chunks are long and overlapping.
+5. System layer: context assembly.
+6.</p>
+
+<p id="sec-bank-d2-p169" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: B attacks the positional fault directly, A feeds it more middle to lose.
+9.</p>
+
+<p id="sec-bank-d2-p170" data-kind="prose">Hidden dependencies: re-chunking needs the document structure, ranking needs a relevance signal.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d2-p171" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "answers needing the middle chunks are often wrong or missing" and "chunks are long and overlapping."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Fixes the middle-loss fault</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Cuts duplication</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: shorter structure-boundary chunks cut the overlap, fewer better-placed chunks keep the key facts out of the lost middle.</li>
+
+<li>Why B best meets the objective: V2-D2.4 maps "middle answers wrong" to fewer, better-placed chunks, this is the dilution leak.</li>
+
+<li>Every rejected choice explained: A doubles the context, more long overlapping chunks deepen the dilution and the cost. C is the proxy fix, a bigger tier still loses the middle of a bloated context. D reasons over the same lost middle, the facts are not in view to reason about.</li>
+
+<li>Exact limitation or tradeoff: B needs the re-chunking validated on the eval set, too-aggressive chunking can split a fact across boundaries.</li>
+
+<li>Relevant evidence (with date): "middle answers wrong: fewer, better-placed chunks" from lesson-D2-4 (§9), Oct 6 2026, dilution leak from the same lesson, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the fault is recall (facts absent), not dilution (facts present but lost). C wins if the tier cannot use long contexts at all (capability fault). D wins if the answers are wrong despite the facts being in view (reasoning fault).</li>
+
+<li>Misconception tested: more context is more knowledge. Past the dilution point, more context is less usable knowledge.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h19">Q-D2-18 (V2-D2.4), Select TWO</h3>
+
+<p id="sec-bank-d2-p172" data-kind="prose"><strong>Scenario.</strong> A team finds three context symptoms. (1) The same customer fact appears four times in the assembled context. (2) The window fills mid-task. The agent stops with work undone. (3) An auditor needs the full conversation for a dispute.</p>
+
+<p id="sec-bank-d2-p173" data-kind="prose"><strong>Question.</strong> Which TWO leak-to-fix matches are correct? Select TWO.</p>
+
+<p id="sec-bank-d2-p174" data-kind="prose"><strong>Options.</strong>
+A) Symptom 1 is duplication: dedupe at assembly.
+B) Symptom 2 is exhaustion: reserve headroom and compact early.
+C) Symptom 3 is growth: switch to just-in-time retrieval.
+D) Symptom 1 is dilution: retrieve more chunks.
+E) Symptom 2 is loss: summarize every turn.</p>
+
+<p id="sec-bank-d2-p175" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-d2-p176" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: diagnosis matching (multi-select).
+2. Lifecycle stage: operation (diagnosis).
+3.</p>
+
+<p id="sec-bank-d2-p177" data-kind="prose">Objective: name each leak and its fix.
+4. Hard constraints: the five leaks are growth, duplication, loss, exhaustion, dilution.
+5. System layer: context management.
+6.</p>
+
+<p id="sec-bank-d2-p178" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: C drops the audit requirement, D feeds duplication, E prescribes drift.
+8. Compare on objective: A and B match the lesson&#x27;s leak-to-strategy map exactly.
+9.</p>
+
+<p id="sec-bank-d2-p179" data-kind="prose">Hidden dependencies: dedupe needs a canonical fact key, headroom needs the threshold tuned.
+10. Verify: A and B. Two selected.</p>
+
+<p id="sec-bank-d2-p180" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "appears four times", "window fills mid-task", "auditor needs the full conversation."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>1: repeated fact</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>2: window fills mid-task</td>
+<td>n/a</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>3: auditor needs full</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and B satisfy all hard constraints: dedupe at assembly removes the repeats, reserved headroom plus early compaction keeps the task finishing.</li>
+
+<li>A and B meet the objective best. V2-D2.4 maps &quot;same fact repeated&quot; to dedupe at assembly. V2-D2.4 maps &quot;window fills mid-task&quot; to reserve headroom. V2-D2.4 maps &quot;window fills mid-task&quot; to compact early.</li>
+
+<li>Every rejected choice explained: C answers the auditor with JIT, but the auditor needs everything, the lesson says full history, priced and bounded. D calls duplication "dilution" and prescribes more chunks, which multiplies the repeats. E answers exhaustion with per-turn summaries, which compound drift and cost.</li>
+
+<li>Exact limitation or tradeoff: A and B do not cover symptom 3. The auditor's full history needs its own priced, bounded retention. Keep it separate from the working context.</li>
+
+<li>Relevant evidence (with date): five leaks and leak-to-strategy mapping from lesson-D2-4 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins if no auditor exists and history is disposable. D wins if the symptom were truly dilution (facts lost in the middle). E wins never as a standing strategy.</li>
+
+<li>Misconception tested: all context problems get the same fix. The lesson names five leaks because each has its own fix, the symptom names the leak.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h20">Q-D2-19 (V2-D2.4)</h3>
+
+<p id="sec-bank-d2-p181" data-kind="prose"><strong>Scenario.</strong> A bank's advisory assistant must keep the full conversation for seven years: regulators can demand any session. The team proposes keeping every turn in the active context for the whole session.</p>
+
+<p id="sec-bank-d2-p182" data-kind="prose"><strong>Question.</strong> What is the best design?</p>
+
+<p id="sec-bank-d2-p183" data-kind="prose"><strong>Options.</strong>
+A) Keep the proposal. Keep full history in active context. Keep full history always.
+B) Keep full history in priced storage. Keep full history in bounded storage.</p>
+
+<p id="sec-bank-d2-p184" data-kind="prose">Keep full history outside the active context. The active context holds the working set. Retrieve history just-in-time when you need it.
+C) Summarize each session nightly. Delete the raw turns.
+D) Keep only the last 10 turns.</p>
+
+<p id="sec-bank-d2-p185" data-kind="prose">Regulators rarely ask for more.</p>
+
+<p id="sec-bank-d2-p186" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d2-p187" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best design under a retention constraint.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-d2-p188" data-kind="prose">Objective: seven-year replay with bounded per-turn cost.
+4. Hard constraints: regulators can demand any session, per-turn cost must stay bounded.
+5. System layer: context accounts (active context vs app state).
+6.</p>
+
+<p id="sec-bank-d2-p189" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: C deletes what the regulator can demand, D bets the regulator never asks.
+8. Compare on objective: B keeps everything and keeps the working set small.
+9.</p>
+
+<p id="sec-bank-d2-p190" data-kind="prose">Hidden dependencies: the storage needs retention, access control, and redaction for the trust boundary.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d2-p191" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "regulators can demand any session" and "seven years."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Full session replayable</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Per-turn cost bounded</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Meets the retention rule</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the full history exists in storage, the active context stays a bounded working set, JIT bridges the two.</li>
+
+<li>B best meets the objective. V2-D2.4 has four accounts. They separate active context from app state. &quot;Audit needs everything&quot; means full history. This history is priced and bounded. It is not full history in the window.</li>
+
+<li>Every rejected choice explained: A puts years of turns in the active context, cost and dilution explode. C deletes the raw evidence the regulator can demand, a summary is not the session. D gambles on regulator behavior, a lost gamble is a compliance failure.</li>
+
+<li>Exact limitation or tradeoff: B needs the storage priced (seven years of sessions is real money) and the JIT path tested, a broken bridge strands the history.</li>
+
+<li>Relevant evidence (with date): four accounts and "audit needs everything: full history, priced and bounded" from lesson-D2-4 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>A wins if sessions are small. A wins if the budget is open. Then simplicity wins. C wins if the rule allows summaries as the record. The rule does not allow summaries here. D never wins as a compliance design.</li>
+
+<li>Misconception tested: retention means keeping it in context. Retention is storage, context is the working set. The four accounts exist to separate them.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h21">Q-D2-20 (V2-D2.4)</h3>
+
+<p id="sec-bank-d2-p192" data-kind="prose"><strong>Scenario.</strong> An agent runs 50-turn tasks. The team sets a compaction trigger at 40,000 tokens: when hit, the agent summarizes the history into 2,000 tokens and continues. Evals show the agent now forgets customer names and decisions made before the compaction.</p>
+
+<p id="sec-bank-d2-p193" data-kind="prose"><strong>Question.</strong> What is the best fix?</p>
+
+<p id="sec-bank-d2-p194" data-kind="prose"><strong>Options.</strong>
+A) Lower the trigger to 20,000 tokens so compactions are smaller.
+B) Raise the trigger to 80,000 tokens to compact less often.
+C) Fix the compaction summary contract: it must preserve names, decisions, numbers, and open items, verified against a checklist, keep the 40,000-token trigger.
+D) Remove compaction and let the window fill.</p>
+
+<p id="sec-bank-d2-p195" data-kind="prose"><strong>Answer.</strong> C</p>
+
+<p id="sec-bank-d2-p196" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best fix for a lossy compaction.
+2. Lifecycle stage: operation (iteration).
+3.</p>
+
+<p id="sec-bank-d2-p197" data-kind="prose">Objective: bounded context without losing names and decisions.
+4. Hard constraints: the trigger exists, the summary drops facts the task needs.
+5. System layer: context management (compaction).
+6.</p>
+
+<p id="sec-bank-d2-p198" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: D lets the window fill mid-task (exhaustion).
+8. Compare on objective: C fixes the summary content, which is the diagnosed fault, A and B move the trigger without fixing what the summary keeps.
+9.</p>
+
+<p id="sec-bank-d2-p199" data-kind="prose">Hidden dependencies: the checklist needs the fact types the task uses, the summary format must be parseable.
+10. Verify: C alone. Single select.</p>
+
+<p id="sec-bank-d2-p200" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: C.
+2. Decisive scenario phrase: "forgets customer names and decisions made before the compaction."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Fixes what the summary keeps</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>Keeps the bound</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why C satisfies all hard constraints: the contract names what must survive (names, decisions, numbers, open items), the checklist verifies it, the trigger still bounds growth.</li>
+
+<li>C best meets the objective. The fault is the summary&#x27;s content. The fault is not the trigger&#x27;s position. Preserving facts fixes V2-D2.4&#x27;s loss leak. It is not fixed by moving the threshold.</li>
+
+<li>Every rejected choice explained: A compacts more often with the same lossy summary, the names die sooner. B compacts less often but the summary still drops the names when it fires. D removes the bound, the window fills mid-task and the work stops.</li>
+
+<li>Exact limitation or tradeoff: C needs the checklist maintained as the task evolves, new fact types must join the contract.</li>
+
+<li>Relevant evidence (with date): loss leak and compaction from lesson-D2-4, Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>
+<div>A wins if the fault is summary size. The summary is too big to fit. The fault is not the content. B wins if compactions fire often. Then their cost is too high. D wins if the task fits the window with headroom.</div>
+
+<div>Then no compaction is necessary.</div>
+</li>
+
+<li>Misconception tested: tuning the threshold fixes a bad summary. The threshold decides when, the contract decides what survives. The symptom names the contract.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h22">Q-D2-21 (V2-D2.5)</h3>
+
+<p id="sec-bank-d2-p201" data-kind="prose"><strong>Scenario.</strong> A support bot's prompt has a 3,000-token system block (stable product rules) and a 500-token user context that changes every call. The team enables prompt caching but puts the user context first and the system block last. The cache hit rate is near zero.</p>
+
+<p id="sec-bank-d2-p202" data-kind="prose"><strong>Question.</strong> What is the best fix?</p>
+
+<p id="sec-bank-d2-p203" data-kind="prose"><strong>Options.</strong>
+A) Disable caching, the prompt is too variable.
+B) Reorder the prompt: stable system block first, variable user context last, so the prefix stabilizes and caches.
+C) Cache only the user context, since it changes most.
+D) Shorten the system block to 500 tokens.</p>
+
+<p id="sec-bank-d2-p204" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d2-p205" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best fix for a broken cache prefix.
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d2-p206" data-kind="prose">Objective: a real cache hit rate.
+4. Hard constraints: the system block is stable, the user context changes every call, the cache keys on the prefix.
+5. System layer: prompt caching.
+6.</p>
+
+<p id="sec-bank-d2-p207" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: B is the prefix rule itself, the rest miss how the cache keys.
+9.</p>
+
+<p id="sec-bank-d2-p208" data-kind="prose">Hidden dependencies: the system block must stay byte-stable across calls, versions pin the prefix.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d2-p209" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;puts the user context first and the system block last. The cache hit rate is near zero.&quot;
+3.</p>
+
+<p id="sec-bank-d2-p210" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Prefix stabilizes</td>
+<td>n/a</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>Stable 3,000 tokens cached</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the cache keys on the leading prefix, stable-first makes the 3,000-token block hit every call.</li>
+
+<li>Why B best meets the objective: V2-D2.5's prefix rule is stable first, variable last, the current order defeats it by construction.</li>
+
+<li>Every rejected choice explained: A surrenders a working optimization because of an ordering bug. C caches the variable part, which changes every call, the hit rate stays near zero. D shrinks the stable block but keeps it last, the order is the fault, not the size.</li>
+
+<li>B needs a versioned system block. Each version is a new cache. Weekly edits reset the hit rate. The hit rate resets until the version is stable.</li>
+
+<li>Relevant evidence (with date): prefix rule from lesson-D2-5 (§9), Oct 6 2026, cache pricing (write 1.25x, read 0.1x, TTL 5 min) is current product behavior per S10-S12, Oct 2026, verify against official docs, exam scope via S03/S04, Sept 2026.</li>
+
+<li>
+<div>A wins if the hit rate is below break-even. This is true even with the correct order. Then drop the cache. C never wins. Caching the variable tail is the anti-pattern. D wins if the block has many rarely used rules.</div>
+
+<div>Then shrink the block for tokens. Do not shrink it for cache.</div>
+</li>
+
+<li>Misconception tested: caching is one switch. The prefix order decides the hit rate, the switch only enables it.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h23">Q-D2-22 (V2-D2.5), Select TWO</h3>
+
+<p id="sec-bank-d2-p211" data-kind="prose"><strong>Scenario.</strong> A team evaluates prompt caching for a 10,000-token stable prefix at 50,000 calls per day. Cache writes cost 1.25x and reads cost 0.1x (current product behavior, Oct 2026, verify against official docs). The measured hit rate is 60%.</p>
+
+<p id="sec-bank-d2-p212" data-kind="prose"><strong>Question.</strong> Which TWO statements are correct? Select TWO.</p>
+
+<p id="sec-bank-d2-p213" data-kind="prose"><strong>Options.</strong>
+A) At 60% hit rate, the cache pays: the lesson's break-even sits near 4%, so 60% is far above it.
+B) The team should also cache the variable tail to push the hit rate higher.
+C) Each prompt version is a separate cache, version churn resets the hit rate.
+D) The TTL of 5 minutes means the cache is useless for this traffic.
+E) The team should disable the cache because writes cost 1.25x.</p>
+
+<p id="sec-bank-d2-p214" data-kind="prose"><strong>Answer.</strong> A, C</p>
+
+<p id="sec-bank-d2-p215" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: cache economics judgment (multi-select).
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d2-p216" data-kind="prose">Objective: decide whether the cache pays and what governs it.
+4. Hard constraints: the break-even math, versioning semantics, the TTL.
+5. System layer: prompt reuse and caching.
+6.</p>
+
+<p id="sec-bank-d2-p217" data-kind="prose">Eliminate infeasible: all are stateable.
+7. Eliminate constraint-violating: B caches the variable tail (the anti-pattern), D misreads the TTL at this volume.
+8. Compare on objective: A does the break-even math, C states the versioning rule.
+9.</p>
+
+<p id="sec-bank-d2-p218" data-kind="prose">Hidden dependencies: the 4% break-even is the lesson toy&#x27;s number, the team should recompute with its own prices.
+10. Verify: A and C. Two selected.</p>
+
+<p id="sec-bank-d2-p219" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, C.
+2. Decisive scenario phrase: "measured hit rate is 60%" with "writes 1.25x and reads 0.1x."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Break-even math right</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Versioning semantics right</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>TTL read right</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No</td>
+<td>n/a</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and C satisfy all hard constraints: 60% beats the ~4% break-even by an order of magnitude, versions are separate caches by construction.</li>
+
+<li>Why A and C best meet the objective: V2-D2.5 requires the break-even check and versioning discipline, both statements apply them.</li>
+
+<li>
+<div>B is the documented anti-pattern. The variable tail changes with every call. Caching it keeps the hit rate near zero. Writes continue to bill. D misreads the TTL. There are 50,000 calls per day.</div>
+
+<div>The same prefix recurs within minutes. A 5-minute TTL still hits. E reads only the write price. The 0.1x reads at 60% hits are more important.</div>
+</li>
+
+<li>The 4% is a toy break-even. The team&#x27;s real prices and prefix size set its own number. Version churn is the main threat to the 60%.</li>
+
+<li>Relevant evidence (with date): break-even toy and versioning rule from lesson-D2-5 (§9), Oct 6 2026, cache pricing S10-S12, Oct 2026, verify against official docs, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: B wins never. D wins if the traffic were one call per hour (then the TTL would starve the hits). E wins if the hit rate sat below the team's recomputed break-even.</li>
+
+<li>Misconception tested: the write markup kills caching. The math is hits times the read discount against writes, at 60% the discount wins by far.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h24">Q-D2-23 (V2-D2.5)</h3>
+
+<p id="sec-bank-d2-p220" data-kind="prose"><strong>Scenario.</strong> A team's prompt leads with 2,000 tokens of per-ticket details, followed by 4,000 tokens of stable troubleshooting procedures. The cache hit rate is 3%, below the team's 5% break-even.</p>
+
+<p id="sec-bank-d2-p221" data-kind="prose"><strong>Question.</strong> What is the best next action?</p>
+
+<p id="sec-bank-d2-p222" data-kind="prose"><strong>Options.</strong>
+A) Increase the cache TTL.
+B) Reorder the prompt: stable procedures first, per-ticket details last, then re-measure the hit rate against break-even.
+C) Add more per-ticket details to improve answer quality.
+D) Drop caching and accept the cost.</p>
+
+<p id="sec-bank-d2-p223" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d2-p224" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best next action on a sub-break-even cache.
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d2-p225" data-kind="prose">Objective: hit rate above break-even or a principled drop.
+4. Hard constraints: variable content leads, the prefix never stabilizes.
+5. System layer: prompt caching.
+6.</p>
+
+<p id="sec-bank-d2-p226" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: B fixes the named fault (variable leads), A and C do not touch the order.
+9.</p>
+
+<p id="sec-bank-d2-p227" data-kind="prose">Hidden dependencies: the procedures must be byte-stable, re-measurement decides keep vs drop.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d2-p228" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "leads with 2,000 tokens of per-ticket details" and "hit rate is 3%, below the team's 5% break-even."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Fixes the variable-lead fault</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>Decided by re-measured math</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: reordering stabilizes the prefix, re-measuring tells the team whether the cache now pays.</li>
+
+<li>B best meets the objective. V2-D2.5 says variable content means reorder first. Then, cache. A hit rate below break-even means fix the prefix or drop the cache. The fix comes before the drop.</li>
+
+<li>Every rejected choice explained: A raises the TTL, but the prefix changes every call, a longer TTL on a never-repeating prefix still never hits. C adds more variable tokens, pushing the stable block further from the prefix. D drops the cache before trying the reorder, the lesson says fix the prefix first.</li>
+
+<li>Exact limitation or tradeoff: if the reordered hit rate still sits below 5%, the team drops the cache, the reorder costs one prompt change.</li>
+
+<li>Relevant evidence (with date): "variable content leads: reorder first, then cache" and "hit rate below break-even: fix the prefix or drop the cache" from lesson-D2-5 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the prefix is stable but calls arrive just outside the TTL (then the TTL is the fault). C wins if quality, not cache, is the binding problem. D wins after the reorder still misses break-even.</li>
+
+<li>Misconception tested: a low hit rate means caching does not fit. It means the prefix does not fit, the order is the first suspect.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h25">Q-D2-24 (V2-D2.5)</h3>
+
+<p id="sec-bank-d2-p229" data-kind="prose"><strong>Scenario.</strong> Five teams paste the same 15-step refund procedure into their own prompts. The procedure changed twice last month, three teams still run the old version. One old-version run issued a refund the new policy forbids.</p>
+
+<p id="sec-bank-d2-p230" data-kind="prose"><strong>Question.</strong> What is the best fix?</p>
+
+<p id="sec-bank-d2-p231" data-kind="prose"><strong>Options.</strong>
+A) Email all teams the new procedure and ask them to update their prompts.
+B) Create a governed Skill: one named, versioned refund procedure, reviewed on change, shared by all five teams, pin the version per deployment.
+C) Build a sixth prompt with the procedure and link to it from the docs.
+D) Remove the refund procedure from all prompts and handle refunds manually.</p>
+
+<p id="sec-bank-d2-p232" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d2-p233" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best fix for procedure drift.
+2. Lifecycle stage: operation (governance).
+3.</p>
+
+<p id="sec-bank-d2-p234" data-kind="prose">Objective: one current refund procedure everywhere.
+4. Hard constraints: five copies, two changes last month, a stale copy already caused a forbidden refund.
+5. System layer: prompt reuse (Skills as governed assets).
+6.</p>
+
+<p id="sec-bank-d2-p235" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: B removes the copies and versions the one source, A repeats the email that already failed.
+9.</p>
+
+<p id="sec-bank-d2-p236" data-kind="prose">Hidden dependencies: the Skill needs an owner, a review step, and version pins per team deployment.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d2-p237" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "Five teams paste the same 15-step refund procedure" and "three teams still run the old version."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>One source of truth</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>Changes versioned and reviewed</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>Stale copies impossible</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the Skill is the single versioned asset, review gates changes, pins keep deployments explicit.</li>
+
+<li>Why B best meets the objective: V2-D2.5 defines Skills as governed reusable assets for exactly this failure: pasted procedures drift, versioned Skills do not.</li>
+
+<li>
+<div>A is the email. It failed two times. Guidance does not update five pastes. C adds a sixth copy with a link. Links rot. No one must follow them.</div>
+
+<div>D kills the automation. The five teams depend on it. Deletion is not design.</div>
+</li>
+
+<li>Exact limitation or tradeoff: B needs governance overhead (owner, review, versioning), a Skill used by two teams needs the narrower team's permission envelope.</li>
+
+<li>Relevant evidence (with date): Skills as governed assets from lesson-D2-5 and comparisons-03 (Pair 12), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the change is a one-time typo fix and the teams are two, not five. C wins never as governance. D wins if refunds are rare enough that manual handling is cheaper than the Skill's governance.</li>
+
+<li>Misconception tested: sharing means copying. Copying is the disease, a named versioned asset is the cure.</li>
+
+</ol>
+
+
+<h3 id="bank-d2-h26">Q-D2-25 (V2-D2.5), Select THREE</h3>
+
+<p id="sec-bank-d2-p238" data-kind="prose"><strong>Scenario.</strong> A platform team offers three reuse mechanisms.
+The mechanisms are a shared prompt module, a Skill, and a subagent.
+Three needs arise.
+Need 1: Five teams repeat one 15-step refund procedure.
+Need 2: many prompts call one refund lookup action.</p>
+
+<p id="sec-bank-d2-p239" data-kind="prose">Need 3: A research subtask needs web search and file writes.
+The subtask needs different permissions than the caller.</p>
+
+<p id="sec-bank-d2-p240" data-kind="prose"><strong>Question.</strong> Which THREE mechanism matches are correct? Select THREE.</p>
+
+<p id="sec-bank-d2-p241" data-kind="prose"><strong>Options.</strong>
+A) Need 1 fits a Skill: a governed, versioned procedure shared across teams.
+B) Need 2 fits a tool: one callable action with a schema.
+C) Need 3 fits a bigger prompt module with more instructions.
+D) Need 1 fits five separate prompts, one per team.
+E) Need 3 fits a subagent: its own loop, its own tool list, its own context.</p>
+
+<p id="sec-bank-d2-p242" data-kind="prose"><strong>Answer.</strong> A, B, E</p>
+
+<p id="sec-bank-d2-p243" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: reuse-mechanism matching (multi-select).
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-d2-p244" data-kind="prose">Objective: the cheapest correct unit per need.
+4. Hard constraints: procedures need versioning, single actions need schemas, different permissions need a separate envelope.
+5. System layer: prompt reuse and team enablement.
+6.</p>
+
+<p id="sec-bank-d2-p245" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: C gives a permission problem a prose answer, D repeats the drift failure.
+8. Compare on objective: A, B, and E each match the comparisons-03 matrix.
+9.</p>
+
+<p id="sec-bank-d2-p246" data-kind="prose">Hidden dependencies: the Skill needs the narrower team&#x27;s envelope, the tool needs least-privilege scoping, the subagent needs a contract and an owner.
+10. Verify: A, B, and E. Three selected.</p>
+
+<p id="sec-bank-d2-p247" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B, E.
+2. Decisive scenario phrase: "repeat one 15-step refund procedure", "one refund lookup action", "different permissions than the caller."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>1: repeated procedure</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>2: single action</td>
+<td>n/a</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>3: own permissions</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>No</td>
+<td>n/a</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>A, B, and E satisfy all hard constraints. The Skill versions the repeated procedure. The tool scopes the single action. The subagent carries the separate permission envelope.</li>
+
+<li>A, B, and E best meet the objective. The matrix says procedures repeated across teams go to Skills. Single actions go to tools. Subtasks needing their own tools and context go to subagents. The cheapest correct unit wins.</li>
+
+<li>Every rejected choice explained: C answers a permission boundary with more instructions, prose cannot fence a tool list. D is the five-paste drift the scenario already shows failing, copying is the disease.</li>
+
+<li>The Skill gets the caller&#x27;s scope. The five teams need the smallest scope. The subagent needs a full loop. This loop includes context and coordination. The subagent needs an owner.</li>
+
+<li>Relevant evidence (with date): skills vs tools vs subagents matrix from comparisons-03 (Pair 12), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins if need 3 were guidance (tone, steps) rather than permissions. D wins if the teams are two and the procedure never changes (then the governance costs more than the drift).</li>
+
+<li>Misconception tested: reuse has one mechanism. It has three, and the unit (procedure, action, loop) picks among them. The exam's favorite trap is a subagent wearing a skill's name, or a skill that is really five pasted prompts.</li>
+
+</ol>
+

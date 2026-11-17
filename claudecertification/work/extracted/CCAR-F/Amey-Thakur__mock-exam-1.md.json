@@ -1,0 +1,227 @@
+[
+  {
+    "number": "1",
+    "heading": null,
+    "question": "The agent occasionally answers billing questions using an order it looked up three turns earlier for a different customer. What is the architectural fix?",
+    "choices": {
+      "A": "Increase the context window",
+      "B": "Scope each conversation's context to one customer and clear or isolate prior lookups when the subject changes",
+      "C": "Remove the lookup_order tool",
+      "D": "Instruct the model to be careful about customer identity"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Cross-customer contamination is a context-scoping defect, not a window-size problem",
+    "source_section": "Context Management & Reliability"
+  },
+  {
+    "number": "2",
+    "heading": null,
+    "question": "process_refund fails intermittently because the billing backend times out. What should the tool return so the agent can behave sensibly?",
+    "choices": {
+      "A": "An empty string",
+      "B": "A message asking the user to try later",
+      "C": "A structured error with a category and a retryable flag, so the agent can retry or escalate deliberately",
+      "D": "The exception stack trace"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Structured errors with categories and retryable flags are what let an agent recover deliberately",
+    "source_section": "Tool Design & MCP Integration"
+  },
+  {
+    "number": "3",
+    "heading": null,
+    "question": "Which condition should route a ticket to escalate_to_human rather than continue autonomous resolution?",
+    "choices": {
+      "A": "The customer writes in a language the agent supports",
+      "B": "The order is more than thirty days old",
+      "C": "The conversation exceeds five turns",
+      "D": "The request falls outside documented policy, or the agent cannot make progress after a bounded number of attempts"
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Policy gaps and lack of progress are the documented escalation triggers; turn counts and order age are not",
+    "source_section": "Context Management & Reliability"
+  },
+  {
+    "number": "4",
+    "heading": null,
+    "question": "The agent sometimes calls get_customer when it should call lookup_order. What is the most effective change?",
+    "choices": {
+      "A": "Rewrite both tool descriptions so each states precisely when it applies and how it differs from the other",
+      "B": "Reorder the tools in the configuration",
+      "C": "Merge them into one tool with a mode flag",
+      "D": "Increase the model's temperature"
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Tool selection runs on descriptions, so differentiation is the fix for confusion between similar tools",
+    "source_section": "Tool Design & MCP Integration"
+  },
+  {
+    "number": "5",
+    "heading": null,
+    "question": "Backend conventions should apply only when backend files are touched. Where do they belong?",
+    "choices": {
+      "A": "In the root CLAUDE.md so they are always available",
+      "B": "In a path-scoped rule under .claude/rules/ with frontmatter matching backend paths",
+      "C": "In each engineer's user-level configuration",
+      "D": "In the repository wiki"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Path-scoped rules load conditionally, which is exactly the stated requirement",
+    "source_section": "Claude Code Configuration & Workflows"
+  },
+  {
+    "number": "6",
+    "heading": null,
+    "question": "When is plan mode the appropriate choice over direct execution?",
+    "choices": {
+      "A": "For every change, since planning is always safer",
+      "B": "Only when the model is unfamiliar with the language",
+      "C": "When the change is large or risky enough that a human should review the approach before edits are made",
+      "D": "When the context window is nearly full"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Plan mode is a human review gate for approach, warranted by risk rather than universally",
+    "source_section": "Claude Code Configuration & Workflows"
+  },
+  {
+    "number": "7",
+    "heading": null,
+    "question": "A repeated multi-step review procedure should be available to the whole team as a single invocation. What is the right mechanism?",
+    "choices": {
+      "A": "A shared document describing the steps",
+      "B": "A longer CLAUDE.md",
+      "C": "A saved chat transcript",
+      "D": "A custom slash command or skill committed to the repository"
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Repeatable team procedures belong in committed commands or skills, not prose",
+    "source_section": "Claude Code Configuration & Workflows"
+  },
+  {
+    "number": "8",
+    "heading": null,
+    "question": "Subagents return full source documents to the coordinator, which then exceeds its context limit. What is the correct design change?",
+    "choices": {
+      "A": "Have subagents return structured findings with citations while raw sources stay at the edge or in a scratchpad",
+      "B": "Give the coordinator a larger model",
+      "C": "Reduce the number of subagents to one",
+      "D": "Truncate each document to its first page"
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Delegation exists to keep bulk at the edge and move distilled results",
+    "source_section": "Context Management & Reliability"
+  },
+  {
+    "number": "9",
+    "heading": null,
+    "question": "Final reports attribute claims to the wrong sources even though each subagent is individually accurate. What is the likely cause?",
+    "choices": {
+      "A": "The synthesis model is too small",
+      "B": "The handoff format does not carry claim and source together, so provenance is lost between stages",
+      "C": "The search subagent returns too many results",
+      "D": "Reports are generated before analysis completes"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Provenance survives handoffs only when the format carries claim and source together",
+    "source_section": "Context Management & Reliability"
+  },
+  {
+    "number": "10",
+    "heading": null,
+    "question": "A subagent fails permanently on one source. What should the coordinator receive?",
+    "choices": {
+      "A": "Nothing, so the report proceeds",
+      "B": "A silent retry loop until it succeeds",
+      "C": "A propagated error with enough context to decide between retry, exclusion with a noted gap, or abort",
+      "D": "A generic failure flag with no detail"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Errors must propagate with enough context for the coordinator to choose a recovery path",
+    "source_section": "Context Management & Reliability"
+  },
+  {
+    "number": "11",
+    "heading": null,
+    "question": "The reviewer must emit results a pipeline can parse. Which invocation is correct?",
+    "choices": {
+      "A": "Interactive session with output redirected to a log",
+      "B": "Plan mode with an approval step",
+      "C": "A cron job that emails the transcript",
+      "D": "Non-interactive print mode with JSON output and a schema"
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "CI requires non-interactive invocation with structured, schema-validated output",
+    "source_section": "Claude Code Configuration & Workflows"
+  },
+  {
+    "number": "12",
+    "heading": null,
+    "question": "Reviews flag many low-value style nits and engineers now ignore them. Which change addresses this?",
+    "choices": {
+      "A": "Define explicit review criteria and a severity bar in the prompt, with examples of in-scope and out-of-scope findings",
+      "B": "Post findings to a separate channel",
+      "C": "Run the review only on large pull requests",
+      "D": "Cap output at five findings"
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Precision comes from explicit criteria and examples that draw the signal boundary",
+    "source_section": "Prompt Engineering & Structured Output"
+  },
+  {
+    "number": "13",
+    "heading": null,
+    "question": "Some invoices legitimately lack a delivery date. How should the schema express this?",
+    "choices": {
+      "A": "Make the field required and let extraction fail",
+      "B": "Make the field nullable so absence is recorded explicitly, with conditional validation where the document type requires it",
+      "C": "Omit the field from the schema",
+      "D": "Default it to today's date"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Nullable fields record legitimate absence; required fields force fabrication or failure",
+    "source_section": "Prompt Engineering & Structured Output"
+  },
+  {
+    "number": "14",
+    "heading": null,
+    "question": "Which loop gives the most reliable extraction output?",
+    "choices": {
+      "A": "Generate, then manually review every record",
+      "B": "Generate three times and take the majority",
+      "C": "Enforce a JSON schema through tool use, validate, and on failure retry with the validation error provided to the model",
+      "D": "Generate with temperature zero and accept the result"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Schema enforcement plus a validation-retry loop is the reliability pattern the guide describes",
+    "source_section": "Prompt Engineering & Structured Output"
+  },
+  {
+    "number": "15",
+    "heading": null,
+    "question": "Your team reports 97% accuracy measured only on records that passed validation. Why is that number misleading?",
+    "choices": {
+      "A": "Accuracy should be measured per field, not per record",
+      "B": "97% is too low to report",
+      "C": "Validation and accuracy are unrelated",
+      "D": "It excludes the failures, so it measures where the system already succeeded rather than the true rate across all documents"
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Measuring only validated records is a biased sample; calibration needs coverage of all documents",
+    "source_section": "Context Management & Reliability"
+  }
+]

@@ -1,0 +1,963 @@
+{
+ "jobs": [
+  {
+   "out": "work/extracted/CCAO-F/Amey-Thakur__practice-questions.md.json",
+   "expected": 35,
+   "got": 35,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/Amey-Thakur__mock-exam-1.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/Amey-Thakur__mock-exam-2.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/Amey-Thakur__mock-exam-3.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/preporato__practice-questions.md.json",
+   "expected": 30,
+   "got": 30,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCDV-F/Amey-Thakur__practice-questions.md.json",
+   "expected": 35,
+   "got": 35,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCDV-F/Amey-Thakur__mock-exam-1.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCDV-F/Amey-Thakur__mock-exam-2.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCDV-F/Amey-Thakur__mock-exam-3.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCDV-F/preporato__practice-questions.md.json",
+   "expected": 30,
+   "got": 30,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/Amey-Thakur__practice-questions.md.json",
+   "expected": 35,
+   "got": 35,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/Amey-Thakur__mock-exam-1.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/Amey-Thakur__mock-exam-2.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/Amey-Thakur__mock-exam-3.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/preporato__practice-questions.md.json",
+   "expected": 30,
+   "got": 30,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/Amey-Thakur__practice-questions.md.json",
+   "expected": 35,
+   "got": 35,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/Amey-Thakur__mock-exam-1.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/Amey-Thakur__mock-exam-2.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/Amey-Thakur__mock-exam-3.md.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/preporato__practice-questions.md.json",
+   "expected": 30,
+   "got": 30,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__practice-exam-01.md.json",
+   "expected": 28,
+   "got": 28,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__practice-exam-02.md.json",
+   "expected": 28,
+   "got": 28,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__practice-exam-03-blueprint-weighted.md.json",
+   "expected": 60,
+   "got": 60,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__01-platform-model-foundations__quiz.md.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__02-prompting-task-execution__quiz.md.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__03-evaluating-validating-output__quiz.md.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__04-workflow-integration-solutions-design__quiz.md.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__05-configuration-knowledge-management__quiz.md.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__06-governance-risk-responsible-use__quiz.md.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAO-F/raybeecham__07-troubleshooting-optimization__quiz.md.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCDV-F/PatrickWiloak__scenarios.md.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCDV-F/PatrickWiloak__practice-questions__anthropic-claude-developer-foundations.md.json",
+   "expected": 30,
+   "got": 30,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/paullarionov__practical_test_en.html.part01.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/paullarionov__practical_test_en.html.part02.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/paullarionov__practical_test_en.html.part03.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-F/paullarionov__practical_test_en.html.part04.json",
+   "expected": 15,
+   "got": 15,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part01.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part02.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part03.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part04.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part05.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part06.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part07.json",
+   "expected": 14,
+   "got": 14,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__08-question-bank.html.part08.json",
+   "expected": 8,
+   "got": 8,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part01.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part02.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part03.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part04.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part05.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part06.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part07.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part08.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part09.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part10.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part11.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part12.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part13.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part14.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part15.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part16.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part17.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part18.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part19.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part20.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part21.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part22.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part23.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part24.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part25.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part26.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part27.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part28.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part29.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part30.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part31.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part32.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part33.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part34.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part35.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part36.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part37.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part38.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part39.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part40.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part41.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part42.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part43.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part44.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part45.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part46.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part47.json",
+   "expected": 10,
+   "got": 10,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__question-bank.html.part48.json",
+   "expected": 7,
+   "got": 7,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__package-v3__practice-answer-key.html.part01.json",
+   "expected": 21,
+   "got": 21,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__package-v3__practice-answer-key.html.part02.json",
+   "expected": 21,
+   "got": 21,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__package-v3__practice-answer-key.html.part03.json",
+   "expected": 21,
+   "got": 21,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__package-v3__practice-answer-key.html.part04.json",
+   "expected": 21,
+   "got": 21,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__package-v3__practice-answer-key.html.part05.json",
+   "expected": 21,
+   "got": 21,
+   "status": "ok",
+   "not_verbatim": []
+  },
+  {
+   "out": "work/extracted/CCAR-P/jrajath94__package-v3__practice-answer-key.html.part06.json",
+   "expected": 21,
+   "got": 21,
+   "status": "ok",
+   "not_verbatim": []
+  }
+ ],
+ "files": [
+  {
+   "file": "CCAO-F/Amey-Thakur__practice-questions.md",
+   "original_count": 35,
+   "extracted_count": 35,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/Amey-Thakur__mock-exam-1.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/Amey-Thakur__mock-exam-2.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/Amey-Thakur__mock-exam-3.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/preporato__practice-questions.md",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/Amey-Thakur__practice-questions.md",
+   "original_count": 35,
+   "extracted_count": 35,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/Amey-Thakur__mock-exam-1.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/Amey-Thakur__mock-exam-2.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/Amey-Thakur__mock-exam-3.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/preporato__practice-questions.md",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/Amey-Thakur__practice-questions.md",
+   "original_count": 35,
+   "extracted_count": 35,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/Amey-Thakur__mock-exam-1.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/Amey-Thakur__mock-exam-2.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/Amey-Thakur__mock-exam-3.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/preporato__practice-questions.md",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/Amey-Thakur__practice-questions.md",
+   "original_count": 35,
+   "extracted_count": 35,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/Amey-Thakur__mock-exam-1.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/Amey-Thakur__mock-exam-2.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/Amey-Thakur__mock-exam-3.md",
+   "original_count": 15,
+   "extracted_count": 15,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/preporato__practice-questions.md",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__practice-exam-01.md",
+   "original_count": 28,
+   "extracted_count": 28,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__practice-exam-02.md",
+   "original_count": 28,
+   "extracted_count": 28,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__practice-exam-03-blueprint-weighted.md",
+   "original_count": 60,
+   "extracted_count": 60,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__01-platform-model-foundations__quiz.md",
+   "original_count": 8,
+   "extracted_count": 8,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__02-prompting-task-execution__quiz.md",
+   "original_count": 8,
+   "extracted_count": 8,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__03-evaluating-validating-output__quiz.md",
+   "original_count": 8,
+   "extracted_count": 8,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__04-workflow-integration-solutions-design__quiz.md",
+   "original_count": 8,
+   "extracted_count": 8,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__05-configuration-knowledge-management__quiz.md",
+   "original_count": 8,
+   "extracted_count": 8,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__06-governance-risk-responsible-use__quiz.md",
+   "original_count": 8,
+   "extracted_count": 8,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__07-troubleshooting-optimization__quiz.md",
+   "original_count": 8,
+   "extracted_count": 8,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/PatrickWiloak__scenarios.md",
+   "original_count": 14,
+   "extracted_count": 14,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/PatrickWiloak__practice-questions__anthropic-claude-developer-foundations.md",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/paullarionov__practical_test_en.html",
+   "original_count": 60,
+   "extracted_count": 60,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/jrajath94__08-question-bank.html",
+   "original_count": 106,
+   "extracted_count": 106,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/jrajath94__question-bank.html",
+   "original_count": 477,
+   "extracted_count": 477,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/jrajath94__package-v3__practice-answer-key.html",
+   "original_count": 126,
+   "extracted_count": 126,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/Amey-Thakur__question-bank.json",
+   "original_count": 80,
+   "extracted_count": 80,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/Amey-Thakur__question-bank.json",
+   "original_count": 80,
+   "extracted_count": 80,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/Amey-Thakur__question-bank.json",
+   "original_count": 80,
+   "extracted_count": 80,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/Amey-Thakur__question-bank.json",
+   "original_count": 80,
+   "extracted_count": 80,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/preporato__practice__ccao-f.json",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCDV-F/preporato__practice__ccdv-f.json",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCAR-F/preporato__practice__cca-f.json",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCAR-P/preporato__practice__ccar-p.json",
+   "original_count": 30,
+   "extracted_count": 30,
+   "match": true
+  },
+  {
+   "file": "CCAO-F/raybeecham__questions.json",
+   "original_count": 56,
+   "extracted_count": 56,
+   "match": true
+  }
+ ],
+ "retry": []
+}

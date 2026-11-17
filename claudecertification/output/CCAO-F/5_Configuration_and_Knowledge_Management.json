@@ -1,0 +1,833 @@
+[
+ {
+  "id": "CCAO-F-Amey-Thakur-0008",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "Your team's Project answers policy questions from an uploaded handbook. HR publishes a new handbook version. What must happen for the Project to stay trustworthy?",
+  "choices": {
+   "A": "Nothing; Claude will find the new version on its own",
+   "B": "Add the new handbook alongside the old one so both are available",
+   "C": "Replace the outdated handbook in the Project knowledge and spot-check answers against the new version",
+   "D": "Tell users to mention the new version in every prompt"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** Project knowledge is maintained, not self-updating; stale sources are a quality defect the configurer owns. Claude does not fetch your internal documents on its own (A), keeping both versions invites contradictory answers (B), and pushing the burden onto every user (D) is not maintenance.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0088",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0031",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "What belongs in a project's knowledge rather than in individual prompts?",
+  "choices": {
+   "A": "The specific question being asked today",
+   "B": "Material that every conversation in the project should be able to draw on",
+   "C": "The preferred output length for one report",
+   "D": "A one-off document being reviewed this week"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Project knowledge holds what recurs, so each conversation starts from the same base. Today's question (A), a single formatting preference (C), and a one-off document (D) all belong in the prompt that needs them.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "31",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0111",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0032",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "A project's answers have grown vaguer as more documents were added. What is the likely cause?",
+  "choices": {
+   "A": "The model version changed",
+   "B": "The project has too few documents to ground answers",
+   "C": "The knowledge now holds overlapping or outdated material competing with the right sources",
+   "D": "The prompts have become too specific"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** Accumulated, unmaintained knowledge dilutes retrieval, and the symptom is exactly this drift toward vagueness. A version change (A) is unrelated to what was added, and both too few documents (B) and overly specific prompts (D) contradict the described trend.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "32",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0112",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0033",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "How should project knowledge be treated as the underlying material changes?",
+  "choices": {
+   "A": "It updates automatically from the source systems",
+   "B": "It only needs review when answers are visibly wrong",
+   "C": "It should be rebuilt from scratch each quarter",
+   "D": "It must be maintained deliberately, because it does not update itself"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Project knowledge is a curated copy and stays as accurate as the person maintaining it. It does not sync (A), waiting for visible errors (B) means acting after the damage, and periodic rebuilds (C) are wasteful and still unscheduled against real change.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "33",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0113",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0039",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-1.md",
+  "question": "Your team's Project answers questions from a product manual. Users report confident answers about a feature that was removed last quarter. What is the most likely cause?",
+  "choices": {
+   "A": "The model needs retraining",
+   "B": "The Project's knowledge still contains the outdated manual",
+   "C": "Users are asking the questions wrong",
+   "D": "The context window is too small"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Project knowledge is maintained by you; stale documents produce confidently outdated answers",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0119",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0044",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-1.md",
+  "question": "You are configuring a Project that several colleagues will use for consistent client communications. What belongs in the Project instructions rather than in each individual prompt?",
+  "choices": {
+   "A": "The specific client's name for today's message",
+   "B": "Today's date",
+   "C": "The house tone, required disclaimers, and the standard structure of a client message",
+   "D": "The colleague's personal writing preferences"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Durable, shared conventions belong in instructions; per-message specifics belong in the prompt",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0124",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0062",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-2.md",
+  "question": "Two teams keep separate copies of the same reference documents in their own projects. What is the main risk?",
+  "choices": {
+   "A": "The copies drift apart, and the two teams begin answering the same question differently",
+   "B": "Higher storage cost",
+   "C": "Slower responses",
+   "D": "The model becomes confused between projects"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Duplicated knowledge diverges as each copy is maintained separately, producing inconsistent answers. Storage (B) and speed (C) are minor, and projects do not leak into one another (D)",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0142",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0063",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-2.md",
+  "question": "What is the right first step when setting up a project for a recurring task?",
+  "choices": {
+   "A": "Decide what the task needs to know every time, and add only that",
+   "B": "Upload every document the team owns",
+   "C": "Write the longest possible instruction",
+   "D": "Add documents as questions come up, without review"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "A deliberate, minimal base keeps retrieval sharp and is maintainable. Uploading everything (B) and accumulating without review (D) both dilute, and instruction length (C) is not the question",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "13",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0143",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0077",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-3.md",
+  "question": "What is the risk of adding a document to project knowledge without removing the version it replaces?",
+  "choices": {
+   "A": "Both versions can be drawn on, producing answers that mix current and superseded material",
+   "B": "Storage cost",
+   "C": "Slower responses",
+   "D": "The project will refuse to answer"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Superseded material remains retrievable and contradicts the current version. Storage (B) and speed (C) are minor, and the project does not refuse (D)",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0157",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0078",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-3.md",
+  "question": "Which is the better test of whether something belongs in project knowledge?",
+  "choices": {
+   "A": "Whether every conversation in the project would benefit from it",
+   "B": "Whether it is long enough to be worth uploading",
+   "C": "Whether it was recently created",
+   "D": "Whether it is confidential"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Recurrence across conversations is what distinguishes shared knowledge from prompt content. Length (B), recency (C), and sensitivity (D) are unrelated to that test",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "13",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0158",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0025",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "In a team Project, where should each of these go: (1) 'Always write in British English and use our headline format'; (2) the 40-page brand guidelines PDF; (3) the brief for this week's campaign?",
+  "choices": {
+   "A": "(1) The chat prompt, (2) the chat prompt, (3) Project knowledge",
+   "B": "(1) Project instructions, (2) the chat prompt, (3) Project knowledge",
+   "C": "(1) Project knowledge, (2) Project instructions, (3) Project instructions",
+   "D": "(1) Project instructions, (2) Project knowledge, (3) the chat prompt"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Standing rules go in instructions, reference documents go in knowledge, and details for one task go in the chat (D). C swaps rules and documents and makes a one-week brief permanent. A retypes standing rules every time. B re-uploads the guidelines in every chat and stores a temporary brief permanently.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": "Question 25",
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0055",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0026",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "Your weekly report draws on a Google Doc of sales notes that the team updates daily. You've been uploading a copy every Monday, and sometimes it's out of date. What is the better setup?",
+  "choices": {
+   "A": "Copy the notes into the Project instructions",
+   "B": "Connect Google Drive so Claude reads the current version of the document",
+   "C": "Upload a copy twice a week",
+   "D": "Paste the notes from memory"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Connectors suit material that lives in another tool and changes often, so Claude reads the current version (B). More frequent uploads (C) shrink the gap without closing it. Memory (D) adds errors. Instructions (A) hold standing rules, and pasted notes there go stale just as fast.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "26",
+  "source_heading": "Question 26",
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0056",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0027",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "A Project keeps quoting last year's prices. Both the 2025 and the 2026 price sheets are in Project knowledge. What fixes this?",
+  "choices": {
+   "A": "Remove or replace the outdated price sheet, and if both must stay, state in the instructions which one is current",
+   "B": "Use research mode for prices",
+   "C": "Correct Claude in every chat",
+   "D": "Switch to Opus"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Stale knowledge produces confidently outdated answers, so the fix is maintaining the knowledge itself (A). Correcting every chat (C) never ends. A stronger model (D) still reads both sheets. Your prices are internal, so searching for them (B) won't find the right ones.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "27",
+  "source_heading": "Question 27",
+  "source_section": "Configuration and Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0057",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0005",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "An internal knowledge document is used to answer policy questions, but no one knows whether it is current. What metadata is most important to establish first?",
+  "choices": {
+   "A": "The document's font and page color",
+   "B": "Its owner, authority, version or effective date, classification, scope, and review cadence",
+   "C": "How many users have downloaded it",
+   "D": "Whether it contains the word “policy”"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Why B is best: A governed source needs accountability, authority, freshness, scope, and data-handling metadata before it can reliably support answers.\n\nWhy the distractors are weaker:\n- **A:** Formatting does not establish governance or freshness.\n- **C:** Popularity is not authority.\n- **D:** A keyword does not prove the document governs the use case.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "5",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0149",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0205",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0012",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "Every response in a controlled application must cite approved evidence and use `insufficient_evidence` when support is absent. Where should this rule live?",
+  "choices": {
+   "A": "Only in each user's memory",
+   "B": "Only in the source documents",
+   "C": "In version-controlled application or system configuration, with retrieval and validation enforcing it",
+   "D": "In a model-generated note that is not saved"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Why C is best: Durable application behavior should be governed, versioned, reviewed, and tested rather than repeated informally by each user.\n\nWhy the distractors are weaker:\n- **A:** User memory is not enforceable or auditable.\n- **B:** Sources are evidence, not trusted behavioral configuration.\n- **D:** An unsaved note cannot establish repeatable system behavior.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0150",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0206",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0019",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A service repeatedly sends the same long system instructions, tool definitions, and approved reference text, followed by a different short user task. Data policy permits caching. What optimization is most relevant?",
+  "choices": {
+   "A": "Place the stable reusable content in a consistent prompt prefix and use the platform's prompt-caching behavior, then measure actual hits.",
+   "B": "Move a changing timestamp to the beginning of the prompt.",
+   "C": "Store the API credential in the cached text.",
+   "D": "Randomize the order of tool definitions on each request."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Why A is best: Prompt caching is designed for stable, repeatedly reused prefixes. The design must follow current platform semantics and data policy and should be verified with usage diagnostics.\n\nWhy the distractors are weaker:\n- **B:** A changing early field can invalidate the reusable prefix.\n- **C:** Credentials must never be stored in prompt text or cache.\n- **D:** Changing order prevents prefix reuse.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "19",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0151",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0207",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0026",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A policy assistant retrieves fifty documents for every question. Answers are slow and sometimes combine conflicting versions. What is the best redesign?",
+  "choices": {
+   "A": "Increase the response length so all documents are discussed.",
+   "B": "Tell Claude to ignore conflict without identifying it.",
+   "C": "Remove authorization filters so retrieval is faster.",
+   "D": "Retrieve the smallest relevant, permitted, authoritative, current set and attach provenance and conflict metadata."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Why D is best: Retrieval should select high-quality evidence, not maximize volume. Authority, freshness, relevance, and access belong in the retrieval pipeline.\n\nWhy the distractors are weaker:\n- **A:** More generated text does not resolve noisy or conflicting evidence.\n- **B:** Conflict must be resolved by documented authority or surfaced.\n- **C:** Removing authorization creates a data exposure risk.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "26",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0152",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0208",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0033",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A prompt needs to call an internal search service that requires a credential. Where should the credential be stored?",
+  "choices": {
+   "A": "In the system prompt so Claude can copy it into the tool call",
+   "B": "In an example inside the repository",
+   "C": "In an approved secret manager, used by the application or connector without exposing the value to the model",
+   "D": "In the generated output with a warning"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Why C is best: Credentials belong in a secret-management boundary and should be supplied only to the authorized service call.\n\nWhy the distractors are weaker:\nA: Prompt text may be logged or exposed and is not a secret store.\nB: Repository examples are public or broadly accessible.\nD: Outputting a credential is disclosure, regardless of warning.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "5",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0153",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0209",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0040",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "Users in Business Unit A can retrieve confidential documents from Business Unit B because the model is instructed not to reveal them. What is the correct control?",
+  "choices": {
+   "A": "Make the non-disclosure instruction more forceful.",
+   "B": "Enforce identity-aware authorization before retrieval so unauthorized documents never enter the model context.",
+   "C": "Ask users to promise not to request other units' data.",
+   "D": "Filter the final answer after the model has processed all documents."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Why B is best: Access control must prevent unauthorized data from reaching the model. Prompt instructions and output filtering are not substitutes for retrieval authorization.\n\nWhy the distractors are weaker:\nA: Instructions do not enforce access control.\nC: User promises are not a technical authorization mechanism.\nD: Post-generation filtering is too late because the model already received the data.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0154",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0210",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0047",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A knowledge file has a recent upload timestamp but contains an older policy with no owner or review date. What is the primary risk?",
+  "choices": {
+   "A": "The system may treat stale or superseded content as authoritative because file metadata does not establish content freshness.",
+   "B": "The file will necessarily exceed the context window.",
+   "C": "The model will always refuse to read it.",
+   "D": "The document cannot contain any useful information."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Why A is best: Upload or modification time is not sufficient evidence of policy currency. Content version, effective date, authority, and ownership are needed.\n\nWhy the distractors are weaker:\nB: File age does not determine context size.\nC: A stale document is not inherently unreadable.\nD: It may still be useful as historical or advisory evidence if labeled correctly.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "19",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0155",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0211",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0054",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A current public standard and a current approved internal standard give different minimum requirements. The internal standard applies to the organization and is stricter. What should the assistant do?",
+  "choices": {
+   "A": "Choose the shorter document.",
+   "B": "Blend the requirements and omit the difference.",
+   "C": "Select the public standard because it is public.",
+   "D": "Apply the documented authority and scope rules, cite both where useful, and state that the stricter internal standard governs the organization."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Why D is best: Source resolution depends on authority and scope, not convenience. The conflict and governing rule should remain traceable.\n\nWhy the distractors are weaker:\nA: Length has no relationship to authority.\nB: Blending hides a material difference.\nC: Public availability does not override an approved internal requirement within scope.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "26",
+  "source_heading": null,
+  "source_section": "Configuration & Knowledge Management",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0156",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/05-configuration-knowledge-management/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0212",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0063",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A team wants every report to follow the same ordered, multi-step formatting and quality-check procedure across multiple Projects. Which mechanism fits best?",
+  "choices": {
+   "A": "A Memory entry",
+   "B": "A reference document in each Project knowledge base",
+   "C": "A one-time prompt pasted by every user",
+   "D": "A reusable Skill"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "A reusable, ordered procedure belongs in a Skill. Memory is continuity, knowledge holds reference material, and a one-time prompt is not a maintainable shared procedure.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0070",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A monthly-report Project contains current FY26 target files and the approved FY26 template. However, the standing instruction still says to use the FY25 template, and Project Memory still says the reporting period is FY25. What is the correct repair?",
+  "choices": {
+   "A": "Delete the FY26 files.",
+   "B": "Upgrade the model tier.",
+   "C": "Remove the brand guide because it is unrelated to the figures.",
+   "D": "Update the standing instruction and the stale Memory entry to FY26, then regression-test the workflow."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "The current knowledge is already present; stale standing instructions and Memory are directing the workflow toward FY25. The repair is to update those maintained layers and run representative regression tests.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "14",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0077",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A mail connector can search and read messages but cannot send them. A user asks why “send” failed. What is the most accurate diagnosis?",
+  "choices": {
+   "A": "The model tier is too weak.",
+   "B": "Sending is outside the connector’s defined capability boundary.",
+   "C": "The user must re-add the connector from a public directory.",
+   "D": "The connector is necessarily defective."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "The connector is operating within its defined boundary. A connector’s name does not imply universal read, draft, write, send, or delete capabilities, and a model upgrade cannot create an unavailable action.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "21",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0084",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A Project has an approved policy that should remain stable and an evolving set of decisions from ongoing conversations. Where should each live?",
+  "choices": {
+   "A": "Put both only in Memory.",
+   "B": "Put both only in standing instructions.",
+   "C": "Put the approved policy in Project knowledge and selected evolving continuity in Project-scoped Memory.",
+   "D": "Put the policy in a Skill and the decisions in a connector."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "An approved policy is authoritative reference material and belongs in Project knowledge. Selected evolving continuity may live in scoped Memory, but Memory should not replace the controlling source.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "28",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0092",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "Which standing instruction is most likely to produce consistent meeting notes?",
+  "choices": {
+   "A": "“Make the notes good and professional.”",
+   "B": "“Capture the meeting clearly.”",
+   "C": "“List each decision as a separate bullet; record every action as owner, due date, and status; label missing owners ‘owner TBD.’”",
+   "D": "“Summarize as best you can.”"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "This instruction defines observable structure and explicit failure behavior for missing owners. The other options are aspirations that two readers could interpret differently and that cannot be tested reliably.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "36",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0099",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "Which statement correctly distinguishes a Skill from a Project configuration?",
+  "choices": {
+   "A": "Skills hold Project-specific facts, while Projects hold reusable procedures.",
+   "B": "Skills are stored only inside the Project that created them.",
+   "C": "Project Memory is the same thing as a Skill.",
+   "D": "A Skill carries a reusable procedure across relevant conversations, while Project instructions and knowledge remain scoped to the Project."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Skills carry reusable procedures across relevant conversations, while Project instructions and knowledge remain scoped to the Project. Skills are not Project Memory and should not become repositories for Project-specific facts.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "43",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0106",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A Project knowledge base contains three versions of the same policy, including one current version and two superseded drafts. What is the best maintenance action?",
+  "choices": {
+   "A": "Remove or clearly archive the superseded versions, identify the controlling source, and update the source register.",
+   "B": "Keep all versions unlabeled so Claude can choose.",
+   "C": "Move all three documents into Memory.",
+   "D": "Ask users to clarify the version in every prompt forever."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Duplicate, unlabeled policy versions create source-authority conflicts. The controlling version should be identified, superseded material removed or clearly archived, and provenance and review metadata maintained.",
+  "domain": "5. Configuration and Knowledge Management",
+  "domain_confidence": "source",
+  "source_number": "50",
+  "source_heading": null,
+  "source_section": "Configuration and Knowledge Management"
+ }
+]

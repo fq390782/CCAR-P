@@ -1,0 +1,207 @@
+<h3 id="bank-mocks-h148">M3-Q10 (V2-D1.6)</h3>
+
+<p id="sec-bank-mocks-p657" data-kind="prose"><strong>Scenario.</strong> A hotel automates check-in. Front-desk labor costs $8,000 per month for check-ins. The kiosk design costs $1,200 per month. The kiosk design has a $5,000 one-time cost. Guest satisfaction does not change.</p>
+
+<p id="sec-bank-mocks-p658" data-kind="prose"><strong>Question.</strong> What is the first-year net value?</p>
+
+<p id="sec-bank-mocks-p659" data-kind="prose"><strong>Options.</strong>
+A) $8,000 - $1,200 = $6,800 per month.
+B) (12 x ($8,000 - $1,200)) - $5,000 = $76,600.
+C) The kiosk's screen size.
+D) The model's tier.</p>
+
+<p id="sec-bank-mocks-p660" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "$8,000 per month... $1,200 per month
+plus $5,000 one-time." Why: net value includes the one-time cost.
+12 x $6,800 = $81,600, minus $5,000 = $76,600. A ignores the one-time
+cost and the year horizon. Counterfactual: A wins as the monthly
+run-rate answer, not the first-year net.</p>
+
+
+<h3 id="bank-mocks-h149">M3-Q11 (V2-D1.6)</h3>
+
+<p id="sec-bank-mocks-p661" data-kind="prose"><strong>Scenario.</strong> A team celebrates cutting p95 latency from 9 s to 3 s on
+an overnight batch job. No user waits for the job.</p>
+
+<p id="sec-bank-mocks-p662" data-kind="prose"><strong>Question.</strong> What is the correct assessment?</p>
+
+<p id="sec-bank-mocks-p663" data-kind="prose"><strong>Options.</strong>
+A) A major win. Ship the announcement.
+B) Motion without value: no user waits, so the latency cut buys no
+business outcome. The V2-D1.6 question is what the improvement is
+worth.
+C) Cut latency further.</p>
+
+<p id="sec-bank-mocks-p664" data-kind="prose">D) A bigger model.</p>
+
+<p id="sec-bank-mocks-p665" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "overnight batch job. No user waits for
+the job." Why: technical optimization without a value case is the
+fastest route to a system nobody needed. The chain asks what the
+improvement earns. Counterfactual: A wins when the job blocks the
+morning shift.</p>
+
+
+<h3 id="bank-mocks-h150">M3-Q12 (V2-D2.1)</h3>
+
+<p id="sec-bank-mocks-p666" data-kind="prose"><strong>Scenario.</strong> An insurance bot handles 30,000 chats per day. About 96%
+are policy lookups. About 4% are claim disputes where a wrong answer
+creates legal exposure.</p>
+
+<p id="sec-bank-mocks-p667" data-kind="prose"><strong>Question.</strong> Which tier strategy fits?</p>
+
+<p id="sec-bank-mocks-p668" data-kind="prose"><strong>Options.</strong>
+A) Most capable tier for everything.
+B) Fast tier for lookups, stronger tier for disputes, with a quality
+floor on the legal-exposure answers.
+C) Fast tier for everything.
+D) Stronger tier for lookups, Fast tier for disputes.</p>
+
+<p id="sec-bank-mocks-p669" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "a wrong answer creates legal exposure."
+Why: error cost sets the tier per class. D is backwards.
+Counterfactual: A wins when lookups also carry legal exposure.</p>
+
+
+<h3 id="bank-mocks-h151">M3-Q13 (V2-D2.1)</h3>
+
+<p id="sec-bank-mocks-p670" data-kind="prose"><strong>Scenario.</strong> A team cascades: Fast tier first, escalate to the
+Balanced tier when the Fast tier's answer fails a confidence check.</p>
+
+<p id="sec-bank-mocks-p671" data-kind="prose"><strong>Question.</strong> What is the flaw?</p>
+
+<p id="sec-bank-mocks-p672" data-kind="prose"><strong>Options.</strong>
+A) Cascading is always wrong.
+B) The model&#x27;s own confidence is the escalation trigger. The model&#x27;s confidence is uncalibrated. The trigger must be a measured check. For example, use a verifier or a quality floor test.</p>
+
+<p id="sec-bank-mocks-p673" data-kind="prose">C) Tiers must never mix.
+D) Fast is too fast.</p>
+
+<p id="sec-bank-mocks-p674" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;fails a confidence check.&quot; The model confidence is not calibrated. The model confidence is prompt-injectable. The escalation gate needs a measurement. The escalation gate does not need a self-report.</p>
+
+<p id="sec-bank-mocks-p675" data-kind="prose">A never wins. Cascading with a measured trigger is good.</p>
+
+
+<h3 id="bank-mocks-h152">M3-Q14 (V2-D2.2)</h3>
+
+<p id="sec-bank-mocks-p676" data-kind="prose"><strong>Scenario.</strong> A bank bot must never reveal account balances to anyone
+except the verified account holder. Balances sit behind the account
+API.</p>
+
+<p id="sec-bank-mocks-p677" data-kind="prose"><strong>Question.</strong> What is the correct control?</p>
+
+<p id="sec-bank-mocks-p678" data-kind="prose"><strong>Options.</strong>
+A) A system prompt line about balances.
+B) Identity verification plus a code gate: the balance tool runs only
+for the verified holder, and an output check blocks balance figures
+otherwise.
+C) A longer prompt.
+D) Removing the balance tool for everyone.</p>
+
+<p id="sec-bank-mocks-p679" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "except the verified account holder."
+Why: identity plus code enforcement. A and C are guidance. D breaks
+the product. Counterfactual: A wins for tone, never for balances.</p>
+
+
+<h3 id="bank-mocks-h153">M3-Q15 (V2-D2.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p680" data-kind="prose"><strong>Scenario.</strong> A kids' learning bot must: keep ads out, and keep chat
+age-appropriate.</p>
+
+<p id="sec-bank-mocks-p681" data-kind="prose"><strong>Question.</strong> Which TWO placements are correct? Select TWO.</p>
+
+<p id="sec-bank-mocks-p682" data-kind="prose"><strong>Options.</strong>
+A) Ad content excluded at the retrieval/index level in code.
+B) An output check in code for age-appropriateness before display.
+C) A system prompt asking advertisers to stay away.
+D) Trusting the model to know what is appropriate.
+E) No controls.</p>
+
+<p id="sec-bank-mocks-p683" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p684" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "must: keep ads out, and keep chat
+age-appropriate." Why: both are "must" rules, so both live in code:
+retrieval exclusion plus output check. C and D are guidance and hope.
+Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h154">M3-Q16 (V2-D2.3)</h3>
+
+<p id="sec-bank-mocks-p685" data-kind="prose"><strong>Scenario.</strong> A ticket classifier sorts into 40 categories. It fails on
+tickets that match two categories.</p>
+
+<p id="sec-bank-mocks-p686" data-kind="prose"><strong>Question.</strong> Which technique fits first?</p>
+
+<p id="sec-bank-mocks-p687" data-kind="prose"><strong>Options.</strong>
+A) Few-shot examples of dual-category tickets with the tie-break rule
+shown, plus a structured output schema.
+B) Zero-shot.
+C) A bigger model.
+D) Fewer categories.</p>
+
+<p id="sec-bank-mocks-p688" data-kind="prose"><strong>Key.</strong> A. Decisive phrase: "fails on tickets that match two
+categories." Why: examples teach the tie-break. The schema fixes the
+format. Simplest technique that passes evals. Counterfactual: C wins
+when good examples still fail.</p>
+
+
+<h3 id="bank-mocks-h155">M3-Q17 (V2-D2.4)</h3>
+
+<p id="sec-bank-mocks-p689" data-kind="prose"><strong>Scenario.</strong> A research assistant loads 25 full papers into every
+call. The bill is 5x the budget. Questions need two or three papers.</p>
+
+<p id="sec-bank-mocks-p690" data-kind="prose"><strong>Question.</strong> What is the first fix?</p>
+
+<p id="sec-bank-mocks-p691" data-kind="prose"><strong>Options.</strong>
+A) A larger window.
+B) Retrieve the relevant papers just in time instead of loading all
+25.
+C) A stronger tier.
+D) Shorter questions.</p>
+
+<p id="sec-bank-mocks-p692" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;Questions need two or three papers... loads 25 full papers.&quot; Growth is the diagnosed fault. Retrieval is its fix. A wins when you need all 25 papers for every call. A wins when the budget allows this.</p>
+
+
+<h3 id="bank-mocks-h156">M3-Q18 (V2-D2.4), Select TWO</h3>
+
+<p id="sec-bank-mocks-p693" data-kind="prose"><strong>Scenario.</strong> A meeting bot's context holds: the whole quarter's
+transcripts, the same action-items list pasted 3 times, and no
+summaries.</p>
+
+<p id="sec-bank-mocks-p694" data-kind="prose"><strong>Question.</strong> Which TWO faults are present? Select TWO.</p>
+
+<p id="sec-bank-mocks-p695" data-kind="prose"><strong>Options.</strong>
+A) Growth: the whole quarter loads every call.
+B) Duplication: the action-items list appears 3 times.
+C) Loss: old turns vanish.
+D) Exhaustion: the window errors.
+E) Perfect context.</p>
+
+<p id="sec-bank-mocks-p696" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p697" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "whole quarter's transcripts... pasted
+3 times." Why: the load is growth. The triple paste is duplication. C
+and D have no evidence. Counterfactual: D wins when the call errors
+on window size.</p>
+
+
+<h3 id="bank-mocks-h157">M3-Q19 (V2-D2.5)</h3>
+
+<p id="sec-bank-mocks-p698" data-kind="prose"><strong>Scenario.</strong> A tax assistant reuses a 12,000-token regulation prefix
+across 5,000 calls per day. The prefix changes with each tax law
+update, about monthly.</p>
+
+<p id="sec-bank-mocks-p699" data-kind="prose"><strong>Question.</strong> What bounds the caching win?</p>
+
+<p id="sec-bank-mocks-p700" data-kind="prose"><strong>Options.</strong>
+A) The call count.
+B) The monthly prefix resets: each update re-pays the cache write
+cost, so the win depends on the hit rate between updates vs
+break-even.
+C) The model's tier.
+D) Nothing. It always wins.</p>
+
+<p id="sec-bank-mocks-p701" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;changes with each tax law update, about
+monthly.&quot; Why: prefix stability bounds prompt caching. Monthly resets
+re-pay the write cost. Only the measured hit rate decides.
+Counterfactual: D wins never.</p>
+
+<p id="sec-bank-mocks-p702" data-kind="prose">Measurement decides.</p>
+

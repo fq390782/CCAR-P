@@ -1,0 +1,288 @@
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q43</span><span class="constraint">D6</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A department head asks for an AI. The AI must make the team smarter. The architect has a kickoff meeting next week. The architect must make buildable requirements from this request.</div>
+<div class="constraint-block"><strong>Constraint:</strong> leave the meeting with specific users, tasks, and measurable success criteria, not vibes.</div>
+<div class="qb-ask">What does structured discovery look like here?</div>
+<ol class="qb-opts" type="A"><li>
+<div>Run a structured session. Identify the users. Identify tasks that take much time today. Define what good looks like with numbers. Identify existing data. Identify what must not happen.</div>
+
+<div>Write this as agreed requirements.</div>
+</li>
+<li>Ask for the budget first; requirements follow the money.</li>
+<li>Build a quick prototype and iterate until the stakeholder stops complaining.</li>
+<li>Demo the most impressive model capabilities and let the stakeholder pick favorites.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p55" data-kind="prose"><strong>Why A is correct:</strong> Structured discovery changes &quot;make us smarter&quot; into requirements. It defines users, tasks, metrics, data, and guardrails. The written requirements become the contract. People judge the build against this contract. This meets the demand.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong because demos anchor stakeholders on flashy capabilities. They do not anchor stakeholders on their actual tasks.</li>
+<li>B is wrong because budget without requirements just buys an expensive unguided build.</li>
+<li>C is wrong because prototype-and-complain is discovery by accident. It is slow and unbounded. It never produces agreed success criteria.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q44</span><span class="constraint">D6</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">
+<div>The architecture team must choose between two designs. The designs are for an executive briefing. Design A has 96 percent accuracy. It has 4-second latency. It has a higher cost. Design B has 91 percent accuracy.</div>
+
+<div>It has 1.2 seconds latency. It has a lower cost. The executives are not technical.</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> executives must understand the trade-off well enough to make the call, in one page.</div>
+<div class="qb-ask">How should the architect present the decision?</div>
+<ol class="qb-opts" type="A"><li>A 20-slide deck on transformer internals so they appreciate the complexity.</li>
+<li>Make one page. Show the business goal. Show both options. Include accuracy, latency, and cost numbers side by side. Show what each option risks. Give a clear recommendation with reasons.</li>
+<li>Recommend Design A without mentioning Design B, to keep it simple.</li>
+<li>Let the executives vote after a live demo of both.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p56" data-kind="prose"><strong>Why B is correct:</strong> Non-technical decision-makers need the trade-off in business terms. They need the goal, options with comparable numbers, risks, and a recommendation. One page forces clarity. It gives them everything they need to decide.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong because internals do not help a business decision. They bury the decision.</li>
+<li>C is wrong because hiding the alternative removes the decision. It is a sales pitch. It is not architecture communication.</li>
+<li>D is wrong because demos show best cases. They do not show trade-offs. A vote without numbers is theater.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q45</span><span class="constraint">D6</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A consulting firm hands a finished Claude agent to the client's internal team. Three months later the client team cannot debug a failure: they do not know the prompts, the eval results, or the intended operating limits.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the receiving team must be able to operate, debug, and extend the system without the original builders.</div>
+<div class="qb-ask">What should the handoff documentation have contained?</div>
+<ol class="qb-opts" type="A"><li>The source code only; good code documents itself.</li>
+<li>A one-page marketing summary of what the agent does.</li>
+<li>The final demo video and the invoice.</li>
+<li>Show the architecture overview. Show all prompts and their versions. Show eval sets and latest scores. Show known limitations and operating limits. Show the runbook for common failures. Show onboarding steps for new maintainers.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p57" data-kind="prose"><strong>Why D is correct:</strong> Operating an LLM system requires its prompts, evals, limits, and runbooks. It does not just require code. D is the complete package. It lets a new team debug ("what changed?"). It lets them know the limits ("what is it not for?"). It lets them extend safely.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong because a demo video shows the happy path. An invoice shows the price. Neither helps debugging.</li>
+<li>A is wrong because prompts, evals, and limits are the actual behavior contract of an LLM system. Code alone omits them.</li>
+<li>B is wrong because marketing copy contains zero operational information.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q46</span><span class="constraint">D6</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">Sales promises a client. The support bot will resolve 95 percent of tickets automatically. The pilot data shows 78 percent resolution. The other tickets need humans. People draft the contract now.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the SLA in the contract must be achievable and measurable, or the company will pay penalties.</div>
+<div class="qb-ask">What should the architect do about the SLA?</div>
+<ol class="qb-opts" type="A"><li>Refuse the contract entirely.</li>
+<li>Accept the 95 percent SLA; the model will improve with more data.</li>
+<li>Push back with pilot data: propose a tiered SLA (for example 80 percent auto-resolution with defined response times for the human-handled remainder), measured monthly with a clear definition of "resolved."</li>
+<li>Sign the 95 percent SLA but define "resolved" loosely so it is easy to hit.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p58" data-kind="prose"><strong>Why C is correct:</strong> The pilot data shows the 95 percent figure is not true. A tiered, measurable SLA uses real numbers. This SLA protects both sides. It has achievable targets. It handles the remainder explicitly. Defining "resolved" exactly prevents gaming.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. "will improve" is a hope. It is not a basis for a penalty-bearing contract.</li>
+<li>D is wrong. A loosely defined metric is dishonest. It will fail at the first client audit.</li>
+<li>A is wrong. It abandons the deal. It does not negotiate an honest SLA.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q47</span><span class="constraint">D6</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">Users keep reporting that the HR policy bot gives outdated answers after policy updates. There is no channel for these reports except angry emails to the HR inbox, which nobody routes to the engineering team.</div>
+<div class="constraint-block"><strong>Constraint:</strong> user-reported issues must reach the team and trigger a fix cycle, repeatedly.</div>
+<div class="qb-ask">Which feedback-loop design closes this gap?</div>
+<ol class="qb-opts" type="A"><li>The product gives feedback on every answer. The feedback can be helpful, outdated, or wrong. A team reviews a triage queue at a fixed time. A policy-update process refreshes the knowledge source. The process re-runs evaluations before it publishes.</li>
+<li>Retrain the model monthly on all HR emails.</li>
+<li>Remove the bot until policies stop changing.</li>
+<li>Tell users to email a new support address.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p59" data-kind="prose"><strong>Why A is correct:</strong> The loop has four parts. A builds all four parts. It builds capture (in-product feedback). It builds routing (triage queue with cadence). It builds fix (knowledge refresh). It builds verification (re-run evals).</p>
+<p class="qb-why" id="question-bank-106-items-in-number-order-p60" data-kind="prose">A report cannot reach the team. A report cannot trigger a fix. This is not a loop.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. A new inbox has no triage cadence. It has no fix process. This is the same gap with a different address.</li>
+<li>B is wrong. Retraining on raw emails is slow. It is expensive. It does not target the actual problem (stale knowledge).</li>
+<li>C is wrong. Policies always change. Waiting for stability means you never ship.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q48</span><span class="constraint">D6</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A demo of the new claims assistant wows the operations leaders: it handles the five demo claims flawlessly. They now expect the same on all 40 claim types starting Monday. The architect knows the eval set only covers 12 types at 88 percent accuracy.</div>
+<div class="constraint-block"><strong>Constraint:</strong> align expectations with measured reality before launch, without killing the project.</div>
+<div class="qb-ask">What is the right expectation-setting move?</div>
+<ol class="qb-opts" type="A"><li>Cancel the project; the gap is too large.</li>
+<li>Quietly expand the eval set over the weekend and launch anyway.</li>
+<li>Launch Monday as expected; the demo proves it works.</li>
+<li>Present the eval results plainly: 12 of 40 types covered at 88 percent, the rest untested. Propose a phased rollout starting with the covered types, with expansion gated on eval coverage.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p61" data-kind="prose"><strong>Why D is correct:</strong> This is honesty with a path forward. The evaluation numbers set the real expectation. The phased rollout changes the gap into a plan. It does not make it a surprise. Leaders get a launch. It is a scoped launch.</p>
+<p class="qb-why" id="question-bank-106-items-in-number-order-p62" data-kind="prose">It connects to evidence.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. The demo covered five hand-picked claims. Launching on 40 untested types guarantees a painful surprise.</li>
+<li>A is wrong. Phasing can manage the gap. Cancellation wastes the working 12 types.</li>
+<li>B is wrong. A weekend evaluation expansion is too fast. You cannot verify it. It hides the risk. It does not manage the risk.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q49</span><span class="constraint">D6</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">The provider deprecates the model version. This model version powers a production assistant. The provider gives 90 days notice. The assistant&#x27;s prompts work with the old version&#x27;s behavior. The team did not run a version migration before.</div>
+<div class="constraint-block"><strong>Constraint:</strong> migrate without a quality regression, with a rollback option if the new version underperforms.</div>
+<div class="qb-ask">Which lifecycle plan meets the constraint?</div>
+<ol class="qb-opts" type="A"><li>Switch the model ID on deprecation day; the new version is strictly better.</li>
+<li>Pin the old version until the last day, then switch overnight.</li>
+<li>Run the frozen eval set against the new version now. Fix prompt or config gaps until scores match. Shadow-deploy (the new version handles a copy of traffic, outputs compared). Cut over gradually with the old version as instant rollback. Document the new baseline.</li>
+<li>Rewrite all prompts from scratch for the new version without testing the old ones first.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p63" data-kind="prose"><strong>Why C is correct:</strong> Every element helps the constraint. Eval comparison proves no regression before cutover. Shadow deployment tests with real traffic. It does not affect the user. Gradual cutover with rollback limits the blast radius. The documented baseline helps the next migration.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. &quot;Strictly better&quot; is not proven for this workload. Behavior changes break tuned prompts.</li>
+<li>B is wrong. It puts all risk into one overnight switch. There is no evidence. There is no rollback rehearsal.</li>
+<li>D is wrong. Discarding tuned prompts without testing wastes good work. It adds unmeasured risk.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q50</span><span class="constraint">D6</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">Security wants to lock down the new agent. Security wants three months for review. Product wants the agent live next week. This will help to hit a revenue target. Both groups escalate to the architect. The standoff blocks the launch.</div>
+<div class="constraint-block"><strong>Constraint:</strong> Do not ignore either side&#x27;s core need. Do not expose unreviewed risk. Do not miss the revenue window. Make a conscious decision if you miss the revenue window.</div>
+<div class="qb-ask">How should the architect resolve the conflict?</div>
+<ol class="qb-opts" type="A"><li>Risk-tiered rollout: launch next week to a limited internal pilot with the highest-risk tools disabled and full logging. Complete the security review against real pilot data. Then expand in stages as reviewers approve controls.</li>
+<li>Launch fully but promise security a review next quarter.</li>
+<li>Side with product; revenue pays for security later.</li>
+<li>Side with security; delay the launch three months.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p64" data-kind="prose"><strong>Why A is correct:</strong> The tiered rollout respects both constraints. Product gets a live launch on schedule. This is a scoped launch. Security gets a review before broad exposure. Real pilot data makes the review better than a theoretical review. Neither side's main need is lost.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. It ignores security's main need. Unreviewed exposure is what the constraint forbids.</li>
+<li>D is wrong. It ignores product's main need. It does not find a middle path.</li>
+<li>B is wrong. A promised future review is not a control. It is the unreviewed exposure. The constraint forbids this.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q51</span><span class="constraint">D6</span><span class="qb-pill hard">Hard</span><span class="constraint">Select two</span></div>
+<div class="qb-scenario">A financial guidance assistant told a user to take an action that cost them money. The advice was wrong. The user now threatens legal action. The team contained the incident (they disabled the bad answer pattern). Leadership asks for the post-incident plan.</div>
+<div class="constraint-block"><strong>Constraint:</strong> respond honestly to the affected user, prevent recurrence, and preserve trust with all stakeholders.</div>
+<div class="qb-ask">Which two actions are essential? (Select two.)</div>
+<ol class="qb-opts" type="A"><li>A stakeholder communication plan shows what to tell the affected user. It shows what to tell leadership and legal. It shows what changes users will see. Legal must review the plan before release.</li>
+<li>Immediately delete all logs of the incident to limit legal exposure.</li>
+<li>Publicly blame the model provider for the bad advice.</li>
+<li>A blameless postmortem shows the timeline. It shows the root cause. It shows why the wrong advice passed every check. It shows fixes with owners and dates. It shows evaluation additions. This tests the failure class forever.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D, A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p65" data-kind="prose"><strong>Why D, A is correct:</strong> D prevents recurrence. Root cause plus permanent eval coverage means this failure type cannot return silently. A handles the human side. Honest, legally reviewed communication to the affected user and stakeholders keeps trust. Technical fix and communication are both necessary. One without the other fails the constraint.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. It is probably unlawful. Destroying evidence during a legal action makes worse liability. This liability is worse than the incident itself.</li>
+<li>C is wrong. Blame-shifting destroys trust. It does nothing to prevent recurrence.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q52</span><span class="constraint">D2</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A pipeline classifies 2 million customer messages per month into 8 fixed categories. The task is simple pattern matching; a small model already scores 97 percent on the eval set, above the 95 percent SLA.</div>
+<div class="constraint-block"><strong>Constraint:</strong> Meet the 95 percent SLA. Do this at the lowest cost and latency. No extra quality is necessary.</div>
+<div class="qb-ask">Which model choice is correct?</div>
+<ol class="qb-opts" type="A"><li>Alternate between models randomly to compare them in production.</li>
+<li>The mid-tier model, as a compromise between the other two.</li>
+<li>The largest model, for maximum quality headroom.</li>
+<li>The smallest, fastest model that clears the SLA (already verified at 97 percent), since extra quality beyond the bar buys nothing.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p66" data-kind="prose"><strong>Why D is correct:</strong> Model selection is a trade-off decision against the SLA. The small model already clears 95 percent. So, it meets the quality bar at the lowest cost and latency. Paying for headroom that nobody needs breaks the cost constraint.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. Unused quality headroom at 2M messages per month is pure cost.</li>
+<li>A is wrong. Random alternation is not an evaluation method. It only adds inconsistency.</li>
+<li>B is wrong. "Compromise" without measurement is not a selection criterion. The cheaper option already meets the SLA.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q53</span><span class="constraint">D2</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A data-extraction prompt asks the model to return JSON with specific fields, but the model keeps returning slightly different field names and formats. The instruction "return JSON" is in the prompt, with zero examples.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the output format must be exactly right on every call, since a parser consumes it.</div>
+<div class="qb-ask">Which prompting technique fixes the format drift?</div>
+<ol class="qb-opts" type="A"><li>Chain-of-thought reasoning, so the model thinks harder about the format.</li>
+<li>Few-shot prompting: include 3 to 5 input-output examples showing the exact JSON schema, so the model imitates the format precisely.</li>
+<li>Zero-shot with a longer explanation of what JSON is.</li>
+<li>Raise the temperature for more creative formatting.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p67" data-kind="prose"><strong>Why B is correct:</strong> Format compliance is a pattern-matching task. Few-shot examples show the exact pattern to copy. Three to five examples define field names, nesting, and types. They do this better than prose instructions.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. Chain-of-thought helps reasoning. It does not help format adherence. It can even add extra text around the JSON.</li>
+<li>C is wrong. The model already knows what JSON is. The problem is which schema. Prose cannot define this.</li>
+<li>D is wrong. Higher temperature increases format variance. This is the opposite of the goal.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q54</span><span class="constraint">D2</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A team writes its first system prompt for a refund-policy assistant. The draft is three paragraphs of background about the company, ending with "answer refund questions helpfully."</div>
+<div class="constraint-block"><strong>Constraint:</strong> the prompt must reliably produce accurate, policy-grounded answers in a consistent format.</div>
+<div class="qb-ask">What belongs in a well-designed system prompt here?</div>
+<ol class="qb-opts" type="A"><li>A friendly persona with jokes, to make answers engaging.</li>
+<li>The entire refund policy pasted into the system prompt.</li>
+<li>More company background, so the model understands the business deeply.</li>
+<li>Role definition, the rules that matter (answer only from the policy, cite the section, say when unsure), and the exact output format; background trimmed to what affects answers.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p68" data-kind="prose"><strong>Why D is correct:</strong> A system prompt must contain information that changes behavior. This includes the role, the rules, and the format. "Answer only from the policy" and "cite the section" directly help the accuracy constraint. The output format helps consistency. Background that does not affect answers wastes tokens.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. Extra background does not change answer behavior. It only costs tokens.</li>
+<li>A is wrong. A jokey persona reduces the trust and consistency that the constraint needs.</li>
+<li>B is wrong. The policy belongs in the retrieval context. It changes. Do not bake it into the system prompt. Pasting it wastes cache efficiency. It also makes updates more complex.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q55</span><span class="constraint">D2</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A pricing assistant computes multi-step discounts (volume tiers, seasonal adjustments, loyalty bonuses). It gets the final number wrong on 30 percent of eval cases, usually by skipping a step or applying tiers in the wrong order.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the arithmetic must be right; skipped steps are the observed failure mode.</div>
+<div class="qb-ask">Which technique addresses the failure mode?</div>
+<ol class="qb-opts" type="A"><li>Lower temperature to make the wrong answers more consistent.</li>
+<li>Few-shot with final answers only, so the model sees more correct results.</li>
+<li>Chain-of-thought (or extended thinking): require the model to show each computation step in order before the final number, so skipped steps become visible and checkable.</li>
+<li>A larger context window, so the model can see more pricing history.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p69" data-kind="prose"><strong>Why C is correct:</strong> The failure skips reasoning steps. Chain-of-thought makes each step visible. This improves step-by-step accuracy. It also makes errors auditable. It directly addresses the diagnosed failure.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. Final-answer examples do not teach the intermediate steps. The model skips these steps.</li>
+<li>D is wrong. Context length is not related to step-skipping. The pricing rules already fit.</li>
+<li>A is wrong. Consistent wrong answers are still wrong. Temperature does not add missing steps.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q56</span><span class="constraint">D2</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A research assistant reads 150,000-token technical documents. The assistant answers deep questions. Users report that the assistant misses key facts. These facts are in the middle of documents. The whole document fits in the context window.</div>
+<div class="constraint-block"><strong>Constraint:</strong> facts anywhere in the document must be found reliably, without simply buying a bigger window.</div>
+<div class="qb-ask">Which context-engineering approach fixes the misses?</div>
+<ol class="qb-opts" type="A"><li>Split the document into chunks and answer from a random chunk.</li>
+<li>Retrieve-then-read: first pull the most relevant sections with search, then reason over the small focused set; for overview questions, use map-reduce summarization per section.</li>
+<li>Increase the font size of the middle sections in the source PDFs.</li>
+<li>Ask the model the same question three times and take a majority vote.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p70" data-kind="prose"><strong>Why B is correct:</strong> The misses come from attention decay over very long contexts. Retrieve-then-read reduces the reasoning context to the relevant sections. The model is reliable in these sections. Map-reduce handles questions that need the whole document. Both methods work within the existing window.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. Font size has no effect on model attention. It confuses human reading with model processing.</li>
+<li>D is wrong. Voting over the same degraded long context repeats the same misses three times.</li>
+<li>A is wrong. A random chunk will usually not contain the answer.</li>
+</ol>
+</div>
+</details>
+</div>
+

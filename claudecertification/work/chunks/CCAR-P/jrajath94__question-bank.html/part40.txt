@@ -1,0 +1,201 @@
+<h3 id="bank-mocks-h178">M3-Q40 (V2-D4.5)</h3>
+
+<p id="sec-bank-mocks-p798" data-kind="prose"><strong>Scenario.</strong> A chat service's p99 latency is 14 s. The team optimizes
+the median from 1.2 s to 0.9 s. Users still complain.</p>
+
+<p id="sec-bank-mocks-p799" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p800" data-kind="prose"><strong>Options.</strong>
+A) Nothing. The median improved.
+B) The tail is the problem: p99 at 14 s means 1% of users wait
+terribly. Optimize the tail (timeouts, retries, slow stages), not the
+median.
+C) The model is too small.</p>
+
+<p id="sec-bank-mocks-p801" data-kind="prose">D) Users complain too much.</p>
+
+<p id="sec-bank-mocks-p802" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;p99 latency is 14 s.&quot; V2-D4.5 targets p95/p99 for interactive systems. Median work ignores the suffering tail. A wins when the SLA is on the median. A wins when users are happy.</p>
+
+
+<h3 id="bank-mocks-h179">M3-Q41 (V2-D4.6)</h3>
+
+<p id="sec-bank-mocks-p803" data-kind="prose"><strong>Scenario.</strong> A pricing bot's conversion rate drops after a competitor's
+sale. No alert fires because no watch tracks conversion.</p>
+
+<p id="sec-bank-mocks-p804" data-kind="prose"><strong>Question.</strong> What gap exists?</p>
+
+<p id="sec-bank-mocks-p805" data-kind="prose"><strong>Options.</strong>
+A) A bigger model.
+B) The business-outcome watch: conversion is the outcome the system
+exists for, so it needs a line, a window, an owner, and an alert.
+C) More logs.
+D) A new competitor.</p>
+
+<p id="sec-bank-mocks-p806" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "no watch tracks conversion." Why: V2-D4.6
+watches include business outcomes, not just system metrics. The outcome
+the system exists for is the first watch. Counterfactual: A wins never
+for a missing watch.</p>
+
+
+<h3 id="bank-mocks-h180">M3-Q42 (V2-D5.1)</h3>
+
+<p id="sec-bank-mocks-p807" data-kind="prose"><strong>Scenario.</strong> A data agent may delete old records. A deletion is
+irreversible. The task sometimes misidentifies "old."</p>
+
+<p id="sec-bank-mocks-p808" data-kind="prose"><strong>Question.</strong> Which control fits?</p>
+
+<p id="sec-bank-mocks-p809" data-kind="prose"><strong>Options.</strong>
+A) Let it delete. Storage is cheap to refill.
+B) Pre-action approval for deletions plus a fail-closed age check in
+code: ambiguous records are never deleted without a human.
+C) Log deletions after they happen.
+D) A bigger model.</p>
+
+<p id="sec-bank-mocks-p810" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "deletion is irreversible... sometimes
+misidentifies 'old.'" Why: irreversible plus uncertain equals
+pre-action approval with a fail-closed check. C logs the loss.
+Counterfactual: C wins as a complement, never alone.</p>
+
+
+<h3 id="bank-mocks-h181">M3-Q43 (V2-D5.1), Select TWO</h3>
+
+<p id="sec-bank-mocks-p811" data-kind="prose"><strong>Scenario.</strong> A browser agent visits arbitrary URLs to research.</p>
+
+<p id="sec-bank-mocks-p812" data-kind="prose"><strong>Question.</strong> Which TWO controls fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p813" data-kind="prose"><strong>Options.</strong>
+A) Sandboxing: isolate browsing from secrets and internal networks.
+B) An allow-list or screening for high-risk sites and downloads.
+C) Full access to the corporate VPN.
+D) Auto-downloading every file.
+E) Disabling logs.</p>
+
+<p id="sec-bank-mocks-p814" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p815" data-kind="prose"><strong>Key.</strong> A, B. The decisive phrase is &quot;visits arbitrary URLs.&quot; Arbitrary URLs are not trusted. Sandboxing limits the blast radius. Screening limits exposure. C connects the threat to the crown jewels.</p>
+
+<p id="sec-bank-mocks-p816" data-kind="prose">Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h182">M3-Q44 (V2-D5.2)</h3>
+
+<p id="sec-bank-mocks-p817" data-kind="prose"><strong>Scenario.</strong> A support agent's tool list grows to 35 tools, many
+overlapping. Wrong-tool picks cause wrong refunds.</p>
+
+<p id="sec-bank-mocks-p818" data-kind="prose"><strong>Question.</strong> What is the risk, and what is the fix?</p>
+
+<p id="sec-bank-mocks-p819" data-kind="prose"><strong>Options.</strong>
+A) No risk. More tools are better.
+B) Capability bloat leading to tool abuse by mis-selection: prune to
+least privilege, remove overlaps, and consider progressive discovery.
+C) The risk is slow typing.
+D) The fix is a bigger model.</p>
+
+<p id="sec-bank-mocks-p820" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;35 tools, many overlapping. Wrong-tool
+picks cause wrong refunds.&quot; Why: V2-D5.2 names tool abuse. 2-D3.1
+names the bloat fix. The wrong pick is the failure mode realized.</p>
+
+<p id="sec-bank-mocks-p821" data-kind="prose">Counterfactual: A wins never past the bloat threshold.</p>
+
+
+<h3 id="bank-mocks-h183">M3-Q45 (V2-D5.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p822" data-kind="prose"><strong>Scenario.</strong> An agent runs with the CEO's credentials to "get things
+done faster."</p>
+
+<p id="sec-bank-mocks-p823" data-kind="prose"><strong>Question.</strong> Which TWO risks are present? Select TWO.</p>
+
+<p id="sec-bank-mocks-p824" data-kind="prose"><strong>Options.</strong>
+A) Excessive agency: the agent acts with the CEO's full authority.
+B) Data exposure: the credential grants broad data access.
+C) Slow execution.
+D) Poor grammar.
+E) High electricity use.</p>
+
+<p id="sec-bank-mocks-p825" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p826" data-kind="prose"><strong>Key.</strong> A, B. The decisive phrase is &quot;runs with the CEO&#x27;s credentials.&quot; Maximum authority plus maximum data is the maximum blast radius. Least privilege is not present. Counterfactual: none. This design is never acceptable.</p>
+
+
+<h3 id="bank-mocks-h184">M3-Q46 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p827" data-kind="prose"><strong>Scenario.</strong> A marketing bot schedules social posts. A wrong post causes embarrassment. You can delete the post in seconds.</p>
+
+<p id="sec-bank-mocks-p828" data-kind="prose"><strong>Question.</strong> Which review shape fits?</p>
+
+<p id="sec-bank-mocks-p829" data-kind="prose"><strong>Options.</strong>
+A) Pre-action approval on every post.
+B) Post-action sampled review plus audit logging.
+C) No logging.
+D) Legal review per post.</p>
+
+<p id="sec-bank-mocks-p830" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "deletable in seconds." Why:
+reversibility sets the shape. Post-action sampled review fits
+reversible low-stakes output. Counterfactual: A wins for regulated
+claims.</p>
+
+
+<h3 id="bank-mocks-h185">M3-Q47 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p831" data-kind="prose"><strong>Scenario.</strong> An HR bot drafts termination letters. A wrong letter
+creates legal liability.</p>
+
+<p id="sec-bank-mocks-p832" data-kind="prose"><strong>Question.</strong> Which review shape fits?</p>
+
+<p id="sec-bank-mocks-p833" data-kind="prose"><strong>Options.</strong>
+A) Post-action sampled review.
+B) Pre-action approval by HR with the full letter and employee record
+shown before anything sends.
+C) No review. The bot is fast.
+D) Annual review.</p>
+
+<p id="sec-bank-mocks-p834" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "creates legal liability." Why:
+consequence plus regulation equals pre-action approval with full
+context. A reviews after the liability lands. Counterfactual: A wins
+for informational HR FAQs.</p>
+
+
+<h3 id="bank-mocks-h186">M3-Q48 (V2-D5.4)</h3>
+
+<p id="sec-bank-mocks-p835" data-kind="prose"><strong>Scenario.</strong> A bank chatbot logs all conversations. The logs contain
+account numbers. The log store has no retention policy.</p>
+
+<p id="sec-bank-mocks-p836" data-kind="prose"><strong>Question.</strong> What gap exists?</p>
+
+<p id="sec-bank-mocks-p837" data-kind="prose"><strong>Options.</strong>
+A) More logs.
+B) The compliance chain for the logs: retention rule, access control,
+named owner, evidence of enforcement, and review cadence. Account
+numbers in logs are sensitive data needing the full chain.
+C) A bigger model.
+D) Louder alerts.</p>
+
+<p id="sec-bank-mocks-p838" data-kind="prose"><strong>Key.</strong> B.
+Decisive phrase: &quot;contain account numbers... no retention policy.&quot;
+Why: logs with sensitive data are artifacts. Regulations control these artifacts.
+The chain covers retention, access, owner, evidence, and cadence.
+A never wins for sensitive logs.</p>
+
+
+<h3 id="bank-mocks-h187">M3-Q49 (V2-D5.4), Select TWO</h3>
+
+<p id="sec-bank-mocks-p839" data-kind="prose"><strong>Scenario.</strong> A telehealth bot serves patients across states with
+different consent rules.</p>
+
+<p id="sec-bank-mocks-p840" data-kind="prose"><strong>Question.</strong> Which TWO controls fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p841" data-kind="prose"><strong>Options.</strong>
+A) Per-state consent handling in code: the bot follows the patient's
+state rule, verified from the authenticated record.
+B) The compliance evidence chain per requirement: control, owner,
+evidence, cadence.
+C) One rule for all states, guessed.
+D) No consent handling.
+E) A bigger model.</p>
+
+<p id="sec-bank-mocks-p842" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p843" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "different consent rules." Why: the
+rules vary, so the code must branch per state. Each requirement still
+needs the evidence chain. C guesses at law. Counterfactual: none.</p>
+

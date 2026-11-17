@@ -1,0 +1,155 @@
+[
+  {
+    "number": "M1-Q16",
+    "heading": "M1-Q16 (V2-D2.3)",
+    "question": "An address parser extracts street, city, and postal code from messy customer input. It fails on rural routes and PO boxes. Which prompt technique fits first?",
+    "choices": {
+      "A": "Few-shot examples including rural routes and PO boxes as edge cases, plus a structured output schema.",
+      "B": "Zero-shot with no examples.",
+      "C": "A bigger model with no technique change.",
+      "D": "Asking the model to guess."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"fails on rural routes and PO boxes.\" Edge-case examples show the boundary where failures occur. The schema makes the format a contract. V2-D2.3 prescribes the simplest technique. This technique passes evaluations. Counterfactual: C wins if the trace shows the model fails with full context and good examples.",
+    "source_section": "V2-D2.3"
+  },
+  {
+    "number": "M1-Q17",
+    "heading": "M1-Q17 (V2-D2.4), Select TWO",
+    "question": "A tutoring bot keeps the full semester of chat history in context. Bills climbed 4x. The bot now answers new questions with last month's lesson. Which TWO context faults are present? Select TWO.",
+    "choices": {
+      "A": "Growth: the full semester loads every call.",
+      "B": "Duplication: the same lesson stored twice.",
+      "C": "Dilution: last month's lesson answers this month's question.",
+      "D": "Loss: old turns vanish.",
+      "E": "Exhaustion: the window errors."
+    },
+    "answer": ["A", "C"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"full semester of chat history in context... answers new questions with last month's lesson.\" Why: the full load is growth. The wrong-lesson answer is dilution (attention spread over too much context). B, D, and E have no evidence stated. Counterfactual: B wins when the evidence shows doubled content.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M1-Q18",
+    "heading": "M1-Q18 (V2-D2.4)",
+    "question": "A tutoring session runs 3 hours. The context holds every turn. The bill per session tripled versus last term. What is the first fix?",
+    "choices": {
+      "A": "A larger context window.",
+      "B": "Compaction of older turns into a running summary plus just-in-time retrieval of earlier lesson material.",
+      "C": "A stronger tier.",
+      "D": "A longer system prompt."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"holds every turn... bill tripled.\" Compaction shrinks the active context. Compaction loads earlier material on demand. A feeds the growth. C buys strength for a context problem. D adds tokens. A wins if every turn is necessary for every call. A wins if the budget allows it.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M1-Q19",
+    "heading": "M1-Q19 (V2-D2.5)",
+    "question": "A helpdesk bot serves 15,000 calls per day. Every call starts with the same 5,000-token troubleshooting guide. Questions vary. Should the team use prompt caching?",
+    "choices": {
+      "A": "Yes, because volume is high.",
+      "B": "Yes, if the 5,000-token prefix is stable and the measured hit rate clears the break-even point.",
+      "C": "No, caching never helps helpdesks.",
+      "D": "Yes, but cache the answers instead."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"the same 5,000-token troubleshooting guide. Questions vary.\" Why: the mechanism needs a stable prefix and a hit rate above break-even. Volume alone decides nothing. D describes response caching, which needs identical whole prompts. Counterfactual: D wins when the same five questions make up all traffic.",
+    "source_section": "V2-D2.5"
+  },
+  {
+    "number": "M1-Q20",
+    "heading": "M1-Q20 (V2-D3.1)",
+    "question": "A travel agent carries an admin_delete_booking tool. No task deletes bookings. The team proposes monitoring its calls. What is the correct response?",
+    "choices": {
+      "A": "Keep the tool and monitor it.",
+      "B": "Remove the tool from the config. Logging is not removal.",
+      "C": "Keep the tool but hide it from the docs.",
+      "D": "Add a second delete tool for backup."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"No task deletes bookings.\" An unneeded dangerous tool is only an attack surface. Monitoring watches the risk. Removal deletes the risk. The exam rule is blunt. Counterfactual: A wins if you need the tool for incident response. Then it stays watched and gated.",
+    "source_section": "V2-D3.1"
+  },
+  {
+    "number": "M1-Q21",
+    "heading": "M1-Q21 (V2-D3.1), Select TWO",
+    "question": "A recruiting agent has 18 tools. fetch_resume and get_candidate_cv do the same thing. A mass_email tool exists though no task sends bulk email. Which TWO removals are correct? Select TWO.",
+    "choices": {
+      "A": "Remove one of the two overlapping resume tools.",
+      "B": "Remove the mass_email tool.",
+      "C": "Remove the interview scheduler the team uses daily.",
+      "D": "Remove all logging.",
+      "E": "Add more email tools."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"do the same thing... no task sends bulk email.\" Overlapping descriptions show bloat. One resume tool stays. The mass-email tool is not needed. It is also dangerous. C removes a tool that is in use. D kills observability. E adds bloat. Counterfactual: C never wins while the team uses the scheduler daily.",
+    "source_section": "V2-D3.1"
+  },
+  {
+    "number": "M1-Q22",
+    "heading": "M1-Q22 (V2-D3.2)",
+    "question": "A multi-tenant analytics bot serves competing retailers. Each retailer's sales data must stay invisible to the others. The design passes tenant_id from the chat message into the query. What is wrong?",
+    "choices": {
+      "A": "Nothing. The tenant id filters the query.",
+      "B": "The tenant id comes from the user, so it is a claim, not an authorization decision. The filter must use the authenticated identity's tenant in code.",
+      "C": "The bot needs a bigger model.",
+      "D": "The query should run after the answer."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"passes tenant_id from the chat message into the query.\" Why: a user-supplied tenant id is self-declared. One retailer types another's id and reads its sales. The check must use the verified identity. Counterfactual: A wins when the tenant id comes from the verified session, not the chat.",
+    "source_section": "V2-D3.2"
+  },
+  {
+    "number": "M1-Q23",
+    "heading": "M1-Q23 (V2-D3.2)",
+    "question": "A data-export tool lets analysts download customer lists. Exports over 1,000 rows need manager approval per policy. Where does the approval check run?",
+    "choices": {
+      "A": "In the system prompt.",
+      "B": "In code before the export tool runs: count the rows, require the approval token, deny without it.",
+      "C": "After the download completes.",
+      "D": "In the analyst's memory."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"need manager approval per policy.\" Why: deterministic enforcement for side effects runs before the tool in code. A is guidance, C is after the leak, D is nothing. Counterfactual: C wins as a complement (audit), never alone.",
+    "source_section": "V2-D3.2"
+  },
+  {
+    "number": "M1-Q24",
+    "heading": "M1-Q24 (V2-D3.3), Select TWO",
+    "question": "A voice assistant pipeline measures p95: speech-to-text 0.4 s, retrieval 0.6 s, rerank 2.1 s, model 2.4 s. Total 5.5 s. The SLA is 3.0 s. Which TWO stages dominate? Which TWO stages should you optimize first? Select TWO.",
+    "choices": {
+      "A": "Speech-to-text.",
+      "B": "Retrieval.",
+      "C": "Rerank.",
+      "D": "Model.",
+      "E": "Add a translation stage."
+    },
+    "answer": ["C", "D"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"rerank 2.1 s, model 2.4 s... SLA is 3.0 s.\" Why: C and D hold 4.5 of 5.5 seconds. The 2.5 s cut must come from them. A and B are small. E adds latency. Counterfactual: B wins when retrieval is 3 s of the total.",
+    "source_section": "V2-D3.3"
+  },
+  {
+    "number": "M1-Q25",
+    "heading": "M1-Q25 (V2-D3.4)",
+    "question": "An order agent fails between the payment tool and the confirmation queue. Logs exist per hop but share no common id. The team cannot link the payment event to the queue event. What gap exists?",
+    "choices": {
+      "A": "More logs.",
+      "B": "One run id propagated across the payment tool and the queue.",
+      "C": "A bigger model.",
+      "D": "A second payment tool."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"share no common id.\" Why: the run id links per-hop events into one reconstructable run. A adds unlinked volume. Counterfactual: A wins when a hop logs nothing at all.",
+    "source_section": "V2-D3.4"
+  }
+]

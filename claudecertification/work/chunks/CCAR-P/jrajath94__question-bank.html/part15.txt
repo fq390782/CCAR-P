@@ -1,0 +1,975 @@
+<h3 id="bank-d6-h17">Q-D6-16 (V2-D6.4)</h3>
+
+<p id="sec-bank-d6-p160" data-kind="prose"><strong>Scenario.</strong> The engineer who chose the cross-encoder reranker leaves the team. A new engineer must operate the choice. The new engineer must know why the team picked it. The new engineer must know what the team rejected. The new engineer must know when to revisit it.</p>
+
+<p id="sec-bank-d6-p161" data-kind="prose"><strong>Question.</strong> Which artifact serves the successor?</p>
+
+<p id="sec-bank-d6-p162" data-kind="prose"><strong>Options.</strong>
+A) A link to the chat thread where the team discussed rerankers.
+B) ADR-014 with the decision, date, alternatives, rejections, assumptions, trade-offs, owner, evidence, open issues, and review criteria.
+C) Code comments that say "we use a reranker."
+D) A 20-page design document written after the decision.</p>
+
+<p id="sec-bank-d6-p163" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d6-p164" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. This question asks you to select a knowledge-transfer artifact.
+2. The lifecycle stage is handoff.
+3.</p>
+
+<p id="sec-bank-d6-p165" data-kind="prose">The objective is for the successor to use the decision without the original meetings.
+4. The why, the rejected options, and the revisit conditions must all be on the page.
+5. The system layer is architecture documentation.
+6.</p>
+
+<p id="sec-bank-d6-p166" data-kind="prose">Eliminate infeasible options. All four options exist or are writable.
+7. Eliminate constraint-violating options. A is a thread, not a record. C states the what, not the why.</p>
+
+<p id="sec-bank-d6-p167" data-kind="prose">D is prose written after the evidence cooled.
+8. Compare options based on the objective. B is the only artifact with the decision, the rejections, the evidence, and the review criteria together.
+9. Consider hidden dependencies.</p>
+
+<p id="sec-bank-d6-p168" data-kind="prose">You must write the ADR at decision time. You must write it while the evidence is fresh.
+10. Verify the answer. B is the only correct option. This is a single select question.</p>
+
+<p id="sec-bank-d6-p169" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;why we picked it, what we rejected, and when to revisit it.&quot;
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Decision and date recorded</td>
+<td>Partial</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>Rejected options with reasons</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>Revisit conditions stated</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. The nine fields show the decision. They show the alternatives and rejections. They show the evidence. They show the review criteria. The review criteria tell the successor when to reopen it.</li>
+
+<li>Why B best meets the objective: V2-D6.4 requires ADRs that let a successor operate the system without the original meetings. B is that artifact.</li>
+
+<li>Every rejected choice explained: A is archaeology. The thread buries the decision among jokes and dead ends. C is a label. "We use a reranker" explains nothing about why. D is the long prose doc. Twenty pages written after the fact, with the evidence already cold.</li>
+
+<li>Exact limitation or tradeoff: ADRs rot when code changes without a new record, and they cannot capture tacit knowledge. The review criteria field is the antidote to rot.</li>
+
+<li>Relevant evidence (with date): the ADR mechanism and the successor test from lesson-D6-4 (§§4, 9), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins never as the record. It wins as color beside the ADR. C wins for a config flag with no trade-off, where a commit message suffices. D wins for a greenfield design review, not a decided point.</li>
+
+<li>Misconception tested: the code is the documentation. The code shows the what. The ADR shows the why, the rejected, and the when-to-revisit.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h18">Q-D6-17 (V2-D6.4)</h3>
+
+<p id="sec-bank-d6-p170" data-kind="prose"><strong>Scenario.</strong> ADR-014 says the team keeps the reranker. Last month the team removed the reranker from code for cost reasons. The ADR still says "kept." A new engineer reads ADR-014 and re-adds the reranker.</p>
+
+<p id="sec-bank-d6-p171" data-kind="prose"><strong>Question.</strong> What is the best fix?</p>
+
+<p id="sec-bank-d6-p172" data-kind="prose"><strong>Options.</strong>
+A) Edit ADR-014 in place to say "removed."
+B) Write ADR-015 that records the removal and supersedes ADR-014, chaining the records.
+C) Delete ADR-014 so no one reads a stale record.
+D) Do nothing. The code is the truth.</p>
+
+<p id="sec-bank-d6-p173" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d6-p174" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. This question asks you to remediate a stale record.
+2. The lifecycle stage is operation.
+3.</p>
+
+<p id="sec-bank-d6-p175" data-kind="prose">The objective is for the record to show the truth again. Do not rewrite history.
+4. The original decision and its evidence must survive. You must record the removal. The chain must be followable.</p>
+
+<p id="sec-bank-d6-p176" data-kind="prose">5. The system layer is documentation integrity.
+6. Eliminate infeasible options. All four options are executable.
+7.</p>
+
+<p id="sec-bank-d6-p177" data-kind="prose">Eliminate constraint-violating options. A rewrites history. C deletes the audit trail. D leaves the trap set.
+8. Compare options based on the objective.</p>
+
+<p id="sec-bank-d6-p178" data-kind="prose">B records the new decision. B preserves the old decision in a chain.
+9. Consider hidden dependencies. ADR-015 must link back to ADR-014 explicitly. If it does not, the chain breaks.</p>
+
+<p id="sec-bank-d6-p179" data-kind="prose">10. Verify the answer. B is the only correct option. This is a single select question.</p>
+
+<p id="sec-bank-d6-p180" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "The ADR still says 'kept.' A new engineer reads ADR-014 and re-adds the reranker."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Current truth recorded</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>History preserved</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Chain followable</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: ADR-015 records the removal with its date and reasons, supersedes ADR-014, and leaves the original evidence intact.</li>
+
+<li>Why B best meets the objective: V2-D6.4 treats ADRs as append-only. A change is a new ADR that supersedes. Records chain. Never edited in place.</li>
+
+<li>Every rejected choice explained: A is the rewrite. The evidence for the original decision vanishes, and the audit trail now lies about the past. C is deletion as hygiene. The next auditor finds a gap where the decision was. D is neglect. The next reader falls into the same trap.</li>
+
+<li>Exact limitation or tradeoff: chaining adds record count, and readers must follow the supersede links. The links are the price of an honest history.</li>
+
+<li>Relevant evidence (with date): the append-only rule and the rotting-ADR figure from lesson-D6-4 (§7), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins never for a decided ADR. C wins when the ADR was never true, a draft recorded by mistake, with the correction noted. D wins never.</li>
+
+<li>Misconception tested: fixing a stale record means editing it. It means superseding it. Edit the past and the evidence dies with it.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h19">Q-D6-18 (V2-D6.4), Select TWO</h3>
+
+<p id="sec-bank-d6-p181" data-kind="prose"><strong>Scenario.</strong> A successor reads ADR-014 two years later. Rerank costs doubled since the decision. She must decide whether the decision still holds.</p>
+
+<p id="sec-bank-d6-p182" data-kind="prose"><strong>Question.</strong> Which TWO fields answer that question? Select TWO.</p>
+
+<p id="sec-bank-d6-p183" data-kind="prose"><strong>Options.</strong>
+A) Review criteria: "reopen if rerank cost doubles or precision drops 5 points."
+B) The original eval numbers and their links.
+C) The author's favorite lunch spot.
+D) Assumptions that could break, including the cost assumption.
+E) A summary poem about reranking.</p>
+
+<p id="sec-bank-d6-p184" data-kind="prose"><strong>Answer.</strong> A, D</p>
+
+<p id="sec-bank-d6-p185" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. This question asks you to select a record field for a revisit decision.
+2. The lifecycle stage is operation, decision review.
+3.</p>
+
+<p id="sec-bank-d6-p186" data-kind="prose">The objective is to decide if the old decision still holds under new costs.
+4. The question is &quot;does it still hold.&quot; The question is not &quot;why was it made.&quot; The fields must name the trip conditions.
+5. The system layer is decision maintenance.
+6.</p>
+
+<p id="sec-bank-d6-p187" data-kind="prose">Eliminate infeasible options. All five options are readable.
+7. Eliminate constraint-violating options. C and E are not ADR fields. B shows the past.</p>
+
+<p id="sec-bank-d6-p188" data-kind="prose">B does not show the trip condition.
+8. Compare options based on the objective. A states the explicit reopen rule. D names the assumptions. The breakage of these assumptions reopens the decision.</p>
+
+<p id="sec-bank-d6-p189" data-kind="prose">9. Consider hidden dependencies. You must write the review criteria at decision time. This makes them trustworthy now.
+10. Verify the answer.</p>
+
+<p id="sec-bank-d6-p190" data-kind="prose">A and D together are correct. No third field answers &quot;still holds.&quot;</p>
+
+<p id="sec-bank-d6-p191" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, D.
+2. Decisive scenario phrase: "She must decide whether the decision still holds."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>States the trip condition</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Written at decision time</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Answers "still holds"</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>A and D meet all hard constraints. The review criteria fired. The rerank cost doubled. This is the named trip condition. The assumptions field shows that the cost assumption was important.</li>
+
+<li>Why A and D best meet the objective: V2-D6.4 requires review criteria on every ADR precisely so a successor can check them and run. A and D are the check.</li>
+
+<li>Every rejected choice explained: B shows why the decision was made, not whether its conditions still hold. Past numbers do not trip. C is not a field. Lunch spots never gated a decision. E is not a field. Poems do not trip either.</li>
+
+<li>Exact limitation or tradeoff: review criteria can fire on noise, so the successor still re-measures before reversing the decision.</li>
+
+<li>Relevant evidence (with date): the review-criteria field and the successor test from lesson-D6-4 (§§4, 9), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: B wins when the question is "was this decision sound," not "does it still hold." C wins never. E wins never.</li>
+
+<li>Misconception tested: the evidence field tells you when to revisit. It does not. The review criteria and the assumptions do.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h20">Q-D6-19 (V2-D6.4)</h3>
+
+<p id="sec-bank-d6-p192" data-kind="prose"><strong>Scenario.</strong> A startup acquihires a three-person ML team. Their repo has 40 config flags and no ADRs. Time allows three ADRs this week.</p>
+
+<p id="sec-bank-d6-p193" data-kind="prose"><strong>Question.</strong> Which flags deserve ADRs first?</p>
+
+<p id="sec-bank-d6-p194" data-kind="prose"><strong>Options.</strong>
+A) The three flags with the largest cost, safety, or reversibility consequences, each with a review criterion that says when to revisit it.
+B) All 40 flags, each as a 20-page ADR.
+C) None. Commit messages are enough.
+D) Only the flags the founding engineer remembers choosing.</p>
+
+<p id="sec-bank-d6-p195" data-kind="prose"><strong>Answer.</strong> A</p>
+
+<p id="sec-bank-d6-p196" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. This question asks you to prioritize documentation.
+2. The lifecycle stage is handoff.
+3.</p>
+
+<p id="sec-bank-d6-p197" data-kind="prose">The objective is to record the highest-consequence decisions first.
+4. Three ADRs fit the week. The flags with consequences matter most. Each needs a revisit rule.
+5.</p>
+
+<p id="sec-bank-d6-p198" data-kind="prose">The system layer is architecture documentation.
+6. Eliminate infeasible options. B does not fit the week.
+7. Eliminate constraint-violating options.</p>
+
+<p id="sec-bank-d6-p199" data-kind="prose">C leaves the consequential flags undocumented. D documents by memory. D does not document by consequence.
+8. Compare options based on the objective. A rations the three ADRs to the flags.</p>
+
+<p id="sec-bank-d6-p200" data-kind="prose">A rations them where a wrong guess costs the most.
+9. Consider hidden dependencies. The team must agree on what counts as a consequence. If not, the ranking is one person&#x27;s taste.
+10.</p>
+
+<p id="sec-bank-d6-p201" data-kind="prose">Verify the answer. A is the only correct option. This is a single select question.</p>
+
+<p id="sec-bank-d6-p202" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A.
+2. Decisive scenario phrase: &quot;40 config flags and no ADRs. Time allows three ADRs this week.&quot;
+3.</p>
+
+<p id="sec-bank-d6-p203" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Fits the week</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Covers the consequential flags</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>Revisit rule included</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A satisfies all hard constraints: the three ADRs land on cost, safety, and reversibility, and each review criterion dates the decision.</li>
+
+<li>Why A best meets the objective: V2-D6.4 rations ADRs to decisions with trade-offs. A config flag with no trade-off needs a commit message, not an ADR.</li>
+
+<li>Every rejected choice explained: B is bureaucracy as diligence. Forty 20-page ADRs is a month of writing for flags that needed a sentence. C is the amnesia option. The consequential flags stay tribal knowledge. D is the memory lottery. Forgotten flags with real consequences stay undocumented.</li>
+
+<li>Exact limitation or tradeoff: the ranking itself can be wrong, so the review criteria must let a successor promote a flag later.</li>
+
+<li>Relevant evidence (with date): the ADR prioritization rule from lesson-D6-4 (§9), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: B wins with a quarter to spend and an audit demanding full coverage. Then completeness is the requirement. C wins when no flag carries a trade-off. Then commit messages suffice. D wins never as the method.</li>
+
+<li>Misconception tested: documentation means documenting everything. It means documenting the consequential first, with revisit rules.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h21">Q-D6-20 (V2-D6.4)</h3>
+
+<p id="sec-bank-d6-p204" data-kind="prose"><strong>Scenario.</strong> A team flips a feature flag. This changes a button label. The change is reversible in one deploy. No one debated a trade-off. No compliance or cost consequence exists.</p>
+
+<p id="sec-bank-d6-p205" data-kind="prose"><strong>Question.</strong> Which record fits?</p>
+
+<p id="sec-bank-d6-p206" data-kind="prose"><strong>Options.</strong>
+A) A full nine-field ADR with a formal review meeting.
+B) A light ADR with the decision, date, owner, and review criterion, or a commit message if the team agrees that suffices.
+C) A 20-page design document.
+D) No record of any kind.</p>
+
+<p id="sec-bank-d6-p207" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d6-p208" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: record-weight selection.
+2. Lifecycle stage: implementation.
+3.</p>
+
+<p id="sec-bank-d6-p209" data-kind="prose">Objective: the record matches the decision&#x27;s weight.
+4. Hard constraints: reversible in one deploy, no trade-off, no consequence.
+5. System layer: documentation proportionality.
+6.</p>
+
+<p id="sec-bank-d6-p210" data-kind="prose">Eliminate infeasible: all four are producible.
+7. Eliminate constraint-violating: A and C spend more than the decision is worth. D leaves even the date unknown.
+8. Compare on objective: B records the decision at its true weight.</p>
+
+<p id="sec-bank-d6-p211" data-kind="prose">9. Hidden dependencies: the team must agree the flag is truly consequence-free, or the light record hides a real trade-off.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d6-p212" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "reversible in one deploy. No trade-off was debated."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Weight matches the decision</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Decision, date, owner known</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>No bureaucracy</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. The light record names the decision, date, owner, and revisit rule. The commit-message option is proportionate to a debated-nothing flag.</li>
+
+<li>Why B best meets the objective: V2-D6.4 scales the record to the decision. A config flag with no trade-off needs a commit message, not a nine-field ADR.</li>
+
+<li>Every rejected choice explained: A is the meeting for a label. The review costs more than the deploy it governs. C is heavier than A. Twenty pages for a button label is process satire. D is the amnesia option. Even a light decision deserves its date and owner on record.</li>
+
+<li>Exact limitation or tradeoff: light records can hide a trade-off the team did not see. The review criterion is the safety net.</li>
+
+<li>Relevant evidence (with date): the proportionality rule from lesson-D6-4 (§9), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when the flag flips a safety or cost consequence. Then the full record is proportionate. C wins never for a flag. D wins never. Some record always beats none.</li>
+
+<li>Misconception tested: every decision deserves the full ADR. It does not. The record matches the weight. A label gets a line.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h22">Q-D6-21 (V2-D6.5)</h3>
+
+<p id="sec-bank-d6-p213" data-kind="prose"><strong>Scenario.</strong> A production triage agent misroutes tickets daily. There are no written requirements: no precision target, no prohibited list, no owner for the threshold. The team proposes better monitoring dashboards.</p>
+
+<p id="sec-bank-d6-p214" data-kind="prose"><strong>Question.</strong> What is the best FIRST action?</p>
+
+<p id="sec-bank-d6-p215" data-kind="prose"><strong>Options.</strong>
+A) Build the monitoring dashboards.
+B) Return to discovery: write the requirements, the prohibited behaviors, and the owner, then fix against them.
+C) Upgrade to a larger model.
+D) Add a human reviewer on every ticket.</p>
+
+<p id="sec-bank-d6-p216" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d6-p217" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: first action on a skipped-phase failure.
+2. Lifecycle stage: operation, with a discovery gap underneath.
+3.</p>
+
+<p id="sec-bank-d6-p218" data-kind="prose">Objective: fix the missing phase, not the symptom.
+4. Hard constraints: no requirements exist, the threshold has no owner, dashboards cannot invent a target.
+5. System layer: lifecycle phase discipline.
+6.</p>
+
+<p id="sec-bank-d6-p219" data-kind="prose">Eliminate infeasible: all four are executable.
+7. Eliminate constraint-violating: A monitors against no target. C upgrades past the missing requirements. D reviews against no bar.
+8.</p>
+
+<p id="sec-bank-d6-p220" data-kind="prose">Compare on objective: B is the only option that returns to the skipped phase.
+9. Hidden dependencies: the requirements need a signer, or the return trip produces another unsigned page.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d6-p221" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "There are no written requirements: no precision target, no prohibited list, no owner for the threshold."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Returns to the skipped phase</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Produces a target to fix against</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Names the owner</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: discovery writes the target, the prohibitions, and the owner, and every later fix then has a bar to hit.</li>
+
+<li>B best meets the objective. V2-D6.5 states the return rule. If a later phase fails, go back to the phase whose gate the team skipped. Fixing the monitoring config is a proxy fix.</li>
+
+<li>Every rejected choice explained: A is the proxy fix the lesson names. Dashboards watch the misroutes continue against no target. C is the tier-upgrade proxy. A larger model with no requirements still has no target. D is review against no bar. Reviewers cannot enforce a threshold that was never written.</li>
+
+<li>Exact limitation or tradeoff: returning to discovery mid-operation feels slow. That slowness is cheaper than another quarter of misroutes.</li>
+
+<li>Relevant evidence (with date): the return rule from lesson-D6-5 (§4), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when requirements exist and the gap is truly observability. Then dashboards are the fix. C wins when evals prove the model misses a signed target. Then the tier is the fix. D wins for extreme-stakes classes with a signed bar, as the review shape, not the requirements.</li>
+
+<li>Misconception tested: a production problem needs a production-phase fix. It needs the skipped phase. The exam asks for the first action, and the answer is the skipped phase.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h23">Q-D6-22 (V2-D6.5)</h3>
+
+<p id="sec-bank-d6-p222" data-kind="prose"><strong>Scenario.</strong> Production is down. Customers cannot file tickets. The on-call engineer has a hotfix ready. The change process requires a design review and an ADR before any deploy.</p>
+
+<p id="sec-bank-d6-p223" data-kind="prose"><strong>Question.</strong> What is the best action?</p>
+
+<p id="sec-bank-d6-p224" data-kind="prose"><strong>Options.</strong>
+A) Block the hotfix until the design review and ADR are done.
+B) Ship the hotfix now, then write the ADR and hold the review in the post-incident window.
+C) Run full discovery before the fix.
+D) Wait for the architecture board's next meeting.</p>
+
+<p id="sec-bank-d6-p225" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d6-p226" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is emergency-path decision.
+2. The lifecycle stage is operation, live outage.
+3.</p>
+
+<p id="sec-bank-d6-p227" data-kind="prose">The objective is to restore service fast. Do not lose the record.
+4. Hard constraints: customers are down. The fix is ready. You must write the record.</p>
+
+<p id="sec-bank-d6-p228" data-kind="prose">5. The system layer is lifecycle pragmatics.
+6. Eliminate infeasible options: all four are executable.
+7. Eliminate constraint-violating options: A lets downtime grow while the process runs.</p>
+
+<p id="sec-bank-d6-p229" data-kind="prose">C runs discovery during an outage. D schedules the fix for later.
+8. Compare on objective: B restores service now. B catches the record up after.
+9.</p>
+
+<p id="sec-bank-d6-p230" data-kind="prose">Hidden dependencies: the post-incident window must be real and scheduled. If not, you will never write the record.
+10. Verify: B is the only answer. This is a single select question.</p>
+
+<p id="sec-bank-d6-p231" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;Production is down. Customers cannot file tickets.&quot;
+3.</p>
+
+<p id="sec-bank-d6-p232" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Service restored fast</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Record still written</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Proportionate to the outage</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the hotfix ends the downtime now, and the post-incident ADR and review preserve the decision trail.</li>
+
+<li>Why B best meets the objective: V2-D6.5 allows the emergency path. The outage gets the shortcut, then the gate catches up. Gates serve the system.</li>
+
+<li>
+<div>Every rejected choice explained: A is bureaucracy winning over customers. The review can wait. The downtime cannot. C is the full-process reflex in the wrong moment. Discovery during an outage is process theater. D is the calendar as an excuse.</div>
+
+<div>The board meets later. The customers wait now.</div>
+</li>
+
+<li>Exact limitation or tradeoff: the hotfix may carry a design the review would have caught. The post-incident review must be honest enough to find it.</li>
+
+<li>Relevant evidence (with date): the outage-shortcut figure from lesson-D6-5 (§7), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins for a non-urgent change, where the gate properly precedes the deploy. C wins never during an outage. D wins never. The board does not outrank the outage.</li>
+
+<li>Misconception tested: process first, always. Process first, except when customers are down. Then fix first, record after.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h24">Q-D6-23 (V2-D6.5), Select TWO</h3>
+
+<p id="sec-bank-d6-p233" data-kind="prose"><strong>Scenario.</strong> The triage agent moves from the build team to the platform team. The handoff must let the new team operate it without the original meetings.</p>
+
+<p id="sec-bank-d6-p234" data-kind="prose"><strong>Question.</strong> Which TWO artifacts must the handoff include? Select TWO.</p>
+
+<p id="sec-bank-d6-p235" data-kind="prose"><strong>Options.</strong>
+A) The ADR set with decisions, owners, and review criteria.
+B) The runbook with the symptom map, the owner, and the escalation path.
+C) A 200-slide deck with no named owner.
+D) The vendor's marketing one-pager.
+E) A recording of the farewell party.</p>
+
+<p id="sec-bank-d6-p236" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-d6-p237" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: handoff-package selection.
+2. Lifecycle stage: handoff.
+3.</p>
+
+<p id="sec-bank-d6-p238" data-kind="prose">Objective: the new team operates the system without the old team&#x27;s meetings.
+4. Hard constraints: decisions need their whys, incidents need their procedures, both need owners.
+5. System layer: lifecycle handoff.
+6.</p>
+
+<p id="sec-bank-d6-p239" data-kind="prose">Eliminate infeasible: all five exist or are producible.
+7. Eliminate constraint-violating: C names no owner. D is a vendor pitch, not operations. E is sentiment, not procedure.
+8.</p>
+
+<p id="sec-bank-d6-p240" data-kind="prose">Compare on objective: A carries the decisions. B carries the operations. The rest carry neither.
+9. Hidden dependencies: the runbook must be current, or the new team follows a stale map.
+10.</p>
+
+<p id="sec-bank-d6-p241" data-kind="prose">Verify: A and B together. No third option passes the successor test.</p>
+
+<p id="sec-bank-d6-p242" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "operate it without the original meetings."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Decisions with whys</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Incident procedures</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Owner named</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and B satisfy all hard constraints: the ADR set answers why each decision was made and when to revisit it. The runbook answers what to do when symptoms appear and who owns the call.</li>
+
+<li>Why A and B best meet the objective: V2-D6.5 requires the handoff to carry the ADR, the risk register, and the runbook. A and B are the core of that package.</li>
+
+<li>Every rejected choice explained: C is volume without ownership. Two hundred slides and no one to call is not a handoff. D is the vendor's story, not the system's truth. E is a lovely recording. It pages no one at 3 a.m.</li>
+
+<li>Exact limitation or tradeoff: both artifacts rot without maintenance. The handoff must include their review cadence, not just their current text.</li>
+
+<li>Relevant evidence (with date): the handoff requirements from lesson-D6-5 (§4) and Pair 26, Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins never as the handoff. It wins as background reading beside A and B. D wins never. E wins never.</li>
+
+<li>Misconception tested: a handoff is a meeting. It is a package. The successor test is simple: run the system without the original meetings.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h25">Q-D6-24 (V2-D6.5)</h3>
+
+<p id="sec-bank-d6-p243" data-kind="prose"><strong>Scenario.</strong> The team guessed the agent&#x27;s approval threshold during a skipped design phase. Errors cluster at the threshold. The team proposes more alerting on threshold crossings.</p>
+
+<p id="sec-bank-d6-p244" data-kind="prose"><strong>Question.</strong> What is the best action?</p>
+
+<p id="sec-bank-d6-p245" data-kind="prose"><strong>Options.</strong>
+A) Add the alerts on threshold crossings.
+B) Return to design: set the threshold from measured data, record it in an ADR, and then set alerts on the real number.
+C) Add a real-time dashboard for the threshold.
+D) Raise the threshold until complaints stop.</p>
+
+<p id="sec-bank-d6-p246" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d6-p247" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: proxy-fix rejection.
+2. Lifecycle stage: operation, with a design gap underneath.
+3.</p>
+
+<p id="sec-bank-d6-p248" data-kind="prose">Objective: the threshold rests on measurement. Then monitoring watches the real number.
+4. Hard constraints: the team guessed the threshold. Errors cluster at it. Alerts on a guessed number fire on fiction.</p>
+
+<p id="sec-bank-d6-p249" data-kind="prose">5. System layer: lifecycle phase discipline.
+6. Eliminate infeasible: all four are executable.
+7. Eliminate constraint-violating: A monitors a guess.</p>
+
+<p id="sec-bank-d6-p250" data-kind="prose">C charts a guess. D tunes by complaint volume.
+8. Compare on objective: B fixes the design gap first. Then B monitors the measured number.
+9.</p>
+
+<p id="sec-bank-d6-p251" data-kind="prose">Hidden dependencies: the measurement needs representative data. The ADR needs its review criterion.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d6-p252" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "The agent's approval threshold was guessed during a skipped design phase."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Threshold from measurement</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Design gap closed</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Monitoring on a real number</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B meets all hard constraints. The measured threshold replaces the guess. The ADR records it with a revisit rule. The alerts then watch a useful number.</li>
+
+<li>Why B best meets the objective: V2-D6.5 forbids substituting later-phase work for unfinished design. Alerting is later-phase work. The design was never finished.</li>
+
+<li>Every rejected choice explained: A is the proxy fix. Alerts on a guessed threshold fire on fiction and train the team to ignore them. C is the same proxy with charts. A dashboard does not measure the threshold. D is complaint-driven tuning. Complaints measure loudness, not the right number.</li>
+
+<li>Exact limitation or tradeoff: measuring the threshold takes a proper eval, and the design return feels slow. The slow trip beats a fast proxy.</li>
+
+<li>Relevant evidence (with date): the no-phase-substitution rule from lesson-D6-5 (§4), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>
+<div>Here is when each plausible alternative wins. A wins when you measure the threshold. A wins when the gap is truly observability. Then alerts are the fix. C wins with B as the visualization. C never wins instead of B.</div>
+
+<div>D never wins as the method.</div>
+</li>
+
+<li>Misconception tested: monitoring fixes a bad threshold. It watches a bad threshold. Measurement fixes it. Monitoring follows.</li>
+
+</ol>
+
+
+<h3 id="bank-d6-h26">Q-D6-25 (V2-D6.5)</h3>
+
+<p id="sec-bank-d6-p253" data-kind="prose"><strong>Scenario.</strong> A two-person team ships an internal tool. The process demands four formal gate reviews per change. The reviews take longer than the changes themselves.</p>
+
+<p id="sec-bank-d6-p254" data-kind="prose"><strong>Question.</strong> What is the best action?</p>
+
+<p id="sec-bank-d6-p255" data-kind="prose"><strong>Options.</strong>
+A) Keep all four reviews. Process is process.
+B) Right-size the gates to the team: light checks that fit two people, with the full gates reserved for production or handoff changes.
+C) Drop all gates permanently.
+D) Add a fifth review for safety.</p>
+
+<p id="sec-bank-d6-p256" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d6-p257" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: gate-proportionality decision.
+2. Lifecycle stage: implementation, team process.
+3.</p>
+
+<p id="sec-bank-d6-p258" data-kind="prose">Objective: gates cost less than the risk they cover, at this team&#x27;s scale.
+4. Hard constraints: two people, internal tool, reviews cost more than changes.
+5. System layer: lifecycle pragmatics.
+6.</p>
+
+<p id="sec-bank-d6-p259" data-kind="prose">Eliminate infeasible: all four are executable.
+7. Eliminate constraint-violating: A keeps a cost larger than the risk. D grows it. C removes even the cheap checks.
+8.</p>
+
+<p id="sec-bank-d6-p260" data-kind="prose">Compare on objective: B scales the gates to the stakes and keeps the full gates where they matter.
+9. Hidden dependencies: the team must define which changes count as production or handoff, or the reservation is vague.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d6-p261" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "two-person team" and "The reviews take longer than the changes themselves."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Cost below the risk covered</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Some check remains</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Full gates where stakes live</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: light checks fit a two-person flow, and the full gates still guard production and handoff changes.</li>
+
+<li>Why B best meets the objective: V2-D6.5 warns that gates can become bureaucracy. A two-person team does not need four formal reviews. Right-size them.</li>
+
+<li>Every rejected choice explained: A is the process absolutism the lesson warns against. The reviews cost more than the risk they cover. C is the pendulum swing. Zero gates means zero checks even where stakes appear. D is the safety theater. A fifth review multiplies the same disproportion.</li>
+
+<li>Exact limitation or tradeoff: light gates can miss what formal gates catch. The reservation for production changes is the backstop.</li>
+
+<li>Relevant evidence (with date): the bureaucracy limitation from lesson-D6-5 (§7), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins for a regulated production system with handoffs, where four gates are proportionate. C wins for a throwaway experiment with a fixed end date and no users. D wins never.</li>
+
+<li>Misconception tested: more gates mean more safety. Gates mean safety when their cost fits their risk. Past that, they are bureaucracy.</li>
+
+</ol>
+

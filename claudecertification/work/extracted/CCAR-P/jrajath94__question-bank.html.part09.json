@@ -1,0 +1,165 @@
+[
+  {
+    "number": "Q-D4-06",
+    "heading": "Q-D4-06 (V2-D4.2)",
+    "question": "A team grades 5,000 summaries a day with an LLM judge. No one checked the judge against human labels. The judge's scores drifted up 8 points over two months while user complaints rose.\n\nWhat is the best next action?",
+    "choices": {
+      "A": "Tune the judge's prompt to push scores back down.",
+      "B": "Collect human labels on a representative sample, calibrate the judge against them, and only then trust its scores, re-baseline the drifted period.",
+      "C": "Replace the judge with a bigger model.",
+      "D": "Average three judges to cancel the drift."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: best next action on an uncalibrated judge.\n2. Lifecycle stage: operation (iteration).\n3.\n\nObjective: trustworthy grades.\n4. Hard constraints: no human labels exist, scores drifted while complaints rose.\n5. System layer: evaluation framework (judge calibration).\n6.\n\nEliminate infeasible: all are feasible.\n7. Eliminate constraint-violating: none violate outright.\n8. Compare on objective: only B grounds the judge in human labels.\n9.\n\nHidden dependencies: the sample must be representative, the label rubric must be crisp.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"No one checked the judge against human labels\" and \"scores drifted up 8 points over two months while user complaints rose.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nJudge grounded in human labels | No | Yes | No | No\nDrift explained, not hidden | No | Yes | No | No\n1. Why B satisfies all hard constraints: human labels are the ground truth, calibration ties the judge to them, the re-baseline fixes the drifted history.\n2. Why B best meets the objective: V2-D4.2 says judge uncalibrated means human labels first, no judge without a calibration run.\n3. Every rejected choice explained: A tunes the prompt to move the number, not to match truth, the drift's cause stays unknown. C buys a bigger uncalibrated judge, size does not create ground truth. D averages three drifting judges, the mean of three wrongs is still wrong.\n4. Exact limitation or tradeoff: human labels cost money and time, the team calibrates once, then uses the ladder (code, then judge, then human spot checks).\n5. Relevant evidence (with date): \"judge uncalibrated: human labels first\" from lesson-D4-2 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. A wins after calibration shows the prompt is the fault. Then the calibration result grounds tuning. C wins if the judge's capability is the fault. Prove this against labels. C wins if calibration is not the fault. D never wins as a calibration method.\n7. Misconception tested: judge scores are measurements. Uncalibrated scores are opinions with decimals, the human labels are what make them measurements.",
+    "domain": null,
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "Q-D4-07",
+    "heading": "Q-D4-07 (V2-D4.2), Select TWO",
+    "question": "A team grades 2,000 cases per eval run. Human grading costs $250 per run. The ladder (code checks, then calibrated judge, then human spot checks) costs $25.60 per run. The team runs evals daily.\n\nWhich TWO statements are correct? Select TWO.",
+    "choices": {
+      "A": "Use the ladder for daily runs and reserve full human grading for releases or disputes, the 10x cost gap decides the cadence.",
+      "B": "Grade everything by human, it is the most reliable.",
+      "C": "Calibrate the judge once against human labels, then trust the ladder within its calibrated scope.",
+      "D": "Skip calibration, the judge is cheaper and therefore better.",
+      "E": "Run evals monthly to save money."
+    },
+    "answer": ["A", "C"],
+    "select_count": 2,
+    "explanation": "Method walk (Steps 1-10).\n1. The question type is eval economics judgment.\nThe question is multi-select.\n2. The lifecycle stage is operation.\n\n3. The objective is reliable grades.\nThe objective is a sustainable cadence.\n4. The hard constraints are $250 versus $25.60 per run.\nThe hard constraint is a daily cadence.\n\n5. The system layer is the evaluation framework.\n6. Eliminate infeasible choices.\nB is financially infeasible daily.\n$250 multiplied by 365 is too much.\n7.\n\nEliminate constraint-violating choices.\nD skips the grounding.\nThe judge needs the grounding.\n8. Compare choices on the objective.\nA sets the cadence by cost.\n\nC grounds the ladder.\n9. Consider hidden dependencies.\nDocument the calibration scope.\nReleases need the human bar defined.\n10.\n\nVerify the choices.\nA and C are correct.\nYou select two choices.\n\nExplanation.\n1. Correct answer: A, C.\n2. Decisive scenario phrase: \"$250 per run\" vs \"$25.60 per run\" and \"runs evals daily.\"\n3. Requirement-to-option matrix:\nTest | A | B | C | D | E\nDaily cadence affordable | Yes | No | Yes | Yes | n/a\nGrades grounded | Yes | Yes | Yes | No | Partial\n1. Why A and C satisfy all hard constraints: the ladder makes daily runs affordable, calibration grounds the judge, humans keep the release gate.\n2. Why A and C best meet the objective: V2-D4.2 prescribes the cheapest reliable evaluator (code, then judge, then human) with the judge calibrated against human labels.\n3. We explain every rejected choice.\nB is the lesson's valid-but-inferior choice.\nThe most reliable grades cost 10 times more.\nThis changes daily runs into monthly runs.\nThe framework fails because of its cost.\nD confuses cheap with good.\n\nAn uncalibrated judge is not a grader.\nE saves money.\nE blinds the team.\nMonthly evaluations miss regressions for weeks.\n4. Exact limitation or tradeoff: the ladder's scope is its calibration, inputs outside it need human eyes, and the team must say what \"outside\" means.\n5. Relevant evidence (with date): ladder economics ($250 vs $25.60) and calibration rule from lesson-D4-2 (§9-§10), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. B wins if the budget is open. B wins if the stakes demand it. Then daily human grading is the design. D never wins. E wins if the product changes monthly. Then the cadence matches the change rate.\n7. Misconception tested: the best grader is the right grader for every run. The ladder exists because cost sets cadence, the most reliable grade at the wrong cadence is the wrong system.",
+    "domain": null,
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "Q-D4-08",
+    "heading": "Q-D4-08 (V2-D4.2)",
+    "question": "A team mines production conversations. The team mines for eval cases. Some conversations contain account numbers. Some conversations contain health details. The eval set lives in a shared bucket.\n\nThe whole company can read the bucket. A past bug was fixed last quarter. The bug was wrong dosage quotes.\n\nWhich TWO-part action is correct? (Single best answer.)",
+    "choices": {
+      "A": "Strip PII before the cases leave the trust boundary. Keep a regression drawer with the dosage cases. Run it on every change.",
+      "B": "Keep the PII. The evaluation team needs realistic data.",
+      "C": "Delete the dosage cases. The bug is fixed.",
+      "D": "Move the bucket inside the trust boundary. Do not change anything else."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: eval hygiene (two-part action).\n2. Lifecycle stage: preproduction.\n3.\n\nObjective: safe cases plus no regressions.\n4. Hard constraints: PII in the cases, shared bucket, a fixed bug that must stay fixed.\n5. System layer: evaluation datasets.\n6.\n\nEliminate infeasible: all are feasible.\n7. Eliminate constraint-violating: B ships PII to a shared bucket.\n8. Compare on objective: A is the only option that handles both the PII and the regression.\n9.\n\nHidden dependencies: stripping needs the PII patterns, the drawer needs the dosage cases labeled.\n10. Verify: A alone. Single select.\n\nExplanation.\n1. Correct answer: A.\n2. Decisive scenario phrase: \"account numbers and health details\" in \"a shared bucket that the whole company can read\". Also \"wrong dosage quotes) was fixed last quarter.\"\n3.\n\nRequirement-to-option matrix:\nRequirement | A | B | C | D\nPII handled | Yes | No | Partial | Partial\nDosage bug stays fixed | Yes | Yes | No | Yes\n1. Why A satisfies all hard constraints: stripping before the boundary keeps PII inside, the regression drawer re-proves the fix on every change.\n2. A best meets the objective. V2-D4.2 says to strip PII before cases leave the trust boundary. It also says to run a regression drawer on old bugs with every change.\n3. Every rejected choice explained: B keeps PII in a company-readable bucket, \"realistic data\" does not outrank the boundary. C deletes the proof the bug stays fixed, the next change can reintroduce it silently. D moves the bucket but strips nothing and names no drawer, the PII is still over-shared and the regression is still unguarded.\n4. Exact limitation or tradeoff: stripping can remove context the case needs, the team must verify the stripped cases still test the behavior.\n5. Relevant evidence (with date): PII and regression-drawer verdicts from lesson-D4-2 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. Counterfactual where each plausible alternative wins: B wins if the bucket is inside the trust boundary with proper access control (then stripping is optional). C wins never, fixed bugs keep their drawer. D wins if the only problem were the bucket location (it is not, the drawer is absent too).\n7. Misconception tested: fixed means forgotten. Fixed means guarded, the regression drawer is the guard.",
+    "domain": null,
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "Q-D4-09",
+    "heading": "Q-D4-09 (V2-D4.3)",
+    "question": "A team wants to change the refund agent's policy prompt. The change could wrongly deny legitimate refunds. Traffic is 50,000 refunds per day.\n\nWhat is the best rollout?",
+    "choices": {
+      "A": "Ship to everyone and watch the dashboard over the weekend.",
+      "B": "Shadow the new prompt first (run it, log decisions, take no action), then a controlled exposure with the primary metric monitored, then full rollout.",
+      "C": "Ship to 50% immediately, the sample is big enough.",
+      "D": "Ask the model whether the new prompt is safe."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: Find the best rollout for a risky change.\n2. Lifecycle stage: This is preproduction.\n3.\n\nObjective: Prove safety before users feel the change.\n4. Hard constraints: The change can harm users and money. There are 50,000 refunds per day.\n5. System layer: Use A/B testing and iteration.\n\n6. Eliminate infeasible options: All options are feasible.\n7. Eliminate constraint-violating options: No options violate constraints directly.\n8. Compare on objective: Option B is the only path.\n\nYou measure harm before it reaches users.\n9. Hidden dependencies: Shadow mode needs the decision logged. It does not act. The primary metric needs its threshold.\n10.\n\nVerify: Only B is correct. Select only one option.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"could wrongly deny legitimate refunds\" at \"50,000 refunds per day.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nHarm measured before users feel it | No | Yes | Partial | No\nControl exists | No | Yes | Yes | No\n1. Option B satisfies all hard constraints. Shadow mode measures the new prompt's decisions. This has zero user impact. Controlled exposure limits the blast radius. You watch the metric.\n2. Why B best meets the objective: V2-D4.3 says change that can harm users or money gets shadow first, then controlled exposure.\n3. We explain every rejected choice. Option A is valid. Option A is inferior. Option A is fine for reversible low-stakes tweaks. A harmful refund change reaches every user. This happens before anyone measures it.\n\nOption C skips the shadow. 50% of 50,000 harmed users is 25,000 harmed users. There is no prior measurement. Option D asks the model to bless its own prompt. The model is not a test.\n4. Exact limitation or tradeoff: shadow plus controlled exposure takes days, the team must keep the old prompt serving during the test.\n5. Relevant evidence (with date): \"change can harm: shadow first, then controlled exposure\" from lesson-D4-3 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. Counterfactual where each plausible alternative wins: A wins for a reversible low-stakes tweak (copy change, no money). C wins after the shadow shows no harm (then the 50% is the controlled exposure). D wins never as a test.\n7. This tests a misconception. The misconception is that big traffic makes testing unnecessary. The misconception states \"we will see it fast\". Big traffic makes the harm big. The shadow exists so that people measure the harm. The shadow does not let people feel the harm.",
+    "domain": null,
+    "source_section": "V2-D4.3"
+  },
+  {
+    "number": "Q-D4-10",
+    "heading": "Q-D4-10 (V2-D4.3)",
+    "question": "A team ships two changes together: a new retrieval chunker and a new system prompt. Task success moves from 82% to 86%. The team credits the chunker.\n\nWhat is the best response?",
+    "choices": {
+      "A": "Accept the credit, the number went up.",
+      "B": "Split the changes and test one at a time, with two changes shipped together, no one knows which moved the number.",
+      "C": "Ship a third change to see if the number moves again.",
+      "D": "Roll back both changes, the test was invalid."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: test-design correction.\n2. Lifecycle stage: operation (iteration).\n3.\n\nObjective: know which change moved the number.\n4. Hard constraints: two changes, one measurement, credit assigned without evidence.\n5. System layer: A/B testing.\n6.\n\nEliminate infeasible: all are feasible.\n7. Eliminate constraint-violating: none violate outright.\n8. Compare on objective: only B restores the one-change-per-test rule.\n9.\n\nHidden dependencies: the split tests need the same eval set and enough traffic each.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"ships two changes together\" and \"The team credits the chunker.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nAttribution provable | No | Yes | No | n/a\nLearning kept | Luck | Yes | No | No\n1. Why B satisfies all hard constraints: one change per test isolates the effect, the eval set stays fixed across the two tests.\n2. Why B best meets the objective: V2-D4.3 says two changes shipping together get split, one change per test.\n3. Every rejected choice explained: A credits the chunker on no evidence, the prompt may have done the work, or the two interacted. C adds a third unknown to two unknowns, the pile of confounds grows. D rolls back a gain on a method complaint, the number did move, the attribution is what needs repair.\n4. Exact limitation or tradeoff: split tests take twice the traffic or twice the time, the team must size each arm.\n5. Relevant evidence (with date): \"two changes ship together: split them\" from lesson-D4-3 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. Counterfactual where each plausible alternative wins: A wins never as a method. C wins never. D wins if the change is harmful and the team needs it out now (then attribution waits).\n7. Misconception tested: the number going up proves the favored change worked. It proves something worked, the test design decides whether anyone knows what.",
+    "domain": null,
+    "source_section": "V2-D4.3"
+  },
+  {
+    "number": "Q-D4-11",
+    "heading": "Q-D4-11 (V2-D4.3), Select THREE",
+    "question": "A team plans a prompt change test. 400 requests per day are on the changed flow. The primary metric is task success. The switch costs $0.01 extra per request.\n\nWhich THREE statements about the test design are correct? Select THREE.",
+    "choices": {
+      "A": "State a falsifiable hypothesis first (e.g., \"the new prompt raises task success by at least 3 points\").",
+      "B": "Keep assignment consistent: a user stays in one arm for the test.",
+      "C": "Watch p-values only, a significant p-value means ship.",
+      "D": "Test for one day, 400 requests are enough for any claim.",
+      "E": "Since the switch costs $0.01 per request, business significance decides, not the p-value alone."
+    },
+    "answer": ["A", "B", "E"],
+    "select_count": 3,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: test-design review (multi-select).\n2. Lifecycle stage: preproduction.\n3.\n\nObjective: a test that can actually answer.\n4. Hard constraints: 400 requests per day, the switch has a real per-request cost.\n5. System layer: A/B testing.\n6.\n\nEliminate infeasible: all are feasible.\n7. Eliminate constraint-violating: none violate outright.\n8. Compare on objective: A, B, and E are the lesson's rules, C and D break them.\n9.\n\nHidden dependencies: the hypothesis needs the 3 points justified, consistency needs the assignment keyed, business significance needs the dollar math.\n10. Verify: A, B, and E. Three selected.\n\nExplanation.\n1. Correct answer: A, B, E.\n2. Decisive scenario phrase: \"400 requests per day\" and \"the switch costs $0.01 per request extra.\"\n3. Requirement-to-option matrix:\nTest | A | B | C | D | E\nHypothesis falsifiable | Yes | n/a | n/a | n/a | n/a\nAssignment consistent | n/a | Yes | n/a | n/a | n/a\nCost enters the decision | n/a | n/a | No | n/a | Yes\n1. A, B, and E meet all hard constraints. The falsifiable hypothesis sets the bar before the data. Consistent assignment keeps the arms clean. The cost rule keeps the decision honest.\n2. A, B, and E best meet the objective. V2-D4.3 requires a falsifiable hypothesis. It requires the primary metric first. It requires consistent assignment. It requires business significance, not p-values. This applies when the switch has a real cost.\n3. Every rejected choice explained: C ships on the p-value alone while the switch costs real money, a significant 0.5-point gain can still lose money. D asserts 400 requests suffice for any claim, sample size follows the claimed lift, and 400 a day may need weeks.\n4. Exact limitation or tradeoff: A, B, and E do not set the sample size, the team must still compute it from the 3-point claim.\n5. Relevant evidence (with date): hypothesis, assignment, and business-significance rules from lesson-D4-3 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. Counterfactual where each plausible alternative wins: C wins if the switch were free (then the p-value plus the primary metric could decide). D wins if the claimed lift is huge and 400 requests truly suffice (the math must show it).\n7. Misconception tested: a significant p-value means ship. It means the effect is real, the cost decides whether it is worth it.\n\nAgain the E problem. E is correct and the item asks for two n/a flawed per the rewrite rule. Fix: make it Select THREE with A, B, E. But then the scenario must make C and D clearly wrong (they are). Let me rewrite as Select THREE.",
+    "domain": null,
+    "source_section": "V2-D4.3"
+  },
+  {
+    "number": "Q-D4-12",
+    "heading": "Q-D4-12 (V2-D4.3)",
+    "question": "A new rerank stage lifts task success from 84.0% to 84.6% with p < 0.01 on 200,000 requests. The stage adds $0.004 per request. Volume is 1,000,000 requests per day.\n\nShould the team ship the stage?",
+    "choices": {
+      "A": "Yes, the p-value is significant.",
+      "B": "No, the business math decides. The gain is 0.6 points on 1M requests = 6,000 more successes per day at $4,000 per day. Unless a success is worth more than $0.67, the stage loses money.",
+      "C": "Yes, any significant gain is worth shipping.",
+      "D": "No, p-values are meaningless."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: ship decision on a significant but small lift.\n2. Lifecycle stage: preproduction.\n3.\n\nObjective: decide by business significance.\n4. Hard constraints: 0.6-point lift, $0.004 per request, 1M requests per day.\n5. System layer: A/B testing (business significance).\n6.\n\nEliminate infeasible: all are feasible.\n7. Eliminate constraint-violating: none violate outright.\n8. Compare on objective: only B does the dollar math the switch cost demands.\n9.\n\nHidden dependencies: the $0.67 break-even needs the value of a success priced.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"adds $0.004 per request\" at \"1,000,000 requests per day\" for a \"0.6%\" lift.\n3.\n\nRequirement-to-option matrix:\nRequirement | A | B | C | D\nDollar math done | No | Yes | No | No\nDecision follows the math | No | Yes | No | No\n1. Why B satisfies all hard constraints: 0.6% of 1M equals 6,000 successes. 1M x $0.004 equals $4,000 per day. $4,000 / 6,000 equals $0.67 per success break-even.\n2. Why B best meets the objective: V2-D4.3 says when the switch has a real cost, business significance decides, not p-values.\n3. Every rejected choice explained: A ships on significance alone, the p-value says the lift is real, not that it is worth $4,000 a day. C is A's slogan form, \"any gain\" ignores the price. D throws out p-values entirely, they are not meaningless, they are insufficient for a priced decision.\n4. Exact limitation or tradeoff: if a success is worth $5 (e.g., a saved sale), the math flips and the stage ships, the team must price the success.\n5. Relevant evidence (with date): \"switch has a real cost: business significance decides, not p-values\" from lesson-D4-3 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. Counterfactual where each plausible alternative wins: A wins if the stage were free (then the significant lift ships on its own). C wins never as a method. D wins never, p-values still gate whether the lift is real.\n7. Misconception tested: statistical significance equals business significance. It equals reality of the effect, the price tag decides the ship.",
+    "domain": null,
+    "source_section": "V2-D4.3"
+  },
+  {
+    "number": "Q-D4-13",
+    "heading": "Q-D4-13 (V2-D4.4)",
+    "question": "A support bot's task success fell from 90% to 81%. This started on Tuesday. The change log shows this. The team deployed a new system prompt on Monday. The team re-ingested the retriever index with a new chunker on Tuesday.\n\nWhich layer should the team suspect first?",
+    "choices": {
+      "A": "The model tier, move to a more capable tier.",
+      "B": "The Tuesday change: the re-ingestion with the new chunker. The failure starts on the change date, so that layer is the first suspect.",
+      "C": "The Monday change: the system prompt, because prompts are the usual suspect.",
+      "D": "The users, the questions probably got harder."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: right-layer diagnosis.\n2. Lifecycle stage: incident response.\n3.\n\nObjective: find the guilty layer fast.\n4. Hard constraints: the failure starts Tuesday, two changes exist (Monday prompt, Tuesday chunker).\n5. System layer: diagnosis across layers.\n6.\n\nEliminate infeasible: all are feasible.\n7. Eliminate constraint-violating: none violate outright.\n8. Compare on objective: B follows the change-date rule, C follows habit.\n9.\n\nHidden dependencies: the team must confirm with traces, not stop at the suspicion.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"fell from 90% to 81% starting Tuesday\" with \"Tuesday, the retriever index was re-ingested with a new chunker.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nMatches the failure start date | No | Yes | No | No\nNames a real change | n/a | Yes | Yes | No\n1. Why B satisfies all hard constraints: the failure starts on the re-ingestion date, the change-date rule makes that layer the first suspect.\n2. Why B best meets the objective: V2-D4.4 says failure starting on a change date means suspect that layer first.\n3. A is a proxy fix. Nothing shows a problem with the model tier. A bigger tier with broken chunks gives the same failures. It gives them at a higher cost. C suspects the prompt by habit. The failure did not start Monday.\n\nThe prompt is the second suspect, not the first. D blames the users. There is no evidence for this. The change log is evidence. The user theory is not evidence.\n4. Exact limitation or tradeoff: suspicion is not proof, the team must check the retrieval traces before fixing.\n5. Relevant evidence (with date): \"failure starts on a change date: suspect that layer first\" from lesson-D4-4 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. Counterfactual where each plausible alternative wins: A wins if traces show the model misreading good chunks (model fault). C wins if the failure started Monday (then the prompt is the change-date suspect). D wins with evidence of a real distribution shift (then the evidence supports that diagnosis).\n7. Misconception tested: the usual suspect is the right suspect. The change log outranks habit, the date names the layer.",
+    "domain": null,
+    "source_section": "V2-D4.4"
+  },
+  {
+    "number": "Q-D4-14",
+    "heading": "Q-D4-14 (V2-D4.4)",
+    "question": "A classifier's accuracy fell from 96% to 88% after a template change. Traces show the new template truncates the ticket text to 200 characters, cutting off the details the labels need. A teammate proposes upgrading the model tier.\n\nWhat is the best response?",
+    "choices": {
+      "A": "Approve the tier upgrade, a bigger model reads truncated text better.",
+      "B": "Reject the upgrade, fix the template to pass the full ticket text. The trace indicts the template layer, so the fix goes there with the smallest correction.",
+      "C": "Add explicit reasoning to compensate for the truncation.",
+      "D": "Collect more training data for the truncated format."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. The question type is the best response to a proxy fix.\n2. The lifecycle stage is incident response.\n3.\n\nThe objective is to restore 96% accuracy.\n4. The trace indicts the template. The template has a 200-character truncation. The labels need the cut details.\n5.\n\nThe system layer is diagnosis. This is the prompt or template layer.\n6. All options are feasible. Do not eliminate any options.\n7.\n\nNo options violate constraints. Do not eliminate any options.\n8. Compare options on the objective. Only option B fixes the indicted layer.\n9.\n\nTest the template fix against the evaluation set. This is a hidden dependency.\n10. Verify option B alone. This is a single select question.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"the new template truncates the ticket text to 200 characters, cutting off the details the labels need.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nFixes the indicted layer | No | Yes | No | No\nRestores the lost details | No | Yes | No | No\n1. Why B satisfies all hard constraints: the template passes the full text again, the smallest correction restores the 96%.\n2. Option B best meets the objective. V2-D4.4 states that the trace indicts one layer. Fix that layer with the smallest correction. The tier upgrade is the classic proxy fix.\n3. This explains every rejected choice. Option A is valid but inferior. It cost $360 extra per day on the toy. It fixed nothing because the template was guilty. Option C reasons over truncated text. The details are gone.\n\nReasoning cannot recover the details. Option D trains for the broken format. The format is the bug. The data is not the bug.\n4. Exact limitation or tradeoff: if the 200-char limit was intentional (context budget), the team must solve the budget another way (e.g., smarter selection, not blind truncation).\n5. Relevant evidence (with date): \"upgrade the model tier\" valid-but-inferior and the trace-indictment rule from lesson-D4-4 (§9-§10), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. This shows a counterfactual where each plausible alternative wins. Option A wins if traces show the model misreads full texts. This means a true model fault. Option C wins if the details are present but the judgment is hard. This means a reasoning fault. Option D wins if a product decision fixes the format.\n\nThe model must then learn the format.\n7. Misconception tested: a bigger model fixes data starvation. It does not, every tier lacks the details. Fix the layer the trace names.",
+    "domain": null,
+    "source_section": "V2-D4.4"
+  },
+  {
+    "number": "Q-D4-15",
+    "heading": "Q-D4-15 (V2-D4.4), Select TWO",
+    "question": "There are three incidents.\n1. Answers cite clauses that do not exist in the retrieved chunks.\n2. The bot quotes last quarter's prices.\n\nThe catalog updated yesterday.\n3. Latency tripled after a new rerank stage shipped.\n\nWhich TWO layer diagnoses are correct? Select TWO.",
+    "choices": {
+      "A": "Incident 1 is a verification-layer fault. The system did not check the draft against the retrieved chunks. Or the check does not work.",
+      "B": "Incident 2 is a retrieval-layer fault. The index is old.\n\nThe re-ingestion did not get the catalog update.",
+      "C": "Incident 3 is a model-layer fault. The model became slower.",
+      "D": "Incident 1 is a retrieval-layer fault. The chunks are wrong.",
+      "E": "Incident 2 is a model-layer fault.\n\nThe model forgot the prices."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: layer diagnosis (multi-select).\n2. Lifecycle stage: incident response.\n3.\n\nObjective: the right layer per incident.\n4. Hard constraints: the symptom shapes (fabricated citations, stale facts, latency after a stage shipped).\n5. System layer: diagnosis across layers.\n6.\n\nEliminate infeasible: all are feasible.\n7. Eliminate constraint-violating: none violate outright.\n8. Compare on objective: A and B match the symptoms, C, D, E misread them.\n9.\n\nHidden dependencies: each diagnosis needs its trace confirmed before the fix.\n10. Verify: A and B. Two selected.\n\nExplanation.\n1. Correct answer: A, B.\n2. Decisive scenario phrase: \"cite clauses that do not exist in the retrieved chunks\". \"quotes last quarter's prices though the catalog updated yesterday\".\n\n\"latency tripled after a new rerank stage shipped.\"\n3. Requirement-to-option matrix:\nIncident | A | B | C | D | E\n1: phantom citations | Yes | n/a | n/a | No | n/a\n2: stale prices | n/a | Yes | n/a | n/a | No\n3: latency after rerank | n/a | n/a | No | n/a | n/a\n1. Options A and B satisfy all hard constraints. Phantom citations mean the draft escaped its source check. This is a verification fault. Stale prices mean the index missed the update. This is a retrieval fault.\n2. Why A and B best meet the objective: V2-D4.4 says diagnose at the right layer and fix the failing component, not a proxy.\n3. Every rejected choice explained: C blames the model for latency that started when the rerank stage shipped, the change-date rule names the stage. D blames retrieval for incident 1, but the chunks are fine, the draft invented citations the chunks never held, which is the check's failure. E blames the model's memory for prices that live in the index, the model quotes what retrieval gives it.\n4. Exact limitation or tradeoff: A and B are diagnoses, not fixes, the verification check needs repair and the index needs re-ingestion with a freshness check.\n5. Relevant evidence (with date): layer-diagnosis rules from lesson-D4-4 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.\n6. Counterfactual where each plausible alternative wins: C wins if latency rose with no stage change (then the model or its host is the suspect). D wins if the chunks themselves hold the phantom clauses (then retrieval fed bad sources). E wins if the prices come from the model's weights, not an index (then it is a knowledge-cutoff problem).\n7. Misconception tested: every quality failure is a model failure. The pipeline has layers, the symptom names the layer, and the fix follows the name.",
+    "domain": null,
+    "source_section": "V2-D4.4"
+  }
+]

@@ -1,0 +1,606 @@
+[
+ {
+  "id": "CCDV-F-Amey-Thakur-0004",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "A pipeline must always run the same four steps in order: fetch a document, extract fields, validate them, and file the record. A teammate proposes an autonomous agent with tools for all four steps. What is the better design and why?",
+  "choices": {
+   "A": "A workflow that calls the model for extraction inside deterministic orchestration, because the path is known in advance and determinism is cheaper and more reliable",
+   "B": "The agent, because agents are more capable than fixed code",
+   "C": "The agent, because it can skip steps when it decides they are unnecessary",
+   "D": "Two agents supervising each other"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** When the sequence is fixed, orchestrate it in code and use the model where the model adds value. Autonomy buys nothing on a known path and adds nondeterminism (B), skipping validation is a defect rather than a feature (C), and supervision hierarchies (D) are for problems that need delegation, not four fixed steps.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0084",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0005",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "Your agent loop calls the Messages API and receives a response with stop_reason \"tool_use\". What must your code do next?",
+  "choices": {
+   "A": "Treat the turn as finished and show the partial text to the user",
+   "B": "Execute the requested tool, append the tool result to the conversation, and call the API again",
+   "C": "Retry the same request until stop_reason becomes \"end_turn\"",
+   "D": "Increase max_tokens and resend"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** That is the agentic loop: \"tool_use\" means the model is waiting for a tool result before it can continue. Ending the turn (A) abandons the model mid-task, re-rolling (C) re-asks the same question while ignoring the request, and max_tokens (D) is unrelated to tool dispatch.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "5",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0085",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0023",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "A process has fixed, known steps in a fixed order, each with a checkable output. What should be built?",
+  "choices": {
+   "A": "An agent that decides the order at runtime",
+   "B": "A multi-agent system with one agent per step",
+   "C": "A single prompt containing all the steps",
+   "D": "A deterministic workflow that calls the model at defined points"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** When the path is known in advance, encoding it directly is cheaper, faster, and far easier to debug than letting a model rediscover it each run. Runtime decisions (A, B) add nondeterminism with no benefit, and a single prompt (C) removes the checkpoints between steps.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "23",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0103",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0024",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "What most reliably distinguishes a task that genuinely needs an agent?",
+  "choices": {
+   "A": "The steps required cannot be known until intermediate results are seen",
+   "B": "The task is long",
+   "C": "The task involves several different tools",
+   "D": "The output must be structured"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Agents earn their cost where the path must be discovered during execution. Length (B), tool count (C), and structured output (D) are all satisfied by a fixed workflow.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "24",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0104",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0025",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "A subagent is introduced to a working pipeline and quality drops. What is the most likely explanation?",
+  "choices": {
+   "A": "The subagent needs a larger model",
+   "B": "The subagent lacks context the main agent held, and the handoff did not carry it",
+   "C": "Subagents are unsuitable for pipelines",
+   "D": "The pipeline needs more subagents"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Delegation trades context for isolation, and quality falls when the handoff omits what the subtask needed. A larger model (A) cannot supply missing context, subagents are widely used in pipelines (C), and adding more (D) multiplies the same fault.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0105",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0026",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "What is the primary reason to give an agent a hard step limit?",
+  "choices": {
+   "A": "To reduce the cost of a successful run",
+   "B": "To make the agent respond faster",
+   "C": "To bound the damage and expense when the agent fails to converge",
+   "D": "To simplify the prompt"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** A step ceiling is a safety bound for the non-terminating case, which is the failure mode that matters. Successful runs (A) usually finish well inside the limit, and neither speed (B) nor prompt clarity (D) is what the limit governs.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "26",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0106",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0036",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-1.md",
+  "question": "Your service makes a Messages API call and the response carries stop_reason \"end_turn\" with a tool_use block absent. What does your loop do?",
+  "choices": {
+   "A": "Treat the turn as complete and return the content to the caller",
+   "B": "Execute the last requested tool again",
+   "C": "Re-send the request with higher max_tokens",
+   "D": "Append an empty tool result and continue the loop"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "\"end_turn\" means the model has finished; \"tool_use\" is the signal to execute a tool and continue the loop",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "1",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0116",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0040",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-1.md",
+  "question": "A teammate proposes an autonomous agent for a pipeline whose five steps are identical for every input. What is the strongest technical objection?",
+  "choices": {
+   "A": "A known, fixed path does not need model-chosen control flow; deterministic orchestration is cheaper, testable, and auditable",
+   "B": "Agents are unsupported in production",
+   "C": "Agents cannot call tools reliably",
+   "D": "The pipeline would need a larger context window"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Autonomy is justified when the path is unknown. A fixed path belongs in deterministic code that can be tested",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "5",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0120",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0041",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-1.md",
+  "question": "Which is the correct use of a subagent in an agent system?",
+  "choices": {
+   "A": "To run the same prompt twice for consensus",
+   "B": "To isolate a self-contained subtask so its verbose intermediate context does not fill the parent's window",
+   "C": "To bypass rate limits",
+   "D": "To provide a fallback if the main model is unavailable"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Subagents delegate and isolate context; that isolation is their main architectural value",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "6",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0121",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0059",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-2.md",
+  "question": "An agent is given ten tools, three of which overlap in purpose. What is the likely consequence?",
+  "choices": {
+   "A": "Faster execution, since more options are available",
+   "B": "Lower token cost",
+   "C": "Better error handling",
+   "D": "More frequent wrong tool selection"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Overlapping tools make selection ambiguous, which is where agents go wrong. Overlap does not improve speed (A), reduce cost (B), or help error handling (C)",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0139",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0060",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-2.md",
+  "question": "What should terminate an agent loop?",
+  "choices": {
+   "A": "A fixed wall-clock timeout only",
+   "B": "The model deciding it is finished",
+   "C": "An explicit success condition, with a step ceiling as a backstop",
+   "D": "Running out of context"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "A defined success condition ends the loop correctly, and the ceiling bounds the failure case. A timeout alone (A) does not recognize success, the model's own judgment (B) is not a guarantee, and exhausting context (D) is a failure rather than a termination",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0140",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0073",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-3.md",
+  "question": "A long-running agent needs to keep a decision it made twenty steps ago. What is the correct mechanism?",
+  "choices": {
+   "A": "Rely on the context window retaining it",
+   "B": "Increase the temperature",
+   "C": "Write it into an explicit state that is carried forward regardless of compaction",
+   "D": "Restart the agent periodically"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Durable state must be explicit, because context is finite and compaction is lossy. Relying on the window (A) fails at length, temperature (B) is unrelated, and restarting (D) loses the decision",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0153",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0074",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-3.md",
+  "question": "What distinguishes a workflow from an agent in practice?",
+  "choices": {
+   "A": "Workflows are shorter",
+   "B": "Agents cannot use tools",
+   "C": "Workflows cannot call the model",
+   "D": "In a workflow the control flow is fixed in advance; in an agent the model chooses the next step"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Who decides the next step is the distinction that matters. Length (A) is incidental, agents do use tools (B), and workflows do call the model (C)",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": null,
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0154",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0012",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/anthropic/claude-certified-developer-foundations/scenarios.md",
+  "question": "A pipeline must, for every uploaded contract: extract parties and dates, validate the extraction against a schema, then generate a one-paragraph summary. The steps never vary. How should this be built?",
+  "choices": {
+   "A": "A model-driven agent with file tools that decides how to process each contract.",
+   "B": "A code-orchestrated workflow (prompt chaining): three calls in fixed order, with a programmatic schema check between extraction and summary.",
+   "C": "One giant prompt asking for everything at once with no validation.",
+   "D": "An orchestrator-workers pattern with dynamic task decomposition."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "When the steps are known in advance, code should orchestrate them. Prompt chaining with a validation gate is cheaper, faster, and more testable than an agent, and the fixed three-step shape means there is nothing for an orchestrator to decompose dynamically.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "high",
+  "source_number": "12",
+  "source_heading": "Scenario 12 - Workflow vs Agent",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0022",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "A pipeline must run the same three steps on every uploaded document: extract fields, validate them against a schema, then summarize. The team proposes an autonomous agent with file tools. What is the better design?",
+  "choices": {
+   "A": "A code-orchestrated workflow (prompt chaining): three model calls in a fixed order with a validation gate between them",
+   "B": "One prompt that asks for all three outputs at once with no checks",
+   "C": "The agent, because agents produce higher quality",
+   "D": "An orchestrator model that decides dynamically how to process each document and delegates the three steps to worker models it chooses itself"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "When the steps are known in advance, your code should orchestrate them. A workflow is cheaper, faster, and testable; an agent adds cost, latency, and unpredictability to buy flexibility this task does not need. Reserve model-driven agents for open-ended tasks you cannot fully specify up front, and reserve orchestrator-workers for tasks whose decomposition varies per input.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "high",
+  "source_number": "8",
+  "source_heading": "Question 8",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0038",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "A hand-written agent loop calls the Messages API, runs any requested tools, and calls the API again. When should the loop stop?",
+  "choices": {
+   "A": "After exactly three iterations, whatever the model returns",
+   "B": "When the response contains any text block at all",
+   "C": "When `stop_reason` is no longer `tool_use` (for example `end_turn`), with a maximum iteration cap as a safety net",
+   "D": "Only when the user closes the browser tab"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "The model signals that it wants another tool round with `stop_reason: \"tool_use\"`; anything else (such as `end_turn` or `max_tokens`) ends the loop or needs handling. A cap protects against runaway loops. A fixed count ignores the model, a response can contain text alongside tool calls, and waiting for the user to leave is not a stop condition.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "high",
+  "source_number": "24",
+  "source_heading": "Question 24",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0039",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "A team wants an autonomous agent that reads and edits files, runs shell commands, manages its own context, and asks permission before risky actions. They do not want to build the loop and tools themselves.",
+  "choices": {
+   "A": "The Claude Agent SDK",
+   "B": "The Message Batches API, which runs many requests unattended",
+   "C": "A single Messages API call with a very long system prompt describing the tools",
+   "D": "The token counting endpoint, which plans the agent's steps"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "The Agent SDK packages the same agent harness that powers Claude Code: the loop, file and shell tools, context management and a permission system. Batches are for asynchronous bulk requests, not interactive agents. Describing tools in a prompt does not execute them. Token counting estimates size; it does not plan anything.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "high",
+  "source_number": "25",
+  "source_heading": "Question 25",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-preporato-0016",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "A team wants an autonomous agent to convert CSV exports into a fixed JSON layout. The column mapping never changes. What is the best approach?",
+  "choices": {
+   "A": "An Agent SDK agent with file tools",
+   "B": "A manager agent with three subagents",
+   "C": "A deterministic script, or a single model call with a schema if some fields need interpretation, with no agent loop",
+   "D": "An orchestration framework with a state graph"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Apply the four-question test: the task isn't complex, its path is fully known, and code can avoid errors cheaply, so autonomy only adds cost and unpredictability (C). A, B and D each add machinery the problem doesn't need.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "16",
+  "source_heading": "Question 16",
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0046",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0017",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "Which TWO things does the Claude Agent SDK give you that you would otherwise build yourself in a custom loop? (Select TWO)",
+  "choices": {
+   "A": "A visual drag-and-drop workflow designer",
+   "B": "Automatic fine-tuning on your traces",
+   "C": "Context management, plus hooks and permissions for deterministic control",
+   "D": "The agent loop with built-in tools for files, shell commands and search",
+   "E": "A hosted vector database for retrieval"
+  },
+  "answer": [
+   "C",
+   "D"
+  ],
+  "select_count": 2,
+  "explanation": "The Agent SDK packages the same harness Claude Code runs on: the loop and built-in tools (D), plus context management, hooks, permissions and subagents (C). It doesn't host a vector database (E), fine-tune models (B) or provide a visual designer (A).",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "17",
+  "source_heading": "Question 17",
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0047",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0018",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "A bank's agent must keep all code execution and data inside its own network for data-residency rules. A startup wants the fastest path to production. Which deployment fits each?",
+  "choices": {
+   "A": "Managed for the bank, self-hosted for the startup",
+   "B": "Self-hosted for the bank, managed for the startup",
+   "C": "Self-hosted for both",
+   "D": "Managed for both"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Residency and custom-runtime requirements point to self-hosted execution, and speed to production points to a managed deployment where the provider runs the loop and the sandbox (B). D puts the bank's data outside its network. C slows the startup down for a requirement it doesn't have. A reverses both.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "18",
+  "source_heading": "Question 18",
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0048",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0019",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "An agent must summarize 12 long PDFs independently, then write a comparison across them. The single-agent version runs out of context. What is the best design?",
+  "choices": {
+   "A": "One agent reads all 12 PDFs in sequence in a single context",
+   "B": "Twelve agents that send their findings to each other directly",
+   "C": "Raise `max_tokens` on the single agent",
+   "D": "An orchestrator gives each PDF to a subagent with its own context, runs them in parallel, and writes the comparison from their summaries"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "The summaries are independent subtasks, so isolated subagent contexts fit, and only compact reports return to the orchestrator (D). A is the design that already failed. `max_tokens` (C) limits output, and the problem is input. Agents talking to each other directly (B) remove the coordinator that merges results and isolates failures.",
+  "domain": "1. Agents and Workflows",
+  "domain_confidence": "source",
+  "source_number": "19",
+  "source_heading": "Question 19",
+  "source_section": "Agents and Workflows",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0049",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ }
+]

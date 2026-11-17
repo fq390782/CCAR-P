@@ -1,0 +1,258 @@
+<div class="item"><p><span class="lbl">22.</span> A lead agent reviews three separate code areas. Each area needs its own system prompt and tools. The team needs one merged report that one agent owns. Which design meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> The lead agent delegates each area to a subagent with its own prompt and tools, then merges the subagent reports.</li>
+<li><span class="lbl">B.</span> Three peer agents write separate reports to a shared folder, and the user merges them by hand.</li>
+<li><span class="lbl">C.</span> The subagents share one conversation history, so the lead reads every turn of each subagent.</li>
+<li><span class="lbl">D.</span> One agent reviews all three areas with one system prompt and one tool set.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A.</span> Each subagent works with its own prompt, tools, and conversation history. The lead agent receives the subagent&#x27;s final report and owns the merge.</p>
+<p class="c-trap">Trap. Shared history looks like a way to give the lead full context, but each subagent keeps its own conversation history.</p>
+<p class="tag">Source. https://code.claude.com/docs/en/agent-sdk/subagents</p>
+</div>
+
+<div class="item"><p><span class="lbl">23.</span> A team must review 900 repositories in parallel and show progress while the work runs. The lead must not send follow-up messages to each worker during the run. Which design meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Chat with each subagent in turn, and send follow-up messages until each one finishes.</li>
+<li><span class="lbl">B.</span> Start one workflow run that reads the repositories in parallel, with one session budget for the whole session.</li>
+<li><span class="lbl">C.</span> Start a workflow run for each repository, each with a session budget of its own.</li>
+<li><span class="lbl">D.</span> Start one workflow run, and have the lead send each worker a follow-up message about its progress.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> A workflow run reads the items in parallel and combines the findings. Runs count toward the session budget, so one session budget covers all runs.</p>
+<p class="c-trap">Trap. Separate budgets for each run look like tighter control, but runs count toward one session budget.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration</p>
+</div>
+
+<div class="item"><p><span class="lbl">24.</span> Three steps edit one shared report. Each step needs the result of the step before it. The team wants one coherent report. Which two options meet the constraint?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Run the three steps as parallel subagents, each with the full report in its prompt.</li>
+<li><span class="lbl">B.</span> Keep the three steps in one agent, so each step sees the earlier result.</li>
+<li><span class="lbl">C.</span> Enable the shared sandbox so each subagent sees the earlier conversation history.</li>
+<li><span class="lbl">D.</span> Run the steps in order in one thread, and check each step result before the next one starts.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, D.</span> One thread keeps each earlier result in its history, so later steps see it. The fixed order and the check after each step keep one coherent report.</p>
+<p class="c-trap">Trap. A shared sandbox looks like shared context, but each subagent still keeps its own conversation history.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration</p>
+</div>
+<h3>D1.5 Task decomposition</h3>
+
+<div class="item"><p><span class="lbl">25.</span> A team must score 150,000 document requests overnight with batch pricing. No request needs an answer at once, and each request is under 1 KB. Each batch must stay within the documented limits. Which plan meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Send all 150,000 requests in one batch, since a batch can hold them all.</li>
+<li><span class="lbl">B.</span> Send the 150,000 requests one at a time through the synchronous Messages API overnight.</li>
+<li><span class="lbl">C.</span> Split the job into two batches, each under 100,000 requests, and collect both result sets.</li>
+<li><span class="lbl">D.</span> Set the batch expiry to 29 days so all 150,000 requests finish in time.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> A batch holds up to 100,000 requests or 256 MB, whichever limit comes first. Two batches of 75,000 requests of 1 KB each stay under both limits and keep batch pricing.</p>
+<p class="c-trap">Trap. One batch for everything looks simplest, but a batch holds at most 100,000 requests or 256 MB.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/batch-processing</p>
+</div>
+
+<div class="item"><p><span class="lbl">26.</span> A contract pipeline extracts party names first, then computes the fee from those names. A wrong name in step one would change the fee in step two. The team must stop a wrong name before step two runs. Which design meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Run the name step and the fee step in parallel, so both finish sooner.</li>
+<li><span class="lbl">B.</span> Check the party names in code after the fee step, and route each fee to a reviewer.</li>
+<li><span class="lbl">C.</span> Turn on compaction, which removes wrong party names from earlier turns.</li>
+<li><span class="lbl">D.</span> Check the party names in code before the fee step, and stop the chain at a failed check.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: D.</span> The fee step depends on the name step, so a code check between the steps catches a wrong name at its source. A stop at the failed check keeps the wrong name out of step two.</p>
+<p class="c-trap">Trap. Compaction looks like a cleanup step, but it writes a summary of older turns and does not validate values.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/compaction</p>
+</div>
+
+<div class="item"><p><span class="lbl">27.</span> A team has 80,000 review texts for overnight scoring. A live widget scores one text while a user types. The team must keep each path on the right API. Which two options meet the constraint?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Send the live widget requests through a batch, so each score costs less.</li>
+<li><span class="lbl">B.</span> Split the overnight texts into batches of 256 requests, since a batch holds 256 requests.</li>
+<li><span class="lbl">C.</span> Send the overnight texts as one Message Batch, since the batch holds up to 100,000 requests.</li>
+<li><span class="lbl">D.</span> Send the live widget requests through the synchronous Messages API, one call per text.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C, D.</span> A batch holds up to 100,000 requests or 256 MB, and its results come after processing. A live widget needs each answer while the user types, so it uses the synchronous API.</p>
+<p class="c-trap">Trap. The number 256 looks like a request count, but it is the 256 MB size limit of a batch.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/batch-processing</p>
+</div>
+<h3>D1.6 Business-value alignment</h3>
+
+<div class="item"><p><span class="lbl">28.</span> A summary request on Claude Haiku 5.5 uses 3,000 input tokens and 800 output tokens. The prompt is under 100,000 tokens. The team needs the cost per request from published prices. Which method meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Multiply all 3,800 tokens by the input price per million tokens.</li>
+<li><span class="lbl">B.</span> Multiply each token count by its own rate, divide by one million, and add the two results.</li>
+<li><span class="lbl">C.</span> Multiply each token count by its own rate, then write each result to a cost ledger with a dashboard.</li>
+<li><span class="lbl">D.</span> Price all input tokens at the cache hit rate, because the prompt is reused.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> Haiku 5.5 has separate base rates for input and output, both per million tokens. Here the input costs 0.0003 dollars and the output costs 0.0004 dollars, for 0.0007 dollars in total.</p>
+<p class="c-trap">Trap. A cache hit rate looks like a cheap input price, but it applies only to tokens that the cache actually returns.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/about-claude/pricing</p>
+</div>
+
+<div class="item"><p><span class="lbl">29.</span> A team wants to book savings from a cheaper model tier. The cheaper tier passes 91 percent of the eval set, and the agreed threshold is 95 percent. The constraint: keep a value claim only while the quality threshold holds. Which action meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Book the savings now, and tune the threshold after the next quarter.</li>
+<li><span class="lbl">B.</span> Set a session budget on the cheaper tier, which proves the savings hold.</li>
+<li><span class="lbl">C.</span> Hold the savings claim until the cheaper tier passes the threshold on the same eval set.</li>
+<li><span class="lbl">D.</span> Book the savings now, and rebuild the eval set with 10,000 cases before any re-test.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> The claim needs the cheaper tier to pass the agreed threshold on the same eval set. A session budget caps spend, but it does not measure quality.</p>
+<p class="c-trap">Trap. The early savings claim looks like progress, but the cheaper tier fails the agreed threshold today.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/managed-agents/budgets</p>
+</div>
+
+<div class="item"><p><span class="lbl">30.</span> A long agent run follows fixed steps, and no user waits for it. Finance caps the spend for the run. The team needs a budget that stops new requests at the cap and shows spend during the run. Which two options meet the constraint?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Set a session budget when the session is created, so new requests stop at the cap.</li>
+<li><span class="lbl">B.</span> Set the budget after the bill arrives, so the total can be corrected.</li>
+<li><span class="lbl">C.</span> Set a workspace spend limit of the same amount on the Default Workspace.</li>
+<li><span class="lbl">D.</span> Read usage.list_cost on the session object, which holds the list cost to date.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A, D.</span> A session budget is set when the session is created, and it stops new model requests at the cap. The platform prices the session continuously, and usage.list_cost on the session object holds that total to date.</p>
+<p class="c-trap">Trap. A workspace spend limit looks like the same control, but the Default Workspace cannot have a spend limit.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/managed-agents/budgets</p>
+</div>
+<h3>D2.1 Model selection and tier trade-offs</h3>
+
+<div class="item"><p><span class="lbl">31.</span> A ticket router classifies five million tickets each month. Claude Haiku 5.5 clears the measured quality floor on the team&#x27;s test set. The constraint: use the lowest-cost tier that clears the floor. Which choice meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Route every ticket to claude-haiku-5-5, the lowest tier that clears the floor.</li>
+<li><span class="lbl">B.</span> Route every ticket to Claude Haiku 4.5, which costs less per million tokens than Haiku 5.5.</li>
+<li><span class="lbl">C.</span> Route every ticket to Claude Fable 5.1, the top tier, for the highest safety margin.</li>
+<li><span class="lbl">D.</span> Set effort to max on Claude Haiku 5.5, which moves its price to the Sonnet tier.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A.</span> The lowest tier that clears the measured floor has the lowest price for the work. Haiku 5.5 costs 0.10 dollars per million input tokens for prompts up to 100,000 tokens.</p>
+<p class="c-trap">Trap. Fable 5.1 for every ticket looks safest, but it adds cost that the measured floor does not require.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/about-claude/pricing</p>
+</div>
+
+<div class="item"><p><span class="lbl">32.</span> A code assistant runs on Claude Haiku 5.5. It misses the quality floor on about 8 percent of requests at the default effort. The team must keep the same model and raise quality with the least change. Which change meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Move all traffic to Claude Fable 5.1, which clears the floor on every request.</li>
+<li><span class="lbl">B.</span> Raise effort to high only for the requests that miss the floor, and keep the medium default for the rest.</li>
+<li><span class="lbl">C.</span> Set a thinking budget_tokens value of 20,000 on Haiku 5.5 to raise thinking depth.</li>
+<li><span class="lbl">D.</span> Set effort to xhigh on every request and rebuild the eval set with extra checks.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> Effort is set per request on the same model, so only the requests that miss the floor get more effort. Haiku 5.5 supports high effort, and its default is medium.</p>
+<p class="c-trap">Trap. A thinking budget looks like a direct depth control, but budget_tokens returns a 400 error on Haiku 5.5.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/effort</p>
+</div>
+
+<div class="item"><p><span class="lbl">33.</span> A team runs one extraction task on Claude Haiku 5.5. Most requests clear the quality floor at the default effort. The constraint: keep cost and latency low while the quality floor holds. Which two options meet the constraint?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Send all traffic to Claude Opus 5.5, so every request clears the floor.</li>
+<li><span class="lbl">B.</span> Keep Haiku 5.5 for all traffic, and set low effort for simple requests.</li>
+<li><span class="lbl">C.</span> Set a thinking budget_tokens value on Haiku 5.5 to cut output tokens.</li>
+<li><span class="lbl">D.</span> Escalate only the requests that miss the floor to Claude Sonnet 5.5.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, D.</span> Haiku 5.5 is the lowest-priced current model in this set and handles most requests. Low effort reduces thinking on simple requests, and escalation sends only the misses to a higher tier.</p>
+<p class="c-trap">Trap. Opus 5.5 for all traffic looks like a safe floor, but it raises cost for requests that Haiku 5.5 already clears.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/effort</p>
+</div>
+<h3>D2.2 System prompts, templates, and guardrails</h3>
+
+<div class="item"><p><span class="lbl">34.</span> A support assistant must never show one customer&#x27;s order data to another customer. The rule must hold for every user input. Which change meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Add a stricter rule to the system prompt that forbids cross-customer data.</li>
+<li><span class="lbl">B.</span> Filter order records in code by the signed-in customer ID before each call.</li>
+<li><span class="lbl">C.</span> Send all order records, and ask the model to show only the signed-in customer&#x27;s records.</li>
+<li><span class="lbl">D.</span> Set an output schema that lists only the customer ID field.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> Code checks ownership for every input before the model receives any record. A system prompt is guidance, so it cannot enforce access alone (Inference).</p>
+<p class="c-trap">Trap. A stricter system prompt rule looks like access control, but it is guidance that code must enforce (Inference).</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks</p>
+</div>
+
+<div class="item"><p><span class="lbl">35.</span> A billing service parses each model reply into database fields. The team needs one fixed JSON shape, with no retry loop for shape errors. Which change meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Ask in the prompt for JSON only, then parse the text with a pattern match.</li>
+<li><span class="lbl">B.</span> Let the model write prose, then split each paragraph into fields in code.</li>
+<li><span class="lbl">C.</span> Send a JSON schema in output_config format, then check the stop reason before parsing.</li>
+<li><span class="lbl">D.</span> Send a JSON schema in the prompt text, then retry the call when the shape fails to parse.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> The schema in output_config format constrains the reply shape, so a retry loop is not needed in most cases. Code still checks the stop reason before it parses the text.</p>
+<p class="c-trap">Trap. A prompt that asks for JSON only looks equal to a schema, but nothing constrains the text.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/structured-outputs</p>
+</div>
+
+<div class="item"><p><span class="lbl">36.</span> A shared assistant sends one system prompt with every request, and the cache must keep its stable text. The team must also tie each saved answer to one prompt version. Which two changes meet both constraints?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Insert the tenant name into the system prompt on each request.</li>
+<li><span class="lbl">B.</span> Keep the stable instructions in one system block, stored in version control.</li>
+<li><span class="lbl">C.</span> Turn on automatic prompt version history in the Claude Console.</li>
+<li><span class="lbl">D.</span> Log the prompt version with each saved answer.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, D.</span> One stable system block keeps the cached prefix identical across requests. A version label on each saved answer ties it to one prompt (Inference).</p>
+<p class="c-trap">Trap. A tenant name in the system prompt looks like personalization, but a change to the system content invalidates the system and messages caches.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/prompt-caching</p>
+</div>
+<h3>D2.3 Prompt techniques</h3>
+
+<div class="item"><p><span class="lbl">37.</span> A ticket classifier misses its accuracy bar on new labels. The team has no budget for model training, and it wants the smallest prompt change first. Which change should the team try first?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Train a custom classifier on the full ticket history before any prompt change.</li>
+<li><span class="lbl">B.</span> Enable citations, so each label links to its source text.</li>
+<li><span class="lbl">C.</span> Add three to five varied labeled examples in example tags, then run the evals.</li>
+<li><span class="lbl">D.</span> Add the examples, and also turn on adaptive thinking for every call.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> Three to five examples in example tags steer the output pattern without training. Measure the result first, and add more examples only if the evals need them.</p>
+<p class="c-trap">Trap. Custom training on the full history looks like the strongest fix, but the team has no training budget.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices</p>
+</div>
+
+<div class="item"><p><span class="lbl">38.</span> A migration moves an extraction service to a Claude 4.6 model. Each request ends with a prefilled assistant turn, and the API returns a 400 error. The fix must keep the output format and run on Claude 4.6.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Turn thinking off, so the prefilled assistant turn is accepted.</li>
+<li><span class="lbl">B.</span> Remove the prefill, and state the output format in the system prompt.</li>
+<li><span class="lbl">C.</span> Keep the prefill, and add structured outputs to the same request.</li>
+<li><span class="lbl">D.</span> Keep the prefill, and route these calls to an earlier model.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> Claude 4.6 and later models reject a prefilled final assistant turn. A system prompt instruction keeps the output format without the prefill.</p>
+<p class="c-trap">Trap. Thinking turned off looks like a valid fix, but the prefilled final turn still returns a 400 error on Claude 4.6.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices</p>
+</div>
+
+<div class="item"><p><span class="lbl">39.</span> A routing service needs one label from a fixed enum for each ticket. The call targets Claude Opus 5.5, which rejects forced tool use. Which two changes meet the constraints?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Use tool_choice auto with a strict tool that has an enum field.</li>
+<li><span class="lbl">B.</span> Set tool_choice to one named tool, so the model must call it.</li>
+<li><span class="lbl">C.</span> Use structured outputs with an enum in the schema.</li>
+<li><span class="lbl">D.</span> Add a prompt caching breakpoint to the label instructions.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A, C.</span> Tool choice auto works with strict tool use on Opus 5.5. Structured outputs with an enum also return one label from the fixed list.</p>
+<p class="c-trap">Trap. A named tool choice looks like the simplest way to lock the label, but Opus 5.5 rejects forced tool use with a 400 error.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/thinking</p>
+</div>
+<h3>D2.4 Context and token management</h3>
+
+<div class="item"><p><span class="lbl">40.</span> A chat service sends long histories. Each turn must fit an input budget that the app sets before the call, and the model must stay the same. Which change meets both constraints?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Set effort to low, so the input token count falls.</li>
+<li><span class="lbl">B.</span> Skip counting, and rely on the usage fields after each response.</li>
+<li><span class="lbl">C.</span> Count tokens before each send, and switch to a larger-window model when the count is high.</li>
+<li><span class="lbl">D.</span> Count tokens with the target model ID, and trim history that exceeds the budget.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: D.</span> The token counting endpoint reports the input size before the call. The app trims the history, so each turn fits the budget on the same model.</p>
+<p class="c-trap">Trap. Usage fields in a response look like a budget check, but those counts arrive only after the call is sent.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/token-counting</p>
+</div>
+
+<div class="item"><p><span class="lbl">41.</span> An agent task fills its context with old tool results. The team wants no extra summarization call, and recent work must stay in context. Which change meets both constraints?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Add the clear_tool_uses strategy with the context-management beta header.</li>
+<li><span class="lbl">B.</span> Start a separate summary request on every turn, then send that summary.</li>
+<li><span class="lbl">C.</span> Clear all tool results on every turn, even the most recent ones.</li>
+<li><span class="lbl">D.</span> Use the token counting endpoint to delete old turns from the history.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A.</span> The clear_tool_uses strategy removes old tool results by rule, so no summary call is needed. The beta header enables context editing.</p>
+<p class="c-trap">Trap. A separate summary on every turn looks thorough, but it adds the model call that the constraint rules out.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/context-editing</p>
+</div>
+
+<div class="item"><p><span class="lbl">42.</span> A long agent task loses an early constraint after a default summary. Recent turns must stay word for word after the summary. Which two changes meet both constraints?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Let the default summary run, and trust it to keep every constraint.</li>
+<li><span class="lbl">B.</span> Write a custom summarization prompt that keeps the early constraint.</li>
+<li><span class="lbl">C.</span> Set a keep_recent_turns parameter to five in the compaction request.</li>
+<li><span class="lbl">D.</span> Pick a cut point, and send the later turns after the summary block.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, D.</span> A custom summarization prompt can require the early constraint in the summary. No parameter selects kept turns, so the cut point sets which turns stay word for word.</p>
+<p class="c-trap">Trap. A keep_recent_turns parameter looks like the direct control, but no parameter sets which turns are kept.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/compaction-keep-recent-turns</p>
+</div>
+<h3>D2.5 Reuse and prompt caching</h3>

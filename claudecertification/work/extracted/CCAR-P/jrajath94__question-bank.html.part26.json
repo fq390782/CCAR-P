@@ -1,0 +1,155 @@
+[
+  {
+    "number": "M1-Q26",
+    "heading": "M1-Q26 (V2-D3.5)",
+    "question": "A RAG pipeline runs: ingestion, parsing, chunking,\nmetadata, indexing, retrieval, rerank, assembly, generation. The team\nasks what comes after retrieval in the canonical order.\n\nWhich stage follows retrieval?",
+    "choices": {
+      "A": "Ingestion.",
+      "B": "Rerank, then assembly, then generation.",
+      "C": "Chunking.",
+      "D": "Indexing."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"ingestion, parsing, chunking, metadata,\nindexing, retrieval...\" Why: the canonical pipeline order is\nretrieval, rerank, assembly, generation, then grounding checks. The\nrest are earlier stages. Counterfactual: none. Order is definitional.",
+    "source_section": "V2-D3.5"
+  },
+  {
+    "number": "M1-Q27",
+    "heading": "M1-Q27 (V2-D3.5)",
+    "question": "A medical RAG answers with citations. Doctors find cited\nparagraphs that do not support the claims. The pipeline ends at\ngeneration.\n\nWhich stage is absent?",
+    "choices": {
+      "A": "Bigger chunks.",
+      "B": "Grounding and citation checks: verify each cited claim against its\nsource chunk before the answer ships.",
+      "C": "More documents.",
+      "D": "A stronger reranker."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"cited paragraphs that do not support the\nclaims.\" Why: presence of markers is not support. The entailment check\nblocks unsupported claims. A, C, and D improve retrieval, not\nverification. Counterfactual: D wins when the wrong chunk ranks first.",
+    "source_section": "V2-D3.5"
+  },
+  {
+    "number": "M1-Q28",
+    "heading": "M1-Q28 (V2-D3.6), Select TWO",
+    "question": "A product search bot serves queries like \"red waterproof\njacket under $100.\" The catalog carries structured attributes (color, price)\nand free-text descriptions.\n\nWhich TWO retrieval strategies fit? Select TWO.",
+    "choices": {
+      "A": "Keyword search on the description text.",
+      "B": "Semantic search for meaning matches (\"waterproof\" vs \"rain-proof\").",
+      "C": "Metadata filters on color and price.",
+      "D": "Random sampling.",
+      "E": "One fixed FAQ document."
+    },
+    "answer": ["B", "C"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"structured attributes... and free-text\ndescriptions.\" Why: metadata filters handle the structured constraints\nexactly. Semantic search handles meaning variation. A alone misses\nsynonyms. D and E are not strategies.\n\nCounterfactual: A wins as the third leg of a hybrid when exact SKUs matter.",
+    "source_section": "V2-D3.6"
+  },
+  {
+    "number": "M1-Q29",
+    "heading": "M1-Q29 (V2-D3.7)",
+    "question": "Three teams in two languages need the same address\nvalidation capability. One team built it as an internal API.\n\nWhich mechanism fits?",
+    "choices": {
+      "A": "Each team reimplements the API client in its language.",
+      "B": "An MCP server exposing the validator with declared tools. All three\nteams consume it.",
+      "C": "A CLI wrapper with text parsing.",
+      "D": "Email the addresses to the owning team."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Three teams in two languages need the\nsame capability.\" Why: reuse across teams and languages is the MCP win\ncondition. A duplicates work three times. C adds parse risk.\nCounterfactual: A wins when there is one consumer in one language.",
+    "source_section": "V2-D3.7"
+  },
+  {
+    "number": "M1-Q30",
+    "heading": "M1-Q30 (V2-D3.7)",
+    "question": "A vendor capability exists only as a CLI. The team wraps\nit in a subprocess call and parses the text output. The vendor ships a\nstable typed API.\n\nWhat should the team do?",
+    "choices": {
+      "A": "Keep the CLI wrapper. It works.",
+      "B": "Move to the direct API: typed contract, no parse risk.",
+      "C": "Wrap the CLI in a second CLI.",
+      "D": "Drop the capability."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"The vendor ships a stable typed API.\"\nWhy: the CLI won by default. The typed API removes parser maintenance\nand the quarterly breakage. Counterfactual: A wins while no API\nexists.",
+    "source_section": "V2-D3.7"
+  },
+  {
+    "number": "M1-Q31",
+    "heading": "M1-Q31 (V2-D3.8), Select TWO",
+    "question": "A research agent carries 50 tools. Token budget is tight.\nThe latency SLA is loose at 12 seconds. Tasks vary per call.\n\nWhich TWO facts favor progressive discovery? Select TWO.",
+    "choices": {
+      "A": "The tool surface is large (50 tools).",
+      "B": "The latency SLA is loose (12 seconds).",
+      "C": "Every call uses all 50 tools.",
+      "D": "The token budget has no limit.",
+      "E": "The tool set is 3 tools."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"50 tools... loose at 12 seconds...\nToken budget is tight.\" Why: a large surface makes monolithic context\nexpensive and confusing. A loose SLA absorbs the discovery round trip.\nC, D, and E each favor monolithic.\n\nCounterfactual: C wins the argument for monolithic when every call needs every schema.",
+    "source_section": "V2-D3.8"
+  },
+  {
+    "number": "M1-Q32",
+    "heading": "M1-Q32 (V2-D4.1)",
+    "question": "A meeting summarizer must produce summaries the team\ntrusts. The team argues about which metric matters most.\n\nWhich metric is primary for trust?",
+    "choices": {
+      "A": "Tokens per summary.",
+      "B": "Groundedness: each claimed fact traces to the transcript.",
+      "C": "Latency.",
+      "D": "Model tier."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"summaries the team trusts.\" Why: trust\nrests on truth. Groundedness measures whether claimed facts come from\nthe transcript. A, C, and D measure cost, speed, and input, not truth.\nCounterfactual: C wins when the SLA names latency with a penalty.",
+    "source_section": "V2-D4.1"
+  },
+  {
+    "number": "M1-Q33",
+    "heading": "M1-Q33 (V2-D4.1)",
+    "question": "A support bot must answer \"in a few seconds.\" Finance caps\nthe pilot at $2,000 per month for 50,000 chats.\n\nWhat is the first measurement step?",
+    "choices": {
+      "A": "Start building and see.",
+      "B": "Convert the adjectives: p95 under 5 seconds, cost per chat at or\nunder $0.04 ($2,000 / 50,000).",
+      "C": "Pick the most capable tier.",
+      "D": "Promise \"a few seconds\" in the SLA."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"'in a few seconds'... $2,000 per month for 50,000 chats.\" Vague requirements become acceptance thresholds before any build. The arithmetic is fixed. It is $0.04 per chat. D promises an unmeasured adjective.\n\nA wins only after measurement.",
+    "source_section": "V2-D4.1"
+  },
+  {
+    "number": "M1-Q34",
+    "heading": "M1-Q34 (V2-D4.2)",
+    "question": "A team ships a prompt change. The regression drawer goes\nred on three old cases.\n\nWhat does the red drawer mean?",
+    "choices": {
+      "A": "Ship the product. Old cases do not matter.",
+      "B": "The change broke behavior that worked before. Do not ship the product. Understand and fix the regression.\n\nOr update the drawer deliberately.",
+      "C": "Delete the red cases.",
+      "D": "Run the change harder."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"regression drawer goes red on three old cases.\" The regression drawer exists to catch this problem. Red means stop. Deleting cases destroys the measurement. C never wins.\n\nUpdate cases. Do not delete cases. Update cases only deliberately.",
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "M1-Q35",
+    "heading": "M1-Q35 (V2-D4.2), Select TWO",
+    "question": "A loan-description generator needs an eval set. The team\nhas 1,000 typical applications.\n\nWhich TWO case types must you add? Select TWO.",
+    "choices": {
+      "A": "Adversarial cases: applications crafted to elicit biased or false\noutputs.",
+      "B": "Edge cases: unusual but valid applications (uncommon income types).",
+      "C": "1,000 more typical applications.",
+      "D": "The training set copied again.",
+      "E": "Blank inputs only."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"1,000 typical applications.\" Why: the\nrepresentative drawer is full. The missing drawers are adversarial and\nedge. C adds volume, not variety. Counterfactual: E wins as the\nmalformed drawer, a third addition.",
+    "source_section": "V2-D4.2"
+  }
+]

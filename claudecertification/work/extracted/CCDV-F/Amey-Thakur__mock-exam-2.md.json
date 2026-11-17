@@ -1,0 +1,152 @@
+[
+  {
+    "number": "1",
+    "heading": null,
+    "question": "A service sends the same 8,000-token system prompt on every request and cost is dominated by input tokens. What is the first change to evaluate?",
+    "choices": {"A": "Rewriting the system prompt to be shorter", "B": "Switching to a cheaper model", "C": "Caching the stable prefix so it is not reprocessed on every call", "D": "Reducing the number of requests"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "A large unchanging prefix repeated per call is what caching addresses, without losing any instruction. Shortening (A) sacrifices capability, a cheaper model (B) trades quality, and fewer requests (D) changes the product",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "2",
+    "heading": null,
+    "question": "An endpoint must return within 500 ms but the model needs longer for a good answer. What is the appropriate pattern?",
+    "choices": {"A": "Return an acknowledgement immediately and deliver the result through a callback or poll", "B": "Truncate the model's output", "C": "Use the smallest model regardless of quality", "D": "Increase the timeout on the client"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Decoupling acceptance from completion satisfies the latency contract without degrading the answer. Truncation (B) and a minimal model (C) sacrifice the result, and the timeout (D) is the stated constraint",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "3",
+    "heading": null,
+    "question": "What does a stop reason indicating the maximum token limit tell you?",
+    "choices": {"A": "The input was too long", "B": "The request was malformed", "C": "The model refused the request", "D": "The output was cut off before the model finished"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "That stop reason reports that generation hit the output ceiling. An oversized input (A) fails before generation, and neither a malformed request (B) nor a refusal (C) produces this reason",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "4",
+    "heading": null,
+    "question": "A tool result returns 50,000 tokens of JSON, most of it unused. What is the right fix?",
+    "choices": {"A": "Raise the model's context limit", "B": "Change the tool to return only the fields the task needs", "C": "Summarise the JSON with a second model call", "D": "Call the tool less frequently"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Tools should return what the task requires, which preserves context for reasoning. A larger window (A) delays the problem, a second call (C) adds cost and failure surface, and calling less often (D) does not change the payload",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "5",
+    "heading": null,
+    "question": "Which condition warrants a retry with backoff rather than surfacing an error?",
+    "choices": {"A": "The request contained an invalid parameter", "B": "The service returned a rate limit or a transient server error", "C": "The model returned an answer you disagree with", "D": "The response exceeded the expected length"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Rate limits and transient server errors are the recoverable class. An invalid parameter (A) will fail identically, and disagreement (C) or length (D) are not transport failures",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "6",
+    "heading": null,
+    "question": "A workload runs nightly over 50,000 records with no interactive requirement. Which choice reduces cost most?",
+    "choices": {"A": "Streaming each request", "B": "Using the largest model for accuracy", "C": "Increasing concurrency against the standard endpoint", "D": "Submitting the work as a batch"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Large, uniform, latency-tolerant work is exactly the batch case, and it is materially cheaper. Streaming (A) serves interactive use, the largest model (B) raises cost, and concurrency (C) does not change unit price",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "7",
+    "heading": null,
+    "question": "Accuracy on a simple extraction task is identical between a small and a large model. What should be deployed?",
+    "choices": {"A": "The small model, since it meets the requirement at lower cost", "B": "The large model, in case inputs change", "C": "Both, alternating between them", "D": "The newest model available"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Where the requirement is met, the cheaper option is correct, and changing inputs are handled by re-evaluating. Insurance against hypothetical change (B), alternation (C), and recency (D) all spend without benefit",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "8",
+    "heading": null,
+    "question": "A task requires the model to plan across many interacting constraints and revise as it goes. What does this argue for?",
+    "choices": {"A": "The smallest model, to keep cost down", "B": "Splitting the task across several small models", "C": "A more capable model, since the work is reasoning-heavy", "D": "A longer prompt with the same model"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Multi-step reasoning under interacting constraints is where capability differences show. A small model (A) and splitting (B) both fragment the reasoning, and prompt length (D) does not add capability",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "9",
+    "heading": null,
+    "question": "An agent is given ten tools, three of which overlap in purpose. What is the likely consequence?",
+    "choices": {"A": "Faster execution, since more options are available", "B": "Lower token cost", "C": "Better error handling", "D": "More frequent wrong tool selection"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Overlapping tools make selection ambiguous, which is where agents go wrong. Overlap does not improve speed (A), reduce cost (B), or help error handling (C)",
+    "source_section": "Agents and Workflows"
+  },
+  {
+    "number": "10",
+    "heading": null,
+    "question": "What should terminate an agent loop?",
+    "choices": {"A": "A fixed wall-clock timeout only", "B": "The model deciding it is finished", "C": "An explicit success condition, with a step ceiling as a backstop", "D": "Running out of context"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "A defined success condition ends the loop correctly, and the ceiling bounds the failure case. A timeout alone (A) does not recognize success, the model's own judgment (B) is not a guarantee, and exhausting context (D) is a failure rather than a termination",
+    "source_section": "Agents and Workflows"
+  },
+  {
+    "number": "11",
+    "heading": null,
+    "question": "Where should a stable instruction that must apply to every turn be placed?",
+    "choices": {"A": "At the end of the latest user message", "B": "In the system prompt", "C": "Repeated in each user message", "D": "In a tool description"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The system prompt is designed for persistent framing across the exchange. Placing it in user turns (A, C) mixes configuration with input, and tool descriptions (D) govern tool selection",
+    "source_section": "Prompt and Context Engineering"
+  },
+  {
+    "number": "12",
+    "heading": null,
+    "question": "Which change most improves output that is correct but inconsistently formatted?",
+    "choices": {"A": "Providing an example of the exact output required", "B": "Raising the temperature", "C": "Asking for the output to be neat", "D": "Using a larger model"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "An example defines the target unambiguously, which is what formatting consistency needs. Higher temperature (B) increases variance, a vague adjective (C) does not specify, and a larger model (D) does not know your format",
+    "source_section": "Prompt and Context Engineering"
+  },
+  {
+    "number": "13",
+    "heading": null,
+    "question": "What is the most important property of a tool description?",
+    "choices": {"A": "It states what the tool does, when to use it, and what each parameter means", "B": "It is short", "C": "It lists the implementation language", "D": "It matches the function name exactly"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "The description is the model's only basis for choosing and calling the tool correctly. Brevity (B) is secondary to clarity, and implementation detail (C) and naming (D) do not guide selection",
+    "source_section": "Tools and MCPs"
+  },
+  {
+    "number": "14",
+    "heading": null,
+    "question": "Content retrieved from an external site contains instructions aimed at the model. What is the correct defense?",
+    "choices": {"A": "Instruct the model in the system prompt to ignore such content", "B": "Treat retrieved content as untrusted data and bound the model's permissions outside the prompt", "C": "Scan for known injection phrases and block them", "D": "Use a model with a larger context window"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The durable control is that the model cannot exceed its granted permissions regardless of what the content says. Prompt instructions (A) and phrase filters (C) are bypassable, and context size (D) is irrelevant",
+    "source_section": "Security and Safety"
+  },
+  {
+    "number": "15",
+    "heading": null,
+    "question": "A prompt change improved results on the five examples you tested. What should happen before it reaches production?",
+    "choices": {"A": "Ship it, since all five improved", "B": "Ask the model to compare the two prompts", "C": "Evaluate it against a held-out set that reflects real inputs, on defined criteria", "D": "Ship it to a small percentage of traffic and watch error rates"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Five hand-picked cases cannot separate a real gain from noise, which is what an evaluation set settles. Self-comparison (B) is not measurement, and shipping first (A, D) makes users the test",
+    "source_section": "Eval, Testing, and Debugging"
+  }
+]

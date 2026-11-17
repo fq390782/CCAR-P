@@ -1,0 +1,204 @@
+<h3 id="bank-mocks-h252">M4-Q47 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p1125" data-kind="prose"><strong>Scenario.</strong> A news bot drafts headlines. Editors publish after a
+quick read. The bot's drafts are usually fine.</p>
+
+<p id="sec-bank-mocks-p1126" data-kind="prose"><strong>Question.</strong> Which review shape is this, and is it right?</p>
+
+<p id="sec-bank-mocks-p1127" data-kind="prose"><strong>Options.</strong>
+A) Pre-action approval, and it is right: headlines are public and the
+editor's read is the gate with context.
+B) No review at all.
+C) Post-action review.
+D) Annual review.</p>
+
+<p id="sec-bank-mocks-p1128" data-kind="prose"><strong>Key.</strong> A. The decisive phrase is &quot;Editors publish after a quick read.&quot;
+The editor&#x27;s read before publish is pre-action approval with context. Headlines face the public. The gate is correct. C is correct for internal drafts.</p>
+
+
+<h3 id="bank-mocks-h253">M4-Q48 (V2-D5.4)</h3>
+
+<p id="sec-bank-mocks-p1129" data-kind="prose"><strong>Scenario.</strong> A retailer stores EU customer data in the US region. The
+team says "the cloud is global."</p>
+
+<p id="sec-bank-mocks-p1130" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p1131" data-kind="prose"><strong>Options.</strong>
+A) Nothing. The cloud is global.
+B) Residency violation: EU data must stay in the EU per the
+requirement. Move storage and processing to the EU region and build
+the evidence chain.
+C) The cloud is too slow.</p>
+
+<p id="sec-bank-mocks-p1132" data-kind="prose">D) Regions do not exist.</p>
+
+<p id="sec-bank-mocks-p1133" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "stores EU customer data in the US
+region." Why: the requirement names EU residency. "Global cloud" is
+not a control. The fix is regional placement plus the chain.
+Counterfactual: A wins when no residency rule applies.</p>
+
+
+<h3 id="bank-mocks-h254">M4-Q49 (V2-D5.4), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1134" data-kind="prose"><strong>Scenario.</strong> A bank's AI features need model risk documentation for
+the regulator.</p>
+
+<p id="sec-bank-mocks-p1135" data-kind="prose"><strong>Question.</strong> Which TWO artifacts belong in the pack? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1136" data-kind="prose"><strong>Options.</strong>
+A) The model inventory: which models, versions, and use cases.
+B) The validation evidence: eval results, limits, and monitoring
+plan per model.
+C) The vendor's marketing brochure.
+D) The team's lunch menu.
+E) A bigger model.</p>
+
+<p id="sec-bank-mocks-p1137" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1138" data-kind="prose"><strong>Key.</strong> A, B.
+The decisive phrase is &quot;model risk documentation for the regulator.&quot;
+The pack shows what runs.
+The pack shows that someone validated it.
+Inventory and evidence are the chain&#x27;s artifact form.
+There is no counterfactual.</p>
+
+
+<h3 id="bank-mocks-h255">M4-Q50 (V2-D5.5)</h3>
+
+<p id="sec-bank-mocks-p1139" data-kind="prose"><strong>Scenario.</strong> A support bot's satisfaction scores are high overall but
+low for elderly callers.</p>
+
+<p id="sec-bank-mocks-p1140" data-kind="prose"><strong>Question.</strong> What is necessary?</p>
+
+<p id="sec-bank-mocks-p1141" data-kind="prose"><strong>Options.</strong>
+A) Nothing. Overall is high.
+B) Subgroup evaluation and remediation: measure per age group, find
+why elderly callers struggle (e.g., jargon, speed), and fix the
+experience.
+C) Hide the age field.
+D) A bigger model.</p>
+
+<p id="sec-bank-mocks-p1142" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "high overall but low for elderly
+callers." Why: V2-D5.5 measures across subgroups. The aggregate hides
+the harmed group. Counterfactual: A wins never against subgroup
+evidence.</p>
+
+
+<h3 id="bank-mocks-h256">M4-Q51 (V2-D6.1)</h3>
+
+<p id="sec-bank-mocks-p1143" data-kind="prose"><strong>Scenario.</strong> A bank wants a fraud alert bot that is "timely." Volume
+is 100,000 transactions per day. A missed fraud costs $500 on average.</p>
+
+<p id="sec-bank-mocks-p1144" data-kind="prose"><strong>Question.</strong> What is the first discovery output?</p>
+
+<p id="sec-bank-mocks-p1145" data-kind="prose"><strong>Options.</strong>
+A) A vendor demo.
+B) Measurable requirements: "timely" becomes alert p95 under 60
+seconds, plus the $500 miss cost, volume, false-positive tolerance,
+and owners.
+C) A system prompt.
+D) A tier choice.</p>
+
+<p id="sec-bank-mocks-p1146" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;&#x27;timely&#x27;... missed fraud costs $500.&quot; Discovery converts adjectives. Discovery records cost and volume before any build. A is correct after sign-off on the requirements.</p>
+
+
+<h3 id="bank-mocks-h257">M4-Q52 (V2-D6.1), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1147" data-kind="prose"><strong>Scenario.</strong> Discovery for a medical bot records an accuracy target. The liability owner is not decided. The data retention rule is not decided.</p>
+
+<p id="sec-bank-mocks-p1148" data-kind="prose"><strong>Question.</strong> Select two open assumptions.</p>
+
+<p id="sec-bank-mocks-p1149" data-kind="prose"><strong>Options.</strong>
+A) Who owns liability for wrong answers.
+B) The data retention rule for patient chats.
+C) The vendor's tagline.
+D) The office plants.
+E) The Wi-Fi password.</p>
+
+<p id="sec-bank-mocks-p1150" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1151" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "liability owner... undecided... data
+retention rule... undecided." Why: both shape the design and lack
+owners. Record them explicitly. Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h258">M4-Q53 (V2-D6.2)</h3>
+
+<p id="sec-bank-mocks-p1152" data-kind="prose"><strong>Scenario.</strong> An architect proposes a multi-agent design. The security
+team asks about the trade-off.</p>
+
+<p id="sec-bank-mocks-p1153" data-kind="prose"><strong>Question.</strong> What does security need?</p>
+
+<p id="sec-bank-mocks-p1154" data-kind="prose"><strong>Options.</strong>
+A) The parameter count.
+B) Security axes per option: tool surface per agent, permission
+fencing, audit per worker, injection paths, and the cost of the added
+complexity.
+C) The demo video.
+D) Nothing.</p>
+
+<p id="sec-bank-mocks-p1155" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "The security team asks." Why: security
+decides on threat-model axes. V2-D6.2 adapts the message to the
+audience. Counterfactual: A wins never as the security axis.</p>
+
+
+<h3 id="bank-mocks-h259">M4-Q54 (V2-D6.2)</h3>
+
+<p id="sec-bank-mocks-p1156" data-kind="prose"><strong>Scenario.</strong> A team must tell product why the launch slips two weeks.</p>
+
+<p id="sec-bank-mocks-p1157" data-kind="prose"><strong>Question.</strong> What does product need?</p>
+
+<p id="sec-bank-mocks-p1158" data-kind="prose"><strong>Options.</strong>
+A) The attention mechanism details.
+B) Impact framing: what slips, what still ships, the quality risk of
+rushing, and the options with costs.
+C) The git log.
+D) Silence.</p>
+
+<p id="sec-bank-mocks-p1159" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "tell product why the launch slips two
+weeks." Why: product decides on scope, risk, and options. Technical
+detail does not decide. Counterfactual: A wins for the engineering
+postmortem.</p>
+
+
+<h3 id="bank-mocks-h260">M4-Q55 (V2-D6.3), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1160" data-kind="prose"><strong>Scenario.</strong> A team rolls out a bot to 10,000 users with no pilot.</p>
+
+<p id="sec-bank-mocks-p1161" data-kind="prose"><strong>Question.</strong> Which TWO make the rollout responsible? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1162" data-kind="prose"><strong>Options.</strong>
+A) A staged rollout: pilot cohort first, with measured quality gates
+before wider release.
+B) Review triggers and rollback criteria defined before the rollout.
+C) Full release on day one.
+D) No measurement.
+E) Deleting the eval set.</p>
+
+<p id="sec-bank-mocks-p1163" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1164" data-kind="prose"><strong>Key.</strong> A, B. The decisive phrase is &quot;to 10,000 users with no pilot.&quot;
+V2-D6.3 needs realistic staging.
+V2-D6.3 needs triggers with consequences.
+C is the failure.
+There is no counterfactual.</p>
+
+
+<h3 id="bank-mocks-h261">M4-Q56 (V2-D6.3)</h3>
+
+<p id="sec-bank-mocks-p1165" data-kind="prose"><strong>Scenario.</strong> A contract promises "AI-powered insights." The customer
+expects human-expert quality.</p>
+
+<p id="sec-bank-mocks-p1166" data-kind="prose"><strong>Question.</strong> What is the fix?</p>
+
+<p id="sec-bank-mocks-p1167" data-kind="prose"><strong>Options.</strong>
+A) Keep the phrase.
+B) Define "insights" measurably: which questions, what accuracy per
+class, what the system does not do, and the review triggers.
+C) Remove the product.
+D) Promise human experts.</p>
+
+<p id="sec-bank-mocks-p1168" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "'AI-powered insights.'" Why: vague
+phrases become disputes. Measurable terms plus explicit non-goals set
+honest expectations. Counterfactual: A wins never in a contract.</p>
+

@@ -1,0 +1,71 @@
+{
+ "exam": "CCAR-F",
+ "source": "_repos/Amey-Thakur__CLAUDE-CERTIFICATIONS/architect-foundations/exam-guide.pdf",
+ "domains": [
+  {
+   "number": 1,
+   "name": "Agentic Architecture & Orchestration",
+   "weight": "27%",
+   "objectives": [
+    "Task Statement 1.1: Design and implement agentic loops for autonomous task execution",
+    "Task Statement 1.2: Orchestrate multi-agent systems with coordinator-subagent patterns",
+    "Task Statement 1.3: Configure subagent invocation, context passing, and spawning",
+    "Task Statement 1.4: Implement multi-step workflows with enforcement and handoff patterns",
+    "Task Statement 1.5: Apply Agent SDK hooks for tool call interception and data normalization",
+    "Task Statement 1.6: Design task decomposition strategies for complex workflows",
+    "Task Statement 1.7: Manage session state, resumption, and forking"
+   ]
+  },
+  {
+   "number": 2,
+   "name": "Tool Design & MCP Integration",
+   "weight": "18%",
+   "objectives": [
+    "Task Statement 2.1: Design effective tool interfaces with clear descriptions and boundaries",
+    "Task Statement 2.2: Implement structured error responses for MCP tools",
+    "Task Statement 2.3: Distribute tools appropriately across agents and configure tool choice",
+    "Task Statement 2.4: Integrate MCP servers into Claude Code and agent workflows",
+    "Task Statement 2.5: Select and apply built-in tools (Read, Write, Edit, Bash, Grep, Glob) effectively"
+   ]
+  },
+  {
+   "number": 3,
+   "name": "Claude Code Configuration & Workflows",
+   "weight": "20%",
+   "objectives": [
+    "Task Statement 3.1: Configure CLAUDE.md files with appropriate hierarchy, scoping, and modular organization",
+    "Task Statement 3.2: Create and configure custom slash commands and skills",
+    "Task Statement 3.3: Apply path-specific rules for conditional convention loading",
+    "Task Statement 3.4: Determine when to use plan mode vs direct execution",
+    "Task Statement 3.5: Apply iterative refinement techniques for progressive improvement",
+    "Task Statement 3.6: Integrate Claude Code into CI/CD pipelines"
+   ]
+  },
+  {
+   "number": 4,
+   "name": "Prompt Engineering & Structured Output",
+   "weight": "20%",
+   "objectives": [
+    "Task Statement 4.1: Design prompts with explicit criteria to improve precision and reduce false positives",
+    "Task Statement 4.2: Apply few-shot prompting to improve output consistency and quality",
+    "Task Statement 4.3: Enforce structured output using tool use and JSON schemas",
+    "Task Statement 4.4: Implement validation, retry, and feedback loops for extraction quality",
+    "Task Statement 4.5: Design efficient batch processing strategies",
+    "Task Statement 4.6: Design multi-instance and multi-pass review architectures"
+   ]
+  },
+  {
+   "number": 5,
+   "name": "Context Management & Reliability",
+   "weight": "15%",
+   "objectives": [
+    "Task Statement 5.1: Manage conversation context to preserve critical information across long interactions",
+    "Task Statement 5.2: Design effective escalation and ambiguity resolution patterns",
+    "Task Statement 5.3: Implement error propagation strategies across multi-agent systems",
+    "Task Statement 5.4: Manage context effectively in large codebase exploration",
+    "Task Statement 5.5: Design human review workflows and confidence calibration",
+    "Task Statement 5.6: Preserve information provenance and handle uncertainty in multi- source synthesis"
+   ]
+  }
+ ]
+}

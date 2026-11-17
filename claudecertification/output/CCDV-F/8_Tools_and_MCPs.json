@@ -1,0 +1,401 @@
+[
+ {
+  "id": "CCDV-F-Amey-Thakur-0009",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "Three internal applications each need to query the same inventory service through Claude. The capability must be maintained by the platform team independently of the apps. What fits?",
+  "choices": {
+   "A": "Each app embeds its own inventory tool with copied code",
+   "B": "An MCP server exposing the inventory operations as tools, which all three applications connect to",
+   "C": "Paste current inventory data into each app's system prompt daily",
+   "D": "A Skill file describing the inventory API"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Reusable, independently maintained, model-facing capabilities are the MCP server's exact job. Copied tools (A) drift apart, pasted data (C) is stale and wastes context, and a Skill (D) carries instructions, not a live connection.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0089",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0030",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "What most determines whether a model calls a tool correctly?",
+  "choices": {
+   "A": "The number of tools available",
+   "B": "The order the tools are declared in",
+   "C": "How clearly the tool's description and parameters state what it does and when to use it",
+   "D": "Whether the tool returns JSON"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** A tool description is the model's only guide to selection and use, so it is where correctness is won or lost. Tool count (A) and declaration order (B) matter far less, and the return format (D) affects consumption rather than selection.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "30",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0110",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0031",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "An MCP server exposes forty overlapping tools and the model frequently picks the wrong one. What is the best remedy?",
+  "choices": {
+   "A": "Add instructions telling the model to choose carefully",
+   "B": "Increase the context window",
+   "C": "Present the tools in alphabetical order",
+   "D": "Consolidate and sharpen the tool surface so each tool has a distinct purpose"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Ambiguity between tools is a design problem in the interface and is fixed by making each tool distinct. Instructions (A) do not resolve genuine overlap, context size (B) is not the constraint, and ordering (C) does not clarify purpose.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "31",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0111",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0032",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "What is the correct handling when a tool call returns an error?",
+  "choices": {
+   "A": "Return the error to the model as a tool result so it can adapt",
+   "B": "Return the raw error to the end user",
+   "C": "Retry the identical call until it succeeds",
+   "D": "Abandon the run"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Feeding the error back keeps the model in the loop and lets it correct its arguments or choose another path. Raw errors (B) leak internals, blind retries (C) repeat the fault, and abandoning (D) discards recoverable runs.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "32",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0112",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0044",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-1.md",
+  "question": "Which describes the correct relationship between an MCP server and the applications that use it?",
+  "choices": {
+   "A": "The server exposes tools and resources that multiple clients connect to, maintained independently of any one application",
+   "B": "Each application embeds its own copy of the server code",
+   "C": "The server replaces the Messages API",
+   "D": "The server must run in the same process as the model"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "An MCP server is a reusable, independently maintained capability that multiple clients share",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0124",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0063",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-2.md",
+  "question": "What is the most important property of a tool description?",
+  "choices": {
+   "A": "It states what the tool does, when to use it, and what each parameter means",
+   "B": "It is short",
+   "C": "It lists the implementation language",
+   "D": "It matches the function name exactly"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "The description is the model's only basis for choosing and calling the tool correctly. Brevity (B) is secondary to clarity, and implementation detail (C) and naming (D) do not guide selection",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "13",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0143",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0077",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-3.md",
+  "question": "When should a tool return an identifier rather than the full object?",
+  "choices": {
+   "A": "When the object is large and the model only needs it to make a subsequent call",
+   "B": "Never, the model needs the full object",
+   "C": "Always, to reduce cost",
+   "D": "Only for write operations"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Returning a handle keeps context free when the payload is only needed for a later call. Always returning everything (B) or nothing (C) ignores the task, and the rule is not about writes (D)",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0157",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0078",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-3.md",
+  "question": "An MCP server is added and the agent's success rate falls. What should be checked first?",
+  "choices": {
+   "A": "Whether the new tools overlap with existing ones and have distinguishable descriptions",
+   "B": "The server's uptime",
+   "C": "The model version",
+   "D": "The network latency"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "A new tool surface most often degrades selection through overlap and unclear descriptions. Uptime (B) and latency (D) present as errors or slowness, and the model did not change (C)",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "13",
+  "source_heading": null,
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0158",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0002",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/anthropic/claude-certified-developer-foundations/scenarios.md",
+  "question": "After receiving a response with `stop_reason: tool_use`, you want to send the tool's output back. Which is correct?",
+  "choices": {
+   "A": "Append an assistant message with a `tool_result` content block.",
+   "B": "Append a user message with a `tool_result` content block referencing the `tool_use_id`.",
+   "C": "Append a system message with the tool output as text.",
+   "D": "Call `client.tools.submit_result()`."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Tool results are sent in a user-role message containing one or more `tool_result` content blocks, each referencing its `tool_use_id`. There is no dedicated SDK method.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "medium",
+  "source_number": "2",
+  "source_heading": "Scenario 2 - Tool Result Placement",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0017",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "The model returns a `tool_use` block. What must the next request contain?",
+  "choices": {
+   "A": "Just the tool's output as plain text appended to the system prompt, since the model remembers which tool it called and why",
+   "B": "The tool definition again only",
+   "C": "The assistant turn with the `tool_use` block, then a user turn holding a `tool_result` with the same id",
+   "D": "A new conversation whose first user message summarizes the earlier turns, includes the tool's raw output, and asks the model to continue"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "The `tool_use_id` is what pairs the result to the request, and the assistant turn must be appended intact so the model sees its own call. Dropping the assistant turn or omitting the ID produces an error rather than a graceful recovery.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "medium",
+  "source_number": "3",
+  "source_heading": "Question 3",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0018",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "One assistant turn contains three `tool_use` blocks.",
+  "choices": {
+   "A": "Only the first is valid",
+   "B": "Answer them one at a time in three separate user messages",
+   "C": "Execute all three and return all three `tool_result` blocks in a single user message",
+   "D": "Parallel tool use is not supported"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Parallel tool use is on by default, and results must be returned together in one user turn. Splitting them across messages trains the model away from making parallel calls, which quietly costs you latency later. `disable_parallel_tool_use` turns the behavior off if you need one call per turn.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "medium",
+  "source_number": "4",
+  "source_heading": "Question 4",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-preporato-0023",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "Which statement about server-side tools such as web search is correct?",
+  "choices": {
+   "A": "They're available only through MCP",
+   "B": "They run on Anthropic's infrastructure, so your code doesn't execute them or send `tool_result` blocks for them",
+   "C": "Your application must implement and execute them",
+   "D": "They work only in the Batch API"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Server tools execute on Anthropic's side, and their results come back inside the response (B). Client tools are the ones your code runs (C). Server tools are declared in the tools parameter like any other tool (A), and they work in regular requests (D).",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "23",
+  "source_heading": "Question 23",
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0053",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0024",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "Your company's quarterly-report procedure is 12 steps with templates and formatting rules. Teams want Claude to follow it in claude.ai, Claude Code and the API. No new external system is involved. Which mechanism fits?",
+  "choices": {
+   "A": "An MCP server",
+   "B": "A fine-tuned model",
+   "C": "A Skill: packaged instructions and templates that load when the task matches",
+   "D": "A custom tool"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "The need is know-how and workflow steps, which is what Skills package (C). Tools (D) and MCP servers (A) add actions or data access, and nothing here needs a new action or data source. Fine-tuning (B) is heavy machinery for a procedure that fits in a document.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "24",
+  "source_heading": "Question 24",
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0054",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0025",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "An agent calls `create_shipment` with inputs that sometimes have the wrong type (weight as a string) or miss required fields, which breaks your handler. Which API feature addresses this at the source?",
+  "choices": {
+   "A": "`strict: true` on the tool definition, so tool inputs follow the `input_schema`",
+   "B": "A lower temperature",
+   "C": "A longer tool description",
+   "D": "`tool_choice` set to `auto`"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Strict tool use applies schema validation to the tool's inputs (A). A better description (C) helps the model pick and fill the tool and still guarantees nothing. `auto` (D) is the default and changes nothing. Temperature (B) affects variation and can't guarantee types.",
+  "domain": "8. Tools and MCPs",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": "Question 25",
+  "source_section": "Tools and MCPs",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0055",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ }
+]

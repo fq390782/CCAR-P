@@ -1,0 +1,212 @@
+[
+  {
+    "number": "Q57",
+    "heading": "Q57",
+    "question": "A support bot's system prompt is 6,000 tokens: company policies, tone guidelines, and 15 few-shot examples. It is identical on every call. Token costs are 70 percent input tokens, and the prompt has not changed in two months.\n\nConstraint: cut input token cost substantially without changing behavior or removing prompt content.\n\nWhat is the right move?",
+    "choices": {
+      "A": "Shorten the prompt by deleting half the examples.",
+      "B": "Enable prompt caching on the stable system prompt. The system processes the 6,000-token prefix one time. The system reuses the prefix. This cuts the cost per call. The behavior is identical.",
+      "C": "Move the examples into the user message so they feel fresher.",
+      "D": "Fine-tune a model on the prompt and delete the prompt entirely."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Why B is correct: Prompt caching exists for this exact purpose. It is a long, stable, identical prefix for every call. Cached tokens cost a fraction of fresh input tokens. The behavior does not change. You do not remove content. The system meets the constraint on all three points.\n\nA is wrong. Deleting examples changes behavior. It risks the format and tone that the examples enforce.\n\nC is wrong. Moving examples to the user message breaks cacheability. It does not change the cost.\n\nD is wrong. Fine-tuning is a heavy and expensive project. It changes behavior in unmeasured ways. This is too much for the problem.",
+    "source_section": "D2"
+  },
+  {
+    "number": "Q58",
+    "heading": "Q58",
+    "question": "A platform team maintains 20 related internal assistants (HR, IT, finance, legal, and more). Each assistant's prompt repeats the same company-wide instructions: tone, citation rules, escalation policy, and PII handling. Last month a policy change reached 14 prompts but missed 6, causing inconsistent behavior.\n\nConstraint: shared instructions must exist in exactly one place so a policy change propagates everywhere at once.\n\nWhich prompt-reuse strategy enforces the constraint?",
+    "choices": {
+      "A": "Merge all 20 assistants into one giant assistant with one prompt.",
+      "B": "Have one person own all 20 prompts and memorize the shared text.",
+      "C": "Copy-paste the shared instructions into each prompt more carefully next time.",
+      "D": "Modular prompts: extract the shared instructions into versioned shared modules (for example a Skill or shared prompt component) that every assistant includes by reference; update the module once to change all 20."
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Why D is correct: The failure is a duplicated source of truth. Versioned shared modules make the instructions single-sourced. One update propagates to all 20 assistants atomically. Versioning lets the team audit which policy version each assistant used.\n\nC is wrong. Careful copy-paste is still copy-paste. The next policy change will drift again.\n\nA is wrong. Merging 20 domains into one prompt creates an unmaintainable mega-prompt. It destroys per-domain tuning.\n\nB is wrong. Human memory is not a configuration management strategy. It fails on vacation, turnover, and scale.",
+    "source_section": "D2"
+  },
+  {
+    "number": "Q59",
+    "heading": "Q59",
+    "question": "A code-review service processes 5 million tokens per day. The team tests two models. The team uses a 400-case eval set. Model L scores 91 percent. Model L costs $X per day. Model M scores 89 percent.\n\nModel M costs 0.35X per day. The SLA floor is 88 percent. Finance wants the cheapest option. The option must meet the SLA.\n\nConstraint: stay at or above 88 percent accuracy at minimum cost. The decision must rest on measured data, not model reputation.\n\nWhich two conclusions follow? (Select two.)",
+    "choices": {
+      "A": "Choose Model L: 91 percent is higher, and higher accuracy is always worth the cost.",
+      "B": "Check per-category scores before you finalize. Model M may fail a critical category. For example, Model M may fail security flaws. Model L passes this category. The 89 percent aggregate score can hide an SLA failure.",
+      "C": "Skip the eval and choose by parameter count.",
+      "D": "Choose Model M. It clears the 88 percent floor. It costs about one third of Model L. The eval measurement supports this choice."
+    },
+    "answer": ["D", "B"],
+    "select_count": 2,
+    "explanation": "Why D, B is correct: D applies the constraint directly. Model M clears the floor. Model M has a much lower cost. The choice uses measured data. B is the necessary caution. Aggregate scores hide per-segment failures.\n\nThe per-category check must pass. Then you can ship the cheaper model.\n\nA is wrong. \"Higher is always worth it\" ignores the cost constraint. 3 extra points above the floor at 3x cost needs justification. It does not need assumption.\n\nC is wrong. Parameter count is not a measured quality signal for this workload.",
+    "source_section": "D2"
+  },
+  {
+    "number": "Q60",
+    "heading": "Q60",
+    "question": "A 40-engineer team adopts Claude Code. Each engineer configures it differently: different allowed tools, different project instructions, different MCP servers. Results are inconsistent, and one engineer accidentally gave the agent write access to the production database config.\n\nConstraint: every engineer gets the same safe, project-aware setup, managed in one place.\n\nHow should the team standardize?",
+    "choices": {
+      "A": "Let each engineer keep personal configs; variety breeds innovation.",
+      "B": "Check shared configuration into the repo. Add a CLAUDE.md project file with instructions. Add a versioned MCP server list. Add a permissions policy. For example, do not give production write access. The policy applies to all users.",
+      "C": "Do not use Claude Code. Use Claude Code only after you design a perfect config.",
+      "D": "Email a PDF of recommended settings to the team."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Why B is correct: Checked-in, versioned configuration gives every engineer the identical safe setup. The permissions policy structurally prevents the production-write accident. One place to update means fixes propagate to all 40 engineers.\n\nA is wrong. Uncoordinated configurations caused the incident. More variety means more risk.\n\nC is wrong. A ban forfeits the productivity gain. It does not manage the risk.\n\nD is wrong. A PDF is unenforceable. Nothing stops a person from ignoring it.",
+    "source_section": "D7"
+  },
+  {
+    "number": "Q61",
+    "heading": "Q61",
+    "question": "An engineer asks an AI coding assistant to \"fix the flaky test.\" The assistant rewrites the test to always pass by deleting the assertions. The engineer almost merges it.\n\nConstraint: AI assistance must fix the actual flakiness without weakening the test.\n\nWhat is the correct debugging workflow with the assistant?",
+    "choices": {
+      "A": "Delete the flaky test; flaky tests are not worth fixing.",
+      "B": "Accept the assistant's fix; it made the test pass.",
+      "C": "First, reproduce the flake. Then, capture logs. Give the assistant the failure evidence. Ask the assistant to diagnose the root cause. The fix must keep or strengthen assertions. Verify the fix with repeated runs.",
+      "D": "Never use AI assistance on tests."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: The assistant is only as good as its input. First, find failure evidence. Then, make a diagnosis. Then, make a fix. The fix must preserve test strength. Verify the fix with repeated runs.\n\nThis workflow uses the AI's speed. It keeps the engineer in charge of correctness.\n\nB is wrong. A passing test with deleted assertions proves nothing. It is worse than the flake.\n\nD is wrong. It discards a useful tool. It does not use the tool correctly.\n\nA is wrong. Deleting the test destroys the coverage. The test was meant to provide coverage.",
+    "source_section": "D7"
+  },
+  {
+    "number": "Q62",
+    "heading": "Q62",
+    "question": "PR reviews are the team bottleneck: reviewers take two days on average, and simple issues (missing tests, style violations) consume most of the review effort. The team wants Claude Code in the CI pipeline to pre-review PRs.\n\nConstraint: cut review latency on mechanical issues without letting the bot approve PRs on its own or drown reviewers in noise.\n\nWhich CI integration design fits?",
+    "choices": {
+      "A": "Only run the bot on Fridays to avoid disrupting the week.",
+      "B": "Let the bot auto-merge PRs it considers clean.",
+      "C": "A scoped review hook checks each PR. The bot checks the PR against the team's rules. The rules include tests present, style, and obvious bugs. The bot posts findings as review comments. The bot never merges. Humans still approve.\n\nHumans now focus on design. They do not focus on mechanics.",
+      "D": "Run the bot on every commit and email its full output to the whole team."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Scoping the bot to mechanical checks attacks the actual bottleneck. It checks against written rules. Review comments keep humans in the decision seat. Withholding merge rights prevents autonomous approvals. Reviewers get faster. They focus on what matters.\n\nB is wrong. Auto-merge hands the approval decision to the bot. This violates the constraint.\n\nD is wrong. Unfiltered full output to everyone is noise. It is not a review process.\n\nA is wrong. Batching reviews to Friday increases latency. It does not cut latency.",
+    "source_section": "D7"
+  },
+  {
+    "number": "Q63",
+    "heading": "Q63",
+    "question": "New engineers need six weeks to work well on a complex repo. They do not know the build commands. They do not know the deploy process. They do not know which services own which APIs. Senior engineers answer the same questions many times.\n\nConstraint: cut time-to-productivity with a solution seniors maintain once, not per newcomer.\n\nHow should the team use Claude Code to onboard newcomers?",
+    "choices": {
+      "A": "Record senior engineers answering questions and build a video library.",
+      "B": "Assign each newcomer a senior buddy for six weeks.",
+      "C": "Build curated Skills and slash commands for repo tasks. These tasks include build, test, deploy, and \"which service owns this API\". Document these items in the repo's CLAUDE.md file. Newcomers get correct answers fast. Senior engineers maintain the knowledge one time.",
+      "D": "Give newcomers full production access so they learn by doing."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Curated Skills turn repeated senior knowledge into maintained, instantly accessible tooling. Seniors write it one time. Every newcomer benefits immediately. The repo stays the source of truth. It directly attacks the six-week ramp.\n\nB is wrong. It preserves the per-newcomer senior cost. The constraint wants to eliminate this cost.\n\nD is wrong. Production access for learning is a security and reliability hazard.\n\nA is wrong. Videos go stale. They are not queryable at the moment of need. Nobody re-records them on every change.",
+    "source_section": "D7"
+  },
+  {
+    "number": "Q64",
+    "heading": "Q64",
+    "question": "The team's coding agents start to work wrong after a Friday deploy. Agents use old project instructions. One agent type loops on a renamed tool. The deploy changed CLAUDE.md files. The deploy changed MCP server configs. Rollback is possible.\n\nThe team wants a process. The team does not want only a revert.\n\nConstraint: future config deploys must be verifiable before full rollout, with fast recovery when they break.\n\nWhich operational design meets the constraint?",
+    "choices": {
+      "A": "Deploy configs on Fridays only, when a change affects fewer engineers.",
+      "B": "Do canary deploys for agent configuration. Roll new CLAUDE.md and MCP configs to a small group first. Run smoke tests. Smoke tests use sample tasks with good outputs. Stop the deploy automatically if it fails. Keep the old config for a one-command rollback.\n\nRequire a config changelog.",
+      "C": "Stop changing agent configs after initial setup.",
+      "D": "Have each engineer test the new config manually before it ships."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Why B is correct: Canary and smoke tests verify the config on real tasks before full rollout. Auto-halt limits the blast radius. One-command rollback gives fast recovery. The changelog makes the fleet's behavior auditable. Every element meets the constraint.\n\nA is wrong. Timing the deploy for Friday changes who it affects. It does not change if the deploy breaks. This is superstition. It is not a process.\n\nC is wrong. Configs must change with the repo. Freezing them trades today's risk for steady decay.\n\nD is wrong. Manual testing by every engineer does not scale. It is also inconsistent. It is not a verifiable process.",
+    "source_section": "D7"
+  },
+  {
+    "number": "Q65",
+    "heading": "Q65",
+    "question": "A health insurer uses a claims-summarization agent on Bedrock. The agent is for internal adjusters. It works well. Leadership wants to use it for member-facing chat. Members ask \"why was my claim denied?\". This expansion puts protected health information in front of members.\n\nA wrong explanation of a denial can cause a regulatory complaint.\n\nConstraint: no member may ever receive an invented or incorrect reason for a claim denial.\n\nWhat architectural change does the expansion require?",
+    "choices": {
+      "A": "Put the agent behind a workflow. A deterministic step pulls the actual determination record first. The model can only rephrase that record. The model must never supply its own reasons.",
+      "B": "Route member questions to a larger model, which hallucinates less often.",
+      "C": "Let the existing agent answer member questions directly, since it already understands claims.",
+      "D": "Add a paragraph to the system prompt telling the model to be careful with denial explanations under HIPAA."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Why A is correct: The constraint is zero invented denial reasons. Only a structural guarantee meets this constraint. The reason comes from the determination record. The model must rephrase verified content. Care and capacity do not guarantee anything.\n\nC is wrong. The internal agent was never constrained against inventing explanations. Member-facing use raises the stakes. It does not add a guard.\n\nD is wrong. A prompt instruction is bypassable and unverifiable. This is the prompt-plea trap. It applies to a compliance risk.\n\nB is wrong. A larger model still hallucinates. The failure is architectural. It is not a capacity failure (bigger-model trap).",
+    "source_section": "D1"
+  },
+  {
+    "number": "Q66",
+    "heading": "Q66",
+    "question": "A support desk gets 800 tickets a day. Each ticket is a multi-turn conversation where every reply depends on what was said before. An architect proposes fanning each ticket out to five subagents in parallel \"to resolve tickets five times faster.\" The CFO likes the sound of it.\n\nConstraint: resolution quality must hold, and cost per ticket cannot rise.\n\nWhat is the flaw in the proposal, and what should replace it?",
+    "choices": {
+      "A": "Replace the subagents with a larger model so one pass is enough.",
+      "B": "Run the five subagents but have them vote on each reply, which fixes quality.",
+      "C": "Fan-out is theater here: the replies are sequential, not independent, so five subagents quintuple the cost while fragmenting context. Keep one agent per ticket and fan out only genuinely parallel subtasks, like pulling account history while searching the knowledge base.",
+      "D": "Drop to three subagents to cut the cost increase."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Fan-out helps only when subtasks are independent. In a sequential dialogue, each step needs the previous step's context. Parallel agents cannot divide the work. They duplicate the work. The credited answer names the flaw. It keeps parallelism where it is real.\n\nB is wrong. Voting adds more cost. It still fragments the conversation context across five agents.\n\nD is wrong. Three subagents have the same structural flaw as five subagents. This is just cheaper theater.\n\nA is wrong. Model size does not fix a decomposition mistake. The work is sequential either way.",
+    "source_section": "D1"
+  },
+  {
+    "number": "Q67",
+    "heading": "Q67",
+    "question": "A retailer gives an agent power to handle refunds up to $500. A proposal lets the agent draft the customer email. The proposal lets the agent send the email. The proposal lets the agent process the refund. The agent does this in one loop. No human is in the middle.\n\nConstraint: money movement and customer-facing messages must never execute on a model judgment alone.\n\nWhich design satisfies the constraint?",
+    "choices": {
+      "A": "Require the agent to explain its reasoning in detail before acting, then let it act.",
+      "B": "Have two agents vote; act only if both agree.",
+      "C": "Let the agent draft, send, and refund, but add \"double-check the policy before acting\" to the system prompt.",
+      "D": "Let the agent draft freely. Put the send and the refund behind a gate. A rules engine checks policy. The rules engine checks the amount. The rules engine checks fraud flags. A human approves the send.\n\nThe model proposes. The gate disposes."
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Why D is correct: The constraint bans model-only execution of irreversible actions. A deterministic gate plus human approval moves the decision from the model. This moves it to a verifiable control. Drafting stays automated.\n\nC is wrong because a self-check instruction is still a model judgment. This is the prompt-plea trap on an irreversible action.\n\nA is wrong because a detailed explanation does not change who decides. The model still executes alone.\n\nB is wrong because two model votes are still model judgment. There is no deterministic or human check anywhere.",
+    "source_section": "D1"
+  },
+  {
+    "number": "Q68",
+    "heading": "Q68",
+    "question": "A bank chooses between a vendor agent platform and the Anthropic API. The vendor demo has more features. It has dashboards. It has connectors. It has a prompt library. The build option is plainer.\n\nThe bank keeps full control of its data path.\n\nConstraint: the decision must protect data residency, audit ownership, and exit options under banking regulation.\n\nHow should the architect frame the build-vs-buy decision?",
+    "choices": {
+      "A": "Count features: the platform with the longer checklist wins.",
+      "B": "Compare total license cost against three years of API spend.",
+      "C": "Evaluate control and coupling. The system processes data. The system stores data. An owner has the audit trail. What is the cost to swap the model layer later? Features are secondary.",
+      "D": "Choose whichever the engineering team already knows."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Banking regulation states that the decision is about control and coupling. Control refers to residency and audit ownership. Coupling refers to exit cost and swap-ability. It is not about feature counts. The credited answer evaluates these exact axes.\n\nA is wrong. A feature checklist ignores regulatory and lock-in risks. These risks dominate this decision.\n\nB is wrong. License-versus-API math alone misses residency, audit, and exit costs. These costs are much larger than the subscription line.\n\nD is wrong. Team familiarity is a delivery convenience. It is not a decision criterion for a regulated multi-year commitment.",
+    "source_section": "D1"
+  },
+  {
+    "number": "Q69",
+    "heading": "Q69",
+    "question": "A SaaS company serves 300 tenants from one Claude agent. The proposal keeps a single shared agent. The proposal adds a system-prompt instruction. The instruction is: \"Only discuss data belonging to the current tenant, identified by the tenant_id in the conversation.\"\n\nConstraint: under SOC 2, no tenant may ever see another tenant's data, and the control must be enforceable, not advisory.\n\nWhich design provides real tenant isolation?",
+    "choices": {
+      "A": "Derive a separate session context per tenant. Do this at the architecture layer. Use tenant-scoped credentials. Use filtered tool access. Enforce data partitioning outside the model. Cross-tenant data is unreachable.\n\nCross-tenant data is not just forbidden.",
+      "B": "Add a second agent that reviews each reply for cross-tenant leakage before it is sent.",
+      "C": "Log all cross-tenant data accesses for later audit.",
+      "D": "Keep the shared agent and strengthen the prompt with examples of what not to reveal."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Why A is correct: Isolation must be structural. If the data is unreachable through scoped credentials and partitioning, no prompt failure can leak it. A prompt instruction is advisory. Architecture is enforceable.\n\nD is wrong. Stronger prompt wording is still a prompt-plea. It is bypassable. It is untestable as a security boundary.\n\nB is wrong. A reviewer agent is a model. It can miss things. Someone can trick it. It doubles cost. It doubles latency.\n\nThis control must be structural.\n\nC is wrong. Logging detects leaks after they happen. The constraint requires preventing them.",
+    "source_section": "D1"
+  },
+  {
+    "number": "Q70",
+    "heading": "Q70",
+    "question": "A data platform team proposes one \"super-agent\". This single loop does agentic RAG over documents. It does agentic search over the web. It does agentic analytics over the warehouse. All parts share one memory. Two teams own the pieces.\n\nThe search team owns retrieval quality. The analytics team owns SQL correctness. The pilot's failures are hard to attribute. Nobody can tell the source of a bad answer.\n\nConstraint: every failure must be attributable to an owner, and each team must be able to eval and ship its piece independently.\n\nWhich two changes satisfy the constraint? (Select two)",
+    "choices": {
+      "A": "Decompose into three bounded agents (RAG, search, analytics) with explicit input/output contracts, coordinated by a thin orchestrator; each team owns its agent and its eval set.",
+      "B": "Give the super-agent three labeled memory sections so failures are easier to discuss.",
+      "C": "Require each team to review the super-agent's full prompt before every release.",
+      "D": "Version each agent's contract separately and gate releases on that agent's own eval suite, so one team's change cannot silently break another's piece."
+    },
+    "answer": ["A", "D"],
+    "select_count": 2,
+    "explanation": "Why A, D is correct: Bounded agents with contracts make ownership real. Failures stay with the agent. This agent violated its contract (A). Per-agent versioning and eval gates let teams ship independently. This stops cross-team breakage (D). The orchestrator stays thin.\n\nIt cannot become a second super-agent.\n\nB is wrong. Labeled memory sections do not create ownership. They do not create independent evaluations. Attribution stays a matter of opinion.\n\nC is wrong. Joint prompt review couples the teams on every release. This is the opposite of independent shipping.",
+    "source_section": "D1"
+  }
+]

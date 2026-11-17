@@ -1,0 +1,282 @@
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q71</span><span class="constraint">D2</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A company builds onboarding Q&amp;A over a 40,000-token policy manual. The first version pastes the entire manual into every request. Token bills are high, and answer quality is actually dropping: the model misses details buried in the middle of the manual.</div>
+<div class="constraint-block"><strong>Constraint:</strong> cut cost per question while improving answer accuracy on specific policy details.</div>
+<div class="qb-ask">What is the right fix?</div>
+<ol class="qb-opts" type="A"><li>Retrieve only the relevant sections: embed the manual once, fetch the top chunks per question, and put those in context instead of the whole manual.</li>
+<li>Paste the manual twice so the model sees the middle sections again.</li>
+<li>Lower the temperature to make answers more precise.</li>
+<li>Switch to a model with a larger context window so the whole manual fits more comfortably.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p88" data-kind="prose"><strong>Why A is correct:</strong> Retrieval replaces context stuffing with relevant context. The model sees the sections that matter. It does not see 40,000 tokens of noise. This improves cost and the lost-in-the-middle accuracy problem.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. A bigger window does not fix the lost-in-the-middle effect. It does not fix the per-request cost of stuffing the manual. The failure is architectural.</li>
+<li>B is wrong. Duplicating the manual doubles the cost. It adds no new information.</li>
+<li>C is wrong. Temperature controls randomness. It does not control if the model can find a detail in 40,000 tokens.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q72</span><span class="constraint">D2</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">An urgent-care network builds a triage classifier. The network labels incoming messages. The network labels messages as routine, urgent, or emergency. A mislabeled emergency can delay care. The vendor recommends pinning the cheapest model. The vendor says &quot;classification is easy and all models score within a point on benchmarks.&quot;</div>
+<div class="constraint-block"><strong>Constraint:</strong> patient safety dominates; a missed emergency outweighs any cost saving.</div>
+<div class="qb-ask">How should the architect choose the model?</div>
+<ol class="qb-opts" type="A"><li>Use the cheapest model but add ten few-shot examples to close the gap.</li>
+<li>Use the cheapest model for routine messages and skip classification for the rest.</li>
+<li>Take the cheapest model, since benchmarks show near-parity.</li>
+<li>Evaluate candidate models on a triage-specific eval set. Weight the eval set by consequence. Missed emergencies cost more than false alarms. Pick the cheapest model that clears the safety bar. Do not pick the cheapest overall model.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p89" data-kind="prose"><strong>Why D is correct:</strong> Consequence of error must drive model selection. Price must not drive model selection. A consequence-weighted evaluation measures the constraint. This includes missed emergencies. &quot;Cheapest that clears the bar&quot; keeps cost discipline. It does not sacrifice safety.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. Generic benchmarks do not measure triage errors. Near-parity on average hides the rare catastrophic misses. The constraint cares about these misses.</li>
+<li>A is wrong. Few-shot examples cannot fix the specific failure mode. This includes missed emergencies. This is true without the consequence-weighted evaluation. It is hope, not evidence.</li>
+<li>B is wrong. Skipping classification abandons the task for the hardest messages. Triage matters most for these messages.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q73</span><span class="constraint">D2</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A team puts task instructions and five few-shot examples after the user message in the prompt. On short inputs the format is perfect. On long customer emails the model suddenly stops following the format, and the team finds the examples were cut off.</div>
+<div class="constraint-block"><strong>Constraint:</strong> format adherence must hold on long inputs too.</div>
+<div class="qb-ask">What is the correct prompt ordering fix?</div>
+<ol class="qb-opts" type="A"><li>Put the examples in the middle of the user message.</li>
+<li>Shorten the user emails before sending them.</li>
+<li>Add more few-shot examples so some survive truncation.</li>
+<li>Move the task instructions and few-shot examples before the user content, since truncation removes content from the end of the context, not the beginning.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p90" data-kind="prose"><strong>Why D is correct:</strong> Truncation removes content from the end of the context. Instructions and examples placed first form a stable prefix. This prefix stays. If you place them after the user message, the system cuts them first on long inputs.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. More examples after the user message are still after the truncation point. The system cuts them too.</li>
+<li>A is wrong. Examples buried in the middle of a message are still downstream of long content. The system can cut or dilute them.</li>
+<li>B is wrong. Shortening user emails removes the actual task input. This happens to protect the formatting.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q74</span><span class="constraint">D2</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A support agent's system prompt has grown to 15,000 tokens. Three sections change daily (pricing, promos, policy updates). The rest is stable. The team enabled prompt caching, but the cache hit rate is near zero, because any daily change invalidates the whole cached prompt.</div>
+<div class="constraint-block"><strong>Constraint:</strong> maximize cache hits so the stable 12,000 tokens are not reprocessed on every request.</div>
+<div class="qb-ask">How do you restructure the prompt?</div>
+<ol class="qb-opts" type="A"><li>Keep one prompt but enable caching twice, which doubles the hit rate.</li>
+<li>Split the prompt into modules. Put cache breakpoints between the modules. Order the modules stable-first. The stable base caches one time. Only the changed daily sections process again.</li>
+<li>Move the daily sections to the front. This processes them first.</li>
+<li>Remove the daily sections from the prompt and hope the model knows current pricing.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p91" data-kind="prose"><strong>Why B is correct:</strong> Cache breakpoints let each stable prefix cache independently. Order stable content first. The 12,000-token base hits the cache on every request. Only reprocess the small volatile modules when they change.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. You cannot enable caching twice. One changing byte still invalidates one cached blob.</li>
+<li>C is wrong. Putting volatile content first poisons the cache for everything after it. This includes the entire stable base.</li>
+<li>D is wrong. Dropping pricing and policy from context guarantees wrong answers about pricing and policy.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q75</span><span class="constraint">D2</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A code editor&#x27;s autocomplete must respond in less than 300 milliseconds at p99. An engineer enabled extended thinking on the Sonnet model. This was &quot;for better completions.&quot; P99 latency is now 2.1 seconds. Users complain.</div>
+<div class="constraint-block"><strong>Constraint:</strong> p99 latency under 300ms; completions only need the obvious next token, not deep reasoning.</div>
+<div class="qb-ask">What is the right change?</div>
+<ol class="qb-opts" type="A"><li>Turn off extended thinking and use a fast model with a small max-tokens limit; match the effort setting to the task. Note that Haiku has no extended thinking at all, which tells you what it is for.</li>
+<li>Add a loading spinner so users tolerate the 2.1 seconds.</li>
+<li>Cache completions so thinking only runs once per prefix.</li>
+<li>Keep extended thinking but raise the thinking budget so the model finishes faster.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p92" data-kind="prose"><strong>Why A is correct:</strong> Extended thinking trades latency for reasoning depth. Autocomplete does not need this. Disabling it and using a fast model with tight output limits directly attacks the 300ms budget. The constraint is about effort matched to the task.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. A larger thinking budget means more reasoning. This increases latency further. This is the opposite of the fix.</li>
+<li>B is wrong. A spinner masks the symptom. The 2.1-second p99 still violates the constraint.</li>
+<li>C is wrong. Caching prefixes helps only repeated prefixes. It leaves first-seen completions at 2.1 seconds.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q76</span><span class="constraint">D2</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A team faces a one-off data migration: two days of work moving records between systems with custom rules. An engineer proposes packaging the whole procedure as a versioned Skill with documentation and review.</div>
+<div class="constraint-block"><strong>Constraint:</strong> do not over-invest in work that happens once.</div>
+<div class="qb-ask">What is the right call?</div>
+<ol class="qb-opts" type="A"><li>Build the Skill but skip the documentation to save time.</li>
+<li>Build the versioned Skill. Skills are a good method.</li>
+<li>Use plain prompt text or a script for the one-off migration; Skills earn their keep on recurring workflows that need reuse, versioning, and maintenance.</li>
+<li>Skip the migration and keep both systems running.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p93" data-kind="prose"><strong>Why C is correct:</strong> Skills are useful through reuse. Versioning and maintenance are worth the effort when a workflow happens many times. For a one-time task, that investment is only overhead. Prompt text or a script does the job.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong because &quot;best practice&quot; without recurrence counts as over-engineering. The constraint explicitly bans over-investment here.</li>
+<li>D is wrong. Avoiding the migration does not satisfy the business need. It avoids the question.</li>
+<li>A is wrong. An undocumented Skill is worse than prompt text. It has maintenance cost. It has none of the reusability benefit.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q77</span><span class="constraint">D3</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A logistics company needs live carrier data inside its Claude agent. The carrier exposes its data only through a proprietary Python SDK; there is no REST API and no documentation beyond the SDK. Three internal teams will need the same carrier data in their own agents.</div>
+<div class="constraint-block"><strong>Constraint:</strong> build the integration once and reuse it across all three teams, with the vendor's quirks isolated in one place.</div>
+<div class="qb-ask">Which integration approach fits?</div>
+<ol class="qb-opts" type="A"><li>Have each team call the SDK directly from its own agent code.</li>
+<li>Wrap the SDK in a single MCP server with clean, well-named tools; all three teams use the server, and vendor quirks live behind its interface.</li>
+<li>Use an agent-to-agent protocol so the carrier's system negotiates directly with each agent.</li>
+<li>Ask the model to read the SDK source and call it ad hoc per request.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p94" data-kind="prose"><strong>Why B is correct:</strong> An MCP server built once gives every team the same clean tool interface. It isolates the proprietary SDK in exactly one place. That is the build-once rationale. There is one integration to maintain. There are three consumers.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. Three direct integrations triple the maintenance surface. They spread vendor quirks across three codebases.</li>
+<li>C is wrong. Agent-to-agent protocols connect agents to agents. The carrier exposes an SDK. It does not expose an agent.</li>
+<li>D is wrong. Ad-hoc SDK calls per request are unreviewable. They are untestable. They reinvent the integration on every call.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q78</span><span class="constraint">D3</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A finance agent got 23 tools. This included a raw SQL tool &quot;for flexibility.&quot; Wrong-tool calls increase. The model picks similar tools. It then tries again. It once ran an unfiltered SELECT over the transactions table.</div>
+<div class="constraint-block"><strong>Constraint:</strong> keep every capability the agent needs, but cut wrong-tool calls and remove the dangerous flexibility.</div>
+<div class="qb-ask">What is the best fix?</div>
+<ol class="qb-opts" type="A"><li>Consolidate into a few parameterized tools with narrow, well-named operations (for example, one reporting tool with explicit query types), and remove raw SQL entirely; review the catalog for overlap.</li>
+<li>Add a "tool recommender" tool that picks the right tool for each request.</li>
+<li>Document all 23 tools more thoroughly in the system prompt.</li>
+<li>Upgrade to a larger model that can distinguish 23 tools more reliably.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p95" data-kind="prose"><strong>Why A is correct:</strong> Fewer, distinct, well-named tools reduce the model's choice confusion. Removing raw SQL enforces least privilege structurally. Consolidation keeps the capabilities. It removes the misfire surface and the dangerous generality.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. Tool-bloat is an architectural problem. It is not a capacity problem. A larger model still faces 23 similar choices.</li>
+<li>B is wrong. A recommender adds a 24th tool. It adds another model judgment to the path that is already failing.</li>
+<li>C is wrong. Longer descriptions do not fix overlapping, confusing tool boundaries. The catalog itself is the problem.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q79</span><span class="constraint">D3</span><span class="qb-pill hard">Hard</span><span class="constraint">Select two</span></div>
+<div class="qb-scenario">
+<div>A finance team wants to connect a third-party MCP server. This server files invoices. It starts payments. The server&#x27;s tool descriptions are good. An engineer reviews the server. The server is closed-source.</div>
+
+<div>The vendor hosts it. Its &quot;initiate_payment&quot; tool takes a free-text amount and recipient.</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> no unauthorized money movement may be possible, even if the MCP server or its descriptions are malicious.</div>
+<div class="qb-ask">Which two controls satisfy the constraint? (Select two)</div>
+<ol class="qb-opts" type="A"><li>Add &quot;never initiate payments before the user asks two times&quot; to the agent&#x27;s system prompt.</li>
+<li>Validate every tool result and enforce payment authorization in your own code (the effect-performing layer), so a malicious or compromised description cannot trigger money movement by itself.</li>
+<li>Trust the tool descriptions and the vendor's SOC 2 report, and connect the server directly.</li>
+<li>Treat the server as untrusted. Pin a reviewed version of the server. Run it with least-privilege credentials. These credentials cannot move money alone. Require explicit human consent inside your system. Do this before any payment executes.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D, B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p96" data-kind="prose"><strong>Why D, B is correct:</strong> Trust boundaries must assume tool descriptions are text that attackers control. Least-privilege credentials and human consent stop the server from acting alone (D). Enforce authorization at the effect-performing layer. The payment decision never depends on the third party&#x27;s words (B).</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. A SOC 2 report describes the vendor's controls. It does not describe the safety of granting its server payment power. Descriptions remain untrusted input.</li>
+<li>A is wrong. A prompt instruction is bypassable. This is the prompt-plea trap. It guards money movement.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q80</span><span class="constraint">D3</span><span class="qb-pill hard">Hard</span><span class="constraint">Select two</span></div>
+<div class="qb-scenario">A support RAG system served p99 retrieval latency of 400ms. After indexing a new set of 200-page PDF manuals, p99 spiked to 4 seconds. Queries are short ("reset procedure model X"); the new documents are long. Recall on the new manuals matters.</div>
+<div class="constraint-block"><strong>Constraint:</strong> bring p99 back under 800ms without losing recall on the new manuals.</div>
+<div class="qb-ask">Which two changes address the root cause? (Select two)</div>
+<ol class="qb-opts" type="A"><li>Chunk the PDFs by document structure. Use sections and headings. Make small retrievable units. Do not make one chunk per document. Short queries match precise passages. The reranker has less to process.</li>
+<li>Add metadata filters (product model, document type) and a hybrid keyword-plus-vector search so short factual queries hit exact terms without scanning the whole index.</li>
+<li>Increase the top-k from 10 to 100 to improve recall.</li>
+<li>Upgrade to a larger embedding model for better semantic matches.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A, B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p97" data-kind="prose"><strong>Why A, B is correct:</strong> The spike comes from giant chunks. Long documents dilute matches. They also bloat reranking. Structure-aware small chunks restore precision for short queries (A). Metadata filters plus hybrid search cut the candidate set. This happens before the expensive steps.</p>
+<p class="qb-why" id="question-bank-106-items-in-number-order-p98" data-kind="prose">This brings p99 down (B).</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. A larger embedding model increases per-query compute. It does nothing about the chunk-size mismatch. The failure is in chunking and index strategy. Embedding capacity is not the failure.</li>
+<li>C is wrong. Raising top-k increases reranking work. It increases latency further. It treats a precision problem as a recall problem.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q81</span><span class="constraint">D3</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A retailer classifies 2 million product descriptions every night. The job streams through the real-time API. It costs $4,800 per night. The retailer needs results by 6am. This is for the morning catalog build. No one looks at them before 6am.</div>
+<div class="constraint-block"><strong>Constraint:</strong> finish by 6am at the lowest cost; interactivity is worth nothing here.</div>
+<div class="qb-ask">Which API choice fits?</div>
+<ol class="qb-opts" type="A"><li>Sample 10 percent of the descriptions to cut cost.</li>
+<li>Keep the real-time streaming API, since it finishes fastest.</li>
+<li>Move the job to the Batch API: roughly 50 percent cheaper with up to 24-hour turnaround, which easily covers an overnight deadline.</li>
+<li>Split the job across two streaming API keys to double throughput.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p99" data-kind="prose"><strong>Why C is correct:</strong> The Batch API trades latency for a roughly 50 percent discount. The job's only latency requirement is "by 6am." Paying real-time prices for results nobody reads until morning is waste.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. "Fastest" buys nothing here. The catalog build reads the results at 6am regardless.</li>
+<li>D is wrong. Two keys double throughput. The job does not need this. It keeps the expensive real-time price.</li>
+<li>A is wrong. Sampling 10 percent silently drops 90 percent of the catalog. It cuts cost by cutting the work.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q82</span><span class="constraint">D3</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">An e-commerce agent answers &quot;is this in stock?&quot;. A proposal will index the inventory database into the vector store. The system will refresh the vector store hourly. The agent can then answer from retrieval.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the agent must never promise stock that is not actually there; an oversell means a refund and an angry customer.</div>
+<div class="qb-ask">Where should live inventory levels come from?</div>
+<ol class="qb-opts" type="A"><li>The model's training knowledge of typical stock levels.</li>
+<li>The hourly vector index, since retrieval is fast.</li>
+<li>A direct tool call to the inventory system at decision time; the vector index holds stable knowledge, not mutable state.</li>
+<li>A twice-hourly vector index, which is fresher.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p100" data-kind="prose"><strong>Why C is correct:</strong> Inventory is a live state. It changes between any two index refreshes. Only a read at decision time shows the current reality. A vector index is for stable knowledge. A 30-minute-old snapshot can oversell.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. An hourly snapshot is stale by definition. The system does not see items sold in the last hour.</li>
+<li>D is wrong. Refreshing twice as often halves the staleness window. It keeps the structural flaw. It doubles the indexing cost.</li>
+<li>A is wrong. Training knowledge is months old. It was never about this store's stock.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q83</span><span class="constraint">D3</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A travel agent calls a partner airline API. The partner has degraded: responses now take 40 seconds. The agent waits, users time out, and the agent's retries pile more load onto the struggling partner.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the agent must stay responsive even while the partner is slow, and must not make the partner's overload worse.</div>
+<div class="qb-ask">Which resilience design meets the constraint?</div>
+<ol class="qb-opts" type="A"><li>Set a short timeout. Cap concurrent partner calls with a bulkhead. Trip a circuit breaker after repeated failures. Serve a graceful fallback. For example, show &quot;live prices unavailable, showing cached fares&quot;. Do not let the system hang.</li>
+<li>Queue all partner requests and process them serially to be gentle.</li>
+<li>Remove the timeout entirely so slow responses can complete.</li>
+<li>Raise the retry budget and add exponential backoff so every request eventually succeeds.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p101" data-kind="prose"><strong>Why A is correct:</strong> Timeouts bound the wait. The bulkhead caps how much of the agent the partner can consume. The circuit breaker stops the retry pile-on. The fallback keeps the agent responsive. Each piece answers one half of the constraint.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. More retries against a degraded partner is a retry storm. It deepens the overload. Users still wait.</li>
+<li>B is wrong. A serial queue turns 40-second responses into unbounded user-facing latency. Gentleness to the partner is bought with the agent's responsiveness.</li>
+<li>C is wrong. No timeout means one slow partner can hang the agent's workers indefinitely.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q84</span><span class="constraint">D3</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A billing agent listens for payment webhooks. The provider&#x27;s documents warn that the provider can deliver webhooks more than one time. Last month, a duplicate delivery charged a customer two times. The refund cost the company the customer.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the charge must happen exactly once per triggering event, even if the webhook arrives five times.</div>
+<div class="qb-ask">Where must the system enforce idempotency? How must the system enforce idempotency?</div>
+<ol class="qb-opts" type="A"><li>The payment service uses the webhook&#x27;s event ID. The service checks the key before it charges. This stops duplicate charges.</li>
+<li>Ask the customer to confirm before each charge, which catches duplicates.</li>
+<li>Deduplicate in the webhook receiver's in-memory cache.</li>
+<li>In the agent's conversation memory: remember processed webhook IDs and skip repeats.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p102" data-kind="prose"><strong>Why A is correct:</strong> Idempotency must be at the effect-performing service. It uses the triggering event&#x27;s ID. The payment service can guarantee exactly-once charging. This is true for restarts. This is true for retries. This is true for duplicate deliveries.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. Conversation memory is per-session and ephemeral. A restart or a second agent instance forgets it. The double charge returns.</li>
+<li>B is wrong. Customer confirmation is bad UX. It is still racy. The system must confirm two deliveries.</li>
+<li>C is wrong. An in-memory cache dies with the process. Durability is the whole point of idempotency.</li>
+</ol>
+</div>
+</details>
+</div>
+

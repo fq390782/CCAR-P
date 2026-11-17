@@ -1,0 +1,940 @@
+<h3 id="bank-d4-h17">Q-D4-16 (V2-D4.4)</h3>
+
+<p id="sec-bank-d4-p155" data-kind="prose"><strong>Scenario.</strong> A bot&#x27;s answers became worse over three weeks. No layer changed. Traces exist. Traces show no error at any layer. Retrieval returns good chunks.</p>
+
+<p id="sec-bank-d4-p156" data-kind="prose">The model reads them correctly. The checks pass. Users rate answers worse.</p>
+
+<p id="sec-bank-d4-p157" data-kind="prose"><strong>Question.</strong> What is the best next action?</p>
+
+<p id="sec-bank-d4-p158" data-kind="prose"><strong>Options.</strong>
+A) Upgrade the model tier, something must be wrong with the model.
+B) Rewrite the system prompt, prompts are the usual suspect.
+C) Instrument first: add user-outcome tracing (did the answer solve the user's problem?) and production sampling with human labels. No fix without evidence.
+D) Rebuild the index, stale data is the usual cause.</p>
+
+<p id="sec-bank-d4-p159" data-kind="prose"><strong>Answer.</strong> C</p>
+
+<p id="sec-bank-d4-p160" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best next action with no evidence.
+2. Lifecycle stage: incident response.
+3.</p>
+
+<p id="sec-bank-d4-p161" data-kind="prose">Objective: find the real fault before fixing.
+4. Hard constraints: no change date, no trace indicts any layer, users rate answers worse.
+5. System layer: diagnosis (instrumentation).
+6.</p>
+
+<p id="sec-bank-d4-p162" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: only C refuses to fix blind, the rest guess.
+9.</p>
+
+<p id="sec-bank-d4-p163" data-kind="prose">Hidden dependencies: the outcome tracing needs the user&#x27;s goal captured, the sampling needs human labels.
+10. Verify: C alone. Single select.</p>
+
+<p id="sec-bank-d4-p164" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: C.
+2. Decisive scenario phrase: &quot;No layer changed&quot; and &quot;show nothing wrong at any layer, yet users rate answers worse.&quot;
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Acts on evidence</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Can find the real fault</td>
+<td>Luck</td>
+<td>Luck</td>
+<td>Yes</td>
+<td>Luck</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why C satisfies all hard constraints: outcome tracing measures what the current traces miss (did it solve the problem?), human-labeled production samples ground the ratings.</li>
+
+<li>Why C best meets the objective: V2-D4.4 says no evidence at any layer means instrument first, no fix without evidence.</li>
+
+<li>Every rejected choice explained: A upgrades the tier on no indictment, the lesson's $360-a-day proxy fix. B rewrites the prompt on habit, the traces show the prompt's outputs are fine. D rebuilds the index on habit, retrieval returns good chunks per the traces.</li>
+
+<li>Exact limitation or tradeoff: instrumentation takes time while users suffer, the team should also check for a distribution shift in the questions (new topics the eval never covered).</li>
+
+<li>Relevant evidence (with date): "no evidence at any layer: instrument first" from lesson-D4-4 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>A wins if new evidence shows a model layer error. B wins if the prompt changed. The change-date rule then applies. D wins if the traces show old chunks. Retrieval then has an error.</li>
+
+<li>Misconception tested: action beats investigation. Blind fixes feel fast and cost weeks, the instrument-first rule exists because guessing at layers is the most expensive slowness.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h18">Q-D4-17 (V2-D4.5)</h3>
+
+<p id="sec-bank-d4-p165" data-kind="prose"><strong>Scenario.</strong> A pipeline's p95 is 2.9 s against a 2 s SLA. Quality sits above the floor on every metric. Per-stage measurements: retrieval 400 ms, rerank 700 ms (+1 point), reasoning 900 ms (+2 points), verification 300 ms (+4 points). The team asks where to cut.</p>
+
+<p id="sec-bank-d4-p166" data-kind="prose"><strong>Question.</strong> What is the best first cut?</p>
+
+<p id="sec-bank-d4-p167" data-kind="prose"><strong>Options.</strong>
+A) Cut the rerank stage, at 700 ms per 1 point it is the thinnest receipt.
+B) Cut verification, 300 ms is the smallest number.
+C) Cut retrieval, it runs on every call.
+D) Cut reasoning, 900 ms is the biggest number.</p>
+
+<p id="sec-bank-d4-p168" data-kind="prose"><strong>Answer.</strong> A</p>
+
+<p id="sec-bank-d4-p169" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is best first cut under an SLA.
+2. The lifecycle stage is operation (optimization).
+3.</p>
+
+<p id="sec-bank-d4-p170" data-kind="prose">The objective is p95 under 2 seconds. The floor must hold.
+4. The hard constraints are: the floor holds everywhere. The SLA binds.
+5.</p>
+
+<p id="sec-bank-d4-p171" data-kind="prose">The system layer is cost-performance optimization.
+6. Eliminate infeasible options. All options are feasible.
+7. Eliminate constraint-violating options.</p>
+
+<p id="sec-bank-d4-p172" data-kind="prose">No options violate constraints directly. The floor math must hold after the cut.
+8. Compare options on objective. A removes the worst ms-per-point stage. The floor survives (93% to 92% on the D3 toy).</p>
+
+<p id="sec-bank-d4-p173" data-kind="prose">9. Hidden dependencies are: measure the per-stage numbers. The cut needs an evaluation re-run.
+10. Verify the choice. A alone.</p>
+
+<p id="sec-bank-d4-p174" data-kind="prose">Select only one.</p>
+
+<p id="sec-bank-d4-p175" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A.
+2. Decisive scenario phrase: "Quality sits above the floor on every metric" and "p95 is 2.9 s against a 2 s SLA."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Worst ms per point cut</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Floor survives</td>
+<td>Yes</td>
+<td>Risked</td>
+<td>Risked</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A satisfies all hard constraints: 700 ms per 1 point is the thinnest receipt, removing it keeps accuracy above the floor.</li>
+
+<li>Why A best meets the objective: V2-D4.5 says when the SLA binds and the floor holds, cut the thinnest receipt first.</li>
+
+<li>
+<div>B cuts the smallest raw number. Verification is 75 ms per point. It is the correctness guard. Raw ms is not the receipt. C cuts retrieval (67 ms per point). This is the best receipt.</div>
+
+<div>It cuts 6 points. The floor breaks. D cuts the biggest raw number. Reasoning&#x27;s 450 ms per point is better than rerank&#x27;s 700 ms. Biggest is not thinnest.</div>
+</li>
+
+<li>Exact limitation or tradeoff: the cut spends 1 point of headroom, the team must watch the floor after the cut.</li>
+
+<li>Relevant evidence (with date): "SLA binds, floor holds: cut the thinnest receipt first" from lesson-D4-5 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>B never wins as a first cut. C wins if retrieval&#x27;s points were not measured. It is then the unmeasured stage. D wins if reasoning&#x27;s 2 points were not measured.</li>
+
+<li>Misconception tested: cut the biggest or the smallest latency. The receipt (ms per accuracy point) decides, the raw number misleads both ways.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h19">Q-D4-18 (V2-D4.5)</h3>
+
+<p id="sec-bank-d4-p176" data-kind="prose"><strong>Scenario.</strong> Users complain the assistant "feels slow." The p95 SLA measures completion at 3 s. The team proposes streaming the output so the first token arrives in 0.5 s.</p>
+
+<p id="sec-bank-d4-p177" data-kind="prose"><strong>Question.</strong> What is the best response?</p>
+
+<p id="sec-bank-d4-p178" data-kind="prose"><strong>Options.</strong>
+A) Approve, streaming fixes the slowness users feel.
+B) Approve streaming as a perceived-latency win, but name the truth: p95 completion stays 3 s, so the SLA still needs a real cut (thinnest receipt first).
+C) Reject streaming, it never helps.
+D) Remove the SLA, users feel the first token.</p>
+
+<p id="sec-bank-d4-p179" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d4-p180" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best response to a latency proposal.
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d4-p181" data-kind="prose">Objective: honest latency improvement.
+4. Hard constraints: the SLA measures completion, streaming moves first token, not completion.
+5. System layer: latency optimization.
+6.</p>
+
+<p id="sec-bank-d4-p182" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: B is the only option that separates perceived from measured latency.
+9.</p>
+
+<p id="sec-bank-d4-p183" data-kind="prose">Hidden dependencies: the real cut needs the per-stage receipts measured.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d4-p184" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "The p95 SLA measures completion at 3 s" and "the first token arrives in 0.5 s."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Perceived latency helped</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>SLA honestly addressed</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: streaming ships for the feel, the SLA gets its real cut separately.</li>
+
+<li>Why B best meets the objective: V2-D4.5&#x27;s lesson says streaming alone shows responsiveness. The completion time does not change. The SLA measures completion.</li>
+
+<li>Every rejected choice explained: A is the lesson's valid-but-inferior: users feel faster while p95 completion stays 3 s, the SLA still fails. C rejects a real perceived-latency win, streaming helps the feel, it just does not move the SLA. D deletes the contract instead of meeting it, the users' wait is still 3 s.</li>
+
+<li>The exact limitation or tradeoff is this: streaming plus a real cut costs both the streaming work and the cut. The team must do both. Do not substitute one for the other.</li>
+
+<li>Relevant evidence (with date): "streaming alone" valid-but-inferior from lesson-D4-5 (§10), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>A wins if the SLA measures time-to-first-token. Then streaming moves the SLA. C never wins outright. D never wins. People renegotiate SLAs. People do not delete SLAs.</li>
+
+<li>Misconception tested: faster-feeling equals faster. The first token is UX, completion is the SLA. Both matter, and they are different numbers.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h20">Q-D4-19 (V2-D4.5)</h3>
+
+<p id="sec-bank-d4-p185" data-kind="prose"><strong>Scenario.</strong> A team's pipeline misses the quality floor: groundedness is 88% against a 92% bar. The p95 is also over the SLA. The team proposes cutting the rerank stage to fix latency first.</p>
+
+<p id="sec-bank-d4-p186" data-kind="prose"><strong>Question.</strong> What is the best response?</p>
+
+<p id="sec-bank-d4-p187" data-kind="prose"><strong>Options.</strong>
+A) Approve, latency first, quality second.
+B) Reject the cuts, with the floor unmet, no cuts. Fix quality first, then optimize latency against the held floor.
+C) Cut rerank and add a bigger tier at the same time.
+D) Lower the groundedness bar to 88%.</p>
+
+<p id="sec-bank-d4-p188" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d4-p189" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: sequencing judgment (quality vs latency).
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d4-p190" data-kind="prose">Objective: floor held, then SLA met.
+4. Hard constraints: groundedness 88% vs 92% bar, the floor is unmet.
+5. System layer: cost-performance optimization.
+6.</p>
+
+<p id="sec-bank-d4-p191" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: D moves the bar instead of the system.
+8. Compare on objective: only B enforces the floor-first order.
+9.</p>
+
+<p id="sec-bank-d4-p192" data-kind="prose">Hidden dependencies: the quality fix needs its diagnosis (which layer fails groundedness).
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d4-p193" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "groundedness is 88% against a 92% bar" and "proposes cutting the rerank stage to fix latency first."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Floor fixed before cuts</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Evaded</td>
+</tr>
+
+<tr>
+<td>Latency addressed</td>
+<td>Yes</td>
+<td>After</td>
+<td>Partial</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: cuts cost accuracy points. The floor is unmet. You have no points to spend.</li>
+
+<li>Why B best meets the objective: V2-D4.5 says quality floor unmet means no cuts, fix quality first.</li>
+
+<li>Every rejected choice explained: A optimizes a pipeline that fails its bar, a fast wrong answer is still wrong. C does both at once, the tier change confounds the quality diagnosis, and the cut still spends points the floor does not have. D lowers the bar to meet the number, the bar follows the requirement, not the system's comfort.</li>
+
+<li>Exact limitation or tradeoff: B delays the latency win, the team must say so plainly and fix the groundedness layer first.</li>
+
+<li>Relevant evidence (with date): "quality floor unmet: no cuts, fix quality first" from lesson-D4-5 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the floor holds (then the thinnest receipt goes first). C wins never as a combined move, sequence the tier test after the floor holds. D wins if the 92% bar was arbitrary and the requirement truly is 88% (then the bar was wrong, not the system).</li>
+
+<li>Misconception tested: latency and quality optimize in parallel. They sequence: the floor first, then the cuts. Cuts spend accuracy, a broken floor has none to spend.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h21">Q-D4-20 (V2-D4.5), Select TWO</h3>
+
+<p id="sec-bank-d4-p194" data-kind="prose"><strong>Scenario.</strong> A team's cost breakdown per call: context 8,000 tokens (mostly repeated instructions), retrieval 1,500, generation 500. Quality floor holds. The budget binds.</p>
+
+<p id="sec-bank-d4-p195" data-kind="prose"><strong>Question.</strong> Which TWO moves are correct? Select TWO.</p>
+
+<p id="sec-bank-d4-p196" data-kind="prose"><strong>Options.</strong>
+A) Shrink the context before caching: dedupe the repeated instructions and move the stable block to the cache prefix.
+B) Route the easy calls to the cheaper tier after the router proves them easy on evals.
+C) Add a rerank stage for better quality.
+D) Cache the full conversation including the variable tail.
+E) Upgrade all traffic to the most capable tier for headroom.</p>
+
+<p id="sec-bank-d4-p197" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-d4-p198" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: cost-optimization move selection (multi-select).
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d4-p199" data-kind="prose">Objective: cut cost with the floor held.
+4. Hard constraints: context dominates (8,000 of 10,000 tokens), floor holds, budget binds.
+5. System layer: token and cost optimization.
+6.</p>
+
+<p id="sec-bank-d4-p200" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: A attacks the dominant cost, B routes the provably easy calls down.
+9.</p>
+
+<p id="sec-bank-d4-p201" data-kind="prose">Hidden dependencies: A needs the prefix stable, B needs the router&#x27;s &quot;easy&quot; proven on evals, not assumed.
+10. Verify: A and B. Two selected.</p>
+
+<p id="sec-bank-d4-p202" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "context 8,000 tokens (mostly repeated instructions)" and "Quality floor holds."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Attacks the dominant cost</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Floor provably held</td>
+<td>Yes</td>
+<td>With evals</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and B satisfy all hard constraints: shrinking the 8,000-token context cuts the biggest term, routing only the proven-easy calls protects the floor.</li>
+
+<li>A and B best meet the objective. V2-D4.5 says context dominates cost. This means shrink context before caching. This also means route only what the router proves easy.</li>
+
+<li>Every rejected choice explained: C adds a stage (more cost) to a pipeline whose floor already holds, the budget binds the other way. D caches the variable tail, the prefix never stabilizes and writes keep billing. E buys headroom the floor does not need at top-tier prices.</li>
+
+<li>Exact limitation or tradeoff: A needs the stable block versioned, B needs the router re-proven as traffic shifts.</li>
+
+<li>Relevant evidence (with date): "context dominates cost: shrink context before caching" and "route only what the router proves easy" from lesson-D4-5 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins if the floor were unmet (then quality comes before cuts). D wins never. E wins if the floor is unmet and the capable tier is the proven fix.</li>
+
+<li>Misconception tested: caching fixes context cost. Caching discounts a stable prefix, the shrink comes first, because a smaller context beats a discounted big one.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h22">Q-D4-21 (V2-D4.6)</h3>
+
+<p id="sec-bank-d4-p203" data-kind="prose"><strong>Scenario.</strong> A team&#x27;s quality dashboard shows green for six weeks. A user survey shows answers got worse one month ago. The eval suite did not change in four months. Production topics shifted to a new product line.</p>
+
+<p id="sec-bank-d4-p204" data-kind="prose"><strong>Question.</strong> What is the best next action?</p>
+
+<p id="sec-bank-d4-p205" data-kind="prose"><strong>Options.</strong>
+A) Celebrate. The dashboard shows green.
+B) Tune the model to the new product line now.
+C) Page the owner and refresh the suite. The suite is stale.</p>
+
+<p id="sec-bank-d4-p206" data-kind="prose">Add the new product line&#x27;s cases. Re-baseline. Find why the green suite missed one month of drift.
+D) Lower the survey&#x27;s influence. Users are subjective.</p>
+
+<p id="sec-bank-d4-p207" data-kind="prose"><strong>Answer.</strong> C</p>
+
+<p id="sec-bank-d4-p208" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best next action on a stale suite.
+2. Lifecycle stage: operation (monitoring).
+3.</p>
+
+<p id="sec-bank-d4-p209" data-kind="prose">Objective: a suite that sees the drift.
+4. Hard constraints: suite unchanged for four months. Production shifted. Users report worse answers for one month.
+5.</p>
+
+<p id="sec-bank-d4-p210" data-kind="prose">System layer: production monitoring.
+6. Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8.</p>
+
+<p id="sec-bank-d4-p211" data-kind="prose">Compare on objective: only C treats the green as the suspect.
+9. Hidden dependencies: the refresh needs the new product line&#x27;s cases labeled. Name the owner.
+10. Verify: C alone.</p>
+
+<p id="sec-bank-d4-p212" data-kind="prose">Single select.</p>
+
+<p id="sec-bank-d4-p213" data-kind="prose"><strong>Explanation.</strong>
+1. The correct answer is C.
+2. The decisive scenario phrase is &quot;dashboard is green for six weeks&quot;. The phrase is also &quot;answers got worse a month ago&quot;.</p>
+
+<p id="sec-bank-d4-p214" data-kind="prose">The phrase is also &quot;The eval suite has not changed in four months.&quot;
+3. This is the requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Suite represents production</td>
+<td>No</td>
+<td>n/a</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Drift explained</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why C satisfies all hard constraints: the refresh adds the missing cases, the re-baseline shows the true state, the post-mortem finds the blind spot.</li>
+
+<li>Why C best meets the objective: V2-D4.6 says live slides with a green suite means the suite is stale, page and refresh.</li>
+
+<li>Every rejected choice explained: A trusts the instrument over the users, the instrument is what failed. B tunes the model to a drift the suite cannot see, the fix may help, but the blindness remains. D dismisses the users, the survey is the signal the suite missed.</li>
+
+<li>Exact limitation or tradeoff: the refresh costs labeling work, the team should also schedule suite reviews so staleness is caught by calendar, not by users.</li>
+
+<li>Relevant evidence (with date): "live slides, suite is green: the suite is stale, page and refresh" from lesson-D4-6 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins never as a method. B wins after the refreshed suite confirms the model layer is the fault. D wins never, user signal outranks a stale suite.</li>
+
+<li>Misconception tested: green means good. Green means the suite passes, when production moves and the suite does not, green is the color of blindness.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h23">Q-D4-22 (V2-D4.6)</h3>
+
+<p id="sec-bank-d4-p215" data-kind="prose"><strong>Scenario.</strong> A team monitors a payment assistant. They need to catch a full outage in minutes and a slow quality drift over weeks. One alert exists: a daily average of task success.</p>
+
+<p id="sec-bank-d4-p216" data-kind="prose"><strong>Question.</strong> What is the best monitoring design?</p>
+
+<p id="sec-bank-d4-p217" data-kind="prose"><strong>Options.</strong>
+A) Keep the daily average. It covers both.
+B) Pair a fast line with a slow line. Use a minutes-scale alert on error rate and traffic for outage. Use a weeks-scale trend on task success with human-labeled samples for drift.</p>
+
+<p id="sec-bank-d4-p218" data-kind="prose">C) Add ten more daily averages.
+D) Alert on every single failed task.</p>
+
+<p id="sec-bank-d4-p219" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d4-p220" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best monitoring design for two time scales.
+2. Lifecycle stage: operation (monitoring design).
+3.</p>
+
+<p id="sec-bank-d4-p221" data-kind="prose">Objective: fast outage caught fast, slow drift caught at all.
+4. Hard constraints: outage needs minutes, drift needs weeks, one daily average serves neither well.
+5. System layer: production monitoring.
+6.</p>
+
+<p id="sec-bank-d4-p222" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: B gives each time scale its line.
+9.</p>
+
+<p id="sec-bank-d4-p223" data-kind="prose">Hidden dependencies: the fast line needs its threshold tuned, the slow line needs the labeled samples funded.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d4-p224" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "catch a full outage in minutes and a slow quality drift over weeks."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Outage in minutes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Drift over weeks</td>
+<td>Partial</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Alert fatigue avoided</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the fast line pages on error rate and traffic drops, the slow line trends task success on labeled samples.</li>
+
+<li>Why B best meets the objective: V2-D4.6 says fast outage vs slow drift means pair a fast line with a slow line.</li>
+
+<li>
+<div>Every rejected choice has an explanation. A is one line for two time scales. The daily average sees the outage a day late. It sees the drift only when the drift is big. C multiplies the wrong shape. Ten daily averages are still daily.</div>
+
+<div>D pages on every failure. The team drowns. The team starts ignoring the pager. This kills both lines.</div>
+</li>
+
+<li>Exact limitation or tradeoff: two lines need two thresholds and two owners, the slow line's labels cost ongoing money.</li>
+
+<li>Relevant evidence (with date): "fast outage vs slow drift: pair a fast line with a slow line" from lesson-D4-6 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the product is low-stakes and daily detection suffices for both. C wins never as a design. D wins if failures are rare and each one is critical (then every failure deserves a page).</li>
+
+<li>Misconception tested: one metric monitors everything. Time scales differ, the outage line and the drift line are different instruments.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h24">Q-D4-23 (V2-D4.6)</h3>
+
+<p id="sec-bank-d4-p225" data-kind="prose"><strong>Scenario.</strong> A team&#x27;s incident review finds these facts. The quality alert fired three times last month. Nobody owned the alert. The team discussed each firing in a chat thread. The team forgot each firing.</p>
+
+<p id="sec-bank-d4-p226" data-kind="prose">The alert still has no owner.</p>
+
+<p id="sec-bank-d4-p227" data-kind="prose"><strong>Question.</strong> What is the best first action?</p>
+
+<p id="sec-bank-d4-p228" data-kind="prose"><strong>Options.</strong>
+A) Tune the alert threshold.
+B) Add more alerts for coverage.
+C) Name an owner first: one person accountable for the alert's tuning, response, and retirement. No monitoring exists until someone owns it.
+D) Silence the alert, it clearly does not work.</p>
+
+<p id="sec-bank-d4-p229" data-kind="prose"><strong>Answer.</strong> C</p>
+
+<p id="sec-bank-d4-p230" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best first action on an unowned alert.
+2. Lifecycle stage: operation (monitoring).
+3.</p>
+
+<p id="sec-bank-d4-p231" data-kind="prose">Objective: the alert becomes a working control.
+4. Hard constraints: three firings, no owner, no response, no tuning.
+5. System layer: production monitoring (ownership).
+6.</p>
+
+<p id="sec-bank-d4-p232" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: only C addresses the root cause (no owner), the rest treat symptoms.
+9.</p>
+
+<p id="sec-bank-d4-p233" data-kind="prose">Hidden dependencies: the owner needs the authority to tune and the time to respond.
+10. Verify: C alone. Single select.</p>
+
+<p id="sec-bank-d4-p234" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: C.
+2. Decisive scenario phrase: "nobody owned it, each firing was discussed in a chat thread and forgotten."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Root cause addressed</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Alert becomes actionable</td>
+<td>Maybe</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why C satisfies all hard constraints: the owner tunes, responds, and retires, accountability replaces the chat thread.</li>
+
+<li>Why C best meets the objective: V2-D4.6 says no named owner means no monitoring exists yet, name one first.</li>
+
+<li>Every rejected choice explained: A tunes a threshold nobody will maintain, the next drift re-breaks it. B adds alerts to an unowned system, more unowned alerts are more noise. D silences the one signal the team has, the failures continue quietly.</li>
+
+<li>Exact limitation or tradeoff: one owner can become a bottleneck, the team should name a backup and a rotation.</li>
+
+<li>Relevant evidence (with date): "no named owner: no monitoring exists yet, name one first" from lesson-D4-6 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>
+<div>This is a counterfactual. Each plausible alternative wins in a different case. A wins after the team names the owner. A wins if the threshold is the diagnosed problem. B wins after ownership exists. B wins if the team finds a real coverage gap.</div>
+
+<div>D wins if the alert is wrong. Then retirement is the owner&#x27;s call. It is not silence by frustration.</div>
+</li>
+
+<li>Misconception tested: monitoring is instrumentation. Instrumentation without an owner is a dashboard, the owner is what makes it monitoring.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h25">Q-D4-24 (V2-D4.6)</h3>
+
+<p id="sec-bank-d4-p235" data-kind="prose"><strong>Scenario.</strong> A latency alert fires every Monday morning. Each time, the on-call checks, finds nothing wrong (a batch job skews the Monday numbers), and closes it. This has run for two months. The team now ignores the alert channel.</p>
+
+<p id="sec-bank-d4-p236" data-kind="prose"><strong>Question.</strong> What is the best action?</p>
+
+<p id="sec-bank-d4-p237" data-kind="prose"><strong>Options.</strong>
+A) Keep the alert, it might catch a real incident one day.
+B) Retune or retire the alert: exclude the batch window or move the alert to business-hours traffic. An alert that fires weekly with no action is a wrong line.
+C) Page louder on Mondays so the team pays attention.
+D) Lower the threshold to catch smaller issues.</p>
+
+<p id="sec-bank-d4-p238" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d4-p239" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best action on a noisy alert.
+2. Lifecycle stage: operation (monitoring).
+3.</p>
+
+<p id="sec-bank-d4-p240" data-kind="prose">Objective: an alert channel the team trusts.
+4. Hard constraints: weekly false fires for two months, the team ignores the channel, the cause is known (batch job skew).
+5. System layer: production monitoring (alert hygiene).
+6.</p>
+
+<p id="sec-bank-d4-p241" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: only B fixes the line, the rest preserve or worsen the noise.
+9.</p>
+
+<p id="sec-bank-d4-p242" data-kind="prose">Hidden dependencies: the retune needs the batch window defined, retirement needs the coverage replaced.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d4-p243" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "fires every Monday morning" with "finds nothing wrong" for "two months" and "The team now ignores the alert channel."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>False fires stop</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Channel trust restored</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: excluding the batch window removes the known false cause, the channel becomes trustworthy again.</li>
+
+<li>Why B best meets the objective: V2-D4.6 says an alert firing weekly with no action is the wrong line, retune or retire it.</li>
+
+<li>Every rejected choice explained: A keeps a line the team ignores, an ignored alert is not coverage, it is a story the team tells itself. C pages louder into an ignored channel, volume does not create trust. D lowers the threshold, which fires more often with the same false cause, the noise grows.</li>
+
+<li>Exact limitation or tradeoff: if the batch window ever carries real incidents, the exclusion blinds the team there, the exclusion needs its own review.</li>
+
+<li>Relevant evidence (with date): "alert fires weekly with no action: the line is wrong, retune or retire it" from lesson-D4-6 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the fires were real but the response was weak (then the response needs fixing, not the line). C wins never as a trust repair. D wins if the misses are real and the noise is tolerable (then the threshold was the fault).</li>
+
+<li>Misconception tested: more alerting equals more safety. Unactioned alerts destroy the channel, a quiet trusted channel beats a loud ignored one.</li>
+
+</ol>
+
+
+<h3 id="bank-d4-h26">Q-D4-25 (V2-D4.6), Select TWO</h3>
+
+<p id="sec-bank-d4-p244" data-kind="prose"><strong>Scenario.</strong> A team designs production monitoring for a claims assistant.
+The quality floor is 95% task success.
+The p95 latency is 2 seconds.
+There is a cost budget per month.
+A regulator can audit any decision.</p>
+
+<p id="sec-bank-d4-p245" data-kind="prose"><strong>Question.</strong> Which TWO monitoring choices are correct? Select TWO.</p>
+
+<p id="sec-bank-d4-p246" data-kind="prose"><strong>Options.</strong>
+A) Instrument the model, retrieval, tools, and dependencies with per-stage metrics, and keep the eval suite representative of production with a named owner.
+B) Run the regression suite on every change and page on quality slides with the owner accountable.
+C) Review the dashboard manually once a month, the team is small.
+D) Alert only on latency, quality moves slowly.
+E) Keep no traces to save cost, the metrics suffice.</p>
+
+<p id="sec-bank-d4-p247" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-d4-p248" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: monitoring design selection (multi-select).
+2. Lifecycle stage: operation (monitoring design).
+3.</p>
+
+<p id="sec-bank-d4-p249" data-kind="prose">Objective: floor held, regressions caught, audits answerable.
+4. Hard constraints: quality floor, latency SLA, cost budget, regulator audits.
+5. System layer: production monitoring.
+6.</p>
+
+<p id="sec-bank-d4-p250" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: E destroys auditability the regulator requires.
+8. Compare on objective: A instruments every layer with an owned suite, B gates changes and pages on slides.
+9.</p>
+
+<p id="sec-bank-d4-p251" data-kind="prose">Hidden dependencies: the per-stage metrics need the request id, the page needs its threshold.
+10. Verify: A and B. Two selected.</p>
+
+<p id="sec-bank-d4-p252" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "quality floor 95%", "regulator that can audit any decision."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Every layer instrumented</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Regressions gated</td>
+<td>n/a</td>
+<td>Yes</td>
+<td>No</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+
+<tr>
+<td>Audits answerable</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>No</td>
+<td>n/a</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>A and B satisfy all hard constraints.
+Per-stage instrumentation with an owned representative suite covers the floor.
+It also covers the audit.
+The regression gate plus paging covers change risk.</li>
+
+<li>
+<div>A and B best meet the objective.
+V2-D4.6 requires instrumentation of the model.
+It requires instrumentation of retrieval.
+It requires instrumentation of tools and dependencies.
+It requires representative evaluation data.
+It requires regression suites.</div>
+
+<div>It requires alerts with owners.</div>
+</li>
+
+<li>
+<div>The lesson explains why C is a valid-but-inferior choice.
+On the toy, the slide ran 42 days.
+A human looked at the slide after 42 days.
+Manual review is the first chore that people drop under pressure.
+D watches one of three constraints.
+Quality and cost drift unseen.</div>
+
+<div>E saves the trace bill.
+E loses the audit.
+The regulator&#x27;s &quot;any decision&quot; needs the traces.</div>
+</li>
+
+<li>A and B cost build money.
+A and B cost label money.
+The team must fund the suite&#x27;s representativeness.
+If not, it rots like the D4-21 toy.</li>
+
+<li>Relevant evidence (with date): monitoring requirements from lesson-D4-6 (§9) and the 42-day toy from §10, Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins if the product is a low-stakes internal tool with no floor (then the stakes do not justify the machinery). D wins never as a complete design. E wins never with a regulator in the scenario.</li>
+
+<li>Misconception tested: monitoring is one dashboard. It is instrumentation plus an owned suite plus gates plus paging, the dashboard is the least of it.</li>
+
+</ol>
+

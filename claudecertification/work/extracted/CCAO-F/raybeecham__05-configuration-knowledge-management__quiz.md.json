@@ -1,0 +1,122 @@
+[
+  {
+    "number": "1",
+    "heading": "1. An internal knowledge document is used to answer policy questions, but no one knows whether it is current. What metadata is most important to establish first?",
+    "question": "An internal knowledge document is used to answer policy questions, but no one knows whether it is current. What metadata is most important to establish first?",
+    "choices": {
+      "A": "The document's font and page color",
+      "B": "Its owner, authority, version or effective date, classification, scope, and review cadence",
+      "C": "How many users have downloaded it",
+      "D": "Whether it contains the word “policy”"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "**Rationale:** A governed source needs accountability, authority, freshness, scope, and data-handling metadata before it can reliably support answers.\n\n**Why the other options are weaker:**\n\n- **A:** Formatting does not establish governance or freshness.\n- **C:** Popularity is not authority.\n- **D:** A keyword does not prove the document governs the use case.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  },
+  {
+    "number": "2",
+    "heading": "2. Every response in a controlled application must cite approved evidence and use `insufficient_evidence` when support is absent. Where should this rule live?",
+    "question": "Every response in a controlled application must cite approved evidence and use `insufficient_evidence` when support is absent. Where should this rule live?",
+    "choices": {
+      "A": "Only in each user's memory",
+      "B": "Only in the source documents",
+      "C": "In version-controlled application or system configuration, with retrieval and validation enforcing it",
+      "D": "In a model-generated note that is not saved"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "**Rationale:** Durable application behavior should be governed, versioned, reviewed, and tested rather than repeated informally by each user.\n\n**Why the other options are weaker:**\n\n- **A:** User memory is not enforceable or auditable.\n- **B:** Sources are evidence, not trusted behavioral configuration.\n- **D:** An unsaved note cannot establish repeatable system behavior.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  },
+  {
+    "number": "3",
+    "heading": "3. A service repeatedly sends the same long system instructions, tool definitions, and approved reference text, followed by a different short user task. Data policy permits caching. What optimization is most relevant?",
+    "question": "A service repeatedly sends the same long system instructions, tool definitions, and approved reference text, followed by a different short user task. Data policy permits caching. What optimization is most relevant?",
+    "choices": {
+      "A": "Place the stable reusable content in a consistent prompt prefix and use the platform's prompt-caching behavior, then measure actual hits.",
+      "B": "Move a changing timestamp to the beginning of the prompt.",
+      "C": "Store the API credential in the cached text.",
+      "D": "Randomize the order of tool definitions on each request."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "**Rationale:** Prompt caching is designed for stable, repeatedly reused prefixes. The design must follow current platform semantics and data policy and should be verified with usage diagnostics.\n\n**Why the other options are weaker:**\n\n- **B:** A changing early field can invalidate the reusable prefix.\n- **C:** Credentials must never be stored in prompt text or cache.\n- **D:** Changing order prevents prefix reuse.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  },
+  {
+    "number": "4",
+    "heading": "4. A policy assistant retrieves fifty documents for every question. Answers are slow and sometimes combine conflicting versions. What is the best redesign?",
+    "question": "A policy assistant retrieves fifty documents for every question. Answers are slow and sometimes combine conflicting versions. What is the best redesign?",
+    "choices": {
+      "A": "Increase the response length so all documents are discussed.",
+      "B": "Tell Claude to ignore conflict without identifying it.",
+      "C": "Remove authorization filters so retrieval is faster.",
+      "D": "Retrieve the smallest relevant, permitted, authoritative, current set and attach provenance and conflict metadata."
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "**Rationale:** Retrieval should select high-quality evidence, not maximize volume. Authority, freshness, relevance, and access belong in the retrieval pipeline.\n\n**Why the other options are weaker:**\n\n- **A:** More generated text does not resolve noisy or conflicting evidence.\n- **B:** Conflict must be resolved by documented authority or surfaced.\n- **C:** Removing authorization creates a data exposure risk.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  },
+  {
+    "number": "5",
+    "heading": "5. A prompt needs to call an internal search service that requires a credential. Where should the credential be stored?",
+    "question": "A prompt needs to call an internal search service that requires a credential. Where should the credential be stored?",
+    "choices": {
+      "A": "In the system prompt so Claude can copy it into the tool call",
+      "B": "In an example inside the repository",
+      "C": "In an approved secret manager, used by the application or connector without exposing the value to the model",
+      "D": "In the generated output with a warning"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "**Rationale:** Credentials belong in a secret-management boundary and should be supplied only to the authorized service call.\n\n**Why the other options are weaker:**\n\n- **A:** Prompt text may be logged or exposed and is not a secret store.\n- **B:** Repository examples are public or broadly accessible.\n- **D:** Outputting a credential is disclosure, regardless of warning.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  },
+  {
+    "number": "6",
+    "heading": "6. Users in Business Unit A can retrieve confidential documents from Business Unit B because the model is instructed not to reveal them. What is the correct control?",
+    "question": "Users in Business Unit A can retrieve confidential documents from Business Unit B because the model is instructed not to reveal them. What is the correct control?",
+    "choices": {
+      "A": "Make the non-disclosure instruction more forceful.",
+      "B": "Enforce identity-aware authorization before retrieval so unauthorized documents never enter the model context.",
+      "C": "Ask users to promise not to request other units' data.",
+      "D": "Filter the final answer after the model has processed all documents."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "**Rationale:** Access control must prevent unauthorized data from reaching the model. Prompt instructions and output filtering are not substitutes for retrieval authorization.\n\n**Why the other options are weaker:**\n\n- **A:** Instructions do not enforce access control.\n- **C:** User promises are not a technical authorization mechanism.\n- **D:** Post-generation filtering is too late because the model already received the data.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  },
+  {
+    "number": "7",
+    "heading": "7. A knowledge file has a recent upload timestamp but contains an older policy with no owner or review date. What is the primary risk?",
+    "question": "A knowledge file has a recent upload timestamp but contains an older policy with no owner or review date. What is the primary risk?",
+    "choices": {
+      "A": "The system may treat stale or superseded content as authoritative because file metadata does not establish content freshness.",
+      "B": "The file will necessarily exceed the context window.",
+      "C": "The model will always refuse to read it.",
+      "D": "The document cannot contain any useful information."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "**Rationale:** Upload or modification time is not sufficient evidence of policy currency. Content version, effective date, authority, and ownership are needed.\n\n**Why the other options are weaker:**\n\n- **B:** File age does not determine context size.\n- **C:** A stale document is not inherently unreadable.\n- **D:** It may still be useful as historical or advisory evidence if labeled correctly.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  },
+  {
+    "number": "8",
+    "heading": "8. A current public standard and a current approved internal standard give different minimum requirements. The internal standard applies to the organization and is stricter. What should the assistant do?",
+    "question": "A current public standard and a current approved internal standard give different minimum requirements. The internal standard applies to the organization and is stricter. What should the assistant do?",
+    "choices": {
+      "A": "Choose the shorter document.",
+      "B": "Blend the requirements and omit the difference.",
+      "C": "Select the public standard because it is public.",
+      "D": "Apply the documented authority and scope rules, cite both where useful, and state that the stricter internal standard governs the organization."
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "**Rationale:** Source resolution depends on authority and scope, not convenience. The conflict and governing rule should remain traceable.\n\n**Why the other options are weaker:**\n\n- **A:** Length has no relationship to authority.\n- **B:** Blending hides a material difference.\n- **C:** Public availability does not override an approved internal requirement within scope.",
+    "source_section": "Quiz: Configuration & Knowledge Management"
+  }
+]

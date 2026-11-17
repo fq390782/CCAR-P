@@ -1,0 +1,1060 @@
+[
+ {
+  "id": "CCAO-F-Amey-Thakur-0006",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "Your monthly close process involves collecting figures, drafting a variance commentary, and formatting a board pack. You want Claude to help durably, not just once. What is the strongest approach?",
+  "choices": {
+   "A": "Create a Project with the commentary conventions and prior packs as knowledge, plus instructions for the structure, and run each close inside it",
+   "B": "Paste everything into a fresh chat each month and ask for the pack",
+   "C": "Ask Claude to do the whole close autonomously, including pulling the figures",
+   "D": "Use Claude only for spellchecking the final pack"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Durable, repeated workflows belong in a Project where instructions and knowledge persist and improve. Re-pasting monthly (B) rebuilds context by hand every time, full autonomy over financial figures without review (C) ignores appropriate-use judgment, and spellchecking (D) forfeits the actual value.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "6",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0086",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0007",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "A department head asks you whether Claude could \"handle our customer onboarding.\" What is the right first move?",
+  "choices": {
+   "A": "Say yes and start building immediately",
+   "B": "Map the onboarding steps, identify which involve drafting, summarizing, or lookup that Claude does well, and which need human judgment or system access it does not have",
+   "C": "Say no, since onboarding involves customer data",
+   "D": "Forward the question to Anthropic support"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** The Associate's core skill is translating a business ask into a realistic division of labor: where Claude adds value, where humans stay, and what the limits are. Unqualified yes (A) and unqualified no (C) both skip the analysis, and support (D) does not know your process.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0087",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0016",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "A team wants Claude to draft weekly customer health summaries from support tickets, CRM notes, and usage data. Which design detail matters most for the output to stay useful over months?",
+  "choices": {
+   "A": "Choosing the largest available model",
+   "B": "Running the summary daily instead of weekly",
+   "C": "Defining what a health summary must contain and keeping that definition in one place the team maintains",
+   "D": "Letting each team member write their own prompt"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** A stable, maintained definition of the deliverable is what keeps output consistent as people and inputs change. Model size (A) does not fix an undefined task, higher frequency (B) multiplies an unclear output, and per-person prompts (D) guarantee drift.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "16",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0096",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0017",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "Which task in a monthly reporting process is the weakest candidate for delegation to Claude?",
+  "choices": {
+   "A": "Drafting the narrative summary from agreed figures",
+   "B": "Reformatting last month's report into the new template",
+   "C": "Extracting the top five variances from a spreadsheet export",
+   "D": "Deciding which underperforming account to escalate to the executive team"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** The escalation decision carries accountability and depends on relationships and context the model does not hold. Drafting (A), reformatting (B), and extraction (C) are all bounded tasks with checkable output.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "17",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0097",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0018",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "A process works well for one analyst and poorly for three others using the same prompt. What is the most likely cause?",
+  "choices": {
+   "A": "The prompt relies on context the first analyst supplies without noticing",
+   "B": "The other three need a more capable model",
+   "C": "The task is unsuitable for Claude",
+   "D": "The other three are using shorter inputs"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** One person succeeding with the same prompt usually means they are contributing unstated context, such as knowing which file to attach or what good looks like. A model change (B) does not supply missing context, the task clearly works (C), and input length (D) is a symptom rather than a cause.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "18",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0098",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0019",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "When is it appropriate to keep a human approval step in an otherwise automated Claude workflow?",
+  "choices": {
+   "A": "Always, since automation is inherently risky",
+   "B": "When the action is hard to reverse or carries external consequences",
+   "C": "Only while the workflow is new, then remove it",
+   "D": "Never, because approval steps defeat the purpose of automation"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Approval earns its cost where a mistake is expensive or hard to undo. Blanket approval (A) and blanket removal (D) both ignore the specific risk, and a time-based rule (C) removes the check regardless of what the action does.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "19",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0099",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0043",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-1.md",
+  "question": "A manager wants to know whether Claude can \"replace our weekly reporting process.\" What is the most useful response?",
+  "choices": {
+   "A": "Yes, automation is what AI is for",
+   "B": "A breakdown of which reporting steps Claude can draft or summarize, which need human judgment or system access, and what the review step would be",
+   "C": "No, reporting requires human oversight",
+   "D": "A recommendation to hire a consultant"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "The valued skill is a realistic division of labor with a review step, not a yes or a no",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0123",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0047",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-1.md",
+  "question": "For which task is a Project with persistent instructions and knowledge clearly better than a one-off chat?",
+  "choices": {
+   "A": "Asking for a synonym",
+   "B": "A monthly report that follows the same structure and draws on the same reference documents",
+   "C": "Checking a single fact",
+   "D": "Rewriting one email"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Repeated work with stable context and structure is exactly what Projects are for",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0127",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0049",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-1.md",
+  "question": "You want Claude to help redesign a slow approval process rather than just speed up its current steps. Which prompt direction fits that goal?",
+  "choices": {
+   "A": "\"Make our approval process faster.\"",
+   "B": "\"Automate our approvals.\"",
+   "C": "\"What do other companies do for approvals?\"",
+   "D": "\"Here are the current approval steps and where delays occur. Propose two redesigns: one that keeps the current structure and one that reorders or removes steps, with the tradeoffs of each.\""
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Process redesign requires giving Claude the current steps, the pain points, and asking for alternatives with tradeoffs",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "14",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0129",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0054",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-2.md",
+  "question": "Which of these is the strongest candidate to hand to Claude in a monthly close process?",
+  "choices": {
+   "A": "Approving the final journal entries",
+   "B": "Drafting the variance commentary from figures that are already agreed",
+   "C": "Deciding which variances require investigation",
+   "D": "Signing off the reconciliation"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Drafting from agreed inputs is bounded and checkable. Approval (A), sign-off (D), and the decision about what to investigate (C) all carry accountability",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0134",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0055",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-2.md",
+  "question": "A workflow produces good output but nobody uses it. What should be examined first?",
+  "choices": {
+   "A": "Whether the model should be upgraded",
+   "B": "Whether the output arrives where the work actually happens, in a form people can act on",
+   "C": "Whether the prompt is long enough",
+   "D": "Whether more people need training"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Adoption usually fails on fit with the existing process rather than on output quality. Model (A) and prompt length (C) address quality that is already acceptable, and training (D) treats a symptom",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "5",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0135",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0069",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-3.md",
+  "question": "A manual process takes four hours and produces a document nobody reads. What should happen before automating it?",
+  "choices": {
+   "A": "Automate it, since four hours is significant",
+   "B": "Establish whether the document is needed at all",
+   "C": "Automate it and measure adoption afterwards",
+   "D": "Split it across more people"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Automating unnecessary work makes waste faster. Proceeding regardless (A, C) skips the question, and redistributing it (D) does not address whether it is needed",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0149",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0070",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-3.md",
+  "question": "Which sequencing is correct when introducing Claude to a recurring team process?",
+  "choices": {
+   "A": "Automate the whole process, then refine",
+   "B": "Start with the step that is bounded and checkable, prove it, then extend",
+   "C": "Start with the hardest step, since it has most value",
+   "D": "Let each person adopt it however they prefer"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "A bounded first step produces evidence and trust cheaply. Full automation first (A) risks everything at once, the hardest step (C) is the least likely to succeed early, and uncoordinated adoption (D) produces drift",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "5",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0150",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0007",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "Your manager wants to roll Claude out to all 200 employees next week for every kind of task. What do you recommend?",
+  "choices": {
+   "A": "Let each employee figure it out without guidance",
+   "B": "Roll it out to everyone at once to build momentum",
+   "C": "Pilot one or two well-defined workflows with a small group, measure before and after (time spent, error rate), then expand",
+   "D": "Wait until AI tools stop making mistakes"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** A measured pilot shows the real value and the limits on a small scale before the whole company depends on it (C). A big-bang rollout (B) spreads untested habits everywhere at once. D waits for something that won't happen. A produces uneven quality and no evidence.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": "Question 7",
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0037",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0008",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "Which TWO tasks are strong fits for Claude in a marketing team's workflow? (Select TWO)",
+  "choices": {
+   "A": "Turning a webinar transcript into a blog draft and three social posts",
+   "B": "Deciding which agency gets a \\$200,000 contract",
+   "C": "Reconciling 5,000 ad-spend transactions with no independent check",
+   "D": "Reporting a competitor's announcement from yesterday, from memory",
+   "E": "Drafting five subject-line variants for an A/B test"
+  },
+  "answer": [
+   "A",
+   "E"
+  ],
+  "select_count": 2,
+  "explanation": "**A and E.** Drafting variants (E) and repurposing content across channels (A) are classic strong fits, with a person reviewing the output. A spending decision (B) needs human accountability, precise reconciliation at volume (C) belongs in a spreadsheet or finance system, and yesterday's news (D) is beyond the model's knowledge unless research mode grounds it.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": "Question 8",
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0038",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0009",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "You're presenting a Claude pilot to leadership. Which framing is most appropriate?",
+  "choices": {
+   "A": "'Meeting summaries now take 10 minutes instead of 45. The meeting owner still reviews each one, because outputs can contain errors.'",
+   "B": "'Claude eliminates errors from our summaries.'",
+   "C": "'Claude will replace the operations team.'",
+   "D": "'The benefits can't really be measured.'"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Good stakeholder communication pairs a concrete, measured benefit with an honest limitation (A). B promises something no probabilistic system delivers. C overstates the role and invites resistance. D gives leadership nothing to decide with.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": "Question 9",
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0039",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0010",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "A colleague opens Claude and types 'help me with the Q3 board deck.' The results are unfocused. What should be defined before prompting?",
+  "choices": {
+   "A": "The slide color scheme",
+   "B": "Nothing; Claude should infer it",
+   "C": "Which model to use",
+   "D": "The deliverable, the audience, the source material and what a good result looks like"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Solution design starts from the task: what you need, for whom, from which sources, and how you'll judge it (D). Model choice (C) comes later and won't rescue an undefined task. Claude can't infer goals nobody has stated (B). Colors (A) are a detail of the deliverable.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": "Question 10",
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0040",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0011",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "A legal team handles NDAs in five steps: intake, first-pass review against the team's playbook, negotiation, approval and signature. Where does Claude add the most value with the right safeguards?",
+  "choices": {
+   "A": "Signing on the company's behalf",
+   "B": "First-pass review: compare each NDA to the playbook and flag deviations for a lawyer to decide on",
+   "C": "Final approval",
+   "D": "Negotiating directly with the other party, unsupervised"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Claude fits the draft-and-analyze stage, with a qualified person keeping the decision (B). Approval (C), signature (A) and unsupervised negotiation (D) would put legal accountability on a tool.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": "Question 11",
+  "source_section": "Workflow Integration and Solution Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0041",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0004",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A workflow calculates exact payment totals and then drafts a plain-language explanation. Which division of responsibility is best?",
+  "choices": {
+   "A": "Use deterministic code for the calculations and Claude for the explanation based on validated results.",
+   "B": "Ask Claude to calculate and authorize the payment in one step.",
+   "C": "Let a human retype every number after generation.",
+   "D": "Use retrieval to estimate the payment."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Why A is best: Exact arithmetic and authorization belong in deterministic components. Claude can explain the validated results without controlling the financial action.\n\nWhy the distractors are weaker:\n- **B:** This combines probabilistic calculation with a consequential side effect.\n- **C:** Manual retyping adds error and does not improve the architecture.\n- **D:** Retrieval is unrelated to exact arithmetic.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0141",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0197",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0011",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A system drafts a public incident statement from verified evidence. Where should the communications lead's approval occur?",
+  "choices": {
+   "A": "After the statement has been posted",
+   "B": "Only after public feedback arrives",
+   "C": "After evidence and policy validation but before any publishing tool can execute",
+   "D": "Inside a hidden model instruction with no reviewer interface"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Why C is best: Meaningful approval must occur before the consequential side effect and should present the evidence, uncertainty, and proposed action to an authorized reviewer.\n\nWhy the distractors are weaker:\n- **A:** Post-execution review cannot prevent harm.\n- **B:** Public feedback is not a substitute for prepublication authorization.\n- **D:** A model instruction does not create human accountability.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0142",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0198",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0018",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A payment tool times out after submission. The client does not know whether the payment completed. What is the safest next action?",
+  "choices": {
+   "A": "Immediately submit the same payment again with a new identifier.",
+   "B": "Use the original idempotency key or transaction identifier to check status before any retry.",
+   "C": "Ask Claude whether it thinks the payment succeeded.",
+   "D": "Ignore the timeout and mark the workflow complete."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Why B is best: A status check tied to a stable idempotency key prevents duplicate side effects when the result of the first request is uncertain.\n\nWhy the distractors are weaker:\n- **A:** A new identifier can create a duplicate payment.\n- **C:** The model cannot determine an external transaction state without authoritative evidence.\n- **D:** Ignoring the result leaves the workflow inconsistent.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "18",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0143",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0199",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0025",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "Which tool definition is most reliable for model-guided use?",
+  "choices": {
+   "A": "`manage_data`: Does data things.",
+   "B": "`run_action`: Use whenever needed; accepts any object.",
+   "C": "`admin`: Full system access for convenience.",
+   "D": "`create_draft_exception_request`: Creates a non-approved draft only, lists when it applies, requires typed fields and authorization, defines errors, and has no execution capability."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Why D is best: A purpose-specific, narrow, typed, and non-ambiguous contract supports correct selection and least privilege.\n\nWhy the distractors are weaker:\n- **A:** The purpose and selection boundary are undefined.\n- **B:** An unconstrained object and broad use guidance are unsafe.\n- **C:** Full administrative access violates least privilege.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0144",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0200",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0032",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "End-to-end latency increased, but the team logs only the total request duration. What is the key missing capability?",
+  "choices": {
+   "A": "A longer system prompt",
+   "B": "Stage-level timing and outcome data for retrieval, model generation, tools, validation, and human review",
+   "C": "A second copy of every response",
+   "D": "A model-generated explanation of its internal reasoning"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Why B is best: Stage-level telemetry is required to identify the bottleneck and choose the appropriate optimization.\n\nWhy the distractors are weaker:\nA: A longer prompt may increase latency and does not identify the cause.\nC: Duplicating responses does not isolate stages.\nD: Internal reasoning is neither necessary nor a reliable performance trace.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0145",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0201",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0039",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A workflow pauses for two days while awaiting approval, then resumes after a service restart. Which design is required?",
+  "choices": {
+   "A": "Persist validated workflow state, completed steps, versions, and pending approval outside the prompt.",
+   "B": "Assume the model will remember the workflow after restart.",
+   "C": "Keep the only state in a developer's browser tab.",
+   "D": "Restart the entire workflow and repeat all side effects."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Why A is best: Long-running workflows need durable external state and validated state transitions. Model context is not a reliable workflow database.\n\nWhy the distractors are weaker:\nB: The model does not independently preserve application state across service restarts.\nC: A browser tab is fragile, unauditable, and not a system of record.\nD: Repeating completed side effects can create duplicates.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0146",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0202",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0046",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A process always follows the same five steps with fixed validation and one approval gate. Which architecture is usually safest?",
+  "choices": {
+   "A": "An unconstrained autonomous agent with every enterprise tool",
+   "B": "An explicit workflow with bounded model calls and deterministic transitions",
+   "C": "A single prompt that silently performs all steps",
+   "D": "A public chatbot with no state store"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Why B is best: A known sequence is easier to test, observe, authorize, and recover as an explicit workflow. Agentic autonomy is unnecessary.\n\nWhy the distractors are weaker:\nA: Broad autonomy and tools add risk without a requirement.\nC: An opaque prompt lacks stage validation and recovery.\nD: The pattern does not meet integration or state requirements.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "18",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0147",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0203",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0053",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A team proposes a multi-agent system for a one-time, human-reviewed summary of two documents. What is the best design principle?",
+  "choices": {
+   "A": "More agents always improve factual accuracy.",
+   "B": "Every document task requires a workflow engine.",
+   "C": "Choose the simplest architecture that meets the quality, integration, control, and risk requirements.",
+   "D": "Use the architecture with the most components because it is easier to audit."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Why C is best: Complexity should be justified by requirements. A simple human-led interaction may be more appropriate and easier to govern.\n\nWhy the distractors are weaker:\nA: More model calls can add new failure modes.\nB: A workflow engine is not necessary for every task.\nD: More components generally increase the audit surface.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": null,
+  "source_section": "Workflow Integration & Solutions Design",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0148",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/04-workflow-integration-solutions-design/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0204",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0060",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "**Select two.** In an AI-assisted contract-review workflow, which steps should remain human-retained?",
+  "choices": {
+   "A": "Approve or reject proposed clause changes",
+   "B": "Extract clauses from the contract",
+   "C": "Sign and send the final contract",
+   "D": "Compute the financial exposure of a penalty formula with code execution"
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "select_count": 2,
+  "explanation": "Approving clause changes and signing or sending the contract carry non-transferable accountability and irreversible legal consequence. Clause extraction is reversible and mechanical, while a formula can be computed through code execution and then reviewed.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0066",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A quarterly staffing plan depends on ticket growth and average tickets resolved per analyst from an uploaded dataset. Which approach is strongest?",
+  "choices": {
+   "A": "Ask Claude to estimate the figures in prose, then draft the plan.",
+   "B": "Use Research to find industry averages and ignore the uploaded data.",
+   "C": "Ask Claude to calculate the figures three times and average the answers.",
+   "D": "Use code execution to compute the figures, then synthesize the staffing recommendation from the verified results and stated assumptions."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "The plan should rest on computed figures from the actual dataset, followed by synthesis using visible assumptions. Prose estimates, repeated guesses, or unrelated industry averages do not establish the organization’s real capacity needs.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0071",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A dashboard began as a personal Artifact but is now used every day by three departments for official reporting. What does this signal?",
+  "choices": {
+   "A": "Nothing; continue informal prompt iteration indefinitely.",
+   "B": "It has become an operational dependency and should be escalated toward supported engineering or architecture.",
+   "C": "Move it into Incognito mode.",
+   "D": "Use a stronger model but keep the same informal operating model."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "A personal helper has become infrastructure that multiple departments rely on for official reporting. That change in dependency triggers production concerns such as ownership, support, testing, security, monitoring, recovery, and architecture.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "15",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0076",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "**Select two.** Which elements make a stakeholder description of an AI-assisted contract-review workflow credible?",
+  "choices": {
+   "A": "State the bounded tasks Claude performs.",
+   "B": "Describe the workflow as fully automated to emphasize value.",
+   "C": "Name the qualified human who reviews and approves changes before external action.",
+   "D": "Omit known limitations so stakeholders are not confused."
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "select_count": 2,
+  "explanation": "Credible communication states the bounded AI contribution and the retained human approval gate. “Fully automated” and hidden limitations overstate the workflow and create expectations the system cannot responsibly meet.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "20",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0082",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A product-integration brief says, “The system should handle a large number of concurrent users.” Why is this requirement not ready for engineering?",
+  "choices": {
+   "A": "It names a system instead of a user.",
+   "B": "It should be written in a more formal tone.",
+   "C": "“Large number” is unquantified; load, duration, response time, and acceptable failure conditions must be defined.",
+   "D": "It does not mention which Claude model to use."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "“Large number” allows materially different interpretations and architectures. A testable requirement must quantify concurrency, duration, response expectations, throughput, and acceptable failure conditions.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "26",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0089",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "**Select two.** In an expense-report workflow, which steps are best suited to full automation with the stated features?",
+  "choices": {
+   "A": "Extract line items and amounts from submitted receipts using a document procedure",
+   "B": "Approve or reject the report",
+   "C": "Compute totals and policy-limit variances with code execution",
+   "D": "Decide whether an unusual personal circumstance justifies an exception"
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "select_count": 2,
+  "explanation": "Receipt extraction and exact totals are reversible, mechanical steps suited to a document procedure and code execution. Approval and policy exceptions carry judgment and accountability that should remain human or collaborative.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "33",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0094",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "**Select three.** When mapping each step of a workflow for Delegation, which criteria should be assessed?",
+  "choices": {
+   "A": "Reversibility",
+   "B": "Stakes or consequence of error",
+   "C": "Accountability",
+   "D": "Popularity of the selected model"
+  },
+  "answer": [
+   "A",
+   "B",
+   "C"
+  ],
+  "select_count": 3,
+  "explanation": "Reversibility, stakes, and accountability determine whether a workflow step should be AI-appropriate, collaborative, or human-retained. Model popularity has no bearing on responsibility allocation.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "38",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0101",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "Three analysts produce sections of a monthly report in different formats, creating 90 minutes of reconciliation work. Which optimization most directly targets the bottleneck?",
+  "choices": {
+   "A": "Upgrade every analyst to the most capable model.",
+   "B": "Use one shared Skill that applies the approved section template and order.",
+   "C": "Add another reviewer to divide the same reconciliation work.",
+   "D": "Ask the analysts to begin earlier."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "The measured bottleneck is formatting variance, so a shared formatting procedure removes the cause. A stronger model, earlier start, or more reviewers does not directly eliminate inconsistency.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "45",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0107",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "**Select two.** A contract-review workflow is described to a legal lead and to an executive. Which elements must remain invariant even though vocabulary and detail change?",
+  "choices": {
+   "A": "The actual capability boundary and retained human authority",
+   "B": "The verified evidence, material limitations, and uncertainty",
+   "C": "The exact terminology and sentence order",
+   "D": "The amount of technical detail and examples"
+  },
+  "answer": [
+   "A",
+   "B"
+  ],
+  "select_count": 2,
+  "explanation": "Audience adaptation may change vocabulary, order, examples, and depth. It must not change what the system actually does, who retains authority, the evidence supporting value claims, or material limitations and uncertainty.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "51",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0113",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "Claude drafts a customer refund response and prepares an account adjustment. Where should the consequential action occur?",
+  "choices": {
+   "A": "Before any support agent sees the draft",
+   "B": "Automatically whenever the draft sounds confident",
+   "C": "After the customer complains a second time",
+   "D": "Only after an authorized human verifies the account facts, approves the response and adjustment, and releases the action through the controlled system"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "The response and account adjustment can affect money, customer rights, and organizational commitments. An authorized person must verify the facts and approve the side effect before the controlled system executes it.",
+  "domain": "4. Workflow Integration and Solution Design",
+  "domain_confidence": "source",
+  "source_number": "57",
+  "source_heading": null,
+  "source_section": "Workflow Integration and Solution Design"
+ }
+]

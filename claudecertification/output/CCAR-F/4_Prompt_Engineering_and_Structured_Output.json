@@ -1,0 +1,986 @@
+[
+ {
+  "id": "CCAR-F-Amey-Thakur-0007",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "The automated reviewer flags dozens of trivial style nits per pull request, and engineers have started ignoring it. Which change addresses the false-positive problem the way the blueprint suggests?",
+  "choices": {
+   "A": "Define explicit review criteria in the prompt: what to flag, what to ignore, and a severity bar, with a few worked examples of in-scope and out-of-scope findings",
+   "B": "Run the review twice and post only findings that appear both times",
+   "C": "Cap the reviewer at three findings per pull request",
+   "D": "Route all findings to a channel nobody reads"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Precision comes from explicit criteria and few-shot examples that draw the boundary between signal and noise. Double-running (B) filters randomness but not systematic nit-picking, an arbitrary cap (C) drops real findings on bad days, and (D) is surrender.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": "Claude Code in CI",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0087",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0008",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "Invoices sometimes lack a purchase-order number, and your extraction schema must handle that honestly while catching real misses. What is the right schema design?",
+  "choices": {
+   "A": "Make every field required so nothing is missed",
+   "B": "Make purchase_order nullable, so absence is recorded as null, and validate that it is present whenever the document type requires it",
+   "C": "Make everything optional to avoid validation errors",
+   "D": "Have the model invent a plausible number when one is missing"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Schema design encodes reality: genuinely optional data is nullable, and conditional requirements are validated downstream. All-required (A) forces fabrication or failure on legitimate documents, all-optional (C) blinds you to true misses, and invention (D) is data corruption.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": "Structured data extraction",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0088",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0023",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "A pipeline requires output that always validates against a schema. What is the correct approach?",
+  "choices": {
+   "A": "Declare the schema as a tool the model must call, and validate on receipt",
+   "B": "Ask for the schema in the prompt and validate afterwards",
+   "C": "Ask for JSON and repair malformed output in code",
+   "D": "Use a lower temperature"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** A declared schema makes the structure part of the contract rather than a request, and validation on receipt closes the loop. Prompt requests (B), downstream repair (C), and temperature (D) all leave the shape to chance.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "23",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0103",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0024",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "Extraction is accurate for common cases and fails on rare formats. What is the most effective response?",
+  "choices": {
+   "A": "Raise the temperature to encourage flexibility",
+   "B": "Add examples covering the rare formats and define what to return when a field is absent",
+   "C": "Switch to a larger model",
+   "D": "Ask the model to try harder on unusual inputs"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Rare cases fail because they are unspecified, and examples plus an explicit absent-field rule specify them. Temperature (A) adds variance, a larger model (C) is not aimed at the gap, and exhortation (D) is not a specification.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "24",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0104",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0025",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "What should a schema define for a field the source document may not contain?",
+  "choices": {
+   "A": "Nothing, since the model will omit it",
+   "B": "A default value that looks plausible",
+   "C": "An explicit representation for absence, so a missing value is distinguishable from an unfilled one",
+   "D": "A free-text field for notes"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** Absence must be representable, or downstream code cannot tell a genuine gap from a failure. Silent omission (A) is ambiguous, plausible defaults (B) fabricate data, and a notes field (D) does not make the state machine-readable.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0105",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0026",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "Which practice most improves consistency across a long-running structured extraction job?",
+  "choices": {
+   "A": "Randomising the order of documents",
+   "B": "Increasing the output token limit",
+   "C": "Running each document twice",
+   "D": "Fixing the prompt, the schema, and the model version, and recording them with the output"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Consistency requires that the things that shape output are pinned and recorded, so results remain comparable and reproducible. Ordering (A) is irrelevant, the token cap (B) affects length, and duplicate runs (C) measure variance without removing it.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "26",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0106",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0027",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "A prompt mixes the instruction, the data, and the output format in continuous prose. What is the first improvement?",
+  "choices": {
+   "A": "Separate the sections so the instruction, the input, and the required format are distinguishable",
+   "B": "Shorten it",
+   "C": "Move it into the system prompt",
+   "D": "Add emphasis to the format requirement"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Structure lets the model tell instruction from data, which is the most common source of confusion in long prompts. Shortening (B) may remove needed detail, relocation (C) does not clarify, and emphasis (D) does not separate.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "27",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0107",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0047",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-1.md",
+  "question": "Reviews flag many low-value style nits and engineers now ignore them. Which change addresses this?",
+  "choices": {
+   "A": "Define explicit review criteria and a severity bar in the prompt, with examples of in-scope and out-of-scope findings",
+   "B": "Post findings to a separate channel",
+   "C": "Run the review only on large pull requests",
+   "D": "Cap output at five findings"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Precision comes from explicit criteria and examples that draw the signal boundary",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0127",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0048",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-1.md",
+  "question": "Some invoices legitimately lack a delivery date. How should the schema express this?",
+  "choices": {
+   "A": "Make the field required and let extraction fail",
+   "B": "Make the field nullable so absence is recorded explicitly, with conditional validation where the document type requires it",
+   "C": "Omit the field from the schema",
+   "D": "Default it to today's date"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Nullable fields record legitimate absence; required fields force fabrication or failure",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "13",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0128",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0049",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-1.md",
+  "question": "Which loop gives the most reliable extraction output?",
+  "choices": {
+   "A": "Generate, then manually review every record",
+   "B": "Generate three times and take the majority",
+   "C": "Enforce a JSON schema through tool use, validate, and on failure retry with the validation error provided to the model",
+   "D": "Generate with temperature zero and accept the result"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Schema enforcement plus a validation-retry loop is the reliability pattern the guide describes",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "14",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0129",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0058",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-2.md",
+  "question": "A pipeline needs output that always conforms to a fixed shape. What is the correct mechanism?",
+  "choices": {
+   "A": "Requesting the shape in the prompt and parsing the result",
+   "B": "Post-processing prose with regular expressions",
+   "C": "Declaring the shape as a schema the model must satisfy, and validating on receipt",
+   "D": "Lowering the temperature"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "A declared schema makes the shape a contract rather than a request, and validation closes the loop. Prompt requests (A), text parsing (B), and temperature (D) leave the shape to chance",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0138",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0059",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-2.md",
+  "question": "How should a schema handle a value the source may not contain?",
+  "choices": {
+   "A": "Omit the field silently",
+   "B": "Supply a plausible default",
+   "C": "Return an empty string in all cases",
+   "D": "Define an explicit representation for absence"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Absence must be representable so a genuine gap is distinguishable from a failure. Silent omission (A) is ambiguous, a plausible default (B) fabricates, and an empty string (C) conflates absence with an empty value",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0139",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0060",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-2.md",
+  "question": "Extraction succeeds on typical inputs and fails on unusual ones. What is the most effective response?",
+  "choices": {
+   "A": "Raise the temperature",
+   "B": "Use a larger model",
+   "C": "Add examples covering the unusual formats and state what to return when a field is missing",
+   "D": "Ask the model to be careful with unusual inputs"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "The unusual cases fail because they were never specified, and examples plus a missing-value rule specify them. Temperature (A) adds variance, model size (B) is not aimed at the gap, and exhortation (D) is not specification",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0140",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0072",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-3.md",
+  "question": "A schema-validated response fails validation once in every few hundred calls. What is the correct handling?",
+  "choices": {
+   "A": "Define a fallback path: retry, then fail explicitly rather than passing invalid data on",
+   "B": "Ignore it, since the rate is low",
+   "C": "Disable validation to avoid the failures",
+   "D": "Increase the output token limit"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "A rare failure still needs a defined path, and silently passing invalid data is the outcome to prevent. Ignoring it (B) and disabling validation (C) do exactly that, and the token limit (D) is not the cause",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0152",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0073",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-3.md",
+  "question": "What is the advantage of validating structured output at the boundary rather than downstream?",
+  "choices": {
+   "A": "It is cheaper",
+   "B": "It removes the need for a schema",
+   "C": "The failure is caught where it can still be retried or rejected, before it contaminates later steps",
+   "D": "It improves model accuracy"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Catching at the boundary contains the fault. It is not primarily a cost question (A), the schema is what makes it possible (B), and it does not change the model's accuracy (D)",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0153",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0074",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-3.md",
+  "question": "A structured extraction must record where in the source each value came from. What does this require?",
+  "choices": {
+   "A": "A larger model",
+   "B": "A longer prompt",
+   "C": "A second extraction pass",
+   "D": "The schema to include a provenance field the model must populate"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Anything the output must carry has to be part of the declared shape. Model size (A) and prompt length (B) do not create a field, and a second pass (C) is unnecessary if the schema asks for it",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "9",
+  "source_heading": null,
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0154",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-paullarionov-0017",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your team uses Claude Code for generating code suggestions, but you notice a pattern: non-obvious issues—performance optimizations that break edge cases, cleanups that unexpectedly change behavior—are only caught when another team member reviews the PR. Claude’s reasoning during generation shows it considered these cases but concluded its approach was correct. Which approach directly addresses the root cause of this self-check limitation?\n\nWhich approach directly addresses the root cause?",
+  "choices": {
+   "A": "Run a second independent instance of Claude Code to review the changes without access to the generator’s reasoning.",
+   "B": "Enable extended thinking mode for the generation stage to allow more thorough deliberation before producing suggestions.",
+   "C": "Add explicit self-review instructions to the generation prompt asking Claude to critique its own suggestions before finalizing output.",
+   "D": "Include full test files and documentation in prompt context so Claude better understands expected behavior during generation."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "A second independent Claude Code instance without access to the generator’s reasoning directly addresses the root cause by avoiding confirmation bias. This “fresh eyes” perspective mirrors human peer review, where another reviewer catches issues the author rationalized.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "17",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0018",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your code review component is iterative: Claude analyzes the changed file, then may request related files (imports, base classes, tests) via tool calls to understand context before providing final feedback. Your application defines a tool that lets Claude request file contents; Claude calls the tool, gets results, and continues analysis. You’re evaluating batch processing to reduce API cost. What is the primary technical limitation when considering batch processing for this workflow?\n\nWhat is the primary technical limitation?",
+  "choices": {
+   "A": "Batch processing does not include correlation IDs to map outputs back to input requests.",
+   "B": "The asynchronous model cannot execute tools mid-request and return results for Claude to continue analysis.",
+   "C": "The Batch API does not support tool definitions in request parameters.",
+   "D": "The batch processing latency of up to 24 hours is too slow for pull request feedback, although the workflow would otherwise function."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "A “fire-and-forget” asynchronous Batch API model has no mechanism to intercept a tool call during a request, execute the tool, and return results for Claude to continue analysis. This is fundamentally incompatible with iterative tool-calling workflows that require multiple tool request/response rounds within a single logical interaction.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "18",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0019",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your CI/CD system runs three Claude-based analyses: (1) fast style checks on every PR that block merging until completion, (2) comprehensive weekly security audits of the entire codebase, and (3) nightly test-case generation for recently changed modules. The Message Batches API offers 50% savings but processing can take up to 24 hours. You want to optimize API cost while maintaining an acceptable developer experience. Which combination correctly matches each task to an API approach?\n\nWhich combination is correct?",
+  "choices": {
+   "A": "Use the Message Batches API for all three tasks to maximize 50% savings, configuring the pipeline to poll for batch completion.",
+   "B": "Use synchronous calls for PR style checks; use the Message Batches API for weekly security audits and nightly test generation.",
+   "C": "Use synchronous calls for all three tasks for consistent response times, relying on prompt caching to reduce costs across workloads.",
+   "D": "Use synchronous calls for PR style checks and nightly test generation; use the Message Batches API only for weekly security audits."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "PR style checks block developers and require immediate responses via synchronous calls, while weekly security audits and nightly test generation are scheduled tasks with flexible deadlines that can tolerate up to a 24-hour batch window—capturing 50% savings for both.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "19",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0020",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your automated reviews find real issues, but developers report the feedback is not actionable. Findings include phrases like “complex ticket routing logic” or “potential null pointer” without specifying what exactly to change. When you add detailed instructions like “always include concrete fix suggestions,” the model still produces inconsistent output—sometimes detailed, sometimes vague. Which prompting technique most reliably produces consistently actionable feedback?\n\nWhich prompting technique is most reliable?",
+  "choices": {
+   "A": "Further refine instructions with more explicit requirements for each part of the feedback format (location, issue, severity, proposed fix).",
+   "B": "Expand the context window to include more surrounding codebase so the model has enough information to propose concrete fixes.",
+   "C": "Implement a two-pass approach where one prompt identifies issues and a second generates fixes, allowing specialization.",
+   "D": "Add 3–4 few-shot examples showing the exact required format: identified issue, location in code, concrete fix suggestion."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Few-shot examples are the most effective technique for achieving consistent output format when instructions alone produce variable results. Providing 3–4 examples that show the exact desired structure (issue, location, concrete fix) gives the model a concrete pattern to follow, which is more reliable than abstract instructions.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "20",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0021",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your CI pipeline includes two Claude-based code review modes: a pre-merge-commit hook that blocks PR merge until completion, and a “deep analysis” that runs overnight, polls for batch completion, and posts detailed suggestions to the PR. You want to reduce API cost using the Message Batches API, which offers 50% savings but requires polling and can take up to 24 hours. Which mode should use batch processing?\n\nWhich mode should use batch processing?",
+  "choices": {
+   "A": "Only the pre-merge-commit hook.",
+   "B": "Only the deep analysis.",
+   "C": "Both modes.",
+   "D": "Neither mode."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Deep analysis is an ideal candidate for batch processing because it already runs overnight, tolerates delay, and uses a polling model before publishing results—matching the asynchronous, polling-based architecture of the Message Batches API while capturing 50% savings.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "21",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0022",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your automated review analyzes comments and docstrings. The current prompt instructs Claude to “check that comments are accurate and up to date.” Findings often flag acceptable patterns (TODO markers, simple descriptions) while missing comments describing behavior the code no longer implements. What change addresses the root cause of this inconsistent analysis?\n\nWhat change addresses the root cause?",
+  "choices": {
+   "A": "Include `git blame` data so Claude can identify comments that predate recent code changes.",
+   "B": "Add few-shot examples of misleading comments to help the model recognize similar patterns in the codebase.",
+   "C": "Filter TODO, FIXME, and descriptive comment patterns before analysis to reduce noise.",
+   "D": "Specify explicit criteria: flag comments only when the behavior they claim contradicts the code’s actual behavior."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Explicit criteria—flagging comments only when claimed behavior contradicts actual code behavior—directly addresses the root cause by replacing a vague instruction with a precise definition of what constitutes a problem. This reduces false positives on acceptable patterns and misses of truly misleading comments.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "22",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0023",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your automated code review system shows inconsistent severity ratings—similar issues like null pointer risks are rated “critical” in some PRs but only “medium” in others. Developer surveys show growing distrust—many start dismissing findings without reading because “half are wrong.” High-false-positive categories erode trust in accurate categories. Which approach best restores developer trust while improving the system?\n\nWhich approach best restores developer trust?",
+  "choices": {
+   "A": "Temporarily disable high-false-positive categories (style, naming, documentation) and keep only high-precision categories while improving prompts.",
+   "B": "Keep all categories enabled but display confidence scores with each finding so developers can decide what to investigate.",
+   "C": "Keep all categories enabled and add few-shot examples to improve accuracy for each category over the next few weeks.",
+   "D": "Apply a uniform strictness reduction across all categories to bring the overall false-positive rate down."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Temporarily disabling high-false-positive categories immediately stops trust erosion by removing noisy findings that cause developers to dismiss everything, while preserving value from high-precision categories like security and correctness. It also creates space to improve prompts for problematic categories before re-enabling them.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "medium",
+  "source_number": "23",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0027",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "A pull request changes 14 files in an inventory tracking module. A single-pass review that analyzes all files together produces inconsistent results: detailed feedback on some files but shallow comments on others, missed obvious bugs, and contradictory feedback (a pattern is flagged in one file but identical code is approved in another file in the same PR). How should you restructure the review?\n\nHow should you restructure the review?",
+  "choices": {
+   "A": "Run three independent full-PR review passes and flag only issues that appear in at least two of the three runs.",
+   "B": "Split into focused passes: review each file individually for local issues, then run a separate integration-oriented pass to examine cross-file data flows.",
+   "C": "Require developers to split large PRs into smaller submissions of 3–4 files before running automated review.",
+   "D": "Switch to a larger model with a bigger context window so it can pay sufficient attention to all 14 files in one pass."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Focused per-file passes address the root cause—attention dilution—by ensuring consistent depth and reliable local issue detection. A separate integration-oriented pass then covers cross-file concerns such as dependency and data-flow interactions.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "27",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0028",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your automated code review averages 15 findings per pull request, and developers report a 40% false-positive rate. The bottleneck is investigation time: developers must click into each finding to read Claude’s rationale before deciding whether to fix or dismiss it. Your CLAUDE.md already contains comprehensive rules for acceptable patterns, and stakeholders rejected any approach that filters findings before developers see them. What change best addresses investigation time?\n\nWhat change best addresses investigation time?",
+  "choices": {
+   "A": "Require Claude to include its rationale and confidence estimate directly in each finding.",
+   "B": "Add a post-processor that analyzes finding patterns and automatically suppresses those that match historical false-positive signatures.",
+   "C": "Categorize findings as “blocking issues” vs “suggestions,” with different review requirements by level.",
+   "D": "Configure Claude to show only high-confidence findings, filtering uncertain flags before developers see them."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Including rationale and confidence directly in each finding reduces investigation time by letting developers quickly triage without opening each finding. It satisfies the “no filtering” constraint because all findings remain visible while accelerating developer decision-making.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "medium",
+  "source_number": "28",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0029",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Analysis of your automated code review shows large differences in false-positive rates by finding category: security/correctness findings have 8% false positives, performance findings 18%, style/naming findings 52%, and documentation findings 48%. Developer surveys show growing distrust—many start dismissing findings without reading because “half are wrong.” High-false-positive categories erode trust in accurate categories. Which approach best restores developer trust while improving the system?\n\nWhich approach best restores developer trust?",
+  "choices": {
+   "A": "Temporarily disable high-false-positive categories (style, naming, documentation) and keep only high-precision categories while improving prompts.",
+   "B": "Keep all categories enabled but display confidence scores with each finding so developers can decide what to investigate.",
+   "C": "Keep all categories enabled and add few-shot examples to improve accuracy for each category over the next few weeks.",
+   "D": "Apply a uniform strictness reduction across all categories to bring the overall false-positive rate down."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Temporarily disabling high-false-positive categories immediately stops trust erosion by removing noisy findings that cause developers to dismiss everything, while preserving value from high-precision categories like security and correctness. It also creates space to improve prompts for problematic categories before re-enabling them.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "medium",
+  "source_number": "29",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0030",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your team wants to reduce API costs for automated analysis. Currently, synchronous Claude calls support two workflows: (1) a blocking pre-merge check that must complete before developers can merge, and (2) a technical debt report generated overnight for review the next morning. Your manager proposes moving both to the Message Batches API to save 50%. How should you evaluate this proposal?\n\nHow should you evaluate this proposal?",
+  "choices": {
+   "A": "Move both to batch processing with fallback to synchronous calls if batches take too long.",
+   "B": "Move both workflows to batch processing with status polling to verify completion.",
+   "C": "Use batch processing only for technical debt reports; keep synchronous calls for pre-merge checks.",
+   "D": "Keep synchronous calls for both workflows to avoid issues with batch result ordering."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Message Batches API processing can take up to 24 hours with no latency SLA, which is acceptable for overnight technical debt reports but unacceptable for blocking pre-merge checks where developers wait. This matches each workflow to the right API based on latency requirements.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "high",
+  "source_number": "30",
+  "source_heading": "Claude Code for Continuous Integration",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0047",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your agent handles single-issue requests with 94% accuracy (e.g., “I need a refund for order #1234”). But when customers include multiple issues in one message (e.g., “I need a refund for order #1234 and also want to update the shipping address for order #5678”), tool selection accuracy drops to 58%. The agent usually solves only one issue or mixes parameters across requests. What approach most effectively improves reliability for multi-issue requests?\n\nWhat approach is most effective?",
+  "choices": {
+   "A": "Implement a preprocessing layer that uses a separate model call to decompose multi-issue messages into separate requests, handle each independently, and merge results.",
+   "B": "Combine related tools into fewer universal tools.",
+   "C": "Add few-shot examples to the prompt demonstrating correct reasoning and tool sequencing for multi-issue requests.",
+   "D": "Implement response validation that detects incomplete answers and automatically reprompts the agent to resolve missed issues."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Few-shot examples that demonstrate correct reasoning and tool sequencing for multi-issue requests are most effective because the agent already performs well on single issues—what it needs is guidance on the pattern for decomposing and routing multiple issues and keeping parameters separated.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "medium",
+  "source_number": "47",
+  "source_heading": "Customer Support Agent",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0052",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Production metrics show that when resolving complex billing disputes or multi-order returns, customer satisfaction scores are 15% lower than for simple cases—even when the resolution is technically correct. Root-cause analysis shows the agent provides accurate solutions but inconsistently explains rationale: sometimes omitting relevant policy details, sometimes missing timeline info or next steps. The specific context gaps vary case by case. You want to improve solution quality without adding human oversight. What approach is most effective?\n\nWhat approach is most effective?",
+  "choices": {
+   "A": "Add a self-critique stage where the agent evaluates a draft response for completeness—ensuring it resolves the customer’s issue, includes relevant context, and anticipates follow-up questions.",
+   "B": "Add a confirmation stage where the agent asks “Does this fully resolve your issue?” before closing, allowing customers to request additional information if needed.",
+   "C": "Upgrade the model from Haiku to Sonnet for complex cases, routing based on a defined complexity metric.",
+   "D": "Implement few-shot examples in the system prompt showing complete explanations for five common complex case types, demonstrating how to include policy context, timelines, and next steps."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "A self-critique stage (the evaluator-optimizer pattern) directly addresses inconsistent explanation completeness by forcing the agent to assess its own draft against concrete criteria—such as policy context, timelines, and next steps—before presenting it. This catches case-specific gaps without human oversight.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "medium",
+  "source_number": "52",
+  "source_heading": "Customer Support Agent",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0060",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Production logs show the agent sometimes chooses `get_customer` when `lookup_order` would be more appropriate, especially for ambiguous queries like “I need help with my recent purchase.” You decide to add few-shot examples to the system prompt to improve tool selection. Which approach most effectively addresses the problem?\n\nWhich approach is most effective?",
+  "choices": {
+   "A": "Add explicit “use when” and “don’t use when” guidance in each tool description covering ambiguous cases.",
+   "B": "Add examples grouped by tool—all `get_customer` scenarios together, then all `lookup_order` scenarios.",
+   "C": "Add 4–6 examples targeted at ambiguous scenarios, each with rationale for why one tool was chosen over plausible alternatives.",
+   "D": "Add 10–15 examples of clear, unambiguous requests demonstrating correct tool choice for typical scenarios for each tool."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Targeting few-shot examples at the specific ambiguous scenarios where errors occur, with explicit rationale for why one tool is preferable to alternatives, teaches the model the comparative decision process needed for edge cases. This is more effective than generic examples or declarative rules.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "medium",
+  "source_number": "60",
+  "source_heading": "Customer Support Agent",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-preporato-0023",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "A code-review prompt says 'Be thorough but avoid nitpicks.' Reviews flag style issues inconsistently and miss SQL injection. Which rewrite fixes the cause?",
+  "choices": {
+   "A": "'You are a world-class senior security engineer.'",
+   "B": "'Be extremely thorough and never miss anything.'",
+   "C": "'Be conservative with your comments.'",
+   "D": "'Report only these issues: SQL injection, XSS, authentication bypass and secrets in code. Report high or critical severity only. Do not comment on formatting or naming.'"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Vague instructions produce inconsistent behavior because the model has to guess the threshold. D names the categories, the severity floor and the exclusions, and anyone reading a review can check whether it followed them. B and C push the same vague guidance in two directions. A role line (A) without criteria leaves the same guesswork.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "23",
+  "source_heading": "Question 23",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0053",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0024",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "A classifier should flag support tickets that mention a physical safety risk. In testing it flags every ticket containing the word 'fire', including 'firewall rules reset after update.' What is the best few-shot improvement?",
+  "choices": {
+   "A": "An instruction: 'Don't be fooled by keywords.'",
+   "B": "Two to four examples that include the firewall ticket labeled not-safety with a one-line reason, a genuine safety ticket, and an ambiguous case",
+   "C": "Twenty examples of genuine safety tickets",
+   "D": "A lower temperature"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Few-shot examples teach reasoning and edge cases best when they include something the model should leave alone, so the tricky negative in B is the example that matters. C piles on positives and teaches nothing about the false positives. A is vague guidance. Temperature (D) changes randomness and leaves the misunderstanding in place.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "24",
+  "source_heading": "Question 24",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0054",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0025",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "Your team plans to use structured outputs (a JSON schema in `output_config.format`) for invoice extraction. Which TWO statements about this feature are true? (Select TWO)",
+  "choices": {
+   "A": "It guarantees the extracted values are correct for the source document",
+   "B": "It works only when `tool_choice` forces a specific tool",
+   "C": "It removes the need to validate business rules, such as totals matching line items",
+   "D": "Constrained decoding makes the response valid JSON that matches the schema's structure and types",
+   "E": "A refusal or a `max_tokens` cutoff can still produce output that doesn't match the schema, so check `stop_reason`"
+  },
+  "answer": [
+   "D",
+   "E"
+  ],
+  "select_count": 2,
+  "explanation": "Structured outputs guarantee format: valid, schema-compliant JSON (D), with the documented exceptions of refusals and truncation (E). Format says nothing about whether the values are right, so semantic checks such as totals and dates stay in your pipeline, which rules out A and C. B confuses the feature with forced tool use; structured outputs are requested through `output_config.format`.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": "Question 25",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0055",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0026",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "An extraction fails validation because `invoice_date` came back as 2026-04-31, a date that doesn't exist. What should the retry request contain?",
+  "choices": {
+   "A": "The failed output and the words 'try again'",
+   "B": "The original document again with no other changes",
+   "C": "The original document, the failed output, and the specific error ('`invoice_date` 2026-04-31 is not a valid date'), with an instruction to correct only that field",
+   "D": "The same request sent to a more capable model"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "A useful retry tells the model exactly what failed and gives it the source to fix it against (C). B repeats the conditions that produced the error. A removes the source the model needs to correct the date. D changes the model without telling it what went wrong.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "26",
+  "source_heading": "Question 26",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0056",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0027",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "A product team wants to move its live chat assistant to the Message Batches API to cut costs in half. What is the right assessment?",
+  "choices": {
+   "A": "Reject it, because batch requests can't include a system prompt",
+   "B": "Approve it: the same quality at half the price",
+   "C": "Approve it, provided the app polls for results every second",
+   "D": "Reject it: batches carry no latency guarantee (most finish within an hour, some take up to 24), so a waiting user can't be served; cut costs with prompt caching or by routing routine messages to a cheaper tier"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "The batch discount comes with asynchronous processing and no latency guarantee, which rules it out for anyone waiting on an answer (D). B ignores the latency. Polling (C) doesn't speed up processing. A is false: batch requests take the same parameters as regular Messages requests.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "27",
+  "source_heading": "Question 27",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0057",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0028",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "One prompt asks Claude to extract 30 fields from a contract, normalize every currency, classify the risk clauses and write an executive summary. Results vary from run to run, and errors are hard to trace. What is the best restructuring?",
+  "choices": {
+   "A": "A chain of focused prompts (extract, validate, normalize, classify, summarize), each with its own instructions and checks",
+   "B": "The same single prompt on a more capable model",
+   "C": "Ask for the executive summary first, then the fields",
+   "D": "The same single prompt with each requirement marked IMPORTANT"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Prompt chaining gives each stage one job and a validation point, so a failure shows up in the stage that caused it (A). Emphasis (D) doesn't reduce the number of jobs in one prompt. A stronger model (B) may help a little and leaves errors untraceable. Reordering (C) builds the summary on fields nobody has checked yet.",
+  "domain": "4. Prompt Engineering & Structured Output",
+  "domain_confidence": "source",
+  "source_number": "28",
+  "source_heading": "Question 28",
+  "source_section": "Prompt Engineering & Structured Output",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0058",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ }
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "number": "M4-Q47",
+    "heading": "M4-Q47 (V2-D5.3)",
+    "question": "A news bot drafts headlines. Editors publish after a\nquick read. The bot's drafts are usually fine.\n\nWhich review shape is this, and is it right?",
+    "choices": {
+      "A": "Pre-action approval, and it is right: headlines are public and the\neditor's read is the gate with context.",
+      "B": "No review at all.",
+      "C": "Post-action review.",
+      "D": "Annual review."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"Editors publish after a quick read.\"\nThe editor's read before publish is pre-action approval with context. Headlines face the public. The gate is correct. C is correct for internal drafts.",
+    "source_section": "V2-D5.3"
+  },
+  {
+    "number": "M4-Q48",
+    "heading": "M4-Q48 (V2-D5.4)",
+    "question": "A retailer stores EU customer data in the US region. The\nteam says \"the cloud is global.\"\n\nWhat is wrong?",
+    "choices": {
+      "A": "Nothing. The cloud is global.",
+      "B": "Residency violation: EU data must stay in the EU per the\nrequirement. Move storage and processing to the EU region and build\nthe evidence chain.",
+      "C": "The cloud is too slow.",
+      "D": "Regions do not exist."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"stores EU customer data in the US\nregion.\" Why: the requirement names EU residency. \"Global cloud\" is\nnot a control. The fix is regional placement plus the chain.\nCounterfactual: A wins when no residency rule applies.",
+    "source_section": "V2-D5.4"
+  },
+  {
+    "number": "M4-Q49",
+    "heading": "M4-Q49 (V2-D5.4), Select TWO",
+    "question": "A bank's AI features need model risk documentation for\nthe regulator.\n\nWhich TWO artifacts belong in the pack? Select TWO.",
+    "choices": {
+      "A": "The model inventory: which models, versions, and use cases.",
+      "B": "The validation evidence: eval results, limits, and monitoring\nplan per model.",
+      "C": "The vendor's marketing brochure.",
+      "D": "The team's lunch menu.",
+      "E": "A bigger model."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"model risk documentation for the regulator.\"\nThe pack shows what runs.\nThe pack shows that someone validated it.\nInventory and evidence are the chain's artifact form.\nThere is no counterfactual.",
+    "source_section": "V2-D5.4"
+  },
+  {
+    "number": "M4-Q50",
+    "heading": "M4-Q50 (V2-D5.5)",
+    "question": "A support bot's satisfaction scores are high overall but\nlow for elderly callers.\n\nWhat is necessary?",
+    "choices": {
+      "A": "Nothing. Overall is high.",
+      "B": "Subgroup evaluation and remediation: measure per age group, find\nwhy elderly callers struggle (e.g., jargon, speed), and fix the\nexperience.",
+      "C": "Hide the age field.",
+      "D": "A bigger model."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"high overall but low for elderly\ncallers.\" Why: V2-D5.5 measures across subgroups. The aggregate hides\nthe harmed group. Counterfactual: A wins never against subgroup\nevidence.",
+    "source_section": "V2-D5.5"
+  },
+  {
+    "number": "M4-Q51",
+    "heading": "M4-Q51 (V2-D6.1)",
+    "question": "A bank wants a fraud alert bot that is \"timely.\" Volume\nis 100,000 transactions per day. A missed fraud costs $500 on average.\n\nWhat is the first discovery output?",
+    "choices": {
+      "A": "A vendor demo.",
+      "B": "Measurable requirements: \"timely\" becomes alert p95 under 60\nseconds, plus the $500 miss cost, volume, false-positive tolerance,\nand owners.",
+      "C": "A system prompt.",
+      "D": "A tier choice."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"'timely'... missed fraud costs $500.\"\nDiscovery converts adjectives. Discovery records cost and volume before any build. A is correct after sign-off on the requirements.",
+    "source_section": "V2-D6.1"
+  },
+  {
+    "number": "M4-Q52",
+    "heading": "M4-Q52 (V2-D6.1), Select TWO",
+    "question": "Discovery for a medical bot records an accuracy target. The liability owner is not decided. The data retention rule is not decided.\n\nSelect two open assumptions.",
+    "choices": {
+      "A": "Who owns liability for wrong answers.",
+      "B": "The data retention rule for patient chats.",
+      "C": "The vendor's tagline.",
+      "D": "The office plants.",
+      "E": "The Wi-Fi password."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"liability owner... undecided... data\nretention rule... undecided.\" Why: both shape the design and lack\nowners. Record them explicitly. Counterfactual: none.",
+    "source_section": "V2-D6.1"
+  },
+  {
+    "number": "M4-Q53",
+    "heading": "M4-Q53 (V2-D6.2)",
+    "question": "An architect proposes a multi-agent design. The security\nteam asks about the trade-off.\n\nWhat does security need?",
+    "choices": {
+      "A": "The parameter count.",
+      "B": "Security axes per option: tool surface per agent, permission\nfencing, audit per worker, injection paths, and the cost of the added\ncomplexity.",
+      "C": "The demo video.",
+      "D": "Nothing."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"The security team asks.\" Why: security\ndecides on threat-model axes. V2-D6.2 adapts the message to the\naudience. Counterfactual: A wins never as the security axis.",
+    "source_section": "V2-D6.2"
+  },
+  {
+    "number": "M4-Q54",
+    "heading": "M4-Q54 (V2-D6.2)",
+    "question": "A team must tell product why the launch slips two weeks.\n\nWhat does product need?",
+    "choices": {
+      "A": "The attention mechanism details.",
+      "B": "Impact framing: what slips, what still ships, the quality risk of\nrushing, and the options with costs.",
+      "C": "The git log.",
+      "D": "Silence."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"tell product why the launch slips two\nweeks.\" Why: product decides on scope, risk, and options. Technical\ndetail does not decide. Counterfactual: A wins for the engineering\npostmortem.",
+    "source_section": "V2-D6.2"
+  },
+  {
+    "number": "M4-Q55",
+    "heading": "M4-Q55 (V2-D6.3), Select TWO",
+    "question": "A team rolls out a bot to 10,000 users with no pilot.\n\nWhich TWO make the rollout responsible? Select TWO.",
+    "choices": {
+      "A": "A staged rollout: pilot cohort first, with measured quality gates\nbefore wider release.",
+      "B": "Review triggers and rollback criteria defined before the rollout.",
+      "C": "Full release on day one.",
+      "D": "No measurement.",
+      "E": "Deleting the eval set."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"to 10,000 users with no pilot.\"\nV2-D6.3 needs realistic staging.\nV2-D6.3 needs triggers with consequences.\nC is the failure.\nThere is no counterfactual.",
+    "source_section": "V2-D6.3"
+  },
+  {
+    "number": "M4-Q56",
+    "heading": "M4-Q56 (V2-D6.3)",
+    "question": "A contract promises \"AI-powered insights.\" The customer\nexpects human-expert quality.\n\nWhat is the fix?",
+    "choices": {
+      "A": "Keep the phrase.",
+      "B": "Define \"insights\" measurably: which questions, what accuracy per\nclass, what the system does not do, and the review triggers.",
+      "C": "Remove the product.",
+      "D": "Promise human experts."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"'AI-powered insights.'\" Why: vague\nphrases become disputes. Measurable terms plus explicit non-goals set\nhonest expectations. Counterfactual: A wins never in a contract.",
+    "source_section": "V2-D6.3"
+  }
+]

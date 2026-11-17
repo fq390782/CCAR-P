@@ -1,0 +1,155 @@
+[
+  {
+    "number": "M2-Q13",
+    "heading": "M2-Q13 (V2-D2.1)",
+    "question": "A team routes simple questions to the Fast tier and hard\nones to the Balanced tier. The router is a keyword list.\n\nWhat is the risk?",
+    "choices": {
+      "A": "No risk. Keywords are perfect.",
+      "B": "Router misclassification: hard questions landing on the cheap tier\n(quality risk) and easy questions on the expensive tier (cost risk).\nThe router needs evals like any component.",
+      "C": "The tiers are too fast.",
+      "D": "Keywords cost too much."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"The router is a keyword list.\" Why: the\nrouter is a component with failure modes in both directions. It needs\nits own evals. Counterfactual: A wins never. No router is perfect.",
+    "source_section": "V2-D2.1"
+  },
+  {
+    "number": "M2-Q14",
+    "heading": "M2-Q14 (V2-D2.2)",
+    "question": "A recruiting bot must never reveal other candidates'\nnames. Candidate data sits in the retrieval index.\n\nWhat is the correct control?",
+    "choices": {
+      "A": "A system prompt line forbidding it.",
+      "B": "A retrieval filter excluding other candidates' records plus an\noutput check in code blocking names before display.",
+      "C": "A longer prompt.",
+      "D": "Hope."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"must never reveal other candidates'\nnames.\" Why: \"never\" is a control in code, at retrieval and output.\nA and C are guidance. Counterfactual: A wins for tone, never for\nconfidentiality.",
+    "source_section": "V2-D2.2"
+  },
+  {
+    "number": "M2-Q15",
+    "heading": "M2-Q15 (V2-D2.2), Select TWO",
+    "question": "A pricing bot must enforce: discounts need manager\napproval, and list prices are public.\n\nWhich TWO placements are correct? Select TWO.",
+    "choices": {
+      "A": "The discount approval gate in code before the discount tool runs.",
+      "B": "List prices served from the public catalog (no gate needed).",
+      "C": "The discount rule in the system prompt only.",
+      "D": "The approval in the model's judgment.",
+      "E": "No controls at all."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"discounts need manager approval, and\nlist prices are public.\" Why: the approval is a side-effect gate in\ncode. Public prices need no gate. C and D trust the model with money.\nCounterfactual: none.\n\nMoney gates live in code.",
+    "source_section": "V2-D2.2"
+  },
+  {
+    "number": "M2-Q16",
+    "heading": "M2-Q16 (V2-D2.3)",
+    "question": "A resume parser extracts skills. It fails on unusual job\ntitles and lists them as skills incorrectly.\n\nWhich technique fits first?",
+    "choices": {
+      "A": "Few-shot examples including unusual titles as rejection examples,\nplus a structured output schema.",
+      "B": "Zero-shot.",
+      "C": "A bigger model.",
+      "D": "Removing the parser."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"fails on unusual job titles.\" Why:\nrejection examples teach the boundary. The schema fixes the format.\nV2-D2.3: simplest technique that passes evals. Counterfactual: C wins\nwhen good examples still fail.",
+    "source_section": "V2-D2.3"
+  },
+  {
+    "number": "M2-Q17",
+    "heading": "M2-Q17 (V2-D2.4)",
+    "question": "A legal assistant loads 40 prior cases into every call.\nThe bill doubled. The model cites the wrong case for the current\nmatter.\n\nWhat is the first fix?",
+    "choices": {
+      "A": "A larger window.",
+      "B": "Just-in-time retrieval of relevant cases plus compaction, instead\nof loading all 40 every call.",
+      "C": "A stronger tier.",
+      "D": "A longer prompt."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is: \"loads 40 prior cases into every call... cites the wrong case.\" This shows growth plus dilution. Retrieval loads what matters. Compaction shrinks the rest. A wins when all 40 cases are necessary for every call and the budget allows.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M2-Q18",
+    "heading": "M2-Q18 (V2-D2.4), Select TWO",
+    "question": "A shopping assistant's context holds: the full catalog\n(50,000 tokens), the user's last 200 messages, and the same shipping\npolicy pasted 4 times.\n\nWhich TWO faults are present? Select TWO.",
+    "choices": {
+      "A": "Growth: the full catalog loads every call.",
+      "B": "Duplication: the shipping policy appears 4 times.",
+      "C": "Loss: old turns vanish.",
+      "D": "Exhaustion: the window errors.",
+      "E": "Perfect context."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"full catalog (50,000 tokens)... pasted\n4 times.\" Why: the catalog load is growth. The 4x policy is\nduplication. C and D have no evidence. Counterfactual: D wins when the\ncall errors on window size.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M2-Q19",
+    "heading": "M2-Q19 (V2-D2.5)",
+    "question": "A code assistant shares a 10,000-token style guide prefix\nacross 8,000 calls per day. Questions vary. Prefix edits happen weekly.\n\nWhat should the team check before claiming savings?",
+    "choices": {
+      "A": "The measured hit rate against the break-even point, accounting for\nweekly prefix resets.",
+      "B": "The total call count.",
+      "C": "The model's mood.",
+      "D": "Nothing. Caching always pays."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Prefix edits happen weekly.\" Why: edits\nreset the cache and re-pay the write cost. Only the measured hit rate\nvs break-even decides. Counterfactual: D wins never. Measurement\ndecides.",
+    "source_section": "V2-D2.5"
+  },
+  {
+    "number": "M2-Q20",
+    "heading": "M2-Q20 (V2-D3.1)",
+    "question": "A support agent has refund_order and issue_refund\ntools. Both do the same thing. The team keeps both \"for safety.\"\n\nWhat is correct?",
+    "choices": {
+      "A": "Keep both for safety.",
+      "B": "Remove one. Overlapping descriptions confuse tool selection. One\nrefund tool with a clear schema is safer.",
+      "C": "Add a third refund tool.",
+      "D": "Rename both weekly."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Both do the same thing.\" Why: overlap is\nthe V2-D3.1 bloat signal. Two names for one action doubles the\nwrong-tool surface. Counterfactual: A wins never for identical tools.",
+    "source_section": "V2-D3.1"
+  },
+  {
+    "number": "M2-Q21",
+    "heading": "M2-Q21 (V2-D3.1), Select TWO",
+    "question": "An HR agent carries: read_policy (used daily),\nwrite_policy (never used), delete_employee (never used), and\ndraft_email (used daily).\n\nWhich TWO tools must you remove? Select TWO.",
+    "choices": {
+      "A": "write_policy.",
+      "B": "delete_employee.",
+      "C": "read_policy.",
+      "D": "draft_email.",
+      "E": "The audit log."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"write_policy (never used),\ndelete_employee (never used).\" Why: unneeded tools are pure attack\nsurface, and these two are dangerous. Teams use C and D daily. E kills\nobservability. Counterfactual: none. Used tools stay.",
+    "source_section": "V2-D3.1"
+  },
+  {
+    "number": "M2-Q22",
+    "heading": "M2-Q22 (V2-D3.2)",
+    "question": "A finance bot serves two subsidiaries. Subsidiary A's\nnumbers must never reach subsidiary B. The design filters by a\nsubsidiary field the user selects in a dropdown.\n\nWhat is wrong?",
+    "choices": {
+      "A": "Nothing. The dropdown filters.",
+      "B": "The dropdown value is user input, not an authorization decision. The\nfilter must use the authenticated user's subsidiary in code.",
+      "C": "The bot needs a bigger model.",
+      "D": "Dropdowns are too slow."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"filters by a subsidiary field the user\nselects.\" Why: user-selected means user-claimed. One dropdown change\nreads the other subsidiary's numbers. The verified identity decides.\nCounterfactual: A wins when the dropdown is bound to the verified\nsession.",
+    "source_section": "V2-D3.2"
+  }
+]

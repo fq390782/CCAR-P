@@ -1,0 +1,154 @@
+[
+  {
+    "number": "M4-Q17",
+    "heading": "M4-Q17 (V2-D2.4)",
+    "question": "A customer support bot loads the full 100,000-token product manual on every call. The bill is 8x the budget. Questions need one chapter. What is the first fix?",
+    "choices": {
+      "A": "A larger window.",
+      "B": "Retrieve the relevant chapter just in time instead of the full manual.",
+      "C": "A stronger tier.",
+      "D": "Shorter manuals."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Questions need one chapter... full 100,000-token manual.\" Why: growth is the fault. Retrieval is the fix. Counterfactual: A wins when every question needs the whole manual and the budget allows.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M4-Q18",
+    "heading": "M4-Q18 (V2-D2.4), Select TWO",
+    "question": "A news bot's context holds: all of today's articles, the same correction notice pasted 5 times, and yesterday's articles too. Which TWO faults are present? Select TWO.",
+    "choices": {
+      "A": "Growth: far more than needed loads every call.",
+      "B": "Duplication: the correction notice appears 5 times.",
+      "C": "Loss: old turns vanish.",
+      "D": "Exhaustion: the window errors.",
+      "E": "Perfect context."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"all of today's articles... pasted 5 times... yesterday's articles too.\" Why: the load is growth. The 5x notice is duplication. C and D have no evidence. Counterfactual: D wins when the call errors on window size.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M4-Q19",
+    "heading": "M4-Q19 (V2-D2.5)",
+    "question": "A shopping bot shares a 3,000-token policy prefix across 25,000 calls per day. The prefix never changes. Hit rate measures 92%. Should the team keep prompt caching?",
+    "choices": {
+      "A": "No. 3,000 tokens is small.",
+      "B": "Yes: the prefix is stable and the measured 92% hit rate clears the break-even point by a wide margin.",
+      "C": "No. Caching is complex.",
+      "D": "Switch to response caching instead."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"never changes. Hit rate measures 92%.\" Why: stability plus measured hit rate above break-even is the keep condition. Both hold. Counterfactual: D wins when whole prompts repeat identically.",
+    "source_section": "V2-D2.5"
+  },
+  {
+    "number": "M4-Q20",
+    "heading": "M4-Q20 (V2-D3.1)",
+    "question": "A calendar agent has delete_event though its task only reads schedules. The team argues the tool \"might be useful later.\" What is correct?",
+    "choices": {
+      "A": "Keep it for later.",
+      "B": "Remove it now. \"Might be useful\" is not a task. The tool is pure attack surface today. Re-add with review if a task needs it.",
+      "C": "Keep it and log it.",
+      "D": "Give it to every agent."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"only reads schedules... 'might be useful later.'\" Why: least privilege is about current tasks. Speculative tools are speculative attack surface. Counterfactual: C wins never as the fix. Logging is not removal.",
+    "source_section": "V2-D3.1"
+  },
+  {
+    "number": "M4-Q21",
+    "heading": "M4-Q21 (V2-D3.1), Select TWO",
+    "question": "A finance agent has 16 tools. get_balance and check_balance are identical. A wire_transfer tool exists though the task is read-only analysis. Which TWO removals are correct? Select TWO.",
+    "choices": {
+      "A": "Remove one of the two identical balance tools.",
+      "B": "Remove wire_transfer.",
+      "C": "Remove the report reader used daily.",
+      "D": "Remove the audit log.",
+      "E": "Add more transfer tools."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"identical... read-only analysis.\" Overlap is the bloat signal. The wire tool exceeds the task. The wire tool moves money. Use C. D blinds.",
+    "source_section": "V2-D3.1"
+  },
+  {
+    "number": "M4-Q22",
+    "heading": "M4-Q22 (V2-D3.2)",
+    "question": "A multi-tenant support bot filters tickets by the company field in the user's profile JSON, which the user can edit. What is wrong?",
+    "choices": {
+      "A": "Nothing. The profile filters.",
+      "B": "The profile field is user-editable, so it is a claim. The filter must use the authenticated user's company in code.",
+      "C": "The bot needs a bigger model.",
+      "D": "JSON is too slow."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"which the user can edit.\" Why: user-editable means user-claimed. One edit reads another company's tickets. The verified identity decides. Counterfactual: A wins when the field is server-set and uneditable.",
+    "source_section": "V2-D3.2"
+  },
+  {
+    "number": "M4-Q23",
+    "heading": "M4-Q23 (V2-D3.2)",
+    "question": "An internal tool calls a database with the developer's personal credentials baked into the config. What is wrong?",
+    "choices": {
+      "A": "Nothing. It works.",
+      "B": "Personal credentials in shared config: no attribution, no rotation, and the credential leaves with the developer. Use a service identity with scoped access.",
+      "C": "The database is too slow.",
+      "D": "Config files are bad."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"developer's personal credentials baked into the config.\" Why: shared personal credentials destroy attribution and rotation. Service identities with scopes are the fix. Counterfactual: A wins never for shared personal credentials.",
+    "source_section": "V2-D3.2"
+  },
+  {
+    "number": "M4-Q24",
+    "heading": "M4-Q24 (V2-D3.3)",
+    "question": "A search pipeline measures p95: parse 0.2 s, vector search 2.3 s, rerank 0.4 s, model 1.1 s. Total 4.0 s. The SLA is 2.0 s. Which stage must you optimize first?",
+    "choices": {
+      "A": "Parse.",
+      "B": "Vector search: it holds over half the total.",
+      "C": "Rerank.",
+      "D": "Add a cache stage."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"vector search 2.3 s... Total 4.0 s.\" Why: 58% of the budget. The 2.0 s cut must come mostly from it. Counterfactual: C wins when rerank dominates.",
+    "source_section": "V2-D3.3"
+  },
+  {
+    "number": "M4-Q25",
+    "heading": "M4-Q25 (V2-D3.4)",
+    "question": "A returns agent calls the model, a warehouse API, and a refund queue. Refunds sometimes never issue. The trace has per-hop events but no timings. What gap exists?",
+    "choices": {
+      "A": "A bigger model.",
+      "B": "Per-hop timings in the trace: without durations, the team cannot tell a slow hop from a dropped one.",
+      "C": "More refunds.",
+      "D": "A second queue."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"no timings.\" Why: V2-D3.4 traces include latencies per hop. Duration distinguishes slow from dropped. Counterfactual: A wins never for a timing question.",
+    "source_section": "V2-D3.4"
+  },
+  {
+    "number": "M4-Q26",
+    "heading": "M4-Q26 (V2-D3.5)",
+    "question": "A RAG pipeline over support articles returns great chunks but the answers ignore them and invent policies. Which layer failed?",
+    "choices": {
+      "A": "Retrieval: the chunks are great, so retrieval works.",
+      "B": "The model/generation layer: the chunks arrive and the answer still invents. Fix the prompt, the model choice, or add a grounding gate.",
+      "C": "Chunking.",
+      "D": "Indexing."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"returns great chunks but the answers ignore them.\" Why: the trace clears retrieval and convicts generation. Fix the failing component, not a proxy. Counterfactual: A wins when chunks are wrong.",
+    "source_section": "V2-D3.5"
+  }
+]

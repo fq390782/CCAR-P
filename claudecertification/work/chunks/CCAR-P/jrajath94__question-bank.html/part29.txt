@@ -1,0 +1,224 @@
+<h3 id="bank-mocks-h60">M1-Q56 (V2-D6.3)</h3>
+
+<p id="sec-bank-mocks-p275" data-kind="prose"><strong>Scenario.</strong> A pilot costs $500 per month for 1,000 chats. The rollout
+targets 200,000 chats per month with new retrieval stages.</p>
+
+<p id="sec-bank-mocks-p276" data-kind="prose"><strong>Question.</strong> What must the team produce before rollout?</p>
+
+<p id="sec-bank-mocks-p277" data-kind="prose"><strong>Options.</strong>
+A) A production cost forecast: per-unit cost at scale, times volume,
+plus the new stages, with the assumptions listed.
+B) Hope.
+C) The pilot bill framed on the wall.
+D) A bigger pilot.</p>
+
+<p id="sec-bank-mocks-p278" data-kind="prose"><strong>Key.</strong> A. Decisive phrase: "200,000 chats per month with new
+retrieval stages." Why: V2-D6.3 requires production cost forecasting.
+Pilot unit cost times 200 plus new-stage costs, with assumptions
+explicit. B, C, and D are not forecasts. Counterfactual: D wins when
+the pilot never measured unit cost.</p>
+
+
+<h3 id="bank-mocks-h61">M1-Q57 (V2-D6.4)</h3>
+
+<p id="sec-bank-mocks-p279" data-kind="prose"><strong>Scenario.</strong> An ADR records the choice of a vector database. A year
+later the workload changes completely.</p>
+
+<p id="sec-bank-mocks-p280" data-kind="prose"><strong>Question.</strong> What should the ADR trigger?</p>
+
+<p id="sec-bank-mocks-p281" data-kind="prose"><strong>Options.</strong>
+A) Nothing. DRs are write-once.
+B) A review: the ADR names its review criteria and open issues, so the
+team re-evaluates the decision against the new workload.
+C) Deleting the ADR.
+D) Blaming the author.</p>
+
+<p id="sec-bank-mocks-p282" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;the workload changes completely.&quot; Why:
+V2-D6.4 ADRs carry review criteria and open issues. Changed conditions
+trigger re-evaluation. A treats the ADR as a tombstone.
+Counterfactual: A wins never.</p>
+
+<p id="sec-bank-mocks-p283" data-kind="prose">Decisions expire.</p>
+
+
+<h3 id="bank-mocks-h62">M1-Q58 (V2-D6.4)</h3>
+
+<p id="sec-bank-mocks-p284" data-kind="prose"><strong>Scenario.</strong> The founding engineer leaves. A new hire must operate the
+agent fleet next week.</p>
+
+<p id="sec-bank-mocks-p285" data-kind="prose"><strong>Question.</strong> What makes the architecture docs sufficient?</p>
+
+<p id="sec-bank-mocks-p286" data-kind="prose"><strong>Options.</strong>
+A) The founder's memory.
+B) Docs that let a successor operate without the original meetings:
+ADRs, runbooks, ownership, and open issues.
+C) A farewell party.
+D) The code alone.</p>
+
+<p id="sec-bank-mocks-p287" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "operate the agent fleet next week." Why:
+V2-D6.4 demands successor-operable docs. Code shows what. DRs and
+runbooks show why and how. Counterfactual: D wins never alone for a
+fleet.</p>
+
+
+<h3 id="bank-mocks-h63">M1-Q59 (V2-D6.5), Select TWO</h3>
+
+<p id="sec-bank-mocks-p288" data-kind="prose"><strong>Scenario.</strong> A team hands a support bot to operations. The handoff
+packet has: ADRs, runbook, named owners per watch, and the regression
+suite.</p>
+
+<p id="sec-bank-mocks-p289" data-kind="prose"><strong>Question.</strong> Which TWO mark the handoff complete? Select TWO.</p>
+
+<p id="sec-bank-mocks-p290" data-kind="prose"><strong>Options.</strong>
+A) Operations can run the bot without the builders: the packet answers
+why, how, and who.
+B) The regression suite runs green on the handoff build.
+C) The builders promise to answer Slack forever.
+D) A cake.
+E) Deleting the docs to "travel light."</p>
+
+<p id="sec-bank-mocks-p291" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p292" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;ADRs, runbook, named owners per watch,
+and the regression suite.&quot; Why: V2-D6.5 handoff means the next phase
+can operate independently. A tests independence. B tests the build.
+C is not a handoff, D is cake, E destroys it.</p>
+
+<p id="sec-bank-mocks-p293" data-kind="prose">Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h64">M1-Q60 (V2-D7.1)</h3>
+
+<p id="sec-bank-mocks-p294" data-kind="prose"><strong>Scenario.</strong> A team of 15 uses Claude Code. The repo has a production
+deploy script. Twice, the agent ran it during exploration.</p>
+
+<p id="sec-bank-mocks-p295" data-kind="prose"><strong>Question.</strong> What is the correct configuration?</p>
+
+<p id="sec-bank-mocks-p296" data-kind="prose"><strong>Options.</strong>
+A) This is a <code>CLAUDE.md</code> note. It says &quot;do not run the deploy script.&quot;
+B) This is a deny rule on the deploy script path in the committed settings. It is also an allow-listed path for the release engineer with audit.
+C) There is no configuration. The team is careful.</p>
+
+<p id="sec-bank-mocks-p297" data-kind="prose">D) Delete the deploy script.</p>
+
+<p id="sec-bank-mocks-p298" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;Twice, the agent ran it during
+exploration.&quot; Why: the incident proves guidance failed. The deny rule
+enforces in code. The allow-listed path keeps legitimate deploys
+working. D breaks releases.</p>
+
+<p id="sec-bank-mocks-p299" data-kind="prose">Counterfactual: A wins for style
+guidance, never after two incidents.</p>
+
+
+<h3 id="bank-mocks-h65">M1-Q61 (V2-D7.1)</h3>
+
+<p id="sec-bank-mocks-p300" data-kind="prose"><strong>Scenario.</strong> An org has 10 teams on Claude Code. Finance needs a hard
+cap on model spend per team.</p>
+
+<p id="sec-bank-mocks-p301" data-kind="prose"><strong>Question.</strong> Which mechanism fits?</p>
+
+<p id="sec-bank-mocks-p302" data-kind="prose"><strong>Options.</strong>
+A) A CLAUDE.md note per repo asking teams to spend less.
+B) Managed policies: org-level model and spend guardrails that no team
+config can override.
+C) Trust.
+D) Project defaults alone.</p>
+
+<p id="sec-bank-mocks-p303" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "hard cap on model spend per team." Why:
+"hard cap" plus "no team can weaken" is the managed-policy win
+condition. Project defaults cannot survive their own editors. A and C
+are not controls. Counterfactual: D wins for team workflow tooling,
+never for org non-negotiables.</p>
+
+
+<h3 id="bank-mocks-h66">M1-Q62 (V2-D7.2)</h3>
+
+<p id="sec-bank-mocks-p304" data-kind="prose"><strong>Scenario.</strong> An AI assistant writes unit tests for a payment module.
+The engineer pastes them into the repo.</p>
+
+<p id="sec-bank-mocks-p305" data-kind="prose"><strong>Question.</strong> What is necessary before merge?</p>
+
+<p id="sec-bank-mocks-p306" data-kind="prose"><strong>Options.</strong>
+A) Nothing. The AI wrote them.
+B) Run the tests, inspect the results, and confirm no secrets in the
+test fixtures.
+C) Count the tests.
+D) Admire the coverage number.</p>
+
+<p id="sec-bank-mocks-p307" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;writes unit tests for a payment module.&quot;
+Why: V2-D7.2 verification: tests ran, results inspected, secrets
+protected. Unrun tests prove nothing. Fixtures are a secret leak path.
+Counterfactual: none.</p>
+
+<p id="sec-bank-mocks-p308" data-kind="prose">Pasting unrun tests is never acceptable.</p>
+
+
+<h3 id="bank-mocks-h67">M1-Q63 (V2-D7.3)</h3>
+
+<p id="sec-bank-mocks-p309" data-kind="prose"><strong>Scenario.</strong> A support bot's answer quality drops over a month. No code
+changed. The runbook's quality branch maps symptoms to investigations.</p>
+
+<p id="sec-bank-mocks-p310" data-kind="prose"><strong>Question.</strong> What does the runbook check?</p>
+
+<p id="sec-bank-mocks-p311" data-kind="prose"><strong>Options.</strong>
+A) The office lighting.
+B) Quality to prompt, model, or retrieval drift: re-run the eval
+drawers, check for prompt edits, model version changes, and index or
+data changes.
+C) The vendor's homepage.
+D) The team's lunch menu.</p>
+
+<p id="sec-bank-mocks-p312" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;answer quality drops... No code
+changed.&quot; Why: V2-D7.3 maps quality symptoms to prompt, model, and
+retrieval drift investigations. The eval drawers say whether the drop
+is real and where. Counterfactual: none.</p>
+
+<p id="sec-bank-mocks-p313" data-kind="prose">The map is the answer.</p>
+
+
+<h3 id="bank-mocks-h72">M2-Q01 (V2-D1.1)</h3>
+
+<p id="sec-bank-mocks-p317" data-kind="prose"><strong>Scenario.</strong> A dental insurer processes 12,000 pre-authorizations per
+day. About 80% are routine cleanings with fixed codes. About 20% are
+complex surgical cases. One hard rule: no approval on an unverified
+procedure code.</p>
+
+<p id="sec-bank-mocks-p318" data-kind="prose"><strong>Question.</strong> Which design fits best?</p>
+
+<p id="sec-bank-mocks-p319" data-kind="prose"><strong>Options.</strong>
+A) The most capable tier approves everything with no checks.
+B) Deterministic rules approve the 80% routine cases. Claude drafts the
+clinical summary for the 20% complex cases. A code gate blocks any
+approval until the procedure code check passes.
+C) One agent handles everything with no checks.</p>
+
+<p id="sec-bank-mocks-p320" data-kind="prose">D) A dentist reviews all 12,000 cases.</p>
+
+<p id="sec-bank-mocks-p321" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "no approval on an unverified procedure
+code." Why: the fork maps fixed codes to rules and complex cases to
+Claude. The code gate enforces the hard rule. D cannot fit 12,000 daily
+reviews. Counterfactual: D wins at 50 cases per day with malpractice
+risk.</p>
+
+
+<h3 id="bank-mocks-h73">M2-Q02 (V2-D1.1)</h3>
+
+<p id="sec-bank-mocks-p322" data-kind="prose"><strong>Scenario.</strong> A logistics CFO asks for an AI system that "books freight
+automatically." About 75% of lanes use fixed rates. About 25% need
+negotiation. Finance states one rule: no booking above the lane budget
+without a check.</p>
+
+<p id="sec-bank-mocks-p323" data-kind="prose"><strong>Question.</strong> What is the best FIRST action?</p>
+
+<p id="sec-bank-mocks-p324" data-kind="prose"><strong>Options.</strong>
+A) Start to build the booking agent this week.
+B) Write the budget rule into the design. Fork fixed lanes to deterministic booking. Route negotiated lanes to Claude. Gate every booking against the lane budget in code.</p>
+
+<p id="sec-bank-mocks-p325" data-kind="prose">C) Benchmark the most capable tier first.
+D) Draft a system prompt that forbids over-budget bookings.</p>
+
+<p id="sec-bank-mocks-p326" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "no booking above the lane budget without
+a check." Why: hard constraints filter the design before any build. D
+puts a money rule in a prompt. A builds before the constraint exists.
+Counterfactual: A wins for a demo with no real bookings.</p>
+

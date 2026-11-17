@@ -1,0 +1,227 @@
+<h3 id="bank-mocks-h134">M2-Q63 (V2-D7.3)</h3>
+
+<p id="sec-bank-mocks-p606" data-kind="prose"><strong>Scenario.</strong> An agent's tool calls start failing with permission
+errors after a platform migration. Nothing in the agent changed.</p>
+
+<p id="sec-bank-mocks-p607" data-kind="prose"><strong>Question.</strong> What does the runbook check?</p>
+
+<p id="sec-bank-mocks-p608" data-kind="prose"><strong>Options.</strong>
+A) The model's feelings.
+B) Tool failures to credentials, permissions, or throttling: verify the
+service identity, its scopes, and quota after the migration.
+C) The office network cable.
+D) The vendor's blog.</p>
+
+<p id="sec-bank-mocks-p609" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "permission errors after a platform
+migration." Why: V2-D7.3 maps tool failures to creds, perms, and
+throttling. Migration changes identities and scopes. Counterfactual:
+none.</p>
+
+
+<h3 id="bank-mocks-h139">M3-Q01 (V2-D1.1)</h3>
+
+<p id="sec-bank-mocks-p612" data-kind="prose"><strong>Scenario.</strong> An airline handles 20,000 baggage claims per day. About
+88% are standard: tag number, flight, one photo. About 12% involve
+disputed liability between carriers. One hard rule: no compensation on
+an unverified tag.</p>
+
+<p id="sec-bank-mocks-p613" data-kind="prose"><strong>Question.</strong> Which design fits best?</p>
+
+<p id="sec-bank-mocks-p614" data-kind="prose"><strong>Options.</strong>
+A) One agent handles every claim with no checks.
+B) Deterministic rules process the 88% standard claims. Claude drafts
+the liability summary for the 12% disputed claims. A code gate blocks
+any compensation until the tag check passes.
+C) The most capable tier handles everything with no checks.</p>
+
+<p id="sec-bank-mocks-p615" data-kind="prose">D) Staff review all 20,000 claims.</p>
+
+<p id="sec-bank-mocks-p616" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "no compensation on an unverified tag."
+Why: the fork matches input shape to lane and the gate enforces the
+hard rule. D cannot scale to 20,000. Counterfactual: D wins at 60
+claims per day with fraud risk.</p>
+
+
+<h3 id="bank-mocks-h140">M3-Q02 (V2-D1.1)</h3>
+
+<p id="sec-bank-mocks-p617" data-kind="prose"><strong>Scenario.</strong> A bank's fraud team wants an AI that "blocks bad
+transactions automatically." About 90% of transactions are low-risk
+recurring payments. About 10% are unusual. Compliance states one rule:
+no block on a transaction without a logged reason.</p>
+
+<p id="sec-bank-mocks-p618" data-kind="prose"><strong>Question.</strong> What is the best FIRST action?</p>
+
+<p id="sec-bank-mocks-p619" data-kind="prose"><strong>Options.</strong>
+A) Build the auto-block agent this week.
+B) Write the rule into the design. Deterministic rules pass the 90% low-risk flow. Claude assesses the 10% unusual flow. A code gate logs the reason before any block.</p>
+
+<p id="sec-bank-mocks-p620" data-kind="prose">C) Benchmark tiers first.
+D) Draft a prompt that forbids unexplained blocks.</p>
+
+<p id="sec-bank-mocks-p621" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "no block on a transaction without a
+logged reason." Why: the constraint filters the design before build. D
+puts a compliance rule in a prompt. Counterfactual: A wins for a
+sandbox demo with no real transactions.</p>
+
+
+<h3 id="bank-mocks-h141">M3-Q03 (V2-D1.2)</h3>
+
+<p id="sec-bank-mocks-p622" data-kind="prose"><strong>Scenario.</strong> A content pipeline runs: draft, style check, fact check,
+legal review, publish, feedback. The published article is the system of
+record for corrections. A wrong fact in a medical article harms
+readers.</p>
+
+<p id="sec-bank-mocks-p623" data-kind="prose"><strong>Question.</strong> Where does the strongest verification sit?</p>
+
+<p id="sec-bank-mocks-p624" data-kind="prose"><strong>Options.</strong>
+A) Before drafting.
+B) After fact check and legal review, before publish: verify claims
+against sources in code plus human sign-off on medical claims.
+C) After publish.
+D) Nowhere. The draft is usually right.</p>
+
+<p id="sec-bank-mocks-p625" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "A wrong fact in a medical article harms
+readers." Why: verification sits after the model stages and before the
+irreversible publish. Medical claims get the human gate with source
+checks. Counterfactual: C wins for a personal blog with no readers.</p>
+
+
+<h3 id="bank-mocks-h142">M3-Q04 (V2-D1.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p626" data-kind="prose"><strong>Scenario.</strong> A recruiting pipeline takes web applications, validates
+them, scores them with a model, and writes interview invites to the HR
+system. Web input may be hostile. The HR system is the system of
+record.</p>
+
+<p id="sec-bank-mocks-p627" data-kind="prose"><strong>Question.</strong> Which TWO are trust boundaries? Select TWO.</p>
+
+<p id="sec-bank-mocks-p628" data-kind="prose"><strong>Options.</strong>
+A) Between web input and validation.
+B) Between the model score and the HR system write.
+C) Between validation and the model.
+D) Between the log writer and storage.
+E) Between two functions in one process.</p>
+
+<p id="sec-bank-mocks-p629" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p630" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;Web input may be hostile... writes
+interview invites to the HR system.&quot; Why: hostile input crosses at
+validation (screen it). The HR write is the side effect (authorize it
+in code). The rest are internal. Counterfactual: none.</p>
+
+<p id="sec-bank-mocks-p631" data-kind="prose">Internal
+crossings are not boundaries.</p>
+
+
+<h3 id="bank-mocks-h143">M3-Q05 (V2-D1.3)</h3>
+
+<p id="sec-bank-mocks-p632" data-kind="prose"><strong>Scenario.</strong> A factory monitors 500 sensors. Readings follow fixed
+thresholds. About 5% of alerts need judgment on ambiguous patterns.</p>
+
+<p id="sec-bank-mocks-p633" data-kind="prose"><strong>Question.</strong> Which pattern fits?</p>
+
+<p id="sec-bank-mocks-p634" data-kind="prose"><strong>Options.</strong>
+A) Agent loop for all readings.
+B) Deterministic workflow on thresholds, with an agent call for the 5%
+ambiguous patterns, then back to the workflow for the alert.
+C) Augmented single call per sensor with no thresholds.
+D) Manual monitoring.</p>
+
+<p id="sec-bank-mocks-p635" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;Readings follow fixed thresholds... 5% need judgment.&quot; Thresholds are deterministic. Ambiguity needs runtime judgment. The hybrid covers both cases.</p>
+
+<p id="sec-bank-mocks-p636" data-kind="prose">A wins when you cannot define thresholds.</p>
+
+
+<h3 id="bank-mocks-h144">M3-Q06 (V2-D1.3)</h3>
+
+<p id="sec-bank-mocks-p637" data-kind="prose"><strong>Scenario.</strong> A compliance team reviews vendor contracts against a
+fixed 20-point checklist. Every contract gets the same checks in the
+same order.</p>
+
+<p id="sec-bank-mocks-p638" data-kind="prose"><strong>Question.</strong> Which pattern fits?</p>
+
+<p id="sec-bank-mocks-p639" data-kind="prose"><strong>Options.</strong>
+A) Use an autonomous agent loop.
+B) Use a deterministic workflow. The checklist is fixed. The order is fixed. The trace must be identical per contract.</p>
+
+<p id="sec-bank-mocks-p640" data-kind="prose">C) Use an augmented single call with no checklist.
+D) There is no pattern. Skip the review.</p>
+
+<p id="sec-bank-mocks-p641" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "fixed 20-point checklist... same checks
+in the same order." Why: fixed steps plus identical-trace demand is
+the workflow's exact win condition. An agent would vary the plan.
+Counterfactual: A wins when the checklist itself is unknown per
+contract.</p>
+
+
+<h3 id="bank-mocks-h145">M3-Q07 (V2-D1.4)</h3>
+
+<p id="sec-bank-mocks-p642" data-kind="prose"><strong>Scenario.</strong> A translation pipeline uses a coordinator with a
+translator worker and a reviewer worker. The reviewer rejects 30% of
+translations with no reason codes.</p>
+
+<p id="sec-bank-mocks-p643" data-kind="prose"><strong>Question.</strong> What gap exists?</p>
+
+<p id="sec-bank-mocks-p644" data-kind="prose"><strong>Options.</strong>
+A) A bigger model.
+B) The handoff contract's disagree rule: rejection reason codes and
+the rework path, applied by the coordinator and logged.
+C) More translators.
+D) A longer timeout.</p>
+
+<p id="sec-bank-mocks-p645" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "rejects 30% of translations with no
+reason codes." Why: the contract must name the disagree rule:
+structured reasons and the rework path. Without it, rejections are
+dead ends. Counterfactual: C wins when throughput, not disputes, is
+the problem.</p>
+
+
+<h3 id="bank-mocks-h146">M3-Q08 (V2-D1.5)</h3>
+
+<p id="sec-bank-mocks-p646" data-kind="prose"><strong>Scenario.</strong> A disaster response plan needs: damage assessment,
+shelter setup, and supply routing. Assessment must finish before
+supply routing. Shelter setup is independent.</p>
+
+<p id="sec-bank-mocks-p647" data-kind="prose"><strong>Question.</strong> Which decomposition fits?</p>
+
+<p id="sec-bank-mocks-p648" data-kind="prose"><strong>Options.</strong>
+A) All three in parallel.
+B) Assessment first, then fan-out to shelter setup and supply routing
+in parallel, fan-in to a coordination check.
+C) One agent improvising.
+D) All three sequential.</p>
+
+<p id="sec-bank-mocks-p649" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;Assessment must finish before supply
+routing. Shelter setup is independent.&quot; Why: the dependency orders
+assessment first. Independence parallelizes the rest. A breaks the
+dependency.</p>
+
+<p id="sec-bank-mocks-p650" data-kind="prose">D wastes time. Counterfactual: A wins when assessment is
+not needed for routing.</p>
+
+
+<h3 id="bank-mocks-h147">M3-Q09 (V2-D1.5), Select TWO</h3>
+
+<p id="sec-bank-mocks-p651" data-kind="prose"><strong>Scenario.</strong> A software release needs: build, test, security scan, and
+deploy. Build must precede test and scan. Deploy needs all three
+green.</p>
+
+<p id="sec-bank-mocks-p652" data-kind="prose"><strong>Question.</strong> Which TWO orderings are valid? Select TWO.</p>
+
+<p id="sec-bank-mocks-p653" data-kind="prose"><strong>Options.</strong>
+A) Build, then test and security scan in parallel, then deploy.
+B) Build, test, scan, deploy in strict sequence.
+C) Deploy first, then build.
+D) Test before build.
+E) Scan and deploy in parallel.</p>
+
+<p id="sec-bank-mocks-p654" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p655" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;Build must precede test and scan.
+Deploy needs all three green.&quot; Why: both respect the dependencies.
+Test and scan are independent after the build, so parallel or sequence
+both work. C, D, and E break stated dependencies.</p>
+
+<p id="sec-bank-mocks-p656" data-kind="prose">Counterfactual:
+none. Dependencies decide.</p>
+

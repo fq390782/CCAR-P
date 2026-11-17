@@ -1,0 +1,141 @@
+<h3 id="bank-mocks-h262">M4-Q57 (V2-D6.4)</h3>
+
+<p id="sec-bank-mocks-p1169" data-kind="prose"><strong>Scenario.</strong> A team chose prompt caching and recorded an ADR. A year
+later the provider changes cache pricing.</p>
+
+<p id="sec-bank-mocks-p1170" data-kind="prose"><strong>Question.</strong> What happens next?</p>
+
+<p id="sec-bank-mocks-p1171" data-kind="prose"><strong>Options.</strong>
+A) Nothing.
+B) The ADR's review criteria trigger re-evaluation: does caching still
+pay at the new prices.
+C) Delete the ADR.
+D) Panic.</p>
+
+<p id="sec-bank-mocks-p1172" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "the provider changes cache pricing."
+Why: pricing was an ADR assumption. Changed assumptions reopen the
+decision. Counterfactual: A wins never when assumptions break.</p>
+
+
+<h3 id="bank-mocks-h263">M4-Q58 (V2-D6.4)</h3>
+
+<p id="sec-bank-mocks-p1173" data-kind="prose"><strong>Scenario.</strong> A new hire asks why deploys go through the release
+engineer instead of the agent.</p>
+
+<p id="sec-bank-mocks-p1174" data-kind="prose"><strong>Question.</strong> What answers him?</p>
+
+<p id="sec-bank-mocks-p1175" data-kind="prose"><strong>Options.</strong>
+A) "Because."
+B) The ADR: the decision, its date, the incident that motivated it,
+the alternatives, and the owner.
+C) The agent's opinion.
+D) A shrug.</p>
+
+<p id="sec-bank-mocks-p1176" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "why deploys go through the release
+engineer." Why: the ADR records the why, including the motivating
+incident. Counterfactual: C wins never as the record.</p>
+
+
+<h3 id="bank-mocks-h264">M4-Q59 (V2-D6.5), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1177" data-kind="prose"><strong>Scenario.</strong> A team ships a bot and disbands. Six months later it
+breaks. Nobody knows who owns it.</p>
+
+<p id="sec-bank-mocks-p1178" data-kind="prose"><strong>Question.</strong> Which TWO stop this failure? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1179" data-kind="prose"><strong>Options.</strong>
+A) Named lifecycle owners assigned at handoff, covering monitoring,
+iteration, and incidents.
+B) A runbook with escalation paths that survive team changes.
+C) Disbanding faster.
+D) Deleting the bot at ship.
+E) Hope.</p>
+
+<p id="sec-bank-mocks-p1180" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1181" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "Nobody knows who owns it." Why:
+V2-D6.5: lifecycle ownership is the finish line. Owners plus runbook
+survive reorgs. Counterfactual: D wins for a true throwaway with a
+fixed end date.</p>
+
+
+<h3 id="bank-mocks-h265">M4-Q60 (V2-D7.1)</h3>
+
+<p id="sec-bank-mocks-p1182" data-kind="prose"><strong>Scenario.</strong> A 100-person org uses Claude Code. Security needs secret
+scanning on every commit, everywhere, with no exceptions.</p>
+
+<p id="sec-bank-mocks-p1183" data-kind="prose"><strong>Question.</strong> Which mechanism fits?</p>
+
+<p id="sec-bank-mocks-p1184" data-kind="prose"><strong>Options.</strong>
+A) A CLAUDE.md note per repo.
+B) Managed policies: org-level hooks and deny rules deployed by
+admins, overriding everything below.
+C) Project defaults alone.
+D) Trust.</p>
+
+<p id="sec-bank-mocks-p1185" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "everywhere, with no exceptions." Why:
+org-wide non-negotiables take managed policies. Project defaults
+cannot survive their editors. Counterfactual: C wins for team workflow
+choices.</p>
+
+
+<h3 id="bank-mocks-h266">M4-Q61 (V2-D7.1)</h3>
+
+<p id="sec-bank-mocks-p1186" data-kind="prose"><strong>Scenario.</strong> A team wants a PostToolUse hook that runs the linter
+after every file edit.</p>
+
+<p id="sec-bank-mocks-p1187" data-kind="prose"><strong>Question.</strong> Where does it belong?</p>
+
+<p id="sec-bank-mocks-p1188" data-kind="prose"><strong>Options.</strong>
+A) Managed policies.
+B) Project defaults: the committed settings.json. It is team workflow
+tooling, not an org control.
+C) CLAUDE.md as a wish.
+D) Nowhere.</p>
+
+<p id="sec-bank-mocks-p1189" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "runs the linter after every file edit."
+Why: team workflow tooling belongs to the team config. Managed
+policies are for org non-negotiables. Counterfactual: A wins when the
+org mandates the linter everywhere.</p>
+
+
+<h3 id="bank-mocks-h267">M4-Q62 (V2-D7.2)</h3>
+
+<p id="sec-bank-mocks-p1190" data-kind="prose"><strong>Scenario.</strong> An AI assistant summarizes a production incident. The
+summary names the wrong service as the cause.</p>
+
+<p id="sec-bank-mocks-p1191" data-kind="prose"><strong>Question.</strong> What is the lesson?</p>
+
+<p id="sec-bank-mocks-p1192" data-kind="prose"><strong>Options.</strong>
+A) AI summaries are always right.
+B) Verify AI output before acting: the engineer must check the claim
+against the trace before the summary drives the response.
+C) Never use AI.
+D) Blame the AI.</p>
+
+<p id="sec-bank-mocks-p1193" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "names the wrong service as the cause."
+Why: V2-D7.2: verification is the human's job. Acting on an unchecked
+summary misdirects the response. Counterfactual: A wins never.
+Verification is the rule.</p>
+
+
+<h3 id="bank-mocks-h268">M4-Q63 (V2-D7.3)</h3>
+
+<p id="sec-bank-mocks-p1194" data-kind="prose"><strong>Scenario.</strong> A deployment agent's actions start failing after a
+permissions change. The runbook's tool branch maps symptoms to
+investigations.</p>
+
+<p id="sec-bank-mocks-p1195" data-kind="prose"><strong>Question.</strong> What does it check first?</p>
+
+<p id="sec-bank-mocks-p1196" data-kind="prose"><strong>Options.</strong>
+A) The model's version.
+B) Credentials and permissions: the service identity's scopes after
+the change, then throttling, then the tool's own health.
+C) The weather.
+D) The team's morale.</p>
+
+<p id="sec-bank-mocks-p1197" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "failing after a permissions change." Why:
+V2-D7.3 maps tool failures to creds, perms, then throttling. The
+change log names permissions. Counterfactual: A wins when the model
+version changed.</p>
+

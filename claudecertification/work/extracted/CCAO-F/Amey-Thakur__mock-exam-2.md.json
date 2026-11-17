@@ -1,0 +1,227 @@
+[
+  {
+    "number": "1",
+    "heading": null,
+    "question": "Claude returns a policy answer that matches your expectation exactly, with no citation. What does the match tell you?",
+    "choices": {
+      "A": "The answer is confirmed, since it agrees with your understanding",
+      "B": "The answer is probably correct but should be reworded",
+      "C": "Nothing about accuracy, because agreement with an expectation is not evidence",
+      "D": "The model has read the policy document"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Agreement with what you already believed is the easiest error to miss, since nothing prompts a check. Neither confirmation (A), rewording (B), nor an assumption about retrieval (D) establishes that the claim is true",
+    "source_section": "Output Evaluation and Validation"
+  },
+  {
+    "number": "2",
+    "heading": null,
+    "question": "A colleague asks Claude to check its own earlier answer, and it confirms the answer. How much weight does the confirmation carry?",
+    "choices": {
+      "A": "None on its own, because the check is not independent of the thing being checked",
+      "B": "Substantial, because the model reviewed its own reasoning",
+      "C": "Substantial if the confirmation is detailed",
+      "D": "It depends on the model used"
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Self-review is not an independent source and cannot establish correctness. Detail (C) and model choice (D) do not make a self-check independent",
+    "source_section": "Output Evaluation and Validation"
+  },
+  {
+    "number": "3",
+    "heading": null,
+    "question": "A report drafted with Claude contains one figure you cannot verify from any available source. What is the appropriate handling before circulation?",
+    "choices": {
+      "A": "Circulate it with a general disclaimer about AI assistance",
+      "B": "Keep the figure and mark it as an estimate",
+      "C": "Ask Claude to provide a source and keep whatever it returns",
+      "D": "Remove the figure and note that it could not be verified"
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "An unverifiable claim should not be presented as fact, and a labeled gap is honest. A blanket disclaimer (A) does not address the specific figure, an unfounded estimate (B) misrepresents it, and a citation produced on demand (C) needs the same verification",
+    "source_section": "Output Evaluation and Validation"
+  },
+  {
+    "number": "4",
+    "heading": null,
+    "question": "Which of these is the strongest candidate to hand to Claude in a monthly close process?",
+    "choices": {
+      "A": "Approving the final journal entries",
+      "B": "Drafting the variance commentary from figures that are already agreed",
+      "C": "Deciding which variances require investigation",
+      "D": "Signing off the reconciliation"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Drafting from agreed inputs is bounded and checkable. Approval (A), sign-off (D), and the decision about what to investigate (C) all carry accountability",
+    "source_section": "Workflow Integration and Solution Design"
+  },
+  {
+    "number": "5",
+    "heading": null,
+    "question": "A workflow produces good output but nobody uses it. What should be examined first?",
+    "choices": {
+      "A": "Whether the model should be upgraded",
+      "B": "Whether the output arrives where the work actually happens, in a form people can act on",
+      "C": "Whether the prompt is long enough",
+      "D": "Whether more people need training"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Adoption usually fails on fit with the existing process rather than on output quality. Model (A) and prompt length (C) address quality that is already acceptable, and training (D) treats a symptom",
+    "source_section": "Workflow Integration and Solution Design"
+  },
+  {
+    "number": "6",
+    "heading": null,
+    "question": "A team wants to paste anonymised customer feedback into Claude for theme analysis. What remains a risk after names are removed?",
+    "choices": {
+      "A": "Nothing, since anonymisation removes the risk entirely",
+      "B": "The model may store the text permanently",
+      "C": "Theme analysis is unreliable on anonymised data",
+      "D": "Free text can still identify people through specific details, so review before sending is still needed"
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Removing names does not remove identifying detail from free text, which is why a review step remains. Treating anonymisation as complete (A) is the error tested, and neither storage assumptions (B) nor reliability (C) is the governance issue here",
+    "source_section": "Governance, Risk, and Responsible Use"
+  },
+  {
+    "number": "7",
+    "heading": null,
+    "question": "Who should decide whether a Claude-assisted output is fit to send to a customer?",
+    "choices": {
+      "A": "The person accountable for the customer relationship",
+      "B": "Whoever wrote the prompt",
+      "C": "The model, if asked to assess its own output",
+      "D": "Nobody, if the workflow was approved in advance"
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Accountability for the outgoing communication decides the question. Prompt authorship (B) is incidental, self-assessment (C) is not independent, and prior approval of a workflow (D) does not review this instance",
+    "source_section": "Governance, Risk, and Responsible Use"
+  },
+  {
+    "number": "8",
+    "heading": null,
+    "question": "A prompt works well until the input document is much longer than usual, when quality drops. What is the most likely explanation?",
+    "choices": {
+      "A": "The model became less capable",
+      "B": "The prompt is too short",
+      "C": "The relevant material is now competing with far more surrounding text",
+      "D": "Longer documents always produce worse output"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Dilution across a much longer input is the usual cause of this pattern. The model has not changed (A), prompt length (B) is not the variable that changed, and length alone is not determinative (D)",
+    "source_section": "Prompting and Task Execution"
+  },
+  {
+    "number": "9",
+    "heading": null,
+    "question": "You want the same analysis applied to fifty documents with consistent output. What matters most?",
+    "choices": {
+      "A": "Using the largest model available",
+      "B": "Processing the documents in one conversation",
+      "C": "Reviewing only a sample of the outputs",
+      "D": "Fixing the prompt and the required output structure, and applying both unchanged to every document"
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Consistency across a set comes from holding the instruction and the output shape constant. Model size (A) does not create consistency, one long conversation (B) invites drift, and sampling (C) is a review policy rather than a design",
+    "source_section": "Prompting and Task Execution"
+  },
+  {
+    "number": "10",
+    "heading": null,
+    "question": "A task must return an answer within a second for an interactive interface, and the work is simple classification. What follows?",
+    "choices": {
+      "A": "Use the most capable model to be safe",
+      "B": "Batch the requests",
+      "C": "Use the smallest model that meets the accuracy requirement, since latency is the binding constraint",
+      "D": "Increase the context supplied"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "With a hard latency requirement and a simple task, the smallest sufficient model is the fit. The most capable model (A) spends latency for accuracy that is not needed, batching (B) breaks interactivity, and more context (D) adds cost and time",
+    "source_section": "Product and Model Selection"
+  },
+  {
+    "number": "11",
+    "heading": null,
+    "question": "What is the correct reading of a model's published benchmark score when choosing for a specific business task?",
+    "choices": {
+      "A": "It predicts performance on your task",
+      "B": "It is a general signal that does not substitute for evaluating on your own task",
+      "C": "It is irrelevant",
+      "D": "It determines the price you should expect to pay"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Benchmarks indicate general capability and cannot stand in for measurement on the actual task. Treating them as predictive (A) or irrelevant (C) are both wrong, and they do not set price (D)",
+    "source_section": "Product and Model Selection"
+  },
+  {
+    "number": "12",
+    "heading": null,
+    "question": "Two teams keep separate copies of the same reference documents in their own projects. What is the main risk?",
+    "choices": {
+      "A": "The copies drift apart, and the two teams begin answering the same question differently",
+      "B": "Higher storage cost",
+      "C": "Slower responses",
+      "D": "The model becomes confused between projects"
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Duplicated knowledge diverges as each copy is maintained separately, producing inconsistent answers. Storage (B) and speed (C) are minor, and projects do not leak into one another (D)",
+    "source_section": "Configuration and Knowledge Management"
+  },
+  {
+    "number": "13",
+    "heading": null,
+    "question": "What is the right first step when setting up a project for a recurring task?",
+    "choices": {
+      "A": "Decide what the task needs to know every time, and add only that",
+      "B": "Upload every document the team owns",
+      "C": "Write the longest possible instruction",
+      "D": "Add documents as questions come up, without review"
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "A deliberate, minimal base keeps retrieval sharp and is maintainable. Uploading everything (B) and accumulating without review (D) both dilute, and instruction length (C) is not the question",
+    "source_section": "Configuration and Knowledge Management"
+  },
+  {
+    "number": "14",
+    "heading": null,
+    "question": "A user reports that Claude gave a wrong answer, but you cannot reproduce it. What is the most useful next step?",
+    "choices": {
+      "A": "Assume the user made an error",
+      "B": "Obtain the exact prompt, inputs, and configuration they used",
+      "C": "Increase the model size for everyone",
+      "D": "Add a warning to the interface"
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Reproduction depends on the exact conditions, and gathering them is the only way to diagnose. Dismissing the report (A) discards the signal, and a model change (C) or a warning (D) acts before the cause is known",
+    "source_section": "Troubleshooting and Optimization"
+  },
+  {
+    "number": "15",
+    "heading": null,
+    "question": "Output quality varies between runs of an identical prompt on identical input. What does this indicate?",
+    "choices": {
+      "A": "The system is broken",
+      "B": "The temperature must be zero for all tasks",
+      "C": "Some variation is expected, and the task needs constraints tight enough that the variation does not matter",
+      "D": "The input must be shortened"
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Generation is not deterministic, so the design must tolerate variation within acceptable bounds. Treating it as breakage (A) misreads normal behavior, a universal temperature rule (B) is too blunt, and input length (D) is unrelated",
+    "source_section": "Troubleshooting and Optimization"
+  }
+]

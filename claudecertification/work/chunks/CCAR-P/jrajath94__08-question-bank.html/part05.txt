@@ -1,0 +1,322 @@
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q57</span><span class="constraint">D2</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A support bot's system prompt is 6,000 tokens: company policies, tone guidelines, and 15 few-shot examples. It is identical on every call. Token costs are 70 percent input tokens, and the prompt has not changed in two months.</div>
+<div class="constraint-block"><strong>Constraint:</strong> cut input token cost substantially without changing behavior or removing prompt content.</div>
+<div class="qb-ask">What is the right move?</div>
+<ol class="qb-opts" type="A"><li>Shorten the prompt by deleting half the examples.</li>
+<li>Enable prompt caching on the stable system prompt. The system processes the 6,000-token prefix one time. The system reuses the prefix. This cuts the cost per call. The behavior is identical.</li>
+<li>Move the examples into the user message so they feel fresher.</li>
+<li>Fine-tune a model on the prompt and delete the prompt entirely.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p71" data-kind="prose"><strong>Why B is correct:</strong> Prompt caching exists for this exact purpose. It is a long, stable, identical prefix for every call. Cached tokens cost a fraction of fresh input tokens. The behavior does not change. You do not remove content. The system meets the constraint on all three points.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. Deleting examples changes behavior. It risks the format and tone that the examples enforce.</li>
+<li>C is wrong. Moving examples to the user message breaks cacheability. It does not change the cost.</li>
+<li>D is wrong. Fine-tuning is a heavy and expensive project. It changes behavior in unmeasured ways. This is too much for the problem.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q58</span><span class="constraint">D2</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A platform team maintains 20 related internal assistants (HR, IT, finance, legal, and more). Each assistant&#x27;s prompt repeats the same company-wide instructions: tone, citation rules, escalation policy, and PII handling. Last month a policy change reached 14 prompts but missed 6, causing inconsistent behavior.</div>
+<div class="constraint-block"><strong>Constraint:</strong> shared instructions must exist in exactly one place so a policy change propagates everywhere at once.</div>
+<div class="qb-ask">Which prompt-reuse strategy enforces the constraint?</div>
+<ol class="qb-opts" type="A"><li>Merge all 20 assistants into one giant assistant with one prompt.</li>
+<li>Have one person own all 20 prompts and memorize the shared text.</li>
+<li>Copy-paste the shared instructions into each prompt more carefully next time.</li>
+<li>Modular prompts: extract the shared instructions into versioned shared modules (for example a Skill or shared prompt component) that every assistant includes by reference; update the module once to change all 20.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p72" data-kind="prose"><strong>Why D is correct:</strong> The failure is a duplicated source of truth. Versioned shared modules make the instructions single-sourced. One update propagates to all 20 assistants atomically. Versioning lets the team audit which policy version each assistant used.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. Careful copy-paste is still copy-paste. The next policy change will drift again.</li>
+<li>A is wrong. Merging 20 domains into one prompt creates an unmaintainable mega-prompt. It destroys per-domain tuning.</li>
+<li>B is wrong. Human memory is not a configuration management strategy. It fails on vacation, turnover, and scale.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q59</span><span class="constraint">D2</span><span class="qb-pill hard">Hard</span><span class="constraint">Select two</span></div>
+<div class="qb-scenario">
+<div>A code-review service processes 5 million tokens per day. The team tests two models. The team uses a 400-case eval set. Model L scores 91 percent. Model L costs $X per day. Model M scores 89 percent.</div>
+
+<div>Model M costs 0.35X per day. The SLA floor is 88 percent. Finance wants the cheapest option. The option must meet the SLA.</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> stay at or above 88 percent accuracy at minimum cost. The decision must rest on measured data, not model reputation.</div>
+<div class="qb-ask">Which two conclusions follow? (Select two.)</div>
+<ol class="qb-opts" type="A"><li>Choose Model L: 91 percent is higher, and higher accuracy is always worth the cost.</li>
+<li>Check per-category scores before you finalize. Model M may fail a critical category. For example, Model M may fail security flaws. Model L passes this category. The 89 percent aggregate score can hide an SLA failure.</li>
+<li>Skip the eval and choose by parameter count.</li>
+<li>Choose Model M. It clears the 88 percent floor. It costs about one third of Model L. The eval measurement supports this choice.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D, B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p73" data-kind="prose"><strong>Why D, B is correct:</strong> D applies the constraint directly. Model M clears the floor. Model M has a much lower cost. The choice uses measured data. B is the necessary caution. Aggregate scores hide per-segment failures.</p>
+
+<p id="question-bank-106-items-in-number-order-p74" data-kind="prose">The per-category check must pass. Then you can ship the cheaper model.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. "Higher is always worth it" ignores the cost constraint. 3 extra points above the floor at 3x cost needs justification. It does not need assumption.</li>
+<li>C is wrong. Parameter count is not a measured quality signal for this workload.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q60</span><span class="constraint">D7</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A 40-engineer team adopts Claude Code. Each engineer configures it differently: different allowed tools, different project instructions, different MCP servers. Results are inconsistent, and one engineer accidentally gave the agent write access to the production database config.</div>
+<div class="constraint-block"><strong>Constraint:</strong> every engineer gets the same safe, project-aware setup, managed in one place.</div>
+<div class="qb-ask">How should the team standardize?</div>
+<ol class="qb-opts" type="A"><li>Let each engineer keep personal configs; variety breeds innovation.</li>
+<li>Check shared configuration into the repo. Add a <code>CLAUDE.md</code> project file with instructions. Add a versioned MCP server list. Add a permissions policy. For example, do not give production write access. The policy applies to all users.</li>
+<li>Do not use Claude Code. Use Claude Code only after you design a perfect config.</li>
+<li>Email a PDF of recommended settings to the team.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p75" data-kind="prose"><strong>Why B is correct:</strong> Checked-in, versioned configuration gives every engineer the identical safe setup. The permissions policy structurally prevents the production-write accident. One place to update means fixes propagate to all 40 engineers.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. Uncoordinated configurations caused the incident. More variety means more risk.</li>
+<li>C is wrong. A ban forfeits the productivity gain. It does not manage the risk.</li>
+<li>D is wrong. A PDF is unenforceable. Nothing stops a person from ignoring it.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q61</span><span class="constraint">D7</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">An engineer asks an AI coding assistant to "fix the flaky test." The assistant rewrites the test to always pass by deleting the assertions. The engineer almost merges it.</div>
+<div class="constraint-block"><strong>Constraint:</strong> AI assistance must fix the actual flakiness without weakening the test.</div>
+<div class="qb-ask">What is the correct debugging workflow with the assistant?</div>
+<ol class="qb-opts" type="A"><li>Delete the flaky test; flaky tests are not worth fixing.</li>
+<li>Accept the assistant's fix; it made the test pass.</li>
+<li>First, reproduce the flake. Then, capture logs. Give the assistant the failure evidence. Ask the assistant to diagnose the root cause. The fix must keep or strengthen assertions. Verify the fix with repeated runs.</li>
+<li>Never use AI assistance on tests.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p76" data-kind="prose"><strong>Why C is correct:</strong> The assistant is only as good as its input. First, find failure evidence. Then, make a diagnosis. Then, make a fix. The fix must preserve test strength. Verify the fix with repeated runs.</p>
+<p class="qb-why" id="question-bank-106-items-in-number-order-p77" data-kind="prose">This workflow uses the AI's speed. It keeps the engineer in charge of correctness.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. A passing test with deleted assertions proves nothing. It is worse than the flake.</li>
+<li>D is wrong. It discards a useful tool. It does not use the tool correctly.</li>
+<li>A is wrong. Deleting the test destroys the coverage. The test was meant to provide coverage.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q62</span><span class="constraint">D7</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">PR reviews are the team bottleneck: reviewers take two days on average, and simple issues (missing tests, style violations) consume most of the review effort. The team wants Claude Code in the CI pipeline to pre-review PRs.</div>
+<div class="constraint-block"><strong>Constraint:</strong> cut review latency on mechanical issues without letting the bot approve PRs on its own or drown reviewers in noise.</div>
+<div class="qb-ask">Which CI integration design fits?</div>
+<ol class="qb-opts" type="A"><li>Only run the bot on Fridays to avoid disrupting the week.</li>
+<li>Let the bot auto-merge PRs it considers clean.</li>
+<li>
+<div>A scoped review hook checks each PR. The bot checks the PR against the team&#x27;s rules. The rules include tests present, style, and obvious bugs. The bot posts findings as review comments. The bot never merges. Humans still approve.</div>
+
+<div>Humans now focus on design. They do not focus on mechanics.</div>
+</li>
+<li>Run the bot on every commit and email its full output to the whole team.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p78" data-kind="prose"><strong>Why C is correct:</strong> Scoping the bot to mechanical checks attacks the actual bottleneck. It checks against written rules. Review comments keep humans in the decision seat. Withholding merge rights prevents autonomous approvals. Reviewers get faster. They focus on what matters.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. Auto-merge hands the approval decision to the bot. This violates the constraint.</li>
+<li>D is wrong. Unfiltered full output to everyone is noise. It is not a review process.</li>
+<li>A is wrong. Batching reviews to Friday increases latency. It does not cut latency.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q63</span><span class="constraint">D7</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">New engineers need six weeks to work well on a complex repo. They do not know the build commands. They do not know the deploy process. They do not know which services own which APIs. Senior engineers answer the same questions many times.</div>
+<div class="constraint-block"><strong>Constraint:</strong> cut time-to-productivity with a solution seniors maintain once, not per newcomer.</div>
+<div class="qb-ask">How should the team use Claude Code to onboard newcomers?</div>
+<ol class="qb-opts" type="A"><li>Record senior engineers answering questions and build a video library.</li>
+<li>Assign each newcomer a senior buddy for six weeks.</li>
+<li>Build curated Skills and slash commands for repo tasks. These tasks include build, test, deploy, and &quot;which service owns this API&quot;. Document these items in the repo&#x27;s <code>CLAUDE.md</code> file. Newcomers get correct answers fast. Senior engineers maintain the knowledge one time.</li>
+<li>Give newcomers full production access so they learn by doing.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p79" data-kind="prose"><strong>Why C is correct:</strong> Curated Skills turn repeated senior knowledge into maintained, instantly accessible tooling. Seniors write it one time. Every newcomer benefits immediately. The repo stays the source of truth. It directly attacks the six-week ramp.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. It preserves the per-newcomer senior cost. The constraint wants to eliminate this cost.</li>
+<li>D is wrong. Production access for learning is a security and reliability hazard.</li>
+<li>A is wrong. Videos go stale. They are not queryable at the moment of need. Nobody re-records them on every change.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q64</span><span class="constraint">D7</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">
+<div>The team&#x27;s coding agents start to work wrong after a Friday deploy. Agents use old project instructions. One agent type loops on a renamed tool. The deploy changed <code>CLAUDE.md</code> files. The deploy changed MCP server configs. Rollback is possible.</div>
+
+<div>The team wants a process. The team does not want only a revert.</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> future config deploys must be verifiable before full rollout, with fast recovery when they break.</div>
+<div class="qb-ask">Which operational design meets the constraint?</div>
+<ol class="qb-opts" type="A"><li>Deploy configs on Fridays only, when a change affects fewer engineers.</li>
+<li>
+<div>Do canary deploys for agent configuration. Roll new <code>CLAUDE.md</code> and MCP configs to a small group first. Run smoke tests. Smoke tests use sample tasks with good outputs. Stop the deploy automatically if it fails. Keep the old config for a one-command rollback.</div>
+
+<div>Require a config changelog.</div>
+</li>
+<li>Stop changing agent configs after initial setup.</li>
+<li>Have each engineer test the new config manually before it ships.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p80" data-kind="prose"><strong>Why B is correct:</strong> Canary and smoke tests verify the config on real tasks before full rollout. Auto-halt limits the blast radius. One-command rollback gives fast recovery. The changelog makes the fleet's behavior auditable. Every element meets the constraint.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. Timing the deploy for Friday changes who it affects. It does not change if the deploy breaks. This is superstition. It is not a process.</li>
+<li>C is wrong. Configs must change with the repo. Freezing them trades today's risk for steady decay.</li>
+<li>D is wrong. Manual testing by every engineer does not scale. It is also inconsistent. It is not a verifiable process.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q65</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">
+<div>A health insurer uses a claims-summarization agent on Bedrock. The agent is for internal adjusters. It works well. Leadership wants to use it for member-facing chat. Members ask &quot;why was my claim denied?&quot;. This expansion puts protected health information in front of members.</div>
+
+<div>A wrong explanation of a denial can cause a regulatory complaint.</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> no member may ever receive an invented or incorrect reason for a claim denial.</div>
+<div class="qb-ask">What architectural change does the expansion require?</div>
+<ol class="qb-opts" type="A"><li>Put the agent behind a workflow. A deterministic step pulls the actual determination record first. The model can only rephrase that record. The model must never supply its own reasons.</li>
+<li>Route member questions to a larger model, which hallucinates less often.</li>
+<li>Let the existing agent answer member questions directly, since it already understands claims.</li>
+<li>Add a paragraph to the system prompt telling the model to be careful with denial explanations under HIPAA.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p81" data-kind="prose"><strong>Why A is correct:</strong> The constraint is zero invented denial reasons. Only a structural guarantee meets this constraint. The reason comes from the determination record. The model must rephrase verified content. Care and capacity do not guarantee anything.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. The internal agent was never constrained against inventing explanations. Member-facing use raises the stakes. It does not add a guard.</li>
+<li>D is wrong. A prompt instruction is bypassable and unverifiable. This is the prompt-plea trap. It applies to a compliance risk.</li>
+<li>B is wrong. A larger model still hallucinates. The failure is architectural. It is not a capacity failure (bigger-model trap).</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q66</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A support desk gets 800 tickets a day. Each ticket is a multi-turn conversation where every reply depends on what was said before. An architect proposes fanning each ticket out to five subagents in parallel "to resolve tickets five times faster." The CFO likes the sound of it.</div>
+<div class="constraint-block"><strong>Constraint:</strong> resolution quality must hold, and cost per ticket cannot rise.</div>
+<div class="qb-ask">What is the flaw in the proposal, and what should replace it?</div>
+<ol class="qb-opts" type="A"><li>Replace the subagents with a larger model so one pass is enough.</li>
+<li>Run the five subagents but have them vote on each reply, which fixes quality.</li>
+<li>Fan-out is theater here: the replies are sequential, not independent, so five subagents quintuple the cost while fragmenting context. Keep one agent per ticket and fan out only genuinely parallel subtasks, like pulling account history while searching the knowledge base.</li>
+<li>Drop to three subagents to cut the cost increase.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p82" data-kind="prose"><strong>Why C is correct:</strong> Fan-out helps only when subtasks are independent. In a sequential dialogue, each step needs the previous step's context. Parallel agents cannot divide the work. They duplicate the work. The credited answer names the flaw. It keeps parallelism where it is real.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. Voting adds more cost. It still fragments the conversation context across five agents.</li>
+<li>D is wrong. Three subagents have the same structural flaw as five subagents. This is just cheaper theater.</li>
+<li>A is wrong. Model size does not fix a decomposition mistake. The work is sequential either way.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q67</span><span class="constraint">D1</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A retailer gives an agent power to handle refunds up to $500. A proposal lets the agent draft the customer email. The proposal lets the agent send the email. The proposal lets the agent process the refund. The agent does this in one loop. No human is in the middle.</div>
+<div class="constraint-block"><strong>Constraint:</strong> money movement and customer-facing messages must never execute on a model judgment alone.</div>
+<div class="qb-ask">Which design satisfies the constraint?</div>
+<ol class="qb-opts" type="A"><li>Require the agent to explain its reasoning in detail before acting, then let it act.</li>
+<li>Have two agents vote; act only if both agree.</li>
+<li>Let the agent draft, send, and refund, but add "double-check the policy before acting" to the system prompt.</li>
+<li>
+<div>Let the agent draft freely. Put the send and the refund behind a gate. A rules engine checks policy. The rules engine checks the amount. The rules engine checks fraud flags. A human approves the send.</div>
+
+<div>The model proposes. The gate disposes.</div>
+</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p83" data-kind="prose"><strong>Why D is correct:</strong> The constraint bans model-only execution of irreversible actions. A deterministic gate plus human approval moves the decision from the model. This moves it to a verifiable control. Drafting stays automated.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong because a self-check instruction is still a model judgment. This is the prompt-plea trap on an irreversible action.</li>
+<li>A is wrong because a detailed explanation does not change who decides. The model still executes alone.</li>
+<li>B is wrong because two model votes are still model judgment. There is no deterministic or human check anywhere.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q68</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">
+<div>A bank chooses between a vendor agent platform and the Anthropic API. The vendor demo has more features. It has dashboards. It has connectors. It has a prompt library. The build option is plainer.</div>
+
+<div>The bank keeps full control of its data path.</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> the decision must protect data residency, audit ownership, and exit options under banking regulation.</div>
+<div class="qb-ask">How should the architect frame the build-vs-buy decision?</div>
+<ol class="qb-opts" type="A"><li>Count features: the platform with the longer checklist wins.</li>
+<li>Compare total license cost against three years of API spend.</li>
+<li>Evaluate control and coupling. The system processes data. The system stores data. An owner has the audit trail. What is the cost to swap the model layer later? Features are secondary.</li>
+<li>Choose whichever the engineering team already knows.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p84" data-kind="prose"><strong>Why C is correct:</strong> Banking regulation states that the decision is about control and coupling. Control refers to residency and audit ownership. Coupling refers to exit cost and swap-ability. It is not about feature counts. The credited answer evaluates these exact axes.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. A feature checklist ignores regulatory and lock-in risks. These risks dominate this decision.</li>
+<li>B is wrong. License-versus-API math alone misses residency, audit, and exit costs. These costs are much larger than the subscription line.</li>
+<li>D is wrong. Team familiarity is a delivery convenience. It is not a decision criterion for a regulated multi-year commitment.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q69</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A SaaS company serves 300 tenants from one Claude agent. The proposal keeps a single shared agent. The proposal adds a system-prompt instruction. The instruction is: &quot;Only discuss data belonging to the current tenant, identified by the tenant_id in the conversation.&quot;</div>
+<div class="constraint-block"><strong>Constraint:</strong> under SOC 2, no tenant may ever see another tenant's data, and the control must be enforceable, not advisory.</div>
+<div class="qb-ask">Which design provides real tenant isolation?</div>
+<ol class="qb-opts" type="A"><li>
+<div>Derive a separate session context per tenant. Do this at the architecture layer. Use tenant-scoped credentials. Use filtered tool access. Enforce data partitioning outside the model. Cross-tenant data is unreachable.</div>
+
+<div>Cross-tenant data is not just forbidden.</div>
+</li>
+<li>Add a second agent that reviews each reply for cross-tenant leakage before it is sent.</li>
+<li>Log all cross-tenant data accesses for later audit.</li>
+<li>Keep the shared agent and strengthen the prompt with examples of what not to reveal.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p85" data-kind="prose"><strong>Why A is correct:</strong> Isolation must be structural. If the data is unreachable through scoped credentials and partitioning, no prompt failure can leak it. A prompt instruction is advisory. Architecture is enforceable.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. Stronger prompt wording is still a prompt-plea. It is bypassable. It is untestable as a security boundary.</li>
+<li>
+<div>B is wrong. A reviewer agent is a model. It can miss things. Someone can trick it. It doubles cost. It doubles latency.</div>
+
+<div>This control must be structural.</div>
+</li>
+<li>C is wrong. Logging detects leaks after they happen. The constraint requires preventing them.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q70</span><span class="constraint">D1</span><span class="qb-pill hard">Hard</span><span class="constraint">Select two</span></div>
+<div class="qb-scenario">
+<div>A data platform team proposes one &quot;super-agent&quot;. This single loop does agentic RAG over documents. It does agentic search over the web. It does agentic analytics over the warehouse. All parts share one memory. Two teams own the pieces.</div>
+
+<div>The search team owns retrieval quality. The analytics team owns SQL correctness. The pilot&#x27;s failures are hard to attribute. Nobody can tell the source of a bad answer.</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> every failure must be attributable to an owner, and each team must be able to eval and ship its piece independently.</div>
+<div class="qb-ask">Which two changes satisfy the constraint? (Select two)</div>
+<ol class="qb-opts" type="A"><li>Decompose into three bounded agents (RAG, search, analytics) with explicit input/output contracts, coordinated by a thin orchestrator; each team owns its agent and its eval set.</li>
+<li>Give the super-agent three labeled memory sections so failures are easier to discuss.</li>
+<li>Require each team to review the super-agent's full prompt before every release.</li>
+<li>Version each agent's contract separately and gate releases on that agent's own eval suite, so one team's change cannot silently break another's piece.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A, D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p86" data-kind="prose"><strong>Why A, D is correct:</strong> Bounded agents with contracts make ownership real. Failures stay with the agent. This agent violated its contract (A). Per-agent versioning and eval gates let teams ship independently. This stops cross-team breakage (D). The orchestrator stays thin.</p>
+
+<p id="question-bank-106-items-in-number-order-p87" data-kind="prose">It cannot become a second super-agent.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. Labeled memory sections do not create ownership. They do not create independent evaluations. Attribution stays a matter of opinion.</li>
+<li>C is wrong. Joint prompt review couples the teams on every release. This is the opposite of independent shipping.</li>
+</ol>
+</div>
+</details>
+</div>
+

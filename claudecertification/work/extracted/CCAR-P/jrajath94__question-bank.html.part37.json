@@ -1,0 +1,154 @@
+[
+  {
+    "number": "M3-Q10",
+    "heading": "M3-Q10 (V2-D1.6)",
+    "question": "A hotel automates check-in. Front-desk labor costs $8,000 per month for check-ins. The kiosk design costs $1,200 per month. The kiosk design has a $5,000 one-time cost. Guest satisfaction does not change.\n\nWhat is the first-year net value?",
+    "choices": {
+      "A": "$8,000 - $1,200 = $6,800 per month.",
+      "B": "(12 x ($8,000 - $1,200)) - $5,000 = $76,600.",
+      "C": "The kiosk's screen size.",
+      "D": "The model's tier."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"$8,000 per month... $1,200 per month\nplus $5,000 one-time.\" Why: net value includes the one-time cost.\n12 x $6,800 = $81,600, minus $5,000 = $76,600. A ignores the one-time\ncost and the year horizon. Counterfactual: A wins as the monthly\nrun-rate answer, not the first-year net.",
+    "source_section": "V2-D1.6"
+  },
+  {
+    "number": "M3-Q11",
+    "heading": "M3-Q11 (V2-D1.6)",
+    "question": "A team celebrates cutting p95 latency from 9 s to 3 s on\nan overnight batch job. No user waits for the job.\n\nWhat is the correct assessment?",
+    "choices": {
+      "A": "A major win. Ship the announcement.",
+      "B": "Motion without value: no user waits, so the latency cut buys no\nbusiness outcome. The V2-D1.6 question is what the improvement is\nworth.",
+      "C": "Cut latency further.",
+      "D": "A bigger model."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"overnight batch job. No user waits for\nthe job.\" Why: technical optimization without a value case is the\nfastest route to a system nobody needed. The chain asks what the\nimprovement earns. Counterfactual: A wins when the job blocks the\nmorning shift.",
+    "source_section": "V2-D1.6"
+  },
+  {
+    "number": "M3-Q12",
+    "heading": "M3-Q12 (V2-D2.1)",
+    "question": "An insurance bot handles 30,000 chats per day. About 96%\nare policy lookups. About 4% are claim disputes where a wrong answer\ncreates legal exposure.\n\nWhich tier strategy fits?",
+    "choices": {
+      "A": "Most capable tier for everything.",
+      "B": "Fast tier for lookups, stronger tier for disputes, with a quality\nfloor on the legal-exposure answers.",
+      "C": "Fast tier for everything.",
+      "D": "Stronger tier for lookups, Fast tier for disputes."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"a wrong answer creates legal exposure.\"\nWhy: error cost sets the tier per class. D is backwards.\nCounterfactual: A wins when lookups also carry legal exposure.",
+    "source_section": "V2-D2.1"
+  },
+  {
+    "number": "M3-Q13",
+    "heading": "M3-Q13 (V2-D2.1)",
+    "question": "A team cascades: Fast tier first, escalate to the\nBalanced tier when the Fast tier's answer fails a confidence check.\n\nWhat is the flaw?",
+    "choices": {
+      "A": "Cascading is always wrong.",
+      "B": "The model's own confidence is the escalation trigger. The model's confidence is uncalibrated. The trigger must be a measured check. For example, use a verifier or a quality floor test.",
+      "C": "Tiers must never mix.",
+      "D": "Fast is too fast."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"fails a confidence check.\" The model confidence is not calibrated. The model confidence is prompt-injectable. The escalation gate needs a measurement. The escalation gate does not need a self-report.\n\nA never wins. Cascading with a measured trigger is good.",
+    "source_section": "V2-D2.1"
+  },
+  {
+    "number": "M3-Q14",
+    "heading": "M3-Q14 (V2-D2.2)",
+    "question": "A bank bot must never reveal account balances to anyone\nexcept the verified account holder. Balances sit behind the account\nAPI.\n\nWhat is the correct control?",
+    "choices": {
+      "A": "A system prompt line about balances.",
+      "B": "Identity verification plus a code gate: the balance tool runs only\nfor the verified holder, and an output check blocks balance figures\notherwise.",
+      "C": "A longer prompt.",
+      "D": "Removing the balance tool for everyone."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"except the verified account holder.\"\nWhy: identity plus code enforcement. A and C are guidance. D breaks\nthe product. Counterfactual: A wins for tone, never for balances.",
+    "source_section": "V2-D2.2"
+  },
+  {
+    "number": "M3-Q15",
+    "heading": "M3-Q15 (V2-D2.2), Select TWO",
+    "question": "A kids' learning bot must: keep ads out, and keep chat\nage-appropriate.\n\nWhich TWO placements are correct? Select TWO.",
+    "choices": {
+      "A": "Ad content excluded at the retrieval/index level in code.",
+      "B": "An output check in code for age-appropriateness before display.",
+      "C": "A system prompt asking advertisers to stay away.",
+      "D": "Trusting the model to know what is appropriate.",
+      "E": "No controls."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"must: keep ads out, and keep chat\nage-appropriate.\" Why: both are \"must\" rules, so both live in code:\nretrieval exclusion plus output check. C and D are guidance and hope.\nCounterfactual: none.",
+    "source_section": "V2-D2.2"
+  },
+  {
+    "number": "M3-Q16",
+    "heading": "M3-Q16 (V2-D2.3)",
+    "question": "A ticket classifier sorts into 40 categories. It fails on\ntickets that match two categories.\n\nWhich technique fits first?",
+    "choices": {
+      "A": "Few-shot examples of dual-category tickets with the tie-break rule\nshown, plus a structured output schema.",
+      "B": "Zero-shot.",
+      "C": "A bigger model.",
+      "D": "Fewer categories."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"fails on tickets that match two\ncategories.\" Why: examples teach the tie-break. The schema fixes the\nformat. Simplest technique that passes evals. Counterfactual: C wins\nwhen good examples still fail.",
+    "source_section": "V2-D2.3"
+  },
+  {
+    "number": "M3-Q17",
+    "heading": "M3-Q17 (V2-D2.4)",
+    "question": "A research assistant loads 25 full papers into every\ncall. The bill is 5x the budget. Questions need two or three papers.\n\nWhat is the first fix?",
+    "choices": {
+      "A": "A larger window.",
+      "B": "Retrieve the relevant papers just in time instead of loading all\n25.",
+      "C": "A stronger tier.",
+      "D": "Shorter questions."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"Questions need two or three papers... loads 25 full papers.\" Growth is the diagnosed fault. Retrieval is its fix. A wins when you need all 25 papers for every call. A wins when the budget allows this.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M3-Q18",
+    "heading": "M3-Q18 (V2-D2.4), Select TWO",
+    "question": "A meeting bot's context holds: the whole quarter's\ntranscripts, the same action-items list pasted 3 times, and no\nsummaries.\n\nWhich TWO faults are present? Select TWO.",
+    "choices": {
+      "A": "Growth: the whole quarter loads every call.",
+      "B": "Duplication: the action-items list appears 3 times.",
+      "C": "Loss: old turns vanish.",
+      "D": "Exhaustion: the window errors.",
+      "E": "Perfect context."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"whole quarter's transcripts... pasted\n3 times.\" Why: the load is growth. The triple paste is duplication. C\nand D have no evidence. Counterfactual: D wins when the call errors\non window size.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "M3-Q19",
+    "heading": "M3-Q19 (V2-D2.5)",
+    "question": "A tax assistant reuses a 12,000-token regulation prefix\nacross 5,000 calls per day. The prefix changes with each tax law\nupdate, about monthly.\n\nWhat bounds the caching win?",
+    "choices": {
+      "A": "The call count.",
+      "B": "The monthly prefix resets: each update re-pays the cache write\ncost, so the win depends on the hit rate between updates vs\nbreak-even.",
+      "C": "The model's tier.",
+      "D": "Nothing. It always wins."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"changes with each tax law update, about\nmonthly.\" Why: prefix stability bounds prompt caching. Monthly resets\nre-pay the write cost. Only the measured hit rate decides.\nCounterfactual: D wins never.\n\nMeasurement decides.",
+    "source_section": "V2-D2.5"
+  }
+]

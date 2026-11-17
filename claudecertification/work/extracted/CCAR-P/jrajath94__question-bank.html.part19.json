@@ -1,0 +1,155 @@
+[
+  {
+    "number": "Q-M-06",
+    "heading": "Q-M-06 (V2-D1.6)",
+    "question": "A dental supply distributor processes 2,000 orders per day. Workers process these orders manually. The labor cost is $1.10 per order. An automated design costs $0.18 per order. It also costs $400 per month in fixed cost.\n\nThe error rate does not change.\n\nWhich number decides ship or no-ship?",
+    "choices": {
+      "A": "The per-order cost difference alone.",
+      "B": "Net monthly value: (2,000 x 30 x ($1.10 - $0.18)) - $400.",
+      "C": "The model's accuracy score on the order set.",
+      "D": "The p95 latency of the new system."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: business value decision.\n2. Lifecycle stage: design to build decision.\n3. Objective: decide whether the automation is worth building.\n4. Hard constraints: error rate unchanged, so quality is not the decider.\n5. System layer: value chain (V2-D1.6).\n6. Eliminate infeasible: all four are computable.\n7. Eliminate constraint-violating: none violate a hard rule. The test is which number answers the question.\n8. Compare on objective: only B runs the full baseline to net value chain.\n9. Hidden dependencies: the math assumes volume stays at 2,000 per day.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"manually at $1.10 per order in labor... $0.18 per order plus $400 per month in fixed cost.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nCounts the fixed cost | No | Yes | No | No\nCompares against the baseline | Partial | Yes | No | No\nAnswers in net dollars | No | Yes | No | No\n\n1. Why B satisfies all hard constraints: it runs the V2-D1.6 chain end to end. Gross monthly saving: 60,000 orders x $0.92 = $55,200. Net: $55,200\n2. $400 = $54,800 per month. Positive by a wide margin.\n3. Why B best meets the objective: ship or no-ship is a net value question. Only B computes net value. The rest measure parts of the system.\n4. Every rejected choice explained: A ignores the $400 fixed cost and the volume math. A per-unit delta is not a decision. C measures quality, which the scenario holds constant. D measures speed, which no requirement names.\n5. Exact limitation or tradeoff: the math assumes steady volume and no transition cost. A volume drop or a painful cutover changes the answer.\n6. Relevant evidence (with date): baseline to improvement to cost to net value from lesson-7-4A (§4), Oct 6 2026.\n7. Each plausible alternative wins in a counterfactual. A wins when the fixed cost is zero. A wins when the volume is fixed. C wins when the error rate differs between options. D wins when an SLA names latency with a penalty.\n8. Misconception tested: \"cheaper per unit means ship it.\" Net value decides, and net includes fixed cost and volume.",
+    "source_section": "V2-D1.6"
+  },
+  {
+    "number": "Q-M-07",
+    "heading": "Q-M-07 (V2-D1.2)",
+    "question": "A food truck fleet tracks stock. Vendors self-report inventory by text message. The POS records every sale. Stockouts lose sales. Overstock spoils by evening.\n\nWhat is the system of record for stock levels?",
+    "choices": {
+      "A": "The vendor texts the inventory.",
+      "B": "The POS sales ledger shows sales. The POS sales ledger shows deliveries. The code reconciles the ledger. Vendor texts are untrusted input.",
+      "C": "The model blends the estimate from both sources.",
+      "D": "The most recent source reports."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. The question type is system-of-record identification.\n2. The lifecycle stage is design.\n3. The objective is to name the trustworthy source for stock truth.\n4. Stockouts lose sales. Overstock spoils. The number must be right.\n5. The system layer is trust boundaries and state (V2-D1.2).\n6. All four options are feasible to build.\n7. A trusts self-reports. C lets the model invent stock. D is recency without trust. These options violate constraints.\n8. Only B derives stock from the verified ledger.\n9. Record deliveries as reliably as sales.\n10. Only B verifies. This is a single select question.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"Vendors self-report inventory by text message. The POS records every sale.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nSource is verified | No | Yes | No | No\nCrosses no trust boundary unchecked | No | Yes | No | No\nReproducible in code | No | Yes | No | No\n\n1. Why B satisfies all hard constraints: the POS ledger is machine recorded and auditable. Deliveries minus sales reconciled in code gives a computed stock with a provenance chain. Vendor texts stay outside the trust boundary as untrusted input.\n2. Why B best meets the objective: V2-D1.2 requires naming the system of record and the trust boundaries. The ledger is the record. The texts are the boundary crossing.\n3. Every rejected choice explained: A makes self-reports the truth. A vendor's typo becomes the stock. C asks the model to blend sources, and the blend is unverifiable. D picks by recency. A fresh lie beats an old truth.\n4. Exact limitation or tradeoff: B needs delivery records as reliable as POS data. Theft, waste, and comps need their own entries or the ledger drifts.\n5. Relevant evidence (with date): trust boundaries and system of record from lesson-D1-2 (§4), Oct 6 2026.\n6. Each plausible alternative wins in a counterfactual. A wins when vendors scan barcodes into a verified app. The report is then trusted input. C never wins for a system of record. D wins for a \"latest news\" feed. D does not win for stock.\n7. Misconception tested: \"newest data is truest data.\" Trust decides truth, not recency.",
+    "source_section": "V2-D1.2"
+  },
+  {
+    "number": "Q-M-08",
+    "heading": "Q-M-08 (V2-D1.5), Select TWO",
+    "question": "A wind farm inspects 120 turbines per quarter. Each turbine gets an independent inspection report. Report quality varies widely by inspector.\n\nWhich TWO decomposition patterns fit? Select TWO.",
+    "choices": {
+      "A": "Fan-out/fan-in: one inspection task per turbine, merged into a fleet report.",
+      "B": "Critique pattern: a reviewer agent checks each report against the inspection checklist.",
+      "C": "Single sequential pass with no review.",
+      "D": "Chaining where each turbine's report depends on the previous one.",
+      "E": "One augmented call covering all 120 turbines."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: decomposition pattern selection (multi).\n2. Lifecycle stage: design.\n3. Objective: cover 120 independent inspections with consistent quality.\n4. Hard constraints: turbines are independent, quality varies by inspector.\n5. System layer: decomposition patterns (V2-D1.5).\n6. Eliminate infeasible: all five are feasible to attempt.\n7. Eliminate constraint-violating: D invents a false dependency, E exceeds any context window.\n8. Compare on objective: independence calls for fan-out, quality variance calls for critique.\n9. Hidden dependencies: the merge needs a common report schema. The critique needs the checklist.\n10. Verify: A and B together. C covers neither constraint.\n\nExplanation.\n1. Correct answer: A, B.\n2. Decisive scenario phrase: \"Each turbine gets an independent inspection report. Report quality varies widely by inspector.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D | E\nUses independence | Yes | No | No | No | No\nFixes quality variance | No | Yes | No | No | No\nScales to 120 turbines | Yes | Yes | Slow | No | No\n\n1. Why A and B satisfy all hard constraints: fan-out/fan-in runs the 120 independent inspections in parallel and merges them. The critique pattern checks each report against the checklist before merge.\n2. Why A and B best meet the objective: V2-D1.5 maps independence to fan-out and quality variance to a validation pattern. The two patterns compose: critique inside each fan-out branch, merge at the fan-in.\n3. Every rejected choice explained: C is slow (120 sequential reports) and has no quality gate. D chains independent tasks, which adds delay for zero benefit. E stuffs 120 reports into one call: context overflow and no per-report check.\n4. Exact limitation or tradeoff: the critique step doubles per-report cost, and the merge needs a strict schema or the fleet report is mush.\n5. Relevant evidence (with date): decomposition patterns from lesson-D1-patterns (§4), Oct 6 2026.\n6. Counterfactual where each plausible alternative wins: C wins when one inspector does all 120 and quality is uniform. D wins when turbines share a fault that propagates down the row. E wins never at this scale.\n7. Misconception tested: \"one pattern per design.\" Independent scale and quality variance are two problems. They take two patterns.",
+    "source_section": "V2-D1.5"
+  },
+  {
+    "number": "Q-M-09",
+    "heading": "Q-M-09 (V2-D2.1)",
+    "question": "A microbrewery chatbot handles 3,000 chats per day. About 90% are FAQs: hours, location, tour booking. About 10% are recipe troubleshooting: stuck fermentation, off flavors. A wrong recipe answer ruins a customer's batch.\n\nWhich tier strategy fits best?",
+    "choices": {
+      "A": "Most capable tier for every chat.",
+      "B": "Fast tier for FAQs, stronger tier for recipe troubleshooting, with a quality floor: recipe answers must cite the brewing guide.",
+      "C": "Fast tier for everything.",
+      "D": "Stronger tier for FAQs, Fast tier for troubleshooting."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: model tier routing.\n2. Lifecycle stage: design.\n3. Objective: cut cost without risking ruined batches.\n4. Hard constraints: wrong recipe advice ruins a batch, 3,000 chats per day.\n5. System layer: model selection and routing (V2-D2.1).\n6. Eliminate infeasible: all four are feasible.\n7. Eliminate constraint-violating: C risks batch-ruining answers on the hard 10%, D routes backwards.\n8. Compare on objective: B matches tier strength to error cost per class.\n9. Hidden dependencies: the router must classify FAQ vs troubleshooting reliably.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"90% are FAQs... 10% are recipe troubleshooting. A wrong recipe answer ruins a customer's batch.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nFAQs stay cheap | No | Yes | Yes | No\nHard cases get strength | Yes | Yes | No | No\nQuality floor on risky answers | No | Yes | No | No\n\n1. Why B satisfies all hard constraints: FAQs ride the cheap tier, troubleshooting gets the stronger tier, and the citation floor grounds the risky answers.\n2. Why B best meets the objective: V2-D2.1 routes on the capability-cost-latency trade-off with quality floors. Error cost, not volume, sets the tier per class.\n3. Every rejected choice explained: A is safe but wasteful: top tier on 3,000 chats with 90% FAQs. C saves money and risks ruined batches on the hard 10%. D is backwards: it spends strength where the task is trivial and starves the risky class.\n4. Exact limitation or tradeoff: the router is a new failure point. A misclassified troubleshooting chat lands on the cheap tier.\n5. Relevant evidence (with date): tier routing and quality floors from lesson-D2-1 (§4), Oct 6 2026, tier pricing from S10-S12, Oct 2026.\n6. Counterfactual where each plausible alternative wins: A wins when the FAQ answers also carry high error cost. C wins when evals prove the Fast tier clears the recipe floor. D wins never. It is backwards.\n7. Misconception tested: \"one tier for the whole product.\" The exam rewards routing by error cost per class.",
+    "source_section": "V2-D2.1"
+  },
+  {
+    "number": "Q-M-10",
+    "heading": "Q-M-10 (V2-D2.2)",
+    "question": "An aquarium kiosk answers visitor questions. The animal medical records must never reach visitors. A vendor proposes a system prompt line: \"Never reveal animal medical records.\"\n\nWhat is the correct control?",
+    "choices": {
+      "A": "The system prompt line is enough. The model will comply.",
+      "B": "A code filter: medical records stay out of the retrieval set, and an output check blocks any medical content before display.",
+      "C": "A longer system prompt with the rule repeated three times.",
+      "D": "Fine-tune the model to dislike medical topics."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. The question type is control placement for a confidentiality rule.\n2. The lifecycle stage is design.\n3. The objective is to guarantee that medical records never reach visitors.\n4. Hard constraints:\nThe system must not disclose the records.\nVisitors are untrusted.\n5. The system layer is guardrails and enforcement (V2-D2.2, V2-D5.1).\n6. Eliminate infeasible options: all four options are feasible to attempt.\n7. Eliminate constraint-violating options:\nA, C, and D use model behavior.\nModel behavior is not a guarantee.\n8. Compare options on objective: only B enforces in code at two points.\n9. Hidden dependencies:\nThe retrieval index must tag medical records.\nThe filter can then find the medical records.\n10. Verify: B is the only option.\nThis is a single select question.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"must never reach visitors.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nGuarantee, not guidance | No | Yes | No | No\nBlocks at retrieval | No | Yes | No | No\nBlocks at output | No | Yes | No | No\n\n1. B satisfies all hard constraints. The filter removes medical records. It removes them before the model sees them. The output check catches anything the filter missed. There are two code gates. There is zero reliance on model obedience.\n2. Why B best meets the objective: V2-D2.2 is explicit: prompts are not authorization, and structural enforcement gives the hard guarantee. A \"never\" rule is a control, and controls live in code.\n3. Explain every rejected choice. A is the exam's favorite trap. A prompt is guidance. The model may ignore it under pressure. The model may ignore it under injection. C is the same trap with repetition.\nThree signs are still signs. D changes model tendencies. D proves nothing per request. No one can audit D.\n4. Exact limitation or tradeoff: B needs the medical tag maintained on every record. An untagged record slips past the filter to the output check.\n5. Relevant evidence (with date): \"prompts are not authorization\" from lesson-D2-2 (§4), Oct 6 2026, structural enforcement from lesson-D5-1, Oct 6 2026.\n6. Counterfactual where each plausible alternative wins: A wins for tone guidance (\"be friendly\"), never for confidentiality. C wins never as a control. D wins for stable style needs, not for data protection.\n7. Misconception tested: \"a strong instruction equals a control.\" It does not. The exam rewards the answer that puts the rule in code.",
+    "source_section": "V2-D2.2"
+  },
+  {
+    "number": "Q-M-11",
+    "heading": "Q-M-11 (V2-D2.3), Select TWO",
+    "question": "A piano restoration shop builds a cost estimator. Customers describe damage in free text. The shop wants fixed-format estimates and wants the model to refuse jobs outside its craft (e.g., car repair).\n\nWhich TWO prompt techniques fit? Select TWO.",
+    "choices": {
+      "A": "Few-shot examples including rejection examples (car repair refused).",
+      "B": "Structured output schema for the estimate.",
+      "C": "Zero-shot with no examples and no schema.",
+      "D": "Asking the model to \"try its best\" on any topic.",
+      "E": "A longer model with no technique changes."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Method walk (Steps 1-10).\n1. The question type is prompt technique selection (multi).\n2. The lifecycle stage is design.\n3. The objective is fixed-format estimates. The objective is reliable refusals.\n4. Estimates need a fixed format. Refuse out-of-craft jobs.\n5. The system layer is prompt techniques (V2-D2.3).\n6. All five options are feasible to attempt.\n7. C and D leave format and refusal to chance. E changes no technique. These options violate constraints.\n8. A teaches the refusal boundary. B enforces the format.\n9. The rejection examples must cover near-miss cases. For example, furniture repair versus piano repair.\n10. A and B together verify. No third option fits.\n\nExplanation.\n1. Correct answer: A, B.\n2. Decisive scenario phrase: \"fixed-format estimates... refuse jobs outside its craft.\"\n3. Requirement-to-option matrix:\nTest | A | B | C | D | E\nTeaches the refusal boundary | Yes | No | No | No | No\nEnforces the output format | No | Yes | No | No | No\n\n1. A and B satisfy all hard constraints. Rejection examples show the model the craft boundary. The structured schema makes the format a contract. It is not a hope.\n2. A and B meet the objective best. V2-D2.3 gives the simplest technique. This technique passes evaluations. It uses few-shot with rejection examples for the boundary. It uses structured outputs for the format. Each technique meets one requirement.\n3. Every rejected choice explained: C leaves both format and refusal to chance. D is an anti-technique: \"try its best\" invites out-of-craft answers. E spends money on a bigger model while the missing pieces are technique, not capacity.\n4. Exact limitation or tradeoff: the example set needs maintenance as new edge cases arrive, and the schema needs versioning with the estimate format.\n5. Relevant evidence (with date): few-shot with rejection examples and structured outputs from lesson-D2-3 (§4), Oct 6 2026.\n6. Counterfactual where each plausible alternative wins: C wins for a low-stakes internal draft with no format needs. D wins never. E wins when evals show the task exceeds the current tier's capacity.\n7. Misconception tested: \"a bigger model replaces technique.\" Format and refusal boundaries are technique problems first.",
+    "source_section": "V2-D2.3"
+  },
+  {
+    "number": "Q-M-12",
+    "heading": "Q-M-12 (V2-D2.4)",
+    "question": "An elevator maintenance assistant keeps six months of service history in context on every call. Token bills tripled. Techs report the model now confuses last month's fix with this month's fault. Duplicate sensor readings appear three times per call.\n\nWhat is the first fix?",
+    "choices": {
+      "A": "Move to a larger context window.",
+      "B": "Just-in-time retrieval of relevant history plus compaction of the conversation, with dedupe of sensor readings.",
+      "C": "A stronger model tier.",
+      "D": "Longer system prompt explaining the timeline."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: context diagnosis and fix.\n2. Lifecycle stage: operate and optimize.\n3. Objective: cut tokens and fix the confusion.\n4. Hard constraints: bills tripled, confusion between months, duplicate readings.\n5. System layer: context management (V2-D2.4).\n6. Eliminate infeasible: all four are feasible.\n7. Eliminate constraint-violating: A feeds the growth, C buys strength for a context problem, D adds tokens to a token problem.\n8. Compare on objective: B attacks growth, duplication, and dilution at once.\n9. Hidden dependencies: retrieval needs the history indexed by elevator and date.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"six months of service history in context on every call... confuses last month's fix with this month's fault... Duplicate sensor readings appear three times.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nCuts token growth | No | Yes | No | No\nRemoves duplication | No | Yes | No | No\nFixes dilution/confusion | No | Yes | No | No\n\n1. Why B satisfies all hard constraints: just-in-time retrieval loads only the relevant history, compaction keeps the active context small, and dedupe removes the triple readings. All three diagnosed faults (growth, duplication, dilution) get a fix.\n2. B meets the objective best. V2-D2.4 finds context faults. These faults are growth, duplication, loss, exhaustion, and dilution. It matches each fault to active context, retrieval, or compaction. B is the only option that follows the diagnosis.\n3. Every rejected choice explained: A is the classic error: a bigger window holds more duplicates and more dilution. C upgrades the reader while the text stays bloated. D adds prompt tokens to a bill driven by history tokens.\n4. Exact limitation or tradeoff: retrieval can miss a relevant old fix. The index quality bounds the answer quality.\n5. Relevant evidence (with date): context fault taxonomy from lesson-D2-4 (§4), Oct 6 2026.\n6. Counterfactual where each plausible alternative wins: A wins when the task genuinely needs the full six months every call and the budget allows it. C wins when the trace shows the chunk present and the answer still wrong (model layer). D wins never for a token problem.\n7. Misconception tested: \"bigger window fixes context problems.\" It feeds them. Diagnose first: growth, duplication, dilution.",
+    "source_section": "V2-D2.4"
+  },
+  {
+    "number": "Q-M-13",
+    "heading": "Q-M-13 (V2-D2.5)",
+    "question": "A sports league rulebook assistant serves 20,000 calls per day. Every call starts with the same 8,000-token rulebook prefix. Questions vary. The team considers prompt caching.\n\nWhat decides whether caching pays?",
+    "choices": {
+      "A": "The total daily call count alone.",
+      "B": "Whether the 8,000-token prefix is stable across calls and the hit rate clears the break-even point.",
+      "C": "The model tier chosen.",
+      "D": "The length of the user questions."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: caching economics.\n2. Lifecycle stage: design to optimize.\n3. Objective: decide if prompt caching pays.\n4. Hard constraints: 8,000-token stable prefix, varied questions.\n5. System layer: prompt reuse (V2-D2.5).\n6. Eliminate infeasible: all four are answerable.\n7. Eliminate constraint-violating: none violate. The test is which factor decides.\n8. Compare on objective: caching economics rest on prefix stability and hit rate vs break-even.\n9. Hidden dependencies: prefix edits reset the cache. The TTL bounds the write cost.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"the same 8,000-token rulebook prefix. Questions vary.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nNames the reuse unit | No | Yes | No | No\nNames the break-even test | No | Yes | No | No\n\n1. Why B satisfies all hard constraints: prompt caching reuses the stable input prefix across calls with different suffixes. The scenario matches exactly: stable prefix, varied questions. The break-even test (on the lesson toy, about 4% hit rate) decides the money.\n2. Why B best meets the objective: V2-D2.5 defines the mechanism (prefix rules, TTL, costs, break-even). B is the only option that names both the mechanism's precondition and its economic test.\n3. Every rejected choice explained: A counts calls but not reuse: 20,000 calls with a shifting prefix cache nothing. C sets the per-token price but not whether caching applies. D is irrelevant: the suffix varies by design under prompt caching.\n4. Exact limitation or tradeoff: prefix edits (rulebook updates) reset the cache and re-pay the write cost. Measure the real hit rate before claiming savings.\n5. Relevant evidence (with date): prompt caching prefix rules and break-even toy from lesson-D2-5 (§4), Oct 6 2026, pricing from S10-S12, Oct 2026.\n6. Counterfactual where each plausible alternative wins: A wins never alone. C wins when comparing tiers, not caching. D wins for response caching, where identical whole prompts are the precondition.\n7. Misconception tested: \"high volume means caching always pays.\" Stability plus hit rate decide, not volume.",
+    "source_section": "V2-D2.5"
+  },
+  {
+    "number": "Q-M-14",
+    "heading": "Q-M-14 (V2-D2.1)",
+    "question": "A library catalog agent runs on the Balanced tier. The provider releases a new version of the same tier. The team wants the new version live by Friday.\n\nWhat is the required first step?",
+    "choices": {
+      "A": "Swap the model ID on Friday. Same tier means same behavior.",
+      "B": "Run the regression suite against the new version and compare with the pinned baseline before any traffic moves.",
+      "C": "Ask the model if it feels ready for the new version.",
+      "D": "Route 100% of traffic on Friday and watch the dashboards."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10).\n1. Question type: model change management.\n2. Lifecycle stage: operate.\n3. Objective: ship the upgrade without silent behavior change.\n4. Hard constraints: catalog answers must stay correct. No untested change reaches users.\n5. System layer: model selection lifecycle (V2-D2.1).\n6. Eliminate infeasible: all four are feasible actions.\n7. Eliminate constraint-violating: A assumes sameness, C is nonsense, D tests in production.\n8. Compare on objective: only B measures the new version before exposure.\n9. Hidden dependencies: the regression suite must cover the catalog's edge cases, not only happy paths.\n10. Verify: B alone. Single select.\n\nExplanation.\n1. Correct answer: B.\n2. Decisive scenario phrase: \"The provider releases a new version of the same tier.\"\n3. Requirement-to-option matrix:\nRequirement | A | B | C | D\nTreats the upgrade as a production change | No | Yes | No | No\nMeasures before exposure | No | Yes | No | No\n\n1. Why B satisfies all hard constraints: V2-D2.1 treats every model change as a production change. The regression suite compares the new version against the pinned baseline on representative, edge, and adversarial cases before any user sees it.\n2. Why B best meets the objective: behavior drifts between versions even inside a tier. Only measurement catches the drift. B is the only option that measures first.\n3. Every rejected choice explained: A assumes the tier name guarantees behavior. It does not. C anthropomorphizes the model. The model has no say in the change process. D is production testing: users become the regression suite.\n4. Exact limitation or tradeoff: the suite takes time to run, so Friday may slip. A rushed swap is worse than a late swap.\n5. Relevant evidence (with date): \"upgrades are production changes\" from lesson-D2-1 (§4), Oct 6 2026, regression suites from lesson-D4-2, Oct 6 2026.\n6. Counterfactual where each plausible alternative wins: A wins never for a version change. C wins never. D wins for a shadow deploy where the new version gets copied traffic with no user impact.\n7. Misconception tested: \"same tier means same model.\" Version changes behavior. Test the version, not the name.",
+    "source_section": "V2-D2.1"
+  },
+  {
+    "number": "Q-M-15",
+    "heading": "Q-M-15 (V2-D2.4), Select THREE",
+    "question": "A vineyard sensor assistant answers irrigation questions. Each call loads the full season of sensor readings: 60,000 tokens. Duplicate readings from overlapping sensors appear twice. The model sometimes answers from March data for a July question.\n\nWhich THREE context faults are present? Select THREE.",
+    "choices": {
+      "A": "Context growth: the full season loads on every call.",
+      "B": "Duplication: overlapping sensors repeat readings.",
+      "C": "Dilution: March data answers July questions.",
+      "D": "Context exhaustion: the window overflows.",
+      "E": "Conversation loss: old turns vanish."
+    },
+    "answer": ["A", "B", "C"],
+    "select_count": 3,
+    "explanation": "Method walk (Steps 1-10).\n1. The question type is context fault diagnosis (multi).\n2. The lifecycle stage is operate and optimize.\n3. The objective is to name the faults that the evidence shows.\n4. Hard constraints are 60,000 tokens per call, duplicates, and wrong-month answers.\n5. The system layer is context fault taxonomy (V2-D2.4).\n6. Eliminate infeasible options. All five options are real fault names.\n7. Eliminate constraint-violating options. D needs an overflow. The text states no overflow. E needs lost turns. The text states no lost turns.\n8. Compare options on objective. The evidence names growth and duplication directly. The March-for-July answers show dilution.\n9. Hidden dependencies exist. Each fault needs its own fix. Retrieval fixes growth. Deduplication fixes duplication. The model attends to the wrong span of the bloated context. Fewer, better-placed chunks fix dilution.\n10. Verify the answers. A, B, and C are correct. D and E lack evidence. Select THREE.\n\nExplanation.\n1. Correct answer: A, B, C.\n2. Decisive scenario phrase: \"the full season of sensor readings: 60,000 tokens. Duplicate readings from overlapping sensors appear twice. The model sometimes answers from March data for a July question.\"\n3. Requirement-to-option matrix:\nEvidence | A | B | C | D | E\n60,000 tokens per call | Yes | No | No | No | No\nReadings appear twice | No | Yes | No | No | No\nWrong-month answers from a bloated context | No | No | Yes | No | No\nWindow overflow stated | No | No | No | No | No\n\n1. A, B, and C satisfy the diagnosis. The full-season load on every call is context growth. The doubled readings are duplication. The March-for-July answers are dilution. The model attends to the wrong span of an oversized context. The V2-D2.4 taxonomy names all three faults.\n2. Why A, B, and C best meet the objective: V2-D2.4 names growth, duplication, and dilution as distinct faults with distinct fixes (retrieval for growth, dedupe for duplication, fewer better-placed chunks for dilution). Naming all three points at all three fixes.\n3. Every rejected choice explained: D needs an overflow error, which the scenario never states. E needs vanishing turns, which never appear.\n4. Exact limitation or tradeoff: fixing all three still leaves index quality as the bound for the retrieval that replaces the full-season load.\n5. Relevant evidence (with date): context fault taxonomy (growth, duplication, loss, exhaustion, dilution) from lesson-D2-4 (§4), Oct 6 2026.\n6. Counterfactual where each plausible alternative wins: D wins when the call errors on window size. E wins when old turns vanish after compaction.\n7. Misconception tested: \"growth alone explains every context failure.\" Each named fault needs its own fix. Name every fault the evidence shows.",
+    "source_section": "V2-D2.4"
+  }
+]
