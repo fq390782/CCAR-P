@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="확장 수단 선택: 행동·데이터 접근이 필요하면 tool이나 MCP, 절차만이면 Skill" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>확장 수단 선택: 행동·데이터 접근이 필요하면 tool이나 MCP, 절차만이면 Skill</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-extension-choice" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<polygon points="200,25.0 370.0,90 200,155.0 30.0,90" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="200" y="85.0" font-size="13" fill="#1F2937" text-anchor="middle">외부 시스템의 행동(action)이나</text>
+<text x="200" y="102.0" font-size="13" fill="#1F2937" text-anchor="middle">데이터 접근이 필요한가?</text>
+<rect x="30" y="200" width="340" height="90" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="200.0" y="233.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Skill</text>
+<text x="200.0" y="249.0" font-size="12" fill="#1F2937" text-anchor="middle">지시·템플릿·절차(know-how) 묶음</text>
+<text x="200.0" y="265.0" font-size="12" fill="#1F2937" text-anchor="middle">작업이 일치하면 로드, live connection 없음</text>
+<polyline points="200,155 200,198" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-extension-choice)"/>
+<rect x="202" y="170" width="44.0" height="16" fill="#FFFFFF"/>
+<text x="206" y="182" font-size="12" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="620,25.0 790.0,90 620,155.0 450.0,90" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="620" y="85.0" font-size="13" fill="#1F2937" text-anchor="middle">여러 앱이 같은 기능을 쓰고</text>
+<text x="620" y="102.0" font-size="13" fill="#1F2937" text-anchor="middle">앱과 독립적으로 유지보수?</text>
+<polyline points="370,90 448,90" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-extension-choice)"/>
+<rect x="399.0" y="70" width="20.0" height="16" fill="#FFFFFF"/>
+<text x="409" y="82" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="510" y="200" width="220" height="90" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="620.0" y="233.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">MCP server</text>
+<text x="620.0" y="249.0" font-size="12" fill="#1F2937" text-anchor="middle">tools/resources 노출,</text>
+<text x="620.0" y="265.0" font-size="12" fill="#1F2937" text-anchor="middle">여러 client가 연결</text>
+<rect x="750" y="200" width="120" height="90" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="810.0" y="233.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">tool</text>
+<text x="810.0" y="249.0" font-size="12" fill="#1F2937" text-anchor="middle">앱의 tools에</text>
+<text x="810.0" y="265.0" font-size="12" fill="#1F2937" text-anchor="middle">직접 정의</text>
+<polyline points="620,155 620,198" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-extension-choice)"/>
+<rect x="622" y="170" width="20.0" height="16" fill="#FFFFFF"/>
+<text x="626" y="182" font-size="12" fill="#1F2937" text-anchor="start">예</text>
+<polyline points="790,90 810,90 810,198" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-extension-choice)"/>
+<rect x="812" y="138" width="44.0" height="16" fill="#FFFFFF"/>
+<text x="816" y="150" font-size="12" fill="#1F2937" text-anchor="start">아니오</text>
+<rect x="30" y="320" width="840" height="160" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="363.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답</text>
+<text x="450.0" y="379.5" font-size="12" fill="#1F2937" text-anchor="middle">공유 기능을 앱마다 복사 → 복사본끼리 어긋남</text>
+<text x="450.0" y="395.5" font-size="12" fill="#1F2937" text-anchor="middle">데이터를 매일 system prompt에 붙여 넣기 → 데이터가 낡고 context 낭비</text>
+<text x="450.0" y="411.5" font-size="12" fill="#1F2937" text-anchor="middle">Skill로 API 연결 → Skill에는 live connection이 없음</text>
+<text x="450.0" y="427.5" font-size="12" fill="#1F2937" text-anchor="middle">문서 하나로 충분한 절차에 fine-tuning, MCP server, custom tool → 과함</text>
+<text x="450.0" y="443.5" font-size="12" fill="#1F2937" text-anchor="middle">MCP server가 Messages API를 대체 / 모델과 같은 프로세스여야 함 → 둘 다 틀림</text>
+</svg>

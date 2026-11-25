@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="이름은 Glob, 내용은 Grep, 일부 변경은 Edit, 전체 재생성은 Write" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>이름은 Glob, 내용은 Grep, 일부 변경은 Edit, 전체 재생성은 Write</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-builtin-tool-tree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<polygon points="240,30.0 390.0,85 240,140.0 90.0,85" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="240" y="81.0" font-size="12" fill="#1F2937" text-anchor="middle">찾는 정보가 파일 이름에</text>
+<text x="240" y="97.0" font-size="12" fill="#1F2937" text-anchor="middle">있나 · 내용에 있나?</text>
+<polyline points="90,85 60,85 60,188" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-builtin-tool-tree)"/>
+<rect x="24.4" y="129" width="71.2" height="18" fill="#FFFFFF"/>
+<text x="60" y="142" font-size="12" fill="#1F2937" text-anchor="middle">이름 · 경로</text>
+<polyline points="390,85 420,85 420,188" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-builtin-tool-tree)"/>
+<rect x="403.0" y="129" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="420" y="142" font-size="12" fill="#1F2937" text-anchor="middle">내용</text>
+<rect x="30" y="190" width="200" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="130.0" y="212.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Glob</text>
+<text x="130.0" y="228.0" font-size="12" fill="#1F2937" text-anchor="middle">대상 = 파일 경로</text>
+<text x="130.0" y="244.0" font-size="12" fill="#1F2937" text-anchor="middle">(이름 · 확장자 패턴)</text>
+<text x="130.0" y="260.0" font-size="12" fill="#1F2937" text-anchor="middle">예: **/*.test.tsx</text>
+<text x="130.0" y="276.0" font-size="12" fill="#1F2937" text-anchor="middle">contract.template.spec.ts</text>
+<rect x="250" y="190" width="200" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="350.0" y="220.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Grep</text>
+<text x="350.0" y="236.0" font-size="12" fill="#1F2937" text-anchor="middle">대상 = 파일 내용 패턴</text>
+<text x="350.0" y="252.0" font-size="12" fill="#1F2937" text-anchor="middle">함수명 · 에러 메시지 · import</text>
+<text x="350.0" y="268.0" font-size="12" fill="#1F2937" text-anchor="middle">호출처 · 출력 위치 특정</text>
+<polyline points="350,290 350,332" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-builtin-tool-tree)"/>
+<rect x="319.2" y="302" width="61.6" height="18" fill="#FFFFFF"/>
+<text x="350" y="315" font-size="12" fill="#1F2937" text-anchor="middle">일치 파일</text>
+<rect x="250" y="334" width="200" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="350.0" y="360.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Read</text>
+<text x="350.0" y="376.0" font-size="12" fill="#1F2937" text-anchor="middle">일치한 파일 확인</text>
+<text x="350.0" y="392.0" font-size="12" fill="#1F2937" text-anchor="middle">import 따라 흐름 추적</text>
+<rect x="30" y="334" width="200" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="352.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">대규모 탐색 순서</text>
+<text x="130.0" y="368.0" font-size="12" fill="#1F2937" text-anchor="middle">① Glob = 후보 디렉터리</text>
+<text x="130.0" y="384.0" font-size="12" fill="#1F2937" text-anchor="middle">② Grep = 식별자 · 진입점</text>
+<text x="130.0" y="400.0" font-size="12" fill="#1F2937" text-anchor="middle">③ Read = 일치한 파일만</text>
+<rect x="30" y="435" width="420" height="75" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="240.0" y="460.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답</text>
+<text x="240.0" y="476.5" font-size="12" fill="#1F2937" text-anchor="middle">흔한 단어(template)를 Grep → 무관한 일치 대량 · 누락</text>
+<text x="240.0" y="492.5" font-size="12" fill="#1F2937" text-anchor="middle">Glob · find로 내용 정보 추정 → 이름만으론 불확실 · 누락</text>
+<polygon points="720,30.0 870.0,85 720,140.0 570.0,85" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="720" y="81.0" font-size="12" fill="#1F2937" text-anchor="middle">파일 전체를</text>
+<text x="720" y="97.0" font-size="12" fill="#1F2937" text-anchor="middle">다시 쓰나?</text>
+<polyline points="570,85 540,85 540,188" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-builtin-tool-tree)"/>
+<rect x="529.0" y="129" width="22.0" height="18" fill="#FFFFFF"/>
+<text x="540" y="142" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="870,85 900,85 900,188" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-builtin-tool-tree)"/>
+<rect x="856.0" y="129" width="88.0" height="18" fill="#FFFFFF"/>
+<text x="900" y="142" font-size="12" fill="#1F2937" text-anchor="middle">아니오 (일부)</text>
+<rect x="510" y="190" width="200" height="100" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="610.0" y="220.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Write</text>
+<text x="610.0" y="236.0" font-size="12" fill="#1F2937" text-anchor="middle">대상 = 파일 전체</text>
+<text x="610.0" y="252.0" font-size="12" fill="#1F2937" text-anchor="middle">전체 재생성 · 자동 생성 파일</text>
+<text x="610.0" y="268.0" font-size="12" fill="#1F2937" text-anchor="middle">= Write 한 번</text>
+<rect x="740" y="190" width="190" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="835.0" y="220.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Edit</text>
+<text x="835.0" y="236.0" font-size="12" fill="#1F2937" text-anchor="middle">정확히 한 곳과 일치하는</text>
+<text x="835.0" y="252.0" font-size="12" fill="#1F2937" text-anchor="middle">텍스트 완전 일치 치환</text>
+<text x="835.0" y="268.0" font-size="12" fill="#1F2937" text-anchor="middle">old_string = 파일 안에 한 번</text>
+<polyline points="835,290 835,326" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-builtin-tool-tree)"/>
+<rect x="796.4" y="299" width="77.2" height="18" fill="#FFFFFF"/>
+<text x="835" y="312" font-size="12" fill="#1F2937" text-anchor="middle">여러 번 일치</text>
+<rect x="740" y="328" width="190" height="66" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="835.0" y="349.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">여러 번 일치하면</text>
+<text x="835.0" y="365.0" font-size="12" fill="#1F2937" text-anchor="middle">① 앞뒤 문맥으로 유일화</text>
+<text x="835.0" y="381.0" font-size="12" fill="#1F2937" text-anchor="middle">② replace_all: true</text>
+<polyline points="835,394 835,438" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-builtin-tool-tree)"/>
+<rect x="802.4" y="407" width="65.2" height="18" fill="#FFFFFF"/>
+<text x="835" y="420" font-size="12" fill="#1F2937" text-anchor="middle">둘 다 불가</text>
+<rect x="740" y="440" width="190" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="835.0" y="471.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Read → 완성본 조립</text>
+<text x="835.0" y="487.0" font-size="12" fill="#1F2937" text-anchor="middle">→ Write로 전체 덮어쓰기</text>
+<rect x="510" y="334" width="200" height="176" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="610.0" y="370.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답</text>
+<text x="610.0" y="386.0" font-size="12" fill="#1F2937" text-anchor="middle">replace_all (한쪽만 변경)</text>
+<text x="610.0" y="402.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 범위 과다</text>
+<text x="610.0" y="418.0" font-size="12" fill="#1F2937" text-anchor="middle">old_string 단축 · 정규식</text>
+<text x="610.0" y="434.0" font-size="12" fill="#1F2937" text-anchor="middle">· Grep으로 줄 지정</text>
+<text x="610.0" y="450.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 일치 방식 불변</text>
+<text x="610.0" y="466.0" font-size="12" fill="#1F2937" text-anchor="middle">Edit 수십 회 → 일부 실패 시</text>
+<text x="610.0" y="482.0" font-size="12" fill="#1F2937" text-anchor="middle">중간까지 갱신된 파일 잔존</text>
+</svg>

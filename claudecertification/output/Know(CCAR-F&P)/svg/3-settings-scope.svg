@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470" role="img" aria-label="설정 범위 우선순위: managed, command line, local, shared project, user 순으로 높고, 리스트형 설정은 합쳐진다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>설정 파일 범위 계층과 우선순위</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-scope" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="450" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">충돌하면 위쪽 층이 이긴다 (리스트형 설정은 모든 층이 합쳐짐)</text>
+
+  <!-- priority arrow -->
+  <line x1="50" y1="370" x2="50" y2="62" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-scope)"/>
+  <text x="34" y="216" text-anchor="middle" font-size="13" fill="#1F2937" transform="rotate(-90 34 216)">우선순위 높음</text>
+
+  <text x="300" y="58" text-anchor="middle" font-size="11" fill="#6B7280">설정 층 (파일 · 지정 방법)</text>
+  <text x="700" y="58" text-anchor="middle" font-size="11" fill="#6B7280">적용 대상</text>
+
+  <!-- rows -->
+  <rect x="80" y="66" width="440" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="100" y="97" font-size="13" font-weight="bold" fill="#1F2937">1. managed</text>
+  <rect x="560" y="66" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="710" y="97" text-anchor="middle" font-size="13" fill="#1F2937">최우선</text>
+
+  <rect x="80" y="128" width="440" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="100" y="150" font-size="13" font-weight="bold" fill="#1F2937">2. command line</text>
+  <text x="100" y="169" font-size="11" fill="#6B7280">--allowedTools, --permission-mode</text>
+  <rect x="560" y="128" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="710" y="159" text-anchor="middle" font-size="13" fill="#1F2937">이번 실행</text>
+
+  <rect x="80" y="190" width="440" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="100" y="212" font-size="13" font-weight="bold" fill="#1F2937">3. local</text>
+  <text x="100" y="231" font-size="11" fill="#6B7280">.claude/settings.local.json · gitignore됨</text>
+  <rect x="560" y="190" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="710" y="212" text-anchor="middle" font-size="13" fill="#1F2937">이 프로젝트의 나</text>
+  <text x="710" y="231" text-anchor="middle" font-size="11" fill="#6B7280">팀원에게 영향 없음, 팀 공유용 아님</text>
+
+  <rect x="80" y="252" width="440" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="100" y="274" font-size="13" font-weight="bold" fill="#1F2937">4. shared project</text>
+  <text x="100" y="293" font-size="11" fill="#6B7280">.claude/settings.json · 커밋 (permissions, hooks, plugins)</text>
+  <rect x="560" y="252" width="300" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="710" y="274" text-anchor="middle" font-size="13" fill="#1F2937">팀 전원</text>
+  <text x="710" y="293" text-anchor="middle" font-size="11" fill="#6B7280">PR로 리뷰, 버전 추적 가능</text>
+
+  <rect x="80" y="314" width="440" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="100" y="336" font-size="13" font-weight="bold" fill="#1F2937">5. user</text>
+  <text x="100" y="355" font-size="11" fill="#6B7280">~/.claude/settings.json</text>
+  <rect x="560" y="314" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="710" y="336" text-anchor="middle" font-size="13" fill="#1F2937">나, 모든 프로젝트</text>
+  <text x="710" y="355" text-anchor="middle" font-size="11" fill="#6B7280">팀 설정 배포 용도로는 부적합</text>
+
+  <line x1="520" y1="92" x2="558" y2="92" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-scope)"/>
+  <line x1="520" y1="154" x2="558" y2="154" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-scope)"/>
+  <line x1="520" y1="216" x2="558" y2="216" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-scope)"/>
+  <line x1="520" y1="278" x2="558" y2="278" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-scope)"/>
+  <line x1="520" y1="340" x2="558" y2="340" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-scope)"/>
+
+  <!-- notes -->
+  <rect x="80" y="384" width="380" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="270" y="408" text-anchor="middle" font-size="13" fill="#1F2937">permissions.allow 같은 리스트형 설정</text>
+  <text x="270" y="430" text-anchor="middle" font-size="11" fill="#6B7280">덮어쓰지 않고 모든 층의 항목이 합쳐짐</text>
+  <rect x="480" y="384" width="380" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="670" y="408" text-anchor="middle" font-size="13" fill="#1F2937">권한 설정 파일이 아닌 것</text>
+  <text x="670" y="430" text-anchor="middle" font-size="11" fill="#6B7280">CLAUDE.local.md = 개인 지시 · .mcp.json = MCP 서버 설정</text>
+</svg>

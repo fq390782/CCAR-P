@@ -1,0 +1,1085 @@
+<h3 id="bank-d7-h22">Q-D7-21 (V2-D7.3)</h3>
+
+<p id="sec-bank-d7-p195" data-kind="prose"><strong>Scenario.</strong> A RAG agent's answer quality drops 8 points in a week. No prompt changed. The corpus team shipped a reindex last week.</p>
+
+<p id="sec-bank-d7-p196" data-kind="prose"><strong>Question.</strong> Which investigation fits the map?</p>
+
+<p id="sec-bank-d7-p197" data-kind="prose"><strong>Options.</strong>
+A) Retrain the model on new data.
+B) Check the retrieval layer first: the reindex is the prime suspect, then the prompt, then the model.
+C) Upgrade to the most capable tier.
+D) Add more few-shot examples to the prompt.</p>
+
+<p id="sec-bank-d7-p198" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d7-p199" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: quality-drop investigation order.
+2. Lifecycle stage: operation.
+3.</p>
+
+<p id="sec-bank-d7-p200" data-kind="prose">Objective: find the quality cause in map order.
+4. Hard constraints: the prompt did not change, the reindex is the known change, the map orders the suspects.
+5. System layer: operational debugging.
+6.</p>
+
+<p id="sec-bank-d7-p201" data-kind="prose">Eliminate infeasible: all four are executable.
+7. Eliminate constraint-violating: A treats a retrieval shift as a model fault. C is the fashionable proxy. D tunes the prompt before the map clears retrieval.
+8.</p>
+
+<p id="sec-bank-d7-p202" data-kind="prose">Compare on objective: B starts where the change happened.
+9. Hidden dependencies: the retrieval check needs the pre- and post-reindex eval split to confirm the suspect.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d7-p203" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;No prompt changed. The corpus team shipped a reindex last week.&quot;
+3.</p>
+
+<p id="sec-bank-d7-p204" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Starts at the known change</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Follows the quality map</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Avoids the proxy fix</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Option B satisfies all hard constraints. The reindex is the only known change this week. The map orders quality suspects as prompt, model, and retrieval drift. The change points at retrieval first.</li>
+
+<li>Why B best meets the objective: V2-D7.3 maps quality drops to prompt, model, and retrieval drift. The team checks the changed layer first.</li>
+
+<li>
+<div>Every rejected choice explained: A is the retrain reflex. Retraining on a retrieval problem burns a quarter and fixes nothing. C is the tier-upgrade proxy. A bigger model over a broken index is a bigger bill over a broken index. D is the prompt tune. The prompt did not change.</div>
+
+<div>Tuning it is motion.</div>
+</li>
+
+<li>Exact limitation or tradeoff: the reindex may be innocent, and then the map continues to the prompt and the model. The order still starts at retrieval.</li>
+
+<li>Relevant evidence (with date): the quality map from lesson-D7-3 (§9) and the reindex transfer case from lesson-D7-3 (§13), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>A wins when the map clears retrieval. The prompt and evals prove model drift. Then retraining is the fix. C never wins as the diagnosis. D wins when the prompt is the proven suspect. This happens after retrieval is clear.</li>
+
+<li>Misconception tested: quality drops mean the model degraded. The map says check what changed. The reindex changed. Start there.</li>
+
+</ol>
+
+
+<h3 id="bank-d7-h23">Q-D7-22 (V2-D7.3), Select TWO</h3>
+
+<p id="sec-bank-d7-p205" data-kind="prose"><strong>Scenario.</strong> An agent's 40-step run vanishes midway: no output, no error, no resume point. The team must recover the work, not restart it.</p>
+
+<p id="sec-bank-d7-p206" data-kind="prose"><strong>Question.</strong> Which TWO artifacts make recovery possible? Select TWO.</p>
+
+<p id="sec-bank-d7-p207" data-kind="prose"><strong>Options.</strong>
+A) The plan checkpoint written at each handoff.
+B) The run trace showing completed tool calls and their outputs.
+C) The model's apology message.
+D) A fresh run from step one.
+E) A larger context window.</p>
+
+<p id="sec-bank-d7-p208" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-d7-p209" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: lost-work recovery.
+2. Lifecycle stage: operation, incident response.
+3.</p>
+
+<p id="sec-bank-d7-p210" data-kind="prose">Objective: resume the run from its last good state.
+4. Hard constraints: no resume point exists in the run itself, the work must not run twice, the state must come from artifacts.
+5. System layer: orchestration state.
+6.</p>
+
+<p id="sec-bank-d7-p211" data-kind="prose">Eliminate infeasible: all five exist or are producible.
+7. Eliminate constraint-violating: C explains nothing. E adds capacity, not state.
+8. Compare on objective: A gives the resume point.</p>
+
+<p id="sec-bank-d7-p212" data-kind="prose">B gives the completed work. D restarts instead of resuming.
+9. Hidden dependencies: the checkpoint must capture the plan state, and the trace must be end-to-end reconstructable.
+10. Verify: A and B together.</p>
+
+<p id="sec-bank-d7-p213" data-kind="prose">No third artifact holds the lost state.</p>
+
+<p id="sec-bank-d7-p214" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "no output, no error, no resume point" and "recover the work, not restart it."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Holds the last good state</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Shows completed work</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Enables resume, not restart</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Options A and B satisfy all hard constraints. The checkpoint is the resume point the run lacked. The trace shows which steps already completed. The trace shows their outputs.</li>
+
+<li>Why A and B best meet the objective: V2-D7.3 maps lost agent work to orchestration state and traces. Resume from the checkpoint. The trace is the state.</li>
+
+<li>Every rejected choice explained: C is the apology. It explains nothing and recovers nothing. D is the restart. The 40 steps run twice, and the side effects may double. E is the capacity trap. A larger window holds no record of the lost run.</li>
+
+<li>Exact limitation or tradeoff: checkpoints add per-handoff cost, and traces need retention. Both are the price of resumability.</li>
+
+<li>Relevant evidence (with date): the lost-work map entry from lesson-D7-3 (§9), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins never. D wins when the run is idempotent and cheap, and no checkpoint exists. Then restart is rational. E wins never as the recovery.</li>
+
+<li>This tests a misconception. A lost run must be rerun. Resume it. The checkpoint and the trace make resume possible.</li>
+
+</ol>
+
+
+<h3 id="bank-d7-h24">Q-D7-23 (V2-D7.3), Select TWO</h3>
+
+<p id="sec-bank-d7-p215" data-kind="prose"><strong>Scenario.</strong> The team writes the on-call runbook for the triage agent.</p>
+
+<p id="sec-bank-d7-p216" data-kind="prose"><strong>Question.</strong> Which TWO belong in the runbook? Select TWO.</p>
+
+<p id="sec-bank-d7-p217" data-kind="prose"><strong>Options.</strong>
+A) The ordered symptom-to-suspect checks from the map.
+B) The named owner and the escalation path.
+C) "Try upgrading the model first."
+D) A blank page titled "vibes."
+E) Only the vendor's status page URL.</p>
+
+<p id="sec-bank-d7-p218" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-d7-p219" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is runbook-content selection.
+2. The lifecycle stage is operation.
+3.</p>
+
+<p id="sec-bank-d7-p220" data-kind="prose">The objective is to resolve the incident. The original architect does not help.
+4. The checks must be in order. The owner must have a name. The escalation must exist.</p>
+
+<p id="sec-bank-d7-p221" data-kind="prose">5. The system layer is operational readiness.
+6. Eliminate infeasible options. All five options are writable.
+7.</p>
+
+<p id="sec-bank-d7-p222" data-kind="prose">Eliminate options that violate constraints. C is a fashion hunt. D is not a procedure. E covers one external suspect.
+8. Compare options based on the objective.</p>
+
+<p id="sec-bank-d7-p223" data-kind="prose">A is the map. B is the accountability. The other options are not a runbook.
+9. The map must be current after every incident. If not, it becomes old.</p>
+
+<p id="sec-bank-d7-p224" data-kind="prose">10. Verify A and B together. No third option belongs in a runbook.</p>
+
+<p id="sec-bank-d7-p225" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "the on-call runbook for the triage agent."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Ordered procedure</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Owner named</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Ends hero dependence</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>A and B satisfy all hard constraints. The ordered checks make the hunt a procedure. The named owner and escalation path stop the 3 a.m. guess.</li>
+
+<li>Why A and B best meet the objective: V2-D7.3 requires runbooks with the symptom map, an owner, and an escalation path. The team, not the hero, owns the system.</li>
+
+<li>Every rejected choice explained: C is the hunt by fashion the runbook exists to end. "Upgrade first" is the proxy-fix list. D is the blank page. Vibes page no one at 3 a.m. E is the single-URL runbook. The vendor's status page covers one suspect and names no owner.</li>
+
+<li>Exact limitation or tradeoff: maps go stale and runbooks rot like ADRs. The incident review is the runbook's maintenance contract.</li>
+
+<li>Relevant evidence (with date): the runbook requirements from lesson-D7-3 (§§4, 9), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>
+<div>C never wins as the first line. It wins as a last resort. This happens after the map is complete. This decision is explicit. D never wins. E wins as one appendix line.</div>
+
+<div>It never wins as the runbook.</div>
+</li>
+
+<li>Misconception tested: a runbook is a document. It is a procedure with an owner. The document without the owner is a wiki page.</li>
+
+</ol>
+
+
+<h3 id="bank-d7-h25">Q-D7-24 (V2-D7.3)</h3>
+
+<p id="sec-bank-d7-p226" data-kind="prose"><strong>Scenario.</strong> The triage agent fails in a way the team never saw before: outputs loop on a new input shape. The runbook has no matching entry. The on-call engineer must act now.</p>
+
+<p id="sec-bank-d7-p227" data-kind="prose"><strong>Question.</strong> What is the best action?</p>
+
+<p id="sec-bank-d7-p228" data-kind="prose"><strong>Options.</strong>
+A) Follow the closest runbook entry even though it does not match.
+B) Page the architect to investigate, then update the runbook with the new entry in the post-incident review.
+C) Ignore the failure. It is new, so no procedure covers it.
+D) Reboot the agent every hour.</p>
+
+<p id="sec-bank-d7-p229" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d7-p230" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is novel-failure response.
+2. The lifecycle stage is operation and incident response.
+3.</p>
+
+<p id="sec-bank-d7-p231" data-kind="prose">The objective is to resolve the new failure. Teach the runbook about it.
+4. No map entry matches. A human detective is necessary. The runbook must learn.</p>
+
+<p id="sec-bank-d7-p232" data-kind="prose">5. The system layer is incident escalation.
+6. Eliminate infeasible options. All four options are executable.
+7.</p>
+
+<p id="sec-bank-d7-p233" data-kind="prose">Eliminate options that violate constraints. A follows a non-matching checklist. C ignores a live failure. D treats the symptom hourly.
+8. Compare options based on the objective.</p>
+
+<p id="sec-bank-d7-p234" data-kind="prose">B brings the detective now. B brings the procedure later.
+9. The architect must be reachable. The post-incident review must update the runbook.
+10.</p>
+
+<p id="sec-bank-d7-p235" data-kind="prose">Verify B alone. This is a single select.</p>
+
+<p id="sec-bank-d7-p236" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "fails in a way the team never saw before" and "The runbook has no matching entry."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Matches the novelty</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Resolves now</td>
+<td>Partial</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>Runbook learns</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. The architect is the human detective. The novel failure needs the architect. The post-incident update gives the runbook its new entry.</li>
+
+<li>Why B best meets the objective: V2-D7.3 is explicit. The first incident of a new kind still needs a human detective. Then every incident edits the map.</li>
+
+<li>Every rejected choice explained: A is the cliff walk. A non-matching checklist applied anyway misleads with confidence. C is the shrug. New failures still page. D is the hourly reboot. It masks the loop and teaches nothing.</li>
+
+<li>Exact limitation or tradeoff: paging the architect reintroduces hero dependence for one incident. The runbook update is what ends it.</li>
+
+<li>Relevant evidence (with date): the novel-failure rule from lesson-D7-3 (§11), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when an entry partially matches and the engineer adapts it explicitly, noting the gap. C wins never. D wins as a stopgap while the detective works, never as the response.</li>
+
+<li>Misconception tested: the runbook covers everything. It covers the known. The novel failure needs the detective, then the runbook grows.</li>
+
+</ol>
+
+
+<h3 id="bank-d7-h26">Q-D7-25 (V2-D7.3)</h3>
+
+<p id="sec-bank-d7-p237" data-kind="prose"><strong>Scenario.</strong> The team added a new payment dependency last month. The runbook still lists the old suspects. Last night's on-call followed the runbook and missed the new dependency for two hours.</p>
+
+<p id="sec-bank-d7-p238" data-kind="prose"><strong>Question.</strong> What is the best fix?</p>
+
+<p id="sec-bank-d7-p239" data-kind="prose"><strong>Options.</strong>
+A) Freeze the runbook so it stays stable.
+B) Update the runbook after every incident, with the incident review as its maintenance contract.
+C) Delete the runbook. It misled the on-call.
+D) Trust senior memory instead of the runbook.</p>
+
+<p id="sec-bank-d7-p240" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d7-p241" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: runbook-maintenance fix.
+2. Lifecycle stage: operation.
+3.</p>
+
+<p id="sec-bank-d7-p242" data-kind="prose">Objective: the runbook tracks the system it describes.
+4. Hard constraints: the system changed, the runbook did not, the on-call followed it off the map.
+5. System layer: operational documentation.
+6.</p>
+
+<p id="sec-bank-d7-p243" data-kind="prose">Eliminate infeasible: all four are executable.
+7. Eliminate constraint-violating: A freezes the rot in place. C deletes the procedure. D replaces the procedure with memory.
+8.</p>
+
+<p id="sec-bank-d7-p244" data-kind="prose">Compare on objective: B makes every incident maintain the map.
+9. Hidden dependencies: the incident review must be a real meeting with the runbook edit as its output.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d7-p245" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "The runbook still lists the old suspects" and "missed the new dependency for two hours."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Runbook tracks the system</td>
+<td>No</td>
+<td>Yes</td>
+<td>n/a</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Maintenance is owned</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>On-call protected next time</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the post-incident update adds the new suspect, and the review-as-contract makes the update recur.</li>
+
+<li>Why B best meets the objective: V2-D7.3 states the rule. Runbooks rot like ADRs. The incident review is the runbook's maintenance contract.</li>
+
+<li>Every rejected choice explained: A is the stability fallacy. A frozen runbook describing last month's system is confidently wrong. C is the deletion reflex. The runbook misled because it was stale, not because runbooks mislead. D is the memory bank. Senior memory leaves with the senior.</li>
+
+<li>Exact limitation or tradeoff: the update discipline costs review time per incident, and rushed updates can add wrong entries. The review must be honest.</li>
+
+<li>Relevant evidence (with date): the runbook-rot figure from lesson-D7-3 (§7), Oct 6, 2026. Exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins never as the fix. It wins as a version freeze with a dated successor, which is B with a label. C wins never. D wins never as the system. It wins as the detective for the novel failure, per Q-D7-24.</li>
+
+<li>Misconception tested: You write the runbook one time. You write it after each incident. You maintain the map. You do not make the map.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h2">Q-M-01 (V2-D1.1)</h3>
+
+<p id="sec-bank-mixed-p02" data-kind="prose"><strong>Scenario.</strong> A port handles 8,000 container damage claims each day. About 85% are standard claims. These claims have a container ID, a timestamp, and one photo set. About 15% are complex claims. These claims have multi-party liability narratives.</p>
+
+<p id="sec-bank-mixed-p03" data-kind="prose">There is one hard rule. Do not pay for an unverified damage photo. The IT budget is fixed.</p>
+
+<p id="sec-bank-mixed-p04" data-kind="prose"><strong>Question.</strong> Which design fits the scenario best?</p>
+
+<p id="sec-bank-mixed-p05" data-kind="prose"><strong>Options.</strong>
+A) One agent handles every claim end to end with no checks.
+B) Deterministic rules validate the 85% standard claims. Claude drafts the
+adjuster summary for the 15% complex claims. A code gate blocks any payout
+until the damage photo check passes.
+C) The most capable tier answers every claim with no checks.</p>
+
+<p id="sec-bank-mixed-p06" data-kind="prose">D) Claude triages all claims and a human adjuster reviews every payout.</p>
+
+<p id="sec-bank-mixed-p07" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p08" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best architecture under constraints.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-mixed-p09" data-kind="prose">Objective: safe claim routing inside a fixed budget.
+4. Hard constraints: no payout on an unverified photo, 8,000 claims per
+day, budget fixed.
+5. System layer: orchestration pattern plus verification gate.
+6.</p>
+
+<p id="sec-bank-mixed-p10" data-kind="prose">Eliminate infeasible: all four are technically feasible.
+7. Eliminate constraint-violating: A and C have no gate on payouts, D
+needs 8,000 human reviews per day under a fixed budget.
+8. Compare on objective: B forks by input shape and gates every payout in
+code.
+9.</p>
+
+<p id="sec-bank-mixed-p11" data-kind="prose">Hidden dependencies: the photo check needs the source photo set as
+input.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p12" data-kind="prose"><strong>Explanation.</strong>
+1. The correct answer is B.
+2. The decisive scenario phrase is &quot;no payout on an unverified damage photo. The IT budget is fixed.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p13" data-kind="prose">This is the requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Standard claims route cheap</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Complex claims get language handling</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Code gate on every payout</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Fits fixed budget at 8k/day</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Option B satisfies all hard constraints. Deterministic rules handle the fixed 85% at parser cost. Claude handles the open 15%. The code gate enforces the no-unverified-payout rule on every claim.</li>
+
+<li>Why B best meets the objective: V2-D1.1 maps task shape to lane (fixed
+mapping goes deterministic, open input with a verifiable output goes to
+Claude with a gate). B is the only option that applies the fork.</li>
+
+<li>
+<div>This explains every rejected choice. Option A is technically valid. But it violates the payout rule. An agent has no checks on money movement. Option C is valid for quality. But it violates the budget.</div>
+
+<div>It uses the most capable tier on every claim. This tier costs about 10 times more than the Fast tier on the toy. It also has no gate. Option D is valid as a safety instinct. But it is not feasible. 8,000 reviews per day cannot fit a fixed budget.</div>
+
+<div>Triage errors stay in the system.</div>
+</li>
+
+<li>Exact limitation or tradeoff: B needs the rule set maintained as claim
+forms change, and the photo check adds per-claim code.</li>
+
+<li>Relevant evidence (with date): fork rule from lesson-D1-1 (§4), Oct 6
+2026, tier pricing from S10-S12, Oct 2026, exam scope via S03/S04, Sept
+2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins for an
+internal demo with no money movement. C wins when evals prove only the
+top tier clears the quality floor. D wins at 40 claims per day where the
+review labor fits the budget.</li>
+
+<li>Misconception tested: "one agent for everything is simpler and safe."
+It is neither here: no gate on payouts and no budget fit.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h3">Q-M-02 (V2-D1.2)</h3>
+
+<p id="sec-bank-mixed-p14" data-kind="prose"><strong>Scenario.</strong> A fire agency builds a detection pipeline. The pipeline goes from satellite feed to validation. Then it goes to context assembly, to model, to verification, to public alert, and to feedback. The satellite feed is untrusted input. The perimeter database is the system of record.</p>
+
+<p id="sec-bank-mixed-p15" data-kind="prose">A false public alert causes panic evacuations.</p>
+
+<p id="sec-bank-mixed-p16" data-kind="prose"><strong>Question.</strong> Where does human review sit in this pipeline?</p>
+
+<p id="sec-bank-mixed-p17" data-kind="prose"><strong>Options.</strong>
+A) Before validation, on the raw satellite feed.
+B) After the model proposes a perimeter and before the public alert, with
+the perimeter database as the check source.
+C) After the public alert, as post-action review.
+D) Nowhere. The model is accurate enough to skip review.</p>
+
+<p id="sec-bank-mixed-p18" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p19" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: control placement in a pipeline.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-mixed-p20" data-kind="prose">Objective: place review where it prevents the panic-evacuation harm.
+4. Hard constraints: a false alert causes evacuations, the alert is
+irreversible once broadcast.
+5. System layer: verification stage plus trust boundaries.
+6.</p>
+
+<p id="sec-bank-mixed-p21" data-kind="prose">Eliminate infeasible: all four are feasible placements.
+7. Eliminate constraint-violating: A reviews raw pixels with no perimeter
+to judge, C reviews after the harm, D ignores the error cost.
+8. Compare on objective: B gates the irreversible action with the system
+of record as context.
+9.</p>
+
+<p id="sec-bank-mixed-p22" data-kind="prose">Hidden dependencies: the reviewer needs the proposed perimeter, the
+satellite evidence, and the database state in one view.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p23" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "A false public alert triggers panic
+evacuations."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Reviews the actual perimeter proposal</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Acts before the irreversible alert</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>N/A</td>
+</tr>
+
+<tr>
+<td>Reviewer sees the system of record</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Option B satisfies all hard constraints. The gate sits before the irreversible broadcast. The reviewer judges the proposal. The reviewer uses the perimeter database. The perimeter database is the trusted source.</li>
+
+<li>
+<div>Option B best meets the objective. V2-D1.2 places verification after the model. It places verification before the side effect. V2-D5.3 keys review strength to consequence and reversibility. The alert has high consequence. The alert is irreversible.</div>
+
+<div>So, pre-action review with full context is the correct shape.</div>
+</li>
+
+<li>Every rejected choice explained: A reviews pixels before any perimeter
+exists, so there is nothing to judge. C is post-action review on an
+irreversible alert: the panic already happened. D treats accuracy as a
+control. Accuracy is a metric, and no metric gates a side effect.</li>
+
+<li>Exact limitation or tradeoff: B adds minutes to the alert path. The
+agency must set a review SLA so the gate does not stall real fires.</li>
+
+<li>Relevant evidence (with date): pipeline stage order from lesson-D1-2
+(§4), Oct 6 2026, review strength keyed to consequence from lesson-D5-3,
+Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the
+feed itself is the attack surface (spoofed satellites) and validation
+needs eyes. C wins for a low-stakes internal dashboard where the alert
+is reversible. D wins never as a control, only as a cost note.</li>
+
+<li>Misconception tested: "review anywhere counts as a control." Only
+review before the irreversible action with decision context counts.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h4">Q-M-03 (V2-D1.3), Select TWO</h3>
+
+<p id="sec-bank-mixed-p24" data-kind="prose"><strong>Scenario.</strong> A ski resort publishes a daily avalanche bulletin. Inputs are volatile. Sensor data, weather models, and patrol observations change hourly. The safety board fixes the bulletin format. A wrong bulletin risks lives.</p>
+
+<p id="sec-bank-mixed-p25" data-kind="prose"><strong>Question.</strong> Which TWO patterns fit this task? Select TWO.</p>
+
+<p id="sec-bank-mixed-p26" data-kind="prose"><strong>Options.</strong>
+A) Augmented single call with no tools.
+B) Deterministic workflow for the publish step.
+C) Agentic research loop for the conditions assessment.
+D) One fixed prompt with no tools and no checks.
+E) Manual process with no model involvement.</p>
+
+<p id="sec-bank-mixed-p27" data-kind="prose"><strong>Answer.</strong> B, C</p>
+
+<p id="sec-bank-mixed-p28" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: pattern selection for a two-shape task.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-mixed-p29" data-kind="prose">Objective: match each sub-task to its pattern.
+4. Hard constraints: volatile inputs, fixed bulletin format, life-safety
+error cost.
+5. System layer: architectural pattern choice (V2-D1.3).
+6.</p>
+
+<p id="sec-bank-mixed-p30" data-kind="prose">Eliminate infeasible: all five are feasible to attempt.
+7. Eliminate constraint-violating: A and D cannot gather volatile inputs,
+E ignores the task.
+8. Compare on objective: the task has two shapes: open assessment and
+fixed publish. Each needs its own pattern.</p>
+
+<p id="sec-bank-mixed-p31" data-kind="prose">9. Hidden dependencies: the loop&#x27;s output must feed the workflow&#x27;s fixed
+schema.
+10. Verify: B and C together cover both shapes. No third fits.</p>
+
+<p id="sec-bank-mixed-p32" data-kind="prose"><strong>Explanation.</strong>
+1. The correct answers are B and C.
+2. The decisive scenario phrase is &quot;Inputs are volatile... The safety board fixes the bulletin format.</p>
+
+<p id="sec-bank-mixed-p33" data-kind="prose">A wrong bulletin risks lives.&quot;
+3. This is the requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Handles volatile inputs</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Enforces the fixed format</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Fits life-safety error cost</td>
+<td>No</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B and C meet all hard constraints. The agentic loop plans the assessment at run time. It plans across changing sources. The steps are not known in advance. The deterministic workflow enforces the board&#x27;s fixed format. It does a final check before publish.</li>
+
+<li>Why B and C best meet the objective: V2-D1.3 evaluates patterns on
+predictability and dynamic-planning need. Assessment scores high on
+planning need (agent). Publish scores high on predictability need
+(workflow). The hybrid of the two is the exam's standard answer for a
+two-shape task.</li>
+
+<li>Every rejected choice explained: A makes one judgment with no tools,
+so it cannot read sensors or patrol notes. D is a prompt with no input
+path and no check: a wrong bulletin ships. E is valid but answers a
+different question. The scenario asks which patterns fit, and manual
+process is not a pattern under test.</li>
+
+<li>The handoff between the loop and the workflow needs a schema contract. This is an exact limitation. The loop needs a step cap. This keeps the assessment cost bounded.</li>
+
+<li>Relevant evidence (with date): four-stop spectrum and seven axes from
+lesson-D1-patterns (§4), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when all
+inputs arrive pre-assembled in one payload. D wins never for
+life-safety output. E wins when the resort rejects automation entirely.</li>
+
+<li>Misconception tested: "one pattern must win." Two-shape tasks take
+two patterns, joined by a contract.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h5">Q-M-04 (V2-D1.4)</h3>
+
+<p id="sec-bank-mixed-p34" data-kind="prose"><strong>Scenario.</strong> A museum digitizes archives. Three specialists do this work. A transcriber changes handwriting into text. A translator changes Latin into English. A cataloger writes metadata and the final record.</p>
+
+<p id="sec-bank-mixed-p35" data-kind="prose">The translator and transcriber disagree on 12% of pages.</p>
+
+<p id="sec-bank-mixed-p36" data-kind="prose"><strong>Question.</strong> What resolves the disagreement?</p>
+
+<p id="sec-bank-mixed-p37" data-kind="prose"><strong>Options.</strong>
+A) The coordinator re-runs both workers until they agree.
+B) The handoff contract names the cataloger as arbiter with a documented
+disagree rule. The coordinator applies it and logs the decision.
+C) Majority vote across all three workers.
+D) The translator wins because translation is the harder skill.</p>
+
+<p id="sec-bank-mixed-p38" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p39" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is multi-agent conflict resolution.
+2. The lifecycle stage is design.
+3.</p>
+
+<p id="sec-bank-mixed-p40" data-kind="prose">The objective is to resolve worker disagreement deterministically.
+4. Hard constraints are a 12% disagreement rate. The final record must be consistent and auditable.
+5. The system layer is the handoff contract (V2-D1.4).</p>
+
+<p id="sec-bank-mixed-p41" data-kind="prose">6. Eliminate infeasible options. All four options are feasible to do.
+7. Eliminate constraint-violating options. A can loop forever.</p>
+
+<p id="sec-bank-mixed-p42" data-kind="prose">C invents a rule that the contract did not define. D is arbitrary.
+8. Compare options on the objective. Only B uses the contract&#x27;s disagree rule. V2-D1.4 requires this rule.</p>
+
+<p id="sec-bank-mixed-p43" data-kind="prose">9. Hidden dependencies are present. The arbiter needs both workers&#x27; outputs. The arbiter also needs the source page.
+10. Verify the options.</p>
+
+<p id="sec-bank-mixed-p44" data-kind="prose">B alone is correct. Select only one option.</p>
+
+<p id="sec-bank-mixed-p45" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "The translator and transcriber disagree on
+12% of pages."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Terminates on every page</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Rule defined before the dispute</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Decision is logged</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. The disagree rule is present before any dispute. The cataloger arbitrates with full context. The logged decision makes the final record auditable.</li>
+
+<li>Why B best meets the objective: V2-D1.4 requires the handoff contract
+to name input schema, output schema, and the disagree rule. B is the
+only option that uses all three.</li>
+
+<li>Every rejected choice explained: A has no termination guarantee. Two
+workers can disagree forever and burn budget. C invents majority vote,
+but the transcriber and translator judge different things, so a vote is
+meaningless. D picks a winner by prestige, not by contract. The next
+dispute reopens the same fight.</li>
+
+<li>Exact limitation or tradeoff: the cataloger becomes a bottleneck on
+12% of pages, and its arbitration quality bounds the archive's quality.</li>
+
+<li>Relevant evidence (with date): handoff contract and disagree rule from
+lesson-D1-4 (§4), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when
+disagreement signals a fixable input (bad scan) and one re-run resolves
+it. C wins when three independent judges score the same rubric. D wins
+never as a design. It is a bias.</li>
+
+<li>Misconception tested: "more agents means the truth emerges." Without
+a disagree rule, more agents mean more disputes.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h6">Q-M-05 (V2-D1.5)</h3>
+
+<p id="sec-bank-mixed-p46" data-kind="prose"><strong>Scenario.</strong> An airport plans aircraft turnaround. Fueling, catering, and
+cleaning are independent tasks. Pushback depends on all three plus tower
+clearance. The turnaround SLA is 45 minutes.</p>
+
+<p id="sec-bank-mixed-p47" data-kind="prose"><strong>Question.</strong> Which decomposition fits?</p>
+
+<p id="sec-bank-mixed-p48" data-kind="prose"><strong>Options.</strong>
+A) One sequential chain for all tasks including pushback.
+B) Fan-out: fuel, catering, and cleaning run in parallel, then fan-in to a
+readiness check, then pushback after tower clearance.
+C) One agent improvises the order per flight.
+D) Parallelize everything, including pushback with tower clearance.</p>
+
+<p id="sec-bank-mixed-p49" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p50" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: decomposition pattern selection.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-mixed-p51" data-kind="prose">Objective: meet the 45-minute SLA without breaking dependencies.
+4. Hard constraints: pushback needs all three tasks plus tower clearance,
+45-minute SLA.
+5. System layer: decomposition patterns (V2-D1.5).
+6.</p>
+
+<p id="sec-bank-mixed-p52" data-kind="prose">Eliminate infeasible: all four are feasible to attempt.
+7. Eliminate constraint-violating: D breaks the pushback dependency, C
+has no plan.
+8. Compare on objective: B parallelizes the independent work and
+serializes the dependent work.
+9.</p>
+
+<p id="sec-bank-mixed-p53" data-kind="prose">Hidden dependencies: the fan-in needs a readiness signal from each of
+the three tasks.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p54" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;Fueling, catering, and cleaning are
+independent tasks. Pushback depends on all three plus tower clearance.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p55" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Independent tasks in parallel</td>
+<td>No</td>
+<td>Yes</td>
+<td>Maybe</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Pushback waits for dependencies</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Maybe</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Plan is repeatable</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B meets all hard constraints. The fan-out runs the three independent tasks at once. This uses the maximum time, not the sum of times. The fan-in checks readiness. Pushback waits for tower clearance.</li>
+
+<li>Why B best meets the objective: V2-D1.5 says parallelize independent
+work and sequence dependent work. B is the only option that does both.</li>
+
+<li>Every rejected choice explained: A is safe but slow: the sum of three
+tasks risks the 45-minute SLA. C has no repeatable plan. Improvisation
+is not a decomposition. D parallelizes pushback past its dependency,
+which is a safety violation, not an optimization.</li>
+
+<li>Exact limitation or tradeoff: B needs the readiness check to be fast
+and the three tasks to truly share no resources (one fuel truck serving
+two tasks breaks independence).</li>
+
+<li>Relevant evidence (with date): decomposition patterns from
+lesson-D1-patterns (§4), Oct 6 2026.</li>
+
+<li>A counterfactual is a situation where each plausible alternative wins.
+A wins when the three tasks share one crew.
+The three tasks cannot overlap.
+C never wins as a pattern.
+D wins when tower clearance has pre-approval.
+Pushback needs no readiness signal.</li>
+
+<li>Misconception tested: "parallelize everything for speed."
+Dependencies are not optional. Parallelizing past them is a defect.</li>
+
+</ol>
+

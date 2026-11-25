@@ -1,0 +1,276 @@
+[
+ {
+  "id": "CCDV-F-Udemy2-0001",
+  "question": "A hospital's IT department is integrating its in-house clinical reference MCP server into an AI application (the host). One engineer is confusing the relationship among the host, client, and server, as well as the number of clients needed when there are two servers.\nWhich statement correctly describes the MCP host/client/server model?",
+  "choices": {
+   "A": "The host creates one MCP client per server, and each client maintains a dedicated connection.",
+   "B": "The MCP server also acts as the host, and the AI application connects to the server as a client.",
+   "C": "The host creates a single MCP client, and that client connects to both servers simultaneously.",
+   "D": "Separate clients are created per transport, one for stdio and one for Streamable HTTP, and the servers are distributed among them."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0002",
+  "question": "A video streaming service is building a chat assistant that viewers use while watching, and its implementation handles Messages API streaming (server-sent events) directly.\nWhich implementations correctly process SSE events? (Select TWO.)",
+  "choices": {
+   "A": "Treat the text of the last content_block_delta received as the completed body, and display it on screen as is.",
+   "B": "Parse the partial_json of input_json_delta as JSON every time one is received, and apply the resulting value to the arguments.",
+   "C": "Treat receipt of an unknown event type as a specification violation, throw an exception, and close the connection.",
+   "D": "Concatenate text_delta values in order for each index, and read stop_reason from the message_delta event.",
+   "E": "Accumulate the partial_json of input_json_delta, and parse it only after receiving content_block_stop."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0003",
+  "question": "When generating descriptions of tourist sites with a previous model, the development team of a travel guide app specified top_k to tune generation so that low-probability tokens were less likely to be chosen.\nAfter the team updated the model to Claude Sonnet 5, this request began failing with HTTP 400.\nWhich is the most appropriate understanding of sampling parameters and the most appropriate response?",
+  "choices": {
+   "A": "Remove top_k, and guide the writing style through instructions and examples in the prompt.",
+   "B": "Keep top_k, and set top_p to 0.99 or higher so that the request is accepted as a combination close to the defaults.",
+   "C": "Remove top_k, and instead lower temperature to 0 so that low-probability candidates are less likely to be chosen.",
+   "D": "Remove top_k, and instead reduce max_tokens to narrow the number of candidates for the next token."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0004",
+  "question": "A hotel chain put a concierge app built with Claude into production a few months ago.\nWhich is the most appropriate continuous maintenance and evaluation practice for the operations and maintenance phase of the system lifecycle?",
+  "choices": {
+   "A": "Investigate and fix the cause case by case whenever a failure is reported, and operate without an evaluation dataset.",
+   "B": "Tally user satisfaction surveys every quarter, and review the configuration when the score drops.",
+   "C": "Continuously monitor the quality of production outputs, and improve the prompts and configuration while maintaining a regression evaluation set.",
+   "D": "Freeze the configuration from launch, and operate under a policy of not changing the model or prompts until the next major overhaul."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0005",
+  "question": "A fintech (payments) company's fraud detection agent has started ignoring its initial instructions and account constraints in the latter part of long conversations. Its judgments have also started to waver, pulled along by irrelevant tool outputs.\nWhich best describes the symptoms of context drift and how to prevent it?",
+  "choices": {
+   "A": "Treat it as a temporary model malfunction, wait a while, and resume processing in the same conversation until the model recovers.",
+   "B": "Treat it as the initial instructions being buried in a bloated context, and trim unnecessary tool results and narrow the context through summarization or separation.",
+   "C": "Treat it as a shortage of initial instructions, and emphasize them by appending the same instructions to the system prompt repeatedly.",
+   "D": "Treat it as wavering judgment caused by a lack of information, and fetch additional tool outputs that seem relevant and add them to the context."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0006",
+  "question": "A mapping information company provides an in-house library that normalizes address notation to multiple development teams. The library uses Claude, and its current version is 2.4.1.\nIn the next change, the return value field confidence will be renamed to score, and the old name confidence will be removed.\nFollowing semantic versioning, which is the most appropriate version for releasing this change?",
+  "choices": {
+   "A": "Release it as 3.0.0, bumping MAJOR, since it is a backward-incompatible change to the public API.",
+   "B": "Release it as 2.5.0, bumping MINOR, since it is a change that adds a new field.",
+   "C": "Release it as 2.4.2, bumping PATCH, since it is a change comparable to an internal bug fix.",
+   "D": "Replace the contents of the published 2.4.1 release, and notify the consuming teams of the change and ask them to adapt."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0007",
+  "question": "A non-life insurance company's claims assessment support app sends Claude, in a single request, three photos of an accident vehicle taken from different angles together with a question asking it to compare the damaged areas.\nCurrently, the question is placed first, followed by the photos in sequence. Assessors sometimes cannot tell which photo \"the second photo\" in the response refers to.\nWhich is the most appropriate way to arrange the image blocks and text within the user message?",
+  "choices": {
+   "A": "Combine the three photos side by side into a single image, and refer to them by position (left, center, right) in the question.",
+   "B": "Place the photos first, each immediately preceded by a label such as \"Image 1:\", and put the question after them.",
+   "C": "Pass the three photos in the system prompt, and send only the question in the user message.",
+   "D": "Upload the three photos to the Files API, and write each file_id into the question so that Claude references the photos."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0008",
+  "question": "An ad-tech company that is building an agent is deciding whether to adopt an abstraction framework (such as LangGraph, Strands, or PydanticAI) or to implement the agent directly with the Messages API.\nWhich best describes the trade-off?",
+  "choices": {
+   "A": "Adopt an abstraction framework at the prototype stage, and shape the agent's architecture to fit the framework's conventions.",
+   "B": "Start by implementing directly with the Messages API, and adopt a framework when its benefits justify the added complexity.",
+   "C": "Prefer the components bundled with the framework, and inspect its internal prompts only once a bug appears.",
+   "D": "Anticipating a future move to multiple agents, build a foundation for orchestrating multiple agents up front."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0009",
+  "question": "A securities firm has drawn up a solution architecture in which Claude generates research summaries and passes them to a trading dashboard. The development team needs to derive functional requirements from this architecture.\nWhich activity correctly derives functional requirements from the solution architecture?",
+  "choices": {
+   "A": "Write down each part's inputs, outputs, and acceptance criteria as requirements whose pass/fail can be determined by tests.",
+   "B": "Assign each component in the architecture diagram to developers as is, as a list of development tasks.",
+   "C": "Finalize the model ID and API parameters first, and record those settings in the requirements definition document.",
+   "D": "Build a prototype first and show it to stakeholders, then add the well-received behaviors as requirements."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0010",
+  "question": "A publisher's app has the following two types of processing:\nInteractive operations in which editors ask Claude for immediate answers in the editor\nA high-volume job that reformats the entire back catalog in bulk\nWhich is the most appropriate criterion for choosing between a synchronous and an asynchronous architecture?",
+  "choices": {
+   "A": "Submit both types of processing to the Message Batches API, and respond to editor operations by polling for results as well.",
+   "B": "Implement both types of processing with synchronous API calls, and set a longer HTTP timeout for the reformatting job.",
+   "C": "Process the editors' interactive operations synchronously, and process the full-catalog reformatting asynchronously with queues or batches.",
+   "D": "Use streaming for both types of processing, and run the reformatting job while streaming its progress to the editors' screens."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0011",
+  "question": "A restaurant chain uses Claude to classify and summarize store reviews. To understand its operating costs, the company wants to track token usage per request.\nWhich is the most appropriate way to track token usage at the request level?",
+  "choices": {
+   "A": "Record input_tokens and output_tokens from the usage field of each response, and aggregate them per call.",
+   "B": "Have the model write the number of tokens it used in the response body, and log and aggregate that value as usage.",
+   "C": "Check the billed amount on the Console's Usage page at the end of the month, and divide it by that month's request count to get the cost per request.",
+   "D": "Record the input token count measured with the count_tokens endpoint before sending, and aggregate it as the actual usage."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0012",
+  "question": "A film distributor machine-translates tens of thousands of short subtitle lines into many languages. Each line is short and formulaic, and acceptable quality is sufficient. Cost and throughput are the top priorities.\nWhich model choice is most reasonable?",
+  "choices": {
+   "A": "Translate all lines with Claude Opus, setting effort low to keep the cost per line down.",
+   "B": "Have multiple models translate each language, and have an evaluator LLM select and adopt the best translation.",
+   "C": "Translate all lines with Claude Haiku, the fastest and lowest-cost model, and check translation quality with spot-check evaluations.",
+   "D": "Translate all lines with the top-tier Claude Fable, maximizing translation quality before distribution."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0013",
+  "question": "An airline's operations control center wants to build a system that handles operational disruptions involving bad weather, crew shortages, and aircraft changes. The situations that arise cannot be predicted in advance, and the required steps change from case to case, so dynamic decision-making is required.\nWhich architecture best fits this requirement?",
+  "choices": {
+   "A": "Implement it with parallelization, having multiple LLMs produce the same replanning proposal in parallel and choosing the plan to adopt by majority vote.",
+   "B": "Implement it as an agent in which Claude assesses the situation, decides on tool use and next steps, and proceeds while checking the results.",
+   "C": "Implement it with routing, classifying the input by type of disruption and dispatching it to a response flow prepared for each type.",
+   "D": "Implement it with prompt chaining, defining the response steps in advance so that each LLM call proceeds in order using the previous step's output."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0014",
+  "question": "A news media company operates a public Claude chatbot that answers questions about its articles. Some users craft inputs that jailbreak the bot into generating prohibited content (a direct threat in which the user is the attacker).\nWhich mitigation is most effective?",
+  "choices": {
+   "A": "Pre-screen inputs with a lightweight model, instruct the bot on ethical boundaries and how to decline, and restrict users who repeatedly violate the rules.",
+   "B": "Pass user messages inside tool_result blocks so that they are treated as untrusted input.",
+   "C": "Encode the retrieved article text as JSON to make the boundary between articles and instructions clear before having the bot answer.",
+   "D": "Switch to a model with stronger instruction following, list the prohibited items in the system prompt, and restate them every turn."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0015",
+  "question": "In a K-12 learning support app, requests to the Claude API spike right after classes begin, and the app has started receiving 429 errors.\nWhich is the most appropriate understanding of rate limit fundamentals and the most appropriate response?",
+  "choices": {
+   "A": "Retry with exponential backoff that follows retry-after, and use prompt caching for long shared instructions.",
+   "B": "Switch to the Message Batches API, and return answers to in-class questions after batch processing completes.",
+   "C": "Reset max_tokens to a smaller value to free up OTPM capacity and avoid 429 errors.",
+   "D": "Distribute requests across multiple workspaces, and process them within the combined limits of all the workspaces."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0016",
+  "question": "A food manufacturer runs an agent that uses multiple tools to automate production line inspections. However, the tool use loop sometimes runs out of control or repeats endlessly.\nWhich measures prevent this kind of tool use loop failure? (Select TWO.)",
+  "choices": {
+   "A": "Apply prompt caching to the definitions and results of repeatedly called tools to lower the input cost per call.",
+   "B": "Validate the tool results at each step, and set a stop condition that ends the loop once the goal is judged to be achieved.",
+   "C": "Set disable_parallel_tool_use to true to limit each response to at most one tool call.",
+   "D": "Set a cap on the number of tool use round trips (such as max_turns), and stop the loop when the cap is reached.",
+   "E": "Replace old tool results with summaries partway through the loop to free up space in the context."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0017",
+  "question": "A law firm is designing the following two features that use Claude:\nAn analysis feature (scrutinizes the consistency between clauses of complex contracts through multi-step reasoning)\nAn internal FAQ feature (instantly returns a standard answer when asked for a clause number)\nWhich are appropriate ways to choose between fast mode and extended thinking (adaptive thinking / effort level)? (Select TWO.)",
+  "choices": {
+   "A": "For the contract consistency analysis, set effort to high to allocate sufficient thinking to the multi-step reasoning.",
+   "B": "For the FAQ feature, set effort to low to limit thinking and reduce response time and token consumption.",
+   "C": "Set effort to max even for the FAQ feature, so that Claude thinks thoroughly even on simple clause-number questions and answer quality improves.",
+   "D": "For the contract consistency analysis, disable thinking to speed up responses, and have Claude reach a conclusion in a single output.",
+   "E": "For the FAQ feature, enable fast mode (speed: \"fast\") to lower the price per answer."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0018",
+  "question": "A caregiving provider wants to process the large volume of care records that accumulates each day in bulk overnight, and generate non-urgent summary reports by the next morning. Immediate responses are not needed, and cost is the top priority.\nWhich is the most appropriate way to operate the Message Batches API in this case?",
+  "choices": {
+   "A": "Submit the requests to the Message Batches API, and retrieve the results after processing_status becomes ended.",
+   "B": "Specify stream: true on each request in the Message Batches API, and save the generated tokens incrementally.",
+   "C": "Call the Messages API synchronously for each record, processing them one by one during idle overnight hours and saving the results.",
+   "D": "Fetch results_url immediately after submitting to the Message Batches API, and use the results available at that point for the next morning's report."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0019",
+  "question": "A construction company has Claude output on-site inspection findings as structured JSON, and ingests fields such as inspection date, remediation cost, and severity into a typed backend.\nWhich is the most appropriate approach to JSON serialization/deserialization and type handling?",
+  "choices": {
+   "A": "Validate the received JSON against a schema, and explicitly convert dates and amounts to date and Decimal types.",
+   "B": "Store the inspection date in the database as a string, and interpret it each time a comparison or aggregation is needed.",
+   "C": "Receive JSON numbers as floating-point values as is, and use those values when aggregating remediation costs as well.",
+   "D": "Leave the restoration of date strings to date types to the JSON parser, and ingest the data without writing any type conversion logic."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0020",
+  "question": "A construction company uses Claude Code. Every time, the team pastes into the chat the same multi-step checklist (formatting rules, required sections, review steps) for producing standardized site safety reports.\nThe team wants to package this checklist, have it loaded only when relevant, and have Claude follow it consistently.\nWhich mechanism is most appropriate for achieving this?",
+  "choices": {
+   "A": "As a custom tool: encode the checklist into an input_schema and have Claude call the tool.",
+   "B": "As a skill: consolidate the steps and supporting materials into SKILL.md, and have its body loaded when relevant.",
+   "C": "As CLAUDE.md: write the full text of the checklist into it, and have it loaded at the start of every session.",
+   "D": "As an MCP server: expose the checklist as a resource, and have Claude Code reference it."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0021",
+  "question": "A sports analytics platform defines a tool, get_player_stats, for Claude. Claude sometimes calls it with guessed values for parameters the user did not specify, or with the wrong types.\nWhich input_schema design most improves the accuracy of tool calls?",
+  "choices": {
+   "A": "Make every property a string type, and perform conversions to numbers and dates in the receiving code.",
+   "B": "Remove the required specification so that the schema allows calls that omit arguments the user did not provide.",
+   "C": "Write all the argument descriptions in the system prompt, and leave the input_schema properties empty.",
+   "D": "Give each property the correct type and a description that includes units and format, and list the truly necessary arguments in required."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0022",
+  "question": "A weather information company is developing an in-house forecast distribution tool with Claude Code. The company wants to use CLAUDE.md to separate organization-wide policies, individual developers' preferences, and rules shared across the project.\nWhich best describes the CLAUDE.md hierarchy and precedence?",
+  "choices": {
+   "A": "As with settings.json, a narrower-scope CLAUDE.md overrides the same instruction in a broader-scope CLAUDE.md.",
+   "B": "Only the CLAUDE.md at the project root is loaded at startup, and the user file is loaded with /memory.",
+   "C": "The files are loaded and concatenated in the order managed policy → user → project, and the organization's policy cannot be excluded.",
+   "D": "Specifying the managed policy's path in claudeMdExcludes lets an individual exclude the organization's policy in their own environment."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0023",
+  "question": "A logistics company wants to embed Claude into its shipment routing backend service and run it automatically at scale.\nWhich is the most appropriate choice of interface for using Claude (direct API/SDK use, Claude Code, or Claude Desktop/claude.ai)?",
+  "choices": {
+   "A": "Connect an MCP server for the internal systems to Claude Desktop, and have it execute routing on staff instructions.",
+   "B": "Keep Claude Code running on a server in interactive mode, and have the backend feed it input for processing.",
+   "C": "Have staff paste shipment data into the claude.ai chat screen, and transcribe the results into the business system.",
+   "D": "Call the Claude API from the backend code with the Client SDK, and integrate it into the routing process."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0024",
+  "question": "A music streaming app is adding a feature in which Claude summarizes and classifies reviews and track descriptions that users post freely (user-generated content).\nWhich are appropriate design considerations when handling user-generated content? (Select TWO.)",
+  "choices": {
+   "A": "Treat posts as untrusted input, pass them separately from the system instructions, and do not let Claude follow instructions inside the posts.",
+   "B": "Handle post moderation reactively after reports are received, and run summarization and classification without any prior checks.",
+   "C": "Concatenate the post text directly into the system prompt, passing it in the same context as the operator's instructions.",
+   "D": "Set max_tokens to a small value to reduce the room for instructions embedded in posts to produce long outputs.",
+   "E": "Screen posts, for example with pre-classification by a lightweight model, to detect and remove personal information and inappropriate content."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0025",
+  "question": "A real estate company automatically generates property descriptions with Claude, but the level of detail and the tone of the output are inconsistent.\nWhich is the most appropriate way to clarify the instructions and refine them iteratively?",
+  "choices": {
+   "A": "Keep rewriting and testing the prompt until a good output appears, and adopt the wording at the point a satisfying output appears for production.",
+   "B": "Treat the inconsistency in detail and tone as a lack of model capability, and start by considering a switch to a higher-tier model.",
+   "C": "Prepare success criteria and evaluations that measure them first, then improve the prompt by adding specific instructions and examples while checking the results.",
+   "D": "Constrain the output's level of detail and tone with prohibitions, adding instructions to the prompt that list \"do not ...\" items."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0026",
+  "question": "A game studio wants to run long-running, asynchronous agents in production. However, it does not have the capacity to operate its own sandbox and session state infrastructure.\nWhich option most appropriately describes a deployment model suited to this situation and its characteristics?",
+  "choices": {
+   "A": "Run the Agent SDK in the company's own containers, and operate the session state and sandboxes in-house.",
+   "B": "Build the loop with the Messages API and the Client SDK's tool runner, and provide the execution environment on the company's own servers.",
+   "C": "Use Claude Managed Agents, and leave the operation of the agent loop and sandbox to Anthropic.",
+   "D": "Run the Claude Code CLI non-interactively with the -p option, and launch it periodically from the company's job scheduler."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0027",
+  "question": "A university's research support agent needs to retain insights gained partway through long-running research tasks across many steps. In addition, the team wants to carry those insights over to the next session after a session ends.\nWhich best describes agent memory patterns?",
+  "choices": {
+   "A": "Accumulate the insights in the conversation history, and carry them over by resending the same entire history in the next session.",
+   "B": "Cache the conversation history with prompt caching, and read the insights from the cache in the next session.",
+   "C": "Delegate the research to a subagent, have the subagent's context retain the insights, and have it reference them again next time.",
+   "D": "Keep in-progress working notes in the context, and write the insights to be carried over to an external store such as files."
+  }
+ }
+]

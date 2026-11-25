@@ -1,0 +1,274 @@
+[
+ {
+  "id": "CCDV-F-Udemy-0001",
+  "question": "An online travel agency operates a long-running agent that arranges itineraries. The agent makes dozens of tool calls. The conversation approaches the context window limit, and the agent can no longer continue processing.\nWhich context management techniques are effective? (Select TWO.)",
+  "choices": {
+   "A": "Use tool result clearing, a form of context editing, to remove old tool results from the context.",
+   "B": "Use compaction to replace older exchanges in the conversation with a server-side summary, shrinking the context.",
+   "C": "Use prompt caching to cache the conversation-history prefix, lowering the input token cost of the history portion.",
+   "D": "When a 429 or 529 error is returned, resend the same request with exponential backoff.",
+   "E": "Raise max_tokens to increase the limit on the number of output tokens that can be generated in a single response."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0002",
+  "question": "A pharmaceutical company uses Claude in a production system that is subject to regulatory requirements.\nWhich is the most appropriate reason to pin the model to a specific snapshot (fixed version) rather than to an alias that moves to newer snapshots?",
+  "choices": {
+   "A": "A pinned snapshot has no planned deprecation, so the same model can be used indefinitely.",
+   "B": "The system keeps running on the same model that was validated and approved, preventing behavior changes caused by unintended switches.",
+   "C": "A pinned model ID has a lower per-token input price, keeping down the operating cost of the regulated system.",
+   "D": "Improvements in successor models are automatically applied to the pinned ID, so performance improves without revalidation."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0003",
+  "question": "An accounting firm is starting to refactor a large legacy integration codebase that it has operated for many years.\nWhich approach is most appropriate for proceeding safely?",
+  "choices": {
+   "A": "Put tests in place that lock in the existing behavior, then make small changes incrementally and verify each one.",
+   "B": "Because the work does not change behavior, bundle feature additions and bug fixes into the same change.",
+   "C": "Skip the effort of writing tests, and have the person in charge verify behavior by operating the UI after each change.",
+   "D": "Rewrite everything with a new design, and switch over from the old system all at once when it is complete."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0004",
+  "question": "A publisher is building an agent that reviews book manuscripts. The publisher is considering a design that delegates fact-checking, style checking, and quotation rights checking to dedicated subagents. Every check requires reading a large volume of reference material.\nWhich is the most appropriate benefit of context isolation through subagents?",
+  "choices": {
+   "A": "The parent's system prompt also applies to the subagents, so every check can follow the same policy.",
+   "B": "Material reading and intermediate tool results stay within the subagent, and only the final result is returned to the parent.",
+   "C": "Total token consumption across the system is lower than when a single agent does all the processing.",
+   "D": "Each subagent inherits the parent's conversation history and tool results, so delegation instructions can be kept short."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0005",
+  "question": "A sports analytics service generates match reports with Claude. The development team noticed that the output varies from run to run, even with the same input.\nRegarding sampling parameters and nondeterminism, which statement correctly describes temperature?",
+  "choices": {
+   "A": "temperature is a parameter that affects response latency and has no effect on the generated content.",
+   "B": "Setting temperature to 0 guarantees that exactly the same output is returned every time for the same input.",
+   "C": "temperature adjusts the randomness of sampling, and even at 0, an exact match of outputs is not guaranteed.",
+   "D": "Raising temperature makes the model consider a wider range of candidate tokens, which increases the factual accuracy of the generated content."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0006",
+  "question": "A logistics company is building a delivery planning system. In this system, different research and replanning are required every time, depending on road conditions, vehicle availability, and package priority.\nThe system will consist of a central manager (orchestrator) and multiple worker LLMs.\nIn this manager/supervisor hierarchy, which is the most appropriate role for the manager?",
+  "choices": {
+   "A": "Classify delivery requests by type, and route each one to a dedicated worker prepared for that type.",
+   "B": "Decide on subtasks based on the situation of each request, delegate them to workers, and integrate the results into a plan.",
+   "C": "Call workers in an order fixed at design time, passing each stage's output as the next stage's input.",
+   "D": "Have all workers solve the same planning task in parallel, and choose the final delivery plan by majority vote over their outputs."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0007",
+  "question": "A shipping company's batch processing pipeline intermittently receives HTTP 429 and HTTP 529 from the Claude API under high load.\nWhich retry design is most appropriate?",
+  "choices": {
+   "A": "When a 429 is received, pause the entire batch, investigate the cause, and resubmit all items the next day.",
+   "B": "Resend immediately and repeatedly without any delay, and move on to the next request as soon as one succeeds.",
+   "C": "Keep retrying every error, including 400, a fixed number of times with a fixed wait in between.",
+   "D": "Retry 429 and 529 with exponential backoff with jitter, and honor retry-after."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0008",
+  "question": "A legal team is building a feature that splits one uploaded contract into about 40 clauses and uses Claude to perform an independent risk assessment for each clause. The user waits at the screen for the results.\nCalling Claude for one clause at a time in sequence makes the total wait too long. At the same time, the team wants to avoid exceeding the organization's rate limits and triggering frequent 429s.\nWhich implementation using the Python SDK is most appropriate?",
+  "choices": {
+   "A": "Increase the client's max_retries so that the SDK automatically resends each individual call when it fails.",
+   "B": "Switch each individual call to streaming to shorten the time until each clause's result starts arriving.",
+   "C": "Submit the 40 requests together to the Message Batches API, poll until processing finishes, and then display the results.",
+   "D": "Send the 40 requests concurrently with AsyncAnthropic, and use a semaphore to cap the number of requests in flight at a fixed number."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0009",
+  "question": "An agritech company is designing a Claude app that handles field reports of crop diseases. The processing has the following two subtasks.\nClassify a free-text report into one of a predefined set of disease categories\nDevelop a multi-step irrigation and pest-control plan that accounts for many interacting constraints\nWhich is the most appropriate way to choose between few-shot prompting and thinking modes (effort and adaptive thinking)?",
+  "choices": {
+   "A": "Pack dozens of example plans into the planning prompt, and leave the reasoning depth at the default setting.",
+   "B": "For classification, use few-shot prompting to show the format and boundaries; for planning, raise effort so the model reasons deeply.",
+   "C": "For both tasks, give only instructions zero-shot, and set effort to the minimum to prioritize response speed.",
+   "D": "Set effort to max for both tasks so that both classification and planning are handled with the deepest reasoning."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0010",
+  "question": "A weather information company is implementing summary generation for large-scale weather simulation results as a long-running asynchronous job. This processing can take several hours.\nRegarding how to notify the client that the job has completed, which statement comparing polling and callbacks (webhooks) is most appropriate?",
+  "choices": {
+   "A": "Callbacks are delivered reliably as long as the receiving URL is exposed, so there is no need to prepare for redelivery or duplicate receipt.",
+   "B": "Polling is simple but causes detection delays and wasted requests; callbacks are immediate but require preparation on the receiving side.",
+   "C": "Polling can detect completion immediately, and callbacks can be implemented without a receiving endpoint.",
+   "D": "If a synchronous call keeps the HTTP connection open for several hours, neither polling nor callbacks are needed."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0011",
+  "question": "An insurance agency has an app that calls the Messages API directly from its own backend. In this app, the agency wants Claude to use a policy lookup tool provided by a remote MCP server (Streamable HTTP) that is already exposed on the internet.\nThe agency does not implement its own MCP client; instead, it uses the MCP connector (the mcp_servers parameter).\nWhich are correct design choices for this setup? (Select TWO.)",
+  "choices": {
+   "A": "In the mcp_toolset configs, set enabled to false for tools that modify data so that only lookup tools are used.",
+   "B": "Define the server's URL and name in mcp_servers, and reference that name from an mcp_toolset in the tools array.",
+   "C": "Also enable, through mcp_toolset, the policy terms documents that the server exposes as resources, and have Claude read them.",
+   "D": "Also connect the test MCP server running via stdio on a developer's PC by writing its launch command in mcp_servers.",
+   "E": "When Claude returns mcp_tool_use, the app sends tools/call to the server and returns the result as a tool_result."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0012",
+  "question": "A railway company is building a Claude assistant that guides passengers.\nAs a general principle, which is most appropriate regarding whether to place instructions in the system prompt or in the user message?",
+  "choices": {
+   "A": "Place the role and safety constraints in the system prompt, and place individual inquiries and data in the user message.",
+   "B": "Place safety constraints on the user message side, and adjust their content for each inquiry.",
+   "C": "Write all instructions together at the beginning of every user message, and operate without using the system prompt.",
+   "D": "Put all instructions and data, including each passenger's inquiry, into the system prompt."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0013",
+  "question": "A security operations center (SOC) is building a Claude app. In this app, the SOC wants to run both custom queries against an internal SIEM running within its own infrastructure and general web searches.\nRegarding where client tools and server tools are executed and when to use each, which statement is correct?",
+  "choices": {
+   "A": "Client tools are also executed on Anthropic's infrastructure and cannot connect to the internal SIEM.",
+   "B": "Server tools are executed within your own app; you write the execution code and return a tool_result.",
+   "C": "Connect to the internal custom system with a server tool, and implement web search yourself as a client tool.",
+   "D": "Custom-built tools such as the SIEM query are executed within the app, and web search is executed on Anthropic's side."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0014",
+  "question": "A SaaS company that provides a CRM is building a long-running agent. This agent needs the following capabilities.\nDurable execution that can resume after failures\nHuman approval (human-in-the-loop)\nState persistence\nWhich is the most appropriate judgment about adopting an agent orchestration framework such as LangGraph?",
+  "choices": {
+   "A": "Adopt it so that you do not have to build your own mechanisms for resuming after failures and saving state, and define the control flow as a graph.",
+   "B": "Adopt it to automatically reduce the number of LLM calls and token consumption, lowering API costs.",
+   "C": "Adopt it so that you do not have to write prompts or agent configurations yourself.",
+   "D": "Forgo adopting it, implement the tool use loop directly with the Messages API, and hold the pending-approval state in process memory."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0015",
+  "question": "An EdTech company tried instructions (prompts) for generating K-12 teaching materials in three places: Claude Code, claude.ai, and the Messages API. The same instructions produced different interpretations and outputs.\nWhich is the most appropriate explanation of this difference and response to it?",
+  "choices": {
+   "A": "The difference is caused by ambiguity in the instructions, so rewrite the instructions in more detail to make the three outputs consistent.",
+   "B": "Each interface adds different context, so build on the API, where you can control the context.",
+   "C": "All three run with the same system prompt, so report the difference to support as a model defect.",
+   "D": "Settle on the one interface that produced the best output, and stop testing on the other two."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0016",
+  "question": "A bank is building a Claude assistant that accepts changes to registered addresses via chat. The procedure must always proceed in the following order.\nIdentity verification\nCollecting the new address\nRepeating back the details and obtaining consent\nExecuting the change\nIn testing, cases were found in which Claude, pressured by the user to hurry, called the address change tool before identity verification was complete.\nWhich design most reliably enforces this order?",
+  "choices": {
+   "A": "Set effort to a high value to increase the amount of reasoning Claude spends checking the procedure on every response.",
+   "B": "Keep the current step as state on the application side, and include in the request only the tools allowed in that state.",
+   "C": "Have Claude output the name of the next step as JSON in every response, and have the app switch processing according to that value.",
+   "D": "Spell out the order of the steps with numbers in the system prompt, and use few-shot prompting to demonstrate a dialogue that follows the order."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0017",
+  "question": "A logistics company is integrating Claude Code into its CI pipeline to automate code review of pull requests.\nWhich is the most appropriate way to use headless mode and settings.json?",
+  "choices": {
+   "A": "Set defaultMode to bypassPermissions in the project's settings.json to skip all confirmations at once.",
+   "B": "Run non-interactively with -p, and pre-approve the required tools with --allowedTools.",
+   "C": "Write \"In CI, you may run without confirmation\" in CLAUDE.md, and launch Claude Code in interactive mode.",
+   "D": "Launch Claude Code in interactive mode, and have a CI engineer respond to each permission prompt as it appears."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0018",
+  "question": "A game development company frequently refines the Claude prompts it uses to generate dialogue for non-player characters.\nWhich is the most appropriate way to integrate prompt changes into the normal software development lifecycle (SDLC)?",
+  "choices": {
+   "A": "Put prompt changes through A/B tests in production, and keep the versions that get the best user response.",
+   "B": "Let planners edit prompts directly from an admin screen, and apply changes to production immediately.",
+   "C": "Manage the prompt text in a configuration database, and record the full text in the commit message whenever it changes.",
+   "D": "Manage prompts in the repository, and merge changes only after they pass review and evaluation through a pull request."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0019",
+  "question": "An e-commerce company is developing a returns-handling agent. This agent reads return policy documents and runs internal return-processing scripts.\nCompared with calling the Messages API directly with Anthropic's Client SDK, which is the most appropriate benefit of adopting the Claude Agent SDK?",
+  "choices": {
+   "A": "Responses can be received incrementally via streaming, so the progress of long tasks can be displayed on the user's screen.",
+   "B": "The agent can be hosted on Anthropic's infrastructure, so you do not need to operate an execution environment or sandbox.",
+   "C": "You can use built-in tools for file operations and command execution, along with an agent loop that executes those tools and returns the results.",
+   "D": "The agent can run by logging in with a claude.ai account, so it can be embedded in your own product without issuing an API key."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0020",
+  "question": "A retail company's customer support chat involves long conversations with a single customer.\nFrom the perspective of proper session management (session hygiene), which design is most appropriate?",
+  "choices": {
+   "A": "Keep using the same session even when the customer's request changes, and resend all past exchanges every time without trimming them.",
+   "B": "Choose a model with a 1M-token context window, and keep the entire history up to the limit.",
+   "C": "Have the server side hold the conversation state, and have the client send only the latest message each time.",
+   "D": "Use a separate session for each request, shrink old history by summarizing or trimming it, and keep only the relevant context."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0021",
+  "question": "An auto parts manufacturer operates an agent that edits design-related documents. Audit requirements dictate that every time the agent modifies a file, the change must be recorded in the audit log, without exception.\nWhich implementation best meets this requirement?",
+  "choices": {
+   "A": "Configure a PostToolUseFailure hook matched to Edit and Write that runs an audit logging script.",
+   "B": "Define a subagent for audit logging, and instruct the main agent to call it after changing a file.",
+   "C": "Configure a PostToolUse hook matched to Edit and Write that runs an audit logging script.",
+   "D": "Add a rule to CLAUDE.md that says \"When you edit a file, record it in the audit log.\""
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0022",
+  "question": "A power company operates a Claude agent that monitors the power grid. In long sessions, each tool returns large amounts of data, such as sensor data, as-is without processing. This data accumulates in the context, lowering quality while increasing cost and latency.\nWhich mitigation is most appropriate for preventing context bloat?",
+  "choices": {
+   "A": "Raise max_tokens so that long responses are output to the end even with the enlarged context.",
+   "B": "Unregister the tool that retrieves sensor data so that the agent cannot retrieve raw data.",
+   "C": "Narrow tool results down to the necessary fields before adding them, and summarize old exchanges to shorten them.",
+   "D": "Migrate to a model with a 1M-token window, and keep holding the data returned by tools as-is."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0023",
+  "question": "On a payment platform, a Claude-based agent that performs transaction reconciliation fails intermittently. The traces record the following two types of failure.\nThe API returns HTTP 400 invalid_request_error, and the request fails immediately\nThe API returns HTTP 200, but when the company's own parser validates the returned body, the body is rejected as malformed\nWhich approach is most appropriate for isolating whether these failures are caused by defects in the integration layer (the company's own request-building and post-processing code) or by problems in the model output itself?",
+  "choices": {
+   "A": "Raise max_tokens to confirm that responses are not being cut off, and then rerun the same processing.",
+   "B": "Uniformly retry failed requests with exponential backoff, and treat them as resolved if they succeed.",
+   "C": "Classify failures at the API boundary: treat 4xx as a request-construction problem on your side, and malformed output after a 200 as an output or post-processing problem.",
+   "D": "Switch to a larger model to process the same transactions, and observe whether the failure frequency decreases."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0024",
+  "question": "An audit firm is building a feature that passes the audit reports of three subsidiaries to Claude together and asks, \"What internal control findings are common to all three companies?\" Each report is tens of thousands of tokens long.\nThe current prompt places the question first, followed by the three reports concatenated without separators. However, answer quality is inconsistent, and it is also hard to tell which company's report each statement is based on.\nWhich is the most appropriate improvement to the prompt structure?",
+  "choices": {
+   "A": "Set effort to a high value so that more tokens are spent on thinking to interpret the long reports.",
+   "B": "Have each of the three reports summarized in advance, and pass only those summaries, placed after the question.",
+   "C": "Add cache_control at the end of the reports section to make the second and subsequent questions about the same reports faster and cheaper.",
+   "D": "Place the reports first, wrapping each one in tags labeled with its source name, and place the question at the end, after the reports."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0025",
+  "question": "A machine tool manufacturer operates an internal MCP server that provides tools for booking equipment inspections and looking up inspection history. The manufacturer has added a new reschedule_inspection tool to this server for changing inspection schedules.\nThe manufacturer wants the multiple AI apps (hosts) that use this server to present the new tool and its arguments to the model without changing the app code.\nWhich correctly describes how tools and their arguments are communicated to the client in MCP?",
+  "choices": {
+   "A": "The server includes argument descriptions in templates it exposes as prompts, and the user selects one to pass to the model.",
+   "B": "The client sends tools/list and uses the returned inputSchema and other fields for the tool definitions given to the model.",
+   "C": "The client tries tools/call with empty arguments and has the model learn the required arguments from the returned error.",
+   "D": "The client reads a tool specification document that the server exposes as resources and has the model infer the argument format."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0026",
+  "question": "A telecommunications company is planning a Claude-powered assistant that presents suggested answers to call center operators during calls. There are two business requirements.\nSuggested answers must start appearing within 1 second\nThe assistant must support 300 concurrent calls at peak\nWhich technical and infrastructure requirement best follows from these business requirements?",
+  "choices": {
+   "A": "Display responses incrementally with streaming, and when a 429 error is returned, wait the number of seconds in retry-after and then retry the same request.",
+   "B": "Submit per-call requests together to the Message Batches API, adjusting the count to stay within the processing queue limit.",
+   "C": "Select a model with a 1M-token context window, and include the full call transcript in every input.",
+   "D": "Display responses incrementally with streaming, and secure rate limit capacity that matches the peak request volume and token volume."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0027",
+  "question": "A nonprofit runs a Claude workflow in production that supports donor relations.\nWhen a new model version is released, which is the most appropriate way to prepare for behavior changes between model releases?",
+  "choices": {
+   "A": "Pin the production model ID, and migrate to the new model only after regression evaluation confirms that there is no degradation.",
+   "B": "Assume that the new model is better than the previous generation, and skip retesting existing prompts.",
+   "C": "Before migrating, try a few prompts on the new model, and switch the production model if the responses make a good impression.",
+   "D": "Swap the production model ID on the new model's release date, and roll back if problems are reported."
+  }
+ }
+]

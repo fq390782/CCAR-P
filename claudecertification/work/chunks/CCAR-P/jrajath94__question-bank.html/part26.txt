@@ -1,0 +1,212 @@
+<h3 id="bank-mocks-h30">M1-Q26 (V2-D3.5)</h3>
+
+<p id="sec-bank-mocks-p128" data-kind="prose"><strong>Scenario.</strong> A RAG pipeline runs: ingestion, parsing, chunking,
+metadata, indexing, retrieval, rerank, assembly, generation. The team
+asks what comes after retrieval in the canonical order.</p>
+
+<p id="sec-bank-mocks-p129" data-kind="prose"><strong>Question.</strong> Which stage follows retrieval?</p>
+
+<p id="sec-bank-mocks-p130" data-kind="prose"><strong>Options.</strong>
+A) Ingestion.
+B) Rerank, then assembly, then generation.
+C) Chunking.
+D) Indexing.</p>
+
+<p id="sec-bank-mocks-p131" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "ingestion, parsing, chunking, metadata,
+indexing, retrieval..." Why: the canonical pipeline order is
+retrieval, rerank, assembly, generation, then grounding checks. The
+rest are earlier stages. Counterfactual: none. Order is definitional.</p>
+
+
+<h3 id="bank-mocks-h31">M1-Q27 (V2-D3.5)</h3>
+
+<p id="sec-bank-mocks-p132" data-kind="prose"><strong>Scenario.</strong> A medical RAG answers with citations. Doctors find cited
+paragraphs that do not support the claims. The pipeline ends at
+generation.</p>
+
+<p id="sec-bank-mocks-p133" data-kind="prose"><strong>Question.</strong> Which stage is absent?</p>
+
+<p id="sec-bank-mocks-p134" data-kind="prose"><strong>Options.</strong>
+A) Bigger chunks.
+B) Grounding and citation checks: verify each cited claim against its
+source chunk before the answer ships.
+C) More documents.
+D) A stronger reranker.</p>
+
+<p id="sec-bank-mocks-p135" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "cited paragraphs that do not support the
+claims." Why: presence of markers is not support. The entailment check
+blocks unsupported claims. A, C, and D improve retrieval, not
+verification. Counterfactual: D wins when the wrong chunk ranks first.</p>
+
+
+<h3 id="bank-mocks-h32">M1-Q28 (V2-D3.6), Select TWO</h3>
+
+<p id="sec-bank-mocks-p136" data-kind="prose"><strong>Scenario.</strong> A product search bot serves queries like "red waterproof
+jacket under $100." The catalog carries structured attributes (color, price)
+and free-text descriptions.</p>
+
+<p id="sec-bank-mocks-p137" data-kind="prose"><strong>Question.</strong> Which TWO retrieval strategies fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p138" data-kind="prose"><strong>Options.</strong>
+A) Keyword search on the description text.
+B) Semantic search for meaning matches ("waterproof" vs "rain-proof").
+C) Metadata filters on color and price.
+D) Random sampling.
+E) One fixed FAQ document.</p>
+
+<p id="sec-bank-mocks-p139" data-kind="prose"><strong>Answer.</strong> B, C</p>
+
+<p id="sec-bank-mocks-p140" data-kind="prose"><strong>Key.</strong> B, C. Decisive phrase: &quot;structured attributes... and free-text
+descriptions.&quot; Why: metadata filters handle the structured constraints
+exactly. Semantic search handles meaning variation. A alone misses
+synonyms. D and E are not strategies.</p>
+
+<p id="sec-bank-mocks-p141" data-kind="prose">Counterfactual: A wins as the
+third leg of a hybrid when exact SKUs matter.</p>
+
+
+<h3 id="bank-mocks-h33">M1-Q29 (V2-D3.7)</h3>
+
+<p id="sec-bank-mocks-p142" data-kind="prose"><strong>Scenario.</strong> Three teams in two languages need the same address
+validation capability. One team built it as an internal API.</p>
+
+<p id="sec-bank-mocks-p143" data-kind="prose"><strong>Question.</strong> Which mechanism fits?</p>
+
+<p id="sec-bank-mocks-p144" data-kind="prose"><strong>Options.</strong>
+A) Each team reimplements the API client in its language.
+B) An MCP server exposing the validator with declared tools. All three
+teams consume it.
+C) A CLI wrapper with text parsing.
+D) Email the addresses to the owning team.</p>
+
+<p id="sec-bank-mocks-p145" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "Three teams in two languages need the
+same capability." Why: reuse across teams and languages is the MCP win
+condition. A duplicates work three times. C adds parse risk.
+Counterfactual: A wins when there is one consumer in one language.</p>
+
+
+<h3 id="bank-mocks-h34">M1-Q30 (V2-D3.7)</h3>
+
+<p id="sec-bank-mocks-p146" data-kind="prose"><strong>Scenario.</strong> A vendor capability exists only as a CLI. The team wraps
+it in a subprocess call and parses the text output. The vendor ships a
+stable typed API.</p>
+
+<p id="sec-bank-mocks-p147" data-kind="prose"><strong>Question.</strong> What should the team do?</p>
+
+<p id="sec-bank-mocks-p148" data-kind="prose"><strong>Options.</strong>
+A) Keep the CLI wrapper. It works.
+B) Move to the direct API: typed contract, no parse risk.
+C) Wrap the CLI in a second CLI.
+D) Drop the capability.</p>
+
+<p id="sec-bank-mocks-p149" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "The vendor ships a stable typed API."
+Why: the CLI won by default. The typed API removes parser maintenance
+and the quarterly breakage. Counterfactual: A wins while no API
+exists.</p>
+
+
+<h3 id="bank-mocks-h35">M1-Q31 (V2-D3.8), Select TWO</h3>
+
+<p id="sec-bank-mocks-p150" data-kind="prose"><strong>Scenario.</strong> A research agent carries 50 tools. Token budget is tight.
+The latency SLA is loose at 12 seconds. Tasks vary per call.</p>
+
+<p id="sec-bank-mocks-p151" data-kind="prose"><strong>Question.</strong> Which TWO facts favor progressive discovery? Select TWO.</p>
+
+<p id="sec-bank-mocks-p152" data-kind="prose"><strong>Options.</strong>
+A) The tool surface is large (50 tools).
+B) The latency SLA is loose (12 seconds).
+C) Every call uses all 50 tools.
+D) The token budget has no limit.
+E) The tool set is 3 tools.</p>
+
+<p id="sec-bank-mocks-p153" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p154" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;50 tools... loose at 12 seconds...
+Token budget is tight.&quot; Why: a large surface makes monolithic context
+expensive and confusing. A loose SLA absorbs the discovery round trip.
+C, D, and E each favor monolithic.</p>
+
+<p id="sec-bank-mocks-p155" data-kind="prose">Counterfactual: C wins the argument
+for monolithic when every call needs every schema.</p>
+
+
+<h3 id="bank-mocks-h36">M1-Q32 (V2-D4.1)</h3>
+
+<p id="sec-bank-mocks-p156" data-kind="prose"><strong>Scenario.</strong> A meeting summarizer must produce summaries the team
+trusts. The team argues about which metric matters most.</p>
+
+<p id="sec-bank-mocks-p157" data-kind="prose"><strong>Question.</strong> Which metric is primary for trust?</p>
+
+<p id="sec-bank-mocks-p158" data-kind="prose"><strong>Options.</strong>
+A) Tokens per summary.
+B) Groundedness: each claimed fact traces to the transcript.
+C) Latency.
+D) Model tier.</p>
+
+<p id="sec-bank-mocks-p159" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "summaries the team trusts." Why: trust
+rests on truth. Groundedness measures whether claimed facts come from
+the transcript. A, C, and D measure cost, speed, and input, not truth.
+Counterfactual: C wins when the SLA names latency with a penalty.</p>
+
+
+<h3 id="bank-mocks-h37">M1-Q33 (V2-D4.1)</h3>
+
+<p id="sec-bank-mocks-p160" data-kind="prose"><strong>Scenario.</strong> A support bot must answer "in a few seconds." Finance caps
+the pilot at $2,000 per month for 50,000 chats.</p>
+
+<p id="sec-bank-mocks-p161" data-kind="prose"><strong>Question.</strong> What is the first measurement step?</p>
+
+<p id="sec-bank-mocks-p162" data-kind="prose"><strong>Options.</strong>
+A) Start building and see.
+B) Convert the adjectives: p95 under 5 seconds, cost per chat at or
+under $0.04 ($2,000 / 50,000).
+C) Pick the most capable tier.
+D) Promise "a few seconds" in the SLA.</p>
+
+<p id="sec-bank-mocks-p163" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;&#x27;in a few seconds&#x27;... $2,000 per month for 50,000 chats.&quot; Vague requirements become acceptance thresholds before any build. The arithmetic is fixed. It is $0.04 per chat. D promises an unmeasured adjective.</p>
+
+<p id="sec-bank-mocks-p164" data-kind="prose">A wins only after measurement.</p>
+
+
+<h3 id="bank-mocks-h38">M1-Q34 (V2-D4.2)</h3>
+
+<p id="sec-bank-mocks-p165" data-kind="prose"><strong>Scenario.</strong> A team ships a prompt change. The regression drawer goes
+red on three old cases.</p>
+
+<p id="sec-bank-mocks-p166" data-kind="prose"><strong>Question.</strong> What does the red drawer mean?</p>
+
+<p id="sec-bank-mocks-p167" data-kind="prose"><strong>Options.</strong>
+A) Ship the product. Old cases do not matter.
+B) The change broke behavior that worked before. Do not ship the product. Understand and fix the regression.</p>
+
+<p id="sec-bank-mocks-p168" data-kind="prose">Or update the drawer deliberately.
+C) Delete the red cases.
+D) Run the change harder.</p>
+
+<p id="sec-bank-mocks-p169" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;regression drawer goes red on three old cases.&quot; The regression drawer exists to catch this problem. Red means stop. Deleting cases destroys the measurement. C never wins.</p>
+
+<p id="sec-bank-mocks-p170" data-kind="prose">Update cases. Do not delete cases. Update cases only deliberately.</p>
+
+
+<h3 id="bank-mocks-h39">M1-Q35 (V2-D4.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p171" data-kind="prose"><strong>Scenario.</strong> A loan-description generator needs an eval set. The team
+has 1,000 typical applications.</p>
+
+<p id="sec-bank-mocks-p172" data-kind="prose"><strong>Question.</strong> Which TWO case types must you add? Select TWO.</p>
+
+<p id="sec-bank-mocks-p173" data-kind="prose"><strong>Options.</strong>
+A) Adversarial cases: applications crafted to elicit biased or false
+outputs.
+B) Edge cases: unusual but valid applications (uncommon income types).
+C) 1,000 more typical applications.
+D) The training set copied again.
+E) Blank inputs only.</p>
+
+<p id="sec-bank-mocks-p174" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p175" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "1,000 typical applications." Why: the
+representative drawer is full. The missing drawers are adversarial and
+edge. C adds volume, not variety. Counterfactual: E wins as the
+malformed drawer, a third addition.</p>
+

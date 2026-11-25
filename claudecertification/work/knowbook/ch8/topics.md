@@ -1,0 +1,14 @@
+# 8장 topic 목록 (문항당 1개, 가장 핵심인 것)
+- tool-description: tool description·이름 설계·모호한 tool 구분·tool 선택 오류 진단
+- tool-schema: input schema·required·enum·strict·입력 검증
+- tool-surface: tool 개수·분할 vs 통합·역할별 tool 범위·최소 tool set
+- tool-error: tool 에러 응답 설계(is_error·재시도 가능 여부·구조화 에러)·빈 결과 vs 실패
+- tool-result: tool 결과 크기·형식·요약·pagination
+- tool-choice: tool_choice(auto·any·tool·none)·강제 호출·parallel tool use
+- builtin-tools: Claude Code/SDK 내장 도구(Read·Write·Edit·Bash·Grep·Glob) 선택
+- mcp-config: MCP 서버 설정·scope(.mcp.json·user)·env 변수·인증·credential
+- mcp-primitives: MCP tools·resources·prompts 구분·resource로 카탈로그 노출
+- mcp-transport: stdio vs Streamable HTTP·원격 서버·connector(mcp_servers)
+- mcp-vs-other: MCP 서버 vs 직접 tool vs skill·기존 서버 재사용 vs 직접 구축
+- integration-auth: 외부 시스템 통합의 인증·권한·tenant 격리·OAuth
+- other: 위에 안 맞음(짧은 이유를 note에)

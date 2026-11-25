@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="580" viewBox="0 0 960 580" role="img" aria-label="tool 정의를 전부 선로드하지 않고 tool search로 필요할 때만 context에 전개한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>tool 정의를 전부 선로드하지 않고 tool search로 필요할 때만 context에 전개한다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-tool-search-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect x="30" y="25" width="390" height="100" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="225.0" y="55.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Before: 전부 선로드</text>
+<text x="225.0" y="71.0" font-size="12" fill="#1F2937" text-anchor="middle">220개 ≈ 60,000 토큰</text>
+<text x="225.0" y="87.0" font-size="12" fill="#1F2937" text-anchor="middle">200개 ≈ 100,000 스키마 토큰/호출</text>
+<text x="225.0" y="103.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 비용 증가 + 선택 부정확</text>
+<polyline points="420,75 478,75" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-search-flow)"/>
+<rect x="432.0" y="56" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="449" y="69" font-size="12" fill="#1F2937" text-anchor="middle">대신</text>
+<rect x="480" y="25" width="450" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="705.0" y="55.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">After: tools 구성</text>
+<text x="705.0" y="71.0" font-size="12" fill="#1F2937" text-anchor="middle">non-deferred: tool search tool(최소 1개)</text>
+<text x="705.0" y="87.0" font-size="12" fill="#1F2937" text-anchor="middle">+ 자주 쓰는 3~5개</text>
+<text x="705.0" y="103.0" font-size="12" fill="#1F2937" text-anchor="middle">deferred(defer_loading: true): 나머지 전부</text>
+<polyline points="705,125 705,150 450,150 450,175" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-search-flow)"/>
+<rect x="517.4" y="141" width="125.2" height="18" fill="#FFFFFF"/>
+<text x="580" y="154" font-size="12" fill="#1F2937" text-anchor="middle">Claude가 tool 선택</text>
+<polygon points="450,175.0 580.0,225 450,275.0 320.0,225" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="450" y="221.0" font-size="12" fill="#1F2937" text-anchor="middle">필요한 tool이</text>
+<text x="450" y="237.0" font-size="12" fill="#1F2937" text-anchor="middle">non-deferred인가?</text>
+<rect x="30" y="200" width="240" height="50" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="150.0" y="221.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">바로 호출</text>
+<text x="150.0" y="237.0" font-size="12" fill="#1F2937" text-anchor="middle">검색 왕복 없음</text>
+<polyline points="320,225 272,225" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-search-flow)"/>
+<rect x="285.0" y="204" width="22.0" height="18" fill="#FFFFFF"/>
+<text x="296" y="217" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="640" y="195" width="290" height="55" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="785.0" y="218.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">tool search tool 호출</text>
+<text x="785.0" y="234.5" font-size="12" fill="#1F2937" text-anchor="middle">필요한 tool 검색</text>
+<polyline points="580,225 638,225" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-search-flow)"/>
+<rect x="586.0" y="202" width="46.0" height="18" fill="#FFFFFF"/>
+<text x="609" y="215" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<polyline points="785,250 785,300" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-search-flow)"/>
+<rect x="751.8" y="266" width="66.4" height="18" fill="#FFFFFF"/>
+<text x="785" y="279" font-size="12" fill="#1F2937" text-anchor="middle">tool 발견</text>
+<rect x="640" y="300" width="290" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="785.0" y="326.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">검색에서 발견된 deferred 정의만</text>
+<text x="785.0" y="342.0" font-size="12" fill="#1F2937" text-anchor="middle">context에 전개</text>
+<polyline points="640,330 572,330" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-search-flow)"/>
+<rect x="589.0" y="309" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="606" y="322" font-size="12" fill="#1F2937" text-anchor="middle">호출</text>
+<rect x="300" y="300" width="270" height="60" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="435.0" y="326.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">전개된 tool 호출</text>
+<text x="435.0" y="342.0" font-size="12" fill="#1F2937" text-anchor="middle">모든 tool 계속 사용 가능</text>
+<rect x="30" y="395" width="440" height="85" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="250.0" y="417.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">제약</text>
+<text x="250.0" y="433.5" font-size="12" fill="#1F2937" text-anchor="middle">tool search tool 자체에는 defer_loading ✗</text>
+<text x="250.0" y="449.5" font-size="12" fill="#1F2937" text-anchor="middle">→ 최소 1개는 non-deferred</text>
+<text x="250.0" y="465.5" font-size="12" fill="#1F2937" text-anchor="middle">deferred tool + cache_control → 400 오류</text>
+<rect x="490" y="395" width="440" height="85" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="710.0" y="417.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">트레이드오프</text>
+<text x="710.0" y="433.5" font-size="12" fill="#1F2937" text-anchor="middle">조회 단계 추가</text>
+<text x="710.0" y="449.5" font-size="12" fill="#1F2937" text-anchor="middle">이름 색인이 부정확하면</text>
+<text x="710.0" y="465.5" font-size="12" fill="#1F2937" text-anchor="middle">올바른 tool을 못 찾음</text>
+<rect x="30" y="495" width="900" height="65" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="480.0" y="515.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Claude Code 설정: 기본 = tool search 활성 (MCP tool 정의는 필요할 때까지 로드 지연)</text>
+<text x="480.0" y="531.5" font-size="12" fill="#1F2937" text-anchor="middle">ENABLE_TOOL_SEARCH=auto: 정의가 context window 10% 도달 전 = 미리 로드 · 도달 후 = tool search 시작</text>
+<text x="480.0" y="547.5" font-size="12" fill="#1F2937" text-anchor="middle">alwaysLoad = 한 서버 tool 미리 로드 · ENABLE_TOOL_SEARCH=false = 전 정의 미리 로드</text>
+</svg>

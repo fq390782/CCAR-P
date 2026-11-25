@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="470" viewBox="0 0 960 470" role="img" aria-label="API가 error status를 주면 429, 500, 529는 backoff retry, 400 계열은 요청 수정. 200이면 parse 실패는 stop_reason과 본문으로, 답이 틀리면 trace로 retrieval layer를 확인한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>실패 상황 판단 트리</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-rules-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-rules-failure-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">판단 규칙 ①: 실패 증상에서 고칠 곳까지</text>
+<polygon points="480,57.0 610.0,95 480,133.0 350.0,95" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="480" y="91.5" text-anchor="middle"><tspan x="480" dy="0" font-size="13" fill="#1F2937">API 응답이</tspan><tspan x="480" dy="16" font-size="13" fill="#1F2937">error status?</tspan></text>
+<polygon points="240,172.0 350.0,210 240,248.0 130.0,210" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="240" y="214.6" text-anchor="middle"><tspan x="240" dy="0" font-size="13" fill="#1F2937">429 · 500 · 529?</tspan></text>
+<polygon points="720,172.0 865.0,210 720,248.0 575.0,210" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="720" y="206.6" text-anchor="middle"><tspan x="720" dy="0" font-size="13" fill="#1F2937">200 이후</tspan><tspan x="720" dy="16" font-size="13" fill="#1F2937">parse/validation 실패?</tspan></text>
+<path d="M350,95 L240,95 L240,172" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+<rect x="247.7" y="76" width="94.6" height="17" fill="#FFFFFF"/>
+<text x="295" y="88" font-size="12" fill="#1F2937" text-anchor="middle">예 (4xx·5xx)</text>
+<path d="M610,95 L720,95 L720,172" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+<rect x="622.1" y="76" width="85.8" height="17" fill="#FFFFFF"/>
+<text x="665" y="88" font-size="12" fill="#1F2937" text-anchor="middle">아니오 (200)</text>
+<rect x="20" y="290" width="210" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="125.0" y="322.9" text-anchor="middle"><tspan x="125.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">backoff + jitter</tspan><tspan x="125.0" dy="14" font-size="11" fill="#6B7280">retry-after 준수 후 retry</tspan></text>
+<rect x="250" y="290" width="210" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="355.0" y="322.9" text-anchor="middle"><tspan x="355.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">retry 금지, 요청 수정</tspan><tspan x="355.0" dy="14" font-size="11" fill="#6B7280">400 · 401 · 403 · 404</tspan></text>
+<rect x="250" y="385" width="210" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="355.0" y="414.6" text-anchor="middle"><tspan x="355.0" dy="0" font-size="13" fill="#1F2937">tool 추가 후 모든 요청 400</tspan><tspan x="355.0" dy="14" font-size="11" fill="#6B7280">name pattern 위반 확인 → rename</tspan></text>
+<path d="M240,248 L240,268 L125,268 L125,290" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+<rect x="130.0" y="251" width="20.0" height="17" fill="#FFFFFF"/>
+<text x="140" y="263" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M240,268 L355,268 L355,290" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+<rect x="308.0" y="251" width="44.0" height="17" fill="#FFFFFF"/>
+<text x="330" y="263" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<path d="M355,360 L355,385" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+<rect x="500" y="290" width="220" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="610.0" y="321.9" text-anchor="middle"><tspan x="610.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">stop_reason·원본 본문으로</tspan><tspan x="610.0" dy="16" font-size="13" fill="#1F2937">모델 출력 vs 자사 parser 구분</tspan></text>
+<rect x="740" y="290" width="200" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="840.0" y="322.6" text-anchor="middle"><tspan x="840.0" dy="0" font-size="13" fill="#1F2937">답이 틀림 → trace 확인</tspan><tspan x="840.0" dy="14" font-size="11" fill="#6B7280">추론 정상 · 입력 문서 틀림</tspan></text>
+<rect x="740" y="385" width="200" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="840.0" y="413.9" text-anchor="middle"><tspan x="840.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">retrieval/integration</tspan><tspan x="840.0" dy="16" font-size="13" fill="#1F2937">(search · indexing) 수정</tspan></text>
+<path d="M720,248 L720,268 L610,268 L610,290" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+<rect x="615.0" y="251" width="20.0" height="17" fill="#FFFFFF"/>
+<text x="625" y="263" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M720,268 L840,268 L840,290" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+<rect x="793.0" y="251" width="44.0" height="17" fill="#FFFFFF"/>
+<text x="815" y="263" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<path d="M840,360 L840,385" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-failure)"/>
+</svg>

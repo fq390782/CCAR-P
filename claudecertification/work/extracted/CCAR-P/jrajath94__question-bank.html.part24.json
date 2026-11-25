@@ -1,0 +1,154 @@
+[
+  {
+    "number": "M1-Q06",
+    "heading": "M1-Q06 (V2-D1.3)",
+    "question": "A hedge fund asks for open-ended research on emerging\nbattery startups. No source list exists. The next step depends on each\nfinding.\n\nWhich pattern fits?",
+    "choices": {
+      "A": "Deterministic workflow with fixed steps.",
+      "B": "Autonomous agent loop with a step cap and stop rule.",
+      "C": "Augmented single call.",
+      "D": "Manual process only."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"No source list exists. The next step\ndepends on each finding.\" Why: steps are unknowable in advance, so no\ncode can list them. The loop plans sources at runtime. The step cap\nbounds cost.\n\nCounterfactual: A wins when the source list becomes fixed.",
+    "source_section": "V2-D1.3"
+  },
+  {
+    "number": "M1-Q07",
+    "heading": "M1-Q07 (V2-D1.4)",
+    "question": "A drug-interaction checker uses a coordinator with two\nworkers: one reads the prescription list, one reads the interaction\ndatabase. The workers disagree on whether two drugs interact.\n\nWhat gap exists?",
+    "choices": {
+      "A": "A bigger model.",
+      "B": "The disagree rule in the handoff contract: which worker's evidence\nwins, or which arbiter decides, applied by the coordinator and logged.",
+      "C": "More workers.",
+      "D": "A longer timeout."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"The workers disagree on whether two drugs\ninteract.\" Why: V2-D1.4 requires the handoff contract to name the\ndisagree rule. Without it, disputes have no resolution path. A, C, and D\nadd resources, not a rule. Counterfactual: C wins when the task splits\ninto more independent pieces.",
+    "source_section": "V2-D1.4"
+  },
+  {
+    "number": "M1-Q08",
+    "heading": "M1-Q08 (V2-D1.5), Select TWO",
+    "question": "A restaurant opening checklist has five items. These items are: sign the lease, hire staff, order equipment, design the menu, and pass health inspection. You must sign the lease before you order equipment. The health inspection needs the kitchen installed.\n\nWhich TWO tasks can run in parallel? Select TWO.",
+    "choices": {
+      "A": "Hire staff and design the menu.",
+      "B": "Order equipment and sign the lease.",
+      "C": "Pass health inspection and install the kitchen.",
+      "D": "Design the menu and order equipment (after you sign the lease).",
+      "E": "Sign the lease and pass health inspection."
+    },
+    "answer": ["A", "D"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is: \"The lease must be signed before equipment is ordered. The health inspection needs the kitchen installed.\" Hiring and menu design do not depend on each other. Equipment ordering (after the lease) and menu design are independent. B, C, and E do not follow the stated dependencies.\n\nCounterfactual: B wins if you can order equipment before the lease.",
+    "source_section": "V2-D1.5"
+  },
+  {
+    "number": "M1-Q09",
+    "heading": "M1-Q09 (V2-D1.5)",
+    "question": "A marketing team generates ad copy. Quality varies. The\nteam wants every draft checked against the brand voice guide before it\nships.\n\nWhich decomposition pattern fits the check?",
+    "choices": {
+      "A": "Fan-out/fan-in.",
+      "B": "Critique pattern: a reviewer agent checks each draft against the\nbrand guide and sends failures back for revision.",
+      "C": "Chaining with no review.",
+      "D": "One agent with no checks."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"every draft checked against the brand\nvoice guide before it ships.\" Why: the critique pattern is the\nvalidation pattern for quality variance. It names the checker, the\nguide, and the revision loop. Counterfactual: A wins when the task is\nmany independent drafts merged into one campaign.",
+    "source_section": "V2-D1.5"
+  },
+  {
+    "number": "M1-Q10",
+    "heading": "M1-Q10 (V2-D1.6)",
+    "question": "A city processes 10,000 parking ticket disputes each year. The city processes them manually. This costs $6 per dispute in labor. An automated design costs $0.90 per dispute. It also costs $2,000 per year as a fixed cost.\n\nThe error rate does not change.\n\nWhat is the net annual value?",
+    "choices": {
+      "A": "$6 - $0.90 = $5.10 per dispute.",
+      "B": "(10,000 x ($6 - $0.90)) - $2,000 = $49,000 per year.",
+      "C": "The model's accuracy.",
+      "D": "The p95 latency."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"manually at $6 per dispute... $0.90 per\ndispute plus $2,000 per year fixed.\". Why: net value runs baseline to\nimprovement to cost. 10,000 x $5.10 = $51,000 gross, minus $2,000 fixed\n= $49,000. A ignores fixed cost and volume. Counterfactual: A wins as\nthe answer only if fixed cost is zero.",
+    "source_section": "V2-D1.6"
+  },
+  {
+    "number": "M1-Q11",
+    "heading": "M1-Q11 (V2-D1.6)",
+    "question": "A pilot automates invoice coding. The team reports \"40%\nfewer tokens\" as the win. Finance asks whether the pilot earned its\nbudget.\n\nWhich metric answers finance?",
+    "choices": {
+      "A": "Tokens per invoice.",
+      "B": "Net value: baseline labor cost vs automated cost, minus build and\nrun cost.",
+      "C": "Model tier used.",
+      "D": "Lines of code."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"whether the pilot earned its budget.\" Finance decides on net dollars. Finance does not decide on tokens. The V2-D1.6 chain compares the manual baseline to the full automated cost. Token cuts are not important until the value case is priced.\n\nCounterfactual: A wins if the budget question is specifically the token budget.",
+    "source_section": "V2-D1.6"
+  },
+  {
+    "number": "M1-Q12",
+    "heading": "M1-Q12 (V2-D2.1)",
+    "question": "A legal intake bot handles 8,000 chats per day. About 92%\nare office logistics: hours, documents needed. About 8% are case merit\nassessments where a wrong answer creates liability.\n\nWhich tier strategy fits?",
+    "choices": {
+      "A": "Most capable tier for everything.",
+      "B": "Fast tier for logistics, stronger tier for merit assessments, with a\nquality floor on the liability-bearing answers.",
+      "C": "Fast tier for everything.",
+      "D": "Stronger tier for logistics, Fast tier for merit."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"a wrong answer creates liability.\" Why: error cost sets the tier per class. Logistics rides cheap, merit\ngets strength plus a floor. D is backwards, C risks liability answers on\nthe cheap tier, A wastes budget on 92% logistics. Counterfactual: A\nwins when logistics answers also carry liability.",
+    "source_section": "V2-D2.1"
+  },
+  {
+    "number": "M1-Q13",
+    "heading": "M1-Q13 (V2-D2.1)",
+    "question": "A catalog agent runs on a pinned model version. The\nprovider deprecates the version with 60 days notice.\n\nWhat is the correct response?",
+    "choices": {
+      "A": "Wait until the shutdown day, then swap.",
+      "B": "Run the regression suite against the replacement version now,\ncompare with the pinned baseline, and plan the cutover as a production\nchange.",
+      "C": "Let the provider auto-upgrade on shutdown day.",
+      "D": "Pin an even older version."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"deprecates the version with 60 days\nnotice.\" Why: upgrades are production changes. The regression suite\nmeasures the replacement before traffic moves. A and C test in\nproduction. Counterfactual: C wins never for a pinned production\nsystem.",
+    "source_section": "V2-D2.1"
+  },
+  {
+    "number": "M1-Q14",
+    "heading": "M1-Q14 (V2-D2.2), Select TWO",
+    "question": "A company bot must never disclose salary bands. Salary\ndata lives in the HR knowledge base the bot retrieves from.\n\nWhich TWO controls enforce this? Select TWO.",
+    "choices": {
+      "A": "A system prompt line: \"Never disclose salary bands.\"",
+      "B": "A retrieval filter that excludes salary-band documents from the\nbot's index.",
+      "C": "An output check in code that blocks salary figures before display.",
+      "D": "A longer system prompt.",
+      "E": "Trusting the model."
+    },
+    "answer": ["B", "C"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"must never disclose salary bands.\" Why: \"never\" is a control, and controls live in code. The filter keeps\nsalary data from the model. The output check catches leaks. A and D are\nguidance, E is hope.\n\nCounterfactual: A wins as a complement for tone,\nnever as the control.",
+    "source_section": "V2-D2.2"
+  },
+  {
+    "number": "M1-Q15",
+    "heading": "M1-Q15 (V2-D2.2)",
+    "question": "A support bot may grant discounts up to 10%. A manager\nasks whether a system prompt line (\"never discount over 10%\") is\nenough.\n\nWhat is the correct answer?",
+    "choices": {
+      "A": "Yes, the model will obey.",
+      "B": "No. You must enforce the discount cap in code. Do this before the discount tool runs. The prompt is guidance.\n\nThe prompt is not authorization.",
+      "C": "Yes, if you repeat the line twice.",
+      "D": "No, remove all discounts."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"may grant discounts up to 10%.\" Why: a money rule is a control. Prompts do not authorize. Code gates do. The check runs before the tool.\n\nCounterfactual: A wins for style guidance\nlike tone, never for money rules.",
+    "source_section": "V2-D2.2"
+  }
+]

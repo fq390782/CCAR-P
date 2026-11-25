@@ -1,0 +1,1088 @@
+<h3 id="bank-mixed-h27">Q-M-26 (V2-D4.1), Select TWO</h3>
+
+<p id="sec-bank-mixed-p256" data-kind="prose"><strong>Scenario.</strong> A hiring-screening assistant ranks applicants from resumes.
+The company faces hiring-bias regulation. A wrong rank costs a good
+candidate the job.</p>
+
+<p id="sec-bank-mixed-p257" data-kind="prose"><strong>Question.</strong> Which TWO metrics belong in the evaluation? Select TWO.</p>
+
+<p id="sec-bank-mixed-p258" data-kind="prose"><strong>Options.</strong>
+A) Groundedness: each claimed resume fact traces to the source resume.
+B) Subgroup fairness: rank quality measured per demographic group, not
+as one aggregate.
+C) Tokens per resume.
+D) P95 latency.
+E) Model confidence score.</p>
+
+<p id="sec-bank-mixed-p259" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mixed-p260" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is metric selection (multi).
+2. The lifecycle stage is evaluation design.
+3.</p>
+
+<p id="sec-bank-mixed-p261" data-kind="prose">The objective is to measure the hiring decision risks.
+4. The hard constraints are bias regulation. Wrong ranks cost candidates jobs.
+5. The system layer is evaluation metrics (V2-D4.1).</p>
+
+<p id="sec-bank-mixed-p262" data-kind="prose">6. All five options are measurable. Do not eliminate them.
+7. Eliminate options that violate constraints. C and D measure cost and speed.</p>
+
+<p id="sec-bank-mixed-p263" data-kind="prose">They do not measure decision risk. E is not calibrated.
+8. Compare the options based on the objective. A guards truth. B guards fairness across groups.</p>
+
+<p id="sec-bank-mixed-p264" data-kind="prose">9. Subgroup measurement needs the group labels and a fairness floor. This is a hidden dependency.
+10. Verify the answer. A and B are correct.</p>
+
+<p id="sec-bank-mixed-p265" data-kind="prose">No third option measures the decision risk.</p>
+
+<p id="sec-bank-mixed-p266" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: &quot;faces hiring-bias regulation. A wrong
+rank costs a good candidate the job.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p267" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Measures decision truth</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Measures fairness per group</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Required by the risk</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and B satisfy the objective: groundedness catches invented
+resume facts (the direct harm), and subgroup measurement catches bias
+hiding inside a good aggregate (the regulated harm).</li>
+
+<li>Why A and B best meet the objective: V2-D4.1 turns vague requirements
+into acceptance thresholds on task success, groundedness, safety, and
+business outcome. Hiring's vague "fair and accurate" becomes these two
+measured thresholds.</li>
+
+<li>Every rejected choice explained: C and D are real metrics for cost
+and latency budgets, but neither measures rank quality or fairness.
+E is the model's self-report: uncalibrated and prompt-injectable, never
+a metric.</li>
+
+<li>Exact limitation or tradeoff: subgroup labels raise privacy handling
+needs. Groundedness checks cost a verification per claim.</li>
+
+<li>Relevant evidence (with date): metric definition from lesson-D4-1
+(§4), Oct 6 2026, subgroup evaluation from lesson-D5-5, Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins when the
+budget binds. D wins when an SLA names latency. E wins never as a
+metric.</li>
+
+<li>Misconception tested: "one aggregate score proves fairness." It
+hides subgroup harm. Measure per group.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h28">Q-M-27 (V2-D4.2)</h3>
+
+<p id="sec-bank-mixed-p268" data-kind="prose"><strong>Scenario.</strong> A fraud detector flags suspicious transactions. The team
+built the eval set from last quarter's confirmed frauds. The model
+scores 99% on it. A teammate asks how they know the judge's grades are
+right.</p>
+
+<p id="sec-bank-mixed-p269" data-kind="prose"><strong>Question.</strong> What is the missing eval practice?</p>
+
+<p id="sec-bank-mixed-p270" data-kind="prose"><strong>Options.</strong>
+A) A bigger model.
+B) A held-out set the team never trains on, plus calibration of the
+judge against human labels.
+C) More confirmed frauds in the training set.
+D) A faster grading script.</p>
+
+<p id="sec-bank-mixed-p271" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p272" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is eval framework gap.
+2. The lifecycle stage is evaluation design.
+3.</p>
+
+<p id="sec-bank-mixed-p273" data-kind="prose">The objective is to trust the 99% score.
+4. The hard constraints are: the eval set may overlap training. The judge&#x27;s grades are not verified.
+5. The system layer is eval datasets and frameworks (V2-D4.2).</p>
+
+<p id="sec-bank-mixed-p274" data-kind="prose">6. All four options are feasible. Do not eliminate them.
+7. Eliminate options that violate constraints. A buys strength for a measurement problem.</p>
+
+<p id="sec-bank-mixed-p275" data-kind="prose">C feeds training, not evaluation. D speeds grading but does not fix it.
+8. Compare the options based on the objective. Only B separates evaluation from training. B also checks the grader.</p>
+
+<p id="sec-bank-mixed-p276" data-kind="prose">9. The holdout must mirror production. This includes edge and adversarial cases. This is a hidden dependency.
+10. Verify the answer.</p>
+
+<p id="sec-bank-mixed-p277" data-kind="prose">B is the only correct option. This is a single select question.</p>
+
+<p id="sec-bank-mixed-p278" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "built the eval set from last quarter's
+confirmed frauds... how they know the judge's grades are right."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Separates eval from training</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Verifies the grader</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies the objective: the holdout the team never trains on
+measures generalization, not memorization. Calibrating the judge
+against human labels verifies the grades the 99% rests on.</li>
+
+<li>B meets the objective best. V2-D4.2 requires representative, edge, adversarial, and regression cases. It also requires holdouts. It requires the grading ladder: code, then judge, then human. Calibrate judges against human labels. B is the only option that follows these rules.</li>
+
+<li>Every rejected choice explained: A upgrades the model. The measurement is not correct. C improves training. The question is about evaluation trust. D makes bad grading faster.</li>
+
+<li>Exact limitation or tradeoff: holdouts shrink the training pool, and
+judge calibration needs human-labeled cases, which cost reviewer time.</li>
+
+<li>Relevant evidence (with date): holdouts and judge calibration from
+lesson-D4-2 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when
+the trace shows the model failing with full context. C wins when the
+model underfits known fraud. D wins never as an eval fix.</li>
+
+<li>Misconception tested: "a high score on our data proves quality."
+Only a held-out set with a calibrated grader proves it.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h29">Q-M-28 (V2-D4.3)</h3>
+
+<p id="sec-bank-mixed-p279" data-kind="prose"><strong>Scenario.</strong> A team plans an A/B test of a new reranker. Claim: 1% lift
+in booking conversion. Traffic: 400 sessions per day. The test plan
+runs for one week.</p>
+
+<p id="sec-bank-mixed-p280" data-kind="prose"><strong>Question.</strong> What is wrong with this plan?</p>
+
+<p id="sec-bank-mixed-p281" data-kind="prose"><strong>Options.</strong>
+A) Nothing. One week is standard.
+B) The traffic cannot resolve a 1% lift in one week. Use offline
+evaluation on the five drawers instead.
+C) The reranker needs a bigger model first.</p>
+
+<p id="sec-bank-mixed-p282" data-kind="prose">D) A/B tests never work for rerankers.</p>
+
+<p id="sec-bank-mixed-p283" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p284" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: experiment design flaw.
+2. Lifecycle stage: evaluation.
+3.</p>
+
+<p id="sec-bank-mixed-p285" data-kind="prose">Objective: test the 1% lift claim honestly.
+4. Hard constraints: 400 sessions per day, 1% claimed lift, one-week
+window.
+5. System layer: A/B testing (V2-D4.3).
+6.</p>
+
+<p id="sec-bank-mixed-p286" data-kind="prose">Eliminate infeasible: all four are statable.
+7. Eliminate constraint-violating: A ignores sample size, C answers the
+wrong question, D is false.
+8. Compare on objective: only B names the sample-size veto.
+9.</p>
+
+<p id="sec-bank-mixed-p287" data-kind="prose">Hidden dependencies: the offline drawers must include the booking
+conversion proxy metric.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p288" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;1% lift... 400 sessions per day... one
+week.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p289" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Computes sample adequacy</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Offers a valid alternative</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B is right: 2,800 sessions cannot resolve a 1% lift. The test
+would run for months and still wobble. V2-D4.3 demands sample size
+before the test starts. The offline suite on representative, edge,
+adversarial, malformed, and regression drawers still gates quality.</li>
+
+<li>Why B best meets the objective: a test that cannot answer is theater.
+B kills the theater and keeps the gate that works.</li>
+
+<li>Every rejected choice explained: A treats one week as magic. Sample
+math does not care about the calendar. C buys model strength for a
+statistics problem. D is false: A/B tests work for rerankers with
+enough traffic.</li>
+
+<li>Exact limitation or tradeoff: offline eval cannot measure the true
+business outcome. If the lift claim matters, the team needs more
+traffic or a longer window, honestly priced.</li>
+
+<li>Relevant evidence (with date): sample size and significance from
+lesson-D4-3 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins with
+40,000 sessions per day. C wins when the trace shows ranking failures
+with full context. D wins never.</li>
+
+<li>Misconception tested: "running the test is always informative." A
+test without power informs no one.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h30">Q-M-29 (V2-D4.4)</h3>
+
+<p id="sec-bank-mixed-p290" data-kind="prose"><strong>Scenario.</strong> A contract Q&amp;A bot gives wrong answers on paraphrased
+questions. The trace shows the right clause chunk present in the
+retrieved set. The answer still misstates the clause.</p>
+
+<p id="sec-bank-mixed-p291" data-kind="prose"><strong>Question.</strong> Which layer failed, and what is the fix?</p>
+
+<p id="sec-bank-mixed-p292" data-kind="prose"><strong>Options.</strong>
+A) Retrieval failed. Rebuild the index.
+B) The model layer failed. Fix the prompt or the model choice, or add a
+verification gate. The chunk arrived and the model still failed.</p>
+
+<p id="sec-bank-mixed-p293" data-kind="prose">C) The chunking failed. Make chunks bigger.
+D) The evaluation failed. The answers are actually fine.</p>
+
+<p id="sec-bank-mixed-p294" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p295" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: layer diagnosis.
+2. Lifecycle stage: operate and debug.
+3.</p>
+
+<p id="sec-bank-mixed-p296" data-kind="prose">Objective: fix the failing component, not a proxy.
+4. Hard constraints: the chunk is present, the answer is still wrong.
+5. System layer: issue diagnosis (V2-D4.4).
+6.</p>
+
+<p id="sec-bank-mixed-p297" data-kind="prose">Eliminate infeasible: all four are statable.
+7. Eliminate constraint-violating: A and C fix retrieval that the trace
+clears, D denies the evidence.
+8. Compare on objective: the evidence names the model layer.
+9.</p>
+
+<p id="sec-bank-mixed-p298" data-kind="prose">Hidden dependencies: the verification gate needs the source chunk as
+its check input.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p299" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;the right clause chunk present in the
+retrieved set. The answer still misstates the clause.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p300" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Chunk present</td>
+<td>Contradicts</td>
+<td>Matches</td>
+<td>Contradicts</td>
+<td>Ignores</td>
+</tr>
+
+<tr>
+<td>Answer wrong</td>
+<td>Matches</td>
+<td>Matches</td>
+<td>Matches</td>
+<td>Denies</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B is right: the trace clears retrieval (the chunk arrived) and
+convicts the model (it had the facts and failed). The fix belongs at
+the convicted layer: prompt, model choice, or a verification gate.</li>
+
+<li>Why B best meets the objective: V2-D4.4 says fix the failing
+component, not a proxy. Rebuilding the index is the classic proxy fix:
+it costs a pipeline rebuild and changes nothing.</li>
+
+<li>Every rejected choice explained: A rebuilds a working index. C
+changes chunk size for a reasoning failure. D denies the user's
+evidence. The answers are wrong.</li>
+
+<li>Exact limitation or tradeoff: a verification gate adds per-answer
+cost. A model upgrade adds per-call cost. Measure which holds the
+floor cheaper.</li>
+
+<li>Relevant evidence (with date): diagnose at the right layer from
+lesson-D4-4 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when the
+trace shows the chunk absent. C wins when chunks split the clause
+mid-sentence. D wins never against evidence.</li>
+
+<li>Misconception tested: "wrong answer means bad retrieval." The trace
+decides the layer, not the symptom.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h31">Q-M-30 (V2-D4.5), Select TWO</h3>
+
+<p id="sec-bank-mixed-p301" data-kind="prose"><strong>Scenario.</strong> A document Q&amp;A service costs $3,000 per month. The CFO
+wants $1,800. Quality floor: 95% precision on cited answers, measured
+weekly. Current precision: 97%.</p>
+
+<p id="sec-bank-mixed-p302" data-kind="prose"><strong>Question.</strong> Which TWO levers cut cost while holding the floor? Select
+TWO.</p>
+
+<p id="sec-bank-mixed-p303" data-kind="prose"><strong>Options.</strong>
+A) Prompt caching on the stable 6,000-token instruction prefix.
+B) Tier routing: simple lookups to the Fast tier, hard reasoning stays
+on the current tier.
+C) Drop the grounding check to halve verification cost.
+D) Halve the eval sample to save grading cost.
+E) Remove the quality floor to open cheaper options.</p>
+
+<p id="sec-bank-mixed-p304" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mixed-p305" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: cost optimization under a floor (multi).
+2. Lifecycle stage: operate and optimize.
+3.</p>
+
+<p id="sec-bank-mixed-p306" data-kind="prose">Objective: cut $1,200 per month. Precision must be at or above 95%.
+4. Hard constraints: measure the 95% floor weekly. The floor must hold.
+5.</p>
+
+<p id="sec-bank-mixed-p307" data-kind="prose">System layer: token and cost optimization (V2-D4.5).
+6. Eliminate infeasible: all five are feasible.
+7. Eliminate constraint-violating: C, D, and E attack the floor or its measurement.
+8.</p>
+
+<p id="sec-bank-mixed-p308" data-kind="prose">Compare on objective: A and B cut cost inputs. They do not cut quality inputs.
+9. Hidden dependencies: routing needs a reliable difficulty classifier. Caching needs prefix stability.
+10.</p>
+
+<p id="sec-bank-mixed-p309" data-kind="prose">Verify: A and B. The rest break the floor.</p>
+
+<p id="sec-bank-mixed-p310" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "Quality floor: 95% precision on cited
+answers, measured weekly."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Lever</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Cuts real cost</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Maybe</td>
+</tr>
+
+<tr>
+<td>Holds the 95% floor</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Hides drops</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and B satisfy the objective: caching cuts the prefix token
+bill. Routing cuts the per-call tier cost on easy questions. Neither
+touches the grounding check or the measurement, so the floor holds.</li>
+
+<li>A and B best meet the objective. V2-D4.5 says to measure per stage. Then cut oversized context, caching, routing, and call elimination. Hold quality and safety floors. A and B are the textbook levers.</li>
+
+<li>Every rejected choice explained: C drops the check that holds the
+floor. Floors outrank speed and savings. D shrinks the sample so drops
+go undetected: measurement theater. E removes the floor itself, which
+is surrender, not optimization.</li>
+
+<li>Exact limitation or tradeoff: the router can misclassify, and the
+cache needs prefix hygiene. Both need monitoring.</li>
+
+<li>Relevant evidence (with date): per-stage measurement and floor
+discipline from lesson-D4-5 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins never
+while the floor stands. D wins never. E wins when the business
+drops the floor explicitly and owns the risk.</li>
+
+<li>Misconception tested: "any cost cut is an optimization." Only cuts
+that hold the floor count. The rest are quality cuts in disguise.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h32">Q-M-31 (V2-D4.6)</h3>
+
+<p id="sec-bank-mixed-p311" data-kind="prose"><strong>Scenario.</strong> A loan-approval assistant runs in production. Approval
+rates drift upward over two months. No alert fires. The team learns about
+it from a customer complaint.</p>
+
+<p id="sec-bank-mixed-p312" data-kind="prose"><strong>Question.</strong> What gap exists in production monitoring?</p>
+
+<p id="sec-bank-mixed-p313" data-kind="prose"><strong>Options.</strong>
+A) A bigger model.
+B) Drift detection on the approval rate with an alert routed to a named
+owner, plus a regression suite on representative eval data.
+C) More logs.
+D) A second assistant for redundancy.</p>
+
+<p id="sec-bank-mixed-p314" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p315" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: production monitoring gap.
+2. Lifecycle stage: operate.
+3.</p>
+
+<p id="sec-bank-mixed-p316" data-kind="prose">Objective: catch drift before customers do.
+4. Hard constraints: two months of drift, no alert, complaint-driven
+discovery.
+5. System layer: production monitoring (V2-D4.6).
+6.</p>
+
+<p id="sec-bank-mixed-p317" data-kind="prose">Eliminate infeasible: all four are feasible.
+7. Eliminate constraint-violating: A buys strength for a monitoring gap,
+C adds volume without detection, D doubles the unmonitored system.
+8. Compare on objective: only B names detection, alerting, and
+ownership.
+9.</p>
+
+<p id="sec-bank-mixed-p318" data-kind="prose">Hidden dependencies: the drift metric needs a baseline window and a
+threshold.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p319" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;Approval rates drift upward over two
+months. No alert fires.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p320" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Detects the drift</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Alerts a named owner</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Checks against representative data</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies the objective: drift detection watches the approval
+rate against its baseline. The alert with a named owner turns detection
+into response. The regression suite on representative data says whether
+the drift is a quality change or a population change.</li>
+
+<li>Why B best meets the objective: V2-D4.6 requires operational metrics,
+drift detection, regression suites, and alerts with owners. The
+scenario's system has none of the four.</li>
+
+<li>Every rejected choice explained: A upgrades the model while the gap
+is the lack of watches. C adds logs nobody watches. The complaint already proved
+that. D runs two assistants with the same blind spot.</li>
+
+<li>Exact limitation or tradeoff: thresholds need tuning to avoid alert
+fatigue. The owner needs runbook authority to act.</li>
+
+<li>Relevant evidence (with date): drift detection and alert ownership
+from lesson-D4-6 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when the
+trace shows model failures. C wins when a hop logs nothing. D wins
+never for monitoring.</li>
+
+<li>Misconception tested: "the dashboard is the monitoring." Detection
+plus alert plus owner is the monitoring. A dashboard nobody watches is
+furniture.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h33">Q-M-32 (V2-D4.2)</h3>
+
+<p id="sec-bank-mixed-p321" data-kind="prose"><strong>Scenario.</strong> A phishing-triage bot classifies employee-reported emails.
+The eval set has 500 real phishing emails and 500 clean emails. It
+scores 98%. In production, an attacker submits a crafted email that
+looks clean to the classifier but carries a malicious link. The bot
+passes it.</p>
+
+<p id="sec-bank-mixed-p322" data-kind="prose"><strong>Question.</strong> Which eval drawer is absent?</p>
+
+<p id="sec-bank-mixed-p323" data-kind="prose"><strong>Options.</strong>
+A) Representative cases.
+B) Adversarial cases: inputs crafted to fool the classifier.
+C) Malformed cases.
+D) Regression cases.</p>
+
+<p id="sec-bank-mixed-p324" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p325" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: evaluation drawer gap.
+2. Lifecycle stage: evaluation design.
+3.</p>
+
+<p id="sec-bank-mixed-p326" data-kind="prose">Objective: name the drawer that would catch the attack.
+4. Hard constraints: a person made the attack email to fool the classifier.
+5. System layer: evaluation datasets (V2-D4.2).
+6.</p>
+
+<p id="sec-bank-mixed-p327" data-kind="prose">Eliminate infeasible: all four are real drawer names.
+7. Eliminate constraint-violating: A, C, and D describe cases. The set already covers these cases. Or these cases miss the attack shape.
+8.</p>
+
+<p id="sec-bank-mixed-p328" data-kind="prose">Compare on objective: only B names inputs that a person made to fool the system.
+9. Hidden dependencies: the adversarial drawer needs cases from a red team. Refresh these cases as attacks change.
+10. Verify: B alone.</p>
+
+<p id="sec-bank-mixed-p329" data-kind="prose">Single select.</p>
+
+<p id="sec-bank-mixed-p330" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "a crafted email that looks clean to the
+classifier but carries a malicious link."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Drawer</th>
+<th>Covers crafted-to-fool inputs</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Representative</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Adversarial</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Malformed</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Regression</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B is right: the five drawers are representative, edge,
+adversarial, malformed, and regression. The attack is the textbook
+adversarial case: an input designed to beat the classifier. The eval
+set's 1,000 honest emails never contained one.</li>
+
+<li>Why B best meets the objective: V2-D4.2 requires the adversarial
+drawer for any classifier facing attackers. The 98% measured the wrong
+threat.</li>
+
+<li>Every rejected choice explained: A covers normal traffic, which the
+set has. C covers broken inputs, not crafted ones. D covers past bugs,
+not new attacks.</li>
+
+<li>Exact limitation or tradeoff: adversarial cases need red-team effort
+and refresh. Attackers adapt.</li>
+
+<li>Relevant evidence (with date): the five eval drawers from
+lesson-D4-2 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when the
+set misses a whole traffic class. C wins when crashes come from broken
+MIME. D wins when an old bug returns.</li>
+
+<li>Misconception tested: "high accuracy means attacker-proof." Accuracy
+on honest data says nothing about crafted data.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h34">Q-M-33 (V2-D4.4)</h3>
+
+<p id="sec-bank-mixed-p331" data-kind="prose"><strong>Scenario.</strong> A research assistant's p95 latency jumps from 4 s to 11 s
+over three weeks. Nothing in the code changed. Per-stage measurement
+shows: retrieval 1 s (unchanged), model reasoning 2.5 s (unchanged),
+context assembly 7 s (was 0.5 s).</p>
+
+<p id="sec-bank-mixed-p332" data-kind="prose"><strong>Question.</strong> Which layer failed, and what is the fix?</p>
+
+<p id="sec-bank-mixed-p333" data-kind="prose"><strong>Options.</strong>
+A) The model slowed. Upgrade the tier.
+B) The context layer failed: assembly now loads far more tokens per
+call. Fix the context growth (retrieval scoping, compaction, dedupe).
+C) Retrieval failed.</p>
+
+<p id="sec-bank-mixed-p334" data-kind="prose">Rebuild the index.
+D) The network failed. Add retries.</p>
+
+<p id="sec-bank-mixed-p335" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p336" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: latency layer diagnosis.
+2. Lifecycle stage: operate and debug.
+3.</p>
+
+<p id="sec-bank-mixed-p337" data-kind="prose">Objective: name the layer the measurement convicts.
+4. Hard constraints: no code changed, assembly went 0.5 s to 7 s,
+others flat.
+5. System layer: issue diagnosis (V2-D4.4, V2-D4.5).
+6.</p>
+
+<p id="sec-bank-mixed-p338" data-kind="prose">Eliminate infeasible: all four are statable.
+7. Eliminate constraint-violating: A, C, and D contradict the flat
+measurements.
+8. Compare on objective: the measurement names context assembly.
+9.</p>
+
+<p id="sec-bank-mixed-p339" data-kind="prose">Hidden dependencies: the growth source (which data now loads) must
+be found before scoping.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p340" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "context assembly 7 s (was 0.5 s)...
+retrieval 1 s (unchanged), model reasoning 2.5 s (unchanged)."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Changed</th>
+<th>Fix matches</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>No</td>
+<td>A fixes the wrong layer</td>
+</tr>
+
+<tr>
+<td>Context</td>
+<td>Yes, 0.5 to 7 s</td>
+<td>B</td>
+</tr>
+
+<tr>
+<td>Retrieval</td>
+<td>No</td>
+<td>C fixes the wrong layer</td>
+</tr>
+
+<tr>
+<td>Network</td>
+<td>No evidence</td>
+<td>D invents a cause</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B is right: per-stage measurement is the V2-D4.4 habit. Assembly
+is the only stage that moved. Context growth (more tokens assembled per
+call) is the convicted cause. Retrieval scoping, compaction, and dedupe
+are its fixes.</li>
+
+<li>Why B best meets the objective: fix the failing component, not a
+proxy. A model upgrade would cost more per call forever and leave the
+7-second assembly untouched.</li>
+
+<li>Every rejected choice explained: A upgrades a flat stage. C rebuilds
+a flat index. D invents a network cause with no evidence.</li>
+
+<li>Exact limitation or tradeoff: scoping retrieval can drop a useful
+old document. The index quality bounds the fix.</li>
+
+<li>Relevant evidence (with date): per-stage measurement and diagnose at
+the right layer from lesson-D4-4 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when
+reasoning time jumps with context flat. C wins when retrieval time
+jumps. D wins when timeouts cluster on one dependency.</li>
+
+<li>Misconception tested: "latency spike means the model got slow." The
+stages decide. Measure first.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h35">Q-M-34 (V2-D5.1)</h3>
+
+<p id="sec-bank-mixed-p341" data-kind="prose"><strong>Scenario.</strong> A pharmacy refill bot approves repeat prescriptions. A
+dosage ambiguity appears: the label says "take as directed" with no
+number. The bot must decide.</p>
+
+<p id="sec-bank-mixed-p342" data-kind="prose"><strong>Question.</strong> Which control must fail closed here?</p>
+
+<p id="sec-bank-mixed-p343" data-kind="prose"><strong>Options.</strong>
+A) The dosage check: on ambiguity, block the refill and route to the
+pharmacist. The check defaults to deny, not to guess.
+B) The dosage check: on ambiguity, approve the most common dosage.
+C) The logging: on ambiguity, log extra details and approve.
+D) The model: on ambiguity, pick the likelier reading.</p>
+
+<p id="sec-bank-mixed-p344" data-kind="prose"><strong>Answer.</strong> A</p>
+
+<p id="sec-bank-mixed-p345" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: fail-closed control design.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-mixed-p346" data-kind="prose">Objective: handle dosage ambiguity safely.
+4. Hard constraints: a wrong dosage harms the patient. &quot;Take as
+directed&quot; carries no number.
+5. System layer: safety controls (V2-D5.1).</p>
+
+<p id="sec-bank-mixed-p347" data-kind="prose">6. Eliminate infeasible: all four are feasible.
+7. Eliminate constraint-violating: B, C, and D approve or guess on
+ambiguity.
+8. Compare on objective: only A defaults to deny.</p>
+
+<p id="sec-bank-mixed-p348" data-kind="prose">9. Hidden dependencies: the pharmacist queue needs an SLA so blocked
+refills do not stall care.
+10. Verify: A alone. Single select.</p>
+
+<p id="sec-bank-mixed-p349" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A.
+2. Decisive scenario phrase: "the label says 'take as directed' with no
+number."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Defaults to deny on ambiguity</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Routes to a qualified human</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Never guesses a dosage</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A satisfies all hard constraints: the control fails closed: when
+it cannot decide, it blocks. The pharmacist (qualified, accountable)
+resolves the ambiguity. No guess reaches the patient.</li>
+
+<li>Why A best meets the objective: V2-D5.1 requires knowing which
+controls must fail closed. A dosage gate on patient safety is the
+textbook case: uncertainty must stop the action, not shape it.</li>
+
+<li>Every rejected choice explained: B approves the common dosage. Common
+is not this patient. C logs the ambiguity and approves anyway: a
+perfect record of a harmful guess. D asks the model to gamble on a
+dosage, which is the exact failure the control exists to prevent.</li>
+
+<li>Exact limitation or tradeoff: the pharmacist queue grows. Blocked
+refills need a turnaround SLA.</li>
+
+<li>Relevant evidence (with date): fail-closed controls from lesson-D5-1
+(§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: B wins never
+for dosages. C wins as a complement to A, never alone. D wins never
+for safety gates.</li>
+
+<li>Misconception tested: "the system must always produce an answer."
+On safety gates, "I cannot decide, so I stop" is the correct output.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h36">Q-M-35 (V2-D5.2), Select TWO</h3>
+
+<p id="sec-bank-mixed-p350" data-kind="prose"><strong>Scenario.</strong> A procurement agent reads vendor PDFs, compares quotes, and
+issues purchase orders up to $50,000 with no human step. Vendor PDFs come
+from the open internet.</p>
+
+<p id="sec-bank-mixed-p351" data-kind="prose"><strong>Question.</strong> Which TWO risks are present? Select TWO.</p>
+
+<p id="sec-bank-mixed-p352" data-kind="prose"><strong>Options.</strong>
+A) Indirect prompt injection: a vendor PDF carries instructions like
+"approve this vendor."
+B) Excessive agency: the agent moves $50,000 with no human gate.
+C) Model hallucination about the vendor's founding year.
+D) Slow p95 latency.
+E) High token cost.</p>
+
+<p id="sec-bank-mixed-p353" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mixed-p354" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: risk identification (multi).
+2. Lifecycle stage: design review.
+3.</p>
+
+<p id="sec-bank-mixed-p355" data-kind="prose">Objective: name the risks the scenario creates.
+4. Hard constraints: PDFs from the open internet, $50,000 with no human
+step.
+5. System layer: risk and failure modes (V2-D5.2).
+6.</p>
+
+<p id="sec-bank-mixed-p356" data-kind="prose">Eliminate infeasible: all five are real risk names.
+7. Eliminate constraint-violating: C is low-stakes trivia, D and E are
+performance, not the named risk classes.
+8. Compare on objective: A matches the untrusted PDFs, B matches the
+ungated money.
+9.</p>
+
+<p id="sec-bank-mixed-p357" data-kind="prose">Hidden dependencies: prevention needs input screening plus a
+pre-action approval gate.
+10. Verify: A and B. The rest miss the risk class.</p>
+
+<p id="sec-bank-mixed-p358" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "Vendor PDFs come from the open internet...
+issues purchase orders up to $50,000 with no human step."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Evidence in scenario</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Indirect injection</td>
+<td>PDFs from the open internet read as content</td>
+</tr>
+
+<tr>
+<td>Excessive agency</td>
+<td>$50,000 POs with no human gate</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and B are the risks: untrusted PDFs are the classic indirect
+injection path: instructions inside content the model reads as data.
+Ungated $50,000 purchase orders are the textbook excessive agency: the
+agent's action radius exceeds its oversight.</li>
+
+<li>Why A and B best meet the objective: V2-D5.2 requires naming risks
+with prevention, detection, and recovery per risk. These two demand a
+screening layer and a pre-action approval gate.</li>
+
+<li>Every rejected choice explained: C is a hallucination about trivia.
+The founding year moves no money. D and E are performance concerns,
+not safety risks. They belong to D4, not D5.</li>
+
+<li>Exact limitation or tradeoff: the approval gate adds latency to
+procurement. The screening layer needs maintenance against new
+injection shapes.</li>
+
+<li>Relevant evidence (with date): indirect injection and excessive
+agency from lesson-D5-2 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins when the
+founding year appears in a filed report. D wins when an SLA binds. E
+wins when the budget binds.</li>
+
+<li>Misconception tested: "reading a PDF is passive." For an agent with
+tools, reading is an instruction channel.</li>
+
+</ol>
+

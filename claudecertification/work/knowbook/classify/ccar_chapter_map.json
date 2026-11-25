@@ -1,0 +1,4332 @@
+{
+ "CCAR-F-Amey-Thakur-0007": {
+  "id": "CCAR-F-Amey-Thakur-0007",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0008": {
+  "id": "CCAR-F-Amey-Thakur-0008",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0023": {
+  "id": "CCAR-F-Amey-Thakur-0023",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0024": {
+  "id": "CCAR-F-Amey-Thakur-0024",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0025": {
+  "id": "CCAR-F-Amey-Thakur-0025",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0026": {
+  "id": "CCAR-F-Amey-Thakur-0026",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0027": {
+  "id": "CCAR-F-Amey-Thakur-0027",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0047": {
+  "id": "CCAR-F-Amey-Thakur-0047",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0048": {
+  "id": "CCAR-F-Amey-Thakur-0048",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0049": {
+  "id": "CCAR-F-Amey-Thakur-0049",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0058": {
+  "id": "CCAR-F-Amey-Thakur-0058",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0059": {
+  "id": "CCAR-F-Amey-Thakur-0059",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0060": {
+  "id": "CCAR-F-Amey-Thakur-0060",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0072": {
+  "id": "CCAR-F-Amey-Thakur-0072",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0073": {
+  "id": "CCAR-F-Amey-Thakur-0073",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0074": {
+  "id": "CCAR-F-Amey-Thakur-0074",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0017": {
+  "id": "CCAR-F-paullarionov-0017",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0018": {
+  "id": "CCAR-F-paullarionov-0018",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0019": {
+  "id": "CCAR-F-paullarionov-0019",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0020": {
+  "id": "CCAR-F-paullarionov-0020",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0021": {
+  "id": "CCAR-F-paullarionov-0021",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0022": {
+  "id": "CCAR-F-paullarionov-0022",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0023": {
+  "id": "CCAR-F-paullarionov-0023",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-paullarionov-0027": {
+  "id": "CCAR-F-paullarionov-0027",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0028": {
+  "id": "CCAR-F-paullarionov-0028",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-paullarionov-0029": {
+  "id": "CCAR-F-paullarionov-0029",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-paullarionov-0030": {
+  "id": "CCAR-F-paullarionov-0030",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0047": {
+  "id": "CCAR-F-paullarionov-0047",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0052": {
+  "id": "CCAR-F-paullarionov-0052",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0060": {
+  "id": "CCAR-F-paullarionov-0060",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0023": {
+  "id": "CCAR-F-preporato-0023",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0024": {
+  "id": "CCAR-F-preporato-0024",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0025": {
+  "id": "CCAR-F-preporato-0025",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0026": {
+  "id": "CCAR-F-preporato-0026",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0027": {
+  "id": "CCAR-F-preporato-0027",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0028": {
+  "id": "CCAR-F-preporato-0028",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy01-0010": {
+  "id": "CCAR-F-Udemy01-0010",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0022": {
+  "id": "CCAR-F-Udemy01-0022",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0025": {
+  "id": "CCAR-F-Udemy01-0025",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0029": {
+  "id": "CCAR-F-Udemy01-0029",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0042": {
+  "id": "CCAR-F-Udemy01-0042",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0043": {
+  "id": "CCAR-F-Udemy01-0043",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0046": {
+  "id": "CCAR-F-Udemy01-0046",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0047": {
+  "id": "CCAR-F-Udemy01-0047",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0053": {
+  "id": "CCAR-F-Udemy01-0053",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0001": {
+  "id": "CCAR-F-Udemy02-0001",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0011": {
+  "id": "CCAR-F-Udemy02-0011",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0018": {
+  "id": "CCAR-F-Udemy02-0018",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy02-0023": {
+  "id": "CCAR-F-Udemy02-0023",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0026": {
+  "id": "CCAR-F-Udemy02-0026",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy02-0027": {
+  "id": "CCAR-F-Udemy02-0027",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy02-0028": {
+  "id": "CCAR-F-Udemy02-0028",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0030": {
+  "id": "CCAR-F-Udemy02-0030",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0031": {
+  "id": "CCAR-F-Udemy02-0031",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy02-0034": {
+  "id": "CCAR-F-Udemy02-0034",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0050": {
+  "id": "CCAR-F-Udemy02-0050",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0055": {
+  "id": "CCAR-F-Udemy02-0055",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0056": {
+  "id": "CCAR-F-Udemy02-0056",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy02-0058": {
+  "id": "CCAR-F-Udemy02-0058",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0007": {
+  "id": "CCAR-F-Udemy03-0007",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy03-0017": {
+  "id": "CCAR-F-Udemy03-0017",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0018": {
+  "id": "CCAR-F-Udemy03-0018",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0023": {
+  "id": "CCAR-F-Udemy03-0023",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy03-0030": {
+  "id": "CCAR-F-Udemy03-0030",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0044": {
+  "id": "CCAR-F-Udemy03-0044",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0048": {
+  "id": "CCAR-F-Udemy03-0048",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0051": {
+  "id": "CCAR-F-Udemy03-0051",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0053": {
+  "id": "CCAR-F-Udemy03-0053",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0003": {
+  "id": "CCAR-F-Udemy04-0003",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0006": {
+  "id": "CCAR-F-Udemy04-0006",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0013": {
+  "id": "CCAR-F-Udemy04-0013",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0033": {
+  "id": "CCAR-F-Udemy04-0033",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy04-0034": {
+  "id": "CCAR-F-Udemy04-0034",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0037": {
+  "id": "CCAR-F-Udemy04-0037",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy04-0040": {
+  "id": "CCAR-F-Udemy04-0040",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0045": {
+  "id": "CCAR-F-Udemy04-0045",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy04-0056": {
+  "id": "CCAR-F-Udemy04-0056",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0001": {
+  "id": "CCAR-F-Udemy05-0001",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0003": {
+  "id": "CCAR-F-Udemy05-0003",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0021": {
+  "id": "CCAR-F-Udemy05-0021",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0022": {
+  "id": "CCAR-F-Udemy05-0022",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy05-0032": {
+  "id": "CCAR-F-Udemy05-0032",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0037": {
+  "id": "CCAR-F-Udemy05-0037",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0041": {
+  "id": "CCAR-F-Udemy05-0041",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0043": {
+  "id": "CCAR-F-Udemy05-0043",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0053": {
+  "id": "CCAR-F-Udemy05-0053",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0057": {
+  "id": "CCAR-F-Udemy05-0057",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy05-0059": {
+  "id": "CCAR-F-Udemy05-0059",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0060": {
+  "id": "CCAR-F-Udemy05-0060",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0005": {
+  "id": "CCAR-F-Udemy06-0005",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy06-0013": {
+  "id": "CCAR-F-Udemy06-0013",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0020": {
+  "id": "CCAR-F-Udemy06-0020",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0021": {
+  "id": "CCAR-F-Udemy06-0021",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0035": {
+  "id": "CCAR-F-Udemy06-0035",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0040": {
+  "id": "CCAR-F-Udemy06-0040",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0042": {
+  "id": "CCAR-F-Udemy06-0042",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy06-0049": {
+  "id": "CCAR-F-Udemy06-0049",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0053": {
+  "id": "CCAR-F-Udemy06-0053",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0017": {
+  "id": "CCAR-F-MyPractice-0017",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0018": {
+  "id": "CCAR-F-MyPractice-0018",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0019": {
+  "id": "CCAR-F-MyPractice-0019",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0020": {
+  "id": "CCAR-F-MyPractice-0020",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0021": {
+  "id": "CCAR-F-MyPractice-0021",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0022": {
+  "id": "CCAR-F-MyPractice-0022",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0023": {
+  "id": "CCAR-F-MyPractice-0023",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0027": {
+  "id": "CCAR-F-MyPractice-0027",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0029": {
+  "id": "CCAR-F-MyPractice-0029",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0030": {
+  "id": "CCAR-F-MyPractice-0030",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0047": {
+  "id": "CCAR-F-MyPractice-0047",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0052": {
+  "id": "CCAR-F-MyPractice-0052",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0060": {
+  "id": "CCAR-F-MyPractice-0060",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0070": {
+  "id": "CCAR-F-MyPractice-0070",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0071": {
+  "id": "CCAR-F-MyPractice-0071",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0072": {
+  "id": "CCAR-F-MyPractice-0072",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0004": {
+  "id": "CCAR-F-Amey-Thakur-0004",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0009": {
+  "id": "CCAR-F-Amey-Thakur-0009",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0032": {
+  "id": "CCAR-F-Amey-Thakur-0032",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0033": {
+  "id": "CCAR-F-Amey-Thakur-0033",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0034": {
+  "id": "CCAR-F-Amey-Thakur-0034",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0035": {
+  "id": "CCAR-F-Amey-Thakur-0035",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0036": {
+  "id": "CCAR-F-Amey-Thakur-0036",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0038": {
+  "id": "CCAR-F-Amey-Thakur-0038",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0043": {
+  "id": "CCAR-F-Amey-Thakur-0043",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0044": {
+  "id": "CCAR-F-Amey-Thakur-0044",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0045": {
+  "id": "CCAR-F-Amey-Thakur-0045",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0050": {
+  "id": "CCAR-F-Amey-Thakur-0050",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0064": {
+  "id": "CCAR-F-Amey-Thakur-0064",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0065": {
+  "id": "CCAR-F-Amey-Thakur-0065",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0078": {
+  "id": "CCAR-F-Amey-Thakur-0078",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Amey-Thakur-0079": {
+  "id": "CCAR-F-Amey-Thakur-0079",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Amey-Thakur-0080": {
+  "id": "CCAR-F-Amey-Thakur-0080",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-paullarionov-0001": {
+  "id": "CCAR-F-paullarionov-0001",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0003": {
+  "id": "CCAR-F-paullarionov-0003",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0005": {
+  "id": "CCAR-F-paullarionov-0005",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0006": {
+  "id": "CCAR-F-paullarionov-0006",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0009": {
+  "id": "CCAR-F-paullarionov-0009",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0012": {
+  "id": "CCAR-F-paullarionov-0012",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0013": {
+  "id": "CCAR-F-paullarionov-0013",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0014": {
+  "id": "CCAR-F-paullarionov-0014",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0045": {
+  "id": "CCAR-F-paullarionov-0045",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0049": {
+  "id": "CCAR-F-paullarionov-0049",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0050": {
+  "id": "CCAR-F-paullarionov-0050",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0054": {
+  "id": "CCAR-F-paullarionov-0054",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-paullarionov-0055": {
+  "id": "CCAR-F-paullarionov-0055",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0002": {
+  "id": "CCAR-F-preporato-0002",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0006": {
+  "id": "CCAR-F-preporato-0006",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0008": {
+  "id": "CCAR-F-preporato-0008",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0029": {
+  "id": "CCAR-F-preporato-0029",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-preporato-0030": {
+  "id": "CCAR-F-preporato-0030",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0001": {
+  "id": "CCAR-F-Udemy01-0001",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0004": {
+  "id": "CCAR-F-Udemy01-0004",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy01-0009": {
+  "id": "CCAR-F-Udemy01-0009",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0017": {
+  "id": "CCAR-F-Udemy01-0017",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy01-0023": {
+  "id": "CCAR-F-Udemy01-0023",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0030": {
+  "id": "CCAR-F-Udemy01-0030",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0032": {
+  "id": "CCAR-F-Udemy01-0032",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy01-0033": {
+  "id": "CCAR-F-Udemy01-0033",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy01-0058": {
+  "id": "CCAR-F-Udemy01-0058",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy02-0003": {
+  "id": "CCAR-F-Udemy02-0003",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0014": {
+  "id": "CCAR-F-Udemy02-0014",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0021": {
+  "id": "CCAR-F-Udemy02-0021",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0022": {
+  "id": "CCAR-F-Udemy02-0022",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0029": {
+  "id": "CCAR-F-Udemy02-0029",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0033": {
+  "id": "CCAR-F-Udemy02-0033",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy02-0044": {
+  "id": "CCAR-F-Udemy02-0044",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0051": {
+  "id": "CCAR-F-Udemy02-0051",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy02-0052": {
+  "id": "CCAR-F-Udemy02-0052",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0002": {
+  "id": "CCAR-F-Udemy03-0002",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy03-0010": {
+  "id": "CCAR-F-Udemy03-0010",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0014": {
+  "id": "CCAR-F-Udemy03-0014",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0020": {
+  "id": "CCAR-F-Udemy03-0020",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy03-0022": {
+  "id": "CCAR-F-Udemy03-0022",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0025": {
+  "id": "CCAR-F-Udemy03-0025",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0034": {
+  "id": "CCAR-F-Udemy03-0034",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0041": {
+  "id": "CCAR-F-Udemy03-0041",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy03-0045": {
+  "id": "CCAR-F-Udemy03-0045",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy04-0011": {
+  "id": "CCAR-F-Udemy04-0011",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0015": {
+  "id": "CCAR-F-Udemy04-0015",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0023": {
+  "id": "CCAR-F-Udemy04-0023",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0025": {
+  "id": "CCAR-F-Udemy04-0025",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0032": {
+  "id": "CCAR-F-Udemy04-0032",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0038": {
+  "id": "CCAR-F-Udemy04-0038",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0039": {
+  "id": "CCAR-F-Udemy04-0039",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0041": {
+  "id": "CCAR-F-Udemy04-0041",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy04-0049": {
+  "id": "CCAR-F-Udemy04-0049",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0023": {
+  "id": "CCAR-F-Udemy05-0023",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0030": {
+  "id": "CCAR-F-Udemy05-0030",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy05-0031": {
+  "id": "CCAR-F-Udemy05-0031",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy05-0044": {
+  "id": "CCAR-F-Udemy05-0044",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-Udemy05-0051": {
+  "id": "CCAR-F-Udemy05-0051",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0004": {
+  "id": "CCAR-F-Udemy06-0004",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0014": {
+  "id": "CCAR-F-Udemy06-0014",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0015": {
+  "id": "CCAR-F-Udemy06-0015",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0019": {
+  "id": "CCAR-F-Udemy06-0019",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0028": {
+  "id": "CCAR-F-Udemy06-0028",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0036": {
+  "id": "CCAR-F-Udemy06-0036",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0043": {
+  "id": "CCAR-F-Udemy06-0043",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0054": {
+  "id": "CCAR-F-Udemy06-0054",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-Udemy06-0055": {
+  "id": "CCAR-F-Udemy06-0055",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0001": {
+  "id": "CCAR-F-MyPractice-0001",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0003": {
+  "id": "CCAR-F-MyPractice-0003",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0005": {
+  "id": "CCAR-F-MyPractice-0005",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0006": {
+  "id": "CCAR-F-MyPractice-0006",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0009": {
+  "id": "CCAR-F-MyPractice-0009",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0012": {
+  "id": "CCAR-F-MyPractice-0012",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0013": {
+  "id": "CCAR-F-MyPractice-0013",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0014": {
+  "id": "CCAR-F-MyPractice-0014",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0028": {
+  "id": "CCAR-F-MyPractice-0028",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0045": {
+  "id": "CCAR-F-MyPractice-0045",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0049": {
+  "id": "CCAR-F-MyPractice-0049",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0050": {
+  "id": "CCAR-F-MyPractice-0050",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0054": {
+  "id": "CCAR-F-MyPractice-0054",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0055": {
+  "id": "CCAR-F-MyPractice-0055",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0063": {
+  "id": "CCAR-F-MyPractice-0063",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0064": {
+  "id": "CCAR-F-MyPractice-0064",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0065": {
+  "id": "CCAR-F-MyPractice-0065",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0066": {
+  "id": "CCAR-F-MyPractice-0066",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0067": {
+  "id": "CCAR-F-MyPractice-0067",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0068": {
+  "id": "CCAR-F-MyPractice-0068",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0069": {
+  "id": "CCAR-F-MyPractice-0069",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0073": {
+  "id": "CCAR-F-MyPractice-0073",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-F-MyPractice-0074": {
+  "id": "CCAR-F-MyPractice-0074",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0075": {
+  "id": "CCAR-F-MyPractice-0075",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-F-MyPractice-0076": {
+  "id": "CCAR-F-MyPractice-0076",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0004": {
+  "id": "CCAR-P-Amey-Thakur-0004",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0005": {
+  "id": "CCAR-P-Amey-Thakur-0005",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0016": {
+  "id": "CCAR-P-Amey-Thakur-0016",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0017": {
+  "id": "CCAR-P-Amey-Thakur-0017",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0018": {
+  "id": "CCAR-P-Amey-Thakur-0018",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0019": {
+  "id": "CCAR-P-Amey-Thakur-0019",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0036": {
+  "id": "CCAR-P-Amey-Thakur-0036",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0045": {
+  "id": "CCAR-P-Amey-Thakur-0045",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0054": {
+  "id": "CCAR-P-Amey-Thakur-0054",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0055": {
+  "id": "CCAR-P-Amey-Thakur-0055",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0056": {
+  "id": "CCAR-P-Amey-Thakur-0056",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0069": {
+  "id": "CCAR-P-Amey-Thakur-0069",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0070": {
+  "id": "CCAR-P-Amey-Thakur-0070",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0013": {
+  "id": "CCAR-P-jrajath94-0013",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0014": {
+  "id": "CCAR-P-jrajath94-0014",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0015": {
+  "id": "CCAR-P-jrajath94-0015",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0016": {
+  "id": "CCAR-P-jrajath94-0016",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0017": {
+  "id": "CCAR-P-jrajath94-0017",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0018": {
+  "id": "CCAR-P-jrajath94-0018",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0019": {
+  "id": "CCAR-P-jrajath94-0019",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0020": {
+  "id": "CCAR-P-jrajath94-0020",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0021": {
+  "id": "CCAR-P-jrajath94-0021",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0022": {
+  "id": "CCAR-P-jrajath94-0022",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0023": {
+  "id": "CCAR-P-jrajath94-0023",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0065": {
+  "id": "CCAR-P-jrajath94-0065",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0066": {
+  "id": "CCAR-P-jrajath94-0066",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0067": {
+  "id": "CCAR-P-jrajath94-0067",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0068": {
+  "id": "CCAR-P-jrajath94-0068",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0069": {
+  "id": "CCAR-P-jrajath94-0069",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0070": {
+  "id": "CCAR-P-jrajath94-0070",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0107": {
+  "id": "CCAR-P-jrajath94-0107",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0108": {
+  "id": "CCAR-P-jrajath94-0108",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0109": {
+  "id": "CCAR-P-jrajath94-0109",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0110": {
+  "id": "CCAR-P-jrajath94-0110",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0111": {
+  "id": "CCAR-P-jrajath94-0111",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0112": {
+  "id": "CCAR-P-jrajath94-0112",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0113": {
+  "id": "CCAR-P-jrajath94-0113",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0114": {
+  "id": "CCAR-P-jrajath94-0114",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0115": {
+  "id": "CCAR-P-jrajath94-0115",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0116": {
+  "id": "CCAR-P-jrajath94-0116",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0117": {
+  "id": "CCAR-P-jrajath94-0117",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0118": {
+  "id": "CCAR-P-jrajath94-0118",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0119": {
+  "id": "CCAR-P-jrajath94-0119",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0120": {
+  "id": "CCAR-P-jrajath94-0120",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0121": {
+  "id": "CCAR-P-jrajath94-0121",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0122": {
+  "id": "CCAR-P-jrajath94-0122",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0123": {
+  "id": "CCAR-P-jrajath94-0123",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0124": {
+  "id": "CCAR-P-jrajath94-0124",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0125": {
+  "id": "CCAR-P-jrajath94-0125",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0126": {
+  "id": "CCAR-P-jrajath94-0126",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0127": {
+  "id": "CCAR-P-jrajath94-0127",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0128": {
+  "id": "CCAR-P-jrajath94-0128",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0129": {
+  "id": "CCAR-P-jrajath94-0129",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0130": {
+  "id": "CCAR-P-jrajath94-0130",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0131": {
+  "id": "CCAR-P-jrajath94-0131",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0282": {
+  "id": "CCAR-P-jrajath94-0282",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0283": {
+  "id": "CCAR-P-jrajath94-0283",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0284": {
+  "id": "CCAR-P-jrajath94-0284",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0285": {
+  "id": "CCAR-P-jrajath94-0285",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0286": {
+  "id": "CCAR-P-jrajath94-0286",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0287": {
+  "id": "CCAR-P-jrajath94-0287",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0288": {
+  "id": "CCAR-P-jrajath94-0288",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0289": {
+  "id": "CCAR-P-jrajath94-0289",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0332": {
+  "id": "CCAR-P-jrajath94-0332",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0333": {
+  "id": "CCAR-P-jrajath94-0333",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0334": {
+  "id": "CCAR-P-jrajath94-0334",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0335": {
+  "id": "CCAR-P-jrajath94-0335",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0336": {
+  "id": "CCAR-P-jrajath94-0336",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0337": {
+  "id": "CCAR-P-jrajath94-0337",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0338": {
+  "id": "CCAR-P-jrajath94-0338",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0339": {
+  "id": "CCAR-P-jrajath94-0339",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0340": {
+  "id": "CCAR-P-jrajath94-0340",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0341": {
+  "id": "CCAR-P-jrajath94-0341",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0342": {
+  "id": "CCAR-P-jrajath94-0342",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0395": {
+  "id": "CCAR-P-jrajath94-0395",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0396": {
+  "id": "CCAR-P-jrajath94-0396",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0397": {
+  "id": "CCAR-P-jrajath94-0397",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0398": {
+  "id": "CCAR-P-jrajath94-0398",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0399": {
+  "id": "CCAR-P-jrajath94-0399",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0400": {
+  "id": "CCAR-P-jrajath94-0400",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0401": {
+  "id": "CCAR-P-jrajath94-0401",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0402": {
+  "id": "CCAR-P-jrajath94-0402",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0403": {
+  "id": "CCAR-P-jrajath94-0403",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0404": {
+  "id": "CCAR-P-jrajath94-0404",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0405": {
+  "id": "CCAR-P-jrajath94-0405",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0458": {
+  "id": "CCAR-P-jrajath94-0458",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0459": {
+  "id": "CCAR-P-jrajath94-0459",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0460": {
+  "id": "CCAR-P-jrajath94-0460",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0461": {
+  "id": "CCAR-P-jrajath94-0461",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0462": {
+  "id": "CCAR-P-jrajath94-0462",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0463": {
+  "id": "CCAR-P-jrajath94-0463",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0464": {
+  "id": "CCAR-P-jrajath94-0464",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0465": {
+  "id": "CCAR-P-jrajath94-0465",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0466": {
+  "id": "CCAR-P-jrajath94-0466",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0467": {
+  "id": "CCAR-P-jrajath94-0467",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0468": {
+  "id": "CCAR-P-jrajath94-0468",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0521": {
+  "id": "CCAR-P-jrajath94-0521",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0522": {
+  "id": "CCAR-P-jrajath94-0522",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0523": {
+  "id": "CCAR-P-jrajath94-0523",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0524": {
+  "id": "CCAR-P-jrajath94-0524",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0525": {
+  "id": "CCAR-P-jrajath94-0525",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0526": {
+  "id": "CCAR-P-jrajath94-0526",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0527": {
+  "id": "CCAR-P-jrajath94-0527",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0528": {
+  "id": "CCAR-P-jrajath94-0528",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0529": {
+  "id": "CCAR-P-jrajath94-0529",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0530": {
+  "id": "CCAR-P-jrajath94-0530",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0531": {
+  "id": "CCAR-P-jrajath94-0531",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0602": {
+  "id": "CCAR-P-jrajath94-0602",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0603": {
+  "id": "CCAR-P-jrajath94-0603",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0604": {
+  "id": "CCAR-P-jrajath94-0604",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0605": {
+  "id": "CCAR-P-jrajath94-0605",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0606": {
+  "id": "CCAR-P-jrajath94-0606",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0607": {
+  "id": "CCAR-P-jrajath94-0607",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0609": {
+  "id": "CCAR-P-jrajath94-0609",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0001": {
+  "id": "CCAR-P-preporato-0001",
+  "chapter": 11,
+  "confidence": "low"
+ },
+ "CCAR-P-preporato-0002": {
+  "id": "CCAR-P-preporato-0002",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0003": {
+  "id": "CCAR-P-preporato-0003",
+  "chapter": 11,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0004": {
+  "id": "CCAR-P-preporato-0004",
+  "chapter": 1,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0005": {
+  "id": "CCAR-P-preporato-0005",
+  "chapter": 1,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0030": {
+  "id": "CCAR-P-Amey-Thakur-0030",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0031": {
+  "id": "CCAR-P-Amey-Thakur-0031",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0032": {
+  "id": "CCAR-P-Amey-Thakur-0032",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0046": {
+  "id": "CCAR-P-Amey-Thakur-0046",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0063": {
+  "id": "CCAR-P-Amey-Thakur-0063",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0064": {
+  "id": "CCAR-P-Amey-Thakur-0064",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0077": {
+  "id": "CCAR-P-Amey-Thakur-0077",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0078": {
+  "id": "CCAR-P-Amey-Thakur-0078",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0052": {
+  "id": "CCAR-P-jrajath94-0052",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0053": {
+  "id": "CCAR-P-jrajath94-0053",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0054": {
+  "id": "CCAR-P-jrajath94-0054",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0055": {
+  "id": "CCAR-P-jrajath94-0055",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0056": {
+  "id": "CCAR-P-jrajath94-0056",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0057": {
+  "id": "CCAR-P-jrajath94-0057",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0058": {
+  "id": "CCAR-P-jrajath94-0058",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0059": {
+  "id": "CCAR-P-jrajath94-0059",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0071": {
+  "id": "CCAR-P-jrajath94-0071",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0072": {
+  "id": "CCAR-P-jrajath94-0072",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0073": {
+  "id": "CCAR-P-jrajath94-0073",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0074": {
+  "id": "CCAR-P-jrajath94-0074",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0075": {
+  "id": "CCAR-P-jrajath94-0075",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0076": {
+  "id": "CCAR-P-jrajath94-0076",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0132": {
+  "id": "CCAR-P-jrajath94-0132",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0133": {
+  "id": "CCAR-P-jrajath94-0133",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0134": {
+  "id": "CCAR-P-jrajath94-0134",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0135": {
+  "id": "CCAR-P-jrajath94-0135",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0136": {
+  "id": "CCAR-P-jrajath94-0136",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0137": {
+  "id": "CCAR-P-jrajath94-0137",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0138": {
+  "id": "CCAR-P-jrajath94-0138",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0139": {
+  "id": "CCAR-P-jrajath94-0139",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0140": {
+  "id": "CCAR-P-jrajath94-0140",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0141": {
+  "id": "CCAR-P-jrajath94-0141",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0142": {
+  "id": "CCAR-P-jrajath94-0142",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0143": {
+  "id": "CCAR-P-jrajath94-0143",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0144": {
+  "id": "CCAR-P-jrajath94-0144",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0145": {
+  "id": "CCAR-P-jrajath94-0145",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0146": {
+  "id": "CCAR-P-jrajath94-0146",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0147": {
+  "id": "CCAR-P-jrajath94-0147",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0148": {
+  "id": "CCAR-P-jrajath94-0148",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0149": {
+  "id": "CCAR-P-jrajath94-0149",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0150": {
+  "id": "CCAR-P-jrajath94-0150",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0151": {
+  "id": "CCAR-P-jrajath94-0151",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0152": {
+  "id": "CCAR-P-jrajath94-0152",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0153": {
+  "id": "CCAR-P-jrajath94-0153",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0154": {
+  "id": "CCAR-P-jrajath94-0154",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0155": {
+  "id": "CCAR-P-jrajath94-0155",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0156": {
+  "id": "CCAR-P-jrajath94-0156",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0290": {
+  "id": "CCAR-P-jrajath94-0290",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0291": {
+  "id": "CCAR-P-jrajath94-0291",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0292": {
+  "id": "CCAR-P-jrajath94-0292",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0293": {
+  "id": "CCAR-P-jrajath94-0293",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0294": {
+  "id": "CCAR-P-jrajath94-0294",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0295": {
+  "id": "CCAR-P-jrajath94-0295",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0296": {
+  "id": "CCAR-P-jrajath94-0296",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0343": {
+  "id": "CCAR-P-jrajath94-0343",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0344": {
+  "id": "CCAR-P-jrajath94-0344",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0345": {
+  "id": "CCAR-P-jrajath94-0345",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0346": {
+  "id": "CCAR-P-jrajath94-0346",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0347": {
+  "id": "CCAR-P-jrajath94-0347",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0348": {
+  "id": "CCAR-P-jrajath94-0348",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0349": {
+  "id": "CCAR-P-jrajath94-0349",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0350": {
+  "id": "CCAR-P-jrajath94-0350",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0406": {
+  "id": "CCAR-P-jrajath94-0406",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0407": {
+  "id": "CCAR-P-jrajath94-0407",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0408": {
+  "id": "CCAR-P-jrajath94-0408",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0409": {
+  "id": "CCAR-P-jrajath94-0409",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0410": {
+  "id": "CCAR-P-jrajath94-0410",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0411": {
+  "id": "CCAR-P-jrajath94-0411",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0412": {
+  "id": "CCAR-P-jrajath94-0412",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0413": {
+  "id": "CCAR-P-jrajath94-0413",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0469": {
+  "id": "CCAR-P-jrajath94-0469",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0470": {
+  "id": "CCAR-P-jrajath94-0470",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0471": {
+  "id": "CCAR-P-jrajath94-0471",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0472": {
+  "id": "CCAR-P-jrajath94-0472",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0473": {
+  "id": "CCAR-P-jrajath94-0473",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0474": {
+  "id": "CCAR-P-jrajath94-0474",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0475": {
+  "id": "CCAR-P-jrajath94-0475",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0476": {
+  "id": "CCAR-P-jrajath94-0476",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0532": {
+  "id": "CCAR-P-jrajath94-0532",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0533": {
+  "id": "CCAR-P-jrajath94-0533",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0534": {
+  "id": "CCAR-P-jrajath94-0534",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0535": {
+  "id": "CCAR-P-jrajath94-0535",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0536": {
+  "id": "CCAR-P-jrajath94-0536",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0537": {
+  "id": "CCAR-P-jrajath94-0537",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0538": {
+  "id": "CCAR-P-jrajath94-0538",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0539": {
+  "id": "CCAR-P-jrajath94-0539",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0587": {
+  "id": "CCAR-P-jrajath94-0587",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0614": {
+  "id": "CCAR-P-jrajath94-0614",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0615": {
+  "id": "CCAR-P-jrajath94-0615",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0616": {
+  "id": "CCAR-P-jrajath94-0616",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0618": {
+  "id": "CCAR-P-jrajath94-0618",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0619": {
+  "id": "CCAR-P-jrajath94-0619",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0620": {
+  "id": "CCAR-P-jrajath94-0620",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0621": {
+  "id": "CCAR-P-jrajath94-0621",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0622": {
+  "id": "CCAR-P-jrajath94-0622",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0623": {
+  "id": "CCAR-P-jrajath94-0623",
+  "chapter": 6,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0624": {
+  "id": "CCAR-P-jrajath94-0624",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0625": {
+  "id": "CCAR-P-jrajath94-0625",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0626": {
+  "id": "CCAR-P-jrajath94-0626",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0627": {
+  "id": "CCAR-P-jrajath94-0627",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0628": {
+  "id": "CCAR-P-jrajath94-0628",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0662": {
+  "id": "CCAR-P-jrajath94-0662",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0664": {
+  "id": "CCAR-P-jrajath94-0664",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0666": {
+  "id": "CCAR-P-jrajath94-0666",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0675": {
+  "id": "CCAR-P-jrajath94-0675",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0683": {
+  "id": "CCAR-P-jrajath94-0683",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0006": {
+  "id": "CCAR-P-preporato-0006",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0007": {
+  "id": "CCAR-P-preporato-0007",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0008": {
+  "id": "CCAR-P-preporato-0008",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0009": {
+  "id": "CCAR-P-preporato-0009",
+  "chapter": 6,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0001": {
+  "id": "CCAR-P-Amey-Thakur-0001",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0002": {
+  "id": "CCAR-P-Amey-Thakur-0002",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0003": {
+  "id": "CCAR-P-Amey-Thakur-0003",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0011": {
+  "id": "CCAR-P-Amey-Thakur-0011",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0012": {
+  "id": "CCAR-P-Amey-Thakur-0012",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0013": {
+  "id": "CCAR-P-Amey-Thakur-0013",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0014": {
+  "id": "CCAR-P-Amey-Thakur-0014",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0015": {
+  "id": "CCAR-P-Amey-Thakur-0015",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0037": {
+  "id": "CCAR-P-Amey-Thakur-0037",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0038": {
+  "id": "CCAR-P-Amey-Thakur-0038",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0050": {
+  "id": "CCAR-P-Amey-Thakur-0050",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0051": {
+  "id": "CCAR-P-Amey-Thakur-0051",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0052": {
+  "id": "CCAR-P-Amey-Thakur-0052",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0053": {
+  "id": "CCAR-P-Amey-Thakur-0053",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0066": {
+  "id": "CCAR-P-Amey-Thakur-0066",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0067": {
+  "id": "CCAR-P-Amey-Thakur-0067",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0068": {
+  "id": "CCAR-P-Amey-Thakur-0068",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0001": {
+  "id": "CCAR-P-jrajath94-0001",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0002": {
+  "id": "CCAR-P-jrajath94-0002",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0003": {
+  "id": "CCAR-P-jrajath94-0003",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0004": {
+  "id": "CCAR-P-jrajath94-0004",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0005": {
+  "id": "CCAR-P-jrajath94-0005",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0006": {
+  "id": "CCAR-P-jrajath94-0006",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0007": {
+  "id": "CCAR-P-jrajath94-0007",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0008": {
+  "id": "CCAR-P-jrajath94-0008",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0009": {
+  "id": "CCAR-P-jrajath94-0009",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0010": {
+  "id": "CCAR-P-jrajath94-0010",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0011": {
+  "id": "CCAR-P-jrajath94-0011",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0012": {
+  "id": "CCAR-P-jrajath94-0012",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0077": {
+  "id": "CCAR-P-jrajath94-0077",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0078": {
+  "id": "CCAR-P-jrajath94-0078",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0079": {
+  "id": "CCAR-P-jrajath94-0079",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0080": {
+  "id": "CCAR-P-jrajath94-0080",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0081": {
+  "id": "CCAR-P-jrajath94-0081",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0082": {
+  "id": "CCAR-P-jrajath94-0082",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0083": {
+  "id": "CCAR-P-jrajath94-0083",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0084": {
+  "id": "CCAR-P-jrajath94-0084",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0157": {
+  "id": "CCAR-P-jrajath94-0157",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0158": {
+  "id": "CCAR-P-jrajath94-0158",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0159": {
+  "id": "CCAR-P-jrajath94-0159",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0160": {
+  "id": "CCAR-P-jrajath94-0160",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0161": {
+  "id": "CCAR-P-jrajath94-0161",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0162": {
+  "id": "CCAR-P-jrajath94-0162",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0163": {
+  "id": "CCAR-P-jrajath94-0163",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0164": {
+  "id": "CCAR-P-jrajath94-0164",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0165": {
+  "id": "CCAR-P-jrajath94-0165",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0166": {
+  "id": "CCAR-P-jrajath94-0166",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0167": {
+  "id": "CCAR-P-jrajath94-0167",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0168": {
+  "id": "CCAR-P-jrajath94-0168",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0169": {
+  "id": "CCAR-P-jrajath94-0169",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0170": {
+  "id": "CCAR-P-jrajath94-0170",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0171": {
+  "id": "CCAR-P-jrajath94-0171",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0172": {
+  "id": "CCAR-P-jrajath94-0172",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0173": {
+  "id": "CCAR-P-jrajath94-0173",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0174": {
+  "id": "CCAR-P-jrajath94-0174",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0175": {
+  "id": "CCAR-P-jrajath94-0175",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0176": {
+  "id": "CCAR-P-jrajath94-0176",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0177": {
+  "id": "CCAR-P-jrajath94-0177",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0178": {
+  "id": "CCAR-P-jrajath94-0178",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0179": {
+  "id": "CCAR-P-jrajath94-0179",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0180": {
+  "id": "CCAR-P-jrajath94-0180",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0181": {
+  "id": "CCAR-P-jrajath94-0181",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0297": {
+  "id": "CCAR-P-jrajath94-0297",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0298": {
+  "id": "CCAR-P-jrajath94-0298",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0299": {
+  "id": "CCAR-P-jrajath94-0299",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0300": {
+  "id": "CCAR-P-jrajath94-0300",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0301": {
+  "id": "CCAR-P-jrajath94-0301",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0302": {
+  "id": "CCAR-P-jrajath94-0302",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0303": {
+  "id": "CCAR-P-jrajath94-0303",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0304": {
+  "id": "CCAR-P-jrajath94-0304",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0305": {
+  "id": "CCAR-P-jrajath94-0305",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0306": {
+  "id": "CCAR-P-jrajath94-0306",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0351": {
+  "id": "CCAR-P-jrajath94-0351",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0352": {
+  "id": "CCAR-P-jrajath94-0352",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0353": {
+  "id": "CCAR-P-jrajath94-0353",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0354": {
+  "id": "CCAR-P-jrajath94-0354",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0355": {
+  "id": "CCAR-P-jrajath94-0355",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0356": {
+  "id": "CCAR-P-jrajath94-0356",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0357": {
+  "id": "CCAR-P-jrajath94-0357",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0358": {
+  "id": "CCAR-P-jrajath94-0358",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0359": {
+  "id": "CCAR-P-jrajath94-0359",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0360": {
+  "id": "CCAR-P-jrajath94-0360",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0361": {
+  "id": "CCAR-P-jrajath94-0361",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0362": {
+  "id": "CCAR-P-jrajath94-0362",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0414": {
+  "id": "CCAR-P-jrajath94-0414",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0415": {
+  "id": "CCAR-P-jrajath94-0415",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0416": {
+  "id": "CCAR-P-jrajath94-0416",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0417": {
+  "id": "CCAR-P-jrajath94-0417",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0418": {
+  "id": "CCAR-P-jrajath94-0418",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0419": {
+  "id": "CCAR-P-jrajath94-0419",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0420": {
+  "id": "CCAR-P-jrajath94-0420",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0421": {
+  "id": "CCAR-P-jrajath94-0421",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0422": {
+  "id": "CCAR-P-jrajath94-0422",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0423": {
+  "id": "CCAR-P-jrajath94-0423",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0424": {
+  "id": "CCAR-P-jrajath94-0424",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0425": {
+  "id": "CCAR-P-jrajath94-0425",
+  "chapter": 9,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0477": {
+  "id": "CCAR-P-jrajath94-0477",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0478": {
+  "id": "CCAR-P-jrajath94-0478",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0479": {
+  "id": "CCAR-P-jrajath94-0479",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0480": {
+  "id": "CCAR-P-jrajath94-0480",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0481": {
+  "id": "CCAR-P-jrajath94-0481",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0482": {
+  "id": "CCAR-P-jrajath94-0482",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0483": {
+  "id": "CCAR-P-jrajath94-0483",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0484": {
+  "id": "CCAR-P-jrajath94-0484",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0485": {
+  "id": "CCAR-P-jrajath94-0485",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0486": {
+  "id": "CCAR-P-jrajath94-0486",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0487": {
+  "id": "CCAR-P-jrajath94-0487",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0488": {
+  "id": "CCAR-P-jrajath94-0488",
+  "chapter": 9,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0540": {
+  "id": "CCAR-P-jrajath94-0540",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0541": {
+  "id": "CCAR-P-jrajath94-0541",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0542": {
+  "id": "CCAR-P-jrajath94-0542",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0543": {
+  "id": "CCAR-P-jrajath94-0543",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0544": {
+  "id": "CCAR-P-jrajath94-0544",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0545": {
+  "id": "CCAR-P-jrajath94-0545",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0546": {
+  "id": "CCAR-P-jrajath94-0546",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0547": {
+  "id": "CCAR-P-jrajath94-0547",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0548": {
+  "id": "CCAR-P-jrajath94-0548",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0549": {
+  "id": "CCAR-P-jrajath94-0549",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0550": {
+  "id": "CCAR-P-jrajath94-0550",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0551": {
+  "id": "CCAR-P-jrajath94-0551",
+  "chapter": 9,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0588": {
+  "id": "CCAR-P-jrajath94-0588",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0589": {
+  "id": "CCAR-P-jrajath94-0589",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0590": {
+  "id": "CCAR-P-jrajath94-0590",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0591": {
+  "id": "CCAR-P-jrajath94-0591",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0592": {
+  "id": "CCAR-P-jrajath94-0592",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0593": {
+  "id": "CCAR-P-jrajath94-0593",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0594": {
+  "id": "CCAR-P-jrajath94-0594",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0599": {
+  "id": "CCAR-P-jrajath94-0599",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0629": {
+  "id": "CCAR-P-jrajath94-0629",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0630": {
+  "id": "CCAR-P-jrajath94-0630",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0632": {
+  "id": "CCAR-P-jrajath94-0632",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0633": {
+  "id": "CCAR-P-jrajath94-0633",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0634": {
+  "id": "CCAR-P-jrajath94-0634",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0635": {
+  "id": "CCAR-P-jrajath94-0635",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0637": {
+  "id": "CCAR-P-jrajath94-0637",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0638": {
+  "id": "CCAR-P-jrajath94-0638",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0640": {
+  "id": "CCAR-P-jrajath94-0640",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0641": {
+  "id": "CCAR-P-jrajath94-0641",
+  "chapter": 9,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0642": {
+  "id": "CCAR-P-jrajath94-0642",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0643": {
+  "id": "CCAR-P-jrajath94-0643",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0644": {
+  "id": "CCAR-P-jrajath94-0644",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0645": {
+  "id": "CCAR-P-jrajath94-0645",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0646": {
+  "id": "CCAR-P-jrajath94-0646",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0647": {
+  "id": "CCAR-P-jrajath94-0647",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0648": {
+  "id": "CCAR-P-jrajath94-0648",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0649": {
+  "id": "CCAR-P-jrajath94-0649",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0650": {
+  "id": "CCAR-P-jrajath94-0650",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0651": {
+  "id": "CCAR-P-jrajath94-0651",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0652": {
+  "id": "CCAR-P-jrajath94-0652",
+  "chapter": 9,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0669": {
+  "id": "CCAR-P-jrajath94-0669",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0693": {
+  "id": "CCAR-P-jrajath94-0693",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0706": {
+  "id": "CCAR-P-jrajath94-0706",
+  "chapter": 2,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0010": {
+  "id": "CCAR-P-preporato-0010",
+  "chapter": 2,
+  "confidence": "low"
+ },
+ "CCAR-P-preporato-0011": {
+  "id": "CCAR-P-preporato-0011",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-preporato-0012": {
+  "id": "CCAR-P-preporato-0012",
+  "chapter": 8,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0013": {
+  "id": "CCAR-P-preporato-0013",
+  "chapter": 8,
+  "confidence": "low"
+ },
+ "CCAR-P-preporato-0014": {
+  "id": "CCAR-P-preporato-0014",
+  "chapter": 9,
+  "confidence": "low"
+ },
+ "CCAR-P-preporato-0015": {
+  "id": "CCAR-P-preporato-0015",
+  "chapter": 9,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0006": {
+  "id": "CCAR-P-Amey-Thakur-0006",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0007": {
+  "id": "CCAR-P-Amey-Thakur-0007",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0020": {
+  "id": "CCAR-P-Amey-Thakur-0020",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0021": {
+  "id": "CCAR-P-Amey-Thakur-0021",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0022": {
+  "id": "CCAR-P-Amey-Thakur-0022",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0023": {
+  "id": "CCAR-P-Amey-Thakur-0023",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0039": {
+  "id": "CCAR-P-Amey-Thakur-0039",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0040": {
+  "id": "CCAR-P-Amey-Thakur-0040",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0048": {
+  "id": "CCAR-P-Amey-Thakur-0048",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0057": {
+  "id": "CCAR-P-Amey-Thakur-0057",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0058": {
+  "id": "CCAR-P-Amey-Thakur-0058",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0073": {
+  "id": "CCAR-P-Amey-Thakur-0073",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0074": {
+  "id": "CCAR-P-Amey-Thakur-0074",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0024": {
+  "id": "CCAR-P-jrajath94-0024",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0025": {
+  "id": "CCAR-P-jrajath94-0025",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0026": {
+  "id": "CCAR-P-jrajath94-0026",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0027": {
+  "id": "CCAR-P-jrajath94-0027",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0028": {
+  "id": "CCAR-P-jrajath94-0028",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0029": {
+  "id": "CCAR-P-jrajath94-0029",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0030": {
+  "id": "CCAR-P-jrajath94-0030",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0031": {
+  "id": "CCAR-P-jrajath94-0031",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0032": {
+  "id": "CCAR-P-jrajath94-0032",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0085": {
+  "id": "CCAR-P-jrajath94-0085",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0086": {
+  "id": "CCAR-P-jrajath94-0086",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0087": {
+  "id": "CCAR-P-jrajath94-0087",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0088": {
+  "id": "CCAR-P-jrajath94-0088",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0089": {
+  "id": "CCAR-P-jrajath94-0089",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0090": {
+  "id": "CCAR-P-jrajath94-0090",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0182": {
+  "id": "CCAR-P-jrajath94-0182",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0183": {
+  "id": "CCAR-P-jrajath94-0183",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0184": {
+  "id": "CCAR-P-jrajath94-0184",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0185": {
+  "id": "CCAR-P-jrajath94-0185",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0186": {
+  "id": "CCAR-P-jrajath94-0186",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0187": {
+  "id": "CCAR-P-jrajath94-0187",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0188": {
+  "id": "CCAR-P-jrajath94-0188",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0189": {
+  "id": "CCAR-P-jrajath94-0189",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0190": {
+  "id": "CCAR-P-jrajath94-0190",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0191": {
+  "id": "CCAR-P-jrajath94-0191",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0192": {
+  "id": "CCAR-P-jrajath94-0192",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0193": {
+  "id": "CCAR-P-jrajath94-0193",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0194": {
+  "id": "CCAR-P-jrajath94-0194",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0195": {
+  "id": "CCAR-P-jrajath94-0195",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0196": {
+  "id": "CCAR-P-jrajath94-0196",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0197": {
+  "id": "CCAR-P-jrajath94-0197",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0198": {
+  "id": "CCAR-P-jrajath94-0198",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0199": {
+  "id": "CCAR-P-jrajath94-0199",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0200": {
+  "id": "CCAR-P-jrajath94-0200",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0201": {
+  "id": "CCAR-P-jrajath94-0201",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0202": {
+  "id": "CCAR-P-jrajath94-0202",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0203": {
+  "id": "CCAR-P-jrajath94-0203",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0204": {
+  "id": "CCAR-P-jrajath94-0204",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0205": {
+  "id": "CCAR-P-jrajath94-0205",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0206": {
+  "id": "CCAR-P-jrajath94-0206",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0307": {
+  "id": "CCAR-P-jrajath94-0307",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0308": {
+  "id": "CCAR-P-jrajath94-0308",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0309": {
+  "id": "CCAR-P-jrajath94-0309",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0310": {
+  "id": "CCAR-P-jrajath94-0310",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0311": {
+  "id": "CCAR-P-jrajath94-0311",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0312": {
+  "id": "CCAR-P-jrajath94-0312",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0313": {
+  "id": "CCAR-P-jrajath94-0313",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0314": {
+  "id": "CCAR-P-jrajath94-0314",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0363": {
+  "id": "CCAR-P-jrajath94-0363",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0364": {
+  "id": "CCAR-P-jrajath94-0364",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0365": {
+  "id": "CCAR-P-jrajath94-0365",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0366": {
+  "id": "CCAR-P-jrajath94-0366",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0367": {
+  "id": "CCAR-P-jrajath94-0367",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0368": {
+  "id": "CCAR-P-jrajath94-0368",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0369": {
+  "id": "CCAR-P-jrajath94-0369",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0370": {
+  "id": "CCAR-P-jrajath94-0370",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0371": {
+  "id": "CCAR-P-jrajath94-0371",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0372": {
+  "id": "CCAR-P-jrajath94-0372",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0426": {
+  "id": "CCAR-P-jrajath94-0426",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0427": {
+  "id": "CCAR-P-jrajath94-0427",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0428": {
+  "id": "CCAR-P-jrajath94-0428",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0429": {
+  "id": "CCAR-P-jrajath94-0429",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0430": {
+  "id": "CCAR-P-jrajath94-0430",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0431": {
+  "id": "CCAR-P-jrajath94-0431",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0432": {
+  "id": "CCAR-P-jrajath94-0432",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0433": {
+  "id": "CCAR-P-jrajath94-0433",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0434": {
+  "id": "CCAR-P-jrajath94-0434",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0435": {
+  "id": "CCAR-P-jrajath94-0435",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0489": {
+  "id": "CCAR-P-jrajath94-0489",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0490": {
+  "id": "CCAR-P-jrajath94-0490",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0491": {
+  "id": "CCAR-P-jrajath94-0491",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0492": {
+  "id": "CCAR-P-jrajath94-0492",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0493": {
+  "id": "CCAR-P-jrajath94-0493",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0494": {
+  "id": "CCAR-P-jrajath94-0494",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0495": {
+  "id": "CCAR-P-jrajath94-0495",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0496": {
+  "id": "CCAR-P-jrajath94-0496",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0497": {
+  "id": "CCAR-P-jrajath94-0497",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0498": {
+  "id": "CCAR-P-jrajath94-0498",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0552": {
+  "id": "CCAR-P-jrajath94-0552",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0553": {
+  "id": "CCAR-P-jrajath94-0553",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0554": {
+  "id": "CCAR-P-jrajath94-0554",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0555": {
+  "id": "CCAR-P-jrajath94-0555",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0556": {
+  "id": "CCAR-P-jrajath94-0556",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0557": {
+  "id": "CCAR-P-jrajath94-0557",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0558": {
+  "id": "CCAR-P-jrajath94-0558",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0559": {
+  "id": "CCAR-P-jrajath94-0559",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0560": {
+  "id": "CCAR-P-jrajath94-0560",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0561": {
+  "id": "CCAR-P-jrajath94-0561",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0584": {
+  "id": "CCAR-P-jrajath94-0584",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0586": {
+  "id": "CCAR-P-jrajath94-0586",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0596": {
+  "id": "CCAR-P-jrajath94-0596",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0597": {
+  "id": "CCAR-P-jrajath94-0597",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0598": {
+  "id": "CCAR-P-jrajath94-0598",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0601": {
+  "id": "CCAR-P-jrajath94-0601",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0608": {
+  "id": "CCAR-P-jrajath94-0608",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0610": {
+  "id": "CCAR-P-jrajath94-0610",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0611": {
+  "id": "CCAR-P-jrajath94-0611",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0612": {
+  "id": "CCAR-P-jrajath94-0612",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0613": {
+  "id": "CCAR-P-jrajath94-0613",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0636": {
+  "id": "CCAR-P-jrajath94-0636",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0639": {
+  "id": "CCAR-P-jrajath94-0639",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0653": {
+  "id": "CCAR-P-jrajath94-0653",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0654": {
+  "id": "CCAR-P-jrajath94-0654",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0655": {
+  "id": "CCAR-P-jrajath94-0655",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0656": {
+  "id": "CCAR-P-jrajath94-0656",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0657": {
+  "id": "CCAR-P-jrajath94-0657",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0658": {
+  "id": "CCAR-P-jrajath94-0658",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0659": {
+  "id": "CCAR-P-jrajath94-0659",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0660": {
+  "id": "CCAR-P-jrajath94-0660",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0661": {
+  "id": "CCAR-P-jrajath94-0661",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0663": {
+  "id": "CCAR-P-jrajath94-0663",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0665": {
+  "id": "CCAR-P-jrajath94-0665",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0667": {
+  "id": "CCAR-P-jrajath94-0667",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0668": {
+  "id": "CCAR-P-jrajath94-0668",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0670": {
+  "id": "CCAR-P-jrajath94-0670",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0674": {
+  "id": "CCAR-P-jrajath94-0674",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0687": {
+  "id": "CCAR-P-jrajath94-0687",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0688": {
+  "id": "CCAR-P-jrajath94-0688",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0689": {
+  "id": "CCAR-P-jrajath94-0689",
+  "chapter": 5,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0690": {
+  "id": "CCAR-P-jrajath94-0690",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0692": {
+  "id": "CCAR-P-jrajath94-0692",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0694": {
+  "id": "CCAR-P-jrajath94-0694",
+  "chapter": 5,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0708": {
+  "id": "CCAR-P-jrajath94-0708",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-preporato-0016": {
+  "id": "CCAR-P-preporato-0016",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0017": {
+  "id": "CCAR-P-preporato-0017",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0018": {
+  "id": "CCAR-P-preporato-0018",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0019": {
+  "id": "CCAR-P-preporato-0019",
+  "chapter": 4,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0020": {
+  "id": "CCAR-P-preporato-0020",
+  "chapter": 4,
+  "confidence": "low"
+ },
+ "CCAR-P-Amey-Thakur-0008": {
+  "id": "CCAR-P-Amey-Thakur-0008",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0024": {
+  "id": "CCAR-P-Amey-Thakur-0024",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0025": {
+  "id": "CCAR-P-Amey-Thakur-0025",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0026": {
+  "id": "CCAR-P-Amey-Thakur-0026",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0041": {
+  "id": "CCAR-P-Amey-Thakur-0041",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0042": {
+  "id": "CCAR-P-Amey-Thakur-0042",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0044": {
+  "id": "CCAR-P-Amey-Thakur-0044",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0059": {
+  "id": "CCAR-P-Amey-Thakur-0059",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0060": {
+  "id": "CCAR-P-Amey-Thakur-0060",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0071": {
+  "id": "CCAR-P-Amey-Thakur-0071",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-Amey-Thakur-0072": {
+  "id": "CCAR-P-Amey-Thakur-0072",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0033": {
+  "id": "CCAR-P-jrajath94-0033",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0034": {
+  "id": "CCAR-P-jrajath94-0034",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0035": {
+  "id": "CCAR-P-jrajath94-0035",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0036": {
+  "id": "CCAR-P-jrajath94-0036",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0037": {
+  "id": "CCAR-P-jrajath94-0037",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0038": {
+  "id": "CCAR-P-jrajath94-0038",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0039": {
+  "id": "CCAR-P-jrajath94-0039",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0040": {
+  "id": "CCAR-P-jrajath94-0040",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0041": {
+  "id": "CCAR-P-jrajath94-0041",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0042": {
+  "id": "CCAR-P-jrajath94-0042",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0091": {
+  "id": "CCAR-P-jrajath94-0091",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0092": {
+  "id": "CCAR-P-jrajath94-0092",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0093": {
+  "id": "CCAR-P-jrajath94-0093",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0094": {
+  "id": "CCAR-P-jrajath94-0094",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0095": {
+  "id": "CCAR-P-jrajath94-0095",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0096": {
+  "id": "CCAR-P-jrajath94-0096",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0207": {
+  "id": "CCAR-P-jrajath94-0207",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0208": {
+  "id": "CCAR-P-jrajath94-0208",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0209": {
+  "id": "CCAR-P-jrajath94-0209",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0210": {
+  "id": "CCAR-P-jrajath94-0210",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0211": {
+  "id": "CCAR-P-jrajath94-0211",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0212": {
+  "id": "CCAR-P-jrajath94-0212",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0213": {
+  "id": "CCAR-P-jrajath94-0213",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0214": {
+  "id": "CCAR-P-jrajath94-0214",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0215": {
+  "id": "CCAR-P-jrajath94-0215",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0216": {
+  "id": "CCAR-P-jrajath94-0216",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0217": {
+  "id": "CCAR-P-jrajath94-0217",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0218": {
+  "id": "CCAR-P-jrajath94-0218",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0219": {
+  "id": "CCAR-P-jrajath94-0219",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0220": {
+  "id": "CCAR-P-jrajath94-0220",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0221": {
+  "id": "CCAR-P-jrajath94-0221",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0222": {
+  "id": "CCAR-P-jrajath94-0222",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0223": {
+  "id": "CCAR-P-jrajath94-0223",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0224": {
+  "id": "CCAR-P-jrajath94-0224",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0225": {
+  "id": "CCAR-P-jrajath94-0225",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0226": {
+  "id": "CCAR-P-jrajath94-0226",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0227": {
+  "id": "CCAR-P-jrajath94-0227",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0228": {
+  "id": "CCAR-P-jrajath94-0228",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0229": {
+  "id": "CCAR-P-jrajath94-0229",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0230": {
+  "id": "CCAR-P-jrajath94-0230",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0231": {
+  "id": "CCAR-P-jrajath94-0231",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0315": {
+  "id": "CCAR-P-jrajath94-0315",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0316": {
+  "id": "CCAR-P-jrajath94-0316",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0317": {
+  "id": "CCAR-P-jrajath94-0317",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0318": {
+  "id": "CCAR-P-jrajath94-0318",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0319": {
+  "id": "CCAR-P-jrajath94-0319",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0320": {
+  "id": "CCAR-P-jrajath94-0320",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0321": {
+  "id": "CCAR-P-jrajath94-0321",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0373": {
+  "id": "CCAR-P-jrajath94-0373",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0374": {
+  "id": "CCAR-P-jrajath94-0374",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0375": {
+  "id": "CCAR-P-jrajath94-0375",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0376": {
+  "id": "CCAR-P-jrajath94-0376",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0377": {
+  "id": "CCAR-P-jrajath94-0377",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0378": {
+  "id": "CCAR-P-jrajath94-0378",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0379": {
+  "id": "CCAR-P-jrajath94-0379",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0380": {
+  "id": "CCAR-P-jrajath94-0380",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0381": {
+  "id": "CCAR-P-jrajath94-0381",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0436": {
+  "id": "CCAR-P-jrajath94-0436",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0437": {
+  "id": "CCAR-P-jrajath94-0437",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0438": {
+  "id": "CCAR-P-jrajath94-0438",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0439": {
+  "id": "CCAR-P-jrajath94-0439",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0440": {
+  "id": "CCAR-P-jrajath94-0440",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0441": {
+  "id": "CCAR-P-jrajath94-0441",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0442": {
+  "id": "CCAR-P-jrajath94-0442",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0443": {
+  "id": "CCAR-P-jrajath94-0443",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0444": {
+  "id": "CCAR-P-jrajath94-0444",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0499": {
+  "id": "CCAR-P-jrajath94-0499",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0500": {
+  "id": "CCAR-P-jrajath94-0500",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0501": {
+  "id": "CCAR-P-jrajath94-0501",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0502": {
+  "id": "CCAR-P-jrajath94-0502",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0503": {
+  "id": "CCAR-P-jrajath94-0503",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0504": {
+  "id": "CCAR-P-jrajath94-0504",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0505": {
+  "id": "CCAR-P-jrajath94-0505",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0506": {
+  "id": "CCAR-P-jrajath94-0506",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0507": {
+  "id": "CCAR-P-jrajath94-0507",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0562": {
+  "id": "CCAR-P-jrajath94-0562",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0563": {
+  "id": "CCAR-P-jrajath94-0563",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0564": {
+  "id": "CCAR-P-jrajath94-0564",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0565": {
+  "id": "CCAR-P-jrajath94-0565",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0566": {
+  "id": "CCAR-P-jrajath94-0566",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0567": {
+  "id": "CCAR-P-jrajath94-0567",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0568": {
+  "id": "CCAR-P-jrajath94-0568",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0569": {
+  "id": "CCAR-P-jrajath94-0569",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0570": {
+  "id": "CCAR-P-jrajath94-0570",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0585": {
+  "id": "CCAR-P-jrajath94-0585",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0595": {
+  "id": "CCAR-P-jrajath94-0595",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0600": {
+  "id": "CCAR-P-jrajath94-0600",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0617": {
+  "id": "CCAR-P-jrajath94-0617",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0631": {
+  "id": "CCAR-P-jrajath94-0631",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0671": {
+  "id": "CCAR-P-jrajath94-0671",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0673": {
+  "id": "CCAR-P-jrajath94-0673",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0676": {
+  "id": "CCAR-P-jrajath94-0676",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0677": {
+  "id": "CCAR-P-jrajath94-0677",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0679": {
+  "id": "CCAR-P-jrajath94-0679",
+  "chapter": 10,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0680": {
+  "id": "CCAR-P-jrajath94-0680",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0681": {
+  "id": "CCAR-P-jrajath94-0681",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0682": {
+  "id": "CCAR-P-jrajath94-0682",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-jrajath94-0684": {
+  "id": "CCAR-P-jrajath94-0684",
+  "chapter": 7,
+  "confidence": "low"
+ },
+ "CCAR-P-jrajath94-0685": {
+  "id": "CCAR-P-jrajath94-0685",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0021": {
+  "id": "CCAR-P-preporato-0021",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0022": {
+  "id": "CCAR-P-preporato-0022",
+  "chapter": 10,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0023": {
+  "id": "CCAR-P-preporato-0023",
+  "chapter": 7,
+  "confidence": "high"
+ },
+ "CCAR-P-preporato-0024": {
+  "id": "CCAR-P-preporato-0024",
+  "chapter": 7,
+  "confidence": "high"
+ }
+}

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="470" viewBox="0 0 960 470" role="img" aria-label="지출 상한은 workspace · session 단위로 걸고, 비용 확인은 Admin API cost 보고서로">
+<title>지출 상한은 workspace · session 단위로 걸고, 비용 확인은 Admin API cost 보고서로</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-spend-reporting" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="480" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">지출 상한은 workspace · session 단위로 걸고, 비용 확인은 Admin API cost 보고서로</text>
+<text x="20" y="58" font-size="14" text-anchor="start" fill="#1F2937" font-weight="bold">지출 상한 (막는 수단)</text>
+<text x="570" y="58" font-size="14" text-anchor="start" fill="#1F2937" font-weight="bold">비용 보고 (확인하는 수단)</text>
+<rect x="20" y="70" width="170" height="80" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105" y="106.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">팀 · 프로젝트별</text>
+<text x="105" y="123.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">월간 예산</text>
+<polyline points="190,110 260,110" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-spend-reporting)"/>
+<rect x="194.8" y="93" width="60.3" height="15" fill="#FFFFFF"/>
+<text x="225" y="104" font-size="11" text-anchor="middle" fill="#1F2937">key scope</text>
+<rect x="260" y="70" width="290" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="405" y="92.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">workspace별 월간 spend limit</text>
+<text x="405" y="107.35" font-size="11" text-anchor="middle" fill="#6B7280">알림 임계값 설정 가능</text>
+<text x="405" y="122.35" font-size="11" text-anchor="middle" fill="#6B7280">그 workspace로 scope한 key만 한도 반영</text>
+<text x="405" y="137.35" font-size="11" text-anchor="middle" fill="#6B7280">프로젝트별 예산 = workspace 분리</text>
+<rect x="20" y="165" width="170" height="80" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105" y="201.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">기다리는 사용자 없는</text>
+<text x="105" y="218.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">장기 agent 실행</text>
+<polyline points="190,205 260,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-spend-reporting)"/>
+<rect x="196.6" y="188" width="56.8" height="15" fill="#FFFFFF"/>
+<text x="225" y="199" font-size="11" text-anchor="middle" fill="#1F2937">hard 상한</text>
+<rect x="260" y="165" width="290" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="405" y="187.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">session budget</text>
+<text x="405" y="202.35" font-size="11" text-anchor="middle" fill="#6B7280">생성 시 설정 · 청구서 후 설정 ✗</text>
+<text x="405" y="217.35" font-size="11" text-anchor="middle" fill="#6B7280">상한에서 새 model 요청 중단</text>
+<text x="405" y="232.35" font-size="11" text-anchor="middle" fill="#6B7280">현재 지출 = usage.list_cost</text>
+<rect x="20" y="260" width="170" height="80" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105" y="304.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">폭주하는 단일 loop</text>
+<polyline points="190,300 260,300" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-spend-reporting)"/>
+<rect x="198.3" y="283" width="53.3" height="15" fill="#FFFFFF"/>
+<text x="225" y="294" font-size="11" text-anchor="middle" fill="#1F2937">호출 상한</text>
+<rect x="260" y="260" width="290" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="405" y="289.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">코드 내 호출 상한</text>
+<text x="405" y="304.85" font-size="11" text-anchor="middle" fill="#6B7280">실행당 tool 호출 수 제한</text>
+<text x="405" y="319.85" font-size="11" text-anchor="middle" fill="#6B7280">몇 분 내 중단 (해설 추론)</text>
+<rect x="20" y="355" width="170" height="80" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105" y="391.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">월간 지출을</text>
+<text x="105" y="408.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">rate limit으로 제한</text>
+<polyline points="190,395 260,395" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-spend-reporting)"/>
+<rect x="198.3" y="378" width="53.3" height="15" fill="#FFFFFF"/>
+<text x="225" y="389" font-size="11" text-anchor="middle" fill="#1F2937">분당 제한</text>
+<rect x="260" y="355" width="290" height="80" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="405" y="384.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">✗ rate limit = 지출 상한 아님</text>
+<text x="405" y="399.85" font-size="11" text-anchor="middle" fill="#6B7280">모델별 분당 request · input · output token</text>
+<text x="405" y="414.85" font-size="11" text-anchor="middle" fill="#6B7280">높이면 호출 증가 → 지출 증가</text>
+<rect x="570" y="70" width="370" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="755" y="97.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">청구서 대조 · 일간 비용 보고</text>
+<text x="755" y="112.35" font-size="11" text-anchor="middle" fill="#6B7280">월간 내역 · 일간 보고 = 일 단위 bucket</text>
+<polyline points="755,130 755,170" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-spend-reporting)"/>
+<rect x="762.0" y="144" width="82.8" height="15" fill="#FFFFFF"/>
+<text x="765" y="155" font-size="11" text-anchor="start" fill="#1F2937">Admin API key</text>
+<rect x="570" y="170" width="370" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="755" y="199.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">플랫폼 cost 보고서</text>
+<text x="755" y="214.85" font-size="11" text-anchor="middle" fill="#6B7280">USD 합계 · workspace별 group</text>
+<text x="755" y="229.85" font-size="11" text-anchor="middle" fill="#6B7280">usage · cost endpoint 호출에 Admin API key 필요</text>
+<rect x="570" y="285" width="370" height="80" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="755" y="307.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">✗ 오답 · 실패</text>
+<text x="755" y="322.35" font-size="11" text-anchor="middle" fill="#6B7280">workspace API key → usage · cost endpoint 실패</text>
+<text x="755" y="337.35" font-size="11" text-anchor="middle" fill="#6B7280">앱 응답 token 합산 × 정가 · usage 필드 재집계</text>
+<text x="755" y="352.35" font-size="11" text-anchor="middle" fill="#6B7280">시간별 · 1분 단위 bucket 알림 (해설: 일 단위만)</text>
+<text x="570" y="392" font-size="11" text-anchor="start" fill="#6B7280">⚠ 공식: legacy cost 보고서 = 1d만</text>
+<text x="570" y="408" font-size="11" text-anchor="start" fill="#6B7280">신규 Usage and Cost Analytics API = 1m · 1h · 1d</text>
+</g>
+</svg>

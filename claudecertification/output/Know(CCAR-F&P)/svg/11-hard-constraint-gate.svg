@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-label="돈 이동이나 승인 요청에서 제약을 기록하고 입력 형태로 lane을 나눈 뒤 위험 행동 직전에 코드 gate를 두는 흐름">
+<title>hard constraint를 제약 기록, 입력 분기, 코드 gate 순서로 강제하는 흐름</title>
+<defs><marker id="arr-hard-constraint-gate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">hard constraint는 prompt가 아니라 코드 gate로 강제</text>
+<rect x="290" y="44" width="320" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="65.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">돈 이동 · 승인 · 차단 · 보상 · 예약 · 조언</text>
+<text x="450.0" y="79.7" font-size="11" fill="#1F2937" text-anchor="middle">"검증 없이 ~ 금지" 규칙 포함</text>
+<polyline points="450,92 450,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hard-constraint-gate)"/>
+<text x="458" y="112" font-size="11" fill="#1F2937" text-anchor="start">첫 행동</text>
+<rect x="300" y="122" width="300" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="146.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">① 제약을 설계에 기록</text>
+<polyline points="450,162 450,206" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hard-constraint-gate)"/>
+<text x="458" y="188" font-size="11" fill="#1F2937" text-anchor="start">lane 분기</text>
+<polygon points="450,206.0 590.0,248 450,290.0 310.0,248" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="450" y="252.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">② 입력 형태는?</text>
+<rect x="20" y="104" width="250" height="96" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="145.0" y="135.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">사람이 전건 검토 ✗</text>
+<text x="145.0" y="149.7" font-size="11" fill="#1F2937" text-anchor="middle">일 5,000~20,000건 규모 감당 ✗</text>
+<text x="145.0" y="163.7" font-size="11" fill="#1F2937" text-anchor="middle">일 40~60건 + 건당 법적 · 사기 ·</text>
+<text x="145.0" y="177.7" font-size="11" fill="#1F2937" text-anchor="middle">의료 과실 위험이면 정답</text>
+<rect x="630" y="104" width="250" height="96" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="755.0" y="135.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">금지 문구를 system prompt에 ✗</text>
+<text x="755.0" y="149.7" font-size="11" fill="#1F2937" text-anchor="middle">prompt = guidance ✗ enforcement</text>
+<text x="755.0" y="163.7" font-size="11" fill="#1F2937" text-anchor="middle">모델은 따를 수도 아닐 수도</text>
+<text x="755.0" y="177.7" font-size="11" fill="#1F2937" text-anchor="middle">어조 · 형식 같은 스타일 안내에만 적합</text>
+<polyline points="310,248 190,248 190,322" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hard-constraint-gate)"/>
+<text x="250" y="240" font-size="11" fill="#1F2937" text-anchor="middle">정형 입력</text>
+<polyline points="590,248 710,248 710,322" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hard-constraint-gate)"/>
+<text x="650" y="240" font-size="11" fill="#1F2937" text-anchor="middle">복잡 · 분쟁 · 열린 형식</text>
+<rect x="40" y="322" width="300" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="190.0" y="351.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">결정론적 규칙 · 파서</text>
+<text x="190.0" y="365.7" font-size="11" fill="#1F2937" text-anchor="middle">정형 입력 약 75~95%</text>
+<rect x="560" y="322" width="300" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="710.0" y="351.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">Claude</text>
+<text x="710.0" y="365.7" font-size="11" fill="#1F2937" text-anchor="middle">복잡 · 분쟁 · 열린 형식 5~25%</text>
+<polyline points="190,386 190,424" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hard-constraint-gate)"/>
+<text x="198" y="410" font-size="11" fill="#1F2937" text-anchor="start">두 lane 모두</text>
+<polyline points="710,386 710,424" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hard-constraint-gate)"/>
+<text x="718" y="410" font-size="11" fill="#1F2937" text-anchor="start">두 lane 모두</text>
+<rect x="40" y="424" width="820" height="84" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="456.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">③ code gate: 위험 행동 직전에 코드가 규칙 강제</text>
+<text x="450.0" y="470.7" font-size="11" fill="#1F2937" text-anchor="middle">gate 입력 = 파싱한 값 + 원본 문서 둘 다</text>
+<text x="450.0" y="484.7" font-size="11" fill="#1F2937" text-anchor="middle">결제 전 합계 · 승인 전 시술 코드 · 보상 전 태그 · 차단 전 사유 기록</text>
+<polyline points="450,508 450,540" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hard-constraint-gate)"/>
+<text x="458" y="528" font-size="11" fill="#1F2937" text-anchor="start">규칙 강제 뒤</text>
+<rect x="250" y="540" width="400" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="450.0" y="564.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">위험 행동 실행 (결제 · 승인 · 보상 · 차단)</text>
+</g>
+</svg>

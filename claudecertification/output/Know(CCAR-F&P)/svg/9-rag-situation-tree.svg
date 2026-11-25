@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="710" viewBox="0 0 960 710" role="img" aria-label="상황 유형별 정답 방향 판단 트리">
+<title>상황 유형별 정답 방향 판단 트리</title>
+<defs><marker id="arr-rag-situation-tree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="480" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">상황 유형이 정답 방향을 결정: 8개 묶음별 판단 규칙</text>
+<polygon points="80,331 146,371 80,411 14,371" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="80" y="375.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">상황 유형?</text>
+<polyline points="170,87.5 170,646" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="146,371 170,371" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="170,87.5 300,87.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="81.5" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">지식 출처</text>
+<rect x="302" y="52" width="648" height="71" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="74.9" font-size="13" fill="#1F2937" text-anchor="start">재고 · 위치 · 가격 · 주문 상태 → 결정 시점 tool call</text>
+<text x="316" y="91.9" font-size="13" fill="#1F2937" text-anchor="start">정책 · 매뉴얼 · 계약 등 안정 텍스트 → vector index</text>
+<text x="316" y="108.9" font-size="13" fill="#1F2937" text-anchor="start">주 단위로 바뀌는 문서 → 재수집 주기 (fine-tuning ✗)</text>
+<polyline points="170,168.5 300,168.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="162.5" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">인용 · chunking</text>
+<rect x="302" y="133" width="648" height="71" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="155.9" font-size="13" fill="#1F2937" text-anchor="start">정확한 조항 인용 필수 → 작은 chunk + overlap + metadata + grounding · citation 검사</text>
+<text x="316" y="172.9" font-size="13" fill="#1F2937" text-anchor="start">고정 크기 절단으로 경계 내용 누락 → 구조 인식 chunking</text>
+<text x="316" y="189.9" font-size="13" fill="#1F2937" text-anchor="start">PDF · 표 · 코드 혼합 코퍼스 → 형태별 chunking + hybrid + metadata 필터</text>
+<polyline points="170,249.5 300,249.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="243.5" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">질의 형태</text>
+<rect x="302" y="214" width="648" height="71" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="236.9" font-size="13" fill="#1F2937" text-anchor="start">정확 코드 + paraphrase 혼합 질의 → hybrid + rank fusion</text>
+<text x="316" y="253.9" font-size="13" fill="#1F2937" text-anchor="start">ID 질의 + 유사 사례 질의 공존 → 질의 라우팅 (ID → 정확 조회)</text>
+<text x="316" y="270.9" font-size="13" fill="#1F2937" text-anchor="start">구조 속성 + 자유 서술 → metadata 필터 + semantic</text>
+<polyline points="170,322 300,322" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="316" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">순위 · 지연</text>
+<rect x="302" y="295" width="648" height="54" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="317.9" font-size="13" fill="#1F2937" text-anchor="start">정답이 후보에 있으나 순위 낮음 → reranker + 상위 passage만 전달</text>
+<text x="316" y="334.9" font-size="13" fill="#1F2937" text-anchor="start">긴 문서 추가 후 p99 급증 → 작은 구조 chunk + 필터 + hybrid</text>
+<polyline points="170,386 300,386" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="380" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">접근 제어</text>
+<rect x="302" y="359" width="648" height="54" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="381.9" font-size="13" fill="#1F2937" text-anchor="start">부서별 ACL 문서 → 점수 계산 전 metadata ACL 필터</text>
+<text x="316" y="398.9" font-size="13" fill="#1F2937" text-anchor="start">공유 서비스 계정 노출 → 호출 사용자 권한으로 실행 + 접근 귀속</text>
+<polyline points="170,458.5 300,458.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="452.5" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">출처 표기 · 검증</text>
+<rect x="302" y="423" width="648" height="71" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="445.9" font-size="13" fill="#1F2937" text-anchor="start">인용이 주장을 뒷받침하지 않음 → grounding · citation 검사 단계 추가</text>
+<text x="316" y="462.9" font-size="13" fill="#1F2937" text-anchor="start">자유 텍스트 + 주장별 출처 → search result 블록 + citations 활성화</text>
+<text x="316" y="479.9" font-size="13" fill="#1F2937" text-anchor="start">표 행별 citation → 행당 custom content 블록</text>
+<polyline points="170,548 300,548" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="542" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">도구 · 저장소</text>
+<rect x="302" y="504" width="648" height="88" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="526.9" font-size="13" fill="#1F2937" text-anchor="start">도구 다수 + 토큰 빠듯 + 느슨한 SLA → progressive discovery</text>
+<text x="316" y="543.9" font-size="13" fill="#1F2937" text-anchor="start">도구 소수 + 빡빡한 SLA → monolithic context</text>
+<text x="316" y="560.9" font-size="13" fill="#1F2937" text-anchor="start">도구 다수 + 작업 사전 파악 → 정적 작업별 부분집합</text>
+<text x="316" y="577.9" font-size="13" fill="#1F2937" text-anchor="start">대형 저장소 탐색 → 검색 · 파일 읽기 tool + 진입점 인덱스</text>
+<polyline points="170,646 300,646" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-situation-tree)"/>
+<text x="235" y="640" font-size="11" font-weight="bold" fill="#1F2937" text-anchor="middle">갱신 후 악화</text>
+<rect x="302" y="602" width="648" height="88" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="316" y="624.9" font-size="13" fill="#1F2937" text-anchor="start">갱신 · 재수집 직후 품질 악화 → 변경된 계층부터 점검 · 롤백</text>
+<text x="316" y="641.9" font-size="13" fill="#1F2937" text-anchor="start">chunk 양호 + 답변이 지어냄 → generation 계층 수정 · grounding gate</text>
+<text x="316" y="658.9" font-size="13" fill="#1F2937" text-anchor="start">존재하지 않는 페이지 번호 인용 → parser 페이지 메타데이터 수정</text>
+<text x="316" y="675.9" font-size="13" fill="#1F2937" text-anchor="start">표 숫자 오류 → 구조 경계 re-chunk + eval 재실행</text>
+</g>
+</svg>

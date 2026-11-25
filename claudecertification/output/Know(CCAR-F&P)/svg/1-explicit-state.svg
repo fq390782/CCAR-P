@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="280" viewBox="0 0 900 280" role="img" aria-label="오래 유지할 결정은 compaction과 무관한 명시적 state에 둔다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>오래 유지할 결정은 compaction과 무관한 명시적 state에 둔다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-explicit-state-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-explicit-state-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-explicit-state-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-explicit-state-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">오래 유지할 결정 — context window가 아니라 명시적 state에</text>
+<text x="20" y="72" font-size="13" fill="#1F2937" text-anchor="start" font-weight="bold">오답</text>
+<rect x="20" y="80" width="260" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="150.0" y="111.1" font-size="13" fill="#1F2937" text-anchor="middle">결정을 context window에만 둠</text>
+<rect x="360" y="80" width="230" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="475.0" y="103.1" font-size="13" fill="#1F2937" text-anchor="middle">결정 일부 손실</text>
+<text x="475.0" y="119.7" font-size="11" fill="#6B7280" text-anchor="middle">compaction은 손실 · 재시작하면 소멸</text>
+<rect x="650" y="80" width="230" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="765.0" y="111.1" font-size="13" fill="#1F2937" text-anchor="middle">이전 결정과 어긋난 행동</text>
+<path d="M280,108 L360,108" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-explicit-state-k)"/>
+<rect x="285.1" y="90" width="69.8" height="15" fill="#FFFFFF"/>
+<text x="320" y="101" font-size="11" fill="#1F2937" text-anchor="middle">compaction</text>
+<path d="M590,108 L650,108" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-explicit-state-k)"/>
+<text x="20" y="192" font-size="13" fill="#1F2937" text-anchor="start" font-weight="bold">정답</text>
+<rect x="20" y="200" width="260" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="150.0" y="231.1" font-size="13" fill="#1F2937" text-anchor="middle">결정을 명시적 state에 기록</text>
+<rect x="360" y="200" width="230" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="475.0" y="223.1" font-size="13" fill="#1F2937" text-anchor="middle">state는 그대로 유지</text>
+<text x="475.0" y="239.7" font-size="11" fill="#6B7280" text-anchor="middle">compaction과 무관하게 전달</text>
+<rect x="650" y="200" width="230" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="765.0" y="222.1" font-size="13" fill="#1F2937" text-anchor="middle">다음 step에서 다시 읽어</text>
+<text x="765.0" y="240.1" font-size="13" fill="#1F2937" text-anchor="middle">결정 유지</text>
+<path d="M280,228 L360,228" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-explicit-state-k)"/>
+<rect x="285.1" y="210" width="69.8" height="15" fill="#FFFFFF"/>
+<text x="320" y="221" font-size="11" fill="#1F2937" text-anchor="middle">compaction</text>
+<path d="M590,228 L650,228" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-explicit-state-k)"/>
+<rect x="606.0" y="210" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="620" y="221" font-size="11" fill="#1F2937" text-anchor="middle">참조</text>
+</svg>

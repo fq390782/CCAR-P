@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="450" viewBox="0 0 900 450" role="img" aria-label="상충하는 두 출처의 값을 임의로 고르지 않고 출처와 함께 coordinator까지 전달하는 흐름">
+<title>상충하는 두 출처의 값을 임의로 고르지 않고 출처와 함께 coordinator까지 전달하는 흐름</title>
+<defs><marker id="arr-conflicting-sources" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">상충 출처: 분석은 끝까지 · 두 값은 출처 · 날짜와 함께 · 정합은 coordinator</text>
+<rect x="20" y="56" width="170" height="116" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105" y="97" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">문서 분석 agent</text>
+<text x="105" y="111.9" font-size="11" fill="#1F2937" text-anchor="middle">정부 보고서 40%</text>
+<text x="105" y="126.2" font-size="11" fill="#1F2937" text-anchor="middle">vs 업계 분석 12%</text>
+<text x="105" y="140.5" font-size="11" fill="#1F2937" text-anchor="middle">정면 모순 발견</text>
+<polyline points="190,114 250,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-conflicting-sources)"/>
+<text x="220" y="106" font-size="11" fill="#1F2937" text-anchor="middle">계속</text>
+<rect x="250" y="56" width="170" height="116" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="335" y="97" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">분석을 끝까지 완료</text>
+<text x="335" y="111.9" font-size="11" fill="#1F2937" text-anchor="middle">두 값 + 출처 + 날짜 보존</text>
+<text x="335" y="126.2" font-size="11" fill="#1F2937" text-anchor="middle">schema: 모순 유무 · 각 값의</text>
+<text x="335" y="140.5" font-size="11" fill="#1F2937" text-anchor="middle">출처</text>
+<polyline points="420,114 480,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-conflicting-sources)"/>
+<text x="450" y="106" font-size="11" fill="#1F2937" text-anchor="middle">반환</text>
+<rect x="480" y="56" width="170" height="116" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="565" y="97" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">coordinator</text>
+<text x="565" y="111.9" font-size="11" fill="#1F2937" text-anchor="middle">더 넓은 context로</text>
+<text x="565" y="126.2" font-size="11" fill="#1F2937" text-anchor="middle">정합 방법 결정</text>
+<text x="565" y="140.5" font-size="11" fill="#1F2937" text-anchor="middle">모순을 기계적으로 검출</text>
+<polyline points="650,114 710,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-conflicting-sources)"/>
+<text x="680" y="106" font-size="11" fill="#1F2937" text-anchor="middle">결정</text>
+<rect x="710" y="56" width="170" height="116" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="795" y="97" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">synthesis</text>
+<text x="795" y="111.9" font-size="11" fill="#1F2937" text-anchor="middle">두 값을 출처와 병기</text>
+<text x="795" y="126.2" font-size="11" fill="#1F2937" text-anchor="middle">충돌 주석</text>
+<text x="795" y="140.5" font-size="11" fill="#1F2937" text-anchor="middle">임의로 값을 고르지 않음</text>
+<polyline points="105,172 105,222" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-conflicting-sources)"/>
+<text x="113" y="204" font-size="11" fill="#1F2937" text-anchor="start">오답 분기</text>
+<rect x="20" y="224" width="205" height="112" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="122.5" y="269.8" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">모순 발견 즉시 중단</text>
+<text x="122.5" y="284.4" font-size="11" fill="#1F2937" text-anchor="middle">"데이터 불일치" error만 반환 ·</text>
+<text x="122.5" y="298.7" font-size="11" fill="#1F2937" text-anchor="middle">coordinator 판단을 기다리며 정지</text>
+<rect x="238" y="224" width="205" height="112" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="340.5" y="262.6" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">한쪽 값 임의 선택</text>
+<text x="340.5" y="277.2" font-size="11" fill="#1F2937" text-anchor="middle">confidence heuristic · 권위 출처</text>
+<text x="340.5" y="291.5" font-size="11" fill="#1F2937" text-anchor="middle">일률 우선 · 최신 값만 채택 → 출처</text>
+<text x="340.5" y="305.8" font-size="11" fill="#1F2937" text-anchor="middle">소실</text>
+<rect x="456" y="224" width="205" height="112" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="558.5" y="276.9" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">두 값의 평균</text>
+<text x="558.5" y="291.5" font-size="11" fill="#1F2937" text-anchor="middle">어느 출처에도 없는 수치 생성</text>
+<rect x="674" y="224" width="205" height="112" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="776.5" y="276.9" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">조용한 최신 우선 · 충돌 미언급</text>
+<text x="776.5" y="291.5" font-size="11" fill="#1F2937" text-anchor="middle">문서끼리 어긋남을 아무도 모름</text>
+<rect x="20" y="362" width="860" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450" y="384.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">사내 문서 보증 12개월(2024) vs 24개월(2026)</text>
+<text x="450" y="399" font-size="11" fill="#1F2937" text-anchor="middle">출처를 밝혀 두 값 + 각 문서 + 날짜 제시 · 더 최신이 현재 기준일 가능성 + 충돌을 검토 대상으로 표시</text>
+<text x="450" y="413.3" font-size="11" fill="#1F2937" text-anchor="middle">날짜 metadata가 시간적 차이를 모순으로 오해하는 것을 방지</text>
+</g>
+</svg>

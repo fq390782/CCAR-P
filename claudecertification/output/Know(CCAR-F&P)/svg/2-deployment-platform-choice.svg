@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="610" viewBox="0 0 900 610" role="img" aria-label="요구사항이 배포 경로를 결정하고 계약이나 설정은 경로를 대체하지 못하는 구조" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>요구사항이 배포 경로를 결정하고 계약이나 설정은 경로를 대체하지 못하는 구조</title>
+<defs><marker id="arr-deployment-platform-choice" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="450" y="24" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">요구사항이 배포 경로를 결정 · 계약과 설정으로는 대체 ✗</text>
+<text x="20" y="50" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">요구사항</text>
+<text x="520" y="50" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">배포 경로</text>
+<rect x="20" y="60" width="410" height="58" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="225.0" y="85.0" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">요청 데이터가 고객 AWS 계정 밖으로 나가면 안 됨</text>
+<text x="225.0" y="100.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">추론을 고객 AWS 계정 내부에서 실행</text>
+<rect x="520" y="60" width="360" height="58" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="92.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">고객 계정 · 리전의 Amazon Bedrock</text>
+<polyline points="430,89.0 520,89.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-deployment-platform-choice)"/>
+<rect x="447.2" y="81.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="475.0" y="93.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">경로 결정</text>
+<rect x="20" y="128" width="410" height="58" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="225.0" y="153.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">Google Cloud 표준화</text>
+<text x="225.0" y="168.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">ID · 과금 · 감사를 기존 통제로 처리</text>
+<rect x="520" y="128" width="360" height="58" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="153.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">Vertex AI 경유 배포</text>
+<text x="700.0" y="168.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">기존 통제를 중복 없이 적용</text>
+<polyline points="430,157.0 520,157.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-deployment-platform-choice)"/>
+<rect x="447.2" y="149.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="475.0" y="161.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">경로 결정</text>
+<rect x="20" y="196" width="410" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="225.0" y="225.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">데이터 거주 규칙이 다른 두 리전의 사용자</text>
+<rect x="520" y="196" width="360" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="225.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">각 리전 경계 안에 데이터가 머무는 별도 배포</text>
+<polyline points="430,222.0 520,222.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-deployment-platform-choice)"/>
+<rect x="447.2" y="214.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="475.0" y="226.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">경로 결정</text>
+<rect x="20" y="258" width="410" height="58" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="225.0" y="290.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">솔루션이 두 클라우드에 걸쳐 실행</text>
+<rect x="520" y="258" width="360" height="58" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="283.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">동일해야 할 동작 정의</text>
+<text x="700.0" y="298.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">→ 각 플랫폼에서 그 동작 평가</text>
+<polyline points="430,287.0 520,287.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-deployment-platform-choice)"/>
+<rect x="447.2" y="279.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="475.0" y="291.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">경로 결정</text>
+<rect x="20" y="326" width="410" height="66" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="225.0" y="355.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">PHI · 리전 고정 · 학습 금지 · 완전 감사</text>
+<text x="225.0" y="370.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">모두 법적 요구</text>
+<rect x="520" y="326" width="360" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="355.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">병원 리전의 Bedrock + PHI 적격 구성</text>
+<text x="700.0" y="370.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">+ 서명된 BAA · 추론 로그를 병원 감사 저장소로</text>
+<polyline points="430,359.0 520,359.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-deployment-platform-choice)"/>
+<rect x="447.2" y="351.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="475.0" y="363.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">경로 결정</text>
+<line x1="20" y1="404" x2="880" y2="404" stroke="#9CA3AF" stroke-width="1"/>
+<text x="450" y="426" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">경로를 대체하지 못하는 오답</text>
+<rect x="20" y="438" width="280" height="120" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="160.0" y="468.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">계약 · 설정으로 대체 ✗</text>
+<text x="160.0" y="486.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">서명된 데이터 처리 계약</text>
+<text x="160.0" y="503.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">요청 로깅 비활성화</text>
+<text x="160.0" y="520.0" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">전송 중 암호화만 충족</text>
+<text x="160.0" y="535.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">→ 데이터가 계정 밖으로 나가는 것은 그대로</text>
+<rect x="310" y="438" width="280" height="120" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="471.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">병원 PHI 사례 오답</text>
+<text x="450.0" y="487.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">ZDR 켠 직접 API → 리전 고정 ✗</text>
+<text x="450.0" y="502.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">기본 구성 직접 API → 거주 · 감사 불충족</text>
+<text x="450.0" y="517.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">오픈 웨이트 자체 호스팅 → 보안 · 패치 · 감사 부담</text>
+<text x="450.0" y="532.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">전부 병원</text>
+<rect x="600" y="438" width="280" height="120" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="740.0" y="478.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">단일 배포의 오답</text>
+<text x="740.0" y="495.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">싼 리전 · 최저 지연 리전 · 암호화</text>
+<text x="740.0" y="510.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">→ 데이터가 경계 너머로 이동</text>
+<text x="740.0" y="525.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">지연 시간은 거주 규칙과 무관</text>
+<text x="450" y="582" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">주의: 직접 API 거주 범위는 시점에 따라 변동 → 공식 data residency 문서로 재확인</text>
+</svg>

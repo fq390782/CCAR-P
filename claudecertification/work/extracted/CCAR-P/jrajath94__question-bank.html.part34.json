@@ -1,0 +1,156 @@
+[
+  {
+    "number": "M2-Q43",
+    "heading": "M2-Q43 (V2-D5.1), Select TWO",
+    "question": "A document agent processes uploads from the internet.\n\nWhich TWO controls fit? Select TWO.",
+    "choices": {
+      "A": "Input screening: scan uploads for malicious content before the model reads them.",
+      "B": "Sandboxing: process uploads isolated from secrets and the network.",
+      "C": "A friendly system prompt.",
+      "D": "Auto-forwarding uploads to all staff.",
+      "E": "Disabling all logging."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"uploads from the internet.\" Why: untrusted uploads need screening before model exposure and sandboxing before execution. C is guidance. D spreads the risk. E blinds the team. Counterfactual: none.",
+    "source_section": "V2-D5.1"
+  },
+  {
+    "number": "M2-Q44",
+    "heading": "M2-Q44 (V2-D5.2)",
+    "question": "An agent's tool list includes a run_sql tool with full database write access. Its task is read-only reporting.\n\nWhat is the risk, and what is the fix?",
+    "choices": {
+      "A": "No risk. The task is read-only.",
+      "B": "Excessive agency plus data exposure: the tool can write and delete though the task never needs it. Fix: scope the tool to read-only or remove it.",
+      "C": "The risk is slow queries.",
+      "D": "The fix is a bigger model."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"full database write access... task is read-only reporting.\" Why: the permission exceeds the task: least privilege fails. Prompt injection or error can steer it to a write. Counterfactual: A wins never when permissions exceed the task.",
+    "source_section": "V2-D5.2"
+  },
+  {
+    "number": "M2-Q45",
+    "heading": "M2-Q45 (V2-D5.2), Select TWO",
+    "question": "A travel agent books flights and hotels with the user's credit card. It reads confirmation emails to track trips.\n\nWhich TWO risks are present? Select TWO.",
+    "choices": {
+      "A": "Indirect injection: confirmation emails can carry instructions.",
+      "B": "Excessive agency: bookings move money with no human gate.",
+      "C": "Slow email reading.",
+      "D": "Ugly itineraries.",
+      "E": "Loud notifications."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"books flights... with the user's credit card... reads confirmation emails.\" Emails are untrusted content. Tool access is near. Bookings move money without a gate. Both are V2-D5.2 risks. Cosmetics are not risks.",
+    "source_section": "V2-D5.2"
+  },
+  {
+    "number": "M2-Q46",
+    "heading": "M2-Q46 (V2-D5.3)",
+    "question": "A content bot publishes blog posts. A wrong post embarrasses the brand but is reversible in minutes.\n\nWhich review shape fits?",
+    "choices": {
+      "A": "Pre-action approval on every post.",
+      "B": "Post-action sampled review plus audit logging: reversible and low-stakes, so detect and correct beats gating everything.",
+      "C": "No logging.",
+      "D": "Board approval per post."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"reversible in minutes.\" Why: V2-D5.3 keys review to reversibility. Reversible plus low-stakes takes post-action sampled review. A is theater at volume. Counterfactual: A wins for regulated or irreversible posts.",
+    "source_section": "V2-D5.3"
+  },
+  {
+    "number": "M2-Q47",
+    "heading": "M2-Q47 (V2-D5.3)",
+    "question": "A medical triage bot's recommendation sends patients to the ER. A wrong recommendation delays care.\n\nWhich review shape fits?",
+    "choices": {
+      "A": "Post-action sampled review.",
+      "B": "Pre-action approval by qualified staff for high-risk recommendations, with the full clinical context shown.",
+      "C": "No review. The bot is fast.",
+      "D": "Annual review."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"A wrong recommendation delays care.\" Why: high consequence plus low reversibility (delayed care cannot be undone). The reviewer needs the real decision context. Counterfactual: A wins for low-risk informational answers.",
+    "source_section": "V2-D5.3"
+  },
+  {
+    "number": "M2-Q48",
+    "heading": "M2-Q48 (V2-D5.4)",
+    "question": "A fintech bot stores transaction records. The regulator requires proof of access controls.\n\nWhat satisfies the regulator?",
+    "choices": {
+      "A": "\"We have access controls.\"",
+      "B": "The evidence chain: the requirement, the control, the named owner, the stored evidence (logs, configs), and the review cadence.",
+      "C": "A new logo.",
+      "D": "A longer password."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"requires proof of access controls.\" Why: V2-D5.4 is requirement to control to owner to evidence to cadence. Proof is the chain, not the claim. Counterfactual: A wins never for a regulator.",
+    "source_section": "V2-D5.4"
+  },
+  {
+    "number": "M2-Q49",
+    "heading": "M2-Q49 (V2-D5.4), Select TWO",
+    "question": "A children's app collects voice clips. Two regulations apply: parental consent and data minimization.\n\nWhich TWO controls fit? Select TWO.",
+    "choices": {
+      "A": "Consent gate in code: no collection without verified parental consent.",
+      "B": "Minimization: keep only the clips needed, auto-delete the rest on a schedule, with an owner and evidence.",
+      "C": "Collect everything forever.",
+      "D": "A cartoon mascot.",
+      "E": "A bigger model."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"parental consent and data minimization.\" Why: each regulation maps to a control with an owner and evidence. C violates both. Counterfactual: none.",
+    "source_section": "V2-D5.4"
+  },
+  {
+    "number": "M2-Q50",
+    "heading": "M2-Q50 (V2-D5.5)",
+    "question": "A hiring bot's interview invites favor one university. The aggregate invite rate looks fine.\n\nWhat is necessary?",
+    "choices": {
+      "A": "Nothing. The aggregate is fine.",
+      "B": "Subgroup evaluation: measure invite rates per school and other groups, find the bias source, and fix the data or rule.",
+      "C": "Hide the school field.",
+      "D": "Trust the model."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"favor one university... aggregate looks fine.\" Why: V2-D5.5 measures across subgroups, not aggregate only. The aggregate hides the skew. Counterfactual: A wins never against subgroup evidence.",
+    "source_section": "V2-D5.5"
+  },
+  {
+    "number": "M2-Q51",
+    "heading": "M2-Q51 (V2-D6.1)",
+    "question": "A retailer wants a returns bot that is \"helpful.\" Volume is 2,000 returns per day. Fraudulent returns cost $40 each.\n\nWhat is the first discovery output?",
+    "choices": {
+      "A": "A vendor contract.",
+      "B": "Measurable requirements: \"helpful\" becomes resolution rate and CSAT targets, plus the fraud cost constraint, volume, and prohibited behaviors (never approve obvious fraud).",
+      "C": "A system prompt.",
+      "D": "A tier choice."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"'helpful'... Fraudulent returns cost $40 each.\" Discovery shows adjectives. Discovery records cost limits and prohibited behaviors. A wins after sign-off on the requirements.",
+    "source_section": "V2-D6.1"
+  },
+  {
+    "number": "M2-Q52",
+    "heading": "M2-Q52 (V2-D6.1), Select TWO",
+    "question": "Discovery for a trading bot records: latency target set, cost limit set, but the data feed's reliability and the compliance reviewer are both unknown.\n\nWhich TWO assumptions are open? Select TWO.",
+    "choices": {
+      "A": "The data feed's reliability and fallback.",
+      "B": "Who the compliance reviewer is and when they review.",
+      "C": "The office snack policy.",
+      "D": "The vendor's logo.",
+      "E": "The team's lunch hour."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"reliability... unknown... reviewer... unknown.\" Why: both shape the design and have no owner yet. V2-D6.1 records them explicitly. Counterfactual: none. Trivia is never discovery.",
+    "source_section": "V2-D6.1"
+  }
+]

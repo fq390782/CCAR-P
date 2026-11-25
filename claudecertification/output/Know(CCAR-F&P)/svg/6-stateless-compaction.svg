@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="390" viewBox="0 0 900 390" role="img" aria-label="Messages API는 stateless: 매 요청에 이력이 쌓이고 compaction으로 줄인다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Messages API는 stateless: 매 요청에 이력이 쌓이고 compaction으로 줄인다</title>
+<defs><marker id="arr-stateless-compaction" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Messages API는 stateless: 매 요청에 system과 과거 messages를 다시 보낸다</text>
+<text x="20" y="72" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">요청 1</text>
+<rect x="90" y="50" width="80" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="70.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">system</text>
+<rect x="170" y="50" width="70" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="205.0" y="70.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">user 1</text>
+<text x="20" y="120" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">요청 2</text>
+<rect x="90" y="98" width="80" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="118.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">system</text>
+<rect x="170" y="98" width="70" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="205.0" y="118.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">user 1</text>
+<rect x="240" y="98" width="70" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="275.0" y="118.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">asst 1</text>
+<rect x="310" y="98" width="70" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="345.0" y="118.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">user 2</text>
+<text x="20" y="168" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">요청 N</text>
+<rect x="90" y="146" width="80" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="166.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">system</text>
+<rect x="170" y="146" width="470" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="405.0" y="166.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">과거 턴 전부 (턴 1 … N-1)</text>
+<rect x="640" y="146" width="70" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="675.0" y="166.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">user N</text>
+<polyline points="730,44 730,194" fill="none" stroke="#DC2626" stroke-width="1.5"/>
+<text x="740" y="60" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">context window</text>
+<text x="740" y="75" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">상한</text>
+<text x="740" y="160" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">input token</text>
+<text x="740" y="175" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">과금도 누적</text>
+<polyline points="400,182 400,222" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stateless-compaction)"/>
+<rect x="364.1" y="193" width="71.8" height="16" fill="#FFFFFF"/>
+<text x="400" y="205.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">compaction</text>
+<text x="20" y="254" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">압축 후</text>
+<rect x="90" y="236" width="80" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="256.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">system</text>
+<rect x="170" y="236" width="210" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="275.0" y="256.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">오래된 턴 → server 측 요약</text>
+<rect x="380" y="236" width="160" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="460.0" y="256.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">최근 턴은 원문 그대로</text>
+<rect x="540" y="236" width="70" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="575.0" y="256.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">user N</text>
+<text x="20" y="302" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">오답</text>
+<rect x="90" y="284" width="70" height="34" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="125.0" y="304.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">user N</text>
+<text x="176" y="306" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="start">최신 메시지만 전송 → Claude는 앞의 경위를 모름</text>
+<text x="20" y="350" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">오답</text>
+<rect x="90" y="332" width="70" height="34" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="125.0" y="352.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">user N</text>
+<text x="176" y="354" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="start">이력 없이 새 대화 시작 → 고객의 원래 문제를 잊음</text>
+</svg>

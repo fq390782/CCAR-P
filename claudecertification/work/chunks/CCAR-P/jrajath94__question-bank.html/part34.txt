@@ -1,0 +1,212 @@
+<h3 id="bank-mocks-h114">M2-Q43 (V2-D5.1), Select TWO</h3>
+
+<p id="sec-bank-mocks-p513" data-kind="prose"><strong>Scenario.</strong> A document agent processes uploads from the internet.</p>
+
+<p id="sec-bank-mocks-p514" data-kind="prose"><strong>Question.</strong> Which TWO controls fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p515" data-kind="prose"><strong>Options.</strong>
+A) Input screening: scan uploads for malicious content before the
+model reads them.
+B) Sandboxing: process uploads isolated from secrets and the network.
+C) A friendly system prompt.
+D) Auto-forwarding uploads to all staff.
+E) Disabling all logging.</p>
+
+<p id="sec-bank-mocks-p516" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p517" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;uploads from the internet.&quot; Why:
+untrusted uploads need screening before model exposure and sandboxing
+before execution. C is guidance. D spreads the risk. E blinds the
+team.</p>
+
+<p id="sec-bank-mocks-p518" data-kind="prose">Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h115">M2-Q44 (V2-D5.2)</h3>
+
+<p id="sec-bank-mocks-p519" data-kind="prose"><strong>Scenario.</strong> An agent's tool list includes a <code>run_sql</code> tool with full
+database write access. Its task is read-only reporting.</p>
+
+<p id="sec-bank-mocks-p520" data-kind="prose"><strong>Question.</strong> What is the risk, and what is the fix?</p>
+
+<p id="sec-bank-mocks-p521" data-kind="prose"><strong>Options.</strong>
+A) No risk. The task is read-only.
+B) Excessive agency plus data exposure: the tool can write and delete
+though the task never needs it. Fix: scope the tool to read-only or
+remove it.
+C) The risk is slow queries.</p>
+
+<p id="sec-bank-mocks-p522" data-kind="prose">D) The fix is a bigger model.</p>
+
+<p id="sec-bank-mocks-p523" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "full database write access... task is
+read-only reporting." Why: the permission exceeds the task: least
+privilege fails. Prompt injection or error can steer it to a write.
+Counterfactual: A wins never when permissions exceed the task.</p>
+
+
+<h3 id="bank-mocks-h116">M2-Q45 (V2-D5.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p524" data-kind="prose"><strong>Scenario.</strong> A travel agent books flights and hotels with the user's
+credit card. It reads confirmation emails to track trips.</p>
+
+<p id="sec-bank-mocks-p525" data-kind="prose"><strong>Question.</strong> Which TWO risks are present? Select TWO.</p>
+
+<p id="sec-bank-mocks-p526" data-kind="prose"><strong>Options.</strong>
+A) Indirect injection: confirmation emails can carry instructions.
+B) Excessive agency: bookings move money with no human gate.
+C) Slow email reading.
+D) Ugly itineraries.
+E) Loud notifications.</p>
+
+<p id="sec-bank-mocks-p527" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p528" data-kind="prose"><strong>Key.</strong> A, B. The decisive phrase is &quot;books flights... with the user&#x27;s credit card... reads confirmation emails.&quot;
+Emails are untrusted content. Tool access is near. Bookings move money without a gate.
+Both are V2-D5.2 risks.</p>
+
+<p id="sec-bank-mocks-p529" data-kind="prose">Cosmetics are not risks.</p>
+
+
+<h3 id="bank-mocks-h117">M2-Q46 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p530" data-kind="prose"><strong>Scenario.</strong> A content bot publishes blog posts. A wrong post
+embarrasses the brand but is reversible in minutes.</p>
+
+<p id="sec-bank-mocks-p531" data-kind="prose"><strong>Question.</strong> Which review shape fits?</p>
+
+<p id="sec-bank-mocks-p532" data-kind="prose"><strong>Options.</strong>
+A) Pre-action approval on every post.
+B) Post-action sampled review plus audit logging: reversible and
+low-stakes, so detect and correct beats gating everything.
+C) No logging.
+D) Board approval per post.</p>
+
+<p id="sec-bank-mocks-p533" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "reversible in minutes." Why: V2-D5.3
+keys review to reversibility. Reversible plus low-stakes takes
+post-action sampled review. A is theater at volume. Counterfactual: A
+wins for regulated or irreversible posts.</p>
+
+
+<h3 id="bank-mocks-h118">M2-Q47 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p534" data-kind="prose"><strong>Scenario.</strong> A medical triage bot's recommendation sends patients to
+the ER. A wrong recommendation delays care.</p>
+
+<p id="sec-bank-mocks-p535" data-kind="prose"><strong>Question.</strong> Which review shape fits?</p>
+
+<p id="sec-bank-mocks-p536" data-kind="prose"><strong>Options.</strong>
+A) Post-action sampled review.
+B) Pre-action approval by qualified staff for high-risk
+recommendations, with the full clinical context shown.
+C) No review. The bot is fast.
+D) Annual review.</p>
+
+<p id="sec-bank-mocks-p537" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "A wrong recommendation delays care."
+Why: high consequence plus low reversibility (delayed care cannot be
+undone). The reviewer needs the real decision context. Counterfactual:
+A wins for low-risk informational answers.</p>
+
+
+<h3 id="bank-mocks-h119">M2-Q48 (V2-D5.4)</h3>
+
+<p id="sec-bank-mocks-p538" data-kind="prose"><strong>Scenario.</strong> A fintech bot stores transaction records. The regulator
+requires proof of access controls.</p>
+
+<p id="sec-bank-mocks-p539" data-kind="prose"><strong>Question.</strong> What satisfies the regulator?</p>
+
+<p id="sec-bank-mocks-p540" data-kind="prose"><strong>Options.</strong>
+A) "We have access controls."
+B) The evidence chain: the requirement, the control, the named owner,
+the stored evidence (logs, configs), and the review cadence.
+C) A new logo.
+D) A longer password.</p>
+
+<p id="sec-bank-mocks-p541" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "requires proof of access controls." Why:
+V2-D5.4 is requirement to control to owner to evidence to cadence.
+Proof is the chain, not the claim. Counterfactual: A wins never for a
+regulator.</p>
+
+
+<h3 id="bank-mocks-h120">M2-Q49 (V2-D5.4), Select TWO</h3>
+
+<p id="sec-bank-mocks-p542" data-kind="prose"><strong>Scenario.</strong> A children's app collects voice clips. Two regulations
+apply: parental consent and data minimization.</p>
+
+<p id="sec-bank-mocks-p543" data-kind="prose"><strong>Question.</strong> Which TWO controls fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p544" data-kind="prose"><strong>Options.</strong>
+A) Consent gate in code: no collection without verified parental
+consent.
+B) Minimization: keep only the clips needed, auto-delete the rest on a
+schedule, with an owner and evidence.
+C) Collect everything forever.
+D) A cartoon mascot.
+E) A bigger model.</p>
+
+<p id="sec-bank-mocks-p545" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p546" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "parental consent and data
+minimization." Why: each regulation maps to a control with an owner
+and evidence. C violates both. Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h121">M2-Q50 (V2-D5.5)</h3>
+
+<p id="sec-bank-mocks-p547" data-kind="prose"><strong>Scenario.</strong> A hiring bot's interview invites favor one university.
+The aggregate invite rate looks fine.</p>
+
+<p id="sec-bank-mocks-p548" data-kind="prose"><strong>Question.</strong> What is necessary?</p>
+
+<p id="sec-bank-mocks-p549" data-kind="prose"><strong>Options.</strong>
+A) Nothing. The aggregate is fine.
+B) Subgroup evaluation: measure invite rates per school and other
+groups, find the bias source, and fix the data or rule.
+C) Hide the school field.
+D) Trust the model.</p>
+
+<p id="sec-bank-mocks-p550" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "favor one university... aggregate looks
+fine." Why: V2-D5.5 measures across subgroups, not aggregate only. The
+aggregate hides the skew. Counterfactual: A wins never against
+subgroup evidence.</p>
+
+
+<h3 id="bank-mocks-h122">M2-Q51 (V2-D6.1)</h3>
+
+<p id="sec-bank-mocks-p551" data-kind="prose"><strong>Scenario.</strong> A retailer wants a returns bot that is "helpful." Volume
+is 2,000 returns per day. Fraudulent returns cost $40 each.</p>
+
+<p id="sec-bank-mocks-p552" data-kind="prose"><strong>Question.</strong> What is the first discovery output?</p>
+
+<p id="sec-bank-mocks-p553" data-kind="prose"><strong>Options.</strong>
+A) A vendor contract.
+B) Measurable requirements: "helpful" becomes resolution rate and CSAT
+targets, plus the fraud cost constraint, volume, and prohibited
+behaviors (never approve obvious fraud).
+C) A system prompt.
+D) A tier choice.</p>
+
+<p id="sec-bank-mocks-p554" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is &quot;&#x27;helpful&#x27;... Fraudulent returns cost $40 each.&quot; Discovery shows adjectives. Discovery records cost limits and prohibited behaviors. A wins after sign-off on the requirements.</p>
+
+
+<h3 id="bank-mocks-h123">M2-Q52 (V2-D6.1), Select TWO</h3>
+
+<p id="sec-bank-mocks-p555" data-kind="prose"><strong>Scenario.</strong> Discovery for a trading bot records: latency target set,
+cost limit set, but the data feed's reliability and the compliance
+reviewer are both unknown.</p>
+
+<p id="sec-bank-mocks-p556" data-kind="prose"><strong>Question.</strong> Which TWO assumptions are open? Select TWO.</p>
+
+<p id="sec-bank-mocks-p557" data-kind="prose"><strong>Options.</strong>
+A) The data feed's reliability and fallback.
+B) Who the compliance reviewer is and when they review.
+C) The office snack policy.
+D) The vendor's logo.
+E) The team's lunch hour.</p>
+
+<p id="sec-bank-mocks-p558" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p559" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "reliability... unknown... reviewer...
+unknown." Why: both shape the design and have no owner yet. V2-D6.1
+records them explicitly. Counterfactual: none. Trivia is never
+discovery.</p>
+

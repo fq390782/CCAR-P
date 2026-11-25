@@ -1,0 +1,212 @@
+[
+ {
+  "id": "CCAR-F-Udemy01-0023",
+  "question": "An insurance company is using the Claude Agent SDK to build an internal developer productivity tool. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and also integrates with MCP servers.\n\nThe team is using Read and Grep to extract structured refactoring candidates from legacy claims-processing source files. A JSON schema now prevents malformed JSON, but the logs still show two remaining problems:\n\nSome responses come back with stop_reason: \"max_tokens\"\n\nSome schema-valid findings cite line numbers that do not exist in the referenced file\n\nWhich actions should the extraction loop take to improve reliability? (Select two.)",
+  "choices": {
+   "A": "Check stop_reason; retry truncated generations with a higher output limit, and return semantic validation errors with specifics so Claude can correct them.",
+   "B": "Treat pause_turn as a client-side tool failure, send an error tool_result, and restart the extraction from the beginning.",
+   "C": "Split each source file into smaller extraction requests to limit the number of candidates per request.",
+   "D": "Trust schema-conformant JSON, skip line-number validation, and retry only when the JSON parser raises a syntax error."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0024",
+  "question": "You are building an SRE agent that automates incident response runbooks. The agent uses the built-in tools (Read, Write, Bash, Grep, Glob) and also integrates with Model Context Protocol (MCP) servers.\n\nReviewing production traces, you find that the agent sometimes runs Bash commands that change cluster state before it has confirmed the target cluster with Read or Grep. The system prompt states that confirming the target environment is mandatory.\n\nWhich changes should you make to enforce this required order of execution most reliably? (Select two.)",
+  "choices": {
+   "A": "Rewrite the system instructions in stronger language, requiring Read or Grep before any Bash command that changes cluster state.",
+   "B": "Add a PostToolUse check that detects and rejects unsafe Bash commands after they run and prompts Claude to retry.",
+   "C": "Move state-changing operations into a dedicated tool that requires a confirmed cluster ID and rejects calls that do not match the recorded one.",
+   "D": "Add a PreToolUse prerequisite gate that denies Bash until confirmation of the target environment has been recorded."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0025",
+  "question": "The platform engineering team at an energy company is using the Claude Agent SDK to build an internal developer productivity tool. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and also integrates with MCP servers.\n\nThe team is running an automated codebase inventory in which the agent extracts endpoint metadata from legacy router definition files as JSON for downstream tools. A validator rejected the extraction for the following reasons:\n\nOne required field is missing\n\nOne enum value is invalid\n\nOne handler name does not exist in the source code\n\nWhich design is most appropriate for the retry follow-up request?",
+  "choices": {
+   "A": "Retry with schema-constrained JSON output using the same schema, and let schema enforcement fill in the missing source details.",
+   "B": "Send a new request that delimits the original document, the rejected JSON, and the validator errors with XML tags, and asks for only the corrected version to be returned.",
+   "C": "Send a short correction request containing only the validator errors, and have Claude infer from the previous attempt which fields to fix and how.",
+   "D": "Retry the initial extraction with temperature set to 0, adding the instruction \"pay more attention to JSON validity\" to the original document and schema."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0026",
+  "question": "The developer tooling team at a fintech company added two MCP servers to Claude Code. Since then, the following mistakes occur frequently:\n\nWhen a developer asks about a symbol in the repository, Claude Code calls the documentation search tool\n\nWhen a developer asks about a framework policy page, Claude Code calls the repository search tool\n\nThe tools have different names, but both accept search-style questions.\n\nWhat should the team change first to improve tool selection reliability?",
+  "choices": {
+   "A": "Rewrite each tool's description to be specific about when to use it and when not to, including the input format and what it returns.",
+   "B": "Add a project slash command that makes developers choose the correct search tool before starting each task.",
+   "C": "Rename each tool with a longer name that identifies its target data source, leaving the existing descriptions unchanged.",
+   "D": "Add an instruction to CLAUDE.md not to use the documentation search tool until the repository search fails."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0027",
+  "question": "You are using Claude to build a structured data extraction system that extracts information from customs shipping manifests. The system extracts information from unstructured documents, validates output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nThe extraction validator and the downstream submission tool currently return tool_result blocks with is_error set to true. However, the content is always the same string, \"Operation failed\", in every one of the following cases:\n\nSchema validation failure\n\nMalformed source data\n\nService timeout\n\nPermission denied\n\nThe logs show that Claude retries failures that cannot be retried and inconsistently escalates failures that can be retried.\n\nWhich changes would most improve recovery behavior? (Select two.)",
+  "choices": {
+   "A": "Expand the tool descriptions to explain to Claude that a generic failure can have many causes.",
+   "B": "Return a structured tool_result error that includes the failure category, whether it is retryable, a specific message, and a remediation hint.",
+   "C": "Retry with backoff only failures that can be classified as retryable, such as timeouts, and return all others as errors.",
+   "D": "Replace the result of a failed extraction tool call with an empty JSON object that satisfies the downstream submission schema."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0028",
+  "question": "You are building your own orchestrator on top of the Messages API to assist with infrastructure-as-code (IaC) work. The orchestrator gives Claude an Agent-equivalent tool for delegating research to subagents, and has them investigate network topology, IAM policies, and cost estimates before proposing changes.\n\nThe logs show that although these three investigations are independent of each other, the main thread processes them one at a time in the following order:\n\nLaunch the network topology subagent and wait for its summary\n\nLaunch the IAM policy subagent and wait for its summary\n\nLaunch the cost estimate subagent\n\nWhich changes would most reduce this serialization of tool calls without changing the scope of the analysis? (Select two.)",
+  "choices": {
+   "A": "Keep one Agent call per turn, waiting for each subagent's final result before launching the next with the background option.",
+   "B": "Return each subagent's summary in its own separate user message immediately upon completion, and advance the main thread only after all have arrived.",
+   "C": "Issue the independent Agent calls together in a single assistant turn, and return the results together in the next user message.",
+   "D": "Leave tool_choice's disable_parallel_tool_use at its default value of false."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0029",
+  "question": "A development team operates a /review command in Claude Code. The command has detailed review criteria and a fixed output template, but its behavior is inconsistent on unfamiliar refactorings. Specifically, the following occurs:\n\nIt sometimes wrongly flags harmless local conventions as defects\n\nIt sometimes misses real defects that differ from the checklist examples\n\nWhich prompt change is most appropriate as the next step?",
+  "choices": {
+   "A": "Add a large checklist enumerating every pattern seen so far, and instruct it to report only on exact matches.",
+   "B": "Add few-shot examples that show both problematic and non-problematic cases, varied, with brief reasoning that shows where the judgment boundary lies.",
+   "C": "Add several examples extracted from the single most recent refactoring, and instruct it to copy their wording and severity labels exactly.",
+   "D": "Add a CLAUDE.md rule stating that the reviewer should be conservative, without giving any examples."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0030",
+  "question": "You are building an agent that helps compliance officers audit insurance claim files over several weeks. The agent uses the built-in tools (Read, Write, Bash, Grep, Glob) and also integrates with Model Context Protocol (MCP) servers.\n\nOver a month-long investigation of a legacy claims-processing system, the exact figures and conditions in the progress summaries the agent produces gradually get replaced with vague wording, as follows:\n\n\"The escalation threshold is $3,000\" → \"a reasonable threshold\"\n\n\"The response SLA is 99.95%\" → \"high availability\"\n\n\"The contract renewal deadline is June 30, 2026\" → \"a near-term deadline\"\n\n\"Under the contract, premiums will not be changed mid-term\" → \"stable premiums\"\n\nWhich changes should you make to reduce the risk of incorrect fixes in later work? (Select two.)",
+  "choices": {
+   "A": "Require that summaries keep figures, dates, and contract terms verbatim from the source rather than paraphrasing them.",
+   "B": "Have the agent rewrite summaries to prioritize the general intent, reducing the details it needs to track.",
+   "C": "Keep more raw tool output in context, and summarize only once the window is nearly full.",
+   "D": "Maintain and update a structured scratchpad that records exact facts, separate from the conversation history that gets compressed."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0031",
+  "question": "The development team at an online learning platform added to Claude Code a custom MCP tool that automatically creates support tickets from application error logs.\n\nWhen the ticketing service rejects a malformed course ID, the adapter (MCP server) must return this failure to Claude as a tool result so that Claude can understand the situation and recover.\n\nWhich of the following are appropriate for the adapter to return? (Select two.)",
+  "choices": {
+   "A": "Return isError: true, with JSON in content stating that no ticket was created and listing candidate course IDs.",
+   "B": "Return isError: true, with JSON in content containing the error category, whether it is retryable, and an example of the correct ID format.",
+   "C": "Return isError: true, with the generic string \"The operation failed. Please try again later.\" in content.",
+   "D": "End the tool call with an uncaught exception, and check the ticketing service's response in Claude Code's debug logs."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0032",
+  "question": "You are using the Claude Agent SDK to build a multi-agent system for patent prior art searches. A coordinator agent delegates work to specialized subagents. The subagents include one that searches patent databases, one that parses prior art documents, one that synthesizes findings, and one that generates novelty reports.\n\nDuring testing, the document parsing subagent repeatedly fails validation because several extracted records are missing claim summaries. Checking the logs, you find that for these patents the subagent was given only the abstract page. The claims section was in a separate file and was never provided to the subagent at all.\n\nWhat should the team change first?",
+  "choices": {
+   "A": "Retry the same extraction with the validation error attached until all claim summary fields are filled.",
+   "B": "Enable strict tool use on the extraction tool so that the missing claim content can be recovered at tool call time.",
+   "C": "Add few-shot examples of claim summaries so that the subagent can consistently infer the missing sections.",
+   "D": "Provide the source for the missing claims, and allow an \"unavailable\" value when the grounding information is not in context."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0033",
+  "question": "You are using Claude to build a structured data extraction system. The system extracts information from unstructured documents, validates output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nDuring evaluation, shipping manifests whose stated total container count disagrees with the sum of the line items often slip through the review stage.\n\nIn the current flow, Claude first extracts the JSON. Then, in the same conversation, a follow-up prompt is sent: \"Before the application runs schema validation, please review your previous extraction result.\"\n\nWhich change would most effectively address this review miss while keeping the validation step itself?",
+  "choices": {
+   "A": "Insert the extraction result into the conversation as a synthetic assistant message, and ask Claude to audit it against the schema.",
+   "B": "Run a separate, independent review request that receives the original document, the extracted JSON, and explicit inconsistency criteria.",
+   "C": "Add a follow-up prompt before validation asking Claude to be skeptical of its own previous extraction result.",
+   "D": "Require each extracted field to include a confidence value before schema validation runs."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0034",
+  "question": "The developer tools team at a game studio is using the Claude Agent SDK to build a developer productivity tool. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and also integrates with MCP servers.\n\nThe team is adding a CI command that reviews changed files and posts suggestion comments inline. The requirements are as follows:\n\nThe PR bot receives a JSON object that matches an application schema with the fields file, line, severity, and message\n\nIf Claude cannot produce valid data, the command fails without posting any comments\n\nRun metadata for expense accounting is also captured\n\nWhich implementations should be adopted? (Select two.)",
+  "choices": {
+   "A": "Run Claude Code with the default text output, and instruct it in the prompt to return only JSON that conforms to the schema.",
+   "B": "Run Claude Code with -p and --output-format json, and use the cost and duration in the resulting JSON for expense accounting.",
+   "C": "Run Claude Code with -p and --output-format json plus --json-schema, and read structured_output.",
+   "D": "Run Claude Code with -p and --output-format stream-json, and validate each streamed event as a review result."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0035",
+  "question": "The engineering team at a travel booking platform is building a support agent for internal operators on the Messages API. The application connects to six MCP servers through its own MCP client (booking, payments, inventory, customer management, ticket management, and monitoring), and passes all roughly 220 retrieved tool definitions in tools.\n\nIt cannot be known in advance which business areas an operator's request will span, so every tool must remain available from a single conversation.\n\nRecent measurements show the following:\n\nThe tool definitions alone consume roughly 60,000 tokens before any work begins\n\nCalls that confuse similarly named tools are increasing\n\nWhich change should the team make?",
+  "choices": {
+   "A": "Add a tool search tool to tools, and set defer_loading: true on all tool definitions except a few frequently used ones.",
+   "B": "Shorten each tool's description to about one line to reduce the total token count of the tool definitions.",
+   "C": "Set tool_choice to {\"type\": \"any\"} so that some tool is called on every turn.",
+   "D": "Attach cache_control to the last definition in tools so that all tool definitions are covered by prompt caching."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0036",
+  "question": "You are using the Claude Agent SDK to build a multi-agent system that analyzes financial audit reports. A coordinator agent delegates work to specialized subagents. The subagents include one that searches regulatory filings, one that parses financial statements, one that cross-references disclosures, and one that writes audit findings reports.\n\nDuring a long debugging session, you find that citation information that was present at the financial statement parsing and cross-reference output stages is sometimes lost in the final report.\n\nThe team wants Claude Code to investigate the following specific questions:\n\nWhere is citation information stored?\n\nWhere in the synthesis process does the rewriting happen?\n\nWhich tests cover report generation?\n\nThe team wants the main conversation to stay focused on coordination work rather than raw search logs or file contents.\n\nWhich workflow is best suited to this goal?",
+  "choices": {
+   "A": "Have a general-purpose subagent investigate the cause of the citation loss while also fixing the report generation code.",
+   "B": "Delegate focused, read-only investigations to subagents, and use the summaries they return in the main conversation.",
+   "C": "Run a separate Claude Code session for each investigation, and paste its full transcript into the main conversation.",
+   "D": "Have the main conversation directly examine all relevant files, and compact the conversation after each phase."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0037",
+  "question": "A team is using the Claude Agent SDK to build a multi-agent research system that orchestrates multiple subagents. A coordinator agent delegates work to specialized subagents (web search, document analysis, findings synthesis, and report generation). The system researches a topic and produces a comprehensive report with cited sources.\n\nA custom MCP server exposes a citation database and a document catalog that several subagents need during research. One team member added this server on their own laptop using Claude Code's MCP command with its default settings. However, when other team members clone the repository, they cannot see that server.\n\nThe team also does not want to commit credentials to source control.\n\nWhich actions should the team take? (Select two.)",
+  "choices": {
+   "A": "Keep the server's credentials in environment variables that each team member sets locally, and list the required environment variable names in the onboarding guide.",
+   "B": "Re-add the server with --scope project, and commit the generated .mcp.json that uses environment variable placeholders.",
+   "C": "Re-add the server with --scope user, and have each team member configure it again individually in their own ~/.claude.json.",
+   "D": "Check the first team member's ~/.claude.json into the repository, and have the other team members reuse that file."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0038",
+  "question": "The platform engineering team at a fintech company is using the Claude Agent SDK to build an internal developer productivity tool. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and also integrates with MCP servers.\n\nThe team is adding a pull request review job that uses Claude Code GitHub Actions. Early reviews ignore the repository's testing policy, fixture naming conventions, and the criteria for when style comments should be reported.\n\nThis guidance must be shared among developers and also be available to Claude Code during CI runs.\n\nWhich actions should the team take? (Select two.)",
+  "choices": {
+   "A": "Place a ~/.claude/CLAUDE.md containing the same guidance in each CI runner image.",
+   "B": "Commit a CLAUDE.md describing the fixture naming conventions to the tests directory, so that it is read for work under that directory.",
+   "C": "Put the guidance in the workflow's claude_args, and append it to the system prompt with --append-system-prompt.",
+   "D": "Commit a CLAUDE.md describing the testing policy, fixture naming conventions, and review criteria to the repository root."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0039",
+  "question": "You are using Claude Code to speed up IoT device firmware development. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You need to integrate it into the development workflow using custom slash commands and CLAUDE.md configuration, and understand how to choose between plan mode and direct execution.\n\nA new developer reports that Claude Code is not applying the repository's coding style and unit test conventions. A senior engineer can reproduce the convention-following behavior on their own machine, but not on the new developer's machine. The team cannot tell whether the relevant instruction files are actually being loaded in the new developer's session.\n\nWhich should you do first to diagnose the configuration hierarchy problem? (Select two.)",
+  "choices": {
+   "A": "Run /status in the new developer's session and check the configuration files listed in the Setting sources row of the Status tab.",
+   "B": "Verify that the relevant CLAUDE.md is actually placed in a location that is loaded in the new developer's session.",
+   "C": "Write the team's conventions into .claude/settings.local.json on the new developer's machine, then observe the behavior afterward.",
+   "D": "Run /context in the new developer's session and check the loaded instruction files listed under \"Memory files\"."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0040",
+  "question": "You are using Claude Code to speed up infrastructure automation development. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You need to integrate it into the development workflow using custom slash commands and CLAUDE.md configuration, and understand how to choose between plan mode and direct execution.\n\nThe repository already has a team-shared project skill at .claude/skills/code-review/SKILL.md. You want a stricter review workflow of your own, available in all the projects you work on. However, you want to avoid the following:\n\nChanging teammates' behavior\n\nShadowing the existing /code-review skill\n\nWhich response is most appropriate?",
+  "choices": {
+   "A": "Edit .claude/skills/code-review/SKILL.md with stricter rules, and invoke it as /code-review.",
+   "B": "Add stricter review instructions to the project's CLAUDE.md, and invoke the existing /code-review.",
+   "C": "Create ~/.claude/skills/my-code-review/SKILL.md, and invoke it as /my-code-review.",
+   "D": "Create ~/.claude/skills/code-review/SKILL.md, and invoke it as /code-review."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0041",
+  "question": "A team at a media analytics company develops and maintains a multi-agent article summarization system with Claude Code. In this system, a coordinator delegates work to research, analysis, summarization, and report generation subagents.\n\nThe team wants to do the following:\n\nShare conventions for handling citations and sources with all developers\n\nApply guidance specific to the report generation subagent only when working in that subagent's working directory\n\nKeep personal editor preferences private\n\nWhich configuration approach best matches the Claude Code memory hierarchy?",
+  "choices": {
+   "A": "Put the conventions together in ~/.claude/CLAUDE.md, write the notes for report generation in .claude/settings.json, and have each developer copy the same file.",
+   "B": "Put the shared conventions in the report generation directory's CLAUDE.md and personal preferences in the root CLAUDE.md, letting child content override the parent.",
+   "C": "Put the shared conventions in CLAUDE.local.md and the report generation guidance in ~/.claude/CLAUDE.md, and commit the user-level file for the team.",
+   "D": "Put the shared conventions in the root CLAUDE.md, the report generation guidance in that directory's CLAUDE.md, and personal preferences in ~/.claude/CLAUDE.md."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0042",
+  "question": "You are using Claude to build a structured data extraction system that extracts information from expense report documents. The system extracts information from unstructured documents, validates output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nValidation shows that the extractor still represents missing amounts inconsistently, in the following ways:\n\nnull\n\nAn empty string\n\n\"N/A\"\n\nOmitting the field entirely\n\nYou have already added a concise prose rule, but the same failure pattern persists.\n\nWhat should you do next? (Select two.)",
+  "choices": {
+   "A": "Add 3 to 5 tag-delimited examples, each pairing an excerpt from the original document with the expected JSON, including missing values in both typical and edge cases.",
+   "B": "Add to the prose rule synonyms for missing values and stronger wording that demands normalization.",
+   "C": "Move the normalization requirement into the user-level CLAUDE.md so that it is loaded in all local Claude Code sessions.",
+   "D": "Define the accepted representation of missing values in the JSON schema itself, making the field required and allowing only null as an empty value."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0043",
+  "question": "You are an engineer who uses an AI assistant to automate internal document processing. Your team operates a custom command that extracts metadata from onboarding materials for new hires and generates a JSON catalog for the HR system.\n\nEvaluation shows a recurring problem in which required fields such as manager and start_date are returned as null. This happens when the information is written in varied formats, such as tables, email signatures, and free-form descriptive text.\n\nThe fields do exist in the original documents. However, the command's prompt contains only the schema description and the instruction \"extract all required fields.\"\n\nWhich changes would most directly improve extraction consistency? (Select two.)",
+  "choices": {
+   "A": "Lower the command's temperature so that extraction behavior becomes more deterministic on each run.",
+   "B": "Add to the instructions where required fields tend to appear, and how to read values from tables, signatures, and body text respectively.",
+   "C": "Add 3 to 5 relevant, structured examples showing diverse source formats and their extraction results.",
+   "D": "Change the relevant schema fields to nullable so that a missing value does not cause a validation error."
+  }
+ }
+]

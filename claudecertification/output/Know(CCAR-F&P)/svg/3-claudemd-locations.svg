@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="430" viewBox="0 0 860 430" role="img" aria-label="CLAUDE.md 위치별 범위: 사용자, 로컬, 프로젝트, 하위 디렉터리 파일이 덮어쓰기 없이 연결되어 context에 투입되고 모순은 한 수준에만 남겨 해소" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>CLAUDE.md 위치별 범위와 결합</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-cmloc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="430" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">위치가 공유 범위를 정하고, 발견된 파일은 덮어쓰지 않고 연결해 투입한다</text>
+
+  <rect x="20" y="50" width="330" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="185" y="73" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">~/.claude/CLAUDE.md</text>
+  <text x="185" y="93" text-anchor="middle" font-size="11" fill="#6B7280">본인 · 모든 프로젝트 · 버전 관리 공유 ✗</text>
+  <rect x="20" y="120" width="330" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="185" y="143" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">CLAUDE.local.md</text>
+  <text x="185" y="163" text-anchor="middle" font-size="11" fill="#6B7280">본인 · 이 프로젝트만 · .gitignore 추가</text>
+  <rect x="20" y="190" width="330" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="185" y="213" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">./CLAUDE.md · ./.claude/CLAUDE.md</text>
+  <text x="185" y="233" text-anchor="middle" font-size="11" fill="#6B7280">팀 전원 · commit → 버전 관리 · 리뷰</text>
+  <rect x="20" y="260" width="330" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="185" y="283" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">하위 디렉터리 CLAUDE.md</text>
+  <text x="185" y="303" text-anchor="middle" font-size="11" fill="#6B7280">팀 · 그 디렉터리 작업 · 디렉터리 한정 규약</text>
+
+  <line x1="350" y1="78" x2="498" y2="78" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cmloc)"/>
+  <text x="424" y="70" text-anchor="middle" font-size="11" fill="#6B7280">① 먼저 로드</text>
+  <line x1="350" y1="148" x2="498" y2="148" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cmloc)"/>
+  <text x="424" y="140" text-anchor="middle" font-size="11" fill="#6B7280">로드</text>
+  <line x1="350" y1="218" x2="498" y2="218" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cmloc)"/>
+  <text x="424" y="210" text-anchor="middle" font-size="11" fill="#6B7280">② 시작 시 로드</text>
+  <line x1="350" y1="288" x2="498" y2="288" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-cmloc)"/>
+  <text x="424" y="280" text-anchor="middle" font-size="11" fill="#6B7280">③ 읽을 때 추가 로드</text>
+
+  <rect x="500" y="50" width="340" height="266" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="670" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">연결해 context에 투입</text>
+  <text x="670" y="112" text-anchor="middle" font-size="11" fill="#6B7280">발견된 파일 = 덮어쓰기 ✗</text>
+  <text x="670" y="130" text-anchor="middle" font-size="11" fill="#6B7280">"자식이 부모를 덮어쓴다" 전제 = 오답</text>
+  <text x="670" y="166" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">로드 순서</text>
+  <text x="670" y="188" text-anchor="middle" font-size="11" fill="#6B7280">사용자 수준 → 프로젝트 수준</text>
+  <text x="670" y="206" text-anchor="middle" font-size="11" fill="#6B7280">디렉터리 = 루트 → 하위</text>
+  <text x="670" y="242" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">시작 위치</text>
+  <text x="670" y="264" text-anchor="middle" font-size="11" fill="#6B7280">작업 디렉터리 · 상위 = 시작 시 로드</text>
+  <text x="670" y="282" text-anchor="middle" font-size="11" fill="#6B7280">하위 = 읽을 때 로드 → 시작 위치마다 로드 파일 상이</text>
+
+  <line x1="20" y1="336" x2="50" y2="336" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="58" y="340" font-size="11" fill="#6B7280">점선 = 그 디렉터리 파일을 읽을 때만 추가 로드</text>
+
+  <rect x="20" y="356" width="380" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="210" y="380" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">수준 간 모순 지시</text>
+  <text x="210" y="402" text-anchor="middle" font-size="11" fill="#6B7280">→ Claude가 한쪽 임의 선택 → session · 멤버별 결과 불일치</text>
+  <line x1="400" y1="388" x2="438" y2="388" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cmloc)"/>
+  <text x="419" y="380" text-anchor="middle" font-size="11" fill="#6B7280">해소</text>
+  <rect x="440" y="356" width="400" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="640" y="378" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">같은 항목을 한 수준에만 남김</text>
+  <text x="640" y="396" text-anchor="middle" font-size="11" fill="#6B7280">루트 규약 범위 한정 · 개인 파일 지시 제거</text>
+  <text x="640" y="411" text-anchor="middle" font-size="11" fill="#6B7280">"상위보다 우선" 문구 · 루트 삭제 ✗</text>
+</svg>

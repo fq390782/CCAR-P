@@ -1,0 +1,168 @@
+[
+ {
+  "id": "CCAR-F-Amey-Thakur-0042",
+  "question": "여러 단계로 된 검토 절차를 반복해서 쓰는데, 팀 전체가 한 번에 호출할 수 있게 하려면 어떤 방법이 맞는가?",
+  "choices": {
+   "A": "단계를 설명한 공유 문서",
+   "B": "더 길어진 CLAUDE.md",
+   "C": "저장해 둔 채팅 기록",
+   "D": "저장소에 커밋한 custom slash command 또는 skill"
+  },
+  "explanation": "팀이 반복하는 절차는 글로 풀어 쓰지 말고 커밋한 command나 skill로 두어야 한다."
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0020",
+  "question": "skill과 subagent 중 어느 쪽으로도 해결할 수 있는 요구가 있다. 둘 중 무엇으로 정할지는 무엇이 결정하는가?",
+  "choices": {
+   "A": "skill이 항상 더 낫다",
+   "B": "그 요구가 재사용할 노하우인지, 자체 context를 가진 독립된 작업 흐름인지",
+   "C": "작업이 긴지 아닌지",
+   "D": "저장소에 이미 CLAUDE.md가 있는지"
+  },
+  "explanation": "**B.** 둘은 푸는 문제가 다르다. skill은 재사용할 절차를 묶어 두는 것이고, subagent는 context를 격리하는 것이다. 무조건 한쪽을 선호하는 것(A), 작업 길이(C), 기존 파일 유무(D)는 이 차이와 관계가 없다."
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0051",
+  "question": "순서가 바뀌지 않고 각 단계의 출력을 검증할 수 있는 4단계 pipeline이 있다. 어떻게 구성해야 하는가?",
+  "choices": {
+   "A": "실행할 때마다 계획을 세우는 agent",
+   "B": "단계마다 하나씩, agent 4개",
+   "C": "정해진 지점에서만 모델을 호출하는 deterministic workflow",
+   "D": "네 단계를 모두 담은 prompt 하나"
+  },
+  "explanation": "순서가 고정돼 있다면 매번 새로 찾아내게 하지 말고 코드로 박아 두는 편이 비용도 적고 단계별로 테스트하기도 쉽다. 실행 중에 계획을 세우면(A, B) 비결정성이 생기고, prompt 하나로 합치면(D) 중간 검증 지점이 사라진다."
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0007",
+  "question": "자동 리뷰어가 pull request마다 사소한 스타일 지적을 수십 개씩 내놓아서 엔지니어들이 리뷰어를 무시하기 시작했다. blueprint가 제안하는 방식으로 false positive 문제를 해결하는 변경은 무엇인가?",
+  "choices": {
+   "A": "prompt에 명확한 리뷰 기준을 정의한다. 무엇을 지적하고 무엇을 무시할지, 심각도 기준선을 적고, 지적 대상에 해당하는 사례와 해당하지 않는 사례를 보여 주는 예시도 몇 개 넣는다",
+   "B": "리뷰를 두 번 돌려서 두 번 다 나온 지적만 게시한다",
+   "C": "리뷰어가 pull request당 지적을 최대 세 개까지만 하게 제한한다",
+   "D": "모든 지적을 아무도 읽지 않는 채널로 보낸다"
+  },
+  "explanation": "**A.** 정밀도는 명확한 기준과 few-shot 예시로 신호와 잡음의 경계를 그어 줄 때 나온다. 두 번 돌리면(B) 무작위성은 걸러져도 늘 반복되는 사소한 지적은 그대로 남는다. 임의로 개수를 제한하면(C) 문제가 많은 날에는 진짜 지적까지 버려진다. (D)는 문제를 포기하는 것이다."
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0010",
+  "question": "코드베이스 탐색 agent에 get_file_contents, read_source, fetch_file 도구가 있다. 셋 다 파일을 읽는 도구라서 agent가 자주 엉뚱한 것을 고른다. 올바른 해결책은 무엇인가?",
+  "choices": {
+   "A": "더 나은 파일 읽기 도구를 네 번째로 추가한다",
+   "B": "도구 목록으로 모델을 fine-tuning한다",
+   "C": "harness가 어떤 도구를 호출할지 무작위로 정하게 한다",
+   "D": "파일 읽기 도구를 하나로 합친다. 아니면 남기는 도구마다 어떤 경우에 쓰는지 분명히 구분되도록 description을 쓴다"
+  },
+  "explanation": "**D.** 도구 선택은 description을 보고 이루어진다. 기능이 겹치는데 description까지 모호하면 agent가 갈팡질팡한다. 하나로 합치거나 description을 뚜렷하게 구분하는 것이 문서에 나온 해결법이다. 겹치는 도구를 더하면(A) 더 나빠지고, fine-tuning(B)은 과하며, 무작위 선택(C)은 혼란을 제도로 굳힐 뿐이다."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0053",
+  "question": "운영 지표를 보니 agent가 한 건을 처리하는 데 평균 4번 넘게 API loop를 돈다. 분석해 보면 처음부터 둘 다 필요한 상황에서도 Claude가 `get_customer`와 `lookup_order`를 별도의 turn에 차례로 요청하는 경우가 많다. loop 수를 줄이는 가장 효과적인 방법은 무엇인가?",
+  "choices": {
+   "A": "요청된 도구가 무엇이든 필요할 만한 도구를 자동으로 병렬 호출하고, 요청 여부와 상관없이 모든 결과를 반환하는 speculative execution을 구현한다.",
+   "B": "`max_tokens`를 늘려서 Claude가 계획을 세울 여유를 주고, 도구 요청을 자연스럽게 합치도록 한다.",
+   "C": "`get_customer_with_orders`처럼 자주 쓰는 조회 조합을 하나의 호출로 묶은 composite tool을 만든다.",
+   "D": "prompt에서 Claude에게 도구 요청을 한 turn에 묶어 보내라고 지시한다. 결과는 모두 함께 돌려주고 나서 다음 API 호출로 넘어간다."
+  },
+  "explanation": "관련된 도구 요청을 한 turn에 묶으라고 prompt로 지시하면, Claude가 원래 갖고 있는 여러 도구 동시 요청 능력을 활용하게 된다. 구조를 거의 바꾸지 않고도 순차 호출 패턴을 바로 해결한다."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0035",
+  "question": "팀에서 의존성 스캔, 테스트 coverage 집계, 코드 품질 지표 같은 심층 코드 분석을 수행하는 `/analyze-codebase` skill을 만들었다. 이 명령을 실행하고 나면 세션에서 Claude의 응답이 느려지고 원래 하던 작업의 context를 잃는다는 보고가 나온다.\n\n분석 기능은 그대로 두면서 가장 효과적으로 고치는 방법은 무엇인가?",
+  "choices": {
+   "A": "skill frontmatter에 `context: fork`를 추가해서 분석을 격리된 subagent context에서 실행한다.",
+   "B": "frontmatter에 `model: haiku`를 추가해서 분석에 더 빠르고 저렴한 모델을 쓴다.",
+   "C": "skill을 세 개로 쪼개서 각각 출력이 줄어들게 한다.",
+   "D": "결과를 보여 주기 전에 전부 짧은 요약으로 압축하라는 지시를 skill에 추가한다."
+  },
+  "explanation": "`context: fork`는 분석을 격리된 subagent context에서 실행한다. 그래서 분량이 큰 출력이 메인 세션의 context window를 채우지 않고, Claude도 원래 작업을 놓치지 않는다. 분석 기능은 그대로 두면서 메인 세션의 응답성을 지킨다."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0007",
+  "question": "운영 로그에 계속 나타나는 패턴이 있다. “업로드한 분기 보고서를 분석해 줘”처럼 업로드한 보고서를 분석해 달라는 요청의 45%가 문서 분석 agent가 아니라 web-search agent로 간다. 도구 정의를 살펴보니 web-search agent에는 “analyzes content and extracts key information”이라는 description의 `analyze_content`가, 문서 분석 agent에는 “analyzes documents and extracts key information”이라는 description의 `analyze_document`가 있다.\n\n잘못된 routing을 어떻게 고쳐야 하는가?",
+  "choices": {
+   "A": "coordinator가 위임을 결정하기 전에, 사용자가 업로드한 파일을 가리키는지 web 콘텐츠를 가리키는지 판별하는 사전 routing 분류기를 추가한다.",
+   "B": "web-search 도구 이름을 `extract_web_results`로 바꾸고 description을 “processes and returns information retrieved from web search and URLs.”로 수정한다.",
+   "C": "coordinator prompt에 올바른 routing을 보여 주는 few-shot 예시를 추가한다. “사용자가 분기 보고서를 업로드함 → 문서 분석 agent”, “사용자가 웹 페이지에 대해 물음 → web-search agent” 같은 식이다.",
+   "D": "web-search 도구는 그대로 두고, 문서 분석 도구의 description에 “Use for uploaded PDFs, Word docs, and spreadsheets,” 같은 사용 예를 추가해 확장한다."
+  },
+  "explanation": "web-search 도구 이름을 `extract_web_results`로 바꾸고 description에 web search와 URL을 분명히 적으면, 두 도구의 이름과 description이 의미상 겹치는 근본 원인이 사라진다. 각 도구의 용도가 분명해지므로 coordinator가 문서 분석과 web search를 안정적으로 구분할 수 있다."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0024",
+  "question": "자동 리뷰가 PR마다 테스트 케이스를 제안한다. 수강 완료 추적 기능을 추가하는 PR에서 Claude가 테스트 케이스 10개를 제안했는데, 개발자 피드백을 보면 그중 6개는 기존 테스트 스위트가 이미 다루는 시나리오와 겹친다. 중복 제안을 가장 효과적으로 줄이는 변경은 무엇인가?",
+  "choices": {
+   "A": "기존 테스트 파일을 context에 포함해서 Claude가 어떤 시나리오가 이미 다뤄지는지 파악하게 한다.",
+   "B": "Claude가 가치 높은 케이스부터 고를 것이라고 가정하고, 제안 개수를 10개에서 5개로 줄인다.",
+   "C": "성공 경로 말고 edge case와 오류 상황에만 집중하라는 지시를 추가한다.",
+   "D": "제안 설명이 기존 테스트 이름과 키워드가 겹치면 걸러 내는 후처리를 구현한다."
+  },
+  "explanation": "기존 테스트 파일을 context에 넣으면 중복의 근본 원인이 해결된다. Claude는 어떤 테스트가 이미 있는지 알아야 그 시나리오를 피할 수 있다. 그래야 정말 새롭고 가치 있는 테스트를 제안할 수 있다."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0038",
+  "question": "새 API endpoint를 만들 때 endpoint 구현 예시 2~3개를 전체 코드로 context에 넣으면 일관성이 눈에 띄게 좋아진다. 하지만 이 context는 새 endpoint를 만들 때만 쓸모 있고, 디버깅이나 코드 리뷰 등 API 디렉터리의 다른 작업에는 필요 없다.\n\n어떤 설정 방식이 가장 효과적인가?",
+  "choices": {
+   "A": "endpoint 예시와 패턴 문서를 프로젝트 CLAUDE.md에 추가해서 항상 쓸 수 있게 한다.",
+   "B": "생성을 요청할 때마다 코드를 prompt에 복사해서 endpoint 예시를 직접 참조시킨다.",
+   "C": "`.claude/rules/api/`에 endpoint 예시를 담은 path-specific rule을 설정해, API 디렉터리에서 작업할 때 활성화되게 한다.",
+   "D": "endpoint 예시를 참조하고 패턴을 따르라는 지시를 담은 skill을 만들어, slash command로 필요할 때 호출한다."
+  },
+  "explanation": "필요할 때 호출하는 skill은 새 endpoint를 만들 때만 예시 context를 불러오고, 디버깅이나 리뷰 같은 다른 작업에서는 불러오지 않는다. 그래서 메인 context를 깨끗하게 유지하면서, 필요할 때는 높은 생성 품질을 얻을 수 있다."
+ },
+ {
+  "id": "CCAR-F-preporato-0002",
+  "question": "소매업체의 고객 지원 시스템에서 coordinator agent가 고객 대화를 하나씩 받아 subagent 세 개에 위임한다. subagent는 읽기 전용 주문 도구를 가진 주문 조회 agent, 환불을 실행할 수 있는 환불 agent, 반품 정책 지식 베이스를 검색하는 정책 agent다. 회사 정책상 \\$250을 넘는 환불은 사람의 승인이 필요하고, 고객은 진행 중인 대화에 7일 안에 다시 들어올 수 있다.\n\n사람 상담원에게 넘겨야 하는 경우는 무엇인가? (2개 선택)",
+  "choices": {
+   "A": "고객의 질문에 답하는 데 도구 호출이 세 번 필요하다",
+   "B": "고객이 사람과 이야기하고 싶다고 요청한다",
+   "C": "모델이 자격 판정에 대해 신뢰도 점수 0.62를 보고한다",
+   "D": "고객이 대문자로 글을 써서, 정책상 환불 가능한 \\$90 환불 건에 몹시 화가 났다고 말한다",
+   "E": "고객이 정책상 환불 가능한 주문에 대해 \\$400 환불을 요청한다"
+  },
+  "explanation": "사람과 연결해 달라는 명시적 요청(B)은 언제든 escalation 사유가 된다. \\$400 환불(E)은 승인 기준인 \\$250을 넘으므로 정책상 반드시 사람에게 넘겨야 한다. 요청이 명확한 정책 범위 안에 있다면 감정만으로는 사유가 되지 않는다. agent가 불만에 공감하면서 직접 처리하면 된다. 모델이 스스로 보고하는 신뢰도(C)는 보정이 잘 안 되어 있어서 trigger로 믿을 수 없다. 작업이 복잡한지(A)는 agent가 감당할 몫이다."
+ },
+ {
+  "id": "CCAR-F-preporato-0018",
+  "question": "팀에서 테스트 스위트가 실패하는 동안에는 Claude가 작업을 끝내지 못하게 하려 한다. 어떤 hook으로 이를 강제하는가?",
+  "choices": {
+   "A": "테스트를 실행하는 `SessionEnd` hook",
+   "B": "테스트를 실행하고, 하나라도 실패하면 실패 내용을 stderr에 출력한 뒤 exit code 2로 종료하는 `Stop` hook",
+   "C": "파일을 읽을 때마다 테스트를 실행하는 `PostToolUse` hook",
+   "D": "prompt를 제출하기 전에 매번 테스트를 실행하는 `UserPromptSubmit` hook"
+  },
+  "explanation": "`Stop` hook이 exit code 2를 반환하면 Claude는 멈추지 못하고 stderr 내용을 전달받아 실패한 테스트를 계속 고친다(B). `SessionEnd`(A)는 세션이 닫히는 시점에 실행되므로 아무것도 막을 수 없다. D는 작업을 하기 전에 테스트하는 것이다. C는 엉뚱한 시점에 계속 실행될 뿐 Claude가 끝내는 것을 막지 못한다."
+ },
+ {
+  "id": "CCAR-F-preporato-0008",
+  "question": "보안팀이 저장소 40개를 대상으로 매일 밤 감사를 돌린다. coordinator가 저장소마다 scanner subagent를 하나씩 띄우고, 각 scanner는 `Read`, `Grep`, `Glob`과 의존성 점검 도구를 쓴다. coordinator는 결과를 합쳐 아침 stand-up용 보고서 하나로 만들고, 새로 발견된 치명적 문제는 티켓으로 올린다.\n\n아침 보고서에는 '모든 저장소에서 치명적인 문제가 발견되지 않았다'고 적혀 있었다. 그런데 나중에 보니 scanner 여섯 개가 token budget을 다 써서 가장 큰 파일들을 건너뛰었다. 보고서 형식은 무엇을 요구했어야 하는가?",
+  "choices": {
+   "A": "요구할 것은 없다. scanner에 더 성능 높은 모델이 필요했을 뿐이다",
+   "B": "scanner마다 더 긴 서술형 요약",
+   "C": "scanner마다 신뢰도 점수",
+   "D": "모든 scanner의 coverage 표기(검토한 파일, 건너뛴 파일과 그 사유, coverage 수치)를 합친 보고서에도 그대로 싣는 것"
+  },
+  "explanation": "coverage를 명시하지 않으면 '문제 없음'과 '실행된 부분에서는 문제 없음'을 구별할 수 없다. D는 빈틈을 눈에 보이게 해서, 건너뛴 파일을 따로 대기열에 넣고 집중 점검할 수 있게 한다. 스스로 보고하는 신뢰도(C)는 보정이 잘 안 되어 있고, 무엇을 건너뛰었는지도 알려 주지 않는다. 요약을 길게 쓰게 해도(B) 수치 없이 글만 늘어난다. 더 강한 모델(A)도 budget에 걸릴 수 있고, 그래도 보고서는 그 사실을 숨긴다."
+ },
+ {
+  "id": "CCAR-F-preporato-0003",
+  "question": "소매업체의 고객 지원 시스템에서 coordinator agent가 고객 대화를 하나씩 받아 subagent 세 개에 위임한다. subagent는 읽기 전용 주문 도구를 가진 주문 조회 agent, 환불을 실행할 수 있는 환불 agent, 반품 정책 지식 베이스를 검색하는 정책 agent다. 회사 정책상 \\$250을 넘는 환불은 사람의 승인이 필요하고, 고객은 진행 중인 대화에 7일 안에 다시 들어올 수 있다.\n\n정책 agent의 지식 베이스 검색은 검색 서비스가 timeout되어 실패할 때도 있고, 어떤 정책도 해당 사례를 다루지 않아 아무것도 찾지 못할 때도 있다. 지금은 두 경우 모두 빈 목록을 반환한다. 도구는 어떻게 응답해야 하는가?",
+  "choices": {
+   "A": "두 경우 모두 빈 목록을 계속 반환하고, agent가 재시도하게 둔다",
+   "B": "timeout에는 structured error(error type, retryable: true, 시도한 작업)를 반환하고, 일치하는 정책이 없는 경우에는 성공으로 처리한 빈 결과를 반환한다",
+   "C": "두 경우 모두 가장 비슷한 정책을 반환해서 agent가 항상 인용할 것이 있게 한다",
+   "D": "두 경우 모두 예외를 발생시켜 coordinator가 대화를 종료하게 한다"
+  },
+  "explanation": "B는 일시적 장애와 정상적인 빈 결과를 구분한다. 두 경우는 복구 방법이 다르다. 하나는 검색을 재시도하는 것이고, 다른 하나는 해당 정책이 없다고 고객에게 알리는 것이다. A에서는 agent가 장애와 실제 답을 구별하지 못해, 장애 중에 해당 정책이 없다고 보고할 수 있다. D는 복구할 수 있는 timeout 때문에 대화를 끝낸다. C는 없는 관련성을 만들어 내서, agent가 적용되지 않는 정책을 인용하게 된다."
+ },
+ {
+  "id": "CCAR-F-preporato-0004",
+  "question": "소매업체의 고객 지원 시스템에서 coordinator agent가 고객 대화를 하나씩 받아 subagent 세 개에 위임한다. subagent는 읽기 전용 주문 도구를 가진 주문 조회 agent, 환불을 실행할 수 있는 환불 agent, 반품 정책 지식 베이스를 검색하는 정책 agent다. 회사 정책상 \\$250을 넘는 환불은 사람의 승인이 필요하고, 고객은 진행 중인 대화에 7일 안에 다시 들어올 수 있다.\n\n한 고객이 나흘 뒤 다시 돌아와 보류 중인 환불에 관한 대화를 이어 가려 한다. 별도로, 상담 관리자는 고객 화면에 보이는 내용은 건드리지 않고 그 대화의 복사본으로 다른 해결 방식을 시험해 보려 한다. 어떤 조합이 맞는가?",
+  "choices": {
+   "A": "둘 다 새 session을 시작하고, 마지막 assistant 메시지를 각 system prompt에 붙여 넣는다",
+   "B": "고객에게는 session을 fork하고, 관리자에게는 resume한다",
+   "C": "둘 다 같은 session을 resume한다",
+   "D": "고객의 session은 resume해서 전체 history를 복원하고, 관리자용으로는 복사본을 따로 fork한다"
+  },
+  "explanation": "resume은 history를 그대로 유지한 채 session을 이어 가는 것이라 돌아온 고객에게 필요하다. fork는 같은 history에서 독립된 분기를 만들며, 분기에서 바꾼 내용은 원래 session으로 돌아오지 않는다. 관리자에게 필요한 것이 이것이다. D는 둘 다 충족한다. B는 둘을 거꾸로 짝지었다. C는 관리자의 실험이 고객의 대화를 바꿔 버린다. A는 context 대부분을 버리고 메시지 하나에 의존한다."
+ }
+]

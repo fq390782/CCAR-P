@@ -1,0 +1,13 @@
+{
+ "add": {},
+ "rep": [
+  [
+   "- ⚠️ `Explore` · `Plan`의 `CLAUDE.md` 미로드<br>버전에 따라 바뀜 · 2026-11 공식 문서와 일치\n\n",
+   ""
+  ],
+  [
+   "- ⚠️ OpenAI SDK 층 `logprobs` 무시<br>citations + structured outputs = 400<br>둘 다 시점에 따라 바뀜 · 2026-11 문서와 일치\n\n",
+   ""
+  ]
+ ]
+}

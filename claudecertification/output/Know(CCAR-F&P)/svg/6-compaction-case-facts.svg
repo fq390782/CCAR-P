@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="요약은 정확한 값을 잃으므로 case facts 블록을 요약 밖에 두고 매 prompt에 포함하는 구조" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>요약은 정확한 값을 잃으므로 case facts 블록을 요약 밖에 두고 매 prompt에 포함하는 구조</title>
+<defs><marker id="arr-compaction-case-facts" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<rect x="20" y="70" width="100" height="320" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="70.0" y="218.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">대화 이력</text>
+<text x="70.0" y="234.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">20턴+ 장기</text>
+<text x="70.0" y="249.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">session</text>
+<rect x="520" y="36" width="360" height="374" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="536" y="58" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">다음 요청 prompt</text>
+<rect x="190" y="70" width="270" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="101.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">compaction 요약</text>
+<text x="325.0" y="116.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">계약: 이름 · 결정 · 숫자 · 미해결 항목 보존 →</text>
+<text x="325.0" y="131.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">체크리스트로 검증</text>
+<text x="325.0" y="146.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">예: '15% 할인' → '프로모션 논의됨'으로 압축</text>
+<rect x="190" y="190" width="270" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="325.0" y="228.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">case facts 블록 추출</text>
+<text x="325.0" y="244.3" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">금액 · 날짜 · 주문 번호 · 안건별 상태</text>
+<text x="325.0" y="259.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">값 + 출처(자료 · 페이지) 기록 → 사후 검증</text>
+<rect x="190" y="310" width="270" height="80" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="346.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">최근 turn</text>
+<text x="325.0" y="361.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">절단 지점(cut point)은 앱이 결정</text>
+<polyline points="120,120 190,120" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-compaction-case-facts)"/>
+<rect x="132.7" y="112.0" width="44.5" height="16" fill="#FFFFFF"/>
+<text x="155.0" y="124.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">전 이력</text>
+<polyline points="120,240 190,240" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-compaction-case-facts)"/>
+<rect x="132.7" y="232.0" width="44.5" height="16" fill="#FFFFFF"/>
+<text x="155.0" y="244.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">값 추출</text>
+<polyline points="120,350 190,350" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-compaction-case-facts)"/>
+<rect x="134.5" y="342.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="155.0" y="354.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">최근분</text>
+<rect x="535" y="70" width="330" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="700.0" y="116.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">요약 block</text>
+<text x="700.0" y="131.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">정확한 세부를 잃은 상태 · 요약 형식은 파싱 가능</text>
+<rect x="535" y="190" width="330" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="236.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">case facts 블록 (요약 밖)</text>
+<text x="700.0" y="251.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">요약된 turn 수와 무관하게 핵심 정보 유지</text>
+<rect x="535" y="310" width="330" height="80" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="700.0" y="346.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">최근 turn 원문</text>
+<text x="700.0" y="361.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">요약 block 뒤에 전송</text>
+<polyline points="460,120 535,120" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-compaction-case-facts)"/>
+<rect x="477.0" y="112.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="497.5" y="124.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">요약만</text>
+<polyline points="460,240 535,240" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-compaction-case-facts)"/>
+<rect x="469.7" y="232.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="497.5" y="244.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">상시 포함</text>
+<polyline points="460,350 535,350" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-compaction-case-facts)"/>
+<rect x="469.7" y="342.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="497.5" y="354.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">원문 유지</text>
+<rect x="20" y="428" width="430" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="235.0" y="458.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">요약 임계값 상향 (70→85%) → 문제를 뒤로 미룰 뿐</text>
+<text x="235.0" y="475.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">외부 저장 + '앞서 말했듯이' 감지 검색 → 정답은 상시 포함</text>
+<rect x="470" y="428" width="410" height="70" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="675.0" y="458.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">요약 prompt에 원문 보존 지시 = 보조</text>
+<text x="675.0" y="475.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">case facts · scratchpad와 병행 시 정답</text>
+</svg>

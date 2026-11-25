@@ -1,0 +1,482 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2040" height="1300" viewBox="0 0 2040 1300" role="img" aria-label="MCP 선택과 프로토콜: 통합 방식 선택에서 확장 수단, primitives, transport, tools/list와 tools/call까지 이어지는 흐름" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>④ MCP 선택 · 프로토콜: 통합 방식 → 확장 수단 → primitives → transport → discovery · 호출</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs>
+<marker id="arr-8map-d1" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+<marker id="arr-8map-d1-b" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker>
+<marker id="arr-8map-d1-r" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker>
+<marker id="arr-8map-d1-ok" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker>
+</defs>
+<g id="8map-d1-backbone">
+<rect x="100.0" y="82.0" width="250.0" height="52.0" rx="6" fill="#F3F4F6" stroke="#1F2937" stroke-width="2.5"/>
+<text x="225.0" y="104.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">① 어떻게 연결하나</text>
+<text x="225.0" y="120.6" font-size="11" text-anchor="middle" fill="#1F2937">통합 방식 선택</text>
+<line x1="225.0" y1="134" x2="225.0" y2="150" stroke="#1F2937" stroke-width="2.5"/>
+<rect x="518.0" y="82.0" width="250.0" height="52.0" rx="6" fill="#F3F4F6" stroke="#1F2937" stroke-width="2.5"/>
+<text x="643.0" y="104.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">② 무엇으로 확장하나</text>
+<text x="643.0" y="120.6" font-size="11" text-anchor="middle" fill="#1F2937">확장 수단 선택</text>
+<line x1="643.0" y1="134" x2="643.0" y2="150" stroke="#1F2937" stroke-width="2.5"/>
+<rect x="936.0" y="82.0" width="250.0" height="52.0" rx="6" fill="#F3F4F6" stroke="#1F2937" stroke-width="2.5"/>
+<text x="1061.0" y="104.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">③ 무엇을 노출하나</text>
+<text x="1061.0" y="120.6" font-size="11" text-anchor="middle" fill="#1F2937">MCP primitives</text>
+<line x1="1061.0" y1="134" x2="1061.0" y2="150" stroke="#1F2937" stroke-width="2.5"/>
+<rect x="1354.0" y="82.0" width="250.0" height="52.0" rx="6" fill="#F3F4F6" stroke="#1F2937" stroke-width="2.5"/>
+<text x="1479.0" y="104.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">④ 어떤 경로로 잇나</text>
+<text x="1479.0" y="120.6" font-size="11" text-anchor="middle" fill="#1F2937">MCP transport</text>
+<line x1="1479.0" y1="134" x2="1479.0" y2="150" stroke="#1F2937" stroke-width="2.5"/>
+<rect x="1731.0" y="82.0" width="250.0" height="52.0" rx="6" fill="#F3F4F6" stroke="#1F2937" stroke-width="2.5"/>
+<text x="1856.0" y="104.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">⑤ 어떻게 찾고 부르나</text>
+<text x="1856.0" y="120.6" font-size="11" text-anchor="middle" fill="#1F2937">discovery · 호출</text>
+<line x1="1856.0" y1="134" x2="1856.0" y2="150" stroke="#1F2937" stroke-width="2.5"/>
+<polyline points="350.0,108.0 518.0,108.0" fill="none" stroke="#1F2937" stroke-width="2.5" marker-end="url(#arr-8map-d1)"/>
+<text x="434.0" y="102.0" font-size="11" text-anchor="middle" fill="#1F2937">MCP 선택</text>
+<polyline points="768.0,108.0 936.0,108.0" fill="none" stroke="#1F2937" stroke-width="2.5" marker-end="url(#arr-8map-d1)"/>
+<text x="852.0" y="102.0" font-size="11" text-anchor="middle" fill="#1F2937">MCP server 선택</text>
+<polyline points="1186.0,108.0 1354.0,108.0" fill="none" stroke="#1F2937" stroke-width="2.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1270.0" y="102.0" font-size="11" text-anchor="middle" fill="#1F2937">노출 내용 확정</text>
+<polyline points="1604.0,108.0 1731.0,108.0" fill="none" stroke="#1F2937" stroke-width="2.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1667.5" y="102.0" font-size="11" text-anchor="middle" fill="#1F2937">연결 수립</text>
+<rect x="606.0" y="6.0" width="180.0" height="34.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="696.0" y="27.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">MCP tools = tool 정의</text>
+<polyline points="696.0,82.0 696.0,40.0" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="706.0" y="66.0" font-size="11" text-anchor="start" fill="#1F2937">서버의 tools → 모델용 tool 정의 증가</text>
+<rect x="1818.0" y="6.0" width="196.0" height="34.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1916.0" y="27.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">tools/list · tools/call</text>
+<polyline points="1916.0,82.0 1916.0,40.0" fill="none" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1906.0" y="66.0" font-size="11" text-anchor="end" fill="#1F2937">발견 · 실행</text>
+</g>
+<g id="8map-d1-c1-24">
+<rect x="24" y="150" width="402" height="1126" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="34.0" y="178.0" font-size="16" font-weight="bold" text-anchor="start" fill="#1F2937">1-24 통합 방식 선택</text>
+<text x="34.0" y="197.0" font-size="11" text-anchor="start" fill="#6B7280">재사용이 실제로 있을 때만 MCP</text>
+<polygon points="133.0,214.0 232.0,266.0 133.0,318.0 34.0,266.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="133.0" y="262.0" font-size="13" text-anchor="middle" fill="#1F2937">연결 상대가 agent?</text>
+<text x="133.0" y="278.0" font-size="13" text-anchor="middle" fill="#1F2937">(자체 plan · tools)</text>
+<rect x="268.0" y="227.5" width="148.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="342.0" y="247.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">agent-to-agent</text>
+<text x="342.0" y="263.6" font-size="11" text-anchor="middle" fill="#1F2937">+ handoff 계약</text>
+<text x="342.0" y="278.6" font-size="11" text-anchor="middle" fill="#1F2937">agent ↔ agent 연결</text>
+<text x="342.0" y="293.6" font-size="11" text-anchor="middle" fill="#1F2937">비용: 담당자 · 계약 필요</text>
+<polyline points="232.0,266.0 268.0,266.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="250.0" y="260.0" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="268.0" y="312.5" width="148.0" height="74.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="276.0" y="330.6" font-size="11" text-anchor="start" fill="#1F2937">✗ REST API · CRM에 연결</text>
+<text x="276.0" y="345.6" font-size="11" text-anchor="start" fill="#1F2937">→ CRM은 agent ✗</text>
+<text x="276.0" y="360.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 별개 벤더 agent에 MCP</text>
+<text x="276.0" y="375.6" font-size="11" text-anchor="start" fill="#1F2937">→ MCP = agent ↔ tool</text>
+<polyline points="133.0,318.0 133.0,400.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="141.0" y="363.2" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<polygon points="133.0,400.5 232.0,452.5 133.0,504.5 34.0,452.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="133.0" y="448.5" font-size="13" text-anchor="middle" fill="#1F2937">소비자 여러 개?</text>
+<text x="133.0" y="464.5" font-size="13" text-anchor="middle" fill="#1F2937">(호스트 · 언어 · 팀)</text>
+<rect x="268.0" y="406.5" width="148.0" height="92.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="342.0" y="426.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">MCP server 1개</text>
+<text x="342.0" y="442.6" font-size="11" text-anchor="middle" fill="#1F2937">schema 1개</text>
+<text x="342.0" y="457.6" font-size="11" text-anchor="middle" fill="#1F2937">agent ↔ tool · 데이터</text>
+<text x="342.0" y="472.6" font-size="11" text-anchor="middle" fill="#1F2937">비용: 새로 소유할</text>
+<text x="342.0" y="487.6" font-size="11" text-anchor="middle" fill="#1F2937">service</text>
+<polyline points="232.0,452.5 268.0,452.5" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="250.0" y="446.5" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="268.0" y="506.5" width="148.0" height="74.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="276.0" y="524.6" font-size="11" text-anchor="start" fill="#1F2937">✗ "MCP는 표준" · "미래</text>
+<text x="276.0" y="539.6" font-size="11" text-anchor="start" fill="#1F2937">재사용" 근거로 구축</text>
+<text x="276.0" y="554.6" font-size="11" text-anchor="start" fill="#1F2937">→ 비용만 · 얻는 기능 없음</text>
+<text x="276.0" y="569.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 일회성 · 단일 쌍에 MCP</text>
+<polyline points="133.0,504.5 133.0,594.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="141.0" y="553.5" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<polygon points="133.0,594.5 232.0,646.5 133.0,698.5 34.0,646.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="133.0" y="642.5" font-size="13" text-anchor="middle" fill="#1F2937">기능이 CLI로만</text>
+<text x="133.0" y="658.5" font-size="13" text-anchor="middle" fill="#1F2937">존재?</text>
+<rect x="268.0" y="608.0" width="148.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="342.0" y="628.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">CLI wrapper</text>
+<text x="342.0" y="644.1" font-size="11" text-anchor="middle" fill="#1F2937">+ 형식 변경 테스트</text>
+<text x="342.0" y="659.1" font-size="11" text-anchor="middle" fill="#1F2937">일회성 · 소비자 1</text>
+<text x="342.0" y="674.1" font-size="11" text-anchor="middle" fill="#1F2937">비용: 취약한 parsing</text>
+<polyline points="232.0,646.5 268.0,646.5" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="250.0" y="640.5" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="268.0" y="693.0" width="148.0" height="89.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="276.0" y="711.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 언어별 CLI wrapper</text>
+<text x="276.0" y="726.1" font-size="11" text-anchor="start" fill="#1F2937">→ 취약한 parsing이</text>
+<text x="276.0" y="741.1" font-size="11" text-anchor="start" fill="#1F2937">언어 수만큼 증가</text>
+<text x="276.0" y="756.1" font-size="11" text-anchor="start" fill="#1F2937">✗ CLI 위에 MCP를 얹음</text>
+<text x="276.0" y="771.1" font-size="11" text-anchor="start" fill="#1F2937">→ 계층마다 실패 모드</text>
+<polyline points="133.0,698.5 133.0,796.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="141.0" y="751.2" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<rect x="34.0" y="796.0" width="198.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="133.0" y="816.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">직접 API/SDK</text>
+<text x="133.0" y="832.1" font-size="11" text-anchor="middle" fill="#1F2937">프로토콜 계층 생략</text>
+<text x="133.0" y="847.1" font-size="11" text-anchor="middle" fill="#1F2937">호스트 1 · 언어 1 · 소비자 1</text>
+<text x="133.0" y="862.1" font-size="11" text-anchor="middle" fill="#1F2937">비용: 소비자마다 client 업데이트</text>
+<rect x="268.0" y="796.0" width="148.0" height="89.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="276.0" y="814.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 단일 호스트에 stdio</text>
+<text x="276.0" y="829.1" font-size="11" text-anchor="start" fill="#1F2937">서버 등록 · MCP wrapper</text>
+<text x="276.0" y="844.1" font-size="11" text-anchor="start" fill="#1F2937">→ 불필요한 프로토콜 계층</text>
+<text x="276.0" y="859.1" font-size="11" text-anchor="start" fill="#1F2937">✗ MCP + 직접 REST 병행</text>
+<text x="276.0" y="874.1" font-size="11" text-anchor="start" fill="#1F2937">→ 유지보수 범위 2배</text>
+<polyline points="133.0,873.0 133.0,917.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="141.0" y="899.0" font-size="11" text-anchor="start" fill="#1F2937">두 번째 팀 · 언어 등장</text>
+<rect x="34.0" y="917.0" width="198.0" height="62.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="133.0" y="937.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">통합 방식 재평가</text>
+<text x="133.0" y="953.1" font-size="11" text-anchor="middle" fill="#1F2937">비교 기준: 재사용 · 보안 경계</text>
+<text x="133.0" y="968.1" font-size="11" text-anchor="middle" fill="#1F2937">소유권 · 운영 복잡도</text>
+<text x="34.0" y="1041.0" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">그 밖의 조건 → 방식</text>
+<rect x="34.0" y="1053.0" width="180.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="124.0" y="1071.1" font-size="11" text-anchor="middle" fill="#1F2937">독점 SDK만 존재 + 여러 팀</text>
+<rect x="214.0" y="1053.0" width="202.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="315.0" y="1071.1" font-size="11" text-anchor="middle" fill="#1F2937">SDK를 MCP server 하나로 감쌈</text>
+<rect x="34.0" y="1088.0" width="180.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="124.0" y="1106.1" font-size="11" text-anchor="middle" fill="#1F2937">공유 기능 + 소비자 8개</text>
+<rect x="214.0" y="1088.0" width="202.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="315.0" y="1106.1" font-size="11" text-anchor="middle" fill="#1F2937">MCP server 또는 공유 library</text>
+<rect x="34.0" y="1123.0" width="180.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="124.0" y="1141.1" font-size="11" text-anchor="middle" fill="#1F2937">필요한 것이 tool 하나</text>
+<rect x="214.0" y="1123.0" width="202.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="315.0" y="1141.1" font-size="11" text-anchor="middle" fill="#1F2937">tool만 노출한 MCP server</text>
+<rect x="34.0" y="1158.0" width="180.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="124.0" y="1176.1" font-size="11" text-anchor="middle" fill="#1F2937">벤더가 typed API 출시</text>
+<rect x="214.0" y="1158.0" width="202.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="315.0" y="1176.1" font-size="11" text-anchor="middle" fill="#1F2937">CLI wrapper → 직접 API 이전</text>
+<rect x="34.0" y="1193.0" width="180.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="124.0" y="1211.1" font-size="11" text-anchor="middle" fill="#1F2937">규제로 schema 공유 불가</text>
+<rect x="214.0" y="1193.0" width="202.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="315.0" y="1211.1" font-size="11" text-anchor="middle" fill="#1F2937">소비자별 개별 구현</text>
+<rect x="34.0" y="1228.0" width="180.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="124.0" y="1246.1" font-size="11" text-anchor="middle" fill="#1F2937">운영 부담 0 요구</text>
+<rect x="214.0" y="1228.0" width="202.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="315.0" y="1246.1" font-size="11" text-anchor="middle" fill="#1F2937">관리형 런타임</text>
+</g>
+<g id="8map-d1-c1-10">
+<rect x="442" y="150" width="402" height="1126" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="452.0" y="178.0" font-size="16" font-weight="bold" text-anchor="start" fill="#1F2937">1-10 확장 수단 선택</text>
+<text x="452.0" y="197.0" font-size="11" text-anchor="start" fill="#6B7280">공유 · 독립 유지보수 = MCP server · 절차 = Skill</text>
+<polygon points="551.0,214.0 650.0,266.0 551.0,318.0 452.0,266.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="551.0" y="262.0" font-size="13" text-anchor="middle" fill="#1F2937">행동 · 데이터 접근</text>
+<text x="551.0" y="278.0" font-size="13" text-anchor="middle" fill="#1F2937">필요?</text>
+<rect x="686.0" y="227.5" width="148.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760.0" y="247.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">Skill</text>
+<text x="760.0" y="263.6" font-size="11" text-anchor="middle" fill="#1F2937">지시 · 템플릿 · 절차 묶음</text>
+<text x="760.0" y="278.6" font-size="11" text-anchor="middle" fill="#1F2937">작업 일치 시 로드</text>
+<text x="760.0" y="293.6" font-size="11" text-anchor="middle" fill="#1F2937">live connection ✗</text>
+<polyline points="650.0,266.0 686.0,266.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="668.0" y="260.0" font-size="11" text-anchor="middle" fill="#1F2937">아니오</text>
+<rect x="686.0" y="312.5" width="148.0" height="74.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="694.0" y="330.6" font-size="11" text-anchor="start" fill="#1F2937">✗ Skill로 API 연결</text>
+<text x="694.0" y="345.6" font-size="11" text-anchor="start" fill="#1F2937">→ live connection 없음</text>
+<text x="694.0" y="360.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 절차에 MCP server ·</text>
+<text x="694.0" y="375.6" font-size="11" text-anchor="start" fill="#1F2937">fine-tuning → 과함</text>
+<polyline points="551.0,318.0 551.0,400.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="559.0" y="363.2" font-size="11" text-anchor="start" fill="#1F2937">예</text>
+<polygon points="551.0,400.5 650.0,452.5 551.0,504.5 452.0,452.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="551.0" y="448.5" font-size="13" text-anchor="middle" fill="#1F2937">여러 앱 공유 +</text>
+<text x="551.0" y="464.5" font-size="13" text-anchor="middle" fill="#1F2937">독립 유지보수?</text>
+<rect x="686.0" y="421.5" width="148.0" height="62.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760.0" y="441.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">앱의 Tools</text>
+<text x="760.0" y="457.6" font-size="11" text-anchor="middle" fill="#1F2937">행동 · 데이터 접근 추가</text>
+<text x="760.0" y="472.6" font-size="11" text-anchor="middle" fill="#1F2937">(MCP server와 공통)</text>
+<polyline points="650.0,452.5 686.0,452.5" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="668.0" y="446.5" font-size="11" text-anchor="middle" fill="#1F2937">아니오</text>
+<rect x="686.0" y="491.5" width="148.0" height="59.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="694.0" y="509.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 데이터를 매일 system</text>
+<text x="694.0" y="524.6" font-size="11" text-anchor="start" fill="#1F2937">prompt에 붙여 넣기</text>
+<text x="694.0" y="539.6" font-size="11" text-anchor="start" fill="#1F2937">→ 낡음 · context 낭비</text>
+<polyline points="551.0,504.5 551.0,564.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="559.0" y="538.5" font-size="11" text-anchor="start" fill="#1F2937">예</text>
+<rect x="452.0" y="564.5" width="198.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="551.0" y="584.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">MCP server</text>
+<text x="551.0" y="600.6" font-size="11" text-anchor="middle" fill="#1F2937">서버가 tools/resources 노출</text>
+<text x="551.0" y="615.6" font-size="11" text-anchor="middle" fill="#1F2937">여러 client 연결</text>
+<text x="551.0" y="630.6" font-size="11" text-anchor="middle" fill="#1F2937">플랫폼 팀이 독립 유지보수</text>
+<rect x="686.0" y="564.5" width="148.0" height="89.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="694.0" y="582.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 앱마다 서버 코드 복사</text>
+<text x="694.0" y="597.6" font-size="11" text-anchor="start" fill="#1F2937">→ 복사본끼리 어긋남</text>
+<text x="694.0" y="612.6" font-size="11" text-anchor="start" fill="#1F2937">✗ Messages API 대체 ·</text>
+<text x="694.0" y="627.6" font-size="11" text-anchor="start" fill="#1F2937">모델과 같은 프로세스 필요</text>
+<text x="694.0" y="642.6" font-size="11" text-anchor="start" fill="#1F2937">→ 둘 다 ✗</text>
+<polyline points="551.0,641.5 551.0,685.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="559.0" y="667.5" font-size="11" text-anchor="start" fill="#1F2937">어느 서버를 쓰나</text>
+<polygon points="551.0,685.5 650.0,737.5 551.0,789.5 452.0,737.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="551.0" y="733.5" font-size="13" text-anchor="middle" fill="#1F2937">많은 조직이</text>
+<text x="551.0" y="749.5" font-size="13" text-anchor="middle" fill="#1F2937">공통 사용?</text>
+<rect x="686.0" y="699.0" width="148.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760.0" y="719.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">기성 MCP server</text>
+<text x="760.0" y="735.1" font-size="11" text-anchor="middle" fill="#1F2937">GitHub · Slack · Jira</text>
+<text x="760.0" y="750.1" font-size="11" text-anchor="middle" fill="#1F2937">연결만으로 사용</text>
+<text x="760.0" y="765.1" font-size="11" text-anchor="middle" fill="#1F2937">유지보수 = 제공처</text>
+<polyline points="650.0,737.5 686.0,737.5" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="668.0" y="731.5" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="686.0" y="784.0" width="148.0" height="59.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="760.0" y="802.1" font-size="11" text-anchor="middle" fill="#1F2937">채택 전 확인</text>
+<text x="760.0" y="817.1" font-size="11" text-anchor="middle" fill="#1F2937">제공처 · 업데이트 상황</text>
+<text x="760.0" y="832.1" font-size="11" text-anchor="middle" fill="#1F2937">요구 권한 범위</text>
+<polyline points="551.0,789.5 551.0,857.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="559.0" y="827.2" font-size="11" text-anchor="start" fill="#1F2937">아니오 (자사에만 존재)</text>
+<rect x="452.0" y="857.0" width="198.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="551.0" y="877.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">custom MCP server</text>
+<text x="551.0" y="893.1" font-size="11" text-anchor="middle" fill="#1F2937">팀 고유 workflow</text>
+<text x="551.0" y="908.1" font-size="11" text-anchor="middle" fill="#1F2937">(2단계 승인 · 예약 · release 판정)</text>
+<text x="551.0" y="923.1" font-size="11" text-anchor="middle" fill="#1F2937">범위를 좁혀 고유 로직만</text>
+<rect x="686.0" y="857.0" width="148.0" height="74.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="694.0" y="875.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 표준 서비스까지</text>
+<text x="694.0" y="890.1" font-size="11" text-anchor="start" fill="#1F2937">custom으로 직접 구축</text>
+<text x="694.0" y="905.1" font-size="11" text-anchor="start" fill="#1F2937">→ 표준 조작의</text>
+<text x="694.0" y="920.1" font-size="11" text-anchor="start" fill="#1F2937">유지보수까지 떠안음</text>
+<text x="452.0" y="994.0" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">혼합 구성</text>
+<rect x="452.0" y="1006.0" width="382.0" height="47.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="643.0" y="1026.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">요건 분해</text>
+<text x="643.0" y="1042.1" font-size="11" text-anchor="middle" fill="#1F2937">표준 조작 · 자체 로직으로 나눠 각각 가장 수고 적은 수단</text>
+<rect x="452.0" y="1099.0" width="186.0" height="47.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="545.0" y="1119.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">기성 서버</text>
+<text x="545.0" y="1135.1" font-size="11" text-anchor="middle" fill="#1F2937">표준 조작</text>
+<rect x="648.0" y="1099.0" width="186.0" height="47.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="741.0" y="1119.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">custom 서버</text>
+<text x="741.0" y="1135.1" font-size="11" text-anchor="middle" fill="#1F2937">release 판정 · 승인 준비</text>
+<polyline points="545.0,1053.0 545.0,1099.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="553.0" y="1080.0" font-size="11" text-anchor="start" fill="#1F2937">표준 조작</text>
+<polyline points="741.0,1053.0 741.0,1099.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="749.0" y="1080.0" font-size="11" text-anchor="start" fill="#1F2937">자체 로직</text>
+<rect x="452.0" y="1156.0" width="382.0" height="44.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="643.0" y="1174.1" font-size="11" text-anchor="middle" fill="#1F2937">개발자 1명 · 보수 최소화 = 기성 서버 우선</text>
+<text x="643.0" y="1189.1" font-size="11" text-anchor="middle" fill="#1F2937">팀 서버 = project scope .mcp.json · 토큰 = 환경 변수 확장</text>
+<rect x="452.0" y="1208.0" width="382.0" height="44.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="460.0" y="1226.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 여러 통합을 custom server 하나로 통합</text>
+<text x="460.0" y="1241.1" font-size="11" text-anchor="start" fill="#1F2937">→ 표준 연동 유지보수 부담 잔존</text>
+</g>
+<g id="8map-d1-c1-11">
+<rect x="860" y="150" width="402" height="1126" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="870.0" y="178.0" font-size="16" font-weight="bold" text-anchor="start" fill="#1F2937">1-11 MCP primitives</text>
+<text x="870.0" y="197.0" font-size="11" text-anchor="start" fill="#6B7280">주도 = tools 모델 · resources 앱 · prompts 사용자</text>
+<rect x="1074.0" y="214.0" width="178.0" height="62.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1163.0" y="234.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">tools</text>
+<text x="1163.0" y="250.1" font-size="11" text-anchor="middle" fill="#1F2937">상황에 따라 찾아 호출</text>
+<text x="1163.0" y="265.1" font-size="11" text-anchor="middle" fill="#1F2937">동작 수행 (예: Jira 티켓 생성)</text>
+<rect x="1074.0" y="284.0" width="178.0" height="59.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1082.0" y="302.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 카탈로그 목록을 tool로 조회</text>
+<text x="1082.0" y="317.1" font-size="11" text-anchor="start" fill="#1F2937">→ 모델의 탐색 turn 발생</text>
+<text x="1082.0" y="332.1" font-size="11" text-anchor="start" fill="#1F2937">(예: 작업마다 7회 호출)</text>
+<rect x="1074.0" y="385.0" width="178.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1163.0" y="405.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">resources</text>
+<text x="1163.0" y="421.1" font-size="11" text-anchor="middle" fill="#1F2937">참조 데이터를 URI로 노출</text>
+<text x="1163.0" y="436.1" font-size="11" text-anchor="middle" fill="#1F2937">(파일 · DB 스키마 · 문서)</text>
+<text x="1163.0" y="451.1" font-size="11" text-anchor="middle" fill="#1F2937">context 포함 여부 = 앱 결정</text>
+<rect x="1074.0" y="470.0" width="178.0" height="44.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1082.0" y="488.1" font-size="11" text-anchor="start" fill="#1F2937">✗ tool 사양서를 resource로</text>
+<text x="1082.0" y="503.1" font-size="11" text-anchor="start" fill="#1F2937">→ 호출 가능 tool 등록 ✗</text>
+<rect x="1074.0" y="556.0" width="178.0" height="62.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1163.0" y="576.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">prompts</text>
+<text x="1163.0" y="592.1" font-size="11" text-anchor="middle" fill="#1F2937">재사용 프롬프트 템플릿</text>
+<text x="1163.0" y="607.1" font-size="11" text-anchor="middle" fill="#1F2937">slash command 등으로 선택</text>
+<rect x="1074.0" y="626.0" width="178.0" height="59.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1082.0" y="644.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 카탈로그를 prompt로 공개</text>
+<text x="1082.0" y="659.1" font-size="11" text-anchor="start" fill="#1F2937">→ 사용자가 기동하는 템플릿</text>
+<text x="1082.0" y="674.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 모델의 자동 tool 탐색 용도</text>
+<polygon points="948.0,378.5 1026.0,423.5 948.0,468.5 870.0,423.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="948.0" y="419.5" font-size="13" text-anchor="middle" fill="#1F2937">누가 언제</text>
+<text x="948.0" y="435.5" font-size="13" text-anchor="middle" fill="#1F2937">쓰는가?</text>
+<polyline points="948.0,378.5 948.0,245.0 1074.0,245.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1015.0" y="239.0" font-size="11" text-anchor="middle" fill="#1F2937">모델 주도</text>
+<polyline points="1026.0,423.5 1074.0,423.5" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1050.0" y="417.5" font-size="11" text-anchor="middle" fill="#1F2937">앱 주도</text>
+<polyline points="948.0,468.5 948.0,587.0 1074.0,587.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1015.0" y="581.0" font-size="11" text-anchor="middle" fill="#1F2937">사용자 주도</text>
+<text x="870.0" y="741.0" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">정적 카탈로그 + 조작 → resource + tool</text>
+<rect x="870.0" y="755.0" width="110.0" height="62.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="925.0" y="775.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">host</text>
+<text x="925.0" y="791.1" font-size="11" text-anchor="middle" fill="#1F2937">목록 탐색</text>
+<text x="925.0" y="806.1" font-size="11" text-anchor="middle" fill="#1F2937">선택분만 첨부</text>
+<rect x="1132.0" y="755.0" width="120.0" height="62.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1192.0" y="775.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">MCP server</text>
+<text x="1192.0" y="791.1" font-size="11" text-anchor="middle" fill="#1F2937">카탈로그</text>
+<text x="1192.0" y="806.1" font-size="11" text-anchor="middle" fill="#1F2937">= resource</text>
+<polyline points="980.0,773.0 1132.0,773.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1056.0" y="767.0" font-size="11" text-anchor="middle" fill="#1F2937">resources/list</text>
+<polyline points="980.0,801.0 1132.0,801.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1056.0" y="795.0" font-size="11" text-anchor="middle" fill="#1F2937">resources/read (선택분)</text>
+<polyline points="925.0,817.0 925.0,873.0" fill="none" stroke="#16A34A" stroke-width="1.5" marker-end="url(#arr-8map-d1-ok)"/>
+<text x="933.0" y="849.0" font-size="11" text-anchor="start" fill="#1F2937">context에 첨부</text>
+<polyline points="1192.0,817.0 1192.0,873.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1184.0" y="849.0" font-size="11" text-anchor="end" fill="#1F2937">조작만 tool로</text>
+<rect x="870.0" y="873.0" width="176.0" height="47.0" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="958.0" y="893.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">모델</text>
+<text x="958.0" y="909.1" font-size="11" text-anchor="middle" fill="#1F2937">탐색 turn 회피</text>
+<rect x="1062.0" y="873.0" width="190.0" height="47.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1157.0" y="893.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">tool = 조작만</text>
+<text x="1157.0" y="909.1" font-size="11" text-anchor="middle" fill="#1F2937">예: create_return</text>
+<rect x="870.0" y="932.0" width="382.0" height="59.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="878.0" y="950.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 카탈로그를 CLAUDE.md에 복사 → 상시 로딩</text>
+<text x="878.0" y="965.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 목록 tool의 반환 건수 확대 · description에 목록 전문</text>
+<text x="878.0" y="980.1" font-size="11" text-anchor="start" fill="#1F2937">→ 대량 정보를 매번 context에 투입</text>
+<text x="870.0" y="1025.0" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">요구 → primitive</text>
+<rect x="870.0" y="1037.0" width="250.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="995.0" y="1055.1" font-size="11" text-anchor="middle" fill="#1F2937">동작 수행 (Jira 티켓 생성)</text>
+<rect x="1120.0" y="1037.0" width="132.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1186.0" y="1055.1" font-size="11" text-anchor="middle" fill="#1F2937">tool</text>
+<rect x="870.0" y="1072.0" width="250.0" height="44.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="995.0" y="1090.1" font-size="11" text-anchor="middle" fill="#1F2937">사용자가 첨부하는 읽기 전용 데이터</text>
+<text x="995.0" y="1105.1" font-size="11" text-anchor="middle" fill="#1F2937">(API schema 파일)</text>
+<rect x="1120.0" y="1072.0" width="132.0" height="44.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1186.0" y="1097.6" font-size="11" text-anchor="middle" fill="#1F2937">resource</text>
+<rect x="870.0" y="1122.0" width="250.0" height="44.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="995.0" y="1140.1" font-size="11" text-anchor="middle" fill="#1F2937">재사용 템플릿 · 노하우</text>
+<text x="995.0" y="1155.1" font-size="11" text-anchor="middle" fill="#1F2937">(심각도 기준 triage 템플릿)</text>
+<rect x="1120.0" y="1122.0" width="132.0" height="44.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1186.0" y="1147.6" font-size="11" text-anchor="middle" fill="#1F2937">prompt</text>
+<text x="870.0" y="1200.0" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">운영 · 첨부</text>
+<rect x="870.0" y="1212.0" width="150.0" height="47.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="945.0" y="1232.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">내용 개정</text>
+<text x="945.0" y="1248.1" font-size="11" text-anchor="middle" fill="#1F2937">resource 갱신</text>
+<rect x="1102.0" y="1212.0" width="150.0" height="47.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1177.0" y="1232.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">client</text>
+<text x="1177.0" y="1248.1" font-size="11" text-anchor="middle" fill="#1F2937">Claude Code = @로 참조</text>
+<polyline points="1020.0,1235.5 1102.0,1235.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1061.0" y="1229.5" font-size="11" text-anchor="middle" fill="#1F2937">변경 알림</text>
+</g>
+<g id="8map-d1-c1-13">
+<rect x="1278" y="150" width="402" height="1126" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1288.0" y="178.0" font-size="16" font-weight="bold" text-anchor="start" fill="#1F2937">1-13 MCP transport</text>
+<text x="1288.0" y="197.0" font-size="11" text-anchor="start" fill="#6B7280">로컬 = stdio · 원격 = Streamable HTTP</text>
+<rect x="1288" y="214" width="150" height="124" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1363.0" y="232.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">host</text>
+<text x="1363.0" y="247.0" font-size="11" text-anchor="middle" fill="#6B7280">예: Claude Code</text>
+<rect x="1298.0" y="256.0" width="130.0" height="32.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1363.0" y="276.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">client A</text>
+<rect x="1298.0" y="296.0" width="130.0" height="32.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1363.0" y="316.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">client B</text>
+<rect x="1550.0" y="256.0" width="120.0" height="32.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1610.0" y="276.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">로컬 server</text>
+<rect x="1550.0" y="296.0" width="120.0" height="32.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1610.0" y="316.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">원격 server</text>
+<polyline points="1428.0,272.0 1550.0,272.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1489.0" y="266.0" font-size="11" text-anchor="middle" fill="#1F2937">stdio</text>
+<polyline points="1428.0,312.0 1550.0,312.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1489.0" y="306.0" font-size="11" text-anchor="middle" fill="#1F2937">Streamable HTTP</text>
+<text x="1448.0" y="232.0" font-size="11" text-anchor="start" fill="#1F2937">서버마다 client 하나 · 전용 연결</text>
+<rect x="1288.0" y="346.0" width="382.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1479.0" y="364.1" font-size="11" text-anchor="middle" fill="#1F2937">서버마다 tools/list → host가 모아 제시 · 호출은 소유 서버로 분배</text>
+<text x="1288.0" y="431.0" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">Claude Code transport 선택 ① 위치 ② 방향 ③ 인증</text>
+<polygon points="1387.0,443.0 1486.0,495.0 1387.0,547.0 1288.0,495.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="1387.0" y="491.0" font-size="13" text-anchor="middle" fill="#1F2937">① 연결 대상이</text>
+<text x="1387.0" y="507.0" font-size="13" text-anchor="middle" fill="#1F2937">로컬 프로세스?</text>
+<rect x="1522.0" y="456.5" width="148.0" height="77.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1596.0" y="476.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">stdio</text>
+<text x="1596.0" y="492.6" font-size="11" text-anchor="middle" fill="#1F2937">subprocess · 표준 입출력</text>
+<text x="1596.0" y="507.6" font-size="11" text-anchor="middle" fill="#1F2937">로컬 파일 · CLI 접근</text>
+<text x="1596.0" y="522.6" font-size="11" text-anchor="middle" fill="#1F2937">네트워크 오버헤드 없음</text>
+<polyline points="1486.0,495.0 1522.0,495.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1504.0" y="489.0" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="1522.0" y="541.5" width="148.0" height="59.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1530.0" y="559.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 원격 서버를 각 단말에</text>
+<text x="1530.0" y="574.6" font-size="11" text-anchor="start" fill="#1F2937">배포해 stdio → 업데이트</text>
+<text x="1530.0" y="589.6" font-size="11" text-anchor="start" fill="#1F2937">· 인증 중앙 관리 ✗</text>
+<polyline points="1387.0,547.0 1387.0,626.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1395.0" y="590.8" font-size="11" text-anchor="start" fill="#1F2937">아니오 (원격)</text>
+<polygon points="1387.0,626.5 1486.0,678.5 1387.0,730.5 1288.0,678.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="1387.0" y="674.5" font-size="13" text-anchor="middle" fill="#1F2937">② 서버가 이벤트를</text>
+<text x="1387.0" y="690.5" font-size="13" text-anchor="middle" fill="#1F2937">자발 전송?</text>
+<rect x="1522.0" y="647.5" width="148.0" height="62.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1596.0" y="667.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">WebSocket</text>
+<text x="1596.0" y="683.6" font-size="11" text-anchor="middle" fill="#1F2937">양방향 지속 연결</text>
+<text x="1596.0" y="698.6" font-size="11" text-anchor="middle" fill="#1F2937">헤더 인증만 · OAuth ✗</text>
+<polyline points="1486.0,678.5 1522.0,678.5" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1504.0" y="672.5" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="1522.0" y="717.5" width="148.0" height="44.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1530.0" y="735.6" font-size="11" text-anchor="start" fill="#1F2937">✗ WebSocket으로</text>
+<text x="1530.0" y="750.6" font-size="11" text-anchor="start" fill="#1F2937">OAuth 로그인</text>
+<polyline points="1387.0,730.5 1387.0,787.5" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1395.0" y="763.0" font-size="11" text-anchor="start" fill="#1F2937">아니오 (요청 응답만)</text>
+<rect x="1288.0" y="787.5" width="198.0" height="92.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1387.0" y="807.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">http (Streamable HTTP)</text>
+<text x="1387.0" y="823.6" font-size="11" text-anchor="middle" fill="#1F2937">HTTP POST + 선택적 SSE</text>
+<text x="1387.0" y="838.6" font-size="11" text-anchor="middle" fill="#1F2937">원격 서버를 여러 client에 제공</text>
+<text x="1387.0" y="853.6" font-size="11" text-anchor="middle" fill="#1F2937">Bearer · API key · 커스텀 헤더</text>
+<text x="1387.0" y="868.6" font-size="11" text-anchor="middle" fill="#1F2937">토큰 획득 = OAuth 권장</text>
+<rect x="1522.0" y="787.5" width="148.0" height="89.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1530.0" y="805.6" font-size="11" text-anchor="start" fill="#1F2937">✗ sse transport 선택</text>
+<text x="1530.0" y="820.6" font-size="11" text-anchor="start" fill="#1F2937">→ deprecated</text>
+<text x="1530.0" y="835.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 로컬 subprocess</text>
+<text x="1530.0" y="850.6" font-size="11" text-anchor="start" fill="#1F2937">서버에 HTTP → 오버헤드</text>
+<text x="1530.0" y="865.6" font-size="11" text-anchor="start" fill="#1F2937">· 포트 노출 · 인증 부담</text>
+<rect x="1288.0" y="923.5" width="382.0" height="47.0" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="1479.0" y="943.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">claude mcp add --transport http &lt;URL&gt;</text>
+<text x="1479.0" y="959.6" font-size="11" text-anchor="middle" fill="#1F2937">→ /mcp에서 브라우저 인증</text>
+<polyline points="1387.0,879.5 1387.0,923.5" fill="none" stroke="#16A34A" stroke-width="1.5" marker-end="url(#arr-8map-d1-ok)"/>
+<text x="1395.0" y="905.5" font-size="11" text-anchor="start" fill="#1F2937">③ OAuth 로그인 필요</text>
+<rect x="1288.0" y="978.5" width="210.0" height="29.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1393.0" y="996.6" font-size="11" text-anchor="middle" fill="#1F2937">사내 클라우드 · 응답만 · OAuth</text>
+<rect x="1498.0" y="978.5" width="172.0" height="29.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1584.0" y="996.6" font-size="11" text-anchor="middle" fill="#1F2937">3조건 모두 HTTP</text>
+<rect x="1288.0" y="1013.5" width="210.0" height="44.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1393.0" y="1039.1" font-size="11" text-anchor="middle" fill="#1F2937">로컬 프로세스 → 사내 클라우드 이전</text>
+<rect x="1498.0" y="1013.5" width="172.0" height="44.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1584.0" y="1031.6" font-size="11" text-anchor="middle" fill="#1F2937">각자 --transport http로</text>
+<text x="1584.0" y="1046.6" font-size="11" text-anchor="middle" fill="#1F2937">URL 추가</text>
+<text x="1288.0" y="1115.5" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">여러 서버 + subagent</text>
+<rect x="1288.0" y="1127.5" width="382.0" height="47.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1479.0" y="1147.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">필요한 서버에 동시 연결 = 표준 형태</text>
+<text x="1479.0" y="1163.6" font-size="11" text-anchor="middle" fill="#1F2937">역할별 서버만 할당 · 연결 유지</text>
+<rect x="1288.0" y="1182.5" width="382.0" height="74.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1296.0" y="1200.6" font-size="11" text-anchor="start" fill="#1F2937">✗ subagent당 서버 1개 + 필요 시 재연결 → 단계마다 중단</text>
+<text x="1296.0" y="1215.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 자체 서버로 집약 → 불필요한 개발 부담</text>
+<text x="1296.0" y="1230.6" font-size="11" text-anchor="start" fill="#1F2937">✗ 로컬 · 원격 모두 stdio 또는 모두 HTTP</text>
+<text x="1296.0" y="1245.6" font-size="11" text-anchor="start" fill="#1F2937">→ 배포 위치 · 제공 범위에 따라 구분</text>
+</g>
+<g id="8map-d1-c1-12">
+<rect x="1696" y="150" width="320" height="1126" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1706.0" y="178.0" font-size="16" font-weight="bold" text-anchor="start" fill="#1F2937">1-12 tool discovery · 호출</text>
+<text x="1706.0" y="197.0" font-size="11" text-anchor="start" fill="#6B7280">발견 = tools/list · 실행 = tools/call</text>
+<rect x="1706.0" y="214.0" width="300.0" height="47.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1856.0" y="234.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">MCP server</text>
+<text x="1856.0" y="250.1" font-size="11" text-anchor="middle" fill="#1F2937">tools capability 선언</text>
+<polyline points="1746.0,261.0 1746.0,331.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1756.0" y="292.0" font-size="11" text-anchor="start" fill="#1F2937">tools/list 응답</text>
+<text x="1756.0" y="308.0" font-size="11" text-anchor="start" fill="#1F2937">name · description · inputSchema</text>
+<rect x="1706.0" y="331.0" width="300.0" height="47.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1856.0" y="351.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">client: 모델용 tool 정의로 변환</text>
+<text x="1856.0" y="367.1" font-size="11" text-anchor="middle" fill="#1F2937">서버에 tool 추가 → 앱 코드 그대로 노출</text>
+<polyline points="1746.0,378.0 1746.0,450.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1754.0" y="418.0" font-size="11" text-anchor="start" fill="#1F2937">tool 정의 전달</text>
+<rect x="1706.0" y="450.0" width="120.0" height="89.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1766.0" y="491.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">모델</text>
+<text x="1766.0" y="507.1" font-size="11" text-anchor="middle" fill="#1F2937">tool 선택</text>
+<rect x="1836.0" y="450.0" width="170.0" height="89.0" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="1844.0" y="468.1" font-size="11" text-anchor="start" fill="#1F2937">✗ tool 발견에 prompts ·</text>
+<text x="1844.0" y="483.1" font-size="11" text-anchor="start" fill="#1F2937">resources 사용</text>
+<text x="1844.0" y="498.1" font-size="11" text-anchor="start" fill="#1F2937">✗ 빈 인자로 tools/call</text>
+<text x="1844.0" y="513.1" font-size="11" text-anchor="start" fill="#1F2937">시험 호출</text>
+<text x="1844.0" y="528.1" font-size="11" text-anchor="start" fill="#1F2937">→ 발견 = tools/list</text>
+<polyline points="1746.0,539.0 1746.0,611.0" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-8map-d1-b)"/>
+<text x="1754.0" y="579.0" font-size="11" text-anchor="start" fill="#1F2937">고른 tool</text>
+<rect x="1706.0" y="611.0" width="300.0" height="47.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1856.0" y="631.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">client: tools/call</text>
+<text x="1856.0" y="647.1" font-size="11" text-anchor="middle" fill="#1F2937">모델이 고른 tool을 실행</text>
+<polyline points="1781.0,658.0 1781.0,730.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1789.0" y="698.0" font-size="11" text-anchor="start" fill="#1F2937">입력 검증</text>
+<polygon points="1781.0,730.0 1856.0,775.0 1781.0,820.0 1706.0,775.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="1781.0" y="771.0" font-size="13" text-anchor="middle" fill="#1F2937">입력 검증</text>
+<text x="1781.0" y="787.0" font-size="13" text-anchor="middle" fill="#1F2937">통과?</text>
+<rect x="1896.0" y="750.0" width="110.0" height="50.0" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="1951.0" y="771.8" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">tool 결과</text>
+<text x="1951.0" y="787.6" font-size="11" text-anchor="middle" fill="#1F2937">모델에 반환</text>
+<polyline points="1856.0,775.0 1896.0,775.0" fill="none" stroke="#16A34A" stroke-width="1.5" marker-end="url(#arr-8map-d1-ok)"/>
+<text x="1876.0" y="769.0" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<polyline points="1781.0,820.0 1781.0,880.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8map-d1)"/>
+<text x="1789.0" y="854.0" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<rect x="1706.0" y="880.0" width="300.0" height="47.0" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="1856.0" y="900.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">isError 붙은 tool 실행 에러</text>
+<text x="1856.0" y="916.1" font-size="11" text-anchor="middle" fill="#1F2937">모델에 반환 → 자가 수정용 (발견 수단 ✗)</text>
+<text x="1706.0" y="973.0" font-size="13" font-weight="bold" text-anchor="start" fill="#1F2937">목록 변경</text>
+<rect x="1706.0" y="985.0" width="300.0" height="34.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1856.0" y="1006.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">listChanged 선언 서버</text>
+<polyline points="1746.0,1019.0 1746.0,1077.0" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-8map-d1)"/>
+<text x="1756.0" y="1052.0" font-size="11" text-anchor="start" fill="#1F2937">notifications/tools/list_changed</text>
+<rect x="1706.0" y="1077.0" width="300.0" height="34.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1856.0" y="1098.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">client 재조회 (tools/list)</text>
+<line x1="1708" y1="1127.0" x2="1740" y2="1127.0" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="1748.0" y="1131.0" font-size="11" text-anchor="start" fill="#6B7280">점선 = 비동기 알림</text>
+<rect x="1706.0" y="1163.0" width="300.0" height="92.0" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="1856.0" y="1183.3" font-size="13" font-weight="bold" text-anchor="middle" fill="#1F2937">2026-07-28판 사양</text>
+<text x="1856.0" y="1199.1" font-size="11" text-anchor="middle" fill="#1F2937">프로토콜 session ✗ (stateless)</text>
+<text x="1856.0" y="1214.1" font-size="11" text-anchor="middle" fill="#1F2937">연결별 tool 목록 변경 금지</text>
+<text x="1856.0" y="1229.1" font-size="11" text-anchor="middle" fill="#1F2937">요청 인가에 따른 변경 허용</text>
+<text x="1856.0" y="1244.1" font-size="11" text-anchor="middle" fill="#1F2937">→ 공식 MCP 사양과 일치</text>
+</g>
+</svg>

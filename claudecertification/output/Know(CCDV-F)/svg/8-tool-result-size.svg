@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="390" viewBox="0 0 900 390" role="img" aria-label="큰 객체가 다음 호출에만 필요하면 identifier(handle)를 반환한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>큰 객체가 다음 호출에만 필요하면 identifier(handle)를 반환한다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-tool-result-size" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<polygon points="180,85.0 330.0,150 180,215.0 30.0,150" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="180" y="145.0" font-size="13" fill="#1F2937" text-anchor="middle">객체가 크고 모델이</text>
+<text x="180" y="162.0" font-size="13" fill="#1F2937" text-anchor="middle">다음 호출에만 필요한가?</text>
+<rect x="400" y="30" width="220" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="510.0" y="63.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">identifier(handle) 반환</text>
+<rect x="650" y="30" width="220" height="60" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="760.0" y="55.0" font-size="12" fill="#1F2937" text-anchor="middle">context에는 짧은 id만</text>
+<text x="760.0" y="71.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 다음 tool 호출에 id 전달</text>
+<rect x="400" y="120" width="220" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="510.0" y="153.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">필요한 전체 객체 반환</text>
+<rect x="650" y="120" width="220" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="760.0" y="145.0" font-size="12" fill="#1F2937" text-anchor="middle">모델이 내용을 직접</text>
+<text x="760.0" y="161.0" font-size="12" fill="#1F2937" text-anchor="middle">읽어야 하는 작업</text>
+<polyline points="180,85 180,60 398,60" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-result-size)"/>
+<rect x="280.0" y="40" width="20.0" height="16" fill="#FFFFFF"/>
+<text x="290" y="52" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="330,150 398,150" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-result-size)"/>
+<rect x="342.0" y="130" width="44.0" height="16" fill="#FFFFFF"/>
+<text x="364" y="142" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<polyline points="620,60 648,60" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-result-size)"/>
+<polyline points="620,150 648,150" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-result-size)"/>
+<rect x="30" y="240" width="840" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="265.0" font-size="12" fill="#1F2937" text-anchor="middle">예: 전체 객체를 반환하면 다음 호출 인자로만 쓰일 큰 데이터가 context에 그대로 쌓인다</text>
+<text x="450.0" y="281.0" font-size="12" fill="#1F2937" text-anchor="middle">identifier만 넘기면 같은 작업을 하면서 context를 아낀다</text>
+<rect x="30" y="316" width="840" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="339.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: "항상 전체 객체" / "항상 id만"</text>
+<text x="450.0" y="355.5" font-size="12" fill="#1F2937" text-anchor="middle">둘 다 틀림. 작업에 따라 정한다</text>
+</svg>

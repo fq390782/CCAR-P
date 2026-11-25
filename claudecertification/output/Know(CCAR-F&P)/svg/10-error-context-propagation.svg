@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480" role="img" aria-label="subagent 실패를 structured error context로 coordinator에 전달하는 흐름">
+<title>subagent 실패를 structured error context로 coordinator에 전달하는 흐름</title>
+<defs><marker id="arr-error-context-propagation" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">실패는 복구 판단용 context째 coordinator로: 빈 결과 · 조용한 skip은 근거를 지움</text>
+<rect x="20" y="96" width="150" height="90" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="95" y="131.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">subagent</text>
+<text x="95" y="146" font-size="11" fill="#1F2937" text-anchor="middle">도구 호출 실패</text>
+<text x="95" y="160.3" font-size="11" fill="#1F2937" text-anchor="middle">timeout · 권한 · 파싱</text>
+<polyline points="170,141 240,141" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-error-context-propagation)"/>
+<text x="205" y="132" font-size="11" fill="#1F2937" text-anchor="middle">error 반환</text>
+<rect x="240" y="56" width="340" height="170" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="410" y="78" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">structured error context</text>
+<text x="256" y="106" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="start">실패 유형</text>
+<text x="350" y="106" font-size="11" fill="#1F2937" text-anchor="start">timeout · 권한 · 파싱 구분</text>
+<text x="256" y="136" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="start">실행한 쿼리</text>
+<text x="350" y="136" font-size="11" fill="#1F2937" text-anchor="start">쿼리 수정 retry 판단</text>
+<text x="256" y="166" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="start">부분 결과</text>
+<text x="350" y="166" font-size="11" fill="#1F2937" text-anchor="start">부분 결과로 계속 진행</text>
+<text x="256" y="196" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="start">대안 접근</text>
+<text x="350" y="196" font-size="11" fill="#1F2937" text-anchor="start">다른 파싱 · 대체 출처 · 사용자 알림</text>
+<polyline points="580,141 670,141" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-error-context-propagation)"/>
+<text x="625" y="132" font-size="11" fill="#1F2937" text-anchor="middle">context째 전달</text>
+<rect x="670" y="96" width="210" height="90" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="775" y="138.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">coordinator</text>
+<text x="775" y="153.2" font-size="11" fill="#1F2937" text-anchor="middle">context를 근거로 판단</text>
+<polyline points="775,186 775,240" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<text x="783" y="218" font-size="11" fill="#1F2937" text-anchor="start">선택</text>
+<polyline points="340,240 775,240" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="340,240 340,264" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-error-context-propagation)"/>
+<rect x="240" y="266" width="200" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="340" y="290.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">재시도</text>
+<polyline points="558,240 558,264" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-error-context-propagation)"/>
+<rect x="458" y="266" width="200" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="558" y="290.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">빈틈 기록 후 제외</text>
+<polyline points="775,240 775,264" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-error-context-propagation)"/>
+<rect x="675" y="266" width="200" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="775" y="290.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">중단</text>
+<text x="20" y="290" font-size="11" fill="#6B7280" text-anchor="start">coordinator 선택지</text>
+<text x="20" y="352" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">오답: 같은 실패를 이렇게 반환하면 판단 근거가 사라짐</text>
+<rect x="20" y="364" width="160" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="100" y="399.1" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">빈 결과 집합을 성공으로</text>
+<text x="100" y="414.7" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">반환</text>
+<text x="100" y="429.3" font-size="11" fill="#1F2937" text-anchor="middle">오류 은폐 · 복구 근거 소실</text>
+<rect x="195" y="364" width="160" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="275" y="399.1" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">손상 문서를 조용히</text>
+<text x="275" y="414.7" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">건너뜀</text>
+<text x="275" y="429.3" font-size="11" fill="#1F2937" text-anchor="middle">실패 가시성 소멸</text>
+<rect x="370" y="364" width="160" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450" y="406.9" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">일반 "실패" 상태만 반환</text>
+<text x="450" y="421.5" font-size="11" fill="#1F2937" text-anchor="middle">복구 판단 정보 없음</text>
+<rect x="545" y="364" width="160" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="625" y="399.1" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">성공할 때까지 조용한</text>
+<text x="625" y="414.7" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">retry loop</text>
+<text x="625" y="429.3" font-size="11" fill="#1F2937" text-anchor="middle">해소 안 되는 에러에 반복</text>
+<rect x="720" y="364" width="160" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="800" y="399.1" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">예외를 최상위</text>
+<text x="800" y="414.7" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">handler까지 전파</text>
+<text x="800" y="429.3" font-size="11" fill="#1F2937" text-anchor="middle">1건 실패로 완료분 소실</text>
+</g>
+</svg>

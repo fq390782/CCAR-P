@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="420" viewBox="0 0 940 420" role="img" aria-label="plugin 팀 배포 흐름: 추가되는 hooks와 MCP까지 심사, project scope로 설치해 settings.json에 기록, PR 리뷰 후 커밋, 멤버가 workspace trust 수락 후 적용. 버전은 고정하고 의도적으로 업데이트한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>Plugin 팀 배포 흐름</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-plug" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="470" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">plugin은 심사 → project scope 공유 → 버전 고정 → 의도적 업데이트</text>
+  <text x="470" y="50" text-anchor="middle" font-size="11" fill="#6B7280">plugin(skills·subagents·hooks·MCP servers 묶음)은 사용자 본인의 권한으로 실행되므로 들어오는 것을 모두 확인한다</text>
+
+  <!-- row 1 -->
+  <rect x="20" y="76" width="190" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="115" y="98" text-anchor="middle" font-size="13" fill="#1F2937">도입 심사</text>
+  <text x="115" y="117" text-anchor="middle" font-size="11" fill="#6B7280">설치 화면의 "추가되는 것"</text>
+  <text x="115" y="133" text-anchor="middle" font-size="11" fill="#6B7280">hooks · MCP servers · skills</text>
+  <line x1="210" y1="110" x2="258" y2="110" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plug)"/>
+  <text x="234" y="102" text-anchor="middle" font-size="11" fill="#6B7280">통과</text>
+  <rect x="260" y="76" width="190" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="355" y="98" text-anchor="middle" font-size="13" fill="#1F2937">project scope로 설치</text>
+  <text x="355" y="117" text-anchor="middle" font-size="11" fill="#6B7280">활성화 정보가</text>
+  <text x="355" y="133" text-anchor="middle" font-size="11" fill="#6B7280">.claude/settings.json에 기록</text>
+  <line x1="450" y1="110" x2="498" y2="110" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plug)"/>
+  <text x="474" y="102" text-anchor="middle" font-size="11" fill="#6B7280">PR</text>
+  <rect x="500" y="76" width="190" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="595" y="104" text-anchor="middle" font-size="13" fill="#1F2937">리뷰 후 커밋</text>
+  <text x="595" y="123" text-anchor="middle" font-size="11" fill="#6B7280">팀 공유 정본</text>
+  <line x1="690" y1="110" x2="738" y2="110" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plug)"/>
+  <text x="714" y="102" text-anchor="middle" font-size="11" fill="#6B7280">공유</text>
+  <rect x="740" y="76" width="180" height="68" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="830" y="104" text-anchor="middle" font-size="13" fill="#1F2937">각 멤버에 적용</text>
+  <text x="830" y="123" text-anchor="middle" font-size="11" fill="#6B7280">workspace trust 수락 후</text>
+
+  <!-- row 2: update loop -->
+  <text x="20" y="212" font-size="11" fill="#6B7280">업데이트 운영</text>
+  <rect x="20" y="222" width="230" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="135" y="246" text-anchor="middle" font-size="13" fill="#1F2937">버전 고정</text>
+  <text x="135" y="266" text-anchor="middle" font-size="11" fill="#6B7280">marketplace를 tag/branch로 (#v1.2.0)</text>
+  <line x1="250" y1="252" x2="298" y2="252" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plug)"/>
+  <rect x="300" y="222" width="230" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="415" y="246" text-anchor="middle" font-size="13" fill="#1F2937">auto-update OFF</text>
+  <text x="415" y="266" text-anchor="middle" font-size="11" fill="#6B7280">marketplace별 설정 (공식은 기본 ON)</text>
+  <line x1="530" y1="252" x2="578" y2="252" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plug)"/>
+  <text x="554" y="244" text-anchor="middle" font-size="11" fill="#6B7280">새 버전</text>
+  <rect x="580" y="222" width="200" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="680" y="246" text-anchor="middle" font-size="13" fill="#1F2937">변경 내용 확인</text>
+  <text x="680" y="266" text-anchor="middle" font-size="11" fill="#6B7280">추가·변경된 hooks·MCP</text>
+  <polyline points="680,222 680,180 115,180 115,146" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plug)"/>
+  <text x="400" y="173" text-anchor="middle" font-size="11" fill="#6B7280">의도적으로 업데이트 (다시 심사부터)</text>
+
+  <!-- anti -->
+  <rect x="20" y="306" width="900" height="96" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="470" y="328" text-anchor="middle" font-size="13" fill="#1F2937">오답</text>
+  <text x="470" y="349" text-anchor="middle" font-size="11" fill="#6B7280">auto-update로 최신판 자동 배포, 설명문·사용자 수만 보고 심사 → 심사를 거치지 않은 hooks나 권한이 유입</text>
+  <text x="470" y="368" text-anchor="middle" font-size="11" fill="#6B7280">팀 설정을 각자의 ~/.claude/settings.json에 수동 배포 → 버전 추적과 리뷰 불가</text>
+  <text x="470" y="387" text-anchor="middle" font-size="11" fill="#6B7280">.claude/settings.local.json을 커밋해 팀에 배포 → 개인용 파일이라 정본 역할을 못 함</text>
+</svg>

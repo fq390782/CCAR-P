@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-label="평가를 통과하는 가장 단순한 기법에서 멈추는 기법 사다리" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>평가를 통과하는 가장 단순한 기법에서 멈추는 기법 사다리</title>
+<defs><marker id="arr-technique-ladder" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<rect x="20" y="56" width="320" height="76" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="180.0" y="89.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">각 단계에서 eval 통과 → 거기서 멈춤</text>
+<text x="180.0" y="106.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">이미 통과한 상태에서 상위 기법으로 승급 ✗</text>
+<rect x="20" y="250" width="160" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="100.0" y="272.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">1 zero-shot</text>
+<text x="100.0" y="287.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">단순 · 모호하지 않은 작업</text>
+<line x1="100" y1="302" x2="100" y2="316" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="20" y="316" width="160" height="150" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="100.0" y="386.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">단순하고 모호하지 않은</text>
+<text x="100.0" y="401.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">작업은 zero-shot 적합</text>
+<rect x="196" y="202" width="160" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="276.0" y="224.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">2 few-shot 예시</text>
+<text x="276.0" y="239.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">zero-shot 위 가장 저렴</text>
+<line x1="276" y1="254" x2="276" y2="316" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="196" y="316" width="160" height="150" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="276.0" y="363.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">학습 예산 없음 · 새 라벨</text>
+<text x="276.0" y="378.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">정확도 미달 → &lt;example&gt;</text>
+<text x="276.0" y="393.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">태그 예시 3~5개로 시작</text>
+<text x="276.0" y="408.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">측정 후 eval에서 필요할</text>
+<text x="276.0" y="423.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">때만 추가</text>
+<rect x="372" y="154" width="160" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="452.0" y="176.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">3 거부 예시</text>
+<text x="452.0" y="191.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">negative · 근접 오류 경계</text>
+<line x1="452" y1="206" x2="452" y2="316" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="372" y="316" width="160" height="150" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="452.0" y="371.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">근접 오류 → 거부 예시</text>
+<text x="452.0" y="386.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">한계: 근접 오류 쌍 선별 ·</text>
+<text x="452.0" y="401.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">새 edge case마다 예시</text>
+<text x="452.0" y="416.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">유지보수</text>
+<rect x="548" y="106" width="160" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="628.0" y="128.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">4 명시적 추론</text>
+<text x="628.0" y="143.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">다단계 · 검증 가능</text>
+<line x1="628" y1="158" x2="628" y2="316" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="548" y="316" width="160" height="150" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="628.0" y="363.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">어렵고 검증 가능한 다단계</text>
+<text x="628.0" y="378.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">→ 명시적 추론</text>
+<text x="628.0" y="393.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">비용: 출력 token 증가 ·</text>
+<text x="628.0" y="408.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">단계 산술은 코드 checker와</text>
+<text x="628.0" y="423.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">짝</text>
+<rect x="724" y="58" width="160" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="804.0" y="80.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">5 fine-tuning</text>
+<text x="804.0" y="95.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">또는 작업 재구성</text>
+<line x1="804" y1="110" x2="804" y2="316" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="724" y="316" width="160" height="150" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="804.0" y="348.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">전환 조건: 1~4 모두 시도 ·</text>
+<text x="804.0" y="363.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">목표 97% 대비 최고 93% ·</text>
+<text x="804.0" y="378.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">오류에 이름 붙일 패턴 없음</text>
+<text x="804.0" y="393.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">· 라벨 40,000건</text>
+<text x="804.0" y="408.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">비용: 데이터 작업 · 학습</text>
+<text x="804.0" y="423.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">실행 · 재구성은 이해관계자</text>
+<text x="804.0" y="438.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">합의</text>
+<polyline points="100,250 100,228 196,228" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-technique-ladder)"/>
+<rect x="122.5" y="212.0" width="59.0" height="16" fill="#FFFFFF"/>
+<text x="152.0" y="224" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">eval 실패</text>
+<polyline points="276,202 276,180 372,180" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-technique-ladder)"/>
+<rect x="298.5" y="164.0" width="59.0" height="16" fill="#FFFFFF"/>
+<text x="328.0" y="176" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">eval 실패</text>
+<polyline points="452,154 452,132 548,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-technique-ladder)"/>
+<rect x="474.5" y="116.0" width="59.0" height="16" fill="#FFFFFF"/>
+<text x="504.0" y="128" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">eval 실패</text>
+<polyline points="628,106 628,84 724,84" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-technique-ladder)"/>
+<rect x="650.5" y="68.0" width="59.0" height="16" fill="#FFFFFF"/>
+<text x="680.0" y="80" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">eval 실패</text>
+<rect x="20" y="480" width="860" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="504.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">사다리 너머 = 더 많은 prompting ✗ · 전환 전 점검: 예시가 잘못 선택됐으면 사다리 미시도, 라벨 정의가 모호했으면 prompt 공간 미시도</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="450" viewBox="0 0 960 450" role="img" aria-label="hook 실행 시점: PreToolUse만 실행 전에 차단할 수 있고, 실행 후에는 성공이면 PostToolUse, 실패면 PostToolUseFailure가 발화한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>Hooks 실행 시점</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-hook" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937">실행 전에만 막을 수 있다: PreToolUse vs PostToolUse</text>
+  <text x="20" y="52" font-size="11" fill="#6B7280">모든 hook은 matcher(예: Edit|Write, Bash)에 맞으면 모델 판단 없이 매번 실행된다</text>
+
+  <!-- boundary -->
+  <line x1="595" y1="70" x2="595" y2="350" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="585" y="86" text-anchor="end" font-size="13" font-weight="bold" fill="#6B7280">실행 전</text>
+  <text x="605" y="86" font-size="13" font-weight="bold" fill="#6B7280">실행 후</text>
+
+  <!-- request -->
+  <rect x="20" y="150" width="120" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="80" y="176" text-anchor="middle" font-size="13" fill="#1F2937">도구 호출</text>
+  <text x="80" y="195" text-anchor="middle" font-size="11" fill="#6B7280">모델이 요청</text>
+  <line x1="140" y1="180" x2="178" y2="180" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hook)"/>
+
+  <!-- PreToolUse -->
+  <rect x="180" y="150" width="170" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="265" y="176" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">PreToolUse</text>
+  <text x="265" y="195" text-anchor="middle" font-size="11" fill="#6B7280">유일하게 차단 가능</text>
+  <line x1="350" y1="180" x2="378" y2="180" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hook)"/>
+  <polygon points="430,140 485,180 430,220 375,180" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="430" y="185" text-anchor="middle" font-size="13" fill="#1F2937">결정</text>
+
+  <!-- block -->
+  <line x1="430" y1="220" x2="430" y2="268" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hook)"/>
+  <text x="420" y="240" text-anchor="end" font-size="11" fill="#6B7280">permissionDecision: deny</text>
+  <text x="420" y="256" text-anchor="end" font-size="11" fill="#6B7280">또는 exit code 2</text>
+  <rect x="350" y="270" width="160" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="430" y="294" text-anchor="middle" font-size="13" fill="#1F2937">차단</text>
+  <text x="430" y="313" text-anchor="middle" font-size="11" fill="#6B7280">도구가 실행되지 않음</text>
+
+  <!-- execute -->
+  <line x1="485" y1="180" x2="618" y2="180" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hook)"/>
+  <text x="522" y="172" text-anchor="middle" font-size="11" fill="#6B7280">allow/ask/defer</text>
+  <rect x="620" y="155" width="100" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="670" y="185" text-anchor="middle" font-size="13" fill="#1F2937">도구 실행</text>
+  <line x1="720" y1="180" x2="748" y2="180" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hook)"/>
+  <polygon points="795,145 840,180 795,215 750,180" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="795" y="185" text-anchor="middle" font-size="13" fill="#1F2937">성공?</text>
+
+  <!-- PostToolUse -->
+  <line x1="795" y1="145" x2="795" y2="118" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hook)"/>
+  <text x="805" y="136" font-size="11" fill="#6B7280">성공</text>
+  <rect x="690" y="60" width="250" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="815" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">PostToolUse</text>
+  <text x="815" y="103" text-anchor="middle" font-size="11" fill="#6B7280">감사 로그·포맷 정리·알림, 차단 불가</text>
+
+  <!-- PostToolUseFailure -->
+  <line x1="795" y1="215" x2="795" y2="268" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hook)"/>
+  <text x="805" y="246" font-size="11" fill="#6B7280">실패</text>
+  <rect x="690" y="270" width="250" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="815" y="294" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">PostToolUseFailure</text>
+  <text x="815" y="313" text-anchor="middle" font-size="11" fill="#6B7280">실패한 호출만 기록·알림</text>
+
+  <!-- traps -->
+  <rect x="20" y="370" width="450" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="245" y="393" text-anchor="middle" font-size="13" fill="#1F2937">함정: PostToolUse로 위험한 명령 차단</text>
+  <text x="245" y="413" text-anchor="middle" font-size="11" fill="#6B7280">이미 실행된 뒤라 막거나 되돌릴 수 없고 관찰만 가능</text>
+  <rect x="490" y="370" width="450" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="715" y="393" text-anchor="middle" font-size="13" fill="#1F2937">함정: PostToolUseFailure로 감사 로그</text>
+  <text x="715" y="413" text-anchor="middle" font-size="11" fill="#6B7280">성공한 변경에서는 발화하지 않아 기록이 빠짐</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="구조 검증과 의미 검증을 거쳐 재요청하거나 최종 수용처로 보내는 흐름" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>구조 검증과 의미 검증을 거쳐 재요청하거나 최종 수용처로 보내는 흐름</title>
+<defs><marker id="arr-validation-semantic" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<rect x="20" y="50" width="140" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="90.0" y="78.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">모델 출력</text>
+<text x="90.0" y="93.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">JSON · tool 입력</text>
+<rect x="200" y="50" width="200" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="300.0" y="70.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">구조 검증</text>
+<text x="300.0" y="86.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">schema · strict · tool_choice</text>
+<text x="300.0" y="101.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">구문 · 타입 · 필수 항목 오류 제거</text>
+<polygon points="575.0,36 680,82.0 575.0,128 470,82.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="575.0" y="70.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">의미 검증 통과?</text>
+<text x="575.0" y="86.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">합계 · 행 번호 · 인용</text>
+<text x="575.0" y="101.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">· 업무 규칙</text>
+<rect x="730" y="50" width="150" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="805.0" y="85.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">하류 전달</text>
+<polyline points="160,82 200,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<polyline points="400,82 470,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<rect x="407.2" y="74.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="435.0" y="86.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">구조 통과</text>
+<polyline points="680,82 730,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<rect x="690.0" y="74.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="705.0" y="86.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">통과</text>
+<polyline points="575,128 575,170" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<rect x="560.0" y="141.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="575" y="153" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">실패</text>
+<polygon points="575.0,170 690,215.0 575.0,260 460,215.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="575.0" y="209.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">모델이 필요한</text>
+<text x="575.0" y="227.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">정보를 가졌나?</text>
+<rect x="20" y="165" width="390" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="215.0" y="193.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">재요청 구성 (정보는 입력에 있고 표기만 다름)</text>
+<text x="215.0" y="210.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">원본 문서 + 거부된 JSON + validator의 구체 오류</text>
+<text x="215.0" y="227.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">지시 · 문맥 · 입력은 XML 태그로 구분</text>
+<text x="215.0" y="244.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">수정이 끝난 데이터만 반환하도록 지시</text>
+<polyline points="460,215 410,215" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<rect x="425.5" y="195.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="435" y="207" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="90,165 90,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<rect x="69.5" y="130.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="90" y="142" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">재요청</text>
+<rect x="20" y="300" width="370" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="205.0" y="329.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">tool 호출이 업무 규칙에 거부될 때</text>
+<text x="205.0" y="346.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">tool_result + is_error: true + 구체적 이유</text>
+<text x="205.0" y="363.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">주고받음을 대화 이력에 남긴 채 다음 요청</text>
+<text x="205.0" y="378.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">무슨 일이 일어났는지 · 다음에 시도할 것 둘 다 필요</text>
+<polyline points="215,265 215,300" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<rect x="174.5" y="275.0" width="81.0" height="16" fill="#FFFFFF"/>
+<text x="215" y="287" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">tool 호출이면</text>
+<rect x="430" y="300" width="450" height="112" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="655.0" y="318.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">최종 수용처</text>
+<text x="655.0" y="335.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">입력에 정보 없음 → 누락 원본 공급 → 그래도 없으면 null · "이용 불가"</text>
+<text x="655.0" y="352.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">허용</text>
+<text x="655.0" y="369.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">소스 자체가 모순 → stated_total · calculated_total 추출 +</text>
+<text x="655.0" y="386.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">conflict_detected → 사람 검토</text>
+<text x="655.0" y="401.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">재시도 N회에도 해소 0건 = 입력에 정보 없다는 신호</text>
+<polyline points="575,260 575,300" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-semantic)"/>
+<rect x="554.5" y="272.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="575" y="284" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="20" y="424" width="860" height="40" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="447.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">정보가 입력에 없는데 재시도 · strict · few-shot 반복 → 없는 정보를 모델이 채우게 하는 방향 (날조)</text>
+<text x="20" y="484" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">운영: 오류 종류별 재시도 성공률 기록 → 안 고쳐지는 오류를 조기 식별</text>
+</svg>

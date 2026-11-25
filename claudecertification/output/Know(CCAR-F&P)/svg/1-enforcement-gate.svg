@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="470" viewBox="0 0 920 470" role="img" aria-label="프로그램 강제: 모델 밖 gate가 tool 실행 전에 검증된 결과를 확인하고 거부 이유를 돌려준다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>프로그램 강제: 모델 밖 gate가 tool 실행 전에 검증된 결과를 확인하고 거부 이유를 돌려준다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-enforce-gate-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-enforce-gate-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-enforce-gate-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-enforce-gate-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">프로그램 강제 · 전제 조건 gate — 모델 밖 코드가 실행 전에 판정</text>
+<rect x="20" y="100" width="170" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105.0" y="121.5" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">모델</text>
+<text x="105.0" y="136.8" font-size="11" fill="#6B7280" text-anchor="middle">tool_use 요청</text>
+<text x="105.0" y="151.8" font-size="11" fill="#6B7280" text-anchor="middle">process_refund</text>
+<rect x="240" y="84" width="200" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="340.0" y="121.5" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">gate (모델 밖 코드)</text>
+<text x="340.0" y="136.8" font-size="11" fill="#6B7280" text-anchor="middle">PreToolUse hook · 전제 조건</text>
+<text x="340.0" y="151.8" font-size="11" fill="#6B7280" text-anchor="middle">tool 실행 직전 검사</text>
+<path d="M190,132 L240,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-enforce-gate-k)"/>
+<rect x="200.0" y="112.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="215" y="123.0" font-size="11" fill="#1F2937" text-anchor="middle">요청</text>
+<polygon points="600,67.0 740.0,132 600,197.0 460.0,132" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="600" y="124.5" font-size="13" fill="#1F2937" text-anchor="middle">선행 단계가</text>
+<text x="600" y="141.6" font-size="13" fill="#1F2937" text-anchor="middle">검증된 결과를 냈나?</text>
+<text x="600" y="156.8" font-size="11" fill="#6B7280" text-anchor="middle">(검증된 ID 획득 = 완료)</text>
+<path d="M440,132 L460,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-enforce-gate-k)"/>
+<rect x="770" y="107" width="130" height="50" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="835.0" y="136.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">tool 실행</text>
+<path d="M740,132 L770,132" fill="none" stroke="#16A34A" stroke-width="1.5" marker-end="url(#arr-enforce-gate-g)"/>
+<rect x="745.5" y="112.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="755" y="123.0" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M600,197 L600,240" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-enforce-gate-r)"/>
+<rect x="599.5" y="210.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="620" y="221.0" font-size="11" fill="#DC2626" text-anchor="middle">아니오</text>
+<rect x="480" y="240" width="240" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="600.0" y="261.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">deny + 이유 반환</text>
+<text x="600.0" y="276.9" font-size="11" fill="#6B7280" text-anchor="middle">permissionDecisionReason으로</text>
+<text x="600.0" y="291.9" font-size="11" fill="#6B7280" text-anchor="middle">이유를 모델에 전달 (tool 결과)</text>
+<path d="M480,272 L105,272 L105,164" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-enforce-gate-r)"/>
+<rect x="207.9" y="254.0" width="164.2" height="16" fill="#FFFFFF"/>
+<text x="290" y="265.0" font-size="11" fill="#DC2626" text-anchor="middle">이유를 받아 올바른 절차로 복귀</text>
+<rect x="20" y="330" width="430" height="116" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="235.0" y="362.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">prompt 지시 (system prompt · CLAUDE.md · few-shot)</text>
+<text x="235.0" y="377.9" font-size="11" fill="#6B7280" text-anchor="middle">확률적 · 실패율 0 ✗</text>
+<text x="235.0" y="392.9" font-size="11" fill="#6B7280" text-anchor="middle">위반 영향이 작은 문체 · 안내 문구에만 충분</text>
+<text x="235.0" y="407.9" font-size="11" fill="#6B7280" text-anchor="middle">위반이 나면 prompt 강화 ✗ → hook · gate 추가</text>
+<text x="235.0" y="422.9" font-size="11" fill="#6B7280" text-anchor="middle">PostToolUse hook = 실행 후 → 방지 ✗</text>
+<rect x="470" y="330" width="430" height="116" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="685.0" y="362.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">프로그램 강제 (hook · gate · tool 권한 · CI gate)</text>
+<text x="685.0" y="377.9" font-size="11" fill="#6B7280" text-anchor="middle">결정적 · 예외 불인정 · 위반 = 법령 · 금전 · 비가역 피해</text>
+<text x="685.0" y="392.9" font-size="11" fill="#6B7280" text-anchor="middle">gate 조건 = '호출됨'이 아니라 '검증됨'</text>
+<text x="685.0" y="407.9" font-size="11" fill="#6B7280" text-anchor="middle">검증된 ID를 session 상태에 유지</text>
+<text x="685.0" y="422.9" font-size="11" fill="#6B7280" text-anchor="middle">→ process_refund 인수의 ID와 일치 확인</text>
+</svg>

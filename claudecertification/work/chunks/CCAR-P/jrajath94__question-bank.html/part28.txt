@@ -1,0 +1,215 @@
+<h3 id="bank-mocks-h50">M1-Q46 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p227" data-kind="prose"><strong>Scenario.</strong> A contract-signing agent prepares signature packets. A
+wrong signature binds the company to bad terms.</p>
+
+<p id="sec-bank-mocks-p228" data-kind="prose"><strong>Question.</strong> Which review shape fits?</p>
+
+<p id="sec-bank-mocks-p229" data-kind="prose">A) Do a post-action sampled review.
+B) Do a pre-action approval. A qualified signer reviews the exact packet and terms. This happens before any signing.
+C) Do not do a review. The agent is accurate.</p>
+
+<p id="sec-bank-mocks-p230" data-kind="prose">D) Do an annual review.</p>
+
+<p id="sec-bank-mocks-p231" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "A wrong signature binds the company to
+bad terms." Why: signing is irreversible and high-consequence. Only
+pre-action approval with full context can stop the harm. A reviews
+after binding. Counterfactual: A wins for reversible low-stakes
+packets.</p>
+
+
+<h3 id="bank-mocks-h51">M1-Q47 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p232" data-kind="prose"><strong>Scenario.</strong> A drafting agent writes internal status updates. Volume is
+2,000 per day. Stakes are low and everything is reversible.</p>
+
+<p id="sec-bank-mocks-p233" data-kind="prose"><strong>Question.</strong> Which review shape fits?</p>
+
+<p id="sec-bank-mocks-p234" data-kind="prose"><strong>Options.</strong>
+A) Pre-action approval on every draft.
+B) Sampled human review plus audit logging.
+C) No logging at all.
+D) CEO approval per draft.</p>
+
+<p id="sec-bank-mocks-p235" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "2,000 per day. Stakes are low and
+everything is reversible." Why: pre-action approval at this volume
+becomes rubber-stamp theater. Sampled review plus complete logs give
+real detection cheaply. Counterfactual: A wins at 20 drafts per day
+with high stakes.</p>
+
+
+<h3 id="bank-mocks-h52">M1-Q48 (V2-D5.4), Select TWO</h3>
+
+<p id="sec-bank-mocks-p236" data-kind="prose"><strong>Scenario.</strong> A health chatbot handles patient messages. HIPAA applies.
+The team has access controls but no named owner and no review schedule.</p>
+
+<p id="sec-bank-mocks-p237" data-kind="prose"><strong>Question.</strong> Which TWO links complete the compliance chain? Select TWO.</p>
+
+<p id="sec-bank-mocks-p238" data-kind="prose"><strong>Options.</strong>
+A) A named owner for the access controls.
+B) A review cadence: re-check the controls on a schedule.
+C) A nicer chatbot avatar.
+D) A longer system prompt.
+E) A bigger model.</p>
+
+<p id="sec-bank-mocks-p239" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p240" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "no named owner and no review
+schedule." Why: the chain is requirement to control to owner to
+evidence to cadence. Name the missing links explicitly. C, D, and
+E are not chain links. Counterfactual: none. Cosmetics never complete
+compliance.</p>
+
+
+<h3 id="bank-mocks-h53">M1-Q49 (V2-D5.4)</h3>
+
+<p id="sec-bank-mocks-p241" data-kind="prose"><strong>Scenario.</strong> A support bot stores EU customer tickets. The team sets
+retention: tickets auto-delete after 3 years, sooner on customer
+request.</p>
+
+<p id="sec-bank-mocks-p242" data-kind="prose"><strong>Question.</strong> What makes this retention design sound?</p>
+
+<p id="sec-bank-mocks-p243" data-kind="prose"><strong>Options.</strong>
+A) The 3-year number alone.
+B) The retention rule tied to the requirement, with an owner, evidence
+of enforcement, and a review cadence. Plus the on-request deletion
+path.
+C) Deleting everything after one day.
+D) Keeping everything forever.</p>
+
+<p id="sec-bank-mocks-p244" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: &quot;auto-delete after 3 years, sooner on
+customer request.&quot; Why: retention is a link in the compliance chain:
+requirement, control, owner, evidence, cadence. The deletion path
+honors the request right. C destroys business evidence. D ignores the
+requirement.</p>
+
+<p id="sec-bank-mocks-p245" data-kind="prose">Counterfactual: C wins only if a rule truly demands
+one-day deletion.</p>
+
+
+<h3 id="bank-mocks-h54">M1-Q50 (V2-D5.5)</h3>
+
+<p id="sec-bank-mocks-p246" data-kind="prose"><strong>Scenario.</strong> A loan assistant denies applications. Applicants ask why.</p>
+
+<p id="sec-bank-mocks-p247" data-kind="prose"><strong>Question.</strong> What does responsible AI require?</p>
+
+<p id="sec-bank-mocks-p248" data-kind="prose"><strong>Options.</strong>
+A) &quot;The model made the decision.&quot;
+B) Traceability: Link the decision to the factors and data. Explain the decision to the applicant. Measure per-group fairness.
+C) A higher confidence score.
+D) Silence.</p>
+
+<p id="sec-bank-mocks-p249" data-kind="prose">The key is B. The decisive phrase is &quot;Applicants ask why.&quot; V2-D5.5 requires transparency. It requires explainability. It requires accountability. It requires traceability. The decision must link to its factors.</p>
+
+<p id="sec-bank-mocks-p250" data-kind="prose">Measure fairness per group. A and D give up responsibility. Opacity is never the answer.</p>
+
+
+<h3 id="bank-mocks-h55">M1-Q51 (V2-D6.1)</h3>
+
+<p id="sec-bank-mocks-p251" data-kind="prose"><strong>Scenario.</strong> A warehouse wants a picking assistant that is "accurate
+and fast." Volume is 5,000 picks per day. Errors ship wrong products.</p>
+
+<p id="sec-bank-mocks-p252" data-kind="prose"><strong>Question.</strong> What is the first discovery output?</p>
+
+<p id="sec-bank-mocks-p253" data-kind="prose"><strong>Options.</strong>
+A) This is a vendor demonstration.
+B) These are measurable requirements. &quot;Accurate&quot; means pick accuracy is 99.5% or more. &quot;Fast&quot; means p95 pick time is less than 20 seconds. Record the error cost and the volume.</p>
+
+<p id="sec-bank-mocks-p254" data-kind="prose">C) This is a system prompt.
+D) This is a tier choice.</p>
+
+<p id="sec-bank-mocks-p255" data-kind="prose"><strong>Key.</strong> B.
+The decisive phrase is &quot;&#x27;accurate and fast&#x27;... Errors ship wrong products.&quot;
+Discovery changes adjectives to numbers before any build.
+A, C, and D use adjectives.
+A wins after the team signs the requirements.</p>
+
+
+<h3 id="bank-mocks-h56">M1-Q52 (V2-D6.1), Select TWO</h3>
+
+<p id="sec-bank-mocks-p256" data-kind="prose"><strong>Scenario.</strong> A discovery session for a claims bot ends with: volume
+unknown, compliance needs unknown, the data source "probably the
+warehouse."</p>
+
+<p id="sec-bank-mocks-p257" data-kind="prose"><strong>Question.</strong> Select the TWO open assumptions to record.</p>
+
+<p id="sec-bank-mocks-p258" data-kind="prose"><strong>Options.</strong>
+A) Daily claim volume.
+B) The compliance and logging requirements.
+C) The office paint color.
+D) The vendor's founding year.
+E) The CEO's favorite model.</p>
+
+<p id="sec-bank-mocks-p259" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p260" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;volume unknown, compliance needs
+unknown, the data source &#x27;probably.&#x27;&quot; Why: V2-D6.1 records open
+assumptions explicitly with owners. Volume and compliance shape the
+whole design. C, D, and E are irrelevant. Counterfactual: none.</p>
+
+<p id="sec-bank-mocks-p261" data-kind="prose">Trivia is never a discovery output.</p>
+
+
+<h3 id="bank-mocks-h57">M1-Q53 (V2-D6.2)</h3>
+
+<p id="sec-bank-mocks-p262" data-kind="prose"><strong>Scenario.</strong> An architect proposes a new vendor for document storage.
+Legal asks about the trade-off.</p>
+
+<p id="sec-bank-mocks-p263" data-kind="prose"><strong>Question.</strong> What does legal need to hear?</p>
+
+<p id="sec-bank-mocks-p264" data-kind="prose"><strong>Options.</strong>
+A) Only the price.
+B) Compliance impact, data residency, contract risk, reversal cost, and
+audit evidence per option.
+C) The model's favorite color.
+D) Nothing. Legal does not decide.</p>
+
+<p id="sec-bank-mocks-p265" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "Legal asks about the trade-off." Why:
+V2-D6.2 adapts benefit, cost, risk, reversal cost, and compliance
+impact to the audience. Legal decides on exactly these axes.
+Counterfactual: A wins for the CFO's first slide, never alone for
+legal.</p>
+
+
+<h3 id="bank-mocks-h58">M1-Q54 (V2-D6.2)</h3>
+
+<p id="sec-bank-mocks-p266" data-kind="prose"><strong>Scenario.</strong> A team debates switching vector databases. The current
+one holds 40M vectors with custom metadata.</p>
+
+<p id="sec-bank-mocks-p267" data-kind="prose"><strong>Question.</strong> Which trade-off axis matters most here?</p>
+
+<p id="sec-bank-mocks-p268" data-kind="prose"><strong>Options.</strong>
+A) The logo design.
+B) Reversal and migration cost: re-indexing 40M vectors, metadata
+mapping, dual-run period, and rollback plan.
+C) The vendor's office location.
+D) The sales rep's responsiveness.</p>
+
+<p id="sec-bank-mocks-p269" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "holds 40M vectors with custom metadata."
+Why: migration cost dominates the decision at this scale. V2-D6.2
+requires reversal cost per option. The rest are trivia.
+Counterfactual: D wins never as a decision axis.</p>
+
+
+<h3 id="bank-mocks-h59">M1-Q55 (V2-D6.3), Select TWO</h3>
+
+<p id="sec-bank-mocks-p270" data-kind="prose"><strong>Scenario.</strong> A team ships a triage bot to the CIO with the promise
+"the AI handles it."</p>
+
+<p id="sec-bank-mocks-p271" data-kind="prose"><strong>Question.</strong> Which TWO make the handoff honest? Select TWO.</p>
+
+<p id="sec-bank-mocks-p272" data-kind="prose"><strong>Options.</strong>
+A) Measured quality per ticket class with the eval date.
+B) Review triggers and breach consequences: what happens when quality
+drops or a new class appears.
+C) "The AI handles it" as the SLA.
+D) A promise of zero errors.
+E) Silence about limits.</p>
+
+<p id="sec-bank-mocks-p273" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p274" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "'the AI handles it.'" Why: honest
+handoff needs measurable quality and named triggers with
+consequences. C, D, and E are slogans or silence. Counterfactual:
+none. Slogans are never SLA terms.</p>
+

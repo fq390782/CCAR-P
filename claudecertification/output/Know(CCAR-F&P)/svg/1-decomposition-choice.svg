@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="분해 방식 선택: 절차를 사전에 정할 수 있으면 고정 chain, 아니면 탐색 우선순위 계획 갱신의 동적 분해" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>분해 방식 선택: 절차를 사전에 정할 수 있으면 고정 chain, 아니면 탐색 우선순위 계획 갱신의 동적 분해</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-decomposition-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-decomposition-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-decomposition-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-decomposition-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">분해 방식 선택 — 고정 chain vs 동적 분해</text>
+<polygon points="180,70.0 330.0,130 180,190.0 30.0,130" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="180" y="126.0" font-size="13" fill="#1F2937" text-anchor="middle">이후 절차를 사전에</text>
+<text x="180" y="143.1" font-size="13" fill="#1F2937" text-anchor="middle">확정할 수 있나?</text>
+<rect x="30" y="236" width="300" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="180.0" y="260.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">고정 순차 chain</text>
+<text x="180.0" y="275.9" font-size="11" fill="#6B7280" text-anchor="middle">정형 · 반복 점검 (PR 체크 · 템플릿 검수)</text>
+<text x="180.0" y="290.9" font-size="11" fill="#6B7280" text-anchor="middle">확인 항목 · 순서 고정 → 일관성 · 검증 용이</text>
+<path d="M180,190 L180,236" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-decomposition-b)"/>
+<rect x="129.4" y="205.0" width="101.3" height="16" fill="#FFFFFF"/>
+<text x="180" y="216.0" font-size="11" fill="#2563EB" text-anchor="middle">예: 항목 목록 확정</text>
+<rect x="30" y="336" width="300" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180.0" y="359.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">한 도구에 두 유형 공존</text>
+<text x="180.0" y="376.6" font-size="13" fill="#1F2937" text-anchor="middle">의뢰 유형 판정 → 분기</text>
+<text x="180.0" y="391.9" font-size="11" fill="#6B7280" text-anchor="middle">정형 = chain · 조사 = 동적 분해</text>
+<rect x="380" y="60" width="520" height="440" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<path d="M330,130 L380,130" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-decomposition-b)"/>
+<rect x="334.5" y="110.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="355" y="121.0" font-size="11" fill="#2563EB" text-anchor="middle">아니오</text>
+<text x="394" y="84" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">동적 분해 — orchestrator가 분해 · 위임 · 통합</text>
+<text x="394" y="100" font-size="11" fill="#6B7280" text-anchor="start">범위 미정 조사 · 원인 탐색: 발견에 따라 다음 단계가 변동</text>
+<rect x="410" y="116" width="280" height="46" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="550.0" y="136.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">1. 짧고 넓은 탐색</text>
+<text x="550.0" y="151.3" font-size="11" fill="#6B7280" text-anchor="middle">구조 · 중요 영역 파악</text>
+<rect x="410" y="182" width="280" height="46" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="550.0" y="209.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">2. 영향 큰 영역 식별</text>
+<rect x="410" y="248" width="280" height="46" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="550.0" y="268.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">3. 우선순위 서브태스크 계획</text>
+<text x="550.0" y="283.4" font-size="11" fill="#6B7280" text-anchor="middle">산출물로 기록</text>
+<rect x="410" y="314" width="280" height="46" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="550.0" y="334.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">4. 의존 관계 발견 시 계획 갱신</text>
+<text x="550.0" y="349.4" font-size="11" fill="#6B7280" text-anchor="middle">변경 이유 기록</text>
+<rect x="410" y="380" width="280" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="550.0" y="405.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">5. 결과 통합 후 공백 확인</text>
+<text x="550.0" y="420.4" font-size="11" fill="#6B7280" text-anchor="middle">공백에만 2차 할당</text>
+<path d="M550,162 L550,182" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-decomposition-b)"/>
+<path d="M550,228 L550,248" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-decomposition-b)"/>
+<path d="M550,294 L550,314" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-decomposition-b)"/>
+<path d="M550,360 L550,380" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-decomposition-b)"/>
+<path d="M690,337 L712,337 L712,271 L690,271" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-decomposition-b)"/>
+<rect x="697.0" y="286.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="712" y="297.0" font-size="11" fill="#2563EB" text-anchor="middle">갱신</text>
+<rect x="738" y="116" width="150" height="112" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="813.0" y="154.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">안티패턴</text>
+<text x="813.0" y="169.3" font-size="11" fill="#6B7280" text-anchor="middle">알파벳 · 디렉터리 순</text>
+<text x="813.0" y="184.3" font-size="11" fill="#6B7280" text-anchor="middle">처리 → 중요 모듈 테스트</text>
+<text x="813.0" y="199.3" font-size="11" fill="#6B7280" text-anchor="middle">0건 · 대부분 재작업</text>
+<rect x="738" y="248" width="150" height="112" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="813.0" y="286.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">안티패턴</text>
+<text x="813.0" y="301.4" font-size="11" fill="#6B7280" text-anchor="middle">시작 시점 문구로</text>
+<text x="813.0" y="316.4" font-size="11" fill="#6B7280" text-anchor="middle">서브태스크 고정</text>
+<text x="813.0" y="331.4" font-size="11" fill="#6B7280" text-anchor="middle">→ 중간 단서 누락</text>
+<rect x="738" y="380" width="150" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="813.0" y="404.4" font-size="11" fill="#6B7280" text-anchor="middle">전 주제 일률 증가 ✗</text>
+<text x="813.0" y="419.4" font-size="11" fill="#6B7280" text-anchor="middle">통합 단계 임의 보완 ✗</text>
+<rect x="394" y="448" width="492" height="40" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="640.0" y="465.1" font-size="13" fill="#1F2937" text-anchor="middle">동적 분해 도입 = 비용 증가 · 탈선 위험</text>
+<text x="640.0" y="480.4" font-size="11" fill="#6B7280" text-anchor="middle">→ 모델 바깥에서 강제하는 한도를 병행</text>
+</svg>

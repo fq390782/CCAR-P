@@ -1,0 +1,8 @@
+{"add": {
+ "### 1.17 Context 결함 5종 진단": ["CCAR-P-jrajath94-0151", "CCAR-P-jrajath94-0411", "CCAR-P-jrajath94-0293"],
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-P-jrajath94-0474", "CCAR-P-jrajath94-0537", "CCAR-F-Udemy01-0030"],
+ "## 3. 자주 나오는 오답 함정": ["CCAR-F-Udemy06-0004", "CCAR-P-jrajath94-0149", "CCAR-P-jrajath94-0293"]},
+ "rep": [
+ ["| 사전 확인 수단 아님 | 응답 `usage` 필드 (호출 후 도착)<br>`effort` low · 큰 window 모델로 전환 |", "| 사전 확인 수단 아님 | 응답 `usage` 필드 (호출 후 도착) |\n| 오답 | 큰 window 모델로 전환 = 모델 고정 제약 위반<br>`effort` low (오답 보기) |"],
+ ["| `effort` low로 입력 token 감소 | 입력 token 수 줄이는 수단 아님 |", "| `effort` low로 입력 token 감소 | 오답 보기 (입력 token 감소 수단으로 제시) |"]
+]}

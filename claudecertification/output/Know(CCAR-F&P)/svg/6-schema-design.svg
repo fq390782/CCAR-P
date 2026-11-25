@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="Schema 설계: nullable, enum과 other, 출처 필드" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Schema 설계: nullable, enum과 other, 출처 필드</title>
+<defs><marker id="arr-schema-design" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="20" y="24" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">입력 상황</text>
+<text x="290" y="24" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">schema 설계 ✓</text>
+<text x="640" y="24" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">피할 설계 ✗</text>
+<rect x="20" y="40" width="220" height="170" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="121.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">원본에 값이 없을 수 있음</text>
+<text x="130.0" y="136.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">예: 종료일이 없는 자동 갱신 계약</text>
+<rect x="290" y="40" width="320" height="170" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="87.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">nullable 필드</text>
+<text x="450.0" y="104.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">null = 진짜 없음 → 추출 실패와 구분</text>
+<text x="450.0" y="121.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">조건부로 필요한 항목 = nullable + 후단 검증</text>
+<text x="450.0" y="138.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">별도 필드(자동 갱신 여부) + null 종료일 → 하위</text>
+<text x="450.0" y="155.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">시스템이 계약 종류 판단</text>
+<text x="450.0" y="170.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">운영: null 건수를 문서 종류별 집계</text>
+<rect x="640" y="40" width="240" height="170" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="760.0" y="77.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">전부 required → 정상 문서에서도</text>
+<text x="760.0" y="94.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">값 날조 (종료일 2099-12-31)</text>
+<text x="760.0" y="111.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">전부 optional → 진짜 놓친 경우</text>
+<text x="760.0" y="128.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">감지 불가</text>
+<text x="760.0" y="145.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">생략 · 빈 문자열 · 기본값 · 메모</text>
+<text x="760.0" y="162.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">필드에 사유 → 없음 vs 실패 구분</text>
+<text x="760.0" y="179.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">불가</text>
+<polyline points="240,125 290,125" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-schema-design)"/>
+<rect x="250.0" y="117.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="265.0" y="129.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">선언</text>
+<rect x="20" y="226" width="220" height="140" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="292.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">분류 목록 밖의 입력</text>
+<text x="130.0" y="307.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">닫힌 enum에 맞지 않는 항목</text>
+<rect x="290" y="226" width="320" height="140" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="267.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">enum + other + 상세 문자열 필드</text>
+<text x="450.0" y="285.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">해당 없음을 그대로 표현 · 내용 보존</text>
+<text x="450.0" y="302.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">unclear = 판단 불가 수용 → 사람 리뷰</text>
+<text x="450.0" y="317.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">운영: other 출현 모니터링 → 정착된 유형을 정식 값으로</text>
+<text x="450.0" y="332.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">승격</text>
+<rect x="640" y="226" width="240" height="140" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="760.0" y="267.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">닫힌 enum만 → 가까운 값으로 억지</text>
+<text x="760.0" y="284.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">분류 · 범위 밖 값 생성 → 하류</text>
+<text x="760.0" y="301.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">validation 실패</text>
+<text x="760.0" y="316.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">structured outputs = 값 범위만 보장 ·</text>
+<text x="760.0" y="331.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">분류 정확성 ✗</text>
+<polyline points="240,296 290,296" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-schema-design)"/>
+<rect x="250.0" y="288.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="265.0" y="300.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">선언</text>
+<rect x="20" y="382" width="220" height="90" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="430.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">값마다 원본 위치가 필요</text>
+<rect x="290" y="382" width="590" height="90" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="585.0" y="413.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">출처 필드를 schema에 선언</text>
+<text x="585.0" y="431.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">출력에 담을 정보 = 선언한 형태 안에 있어야 함</text>
+<text x="585.0" y="448.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">필드로 요구하면 두 번째 pass 불필요</text>
+<polyline points="240,427 290,427" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-schema-design)"/>
+<rect x="250.0" y="419.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="265.0" y="431.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">선언</text>
+</svg>

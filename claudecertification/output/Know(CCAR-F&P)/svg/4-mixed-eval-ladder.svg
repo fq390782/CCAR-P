@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="410" viewBox="0 0 900 410" role="img" aria-label="code test, LLM judge, 사람 표본 검토가 서로의 사각지대를 메운다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>혼합 평가</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-mixed-eval-ladder" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">혼합 평가: code test · LLM judge · 사람 표본이 서로의 빈틈을 메운다</text>
+<rect x="20" y="56" width="220" height="170" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="110.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">code 기반 test</text>
+<text x="130.0" y="125.3" font-size="11" fill="#6B7280" text-anchor="middle">unit test 통과 82%</text>
+<text x="130.0" y="139.3" font-size="11" fill="#6B7280" text-anchor="middle">확인 가능한 case를</text>
+<text x="130.0" y="153.3" font-size="11" fill="#6B7280" text-anchor="middle">싸고 빠르게 확인</text>
+<text x="130.0" y="167.3" font-size="11" fill="#6B7280" text-anchor="middle">사각지대: 가독성 · 관례</text>
+<text x="130.0" y="181.3" font-size="11" fill="#6B7280" text-anchor="middle">불만, 엉뚱한 풀이도 통과</text>
+<rect x="340" y="56" width="220" height="170" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="110.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">LLM judge</text>
+<text x="450.0" y="125.3" font-size="11" fill="#6B7280" text-anchor="middle">style guide 기준 채점</text>
+<text x="450.0" y="139.3" font-size="11" fill="#6B7280" text-anchor="middle">(가독성 · 관례)</text>
+<text x="450.0" y="153.3" font-size="11" fill="#6B7280" text-anchor="middle">전 과제로 확장 가능</text>
+<text x="450.0" y="167.3" font-size="11" fill="#6B7280" text-anchor="middle">대표 sample에 사람 label로</text>
+<text x="450.0" y="181.3" font-size="11" fill="#6B7280" text-anchor="middle">judge 보정</text>
+<rect x="660" y="56" width="220" height="170" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="770.0" y="103.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">사람 검토</text>
+<text x="770.0" y="118.3" font-size="11" fill="#6B7280" text-anchor="middle">표본 spot-check:</text>
+<text x="770.0" y="132.3" font-size="11" fill="#6B7280" text-anchor="middle">문제를 실제로 해결했는지</text>
+<text x="770.0" y="146.3" font-size="11" fill="#6B7280" text-anchor="middle">(의도 일치) 확인</text>
+<text x="770.0" y="160.3" font-size="11" fill="#6B7280" text-anchor="middle">정기 audit: rubric 채점을</text>
+<text x="770.0" y="174.3" font-size="11" fill="#6B7280" text-anchor="middle">labeled 세트로 감사</text>
+<text x="770.0" y="188.3" font-size="11" fill="#6B7280" text-anchor="middle">전 답변 채점은 느리고 비쌈 ✗</text>
+<path d="M240,125 L340,125" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-mixed-eval-ladder)"/>
+<rect x="260.2" y="105" width="59.6" height="17" fill="#FFFFFF"/>
+<text x="290" y="117" font-size="12" fill="#1F2937" text-anchor="middle">빈틈 보완</text>
+<path d="M560,125 L660,125" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-mixed-eval-ladder)"/>
+<rect x="580.2" y="105" width="59.6" height="17" fill="#FFFFFF"/>
+<text x="610" y="117" font-size="12" fill="#1F2937" text-anchor="middle">표본 확인</text>
+<path d="M770,226 L770,256 L450,256 L450,226" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-mixed-eval-ladder)"/>
+<rect x="510.6" y="249" width="198.8" height="17" fill="#FFFFFF"/>
+<text x="610" y="261" font-size="12" fill="#1F2937" text-anchor="middle">정기 audit · label로 judge 보정</text>
+<rect x="20" y="296" width="420" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="230.0" y="321.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">test를 300 → 3,000개로 확대 ✗</text>
+<text x="230.0" y="336.4" font-size="11" fill="#6B7280" text-anchor="middle">같은 지표의 사각지대 그대로</text>
+<rect x="460" y="296" width="420" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="670.0" y="321.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">token 효율 측정 ✗</text>
+<text x="670.0" y="336.4" font-size="11" fill="#6B7280" text-anchor="middle">불만과 무관 · 간결하나 읽기 어려운 code에 보상 가능</text>
+<path d="M20,384 L56,384" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="64" y="388" font-size="11" fill="#6B7280" text-anchor="start">점선: 주기적으로 도는 보정 feedback</text>
+</svg>

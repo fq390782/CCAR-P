@@ -1,0 +1,202 @@
+[
+ {
+  "id": "CCAR-F-Udemy02-0025",
+  "question": "A company that provides a health insurance claims processing system is using the Claude Agent SDK to build an agent that resolves ambiguous member inquiries (claim appeals, eligibility verification, account issues, and so on). The agent accesses internal systems through custom Model Context Protocol (MCP) tools (get_member, lookup_claim, process_adjustment, escalate_to_specialist). The goal is to achieve a first-contact resolution rate of 80% or higher while escalating to a specialist when necessary.\n\nThe team manages changes to claim adjustment and escalation policies in GitHub, and requests managed Claude Code Review only during scheduled review batches.\n\nA reviewer commented @claude review once, and after a fix was pushed, commented @claude review once again. As a result, several findings that should have been resolved were repeated as new inline comments.\n\nFor the next manual re-review, the team wants to make sure that unresolved issues found in the first review are reliably surfaced, without undermining reviewer trust.\n\nWhich change should they make?",
+  "choices": {
+   "A": "Add guidance to REVIEW.md so that, on re-reviews, Claude takes past findings into account and reports only new or unresolved issues.",
+   "B": "Change the manual command to @claude review always so that the pull request is reviewed on every push from now on.",
+   "C": "Leave the review instructions unchanged, and have a maintainer manually close the duplicate inline threads after each re-review.",
+   "D": "Re-run the review from the GitHub Checks tab and have Claude Code update its comments for the new commit."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0026",
+  "question": "You are using the Claude Agent SDK to build a customer support resolution agent for an interior design and furniture e-commerce business. The agent handles highly ambiguous requests such as returns, billing disputes, and account issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nDuring pilot testing, the refund proposal step now always produces parseable structured data. All required fields are present and the numeric types are correct. Two defects remain:\n\nProduct credits are being placed in the shipping_refund field\n\nThe sum of the per-line-item adjustment amounts does not match the requested total refund amount\n\nWhich change should the team make next?",
+  "choices": {
+   "A": "Switch to plain JSON instructions and remove the tool schema from the extraction step.",
+   "B": "Make the refund fields in the schema required and reject nullable values during extraction.",
+   "C": "Set strict: true in the tool definition so that refund proposal inputs match the schema exactly.",
+   "D": "Add business-rule validation before the refund is executed, and send the specific violations back to be corrected."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0027",
+  "question": "An in-house development team at an insurance company is integrating Claude Code into an automated code review pipeline. The system runs an automated review on every pull request and returns specific, actionable feedback.\n\nThe team's review prompt asks Claude to detect possible policy violations and requires every finding to include a policy_section and a supporting_quote (a quote serving as evidence).\n\nOne pull request added retention logic for customer support call records (transcripts). However, the policy excerpts given to Claude covered only application logs and analytics events, and did not include any policy about transcripts. The validator rejected Claude's finding because the supporting_quote was empty.\n\nWhat should the pipeline do? (Select two.)",
+  "choices": {
+    "A": "If a quote cannot be provided, return the finding as insufficient information and do not post it until a quote is attached.",
+    "B": "Raise max_tokens and have Claude fill in the missing policy evidence in a continuation of the response.",
+    "C": "Make supporting_quote a required field in the structured output schema to force the output.",
+    "D": "Additionally pass the policy excerpts on call transcript retention to the review prompt."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0028",
+  "question": "A pharmaceutical company is using the Claude Agent SDK to build a competitive intelligence research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches regulatory submission documents, one that analyzes clinical trial documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring evaluation, the team found that although the final reports are well written, the following problems sometimes occur:\n\nUnsupported claims are included\n\nContradictions between sections are missed\n\nIn the current design, the report generation agent reviews its own draft before publication.\n\nWhich architectural changes would most effectively improve the reliability of the review? (Select two.)",
+  "choices": {
+   "A": "Verify each claim-source pair with an independent reviewer, and then run a synthesis pass that checks for contradictions and gaps.",
+   "B": "Delegate verification to a subagent, and pass it the claims to verify together with the source excerpts they should be checked against.",
+   "C": "Have the report generation agent perform an extended self-review immediately after the draft, using the existing conversation history as is.",
+   "D": "Have the synthesis agent consolidate all subagent outputs at once and flag unsupported claims before publication."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0029",
+  "question": "You are using the Claude Agent SDK to build a customer support resolution agent for an airline. The agent handles highly ambiguous requests such as refunds, billing disputes, and account issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nIn a billing dispute flow, Claude requests get_customer and lookup_order within the same assistant turn. The get_customer call succeeds, but lookup_order times out intermittently.\n\nProduction logs show that the following two fixes have been tried so far:\n\nTreating the lookup_order result as a success with an empty order list\n\nAborting the entire conversation every time lookup_order fails\n\nWhich changes would best address this reliability issue? (Select two.)",
+  "choices": {
+   "A": "Disable parallel calls and have Claude request lookup_order sequentially after checking the get_customer result.",
+   "B": "Retry the timed-out lookup_order inside the tool wrapper before returning that tool result.",
+   "C": "Return both the successful get_customer result and the lookup_order result marked with is_error: true, and continue the conversation.",
+   "D": "When lookup_order times out, use a PreToolUse hook to block subsequent lookup_order calls."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0030",
+  "question": "A startup developing a photo-sharing app uses Claude Code for code generation, refactoring, debugging, and documentation. It integrates Claude Code into its development workflow using custom slash commands and CLAUDE.md configuration, and switches between plan mode and direct execution.\n\nThe team's /review command posts feedback on PRs in four categories: correctness, security, performance, and style. The evaluation data shows the following trends:\n\nSecurity findings are generally accepted\n\nStyle comments are often dismissed as \"trivial personal-preference nitpicks\"\n\nAs a result, developers have started ignoring the entire review output, including the security findings.\n\nWhich change should be made first?",
+  "choices": {
+   "A": "Measure precision and recall per category, and narrow or disable the noisy style criteria based on concrete examples.",
+   "B": "Track only the overall acceptance rate, and revise the entire prompt when that aggregate falls below the target.",
+   "C": "Raise the reporting threshold uniformly across all categories so that Claude flags issues more conservatively in every category.",
+   "D": "Move security findings to the top of the report and make them stand out as required reading for developers."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0031",
+  "question": "An investment firm is using the Claude Agent SDK to build an M&A due diligence research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches public materials, one that analyzes contracts, one that synthesizes risk findings, and one that generates due diligence reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nA recent evaluation revealed the following problems:\n\nIn the final report, the same source is sometimes treated both as supporting a claim and as contradicting it\n\nReviewers sometimes miss unsupported claims buried in a long bundle of sources\n\nThe team also wants a review checkpoint that can be recorded and scored before the report is generated.\n\nWhat should the team do?",
+  "choices": {
+   "A": "Assign a confidence score to each cited claim, and route low-scoring claims to a different reviewer.",
+   "B": "Send the entire source bundle to a single reviewer and impose a longer checklist before report generation.",
+   "C": "Launch multiple identical reviewers to read the entire source bundle, and adopt the result that most of them agree on.",
+   "D": "Run a per-source review pass using prompt chaining, followed by a separate synthesis pass."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0032",
+  "question": "A company that operates a travel booking platform is integrating Claude Code into an automated code review pipeline. The system runs an automated review on every pull request, generates test cases, and returns specific, actionable feedback. A prompt must be designed to minimize false positives.\n\nA compliance review found that, in rare cases, the system posts an approving review on pull requests before the required test result artifact has been attached.\n\nNo exceptions to this rule are allowed. The approve action must be executed only when the artifact already exists and has passed.\n\nWhat changes should the team make? (Select two.)",
+  "choices": {
+   "A": "Place a CI gate before the Claude Code step that fails the job if there is no passing artifact.",
+   "B": "Use a PostToolUse hook that fires after the approve command completes to check whether the artifact exists.",
+   "C": "Rewrite the system prompt instructions in stronger wording so that Claude checks for the artifact before approving.",
+   "D": "Add a PreToolUse hook that rejects the approve command when there is no passing artifact."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0033",
+  "question": "You are using the Claude Agent SDK to build a multi-agent market intelligence system. A coordinator agent delegates work to specialized subagents. The subagents include one that collects competitor pricing information, one that analyzes reviews, one that synthesizes findings, and one that generates recommendation reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring long-running investigations, a later synthesis turn sometimes ignores findings that the web search and document analysis subagents returned earlier. Checking the logs shows that the later Messages API calls contain only the current coordinator instructions and the latest subagent outputs.\n\nWhich changes would most effectively address this consistency problem? (Select two.)",
+  "choices": {
+   "A": "Enable automatic prompt caching so that earlier subagent findings are remembered without being included in subsequent requests.",
+   "B": "Store the coordinator's session identifier and send only the latest subagent results with each follow-up request.",
+   "C": "Retain and resend the relevant messages array (past assistant outputs, tool results, and the current user turn).",
+   "D": "Maintain the subagent findings so far as a continuously updated summary, and include its latest version in each subsequent request."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0034",
+  "question": "You are using the Claude Agent SDK to build an insurance claims triage agent. The agent handles highly ambiguous requests such as refund claims, premium discrepancies, and policyholder information issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_member, lookup_claim, process_adjustment, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nFor overnight backlog processing, the team plans to submit thousands of unresolved conversations in bulk using the Message Batches API. The batch input includes client tool definitions for the MCP backends of the member and claims systems. These backends are implemented by the team's own services.\n\nWhich designs are most appropriate? (Select two.)",
+  "choices": {
+   "A": "Set a custom_id on each batch item so that returned tool requests can be matched to the correct conversation.",
+   "B": "Include all customer support tools in the batch request as server tools so that refund processing can complete without follow-up requests.",
+   "C": "Use the batch for the initial analysis or tool requests, execute the returned client tools, and then continue each case with a subsequent Messages request.",
+   "D": "Include the client tool schemas in each batch item, and have the batch worker execute the backend tools before finalizing the response."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0035",
+  "question": "A game studio's live operations team is integrating Claude Code into its continuous integration/continuous deployment (CI/CD) pipeline. The system runs automated code review, generates test cases, and returns feedback on pull requests. A prompt must be designed that returns specific, actionable feedback and minimizes false positives.\n\nThe repository's main instruction file has grown beyond 400 lines and now mixes the following content:\n\nReview tone\n\nTest conventions\n\nAPI design rules\n\nDeployment checklists\n\nCI run results show that Claude Code routinely applies deployment guidance even to everyday unit test reviews, and sometimes overlooks the test-specific criteria that developers care about.\n\nWhat changes should the team make to reduce irrelevant context while keeping the shared review criteria available? (Select two.)",
+  "choices": {
+   "A": "Trim the root instruction file down to only the review criteria common to all changes.",
+   "B": "Create a CLAUDE.md in each package directory and duplicate the relevant test, API, and deployment guidance there.",
+   "C": "Move the topic-specific guidance into .claude/rules/ without paths, and rely on directory-level loading.",
+   "D": "Move the topic-specific guidance into files under .claude/rules/, and add paths to those intended for specific files."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0036",
+  "question": "You are using the Claude Agent SDK to build an insurance claims handling agent. The agent handles highly ambiguous inquiries such as payment adjustments, coverage questions, and payout eligibility. It accesses backend systems through custom MCP tools (get_policyholder, lookup_claim, issue_payout, escalate_to_adjuster). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team is refactoring the agent into a coordinator-style design so that it can handle long-running cases. The coordinator can delegate the payment adjustment and coverage investigation steps to subagents.\n\nDuring testing, a container crashed in the middle of a disputed case. The worker that took over afterward had lost the following information:\n\nThe verified policyholder ID\n\nThe claim details investigated so far\n\nThe decision that \"this case needs escalation\"\n\nThe filesystem is not shared between workers, and local session JSONL files are not guaranteed to survive a restart.\n\nWhich change would be most effective for safely recovering from the crash?",
+  "choices": {
+   "A": "Add a strongly worded instruction to the system prompt to remember state, and resume from the most recent customer message.",
+   "B": "Persist the verified facts and decisions in a JSON state manifest, and inject it into the prompt on restart.",
+   "C": "Copy the local JSONL transcript when possible, and resume the session that appears most recent on the worker that took over.",
+   "D": "Resume the Agent SDK session with continue, and reconstruct the state from the most recent local transcript."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0037",
+  "question": "A cybersecurity company is using the Claude Agent SDK to build a threat intelligence research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches OSINT sources, one that analyzes malware samples, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nOne run completed a broad review of sources and produced a useful baseline analysis. The team wants to compare two different response strategies starting from the same point. The exploration of each strategy must have its own conversation history without modifying the baseline session history.\n\nWhat should the team do? (Select two.)",
+  "choices": {
+   "A": "Enable the file checkpointing feature for each strategy, and use checkpoints as the mechanism for branching session history.",
+   "B": "Resume the baseline session for each strategy with the SDK's fork option enabled, and track the newly generated session ID.",
+   "C": "Record the session ID once the baseline analysis is complete, and pass it to the worker for each strategy.",
+   "D": "Use continue in each strategy's worker, and let the SDK select the most recent session in the current directory."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0038",
+  "question": "A product team developing a health management app uses Claude Code for code generation, refactoring, debugging, and documentation. It integrates Claude Code into its development workflow using custom slash commands and CLAUDE.md configuration, and switches between plan mode and direct execution.\n\nThe team is adding SDK-managed subagents for code review and for documentation. There are two requirements:\n\nClaude can route work to the appropriate subagent depending on the purpose\n\nThe documentation subagent is allowed to read files, but must not edit files or run commands\n\nWhich configuration should be adopted?",
+  "choices": {
+   "A": "Define a description and prompt for each subagent in the agents map, and limit the documentation subagent's tools to read-only ones.",
+   "B": "Define the agents map by display names, write the purpose inside the prompt, and block editing tools with the top-level disallowedTools.",
+   "C": "List read-only tools in the top-level allowedTools, write the routing policy in CLAUDE.md, and omit per-subagent tool settings.",
+   "D": "Distinguish subagents by file name, leave routing cues to the names, and delegate tool restrictions to the parent's permission settings."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0039",
+  "question": "You are using the Claude Agent SDK to build an insurance claims handling agent. The agent handles highly ambiguous inquiries such as payment adjustments, coverage questions, and payout eligibility. It accesses backend systems through custom MCP tools (get_policyholder, lookup_claim, issue_payout, escalate_to_adjuster). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nIn an incident retrospective, the team needs Claude Code to understand where payout escalation decisions are made within a large repository. In this session, the built-in Read, Grep, and Glob are enabled.\n\nIn past investigations, the entire service directory was loaded into context before the relevant flow was identified, making the session noisy and slow.\n\nWhich approaches should the team take first? (Select two.)",
+  "choices": {
+   "A": "First use Glob to narrow down the candidate service directories, and run Grep only within that path scope.",
+   "B": "First Read through the service directories' READMEs and configuration files, and infer where payout decisions are made from the descriptions in the design documents.",
+   "C": "Use Grep for payout and escalation identifiers, use Read to load only the matching files, and follow imports from those entry points.",
+   "D": "Use Glob for payout and escalation identifiers, and infer the control flow from the returned path matches."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0040",
+  "question": "An in-house team developing a logistics platform uses Claude Code for code generation, refactoring, debugging, and documentation. It integrates Claude Code into its development workflow using custom slash commands and CLAUDE.md configuration, and switches between plan mode and direct execution.\n\nIn the team's monorepo, unit tests and component tests are placed right next to the source files they target, under services/, packages/, and apps/.\n\nHowever, similar test convention instructions have been copied into memory files at multiple directory levels, and some directories have not received the updates. As a result, the test instructions that Claude Code applies are inconsistent.\n\nWhat should be changed to make the test conventions easier to maintain while avoiding unnecessary context for work unrelated to testing? (Select two.)",
+  "choices": {
+   "A": "Move the test conventions into the root CLAUDE.md.",
+   "B": "Consolidate the test conventions into a project slash command under .claude/commands/, and have developers run it before editing tests.",
+   "C": "Create .claude/rules/testing.md that specifies test files with a paths glob pattern, and centralize the shared test conventions there.",
+   "D": "Delete the test conventions duplicated in the directory-level memory files, and unify the location of the shared conventions into one place."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0041",
+  "question": "A development team at a company that operates a local news distribution service is using the Claude Agent SDK to build a multi-agent research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nThe team created a Claude Code skill named literature-gap-audit. Its SKILL.md instructs Claude to do the following before anyone edits the coordinator:\n\nSearch the prompts in the repository\n\nInvestigate the report templates\n\nBrainstorm missing source verification perspectives\n\nWhen a developer invokes this skill, a large volume of file search notes and alternatives that were considered and rejected remain in the main session. As a result, subsequent report generation editing work loses focus.\n\nWhich change should be made to this skill's configuration?",
+  "choices": {
+   "A": "Invoke /fork for the audit so that the entire current conversation history is carried over.",
+   "B": "Move the audit instructions into CLAUDE.md, and run /compact after the audit finishes.",
+   "C": "Set disable-model-invocation: true so that developers invoke it explicitly with \"/name\".",
+   "D": "Add context: fork to SKILL.md, and keep the audit itself as an explicit task instruction."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0042",
+  "question": "The internal tooling team at a game studio uses Claude Code to accelerate code generation, refactoring, debugging, and documentation work. It integrates Claude Code into its development workflow using custom slash commands and CLAUDE.md configuration, and needs to understand how to switch between plan mode and direct execution.\n\nA custom parallel-review command starts an SDK run in a repository pinned to a Claude Code configuration earlier than v2.1.63, and delegates work to subagents using the Task tool. The run is intended to fan out to multiple specialized review subagents.\n\nWith the current SDK options, only Read, Grep, and Glob are auto-approved, and each run stalls on an interactive permission prompt the first time it attempts to delegate to a subagent.\n\nWhat should the team change? (Select two.)",
+  "choices": {
+   "A": "Set permissionMode to acceptEdits to skip confirmation for editing tools.",
+   "B": "Add Agent to the worker-side subagents' tools for nested delegation, without changing the coordinator's configuration.",
+   "C": "Provide the SDK run with a permission-decision callback that programmatically approves Task delegation calls.",
+   "D": "Add Task to the allowedTools (or allowed_tools) list of the SDK that runs the coordinator."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0043",
+  "question": "A platform team at a fintech company is using Claude Code to accelerate software development. A developer investigated at length in plan mode and then saved the session ID before making any changes.\n\nThe developer wants to test two different attempts from this analyzed context:\n\nA minimal patch approach\n\nA larger refactoring approach\n\nHowever, both attempts modify overlapping files in the same working directory.\n\nWhich methods are best suited to testing each attempt independently, without mixing up conversation history and file state? (Select two.)",
+  "choices": {
+   "A": "Run continue twice from the same project directory, and let Claude Code automatically choose which attempt to base each on.",
+   "B": "Resume the saved session ID twice without forking, and ask Claude to treat each attempt separately.",
+   "C": "Resume the saved session ID with the fork option for each attempt, and keep checkpoints available so that you can rewind.",
+   "D": "Run each attempt in a separate working copy of the repository so that edits to overlapping files do not get mixed together."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0044",
+  "question": "A biotech company that manufactures research instruments is using Claude Code to accelerate its development workflow. The team uses Claude Code for code generation, refactoring, debugging, and documentation, and integrates it into its development workflow using custom slash commands and CLAUDE.md configuration. It also needs to understand how to switch between plan mode and direct execution.\n\nThe team has Claude Code generate instrument calibration reports and safety compliance labels from work orders. Before publication, reviewers can check only a small fraction of the generated fields.\n\nThe pilot has shown that accuracy varies greatly by field:\n\nInstrument model names are mostly correct\n\nHazardous material classifications are often wrong\n\nWhich change is most appropriate for directing human review to the items where it has the greatest impact?",
+  "choices": {
+   "A": "Use the overall accuracy from the pilot, reduce review volume once it exceeds the target, and review a uniform sample of the remaining outputs.",
+   "B": "Have the structured output provide a per-field confidence, calibrate thresholds using labeled examples, and route low-confidence fields to review.",
+   "C": "Compute a single confidence score per document, review only the documents that fall below the threshold, and publish all fields of approved documents as is.",
+   "D": "Treat normal completion of processing as a high-reliability indicator and skip review of those outputs, reviewing only responses that were cut off midway."
+  }
+ }
+]

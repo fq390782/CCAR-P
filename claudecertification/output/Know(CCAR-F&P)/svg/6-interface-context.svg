@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="370" viewBox="0 0 900 370" role="img" aria-label="인터페이스마다 다른 컨텍스트" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>인터페이스마다 다른 컨텍스트</title>
+<defs><marker id="arr-interface-context" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<rect x="20" y="120" width="120" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="80.0" y="152.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">같은 지시문</text>
+<rect x="185" y="30" width="175" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="272.5" y="61.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">claude.ai / 모바일 앱</text>
+<rect x="400" y="30" width="260" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="530.0" y="53.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">+ 자체 system prompt</text>
+<text x="530.0" y="70.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">(현재 날짜, 응답 스타일 등)</text>
+<polyline points="140,148 165,148 165,58 190,58" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<polyline points="360,58 400,58" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<rect x="365.0" y="37" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="380" y="49.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">추가</text>
+<polyline points="660,58 700,58 700,148 720,148" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<rect x="185" y="120" width="175" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="272.5" y="151.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">Claude Code</text>
+<rect x="400" y="120" width="260" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="530.0" y="143.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">+ tool 정의 · CLAUDE.md</text>
+<text x="530.0" y="160.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">+ auto memory · 세션 상태</text>
+<polyline points="140,148 165,148 165,148 190,148" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<polyline points="360,148 400,148" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<rect x="365.0" y="127" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="380" y="139.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">추가</text>
+<polyline points="660,148 700,148 700,148 720,148" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<rect x="185" y="210" width="175" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="272.5" y="241.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">Messages API</text>
+<rect x="400" y="210" width="260" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="530.0" y="233.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">system + messages를</text>
+<text x="530.0" y="250.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">개발자가 직접 조립</text>
+<polyline points="140,148 165,148 165,238 190,238" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<polyline points="360,238 400,238" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<rect x="365.0" y="217" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="380" y="229.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">추가</text>
+<polyline points="660,238 700,238 700,148 720,148" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-interface-context)"/>
+<rect x="720" y="98" width="170" height="100" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="805.0" y="127.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">결과가 다름</text>
+<text x="805.0" y="144.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">모델이 받는</text>
+<text x="805.0" y="161.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">컨텍스트가 다르기 때문</text>
+<text x="805.0" y="177.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">버그가 아닌 설계상 차이</text>
+<rect x="20" y="288" width="420" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="230.0" y="313.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">프로덕션: API/SDK 위에 구축</text>
+<text x="230.0" y="330.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">실제 제공 환경에서 평가</text>
+<rect x="460" y="280" width="420" height="76" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="670.0" y="304.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">지시문만 수정 · 모델 버그로 보고</text>
+<text x="670.0" y="322.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">하나만 쓰고 검증 중단</text>
+<text x="670.0" y="339.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">지시문 바깥의 컨텍스트 차이는 그대로 남음</text>
+</svg>

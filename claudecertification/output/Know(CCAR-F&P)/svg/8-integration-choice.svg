@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="535" viewBox="0 0 960 535" role="img" aria-label="통합 방식은 연결 대상과 재사용의 실제 유무로 고른다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>통합 방식은 연결 대상과 재사용의 실제 유무로 고른다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-integration-choice" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<polygon points="165,20.0 300.0,70 165,120.0 30.0,70" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="165" y="66.0" font-size="12" fill="#1F2937" text-anchor="middle">연결 대상이</text>
+<text x="165" y="82.0" font-size="12" fill="#1F2937" text-anchor="middle">agent ↔ agent인가?</text>
+<polyline points="300,70 343,70" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="310.0" y="51" width="22.0" height="18" fill="#FFFFFF"/>
+<text x="321" y="64" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="345" y="24" width="250" height="92" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="470.0" y="58.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">agent-to-agent + handoff 계약</text>
+<text x="470.0" y="74.0" font-size="12" fill="#1F2937" text-anchor="middle">하위 작업이 자체 plan · tools</text>
+<text x="470.0" y="90.0" font-size="12" fill="#1F2937" text-anchor="middle">· context 필요</text>
+<polyline points="595,70 663,70" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="612.0" y="51" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="629" y="64" font-size="12" fill="#1F2937" text-anchor="middle">비용</text>
+<rect x="665" y="24" width="265" height="92" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="797.5" y="50.0" font-size="12" fill="#1F2937" text-anchor="middle">agent ↔ agent: 작업 인계 ·</text>
+<text x="797.5" y="66.0" font-size="12" fill="#1F2937" text-anchor="middle">상태 업데이트 · 협상</text>
+<text x="797.5" y="82.0" font-size="12" fill="#1F2937" text-anchor="middle">비용: 담당자 · 계약 필요</text>
+<text x="797.5" y="98.0" font-size="12" fill="#1F2937" text-anchor="middle">(없으면 감독 없는 두 번째 loop)</text>
+<polyline points="165,120 165,160" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="80.2" y="131" width="169.6" height="18" fill="#FFFFFF"/>
+<text x="165" y="144" font-size="12" fill="#1F2937" text-anchor="middle">아니오 (tool · 데이터 소스)</text>
+<polygon points="165,160.0 300.0,210 165,260.0 30.0,210" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="165" y="206.0" font-size="12" fill="#1F2937" text-anchor="middle">소비자가 여러 개</text>
+<text x="165" y="222.0" font-size="12" fill="#1F2937" text-anchor="middle">(호스트 · 언어 · 팀)?</text>
+<polyline points="300,210 343,210" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="310.0" y="191" width="22.0" height="18" fill="#FFFFFF"/>
+<text x="321" y="204" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="345" y="160" width="250" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="470.0" y="190.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">MCP server 1개 · schema 1개</text>
+<text x="470.0" y="206.0" font-size="12" fill="#1F2937" text-anchor="middle">독점 SDK + 여러 팀</text>
+<text x="470.0" y="222.0" font-size="12" fill="#1F2937" text-anchor="middle">→ SDK를 server 하나로 감쌈</text>
+<text x="470.0" y="238.0" font-size="12" fill="#1F2937" text-anchor="middle">대안 = 공유 library · service</text>
+<polyline points="595,210 663,210" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="612.0" y="191" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="629" y="204" font-size="12" fill="#1F2937" text-anchor="middle">비용</text>
+<rect x="665" y="160" width="265" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="797.5" y="190.0" font-size="12" fill="#1F2937" text-anchor="middle">비용: 새로 소유할 service</text>
+<text x="797.5" y="206.0" font-size="12" fill="#1F2937" text-anchor="middle">(구축 · 호스팅 · 보안 · 버전 관리</text>
+<text x="797.5" y="222.0" font-size="12" fill="#1F2937" text-anchor="middle">· 가동 시간)</text>
+<text x="797.5" y="238.0" font-size="12" fill="#1F2937" text-anchor="middle">보상 조건 = 재사용이 실제로 존재</text>
+<polyline points="165,260 165,300" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="142.0" y="271" width="46.0" height="18" fill="#FFFFFF"/>
+<text x="165" y="284" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<polygon points="165,300.0 300.0,350 165,400.0 30.0,350" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="165" y="346.0" font-size="12" fill="#1F2937" text-anchor="middle">기능이 CLI로만 존재</text>
+<text x="165" y="362.0" font-size="12" fill="#1F2937" text-anchor="middle">· 일회성 · 소비자 1?</text>
+<polyline points="300,350 343,350" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="310.0" y="331" width="22.0" height="18" fill="#FFFFFF"/>
+<text x="321" y="344" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="345" y="305" width="250" height="90" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="470.0" y="338.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">CLI wrapper</text>
+<text x="470.0" y="354.0" font-size="12" fill="#1F2937" text-anchor="middle">기능이 CLI로만 존재</text>
+<text x="470.0" y="370.0" font-size="12" fill="#1F2937" text-anchor="middle">· 일회성 · 소비자 1</text>
+<polyline points="595,350 663,350" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="612.0" y="331" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="629" y="344" font-size="12" fill="#1F2937" text-anchor="middle">비용</text>
+<rect x="665" y="305" width="265" height="90" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="797.5" y="330.0" font-size="12" fill="#1F2937" text-anchor="middle">비용: 취약한 parsing</text>
+<text x="797.5" y="346.0" font-size="12" fill="#1F2937" text-anchor="middle">· 형식 변경 테스트 필요</text>
+<text x="797.5" y="362.0" font-size="12" fill="#1F2937" text-anchor="middle">벤더가 안정적 typed API 출시</text>
+<text x="797.5" y="378.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 직접 API로 이전</text>
+<polyline points="165,400 165,440" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="142.0" y="411" width="46.0" height="18" fill="#FFFFFF"/>
+<text x="165" y="424" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="30" y="442" width="270" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="165.0" y="465.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">직접 API / SDK</text>
+<text x="165.0" y="481.0" font-size="12" fill="#1F2937" text-anchor="middle">호스트 1 · 언어 1 · 소비자 1</text>
+<text x="165.0" y="497.0" font-size="12" fill="#1F2937" text-anchor="middle">프로토콜 계층 생략</text>
+<polyline points="300,477 343,477" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-integration-choice)"/>
+<rect x="304.0" y="458" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="321" y="471" font-size="12" fill="#1F2937" text-anchor="middle">비용</text>
+<rect x="345" y="442" width="330" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="510.0" y="465.0" font-size="12" fill="#1F2937" text-anchor="middle">비용: 소비자마다 client 업데이트</text>
+<text x="510.0" y="481.0" font-size="12" fill="#1F2937" text-anchor="middle">API 인증은 여전히 필요</text>
+<text x="510.0" y="497.0" font-size="12" fill="#1F2937" text-anchor="middle">재평가 시점 = 두 번째 팀 · 언어 등장</text>
+</svg>

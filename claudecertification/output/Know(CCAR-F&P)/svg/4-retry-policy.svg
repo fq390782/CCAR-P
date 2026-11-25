@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="450" viewBox="0 0 900 450" role="img" aria-label="429, 500, 529와 connection error는 exponential backoff와 jitter, retry-after를 지켜 retry하고, 400, 401, 403, 404는 retry하지 않고 요청을 고친다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Retry policy 분기</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-retry-policy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-retry-policy-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Retry policy: 일시적 error만 backoff로 retry</text>
+<rect x="330" y="64" width="240" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="90.9" text-anchor="middle"><tspan x="450.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">API error 발생</tspan></text>
+<polygon points="450,128.0 570.0,170 450,212.0 330.0,170" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="450" y="174.6" text-anchor="middle"><tspan x="450" dy="0" font-size="13" fill="#1F2937">일시적 error인가?</tspan></text>
+<path d="M450,108 L450,128" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-policy)"/>
+<rect x="20" y="250" width="360" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="200.0" y="277.9" text-anchor="middle"><tspan x="200.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">exponential backoff + jitter</tspan><tspan x="200.0" dy="16" font-size="13" fill="#1F2937">server의 retry-after 준수 후 retry</tspan><tspan x="200.0" dy="14" font-size="11" fill="#6B7280">공식 SDK는 429 자동 retry (RateLimitError)</tspan></text>
+<rect x="520" y="250" width="360" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="278.9" text-anchor="middle"><tspan x="700.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">retry 금지 → 요청 수정</tspan><tspan x="700.0" dy="14" font-size="11" fill="#6B7280">매번 같은 이유로 실패</tspan><tspan x="700.0" dy="14" font-size="11" fill="#6B7280">예: tool 이름 공백 → get_order_status로 rename</tspan></text>
+<path d="M330,170 L200,170 L200,250" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-policy)"/>
+<rect x="78.0" y="188" width="243.9" height="17" fill="#FFFFFF"/>
+<text x="200" y="200" font-size="12" fill="#1F2937" text-anchor="middle">예: 429·500·529·connection error</text>
+<path d="M570,170 L700,170 L700,250" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-policy)"/>
+<rect x="611.3" y="188" width="177.4" height="17" fill="#FFFFFF"/>
+<text x="700" y="200" font-size="12" fill="#1F2937" text-anchor="middle">아니오: 400·401·403·404</text>
+<text x="20" y="356" font-size="14" font-weight="bold" fill="#DC2626" text-anchor="start">흔한 오답</text>
+<rect x="20" y="366" width="205" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="122.5" y="388.6" text-anchor="middle"><tspan x="122.5" dy="0" font-size="13" fill="#1F2937">✗ 즉시 retry (tight loop)</tspan><tspan x="122.5" dy="14" font-size="11" fill="#6B7280">과부하를 더 키움</tspan></text>
+<rect x="235" y="366" width="205" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="337.5" y="388.6" text-anchor="middle"><tspan x="337.5" dy="0" font-size="13" fill="#1F2937">✗ 첫 error에 job 전체 실패</tspan><tspan x="337.5" dy="14" font-size="11" fill="#6B7280">쓸데없이 fragile</tspan></text>
+<rect x="450" y="366" width="205" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="552.5" y="388.6" text-anchor="middle"><tspan x="552.5" dy="0" font-size="13" fill="#1F2937">✗ 모든 error를 retry</tspan><tspan x="552.5" dy="14" font-size="11" fill="#6B7280">느린 응답·비용 증가</tspan></text>
+<rect x="665" y="366" width="215" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="772.5" y="388.6" text-anchor="middle"><tspan x="772.5" dy="0" font-size="13" fill="#1F2937">✗ 여러 API key 돌리기</tspan><tspan x="772.5" dy="14" font-size="11" fill="#6B7280">rate limit 회피 시도 = 오답</tspan></text>
+<text x="20" y="438" font-size="11" fill="#6B7280" text-anchor="start">⚠ 시험 기준: 400·401·403·404는 retry 불가. 공식 SDK는 408·409도 기본으로 retry한다.</text>
+</svg>

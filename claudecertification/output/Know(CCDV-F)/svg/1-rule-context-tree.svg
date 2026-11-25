@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="2장 판단 규칙: 컨텍스트·subagent·state·tool 문제의 정답과 오답" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>2장 판단 규칙: 컨텍스트·subagent·state·tool 문제의 정답과 오답</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-rule-context-tree-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-rule-context-tree-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-rule-context-tree-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-rule-context-tree-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">컨텍스트·subagent·tool 문제 — 정답과 흔한 오답</text>
+<polygon points="170,57.0 320.0,102 170,147.0 20.0,102" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="96.1" font-size="13" fill="#1F2937" text-anchor="middle">단일 agent 컨텍스트가</text>
+<text x="170" y="114.1" font-size="13" fill="#1F2937" text-anchor="middle">넘치나?</text>
+<rect x="410" y="56" width="470" height="42" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="645.0" y="80.1" font-size="13" fill="#1F2937" text-anchor="middle">독립 문서별 subagent 병렬 실행 → 요약만 받아 통합</text>
+<rect x="410" y="108" width="470" height="42" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="645.0" y="132.1" font-size="13" fill="#1F2937" text-anchor="middle">max_tokens 상향 (출력 제한일 뿐, 문제는 입력)</text>
+<path d="M320,102 L340,102" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M340,102 L340,77 L410,77" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-b)"/>
+<rect x="361.0" y="70" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="375" y="81" font-size="11" fill="#2563EB" text-anchor="middle">정답</text>
+<path d="M340,102 L340,129 L410,129" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-r)"/>
+<rect x="346.8" y="122" width="56.4" height="15" fill="#FFFFFF"/>
+<text x="375" y="133" font-size="11" fill="#DC2626" text-anchor="middle">흔한 오답</text>
+<polygon points="170,167.0 320.0,212 170,257.0 20.0,212" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="206.1" font-size="13" fill="#1F2937" text-anchor="middle">subagent 도입 후</text>
+<text x="170" y="224.1" font-size="13" fill="#1F2937" text-anchor="middle">품질이 떨어졌나?</text>
+<rect x="410" y="166" width="470" height="42" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="645.0" y="190.1" font-size="13" fill="#1F2937" text-anchor="middle">handoff prompt에 빠진 컨텍스트를 명시적으로 넣는다</text>
+<rect x="410" y="218" width="470" height="42" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="645.0" y="242.1" font-size="13" fill="#1F2937" text-anchor="middle">더 큰 모델로 교체 / subagent 추가</text>
+<path d="M320,212 L340,212" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M340,212 L340,187 L410,187" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-b)"/>
+<rect x="361.0" y="180" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="375" y="191" font-size="11" fill="#2563EB" text-anchor="middle">정답</text>
+<path d="M340,212 L340,239 L410,239" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-r)"/>
+<rect x="346.8" y="232" width="56.4" height="15" fill="#FFFFFF"/>
+<text x="375" y="243" font-size="11" fill="#DC2626" text-anchor="middle">흔한 오답</text>
+<polygon points="170,277.0 320.0,322 170,367.0 20.0,322" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="316.1" font-size="13" fill="#1F2937" text-anchor="middle">오래전 결정을</text>
+<text x="170" y="334.1" font-size="13" fill="#1F2937" text-anchor="middle">유지해야 하나?</text>
+<rect x="410" y="276" width="470" height="42" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="645.0" y="300.1" font-size="13" fill="#1F2937" text-anchor="middle">compaction과 무관한 명시적 state에 기록</text>
+<rect x="410" y="328" width="470" height="42" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="645.0" y="352.1" font-size="13" fill="#1F2937" text-anchor="middle">context window에 맡김 / 주기적 재시작</text>
+<path d="M320,322 L340,322" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M340,322 L340,297 L410,297" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-b)"/>
+<rect x="361.0" y="290" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="375" y="301" font-size="11" fill="#2563EB" text-anchor="middle">정답</text>
+<path d="M340,322 L340,349 L410,349" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-r)"/>
+<rect x="346.8" y="342" width="56.4" height="15" fill="#FFFFFF"/>
+<text x="375" y="353" font-size="11" fill="#DC2626" text-anchor="middle">흔한 오답</text>
+<polygon points="170,387.0 320.0,432 170,477.0 20.0,432" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="426.1" font-size="13" fill="#1F2937" text-anchor="middle">tool 목적이</text>
+<text x="170" y="444.1" font-size="13" fill="#1F2937" text-anchor="middle">겹치나?</text>
+<rect x="410" y="386" width="470" height="42" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="645.0" y="410.1" font-size="13" fill="#1F2937" text-anchor="middle">겹침 제거 (잘못된 tool 선택이 줄어든다)</text>
+<rect x="410" y="438" width="470" height="42" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="645.0" y="462.1" font-size="13" fill="#1F2937" text-anchor="middle">tool이 많을수록 빠르고 싸다고 보고 유지</text>
+<path d="M320,432 L340,432" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M340,432 L340,407 L410,407" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-b)"/>
+<rect x="361.0" y="400" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="375" y="411" font-size="11" fill="#2563EB" text-anchor="middle">정답</text>
+<path d="M340,432 L340,459 L410,459" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-rule-context-tree-r)"/>
+<rect x="346.8" y="452" width="56.4" height="15" fill="#FFFFFF"/>
+<text x="375" y="463" font-size="11" fill="#DC2626" text-anchor="middle">흔한 오답</text>
+</svg>

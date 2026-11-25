@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-label="production model ID를 pin하고, 새 모델이나 retirement 예정이 생기면 regression eval을 거쳐 계획한 시점에 migration한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>모델 업그레이드 절차</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-model-upgrade" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-model-upgrade-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">모델 업그레이드: pin 유지 → regression eval → 계획적 migration</text>
+<rect x="20" y="80" width="170" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="105.0" y="108.9" text-anchor="middle"><tspan x="105.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">production</tspan><tspan x="105.0" dy="16" font-size="13" fill="#1F2937">model ID pin</tspan></text>
+<rect x="220" y="80" width="170" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="305.0" y="109.5" text-anchor="middle"><tspan x="305.0" dy="0" font-size="13" fill="#1F2937">새 모델 release</tspan><tspan x="305.0" dy="14" font-size="11" fill="#6B7280">또는 retirement 예정일</tspan></text>
+<rect x="420" y="80" width="190" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="515.0" y="109.9" text-anchor="middle"><tspan x="515.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">regression eval</tspan><tspan x="515.0" dy="14" font-size="11" fill="#6B7280">prompt·설정까지 다시 eval</tspan></text>
+<polygon points="720,72.0 795.0,112 720,152.0 645.0,112" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="720" y="108.5" text-anchor="middle"><tspan x="720" dy="0" font-size="13" fill="#1F2937">성능 저하</tspan><tspan x="720" dy="16" font-size="13" fill="#1F2937">없음?</tspan></text>
+<rect x="825" y="80" width="115" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="882.5" y="108.9" text-anchor="middle"><tspan x="882.5" dy="0" font-size="14" font-weight="bold" fill="#1F2937">계획적</tspan><tspan x="882.5" dy="16" font-size="13" fill="#1F2937">migration</tspan></text>
+<rect x="620" y="200" width="200" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="720.0" y="225.6" text-anchor="middle"><tspan x="720.0" dy="0" font-size="13" fill="#1F2937">pin 유지</tspan><tspan x="720.0" dy="14" font-size="11" fill="#6B7280">이전 모델용 지시·설정 조정</tspan></text>
+<path d="M190,112 L220,112" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-upgrade)"/>
+<path d="M390,112 L420,112" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-upgrade)"/>
+<path d="M610,112 L645,112" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-upgrade)"/>
+<path d="M795,112 L825,112" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-upgrade)"/>
+<rect x="800.0" y="92" width="20.0" height="17" fill="#FFFFFF"/>
+<text x="810" y="104" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M720,152 L720,200" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-upgrade)"/>
+<rect x="724.0" y="168" width="44.0" height="17" fill="#FFFFFF"/>
+<text x="728" y="180" font-size="12" fill="#1F2937" text-anchor="start">아니오</text>
+<path d="M620,228 L515,228 L515,144" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-upgrade)"/>
+<rect x="535.5" y="210" width="63.0" height="17" fill="#FFFFFF"/>
+<text x="567" y="222" font-size="12" fill="#1F2937" text-anchor="middle">다시 측정</text>
+<text x="20" y="296" font-size="14" font-weight="bold" fill="#DC2626" text-anchor="start">근거가 되지 않는 것 (오답)</text>
+<rect x="20" y="306" width="290" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="165.0" y="331.6" text-anchor="middle"><tspan x="165.0" dy="0" font-size="13" fill="#1F2937">✗ release 당일 교체</tspan><tspan x="165.0" dy="14" font-size="11" fill="#6B7280">문제 생기면 되돌림 = 사용자가 test set</tspan></text>
+<rect x="335" y="306" width="290" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="480.0" y="331.6" text-anchor="middle"><tspan x="480.0" dy="0" font-size="13" fill="#1F2937">✗ 새 모델이니 더 낫다</tspan><tspan x="480.0" dy="14" font-size="11" fill="#6B7280">vendor benchmark는 개별 prompt를 보장 못 함</tspan></text>
+<rect x="650" y="306" width="290" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="795.0" y="331.6" text-anchor="middle"><tspan x="795.0" dy="0" font-size="13" fill="#1F2937">✗ 이전 parameter·지시 그대로</tspan><tspan x="795.0" dy="14" font-size="11" fill="#6B7280">바뀐 모델에서 error가 날 수 있음</tspan></text>
+</svg>

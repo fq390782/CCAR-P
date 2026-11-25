@@ -1,0 +1,8 @@
+{"add": {
+ "### 1.11 Few-shot 실패 증상별 처방": ["CCAR-P-jrajath94-0142"],
+ "## 4. 암기 목록": ["CCAR-F-preporato-0023", "CCAR-F-Udemy01-0053"],
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-F-Udemy02-0055"]},
+ "rep": [
+ ["| 형식(parser가 소비) |", "| 형식(엄격한 schema 추출) |"],
+ ["| 판정 결과를 parser가 소비 | JSON schema로 파싱 가능 유지 |", "| 판정 결과를 JSON schema로 제약 | 각 판정 파싱 가능 유지 |"]
+]}

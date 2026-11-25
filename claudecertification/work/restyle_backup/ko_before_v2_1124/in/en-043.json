@@ -1,0 +1,376 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0657",
+  "question": "A nightly run grades 30,000 outputs. Most outputs need an exact match on one field, and a few need a judgment about tone. The team must avoid human graders, and each grader must be reliable.",
+  "choices": {
+   "A": "Send all 30,000 outputs to an LLM grader without a reliability test, to keep the setup simple.",
+   "B": "Add a second LLM grader that cross-checks each tone verdict before the run ends.",
+   "C": "Grade exact-match outputs with code, and grade tone with an LLM grader after a reliability test.",
+   "D": "Use a grader setting that caches each verdict, so repeated nightly runs skip the scoring step."
+  },
+  "explanation": "Code graders are the fastest and most reliable method for exact matches. An LLM grader handles tone only after a test confirms its reliability. Trap. A grader setting that caches verdicts sounds like a cost fix, but the docs do not describe such a setting."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0658",
+  "question": "A team builds an eval set for a chat assistant. The set must match real traffic and cover unusual input. The team must not hand-grade every case. Which two steps meet these constraints?",
+  "choices": {
+   "A": "Use a built-in Console sampler that labels ambiguous cases automatically.",
+   "B": "Sample recent production traffic, so the cases match the real task mix.",
+   "C": "Rebuild the set every hour from the live traffic log, so it never ages.",
+   "D": "Add empty, long, and irrelevant inputs as edge cases, with expected answers that code can check."
+  },
+  "explanation": "Sampled production cases reflect the real task mix. Edge cases expose failures that clean samples hide, and code checks the expected answers. Trap. An hourly rebuild of the set looks thorough, but the constraints do not need that upkeep."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0659",
+  "question": "A team ships a new prompt after one week of higher scores. The score moved 2 points, and the traffic mix changed that week. The team needs to measure the prompt effect on the same traffic and period.",
+  "choices": {
+   "A": "Check this week against last week on the primary metric, since the prompt went live on Monday.",
+   "B": "Split traffic into a control arm and a candidate arm with a fixed assignment rule, then compare the primary metric.",
+   "C": "Run a shadow copy for every user, plus a 90-day holdout, before any arm is compared.",
+   "D": "Turn on the Usage API arm tag, so each arm reports its own spend automatically."
+  },
+  "explanation": "A control arm and a candidate arm see the same period and traffic mix. The difference then reflects the change, not the traffic mix. Trap. A check of this week against last week looks like a before and after test, but the traffic mix changed in between."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0660",
+  "question": "A candidate model clears the quality floor by 3 points. Its cost per completed task is 25 percent higher than the control. The change ships only when it clears the floor and holds or lowers cost per completed task. Which choice meets this rule?",
+  "choices": {
+   "A": "Ship the candidate, because a higher quality score means the team meets its target.",
+   "B": "Apply the effort discount to the candidate, which lowers its per-token price for every task.",
+   "C": "Add three more arms with new prompts, and decide only after all of them report, to find a cheaper candidate.",
+   "D": "Keep the control, because the candidate raises cost per completed task."
+  },
+  "explanation": "The candidate fails the cost rule because its cost per completed task rises. The control is the only choice that meets the rule. Trap. A switch on the higher quality score looks right, but the change also has to hold or lower cost per completed task."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0661",
+  "question": "A team runs checkable tasks on a model whose default effort is high. The team needs lower cost per completed task, and the pass rate must stay the same. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Run the first pass at low effort, and re-run only the failed tasks at high effort.",
+   "B": "Set a higher effort on every task, so each pass rate improves before the cost check.",
+   "C": "Measure the low-effort pass on the eval set, and confirm the pass rate before the change ships.",
+   "D": "Turn on a discount for failed tasks, so each re-run costs nothing."
+  },
+  "explanation": "In Anthropic tests, low effort with failed tasks re-run at high effort cost about 40 percent less at the same pass rate. The eval set confirms the pass rate before the change ships. Trap. A discount for failed tasks sounds like a cost fix, but the docs do not describe such a discount."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0662",
+  "question": "Cache read tokens dropped to zero after a team edited the tool list in a shared template. The model stayed the same. The team must name the changed layer first, with the smallest fix.",
+  "choices": {
+   "A": "Raise the cache duration to one hour, so the prefix stays cached while the tool list changes.",
+   "B": "Read cache_miss_reason in the response, and fix the earliest changed block first.",
+   "C": "Rewrite the whole prompt template, then measure hit rates over a month of traffic.",
+   "D": "Turn on the streaming cache trace in the Console, which lists each changed block after every response."
+  },
+  "explanation": "The response reports the earliest point of divergence and its reason type. The first fix goes to that block, which confirms the layer before any other change. Trap. A longer cache duration looks like a quick fix, but a changed prefix misses the cache at any duration."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0663",
+  "question": "An assistant gives different figures for the same question across three runs. The model and the prompt did not change. The team needs a check that flags unsupported answers, with no new model.",
+  "choices": {
+   "A": "Move the assistant to a larger model tier, since a stronger model returns the same figure on each run.",
+   "B": "Enable a consistency flag in the Messages API that blocks answers with a figure that varies.",
+   "C": "Run the same prompt several times, and flag answers that disagree on a key figure.",
+   "D": "Route each question through three model tiers, and vote on the answer from all three."
+  },
+  "explanation": "Several runs of one prompt expose answers that disagree. Disagreement on a key figure signals a possible hallucination, and the check needs no new model. Trap. A consistency flag in the Messages API sounds like a direct fix, but the docs do not describe such a flag."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0664",
+  "question": "Cache reads fell after a prompt edit. Two later blocks also changed, so the first reason may hide the others. The team must find the fix and confirm it with cache evidence. Which two steps meet these constraints?",
+  "choices": {
+   "A": "Change the cache duration and the prompt wording in one release, to save a diagnosis round.",
+   "B": "Fix the earliest divergence first, because later reasons can hide behind it.",
+   "C": "Read cache_miss_reason from the usage export, which names each changed block.",
+   "D": "Confirm the fix with the cache read token count on the next request."
+  },
+  "explanation": "The response reports only the earliest divergence, so later changes can stay hidden until that block is fixed. The cache read count on the next request confirms the fix. Trap. The usage export sounds like the place for the miss reason, but the docs attach cache_miss_reason to the response itself."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0665",
+  "question": "A nightly job scores 40,000 eval cases. No user waits for the result. The team wants the lowest token price, and every call that a user sees must stay synchronous.",
+  "choices": {
+   "A": "Stream the nightly job, so its first results arrive sooner at the same token price.",
+   "B": "Move the nightly job to batch processing, and keep user-facing calls synchronous.",
+   "C": "Raise the rate limit for the nightly job, so each call returns in one pass.",
+   "D": "Build a custom queue service with retries, dashboards, and a priority lane for the nightly job."
+  },
+  "explanation": "The Message Batches API gives 50 percent off each token for work that can wait. Synchronous calls stay on the Messages API, so users keep fast answers. Trap. Streaming the nightly job looks like a speed fix, but the job still pays the synchronous token price."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0666",
+  "question": "A chat feature must meet a response time target. Easy and hard requests arrive on the same route. The quality floor is known for each request type. The team must cut cost only where the floor still holds.",
+  "choices": {
+   "A": "Route all traffic to the fastest tier at low effort, since it has the lowest latency for every request.",
+   "B": "Train a learned router that scores each request, retrains weekly, and logs every routing decision.",
+   "C": "Turn on the faster-mode flag for the stronger tier, which cuts latency and leaves the output as is.",
+   "D": "Route easy request types to the faster tier at low effort, after each type clears the floor on the eval set."
+  },
+  "explanation": "A cheaper route saves cost only where it clears the quality floor. The faster tier at low effort then serves the easy types and keeps the floor. Trap. Routing all traffic to the fastest tier looks like the simplest latency fix, but hard requests then miss the quality floor."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0667",
+  "question": "An unattended grader run has 150,000 requests. No user waits for the results. The run must fit the batch limits, and the team must read every result within the result availability period. Which two actions meet these constraints?",
+  "choices": {
+   "A": "Split the 150,000 requests into at least two batches, each within 100,000 requests and 256 MB.",
+   "B": "Set a priority option that returns the batch within five minutes, which the Batch API offers.",
+   "C": "Read each batch result within 29 days of batch creation, while the results are still available.",
+   "D": "Move the run to a dedicated workspace with its own rate limits, and add a second model for every row."
+  },
+  "explanation": "A batch holds up to 100,000 requests or 256 MB, whichever limit comes first. Results stay downloadable for 29 days after creation. Trap. A priority option for five-minute results sounds useful, but the docs do not describe one for batches."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0668",
+  "question": "Monthly spend rose 30 percent while completed tasks stayed flat. The team needs an alert before the budget breaks. The alert must reflect the value of each task, and it needs a named owner.",
+  "choices": {
+   "A": "Alert on total token count per day, since token counts rise with spend.",
+   "B": "Alert on 40 metrics, with latency, token counts, and per-user spend among them, each with its own owner.",
+   "C": "Alert on cost per completed task, and name the owner who acts when the line breaks.",
+   "D": "Set the Cost API to alert on one-minute buckets, so spend breaks show within a minute."
+  },
+  "explanation": "Cost per completed task shows whether spend buys finished work. A named owner turns the alert into a control that someone acts on. (Inference) Trap. One-minute Cost API buckets look like faster alerts, but the Cost API supports only daily buckets."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0669",
+  "question": "The data rules allow only metadata in the observability destination. A request failed across three services. The team uses the Claude API and needs the order and timing of each hop for that one request.",
+  "choices": {
+   "A": "Export full content for every request, then search the prompts for the failed call.",
+   "B": "Read the per-hop trace for the failed request, with metadata-only export.",
+   "C": "Build a custom span format and tracing service before the next incident.",
+   "D": "Turn on the claude_code.session.count metric, which records the timing of each hop."
+  },
+  "explanation": "A trace shows the order and timing of each hop in one request. Metadata-only spans still carry identifiers and timing, so the data rules hold. Trap. The session count metric sounds like timing data, but it counts sessions as each one starts."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0670",
+  "question": "A team pinned a model ID. Live quality dropped after an infrastructure update, and no code changed. The team must find the cause with evidence before it changes the model. Which two actions meet this constraint?",
+  "choices": {
+   "A": "Freeze the infrastructure that serves the model ID, so no update can change observable behavior.",
+   "B": "Compare live metrics with the baseline from before the update, and record the model ID with each metric.",
+   "C": "Rewrite the prompt with a new template and retrain the grader before any metric comparison.",
+   "D": "Check prompt and data changes from the same period before the team changes the model ID."
+  },
+  "explanation": "A pinned ID fixes the weights, so the infrastructure that serves it remains a likely cause of the shift. A baseline and the change history point to the actual cause. Trap. A setting that freezes the infrastructure sounds like a fix, but the docs describe no such setting."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0671",
+  "question": "Users type free text into a support app that reaches the main model. The team needs a check before the main call. The check must return a parseable verdict that code can count.",
+  "choices": {
+   "A": "Add a stricter system prompt that tells the main model to refuse harmful messages, then send every message.",
+   "B": "Screen each message with a lightweight model that returns a boolean verdict, and block a harmful verdict.",
+   "C": "Screen each message with the main model at high effort, and store the full reasoning for each message.",
+   "D": "Turn on the computer use classifiers for each message, since they scan text before the model reads it."
+  },
+  "explanation": "A lightweight model such as Haiku 5.5 screens the input before the main call. Structured output limits the screen to a boolean that code can parse and count. Trap. A stricter system prompt looks like a control, but the model can still follow an injected instruction, and no code stops the call."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0672",
+  "question": "A Claude Code agent must never run the deploy script. The system prompt forbids it, but the agent still proposes the command. The team needs a rule that Claude Code enforces before the command runs.",
+  "choices": {
+   "A": "Add three more sentences to the system prompt that repeat the deploy ban, and ask the agent to confirm.",
+   "B": "Move the deploy script into a separate container with its own network policy, outside the reach of the agent.",
+   "C": "Set the sandbox allowed domains to exclude the deploy host, so the script cannot reach it.",
+   "D": "Add a deny rule for the deploy command in the permission settings, which Claude Code checks before it runs."
+  },
+  "explanation": "Claude Code evaluates deny rules first, and the model cannot override that result. A deny rule for the command blocks each attempt before the command runs. Trap. A sandbox domain list sounds like it blocks the deploy, but that list controls only the hosts that sandboxed commands reach."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0673",
+  "question": "An agent runs shell commands on a developer machine. Untrusted issue text can steer those commands. The shell must not reach unknown hosts. The Read tool must not open credential files. Which two settings meet both constraints?",
+  "choices": {
+   "A": "Run /sandbox to turn on the sandbox, and keep the allowed domain list empty until a task needs a host.",
+   "B": "Add a sandbox denyRead entry for the credential files, so the Read tool cannot open them.",
+   "C": "Run the agent in a separate virtual machine for each issue, with its own network and disk.",
+   "D": "Add permission deny rules for the credential paths, so the Read tool cannot open those files."
+  },
+  "explanation": "The sandbox routes shell network traffic through a proxy, and its allowed domain list starts empty. Permission rules govern the built-in Read tool, which the sandbox does not cover. Trap. A denyRead entry in the sandbox looks like it blocks the Read tool, but the sandbox does not stop that tool."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0674",
+  "question": "A new agent loops overnight and drives API spend up. The team shares one organization across three projects. The team needs a monthly ceiling for each project and a stop for a single runaway loop.",
+  "choices": {
+   "A": "Set a monthly spend limit on each project workspace with alerts, and cap tool calls per run in code.",
+   "B": "Raise the workspace rate limit, so the loop finishes its work within the same hour.",
+   "C": "Set a spend limit on the Default Workspace that holds the project key.",
+   "D": "Create a separate organization for each project, each with its own billing and dashboard."
+  },
+  "explanation": "A workspace spend limit caps monthly spend for each project, and alerts fire at thresholds that you choose. A call cap in code stops one runaway run within minutes. (Inference) Trap. A higher rate limit looks like a fix for a stalled loop, but it allows more calls and raises spend."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0675",
+  "question": "An audited workflow calls an alias for an earlier model. The output must stay fixed through a validation period. The team must also find any deprecated use before the retirement date.",
+  "choices": {
+   "A": "Keep the alias, since aliases for earlier models point to a fixed snapshot that never moves.",
+   "B": "Move the workflow to the newest model now, and skip the replacement test to save time.",
+   "C": "Pin a dated snapshot ID, and export usage by key and model to find deprecated use.",
+   "D": "Build a shadow environment that replays every request to two model IDs, with a dashboard per token."
+  },
+  "explanation": "A dated snapshot ID stays fixed for the validation period. A usage export by key and model shows which calls still use deprecated models. Trap. An alias for an earlier model sounds fixed, but it points to the most recent snapshot for that minor version."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0676",
+  "question": "An assistant summarizes a long contract, and a wrong claim has a real cost. The model must stay the same. Each claim must point to source text. Which two controls meet these constraints?",
+  "choices": {
+   "A": "Use a larger model tier for summaries, because larger tiers invent fewer contract terms.",
+   "B": "Ask for word-for-word quotes before the summary, because the contract is a long document.",
+   "C": "Turn on contract mode, which blocks any summary that lacks a citation.",
+   "D": "Remove each summary claim that has no source quote, after the quote check runs."
+  },
+  "explanation": "Quotes before the summary ground each claim in the text of the document. Claims with no quote are removed, so each claim that stays in the summary is checkable. Trap. A larger model tier looks like the fix for invented terms, but the constraints keep the same model."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0677",
+  "question": "A managed agent can delete customer records through an MCP tool. A deletion cannot be undone. Each deletion must wait for a person to approve it before the tool runs.",
+  "choices": {
+   "A": "Subscribe to the session.status_idled webhook, which pauses the session before each deletion.",
+   "B": "Run an offline reviewer job that samples sessions after each deletion, and reports the results weekly.",
+   "C": "Add an approval service with a hook, a review queue, and a separate audit database for each tool.",
+   "D": "Set the permission policy to always_ask for the delete tool, so the session pauses until a reply arrives."
+  },
+  "explanation": "The always_ask policy pauses the session until a reviewer answers the approval request. The pause happens before the tool runs, so the deletion waits for the answer. Trap. The status idled webhook sounds like a pause control, but it only reports that a session went idle."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0678",
+  "question": "A Claude Code team wants a check on shell commands that no permission rule can express. The check must block a command that touches a production host before the command runs.",
+  "choices": {
+   "A": "Print a warning from the hook and exit with code 0, so the developer sees the reason.",
+   "B": "Set permissionDecision to allow in the hook JSON, which lets the command run with a warning.",
+   "C": "Add a PreToolUse hook on the shell matcher that exits with code 2 when the host check fails.",
+   "D": "Route every shell command to an approval service with a review queue and a manual reply."
+  },
+  "explanation": "A PreToolUse hook that exits with code 2 prevents the tool call. The matcher limits the hook to shell commands, so other tools stay unaffected. Trap. A warning printed from a hook with exit code 0 looks like a block, but the call continues."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0679",
+  "question": "An agent edits files in a reversible way across 5,000 sessions each day. Review can happen after each action, and a tested undo path must exist. Which two steps meet these constraints?",
+  "choices": {
+   "A": "Set evaluated_permission to review, which pauses each file edit until a reviewer answers.",
+   "B": "Sample sessions at a random rate for offline review, and send flagged actions to a human reviewer.",
+   "C": "Test a rollback procedure before the run, so a flagged file edit can be reversed.",
+   "D": "Require approval for every file edit before it runs, with a decision record for each edit."
+  },
+  "explanation": "Random sampling covers high volume at low review cost. (Inference) Flagged actions reach a person, and a tested rollback path makes each flagged edit reversible. Trap. Setting evaluated_permission to review sounds like a pause control, but that field only reports the decision on each tool call event."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0680",
+  "question": "A clinic sends patient notes to the Messages API. The contract requires that prompts and responses not persist after each response. The clinic also tests prompts in the Console playground.",
+  "choices": {
+   "A": "Keep default retention, and encrypt each prompt in the clinic network before it leaves.",
+   "B": "Enable ZDR for the organization, send API calls only with its keys, and keep patient data out of the playground.",
+   "C": "Enable HIPAA readiness, which stops storage of prompts after each response.",
+   "D": "Enable ZDR, and attach a customer-managed key to a new workspace for all stored data."
+  },
+  "explanation": "Zero data retention means Anthropic does not store prompts or responses at rest after the response returns. ZDR does not cover Console usage, so patient data stays out of the playground. Trap. HIPAA readiness sounds like the no-storage setting, but it adds safeguards and does not require deletion after each response."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0681",
+  "question": "A company must keep inference in the United States for a model at version 4.6 or later. The rule must hold even when application code omits the residency setting.",
+  "choices": {
+   "A": "Set the application server region to US, which keeps inference in the United States.",
+   "B": "Set inference_geo to us on each request, and leave the workspace allowed list open.",
+   "C": "Set default_inference_geo and allowed_inference_geos to us on the workspace.",
+   "D": "Create a new workspace with US workspace geo, and set its default and allowed inference geos to us."
+  },
+  "explanation": "The default geo applies when a request omits inference_geo. The allowed list rejects any request that names another geo, so application code cannot skip the rule. Trap. A region on the application server sounds like it sets inference location, but inference_geo controls where inference runs."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0682",
+  "question": "A bank must hold its own keys for new stored data, and it must show who read which records. The audit record must remain after a key is revoked. Which two actions meet these constraints?",
+  "choices": {
+   "A": "Attach a customer-managed key to a new workspace before its first request.",
+   "B": "Re-encrypt old workspaces under the customer key, with the key added after the first request.",
+   "C": "Export Activity Feed events to an internal audit store on a schedule.",
+   "D": "Create a separate workspace and customer key for every team, each with its own Compliance Access Key."
+  },
+  "explanation": "CMEK protects data written after the key takes effect, so a key set up before the first request covers all new data. The Activity Feed sits under the Anthropic key, so audit records survive a key revocation. Trap. A key added after the first request sounds like it protects old data, but earlier data is not re-encrypted."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0683",
+  "question": "A marketplace moderates listings in six languages. The rules change every month. The team must update the rules without new labeled training data. Which design meets the constraint?",
+  "choices": {
+   "A": "Retrain a custom classifier for each language after every rule change.",
+   "B": "Use the built-in safety classifiers as the marketplace rules.",
+   "C": "Put the written rules and edge-case examples in the prompt, and constrain the verdict with a JSON schema.",
+   "D": "Put the written rules in the prompt, and have a person approve every verdict before a listing goes live."
+  },
+  "explanation": "The written rules and examples in the prompt are the control, so a rule change needs an edit to text, not new training data. A JSON schema keeps each verdict parseable. Trap. A custom classifier for each language looks rigorous, but each rule change then needs new labels and a new training cycle."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0684",
+  "question": "A compliance dashboard must count declined requests by policy area. The team cannot change the model. Which method meets the constraint?",
+  "choices": {
+   "A": "HTTP error responses look like the standard count, since each declined request returns an error status code.",
+   "B": "Read stop_reason on each response, and count the stop_details category when stop_reason is refusal.",
+   "C": "Read the category value from the usage field, which lists the policy area of each call.",
+   "D": "Log every full prompt, response, and header for each call, then sort the logs by policy area."
+  },
+  "explanation": "A decline arrives as a regular response with the stop reason refusal, not as an error. The stop_details category names the policy area, so the count needs no error parsing. Trap. HTTP error responses look like the standard count, but a decline returns a normal response with a stop reason."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0685",
+  "question": "A release review asks for evidence that the product works for each user group. The review also asks which model the product uses. Select two actions that meet both requests.",
+  "choices": {
+   "A": "Build an evaluation set with a group label for each user group, and set a floor for each group.",
+   "B": "Cite the model system card as the fairness result for product users.",
+   "C": "Request subgroup fairness metrics that Anthropic publishes for each Claude model.",
+   "D": "Record the model system card link and the exact model ID in the release record."
+  },
+  "explanation": "The per-group evaluation tests the product on its own users, and a floor blocks a release that fails one group. (Inference) The system card and the exact model ID document the model that the product uses. Trap. A system card cited as fairness evidence looks sufficient, but the card describes model tests, not the product users."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0686",
+  "question": "A product owner asks for a fast and accurate answer bot. The team has no number for either word. The team must set a pass or fail check before any design work. Which step meets the constraint?",
+  "choices": {
+   "A": "Pick the largest model, and tune the wording until the demo looks accurate.",
+   "B": "Enable a workspace spend limit so that the bot stays fast and accurate.",
+   "C": "Set a metric, a threshold, and an owner, and add a weekly human panel to score every answer.",
+   "D": "Convert fast and accurate into a latency threshold and a task fidelity score, with an owner who signs each threshold."
+  },
+  "explanation": "Task fidelity and latency are common success criteria, and each needs a threshold before design starts. The owner who signs each threshold is general practice. (Inference) Trap. The largest model with tuned wording looks productive, but the team then builds toward a bar that nobody measured."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0687",
+  "question": "A project team needs a monthly spend cap for its own traffic only. The cap must not include traffic from other teams. Which setup meets the constraint?",
+  "choices": {
+   "A": "Create a project workspace and a staging workspace, scope each API key, and set a spend limit on each.",
+   "B": "Use the Default Workspace with a shared key, and set a spend limit there.",
+   "C": "Create a workspace for the project, scope its API key to that workspace, and set a spend limit on it.",
+   "D": "Set a per-minute rate limit on the project key, which caps the monthly spend."
+  },
+  "explanation": "A workspace has its own spend limit, and a key scoped to that workspace counts only toward it. The Default Workspace offers no spend limit, so the project needs its own workspace. Trap. A spend limit on the Default Workspace looks like the simplest cap, but that workspace accepts no spend limit."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0688",
+  "question": "A support bot team builds an evaluation set. The team wants a fast check loop and coverage of rare cases from real traffic. Select two actions that meet both requests.",
+  "choices": {
+   "A": "Score every answer with a human panel before each test run.",
+   "B": "Add edge cases from real traffic to the test set.",
+   "C": "Use code-based checks wherever the output format allows them.",
+   "D": "Use the workspace spend limit as the pass threshold for each answer."
+  },
+  "explanation": "Code-based checks rank first in speed and reliability in the docs. Test sets should follow the real task mix and include edge cases. Trap. A human panel on every answer looks thorough, but the docs call human grades slow and expensive."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0689",
+  "question": "A budget owner compares two models. Model X has a lower price per token. Model Y finishes each task with fewer requests. The owner must choose on the cost of one completed task. Which measure meets the constraint?",
+  "choices": {
+   "A": "Sum the token prices across all requests for one completed task, then compare the totals.",
+   "B": "Compare the per-token list prices, since they are published and stable.",
+   "C": "Build a per-developer cost dashboard with attribution before any comparison.",
+   "D": "Read the price field in each Messages API response to compare the two models."
+  },
+  "explanation": "A lower token price does not show what a finished task costs. Compare models on cost per completed task, because you pay for completed tasks. Trap. The lower per-token price looks cheaper, but the model that needs more requests can cost more per completed task."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0690",
+  "question": "A proposal moves a quality-sensitive task to a cheaper model tier. The team has no test on its own tasks. The decision must rest on measured quality and cost for real traffic. Which step meets the constraint?",
+  "choices": {
+   "A": "Switch the task to the cheaper tier, since its per-token price is lower.",
+   "B": "Read the Usage and Cost API totals and treat them as a quality score for each answer.",
+   "C": "Sample production tasks weighted like real traffic, and plot each tier score against its spend.",
+   "D": "Rebuild the product on three providers, then run a six-month comparison on real traffic."
+  },
+  "explanation": "Production tasks show how each tier performs on real traffic. A score beside the spend shows whether the cheaper tier meets the bar at a lower cost per task. Trap. A switch on the lowest per-token price looks like a saving, but the team then has no evidence that the cheaper tier meets the bar."
+ }
+]

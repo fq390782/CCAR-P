@@ -1,0 +1,8 @@
+{"add": {
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-P-jrajath94-0545", "CCAR-P-jrajath94-0482"],
+ "## 5. 시험 직전 체크리스트": ["CCAR-P-jrajath94-0372"]},
+ "rep": [
+ ["| 더 큰 tier 전환 · prompt caching | 문제 단계를 가리고 비용 증가 ✗<br>caching은 단계를 기록하지 않음 |", "| 더 큰 tier 전환 | 문제 단계를 가리고 비용 증가 ✗ |\n| prompt caching | 단계 기록 수단으로 제시된 오답 ✗ |"],
+ ["| infra 동결 · 지표 비교 전 prompt 재작성 · grader 재학습 | 증거 확보 전 변경 |", "| infra 동결 | 문서에 그런 설정 설명 없음 |\n| 지표 비교 전 prompt 재작성 · grader 재학습 | 증거 확보 전 변경 |"],
+ ["| `OTEL_LOG_USER_PROMPTS` | user prompt 내용 로깅 |", "| `OTEL_LOG_USER_PROMPTS` | tool 인수 캡처용 ✗<br>(tool 인수 = `OTEL_LOG_TOOL_DETAILS`) |"]
+]}

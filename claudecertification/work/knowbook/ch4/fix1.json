@@ -1,0 +1,10 @@
+{"add": {
+ "### 1-11. 혼합 평가와 사람 검토 표본": ["CCAR-P-jrajath94-0187"],
+ "### 1-10. Eval drawer 5종: 빠진 서랍 찾기": ["CCAR-P-jrajath94-0189"],
+ "### 1-2. Grader 선택: free-form prose에는 LLM-as-judge": ["CCAR-P-jrajath94-0031", "CCAR-P-jrajath94-0656"],
+ "## 4. 암기 목록": ["CCAR-P-jrajath94-0089"]},
+ "rep": [
+ ["| judge 점수 상승 · 사용자 불만 증가 | judge가 사람 판단과 어긋났다는 신호<br>→ 보정이 먼저 |", "| judge 점수 상승 · 사용자 불만 증가 | 원인 불명(drift) · judge 미검증<br>→ 사람 label 보정이 먼저 |"],
+ ["| schema 엄격화 · tool 사용 강제 | 형식만 보장<br>누락 · 출처 품질은 못 잡음 ✗ |", "| schema 엄격화 · tool 사용 강제 ✗ | 알려진 결함 재현 여부 확인 없이<br>대규모 투입 |"],
+ ["피드백 양식 ✗ | 사용자에게 도달한 뒤 감지 |", "피드백 양식 ✗ | regression eval · 통제된 비교 없이 배포 |"]
+]}

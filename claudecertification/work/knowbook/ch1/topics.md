@@ -1,0 +1,13 @@
+# 1장 topic 목록 (문항당 1개, 가장 핵심인 것)
+- workflow-vs-agent: workflow vs agent 선택·결정론 vs 자율·단순한 해법 우선
+- patterns: prompt chaining·routing·parallelization·orchestrator-workers·evaluator-optimizer
+- coordinator: coordinator/subagent 구조·hub-and-spoke·subagent에 넘길 context·결과 취합·위임 prompt
+- decomposition: task decomposition·작업 분할 기준·병렬 vs 순차·동적 분할
+- loop: agentic loop·stop_reason·tool_use 반복·종료 조건·max iterations·안전장치
+- sdk: Agent SDK(query·ClaudeAgentOptions·allowed_tools·AgentDefinition·Task tool·hooks·PreToolUse·PostToolUse)
+- session: session resume·fork·state 유지·handoff·장기 작업 상태 저장
+- enforcement: 프로그램적 강제(hook·gate) vs prompt 지시·전제조건 강제·순서 강제
+- handoff-human: 사람에게 handoff·escalation 시 요약 전달
+- architecture: 전체 아키텍처 패턴 선택·hybrid·결정론 단계 + LLM 단계 배치·system of record·trust boundary
+- deployment: 배포 방식·Managed Agents·hosting·구현 수단 비교
+- other: 위에 안 맞음(짧은 이유를 note에)

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="420" viewBox="0 0 920 420" role="img" aria-label="Handoff 데이터 형식: 본문과 metadata를 분리한 레코드로 넘겨 출처 대응을 유지" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Handoff 데이터 형식: 본문과 metadata를 분리한 레코드로 넘겨 출처 대응을 유지</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-handoff-record-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-handoff-record-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-handoff-record-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-handoff-record-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Handoff 데이터 형식 — 출처를 본문에서 분리한 레코드로 넘긴다</text>
+<text x="20" y="62" font-size="14" fill="#DC2626" text-anchor="start" font-weight="bold">안티패턴: 문장 요약으로 반환</text>
+<rect x="20" y="72" width="240" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="140.0" y="101.0" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Subagent</text>
+<text x="140.0" y="116.3" font-size="11" fill="#6B7280" text-anchor="middle">출처가 문장 속에 섞인 요약</text>
+<rect x="340" y="72" width="240" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="460.0" y="93.5" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Coordinator</text>
+<text x="460.0" y="108.8" font-size="11" fill="#6B7280" text-anchor="middle">요약 압축 · 다시 쓰기</text>
+<text x="460.0" y="123.8" font-size="11" fill="#6B7280" text-anchor="middle">(말 전달 게임식 중계)</text>
+<rect x="660" y="72" width="240" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="780.0" y="93.5" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">최종 보고서</text>
+<text x="780.0" y="108.8" font-size="11" fill="#6B7280" text-anchor="middle">인용이 다른 문서와 연결</text>
+<text x="780.0" y="123.8" font-size="11" fill="#6B7280" text-anchor="middle">조건 다른 통계값이 한 경향으로 묶임</text>
+<path d="M260,104 L340,104" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-handoff-record-r)"/>
+<rect x="272.4" y="77.0" width="55.3" height="30" fill="#FFFFFF"/>
+<text x="300" y="88.0" font-size="11" fill="#DC2626" text-anchor="middle">문장 요약</text>
+<text x="300" y="102.0" font-size="11" fill="#DC2626" text-anchor="middle">반환</text>
+<path d="M580,104 L660,104" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-handoff-record-r)"/>
+<rect x="597.9" y="77.0" width="44.3" height="30" fill="#FFFFFF"/>
+<text x="620" y="88.0" font-size="11" fill="#DC2626" text-anchor="middle">통합 중</text>
+<text x="620" y="102.0" font-size="11" fill="#DC2626" text-anchor="middle">재작성</text>
+<text x="20" y="172" font-size="14" fill="#2563EB" text-anchor="start" font-weight="bold">권장: 본문 + metadata 분리 레코드</text>
+<rect x="20" y="184" width="240" height="84" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="140.0" y="214.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Subagent</text>
+<text x="140.0" y="231.6" font-size="13" fill="#1F2937" text-anchor="middle">구조화 레코드로 반환</text>
+<text x="140.0" y="246.8" font-size="11" fill="#6B7280" text-anchor="middle">고정 schema · 필수 근거 포함</text>
+<rect x="340" y="184" width="240" height="84" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="460.0" y="215.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Coordinator</text>
+<text x="460.0" y="230.8" font-size="11" fill="#6B7280" text-anchor="middle">구조화 데이터를 요약 없이 그대로 전달</text>
+<text x="460.0" y="245.8" font-size="11" fill="#6B7280" text-anchor="middle">통합 전 비교용 metadata 검증</text>
+<rect x="660" y="184" width="240" height="84" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="780.0" y="215.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">통합 → 최종 보고서</text>
+<text x="780.0" y="230.8" font-size="11" fill="#6B7280" text-anchor="middle">주장마다 근거 인용 포함</text>
+<text x="780.0" y="245.8" font-size="11" fill="#6B7280" text-anchor="middle">주장 → ID 연결 → 사후 검증 가능</text>
+<path d="M260,226 L340,226" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-handoff-record-b)"/>
+<rect x="279.5" y="199.0" width="41.0" height="30" fill="#FFFFFF"/>
+<text x="300" y="210.0" font-size="11" fill="#2563EB" text-anchor="middle">레코드</text>
+<text x="300" y="224.0" font-size="11" fill="#2563EB" text-anchor="middle">전달</text>
+<path d="M580,226 L660,226" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-handoff-record-b)"/>
+<rect x="592.4" y="199.0" width="55.3" height="30" fill="#FFFFFF"/>
+<text x="620" y="210.0" font-size="11" fill="#2563EB" text-anchor="middle">근거 인용</text>
+<text x="620" y="224.0" font-size="11" fill="#2563EB" text-anchor="middle">요구 명시</text>
+<rect x="20" y="298" width="240" height="102" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="140.0" y="331.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">근거 레코드</text>
+<text x="140.0" y="346.4" font-size="11" fill="#6B7280" text-anchor="middle">발견마다 고유 ID · 주장(본문)</text>
+<text x="140.0" y="361.4" font-size="11" fill="#6B7280" text-anchor="middle">출처 위치: URL · 문서명 · page 번호</text>
+<text x="140.0" y="376.4" font-size="11" fill="#6B7280" text-anchor="middle">취득 조건: 관측 기간 · 측정 방법</text>
+<path d="M140,268 L140,298" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-handoff-record-b)"/>
+<rect x="142.8" y="275.0" width="66.3" height="16" fill="#FFFFFF"/>
+<text x="176" y="286.0" font-size="11" fill="#2563EB" text-anchor="middle">레코드 구성</text>
+<rect x="340" y="298" width="560" height="102" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="620.0" y="336.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">왜 분리하나</text>
+<text x="620.0" y="353.6" font-size="13" fill="#1F2937" text-anchor="middle">본문을 고쳐 써도 주장 ↔ 출처 대응이 데이터로 유지</text>
+<text x="620.0" y="370.6" font-size="13" fill="#1F2937" text-anchor="middle">출처가 문장에 섞이면 통합 중 다시 쓸 때 대응이 붕괴</text>
+</svg>

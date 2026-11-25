@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="395" viewBox="0 0 960 395" role="img" aria-label="범용 tool은 목적이 다르면 분할하고, 같은 일이면 병합한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>범용 tool은 목적이 다르면 분할하고, 같은 일이면 병합한다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-tool-split-merge" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect x="30" y="20" width="900" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="480.0" y="44.0" font-size="12" fill="#1F2937" text-anchor="middle">증상: 같은 요청인데 출력 형식이 매번 다름 → 원인 = tool 입자도 (범용 tool 하나가 여러 목적을 인자로 선택)</text>
+<polyline points="165,60 165,112" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-split-merge)"/>
+<rect x="134.2" y="77" width="61.6" height="18" fill="#FFFFFF"/>
+<text x="165" y="90" font-size="12" fill="#1F2937" text-anchor="middle">원인 점검</text>
+<polygon points="165,112.0 300.0,177 165,242.0 30.0,177" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="165" y="173.0" font-size="12" fill="#1F2937" text-anchor="middle">추출 · 요약 · 검증처럼</text>
+<text x="165" y="189.0" font-size="12" fill="#1F2937" text-anchor="middle">목적이 다른 작업인가?</text>
+<rect x="345" y="112" width="250" height="130" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="470.0" y="141.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">목적별 tool로 분할</text>
+<text x="470.0" y="157.0" font-size="12" fill="#1F2937" text-anchor="middle">범용 analyze_document 하나가</text>
+<text x="470.0" y="173.0" font-size="12" fill="#1F2937" text-anchor="middle">추출 · 요약 · 검증을 인자로 선택</text>
+<text x="470.0" y="189.0" font-size="12" fill="#1F2937" text-anchor="middle">→ extract_data_points</text>
+<text x="470.0" y="205.0" font-size="12" fill="#1F2937" text-anchor="middle">→ summarize_content</text>
+<text x="470.0" y="221.0" font-size="12" fill="#1F2937" text-anchor="middle">→ verify_claim_against_source</text>
+<polyline points="300,177 343,177" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-split-merge)"/>
+<rect x="310.0" y="158" width="22.0" height="18" fill="#FFFFFF"/>
+<text x="321" y="171" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="660" y="112" width="270" height="130" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="795.0" y="141.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">분할 후 고정되는 것</text>
+<text x="795.0" y="157.0" font-size="12" fill="#1F2937" text-anchor="middle">각 tool 입출력 사양 명시</text>
+<text x="795.0" y="173.0" font-size="12" fill="#1F2937" text-anchor="middle">output schema로 형식 고정</text>
+<text x="795.0" y="189.0" font-size="12" fill="#1F2937" text-anchor="middle">필수 입력 = input_schema required</text>
+<text x="795.0" y="205.0" font-size="12" fill="#1F2937" text-anchor="middle">→ schema 단계에서 호출 불성립</text>
+<text x="795.0" y="221.0" font-size="12" fill="#1F2937" text-anchor="middle">역할 안 겹치는 소수의 tool만</text>
+<polyline points="595,177 658,177" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-split-merge)"/>
+<rect x="609.0" y="158" width="34.0" height="18" fill="#FFFFFF"/>
+<text x="626" y="171" font-size="12" fill="#1F2937" text-anchor="middle">효과</text>
+<polyline points="165,242 165,317 343,317" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-split-merge)"/>
+<rect x="142.0" y="270" width="46.0" height="18" fill="#FFFFFF"/>
+<text x="165" y="283" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="345" y="277" width="250" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="470.0" y="305.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">action 파라미터 tool 하나로 병합</text>
+<text x="470.0" y="321.0" font-size="12" fill="#1F2937" text-anchor="middle">같은 일 · 같은 입력 형태의 tool 둘</text>
+<text x="470.0" y="337.0" font-size="12" fill="#1F2937" text-anchor="middle">+ 명확한 설명</text>
+<rect x="660" y="267" width="270" height="100" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="795.0" y="289.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: 합치기 과다</text>
+<text x="795.0" y="305.0" font-size="12" fill="#1F2937" text-anchor="middle">40개 동작을 mode 파라미터 하나로</text>
+<text x="795.0" y="321.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 동작이 선택 단계에서 숨음</text>
+<text x="795.0" y="337.0" font-size="12" fill="#1F2937" text-anchor="middle">18개 tool → action 범용 tool 하나</text>
+<text x="795.0" y="353.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 목적이 모호한 tool</text>
+</svg>

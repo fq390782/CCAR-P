@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-label="MCP tool discovery: tools/list로 정의를 받아 모델에 노출하고 tools/call로 실행한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>MCP tool discovery: tools/list로 정의를 받아 모델에 노출하고 tools/call로 실행한다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-mcp-discovery" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect x="25" y="24" width="230" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="140.0" y="48.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Claude (모델)</text>
+<polyline points="140,64 140,470" fill="none" stroke="#9CA3AF" stroke-width="1.2"/>
+<rect x="335" y="24" width="230" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="48.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">MCP client (host 안)</text>
+<polyline points="450,64 450,470" fill="none" stroke="#9CA3AF" stroke-width="1.2"/>
+<rect x="645" y="24" width="230" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="760.0" y="48.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">MCP server</text>
+<polyline points="760,64 760,470" fill="none" stroke="#9CA3AF" stroke-width="1.2"/>
+<polyline points="450,100 760,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="559.4615384615385" y="82.0" width="91.07692307692308" height="16" fill="#FFFFFF"/>
+<text x="605.0" y="94.0" font-size="12" fill="#1F2937" text-anchor="middle">① tools/list</text>
+<polyline points="760,140 450,140" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="490.2307692307692" y="122.0" width="229.53846153846155" height="16" fill="#FFFFFF"/>
+<text x="605.0" y="134.0" font-size="12" fill="#1F2937" text-anchor="middle">② name, description, inputSchema</text>
+<polyline points="450,190 140,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="190.3846153846154" y="172.0" width="209.23076923076923" height="16" fill="#FFFFFF"/>
+<text x="295.0" y="184.0" font-size="12" fill="#1F2937" text-anchor="middle">③ 모델용 tool 정의로 변환해 전달</text>
+<rect x="176.76923076923077" y="199" width="236.46153846153845" height="15" fill="#FFFFFF"/>
+<text x="295.0" y="210" font-size="11" fill="#6B7280" text-anchor="middle">서버에 tool을 추가해도 앱 코드 변경 없음</text>
+<polyline points="140,250 450,250" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="254.76923076923077" y="232.0" width="80.46153846153847" height="16" fill="#FFFFFF"/>
+<text x="295.0" y="244.0" font-size="12" fill="#1F2937" text-anchor="middle">④ tool 선택</text>
+<polyline points="450,290 760,290" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="559.4615384615385" y="272.0" width="91.07692307692308" height="16" fill="#FFFFFF"/>
+<text x="605.0" y="284.0" font-size="12" fill="#1F2937" text-anchor="middle">⑤ tools/call</text>
+<polyline points="760,330 450,330" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="495.0769230769231" y="312.0" width="219.84615384615384" height="16" fill="#FFFFFF"/>
+<text x="605.0" y="324.0" font-size="12" fill="#1F2937" text-anchor="middle">⑥ 결과 (입력 검증 실패면 isError)</text>
+<polyline points="450,370 140,370" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="200.53846153846155" y="352.0" width="188.92307692307693" height="16" fill="#FFFFFF"/>
+<text x="295.0" y="364.0" font-size="12" fill="#1F2937" text-anchor="middle">⑦ 결과 / isError로 자가 수정</text>
+<polyline points="760,420 450,420" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-8-mcp-discovery)"/>
+<rect x="483.3076923076923" y="402.0" width="243.3846153846154" height="16" fill="#FFFFFF"/>
+<text x="605.0" y="414.0" font-size="12" fill="#1F2937" text-anchor="middle">⑧ notifications/tools/list_changed</text>
+<rect x="472.1730769230769" y="429" width="265.65384615384613" height="15" fill="#FFFFFF"/>
+<text x="605.0" y="440" font-size="11" fill="#6B7280" text-anchor="middle">listChanged 선언 서버 → client가 ①부터 다시</text>
+<rect x="20" y="490" width="860" height="76" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="523.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: 발견 수단을 잘못 고름</text>
+<text x="450.0" y="539.5" font-size="12" fill="#1F2937" text-anchor="middle">prompts·resources로 tool 발견  |  빈 인자로 tools/call 시험 호출  |  isError를 발견 수단으로 사용</text>
+<line x1="20" y1="584" x2="48" y2="584" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-discovery)"/>
+<text x="56" y="588" font-size="11" fill="#6B7280" text-anchor="start">요청·응답</text>
+<line x1="132.34615384615384" y1="584" x2="160.34615384615384" y2="584" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-8-mcp-discovery)"/>
+<text x="168.34615384615384" y="588" font-size="11" fill="#6B7280" text-anchor="start">목록이 바뀔 때만 오는 비동기 알림</text>
+</svg>

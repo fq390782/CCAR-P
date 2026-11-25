@@ -1,0 +1,1087 @@
+[
+ {
+  "id": "CCDV-F-Udemy-0044",
+  "question": "ある航空会社が、整備記録の自由記述から、所定のフィールド（機体番号・整備区分・所要時間など）を構造化レコードに抽出するClaudeの機能を構築しています。\nモデルがスキーマに準拠した構造化データを確実に返すようにする設計として、適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "結果を使う前に、stop_reasonが拒否（refusal）や上限到達（max_tokens）でないか確かめる。",
+   "B": "自由文の応答から正規表現で各フィールドを抜き出し、見つからない項目は空欄のまま登録する。",
+   "C": "max_tokensを小さく設定して出力を短く保ち、スキーマから外れた部分が出ないようにする。",
+   "D": "構造化出力を使えば応答は常にスキーマ準拠が保証されるとみなし、stop_reasonの確認は省略する。",
+   "E": "output_config.formatのJSONスキーマかstrict tool useで、応答をスキーマに制約する。"
+  },
+  "en_question": "An airline is building a Claude feature that extracts specified fields (aircraft number, maintenance category, time required, etc.) from free-text maintenance records into structured records.\nWhich designs are appropriate for ensuring that the model reliably returns structured data that conforms to the schema? (Select TWO.)",
+  "en_choices": {
+   "A": "Before using the result, confirm that stop_reason does not indicate a refusal (refusal) or reaching the limit (max_tokens).",
+   "B": "Extract each field from the free-text response with regular expressions, and register any fields that are not found as blank.",
+   "C": "Set max_tokens low to keep the output short, so that no parts that deviate from the schema appear.",
+   "D": "Assume that using structured outputs always guarantees a schema-compliant response, and skip checking stop_reason.",
+   "E": "Constrain the response to the schema with a JSON schema in output_config.format or with strict tool use."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0045",
+  "question": "あるホテル予約アシスタントには、空室確認・予約確定・予約キャンセルなど、複数のツールが登録されています。Claudeが、状況に合わないツールを呼び出してしまうことがあります。\nツールの説明の書き方とツール選択の精度の関係を踏まえた設計として、最も適切なものはどれですか。",
+  "choices": {
+   "A": "descriptionは開発者向けのメモとして短くし、選択の精度はツール名の工夫で補っていく。",
+   "B": "どのツールにも同じ汎用的な説明を付け、使い分けはモデルの柔軟な判断に任せておく。",
+   "C": "各ツールの用途と使う場面を具体的に書き分け、ツール間の役割の重なりをなくす。",
+   "D": "誤ったツールが呼ばれたら例外を返し、Claudeに再試行させて正しいツールを選び直させる。"
+  },
+  "en_question": "A hotel reservation assistant has multiple tools registered, such as checking availability, confirming a reservation, and canceling a reservation. Claude sometimes calls a tool that does not fit the situation.\nWhich design is most appropriate in light of the relationship between how tool descriptions are written and tool selection accuracy?",
+  "en_choices": {
+   "A": "Keep the description short, as a memo for developers, and compensate for selection accuracy by choosing tool names carefully.",
+   "B": "Give every tool the same generic description, and leave the choice among them to the model's flexible judgment.",
+   "C": "Write a distinct, specific description of each tool's purpose and when to use it, eliminating overlap in roles between tools.",
+   "D": "When the wrong tool is called, return an exception and have Claude retry and reselect the correct tool."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0046",
+  "question": "ある病院が、診察の音声の書き起こしから診療サマリを自動生成する、Claudeを活用したシステムを企画しています。ビジネス目標は「医師が書類作成に費やす時間を30%削減する」ことです。\nこのビジネス要件から導かれる「機能要件」として最も適切なものはどれですか。",
+  "choices": {
+   "A": "書き起こしテキストから病院指定の書式で診療サマリを生成し、医師の確認画面に表示すること。",
+   "B": "ピーク時に100件の同時リクエストを処理し、応答時間の95パーセンタイルを10秒以内に収めること。",
+   "C": "医師が書類作成に費やす時間を導入前と比べて30%削減し、診療に充てる時間を増やすこと。",
+   "D": "開発を3か月以内に完了し、初年度の構築・運用費用を承認済みの予算内に収めること。"
+  },
+  "en_question": "A hospital is planning a Claude-powered system that automatically generates clinical summaries from transcripts of consultation audio. The business goal is to \"reduce the time physicians spend on paperwork by 30%.\"\nWhich is the most appropriate \"functional requirement\" derived from this business requirement?",
+  "en_choices": {
+   "A": "Generate a clinical summary in the hospital's specified format from the transcript text, and display it on the physician's review screen.",
+   "B": "Handle 100 concurrent requests at peak, keeping the 95th percentile response time within 10 seconds.",
+   "C": "Reduce the time physicians spend on paperwork by 30% compared with before adoption, increasing the time available for patient care.",
+   "D": "Complete development within three months, and keep first-year build and operating costs within the approved budget."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0047",
+  "question": "ある官公庁のポータルが、ほとんど変わらない規制文書のコーパスをもとに、市民からの数千件の問合せに回答しています。どのリクエストでも、先頭に置くシステムプロンプトと規制文書（大量のテキスト）は同じで、変わるのは市民の問合せだけです。\nプロンプトキャッシングのコスト設計として正しい記述はどれですか。",
+  "choices": {
+   "A": "読み出しは多くのモデルで基本入力の0.1倍、5分TTLの書き込みは1.25倍で、再利用が多いほど安い。",
+   "B": "キャッシュは同じ利用者の会話の中でだけ再利用され、市民ごとに別々の書き込みが必要になる。",
+   "C": "1時間TTLの書き込みは5分TTLの書き込みより安く、再利用の間隔によらず1時間TTLが有利になる。",
+   "D": "5分TTLのキャッシュは5分ごとに書き込み直しが課金され、問い合わせが絶えなくても1時間TTLが有利になる。"
+  },
+  "en_question": "A government agency's portal answers thousands of inquiries from citizens based on a corpus of regulatory documents that rarely changes. In every request, the system prompt and the regulatory documents (a large amount of text) placed at the beginning are the same; only the citizen's inquiry changes.\nWhich statement about the cost design of prompt caching is correct?",
+  "en_choices": {
+   "A": "On many models, cache reads cost 0.1x the base input price and 5-minute TTL writes cost 1.25x, so the more reuse, the cheaper it becomes.",
+   "B": "The cache is reused only within the same user's conversation, so a separate write is needed for each citizen.",
+   "C": "1-hour TTL writes are cheaper than 5-minute TTL writes, so the 1-hour TTL is advantageous regardless of the reuse interval.",
+   "D": "A 5-minute TTL cache is billed for a rewrite every 5 minutes, so the 1-hour TTL is advantageous even when inquiries arrive continuously."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0048",
+  "question": "ある広告代理店が、蓄積した数万件の広告コピーの表現を毎晩分析する社内システムを設計しています。分析結果は翌朝の定例会議までにそろっていればよく、処理コストの削減を最優先にしています。\nこの用途でMessage Batches APIを選ぶ根拠として正しいものはどれですか。",
+  "choices": {
+   "A": "結果がserver-sent eventsで逐次届き、分析の進捗を画面に表示し続けられる。",
+   "B": "標準料金の50%で非同期に処理され、多くは1時間以内、最長24時間の枠で完了する。",
+   "C": "各リクエストの応答が標準のAPIより速く返り、夜間の分析時間を短縮できる。",
+   "D": "投入した順序どおりに結果が返り、custom_idなしで元の広告コピーと突き合わせられる。"
+  },
+  "en_question": "An advertising agency is designing an internal system that analyzes the wording of tens of thousands of accumulated ad copies every night. The analysis results only need to be ready by the next morning's regular meeting, and reducing processing cost is the top priority.\nWhich is the correct reason to choose the Message Batches API for this use case?",
+  "en_choices": {
+   "A": "Results arrive incrementally via server-sent events, so the progress of the analysis can be displayed on screen continuously.",
+   "B": "Requests are processed asynchronously at 50% of standard pricing, with most completing within 1 hour and a maximum window of 24 hours.",
+   "C": "Each request's response returns faster than with the standard API, shortening the overnight analysis time.",
+   "D": "Results are returned in the same order as submitted, so they can be matched to the original ad copy without custom_id."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0049",
+  "question": "ある化学メーカーが、Claudeアシスタントを構築しています。このアシスタントは、利用者から送られてくる問い合わせ文をプロンプトのテンプレートに差し込んで回答します。\nプロンプトを組み立てるときの、信頼できないユーザー入力の扱い（サニタイズ）として最も適切なアプローチはどれですか。",
+  "choices": {
+   "A": "入力をuser_queryなどのXMLタグで囲み、中身はデータだとシステムプロンプトに書く。",
+   "B": "入力から記号類を取り除いて文字だけにし、その結果をテンプレートにそのまま差し込んで使う。",
+   "C": "入力を指示文の途中にそのまま連結し、指示と入力の区別はモデルの文脈判断に任せておく。",
+   "D": "差し込む前に別のモデルで入力を要約させ、言い換えた文のほうをテンプレートに差し込む。"
+  },
+  "en_question": "A chemical manufacturer is building a Claude assistant. The assistant inserts the inquiry text sent by users into a prompt template and answers it.\nWhen assembling the prompt, which approach to handling (sanitizing) untrusted user input is most appropriate?",
+  "en_choices": {
+   "A": "Wrap the input in an XML tag such as user_query, and state in the system prompt that its contents are data.",
+   "B": "Strip symbols from the input so that only text characters remain, and insert the result into the template as is.",
+   "C": "Concatenate the input as is into the middle of the instructions, and leave it to the model's contextual judgment to distinguish instructions from input.",
+   "D": "Before inserting the input, have a separate model summarize it, and insert the paraphrased text into the template instead."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0050",
+  "question": "ある証券会社が、顧客向けのClaudeチャットボットを本番導入します。インサイダー取引の助長や顧客情報の開示といった不適切な要求に対して、堅牢なガードレールを設けたいと考えています。\n最も適切な設計はどれですか。",
+  "choices": {
+   "A": "システムプロンプトの拒否方針と出力フィルタを置き、入力の事前審査は省いて処理を軽くする。",
+   "B": "入力を軽量モデルで審査する仕組みを設け、審査を通過した依頼はそのまま処理する。",
+   "C": "リリース前にレッドチーミングで攻撃を試して対策を固め、稼働後の追加の検査は置かない。",
+   "D": "入力の審査とシステムプロンプトの拒否方針に、出力のフィルタと監視を重ねて多層で守る。"
+  },
+  "en_question": "A securities company is deploying a customer-facing Claude chatbot to production. It wants to put robust guardrails in place against inappropriate requests, such as facilitating insider trading or disclosing customer information.\nWhich design is most appropriate?",
+  "en_choices": {
+   "A": "Use a refusal policy in the system prompt and an output filter, and skip pre-screening of input to keep processing light.",
+   "B": "Set up a mechanism that screens input with a lightweight model, and process requests that pass screening as is.",
+   "C": "Try attacks through red teaming before release to harden the defenses, and add no further checks after going live.",
+   "D": "Layer output filtering and monitoring on top of input screening and a refusal policy in the system prompt, for defense in depth."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0051",
+  "question": "ある銀行が、顧客データを扱う社内エージェントを構築します。規制対応のため、次の要件を満たす必要があります。\nエージェントの実行環境とセッション状態（会話ログ）を、自社で管理するインフラ内に置く\nエージェントが、自社ネットワーク内のファイルとサービスを直接操作する\nこの要件に最も適したデプロイモデルはどれですか。",
+  "choices": {
+   "A": "Managed Agentsを採用し、自社インフラ上のセルフホスト型サンドボックスでツールを実行する。",
+   "B": "Message Batches APIを採用し、エージェントの各ステップを非同期のバッチとして投入する。",
+   "C": "Claude Agent SDKを採用し、自社インフラ上の自社プロセスでエージェントループを実行する。",
+   "D": "Managed Agentsを採用し、Anthropic管理のクラウドサンドボックスでセッションを実行する。"
+  },
+  "en_question": "A bank is building an internal agent that handles customer data. For regulatory compliance, it must meet the following requirements.\nThe agent's execution environment and session state (conversation logs) are kept within infrastructure that the bank manages itself\nThe agent directly operates on files and services within the bank's own network\nWhich deployment model best fits these requirements?",
+  "en_choices": {
+   "A": "Adopt Managed Agents, and run tools in a self-hosted sandbox on the bank's own infrastructure.",
+   "B": "Adopt the Message Batches API, and submit each step of the agent as an asynchronous batch.",
+   "C": "Adopt the Claude Agent SDK, and run the agent loop in the bank's own process on its own infrastructure.",
+   "D": "Adopt Managed Agents, and run sessions in an Anthropic-managed cloud sandbox."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0052",
+  "question": "ある再生可能エネルギー事業者が、運用リポジトリでシェルコマンドを実行できるClaude Codeエージェントを使っています。本番設定の削除などの破壊的なコマンドを、実行される前に、モデルの判断に頼らず決定論的に（確実に）ブロックしたいと考えています。\n最も適切なアプローチはどれですか。",
+  "choices": {
+   "A": "システムプロンプトに「本番設定を削除するコマンドは実行しない」と明記しておく。",
+   "B": "実行前に審査役のサブエージェントを呼ぶよう指示し、破壊的なコマンドかどうかを判断させる。",
+   "C": "PostToolUseフックでBashの実行結果を検査し、破壊的な操作を検知したら担当者に通知する。",
+   "D": "PreToolUseフックで実行前にコマンドを検査し、該当すればdenyを返して止める。"
+  },
+  "en_question": "A renewable energy company uses a Claude Code agent that can run shell commands in its operations repository. It wants to block destructive commands, such as deleting production configuration, deterministically (reliably) before they run, without relying on the model's judgment.\nWhich approach is most appropriate?",
+  "en_choices": {
+   "A": "State explicitly in the system prompt: \"Do not run commands that delete production configuration.\"",
+   "B": "Instruct the agent to call a reviewer subagent before execution, and have the subagent judge whether a command is destructive.",
+   "C": "Inspect Bash execution results with a PostToolUse hook, and notify the person in charge if a destructive operation is detected.",
+   "D": "Inspect commands before execution with a PreToolUse hook, and stop them by returning deny if they match."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0053",
+  "question": "ある保険会社が、保険金請求の一次処理を自動化しようとしています。処理は毎回、次の3ステップをこの順序で実行し、順序が変わることはありません。\n提出書類の必須項目チェック\n契約条件との照合\n顧客向け受領通知文の生成\nLLMを活用した実装方針として最も適切なものはどれですか。",
+  "choices": {
+   "A": "マネージャー役のLLMが請求ごとにサブタスクを決め、ワーカーLLMへ委任するorchestrator-workers型で実装する。",
+   "B": "評価役のLLMが出力を採点し、基準を満たすまで生成と修正を繰り返すevaluator-optimizer型で実装する。",
+   "C": "各処理を事前定義したコードパスで順に呼び出すprompt chaining型のワークフローで実装する。",
+   "D": "LLMが実行時にツールの使用順序と処理手順を自ら決める自律型エージェントとして実装する。"
+  },
+  "en_question": "An insurance company is trying to automate first-pass processing of insurance claims. Every time, processing runs the following three steps in this order, and the order never changes.\nCheck the submitted documents for required fields\nCross-check against the policy terms\nGenerate a receipt notification for the customer\nWhich LLM-based implementation approach is most appropriate?",
+  "en_choices": {
+   "A": "Implement it with the orchestrator-workers pattern, in which a manager LLM decides the subtasks for each claim and delegates them to worker LLMs.",
+   "B": "Implement it with the evaluator-optimizer pattern, in which an evaluator LLM scores the output and generation and revision repeat until the criteria are met.",
+   "C": "Implement it as a prompt chaining workflow that calls each step in order through predefined code paths.",
+   "D": "Implement it as an autonomous agent in which the LLM itself decides at runtime the order of tool use and the processing steps."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0001",
+  "question": "ある病院のIT部門が、院内の臨床リファレンス用MCPサーバーを、AIアプリ（ホスト）に統合しようとしています。あるエンジニアは、ホスト・クライアント・サーバーの関係と、サーバーが2つあるときに必要なクライアントの数を混同しています。\nMCPのホスト/クライアント/サーバーモデルを正しく説明しているものはどれですか。",
+  "choices": {
+   "A": "ホストがサーバーごとにMCPクライアントを1つずつ作り、各クライアントが専用の接続を保つ。",
+   "B": "MCPサーバーがホストの役割を兼ね、AIアプリはクライアントとしてサーバーに接続する。",
+   "C": "ホストが1つのMCPクライアントを作り、そのクライアントが2つのサーバーへ同時に接続する。",
+   "D": "stdio用とStreamable HTTP用に、トランスポートごとのクライアントを作ってサーバーを振り分ける。"
+  },
+  "en_question": "A hospital's IT department is integrating its in-house clinical reference MCP server into an AI application (the host). One engineer is confusing the relationship among the host, client, and server, as well as the number of clients needed when there are two servers.\nWhich statement correctly describes the MCP host/client/server model?",
+  "en_choices": {
+   "A": "The host creates one MCP client per server, and each client maintains a dedicated connection.",
+   "B": "The MCP server also acts as the host, and the AI application connects to the server as a client.",
+   "C": "The host creates a single MCP client, and that client connects to both servers simultaneously.",
+   "D": "Separate clients are created per transport, one for stdio and one for Streamable HTTP, and the servers are distributed among them."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0002",
+  "question": "ある動画配信サービスが、視聴しながら使うチャットアシスタントで、Messages APIのストリーミング（server-sent events）を直接扱う実装をしています。\nSSEイベントを正しく処理する実装として、適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "最後に届いたcontent_block_deltaのテキストを完成済みの本文とみなし、そのまま画面に表示する。",
+   "B": "input_json_deltaのpartial_jsonを受信のたびにJSONとしてパースし、得られた値を引数に反映する。",
+   "C": "未知のイベントタイプを受信したら仕様違反として扱い、例外を送出して接続を切断する。",
+   "D": "text_deltaをindexごとに順に連結し、stop_reasonはmessage_deltaイベントから読み取る。",
+   "E": "input_json_deltaのpartial_jsonを蓄積し、content_block_stopを受け取ってからパースする。"
+  },
+  "en_question": "A video streaming service is building a chat assistant that viewers use while watching, and its implementation handles Messages API streaming (server-sent events) directly.\nWhich implementations correctly process SSE events? (Select TWO.)",
+  "en_choices": {
+   "A": "Treat the text of the last content_block_delta received as the completed body, and display it on screen as is.",
+   "B": "Parse the partial_json of input_json_delta as JSON every time one is received, and apply the resulting value to the arguments.",
+   "C": "Treat receipt of an unknown event type as a specification violation, throw an exception, and close the connection.",
+   "D": "Concatenate text_delta values in order for each index, and read stop_reason from the message_delta event.",
+   "E": "Accumulate the partial_json of input_json_delta, and parse it only after receiving content_block_stop."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0003",
+  "question": "ある旅行ガイドアプリの開発チームは、以前のモデルで観光地の紹介文を生成する際、確率の低いトークンが選ばれにくくなるよう、top_kを指定して調整していました。\nモデルをClaude Sonnet 5に更新したところ、このリクエストがHTTP 400で失敗するようになりました。\nサンプリングパラメータの理解と対処として最も適切なものはどれですか。",
+  "choices": {
+   "A": "top_kを外し、文体はプロンプトの指示や例で導く。",
+   "B": "top_kは残したまま、top_pを0.99以上に設定し、既定値に近い組み合わせとして受け付けさせる。",
+   "C": "top_kを外し、代わりにtemperatureを0に下げて、確率の低い候補が選ばれにくくなるようにする。",
+   "D": "top_kを外し、代わりにmax_tokensを小さくして、次のトークンの候補となる数を絞り込む。"
+  },
+  "en_question": "When generating descriptions of tourist sites with a previous model, the development team of a travel guide app specified top_k to tune generation so that low-probability tokens were less likely to be chosen.\nAfter the team updated the model to Claude Sonnet 5, this request began failing with HTTP 400.\nWhich is the most appropriate understanding of sampling parameters and the most appropriate response?",
+  "en_choices": {
+   "A": "Remove top_k, and guide the writing style through instructions and examples in the prompt.",
+   "B": "Keep top_k, and set top_p to 0.99 or higher so that the request is accepted as a combination close to the defaults.",
+   "C": "Remove top_k, and instead lower temperature to 0 so that low-probability candidates are less likely to be chosen.",
+   "D": "Remove top_k, and instead reduce max_tokens to narrow the number of candidates for the next token."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0004",
+  "question": "あるホテルチェーンが、数か月前にClaudeを使ったコンシェルジュアプリを本番導入しました。\nシステムライフサイクルの運用・保守フェーズで行う、継続的な保守・評価の取り組みとして最も適切なものはどれですか。",
+  "choices": {
+   "A": "障害の報告を受けたときに個別に原因を調べて直し、評価用のデータセットは持たずに運用する。",
+   "B": "利用者満足度のアンケートを四半期ごとに集計し、スコアが下がったときに構成を見直す。",
+   "C": "本番出力の品質を継続的に監視し、回帰評価セットを保ちながらプロンプトや構成を改善する。",
+   "D": "導入時の構成を固定し、モデルやプロンプトは次の大規模改修まで変更しない方針で運用する。"
+  },
+  "en_question": "A hotel chain put a concierge app built with Claude into production a few months ago.\nWhich is the most appropriate continuous maintenance and evaluation practice for the operations and maintenance phase of the system lifecycle?",
+  "en_choices": {
+   "A": "Investigate and fix the cause case by case whenever a failure is reported, and operate without an evaluation dataset.",
+   "B": "Tally user satisfaction surveys every quarter, and review the configuration when the score drops.",
+   "C": "Continuously monitor the quality of production outputs, and improve the prompts and configuration while maintaining a regression evaluation set.",
+   "D": "Freeze the configuration from launch, and operate under a policy of not changing the model or prompts until the next major overhaul."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0005",
+  "question": "あるフィンテック（決済）企業の不正検知エージェントが、長い会話の後半で、初期の指示や口座の制約を無視し始めました。無関係なツール出力に引きずられて、判断もぶれ始めています。\nコンテキストドリフト（コンテキストの逸脱）の症状と防止策として最も適切なものはどれですか。",
+  "choices": {
+   "A": "モデルの一時的な不調とみて、同じ会話のまま時間をおいて処理を再開し、回復するのを待つ。",
+   "B": "肥大化した文脈で初期の指示が埋もれた状態とみて、不要なツール結果を削り要約や分離で絞る。",
+   "C": "初期の指示が足りない状態とみて、同じ指示をシステムプロンプトに何度も書き足して強調する。",
+   "D": "情報不足による判断のぶれとみて、関連しそうなツール出力を追加で取得して文脈に加える。"
+  },
+  "en_question": "A fintech (payments) company's fraud detection agent has started ignoring its initial instructions and account constraints in the latter part of long conversations. Its judgments have also started to waver, pulled along by irrelevant tool outputs.\nWhich best describes the symptoms of context drift and how to prevent it?",
+  "en_choices": {
+   "A": "Treat it as a temporary model malfunction, wait a while, and resume processing in the same conversation until the model recovers.",
+   "B": "Treat it as the initial instructions being buried in a bloated context, and trim unnecessary tool results and narrow the context through summarization or separation.",
+   "C": "Treat it as a shortage of initial instructions, and emphasize them by appending the same instructions to the system prompt repeatedly.",
+   "D": "Treat it as wavering judgment caused by a lack of information, and fetch additional tool outputs that seem relevant and add them to the context."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0006",
+  "question": "ある地図情報サービス会社は、住所表記を正規化する社内ライブラリを複数の開発チームに提供しています。このライブラリはClaudeを使っており、現在のバージョンは2.4.1です。\n次の改修では、戻り値のフィールド名confidenceをscoreに変更し、旧名のconfidenceは削除します。\nセマンティックバージョニングに従う場合、この改修を公開するバージョンとして最も適切なものはどれですか。",
+  "choices": {
+   "A": "公開APIに後方互換性のない変更として、MAJORを上げて3.0.0として公開する。",
+   "B": "新しいフィールドを追加する変更として、MINORを上げて2.5.0として公開する。",
+   "C": "内部の不具合修正に準じる変更として、PATCHを上げて2.4.2として公開する。",
+   "D": "2.4.1の公開物の中身を差し替え、変更点を利用チームへ周知して対応を依頼する。"
+  },
+  "en_question": "A mapping information company provides an in-house library that normalizes address notation to multiple development teams. The library uses Claude, and its current version is 2.4.1.\nIn the next change, the return value field confidence will be renamed to score, and the old name confidence will be removed.\nFollowing semantic versioning, which is the most appropriate version for releasing this change?",
+  "en_choices": {
+   "A": "Release it as 3.0.0, bumping MAJOR, since it is a backward-incompatible change to the public API.",
+   "B": "Release it as 2.5.0, bumping MINOR, since it is a change that adds a new field.",
+   "C": "Release it as 2.4.2, bumping PATCH, since it is a change comparable to an internal bug fix.",
+   "D": "Replace the contents of the published 2.4.1 release, and notify the consuming teams of the change and ask them to adapt."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0007",
+  "question": "ある損害保険会社の査定支援アプリは、事故車両を別々の角度から撮った写真3枚と、損傷箇所の比較を求める質問文を、1回のリクエストでClaudeに送っています。\n現在は質問文を先頭に置き、その後ろに写真を続けて並べています。回答中の「2枚目の写真」がどれを指すのか、査定担当者が判断できないことがあります。\nユーザーメッセージ内のimageブロックとテキストの並べ方として最も適切なものはどれですか。",
+  "choices": {
+   "A": "3枚の写真を1枚の画像に横並びで結合して送り、質問文の中で左・中央・右と位置で指し示す。",
+   "B": "各写真の直前に「Image 1:」のようなラベルを置いて先に並べ、質問文はその後ろに置く。",
+   "C": "3枚の写真はシステムプロンプトに含めて渡し、ユーザーメッセージには質問文だけを置いて送る。",
+   "D": "3枚の写真をFiles APIにアップロードし、質問文の中に各file_idを書き込んで写真を参照させる。"
+  },
+  "en_question": "A non-life insurance company's claims assessment support app sends Claude, in a single request, three photos of an accident vehicle taken from different angles together with a question asking it to compare the damaged areas.\nCurrently, the question is placed first, followed by the photos in sequence. Assessors sometimes cannot tell which photo \"the second photo\" in the response refers to.\nWhich is the most appropriate way to arrange the image blocks and text within the user message?",
+  "en_choices": {
+   "A": "Combine the three photos side by side into a single image, and refer to them by position (left, center, right) in the question.",
+   "B": "Place the photos first, each immediately preceded by a label such as \"Image 1:\", and put the question after them.",
+   "C": "Pass the three photos in the system prompt, and send only the question in the user message.",
+   "D": "Upload the three photos to the Files API, and write each file_id into the question so that Claude references the photos."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0008",
+  "question": "ある広告テクノロジー企業が、エージェントを構築するにあたり、抽象化フレームワーク（LangGraph・Strands・PydanticAIなど）を採用するか、Messages APIで直接実装するかを検討しています。\nトレードオフの説明として最も適切なものはどれですか。",
+  "choices": {
+   "A": "試作の段階で抽象化フレームワークを採用し、エージェントの構成をフレームワークの流儀に合わせる。",
+   "B": "まずMessages APIで直接実装し、複雑さに見合う利点がある場合にフレームワークを採用する。",
+   "C": "フレームワーク付属の部品を優先して使い、内部プロンプトの確認は不具合が出た時点で行う。",
+   "D": "将来のマルチエージェント化を見込み、複数エージェントを編成できる基盤を先に整えておく。"
+  },
+  "en_question": "An ad-tech company that is building an agent is deciding whether to adopt an abstraction framework (such as LangGraph, Strands, or PydanticAI) or to implement the agent directly with the Messages API.\nWhich best describes the trade-off?",
+  "en_choices": {
+   "A": "Adopt an abstraction framework at the prototype stage, and shape the agent's architecture to fit the framework's conventions.",
+   "B": "Start by implementing directly with the Messages API, and adopt a framework when its benefits justify the added complexity.",
+   "C": "Prefer the components bundled with the framework, and inspect its internal prompts only once a bug appears.",
+   "D": "Anticipating a future move to multiple agents, build a foundation for orchestrating multiple agents up front."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0009",
+  "question": "ある証券会社が、Claudeでリサーチ要約を生成し、トレーディングダッシュボードに渡すソリューションアーキテクチャを描きました。開発チームは、ここから機能要件を導き出す必要があります。\nソリューションアーキテクチャから機能要件を正しく導く活動はどれですか。",
+  "choices": {
+   "A": "各部分の入出力と受け入れ基準を、テストで合否を判定できる要件として書き出す。",
+   "B": "アーキテクチャ図の各コンポーネントを、そのまま開発タスクの一覧として担当者に割り振る。",
+   "C": "採用するモデルIDとAPIのパラメータを先に確定し、その設定値を要件定義書に記載する。",
+   "D": "プロトタイプを先に作ってステークホルダーに見せ、好評だった挙動を要件として追記する。"
+  },
+  "en_question": "A securities firm has drawn up a solution architecture in which Claude generates research summaries and passes them to a trading dashboard. The development team needs to derive functional requirements from this architecture.\nWhich activity correctly derives functional requirements from the solution architecture?",
+  "en_choices": {
+   "A": "Write down each part's inputs, outputs, and acceptance criteria as requirements whose pass/fail can be determined by tests.",
+   "B": "Assign each component in the architecture diagram to developers as is, as a list of development tasks.",
+   "C": "Finalize the model ID and API parameters first, and record those settings in the requirements definition document.",
+   "D": "Build a prototype first and show it to stakeholders, then add the well-received behaviors as requirements."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0010",
+  "question": "ある出版社のアプリには、次の2種類の処理があります。\n編集者がエディタ上でClaudeに即答を求める対話操作\nバックカタログ全体を一括で再整形する大量ジョブ\n同期アーキテクチャと非同期アーキテクチャの選択基準として最も適切なものはどれですか。",
+  "choices": {
+   "A": "両方の処理をMessage Batches APIに投入し、編集者の操作にも結果のポーリングで応答する。",
+   "B": "両方の処理を同期のAPI呼び出しで実装し、再整形ジョブにはHTTPのタイムアウトを長めに設定する。",
+   "C": "編集者の対話操作は同期で処理し、全カタログの再整形はキューやバッチで非同期に処理する。",
+   "D": "両方の処理でストリーミングを使い、再整形ジョブも編集者の画面に進捗を流しながら実行する。"
+  },
+  "en_question": "A publisher's app has the following two types of processing:\nInteractive operations in which editors ask Claude for immediate answers in the editor\nA high-volume job that reformats the entire back catalog in bulk\nWhich is the most appropriate criterion for choosing between a synchronous and an asynchronous architecture?",
+  "en_choices": {
+   "A": "Submit both types of processing to the Message Batches API, and respond to editor operations by polling for results as well.",
+   "B": "Implement both types of processing with synchronous API calls, and set a longer HTTP timeout for the reformatting job.",
+   "C": "Process the editors' interactive operations synchronously, and process the full-catalog reformatting asynchronously with queues or batches.",
+   "D": "Use streaming for both types of processing, and run the reformatting job while streaming its progress to the editors' screens."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0011",
+  "question": "ある飲食チェーンが、店舗レビューをClaudeで分類・要約しています。運用コストを把握するため、リクエストごとのトークン使用量を追跡したいと考えています。\nトークン使用量をリクエスト単位で追跡する方法として最も適切なものはどれですか。",
+  "choices": {
+   "A": "各レスポンスのusageのinput_tokensやoutput_tokensを記録し、呼び出しごとに集計する。",
+   "B": "応答の本文に使用したトークン数を書かせ、その値をusageとしてログに記録して集計する。",
+   "C": "月末にConsoleのUsage画面で請求額を確認し、その月のリクエスト件数で割って1件あたりのコストとする。",
+   "D": "送信前にcount_tokensエンドポイントで数えた入力トークン数を記録し、実際の使用量として集計する。"
+  },
+  "en_question": "A restaurant chain uses Claude to classify and summarize store reviews. To understand its operating costs, the company wants to track token usage per request.\nWhich is the most appropriate way to track token usage at the request level?",
+  "en_choices": {
+   "A": "Record input_tokens and output_tokens from the usage field of each response, and aggregate them per call.",
+   "B": "Have the model write the number of tokens it used in the response body, and log and aggregate that value as usage.",
+   "C": "Check the billed amount on the Console's Usage page at the end of the month, and divide it by that month's request count to get the cost per request.",
+   "D": "Record the input token count measured with the count_tokens endpoint before sending, and aggregate it as the actual usage."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0012",
+  "question": "ある映画配給会社が、数万行の短い字幕を多数の言語へ機械翻訳します。各行は短く定型的で、品質は許容範囲で十分です。コストとスループットが最優先です。\nモデルの選定として最も妥当なものはどれですか。",
+  "choices": {
+   "A": "全行をClaude Opusで翻訳し、エフォートを低めに設定して1行あたりのコストを抑える。",
+   "B": "言語ごとに複数のモデルで翻訳させ、評価役のLLMが最良の訳を選んで採用する。",
+   "C": "全行を最速で低価格なClaude Haikuで翻訳し、抜き取り評価で訳文の品質を確認する。",
+   "D": "全行を最上位のClaude Fableで翻訳し、訳文の品質を最大限に高めてから配信する。"
+  },
+  "en_question": "A film distributor machine-translates tens of thousands of short subtitle lines into many languages. Each line is short and formulaic, and acceptable quality is sufficient. Cost and throughput are the top priorities.\nWhich model choice is most reasonable?",
+  "en_choices": {
+   "A": "Translate all lines with Claude Opus, setting effort low to keep the cost per line down.",
+   "B": "Have multiple models translate each language, and have an evaluator LLM select and adopt the best translation.",
+   "C": "Translate all lines with Claude Haiku, the fastest and lowest-cost model, and check translation quality with spot-check evaluations.",
+   "D": "Translate all lines with the top-tier Claude Fable, maximizing translation quality before distribution."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0013",
+  "question": "ある航空会社の運航統制センターが、悪天候・乗務員不足・機材変更が絡む運航乱れに対応するシステムを構築したいと考えています。発生する状況は事前に予測できず、その場ごとに必要な手順が変わるため、動的な判断が求められます。\nこの要件に最も適したアーキテクチャはどれですか。",
+  "choices": {
+   "A": "複数のLLMに同じ再計画案を並列で作らせ、多数決で採用案を決めるparallelizationで実装する。",
+   "B": "Claudeが状況を見てツールの使用と次の手順を判断し、結果を確かめながら進むエージェントで実装する。",
+   "C": "入力を運航乱れの種別に分類し、種別ごとに用意した対応フローへ振り分けるroutingで実装する。",
+   "D": "対応手順を事前に定義し、各LLM呼び出しが前段の出力を受けて順に進むprompt chainingで実装する。"
+  },
+  "en_question": "An airline's operations control center wants to build a system that handles operational disruptions involving bad weather, crew shortages, and aircraft changes. The situations that arise cannot be predicted in advance, and the required steps change from case to case, so dynamic decision-making is required.\nWhich architecture best fits this requirement?",
+  "en_choices": {
+   "A": "Implement it with parallelization, having multiple LLMs produce the same replanning proposal in parallel and choosing the plan to adopt by majority vote.",
+   "B": "Implement it as an agent in which Claude assesses the situation, decides on tool use and next steps, and proceeds while checking the results.",
+   "C": "Implement it with routing, classifying the input by type of disruption and dispatching it to a response flow prepared for each type.",
+   "D": "Implement it with prompt chaining, defining the response steps in advance so that each LLM call proceeds in order using the previous step's output."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0014",
+  "question": "あるニュースメディア企業が、自社の記事について答える一般公開のClaudeチャットボットを運用しています。一部の利用者は、禁止されたコンテンツを生成させようと、ボットをジェイルブレイクする入力を作ってきます（利用者自身が攻撃者となる直接的な脅威）。\n最も効果的な緩和策はどれですか。",
+  "choices": {
+   "A": "軽量モデルで入力を事前審査し、倫理的な境界と断り方を指示し、違反を繰り返す利用者を制限する。",
+   "B": "利用者のメッセージをtool_resultブロックに入れて渡し、信頼できない入力として扱わせる。",
+   "C": "取得した記事本文をJSONで符号化して渡し、記事と指示の境界を明確にしてから回答させる。",
+   "D": "指示追従性の高いモデルに切り替え、禁止事項をシステムプロンプトに列挙し、毎ターン再掲する。"
+  },
+  "en_question": "A news media company operates a public Claude chatbot that answers questions about its articles. Some users craft inputs that jailbreak the bot into generating prohibited content (a direct threat in which the user is the attacker).\nWhich mitigation is most effective?",
+  "en_choices": {
+   "A": "Pre-screen inputs with a lightweight model, instruct the bot on ethical boundaries and how to decline, and restrict users who repeatedly violate the rules.",
+   "B": "Pass user messages inside tool_result blocks so that they are treated as untrusted input.",
+   "C": "Encode the retrieved article text as JSON to make the boundary between articles and instructions clear before having the bot answer.",
+   "D": "Switch to a model with stronger instruction following, list the prohibited items in the system prompt, and restate them every turn."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0015",
+  "question": "あるK-12向けの学習支援アプリで、授業開始直後にClaude APIへのリクエストが集中し、429エラーを受けるようになりました。\nレートリミットの基礎と対処として最も適切なものはどれですか。",
+  "choices": {
+   "A": "retry-afterに従い指数バックオフで再試行し、共通の長い指示はプロンプトキャッシングする。",
+   "B": "Message Batches APIへ切り替え、授業中の質問への回答をバッチの処理完了後に返す。",
+   "C": "max_tokensを小さく設定し直し、OTPMの消費枠を空けて429エラーを回避する。",
+   "D": "リクエストを複数のワークスペースに分散させ、各ワークスペースの上限を合算した枠で処理する。"
+  },
+  "en_question": "In a K-12 learning support app, requests to the Claude API spike right after classes begin, and the app has started receiving 429 errors.\nWhich is the most appropriate understanding of rate limit fundamentals and the most appropriate response?",
+  "en_choices": {
+   "A": "Retry with exponential backoff that follows retry-after, and use prompt caching for long shared instructions.",
+   "B": "Switch to the Message Batches API, and return answers to in-class questions after batch processing completes.",
+   "C": "Reset max_tokens to a smaller value to free up OTPM capacity and avoid 429 errors.",
+   "D": "Distribute requests across multiple workspaces, and process them within the combined limits of all the workspaces."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0016",
+  "question": "ある食品メーカーが、複数のツールを使って生産ラインの点検を自動化するエージェントを運用しています。しかし、ツール使用ループがときどき暴走したり、無限に繰り返したりします。\nこのようなツール使用ループの失敗を防ぐ対策として、適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "繰り返し呼ばれるツールの定義と結果をプロンプトキャッシングの対象にし、1回あたりの入力コストを下げる。",
+   "B": "各ステップのツール結果を検証し、ゴールの達成を判定したら終了する停止条件を設ける。",
+   "C": "disable_parallel_tool_useをtrueにして、1回の応答で呼び出すツールを最大1つに絞る。",
+   "D": "ツール使用の往復回数に上限（max_turnsなど）を設け、上限に達したらループを打ち切る。",
+   "E": "ループの途中で古いツール結果を要約に置き換え、コンテキストの空きを確保する。"
+  },
+  "en_question": "A food manufacturer runs an agent that uses multiple tools to automate production line inspections. However, the tool use loop sometimes runs out of control or repeats endlessly.\nWhich measures prevent this kind of tool use loop failure? (Select TWO.)",
+  "en_choices": {
+   "A": "Apply prompt caching to the definitions and results of repeatedly called tools to lower the input cost per call.",
+   "B": "Validate the tool results at each step, and set a stop condition that ends the loop once the goal is judged to be achieved.",
+   "C": "Set disable_parallel_tool_use to true to limit each response to at most one tool call.",
+   "D": "Set a cap on the number of tool use round trips (such as max_turns), and stop the loop when the cap is reached.",
+   "E": "Replace old tool results with summaries partway through the loop to free up space in the context."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0017",
+  "question": "ある法律事務所が、Claudeを使う次の2つの機能を設計しています。\n分析機能（複雑な契約書の条項間の整合性を、多段の推論で精査する）\n社内FAQ機能（条文番号を尋ねると、即座に定型の回答を返す）\n高速モードと拡張思考（適応型思考／エフォートレベル）の使い分けとして、適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "契約の整合性分析では、エフォートをhighにして多段の推論に十分な思考を割り当てる。",
+   "B": "FAQ機能では、エフォートをlowにして思考を抑え、応答時間とトークン消費を減らす。",
+   "C": "FAQ機能でもエフォートをmaxに設定し、単純な条文番号の質問にも十分な思考をさせて回答の質を高める。",
+   "D": "契約の整合性分析では、思考を無効にして応答を速め、1回の出力で結論を出させる。",
+   "E": "FAQ機能では、高速モード（speed: \"fast\"）を有効にし、回答1件あたりの料金を下げる。"
+  },
+  "en_question": "A law firm is designing the following two features that use Claude:\nAn analysis feature (scrutinizes the consistency between clauses of complex contracts through multi-step reasoning)\nAn internal FAQ feature (instantly returns a standard answer when asked for a clause number)\nWhich are appropriate ways to choose between fast mode and extended thinking (adaptive thinking / effort level)? (Select TWO.)",
+  "en_choices": {
+   "A": "For the contract consistency analysis, set effort to high to allocate sufficient thinking to the multi-step reasoning.",
+   "B": "For the FAQ feature, set effort to low to limit thinking and reduce response time and token consumption.",
+   "C": "Set effort to max even for the FAQ feature, so that Claude thinks thoroughly even on simple clause-number questions and answer quality improves.",
+   "D": "For the contract consistency analysis, disable thinking to speed up responses, and have Claude reach a conclusion in a single output.",
+   "E": "For the FAQ feature, enable fast mode (speed: \"fast\") to lower the price per answer."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0018",
+  "question": "ある介護事業者が、毎日蓄積される大量のケア記録を夜間にまとめて処理し、翌朝までに緊急性のない要約レポートを生成したいと考えています。即時応答は不要で、コストを最優先にしています。\nMessage Batches APIを使う場合の運用として最も適切なものはどれですか。",
+  "choices": {
+   "A": "Message Batches APIに投入し、processing_statusがendedになってから結果を取得する。",
+   "B": "Message Batches APIの各リクエストにstream: trueを指定し、生成されたトークンを逐次保存する。",
+   "C": "記録ごとにMessages APIを同期で呼び出し、夜間の空き時間に順番に処理して結果を保存する。",
+   "D": "Message Batches APIへの投入直後にresults_urlを取得し、その時点の結果を翌朝のレポートに使う。"
+  },
+  "en_question": "A caregiving provider wants to process the large volume of care records that accumulates each day in bulk overnight, and generate non-urgent summary reports by the next morning. Immediate responses are not needed, and cost is the top priority.\nWhich is the most appropriate way to operate the Message Batches API in this case?",
+  "en_choices": {
+   "A": "Submit the requests to the Message Batches API, and retrieve the results after processing_status becomes ended.",
+   "B": "Specify stream: true on each request in the Message Batches API, and save the generated tokens incrementally.",
+   "C": "Call the Messages API synchronously for each record, processing them one by one during idle overnight hours and saving the results.",
+   "D": "Fetch results_url immediately after submitting to the Message Batches API, and use the results available at that point for the next morning's report."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0019",
+  "question": "ある建設会社が、現場点検の所見をClaudeに構造化JSONで出力させ、点検日・是正コスト・重大度などのフィールドを型付きのバックエンドに取り込んでいます。\nJSONのシリアライズ/デシリアライズと型の扱いとして最も適切なものはどれですか。",
+  "choices": {
+   "A": "受信したJSONをスキーマで検証し、日付や金額は明示的に日付型・Decimal型へ変換する。",
+   "B": "点検日は文字列のままデータベースへ格納し、比較や集計が必要になった時点で都度解釈する。",
+   "C": "JSONの数値をそのまま浮動小数点型として受け取り、是正コストの集計にもその値を使う。",
+   "D": "日付の文字列から日付型への復元はJSONパーサーに任せ、型の変換処理は書かずに取り込む。"
+  },
+  "en_question": "A construction company has Claude output on-site inspection findings as structured JSON, and ingests fields such as inspection date, remediation cost, and severity into a typed backend.\nWhich is the most appropriate approach to JSON serialization/deserialization and type handling?",
+  "en_choices": {
+   "A": "Validate the received JSON against a schema, and explicitly convert dates and amounts to date and Decimal types.",
+   "B": "Store the inspection date in the database as a string, and interpret it each time a comparison or aggregation is needed.",
+   "C": "Receive JSON numbers as floating-point values as is, and use those values when aggregating remediation costs as well.",
+   "D": "Leave the restoration of date strings to date types to the JSON parser, and ingest the data without writing any type conversion logic."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0020",
+  "question": "ある建設会社がClaude Codeを使っています。標準化された現場安全報告書を作るための同じ多段手順のチェックリスト（書式ルール・必須セクション・レビュー手順）を、毎回チャットに貼り付けています。\nこのチェックリストをパッケージ化し、関連するときだけ読み込ませて、Claudeに一貫して従わせたいと考えています。\nどの仕組みで実現するのが最も適切ですか。",
+  "choices": {
+   "A": "カスタムツールとして、チェックリストをinput_schemaに落とし込み、Claudeに呼び出させる。",
+   "B": "スキルとして、手順と補足資料をSKILL.mdにまとめ、関連する場面で本文を読み込ませる。",
+   "C": "CLAUDE.mdとして、チェックリストの全文を書き込み、セッション開始時に毎回読み込ませる。",
+   "D": "MCPサーバーとして、チェックリストをresourceで公開し、Claude Codeから参照させる。"
+  },
+  "en_question": "A construction company uses Claude Code. Every time, the team pastes into the chat the same multi-step checklist (formatting rules, required sections, review steps) for producing standardized site safety reports.\nThe team wants to package this checklist, have it loaded only when relevant, and have Claude follow it consistently.\nWhich mechanism is most appropriate for achieving this?",
+  "en_choices": {
+   "A": "As a custom tool: encode the checklist into an input_schema and have Claude call the tool.",
+   "B": "As a skill: consolidate the steps and supporting materials into SKILL.md, and have its body loaded when relevant.",
+   "C": "As CLAUDE.md: write the full text of the checklist into it, and have it loaded at the start of every session.",
+   "D": "As an MCP server: expose the checklist as a resource, and have Claude Code reference it."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0021",
+  "question": "あるスポーツ分析プラットフォームが、Claude用のツールget_player_statsを定義しています。Claudeは、利用者が指定していないパラメータに推測した値を入れて呼び出したり、誤った型で呼び出したりすることがあります。\nツール呼び出しの正確さを最も高めるinput_schemaの設計はどれですか。",
+  "choices": {
+   "A": "全プロパティの型をstringにそろえ、数値や日付への変換は受け取り側のコードで行う。",
+   "B": "requiredの指定を外し、利用者が値を示さなかった引数も省略して呼び出せるスキーマにする。",
+   "C": "引数の説明はシステムプロンプトにまとめて書き、input_schemaのpropertiesは空のままにする。",
+   "D": "各プロパティに正しい型と、単位・形式を含む説明を付け、本当に必要な引数をrequiredに列挙する。"
+  },
+  "en_question": "A sports analytics platform defines a tool, get_player_stats, for Claude. Claude sometimes calls it with guessed values for parameters the user did not specify, or with the wrong types.\nWhich input_schema design most improves the accuracy of tool calls?",
+  "en_choices": {
+   "A": "Make every property a string type, and perform conversions to numbers and dates in the receiving code.",
+   "B": "Remove the required specification so that the schema allows calls that omit arguments the user did not provide.",
+   "C": "Write all the argument descriptions in the system prompt, and leave the input_schema properties empty.",
+   "D": "Give each property the correct type and a description that includes units and format, and list the truly necessary arguments in required."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0022",
+  "question": "ある気象情報会社が、Claude Codeで社内の予報配信ツールを開発しています。組織全体の方針、開発者個人の好み、プロジェクトで共有するルールを、CLAUDE.mdで使い分けたいと考えています。\nCLAUDE.mdの階層と優先順位の説明として最も適切なものはどれですか。",
+  "choices": {
+   "A": "settings.jsonと同様に、狭いスコープのCLAUDE.mdが広いスコープの同じ指示を上書きする。",
+   "B": "起動時にはプロジェクト直下のCLAUDE.mdだけを読み込み、ユーザー用のファイルは/memoryで読み込む。",
+   "C": "マネージドポリシー→ユーザー→プロジェクトの順に読み込まれて連結され、組織の方針は除外できない。",
+   "D": "claudeMdExcludesにマネージドポリシーのパスを指定すれば、個人の環境で組織の方針を除外できる。"
+  },
+  "en_question": "A weather information company is developing an in-house forecast distribution tool with Claude Code. The company wants to use CLAUDE.md to separate organization-wide policies, individual developers' preferences, and rules shared across the project.\nWhich best describes the CLAUDE.md hierarchy and precedence?",
+  "en_choices": {
+   "A": "As with settings.json, a narrower-scope CLAUDE.md overrides the same instruction in a broader-scope CLAUDE.md.",
+   "B": "Only the CLAUDE.md at the project root is loaded at startup, and the user file is loaded with /memory.",
+   "C": "The files are loaded and concatenated in the order managed policy → user → project, and the organization's policy cannot be excluded.",
+   "D": "Specifying the managed policy's path in claudeMdExcludes lets an individual exclude the organization's policy in their own environment."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0023",
+  "question": "ある物流会社が、出荷ルーティングのバックエンドサービスにClaudeを組み込み、大規模に自動実行したいと考えています。\nClaudeを利用するインターフェース（API/SDKの直接利用、Claude Code、Claude Desktop/claude.ai）の選び方として最も適切なものはどれですか。",
+  "choices": {
+   "A": "Claude Desktopに社内システムのMCPサーバーを接続し、担当者の指示でルーティングを実行させる。",
+   "B": "Claude Codeをサーバー上で対話モードのまま常駐させ、バックエンドから入力を送り込んで処理させる。",
+   "C": "担当者がclaude.aiのチャット画面に出荷データを貼り付け、得られた結果を業務システムへ転記する。",
+   "D": "バックエンドのコードからClient SDKでClaude APIを呼び出し、ルーティング処理に組み込む。"
+  },
+  "en_question": "A logistics company wants to embed Claude into its shipment routing backend service and run it automatically at scale.\nWhich is the most appropriate choice of interface for using Claude (direct API/SDK use, Claude Code, or Claude Desktop/claude.ai)?",
+  "en_choices": {
+   "A": "Connect an MCP server for the internal systems to Claude Desktop, and have it execute routing on staff instructions.",
+   "B": "Keep Claude Code running on a server in interactive mode, and have the backend feed it input for processing.",
+   "C": "Have staff paste shipment data into the claude.ai chat screen, and transcribe the results into the business system.",
+   "D": "Call the Claude API from the backend code with the Client SDK, and integrate it into the routing process."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0024",
+  "question": "ある音楽配信アプリが、ユーザーが自由に投稿したレビューや楽曲説明（ユーザー生成コンテンツ）を、Claudeに要約・分類させる機能を追加します。\nユーザー生成コンテンツを扱う際の設計上の考慮点として、適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "投稿を信頼できない入力として扱い、システム指示と分けて渡し、投稿内の指示には従わせない。",
+   "B": "投稿の審査は通報を受けた後の事後対応とし、要約・分類の処理は事前のチェックなしで進める。",
+   "C": "投稿の本文をシステムプロンプトに直接連結し、運営側の指示と同じ文脈で渡す。",
+   "D": "max_tokensを小さく設定し、投稿に埋め込まれた指示が長い出力を生む余地を減らす。",
+   "E": "軽量モデルによる事前分類などで投稿を審査し、個人情報や不適切な内容を検出・除去する。"
+  },
+  "en_question": "A music streaming app is adding a feature in which Claude summarizes and classifies reviews and track descriptions that users post freely (user-generated content).\nWhich are appropriate design considerations when handling user-generated content? (Select TWO.)",
+  "en_choices": {
+   "A": "Treat posts as untrusted input, pass them separately from the system instructions, and do not let Claude follow instructions inside the posts.",
+   "B": "Handle post moderation reactively after reports are received, and run summarization and classification without any prior checks.",
+   "C": "Concatenate the post text directly into the system prompt, passing it in the same context as the operator's instructions.",
+   "D": "Set max_tokens to a small value to reduce the room for instructions embedded in posts to produce long outputs.",
+   "E": "Screen posts, for example with pre-classification by a lightweight model, to detect and remove personal information and inappropriate content."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0025",
+  "question": "ある不動産会社が、物件説明文をClaudeで自動生成していますが、出力の粒度やトーンが安定しません。\n指示の明確化と反復的な改良の進め方として最も適切なものはどれですか。",
+  "choices": {
+   "A": "良い出力が出るまでプロンプトを書き換えて試し、気に入った出力が出た時点の文面を本番に採用する。",
+   "B": "粒度とトーンのぶれはモデルの能力不足とみて、より上位のモデルへの切り替えから検討する。",
+   "C": "成功基準とそれを測る評価を先に用意し、具体的な指示や例を加えて結果を見ながら改善する。",
+   "D": "出力の粒度とトーンを禁止事項で縛り、「〜しないこと」を列挙した指示をプロンプトに加える。"
+  },
+  "en_question": "A real estate company automatically generates property descriptions with Claude, but the level of detail and the tone of the output are inconsistent.\nWhich is the most appropriate way to clarify the instructions and refine them iteratively?",
+  "en_choices": {
+   "A": "Keep rewriting and testing the prompt until a good output appears, and adopt the wording at the point a satisfying output appears for production.",
+   "B": "Treat the inconsistency in detail and tone as a lack of model capability, and start by considering a switch to a higher-tier model.",
+   "C": "Prepare success criteria and evaluations that measure them first, then improve the prompt by adding specific instructions and examples while checking the results.",
+   "D": "Constrain the output's level of detail and tone with prohibitions, adding instructions to the prompt that list \"do not ...\" items."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0026",
+  "question": "あるゲームスタジオが、長時間・非同期に動くエージェントを本番で運用したいと考えています。ただし、サンドボックスやセッション状態の基盤を自社で運用する余力はありません。\nこの状況に適したデプロイモデルと、その特徴の説明として最も適切なものはどれですか。",
+  "choices": {
+   "A": "Agent SDKを自社のコンテナで動かし、セッションの状態とサンドボックスを自社で運用する。",
+   "B": "Messages APIとClient SDKのtool runnerでループを組み、実行環境を自社サーバーに用意する。",
+   "C": "Claude Managed Agentsを使い、エージェントループとサンドボックスの運用をAnthropicに任せる。",
+   "D": "Claude Code CLIを-pオプションで非対話実行し、自社のジョブスケジューラから定期的に起動する。"
+  },
+  "en_question": "A game studio wants to run long-running, asynchronous agents in production. However, it does not have the capacity to operate its own sandbox and session state infrastructure.\nWhich option most appropriately describes a deployment model suited to this situation and its characteristics?",
+  "en_choices": {
+   "A": "Run the Agent SDK in the company's own containers, and operate the session state and sandboxes in-house.",
+   "B": "Build the loop with the Messages API and the Client SDK's tool runner, and provide the execution environment on the company's own servers.",
+   "C": "Use Claude Managed Agents, and leave the operation of the agent loop and sandbox to Anthropic.",
+   "D": "Run the Claude Code CLI non-interactively with the -p option, and launch it periodically from the company's job scheduler."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0027",
+  "question": "ある大学の研究支援エージェントでは、長時間にわたる調査タスクの途中で得た知見を、多くのステップにまたがって保持する必要があります。さらに、セッションを終えた後も、その知見を次回に引き継ぎたいと考えています。\nエージェントのメモリパターンの説明として最も適切なものはどれですか。",
+  "choices": {
+   "A": "得た知見を会話履歴に積み上げ、次回のセッションでは同じ履歴を丸ごと再送して引き継ぐ。",
+   "B": "会話履歴をプロンプトキャッシングでキャッシュし、次回のセッションではキャッシュから知見を読み出す。",
+   "C": "調査をサブエージェントに委任し、サブエージェントのコンテキストに知見を保持させて次回も参照させる。",
+   "D": "進行中の作業メモはコンテキスト内に置き、次回へ残す知見はファイル等の外部ストアに書き出す。"
+  },
+  "en_question": "A university's research support agent needs to retain insights gained partway through long-running research tasks across many steps. In addition, the team wants to carry those insights over to the next session after a session ends.\nWhich best describes agent memory patterns?",
+  "en_choices": {
+   "A": "Accumulate the insights in the conversation history, and carry them over by resending the same entire history in the next session.",
+   "B": "Cache the conversation history with prompt caching, and read the insights from the cache in the next session.",
+   "C": "Delegate the research to a subagent, have the subagent's context retain the insights, and have it reference them again next time.",
+   "D": "Keep in-progress working notes in the context, and write the insights to be carried over to an external store such as files."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0028",
+  "question": "ある小売チェーンが、毎週同じ手順で在庫レポートを生成する処理を自動化したいと考えています。工程は常に一定で、次の順に進みます。\n販売データを取得する\n店舗別に集計する\nClaudeで要約文を作る\n所定のフォーマットに整形する\nこの処理に最も適したアプローチはどれですか。",
+  "choices": {
+   "A": "店舗の規模や業態ごとにデータを分類し、分類別に用意した要約プロンプトへ振り分ける。",
+   "B": "Claudeが毎週の販売データを見て、必要な集計と処理の順序をその都度判断しながら進める。",
+   "C": "各工程をコードで定めた固定の順序で呼び出し、前段の出力を次段へ渡して実行する。",
+   "D": "店舗ごとの要約を並列で生成し、評価役のLLMが採点して基準に届くまで書き直させる。"
+  },
+  "en_question": "A retail chain wants to automate a process that generates an inventory report every week using the same procedure. The steps are always the same and proceed in the following order:\nRetrieve sales data\nAggregate by store\nCreate a summary with Claude\nFormat it into the prescribed format\nWhich approach is most appropriate for this process?",
+  "en_choices": {
+   "A": "Classify the data by store size and format, and route it to summarization prompts prepared for each category.",
+   "B": "Have Claude look at each week's sales data and proceed while deciding the necessary aggregations and processing order each time.",
+   "C": "Call each step in a fixed order defined in code, passing the output of the previous step to the next.",
+   "D": "Generate the per-store summaries in parallel, and have an evaluator LLM score them and have them rewritten until they meet the criteria."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0029",
+  "question": "ある海運会社が、船荷証券や着荷通知からデータを抽出するClaudeアプリを構築しています。抽出結果は下流の基幹システムに直接投入されるため、決められたフィールドだけを持つJSONオブジェクトを、前置きや後書きの文章を付けずに返す必要があります。\n出力フォーマットを最も確実に守らせるプロンプト設計はどれですか。",
+  "choices": {
+   "A": "stop_sequencesに閉じ括弧を設定し、JSONを閉じた時点で出力の生成を打ち切らせる。",
+   "B": "期待するJSONの構造と出力例を示し、前置きなしでJSONだけを返すよう肯定形で指示する。",
+   "C": "「前置きを書かないこと」「説明を付けないこと」など、避けるべき書き方を列挙して指示する。",
+   "D": "max_tokensをJSONに必要な分まで小さく設定し、前後に文章を書く余地を残さない。"
+  },
+  "en_question": "A shipping company is building a Claude app that extracts data from bills of lading and arrival notices. Because the extraction results are fed directly into a downstream core system, the app must return a JSON object containing only the specified fields, without any preamble or closing text.\nWhich prompt design most reliably enforces the output format?",
+  "en_choices": {
+   "A": "Set a closing brace in stop_sequences so that output generation is cut off when the JSON closes.",
+   "B": "Show the expected JSON structure and an example output, and instruct in positive terms to return only JSON with no preamble.",
+   "C": "List the styles to avoid in the instructions, such as \"Do not write a preamble\" and \"Do not add explanations.\"",
+   "D": "Set max_tokens just large enough for the JSON, leaving no room for text before or after it."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0030",
+  "question": "ある損害保険会社が、事故受付の一次対応を支援するClaudeアシスタントを企画しています。要件定義の場で、各部門から次の要件が出ました。\n回答候補を2秒以内に表示すること（コールセンター部門）\nすべての回答に約款の該当条文を引用して示すこと（コンプライアンス部門）\n月額コストを現在の予算内に収めること（IT部門）\n検証の結果、3つを同時に最大限満たすのは難しいと分かりました。\n要件を確定させる進め方として最も適切なものはどれですか。",
+  "choices": {
+   "A": "最も役職の高い責任者がいる部門の要件を優先し、残りの要件は次期フェーズの検討事項として記録する。",
+   "B": "部門横断の会議で優先順位は合意し、受け入れ基準は実装を進めながら開発チームが決めていく。",
+   "C": "各要件の業務上の根拠とトレードオフを示し、ステークホルダーと優先順位と受け入れ基準を合意する。",
+   "D": "開発チームが技術的に実現しやすい要件から順に採用し、決まった内容を各部門へ結果として通知する。"
+  },
+  "en_question": "A property and casualty insurer is planning a Claude assistant to support first-line handling of accident claim intake. During requirements definition, the departments raised the following requirements:\nDisplay candidate responses within 2 seconds (call center department)\nCite and show the relevant policy clause in every response (compliance department)\nKeep monthly costs within the current budget (IT department)\nTesting showed that it is difficult to fully satisfy all three at the same time.\nWhich is the most appropriate way to finalize the requirements?",
+  "en_choices": {
+   "A": "Prioritize the requirements of the department with the most senior executive, and record the remaining requirements as items for consideration in the next phase.",
+   "B": "Agree on priorities in a cross-departmental meeting, and let the development team decide the acceptance criteria as implementation proceeds.",
+   "C": "Present the business rationale and trade-offs of each requirement, and agree with stakeholders on priorities and acceptance criteria.",
+   "D": "Have the development team adopt requirements in order of technical ease, and notify each department of the decisions after the fact."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0031",
+  "question": "ある銀行のリスク分析アプリでは、拡張思考を有効にしたモデルが、ツールを使いながら多段の推論を行います。\nAPIでの思考ブロックの扱いについて、正しい説明はどれですか。",
+  "choices": {
+   "A": "思考を有効にしたまま、tool_choiceで特定のツールを指定して毎回呼び出させる。",
+   "B": "思考のトークンを課金対象外として扱い、長い推論を含む応答もコスト見積もりから外す。",
+   "C": "ツール結果を返すとき、直前の思考ブロックを改変せずにtool_resultと一緒に送る。",
+   "D": "ツール結果を返すとき、直前の応答の思考ブロックは削除し、tool_resultだけを送る。"
+  },
+  "en_question": "A bank's risk analysis app uses a model with extended thinking enabled that performs multi-step reasoning while using tools.\nWhich statement correctly describes how thinking blocks are handled in the API?",
+  "en_choices": {
+   "A": "Keep thinking enabled while specifying a particular tool with tool_choice to force it to be called every time.",
+   "B": "Treat thinking tokens as non-billable, and exclude responses containing long reasoning from cost estimates.",
+   "C": "When returning tool results, send the preceding thinking block unmodified along with the tool_result.",
+   "D": "When returning tool results, delete the thinking block from the previous response and send only the tool_result."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0032",
+  "question": "あるECサービスが、開発・ステージング・本番の3環境でClaude連携アプリを運用しています。\nsettings.jsonと環境変数（env）による構成管理で、環境ごとの設定を適切に分離する方針はどれですか。",
+  "choices": {
+   "A": "共有設定はsettings.jsonでコミットし、環境差分はenv、個人の上書きはsettings.local.jsonに置く。",
+   "B": "エンドポイントやモデル名などの設定値をアプリのコードに定数として埋め込み、環境ごとに別々にビルドする。",
+   "C": "APIキーを含む設定値を環境別のsettings.jsonファイルに分けて書き込み、3つのファイルともGitにコミットする。",
+   "D": "全環境で1つのsettings.jsonを共有してコミットし、本番固有の値は障害時に運用担当者が手で書き換える。"
+  },
+  "en_question": "An e-commerce service operates a Claude-integrated app across three environments: development, staging, and production.\nWhen managing configuration with settings.json and environment variables (env), which policy properly separates the settings for each environment?",
+  "en_choices": {
+   "A": "Commit shared settings in settings.json, put environment-specific differences in env, and put personal overrides in settings.local.json.",
+   "B": "Embed configuration values such as endpoints and model names as constants in the app code, and build separately for each environment.",
+   "C": "Write configuration values, including API keys, into separate per-environment settings.json files, and commit all three files to Git.",
+   "D": "Share and commit a single settings.json across all environments, and have operators manually edit production-specific values when an incident occurs."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0033",
+  "question": "ある電力会社が、大量の設備点検ログをClaudeに要約させています。max_tokensを大きく取った長い応答で、リクエストがときどきタイムアウトします。\n長時間かかる応答のタイムアウト対策として最も適切なものはどれですか。",
+  "choices": {
+   "A": "点検ログをFiles APIにアップロードし、リクエストにはfile_idだけを含めて送信する。",
+   "B": "非ストリーミングのまま、SDKのタイムアウトとmax_retriesを大きくして同じリクエストを再送させる。",
+   "C": "stream: trueで応答をSSEとして逐次受け取り、接続を保ったまま長い生成を受信する。",
+   "D": "点検ログを共通の接頭辞としてプロンプトキャッシングでキャッシュし、リクエストの処理時間を短縮する。"
+  },
+  "en_question": "A power company has Claude summarize large volumes of equipment inspection logs. Requests for long responses with a large max_tokens occasionally time out.\nWhat is the most appropriate countermeasure against timeouts for long-running responses?",
+  "en_choices": {
+   "A": "Upload the inspection logs to the Files API and send the request containing only the file_id.",
+   "B": "Stay with non-streaming, increase the SDK timeout and max_retries, and have the same request resent.",
+   "C": "Use stream: true to receive the response incrementally as SSE, receiving the long generation while keeping the connection open.",
+   "D": "Cache the inspection logs as a common prefix with prompt caching to shorten request processing time."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0034",
+  "question": "あるオンライン旅行代理店（OTA）のアプリが、長い問い合わせスレッドと旅程データをまとめて、1回のリクエストでClaudeに渡しています。\nコンテキストウィンドウを超えたときの挙動として、最も正確なものはどれですか。",
+  "choices": {
+   "A": "入力単独で上限を超えると400エラーになり、入力とmax_tokensの合計超過なら生成が上限で止まる。",
+   "B": "入力が上限を超えると、APIが古いメッセージから順に自動で削除し、残った履歴で応答を返す。",
+   "C": "入力が上限を超えると、超過分が別のリクエストに自動で分割され、応答は後で結合されて返る。",
+   "D": "max_tokensを大きく指定するとコンテキストウィンドウもその分だけ広がり、長い入力でも受け付けられる。"
+  },
+  "en_question": "An online travel agency (OTA) app bundles a long inquiry thread and itinerary data and passes them to Claude in a single request.\nWhich most accurately describes the behavior when the context window is exceeded?",
+  "en_choices": {
+   "A": "If the input alone exceeds the limit, a 400 error is returned; if only the sum of the input and max_tokens exceeds it, generation stops at the limit.",
+   "B": "If the input exceeds the limit, the API automatically deletes messages starting from the oldest and responds using the remaining history.",
+   "C": "If the input exceeds the limit, the excess is automatically split into a separate request, and the responses are combined and returned later.",
+   "D": "Specifying a larger max_tokens expands the context window by the same amount, so long inputs are accepted."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0035",
+  "question": "ある保険会社の開発チームが、Claude Codeで審査支援ツールを整備しています。定型作業は、独自のスラッシュコマンドとして用意したいと考えています。\n組み込みコマンドとカスタムスキル（スラッシュコマンド）の関係の説明として最も適切なものはどれですか。",
+  "choices": {
+   "A": "カスタムスキルは~/.claude/skills/に置いたものが有効で、プロジェクトの.claude/skills/は読み込まれない。",
+   "B": "/helpなどの組み込みコマンドとは別に、.claude/skills/＜名前＞/SKILL.mdで独自の/＜名前＞を追加できる。",
+   "C": "独自のコマンドは.claude/commands/にしか置けず、.claude/skills/のSKILL.mdはClaudeの参照専用になる。",
+   "D": "カスタムスキルはユーザーが/＜名前＞で起動したときだけ動き、descriptionによる自動読み込みは行われない。"
+  },
+  "en_question": "An insurance company's development team is building a claims review support tool with Claude Code. They want to provide routine tasks as their own slash commands.\nWhich best describes the relationship between built-in commands and custom skills (slash commands)?",
+  "en_choices": {
+   "A": "Only custom skills placed in ~/.claude/skills/ are active; the project's .claude/skills/ is not loaded.",
+   "B": "Separately from built-in commands such as /help, you can add your own /<name> with .claude/skills/<name>/SKILL.md.",
+   "C": "Custom commands can only be placed in .claude/commands/; SKILL.md files in .claude/skills/ are for Claude's reference only.",
+   "D": "Custom skills run only when the user invokes them with /<name>; they are never loaded automatically based on their description."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0036",
+  "question": "ある保険会社は、保険金請求書類を次の6段で処理するClaudeのパイプラインを運用しています。\nOCRテキストの読み込み\n項目抽出\n契約照合\n査定メモ生成\n基幹システムへの登録\n通知送信\nある夜間バッチで、1〜3段目が完了して結果を保存した後、4段目の査定メモ生成でHTTP 529 overloaded_errorが返り、処理が止まりました。\n復旧戦略として最も適切なものはどれですか。",
+  "choices": {
+   "A": "保存済みの1〜3段目の結果を再利用し、4段目からバックオフ付きで再試行して処理を再開する。",
+   "B": "529を恒久的な障害とみなして当該ジョブを打ち切り、担当者に翌日の手動での再実行を依頼する。",
+   "C": "529を入力の不備による失敗とみなし、4段目へ渡す内容を修正してから全段を最初から実行し直す。",
+   "D": "パイプライン全体を最初から再実行し、1〜3段目の処理と結果の保存もあらためてやり直す。"
+  },
+  "en_question": "An insurance company runs a Claude pipeline that processes insurance claim documents in the following six stages:\nLoad OCR text\nExtract fields\nMatch against the policy\nGenerate assessment notes\nRegister in the core system\nSend notifications\nIn one overnight batch, after stages 1–3 completed and saved their results, stage 4 (assessment note generation) returned HTTP 529 overloaded_error and processing stopped.\nWhich recovery strategy is most appropriate?",
+  "en_choices": {
+   "A": "Reuse the saved results of stages 1–3 and resume processing by retrying from stage 4 with backoff.",
+   "B": "Treat the 529 as a permanent failure, abort the job, and ask staff to rerun it manually the next day.",
+   "C": "Treat the 529 as a failure caused by invalid input, correct what is passed to stage 4, and then rerun all stages from the beginning.",
+   "D": "Rerun the entire pipeline from the beginning, redoing the processing of stages 1–3 and saving their results again."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0037",
+  "question": "ある自治体が、住民からの問い合わせを受け付けるサービスを構築しています。Claudeはcategory・priority・needs_followupを持つJSONオブジェクトを返し、バックエンドがその値でルーティングします。\nチームは構造化出力（json_schema）を有効にしていますが、シニアエンジニアは、それでもアプリ側で防御的なパースが必要だと主張しています。\n最も適切な考え方と実装はどれですか。",
+  "choices": {
+   "A": "構造化出力を有効にしたうえで、アプリ側の検証処理は削除し、返った値をそのまま使う。",
+   "B": "stop_reasonを確認したうえで必須キーと型を検証し、検証に失敗した応答は人手の確認へ回す。",
+   "C": "出力の最後にClaude自身にJSONを見直させる指示を加え、それをアプリ側の検証の代わりとして使う。",
+   "D": "JSONとしてパースできるまで同じリクエストを繰り返し再試行し、最初にパースできた結果をそのまま使う。"
+  },
+  "en_question": "A local government is building a service that accepts inquiries from residents. Claude returns a JSON object with category, priority, and needs_followup, and the backend routes requests based on those values.\nThe team has enabled structured outputs (json_schema), but a senior engineer argues that defensive parsing is still needed on the application side.\nWhich is the most appropriate approach and implementation?",
+  "en_choices": {
+   "A": "Enable structured outputs, remove the application-side validation, and use the returned values as-is.",
+   "B": "Check stop_reason, then validate the required keys and types, and route responses that fail validation to human review.",
+   "C": "Add an instruction at the end of the output for Claude to review its own JSON, and use that in place of application-side validation.",
+   "D": "Retry the same request repeatedly until the output parses as JSON, and use the first parseable result as-is."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0038",
+  "question": "ある再生可能エネルギー事業者は、Claudeを使って風力タービンの保守ログを要約し、故障件数や停止時間などの数値を所見としてまとめています。技術者はその数値をもとに対応を判断しますが、ときどきClaudeが、元のログに存在しない数値を自信たっぷりに示すことがあります。\n確信的だが誤った出力に備える設計として、最も効果的なものはどれですか。",
+  "choices": {
+   "A": "上位モデルに切り替え、モデルが高い確信度を示した数値をそのまま技術者向けの所見として採用する。",
+   "B": "システムプロンプトで断定的に答えるよう指示し、曖昧な言い回しや留保の表現を減らす。",
+   "C": "ログの数値を逐語で抜き出させて根拠とし、不明時は「わからない」を許し、引用で主張を検証させる。",
+   "D": "エフォートを高く設定して思考を深めさせ、各数値の算出過程をより丁寧に一つずつたどらせる。"
+  },
+  "en_question": "A renewable energy company uses Claude to summarize wind turbine maintenance logs and compile figures such as failure counts and downtime into findings. Engineers make decisions based on those figures, but Claude sometimes confidently presents figures that do not exist in the original logs.\nWhat is the most effective design for guarding against confident but incorrect output?",
+  "en_choices": {
+   "A": "Switch to a higher-tier model, and adopt the figures for which the model shows high confidence directly as findings for engineers.",
+   "B": "Instruct Claude in the system prompt to answer assertively, reducing ambiguous wording and hedging.",
+   "C": "Have Claude extract the figures from the logs verbatim as evidence, allow it to say \"I don't know\" when unsure, and have it verify its claims with quotes.",
+   "D": "Set effort high to deepen thinking, and have Claude trace how each figure was derived more carefully, one by one."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0039",
+  "question": "ある気象サービスが、一般向けの荒天警報を発令するツールを持つClaudeエージェントを運用しています（警報は一般に配信されます）。誤発令の代償は大きいため、警報の草案作成と提案はClaudeにさせつつ、自律的に発令させることは避けたいと考えています。\nhuman-in-the-loopの承認パターンとして正しい方法はどれですか。",
+  "choices": {
+   "A": "tool_choiceで警報ツールをリクエストごとに指定し、Claudeに毎回警報ツールを呼び出させる。",
+   "B": "警報の配信処理をサーバー側ツールとして定義し、Anthropic側で承認と配信を実行させる。",
+   "C": "システムプロンプトで、配信の前に利用者へ確認を求めるようClaudeに指示して守らせる。",
+   "D": "警報ツールのハンドラでは配信せずに提案を人の確認へ回し、承認後にアプリが配信を実行する。"
+  },
+  "en_question": "A weather service operates a Claude agent that has a tool for issuing severe weather warnings to the public (the warnings are distributed to the general public). Because the cost of a false warning is high, they want Claude to draft and propose warnings but want to avoid having it issue them autonomously.\nWhich is the correct human-in-the-loop approval pattern?",
+  "en_choices": {
+   "A": "Specify the warning tool with tool_choice on every request, so that Claude calls the warning tool every time.",
+   "B": "Define the warning distribution process as a server tool, and have Anthropic perform the approval and distribution.",
+   "C": "Instruct Claude in the system prompt to ask the user for confirmation before distribution, and have it comply.",
+   "D": "In the warning tool's handler, route the proposal to human review instead of distributing it, and have the app distribute it after approval."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0040",
+  "question": "あるソフトウェア保守会社が、Messages APIを使って顧客の設定ファイルをClaudeに修正させる機能を開発しています。この機能には、Anthropicがスキーマを定めたテキストエディタツール（text_editor_20250728）を採用しました。\nこのツールを組み込む際の理解として正しいものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "ファイルの閲覧や編集はAnthropicのインフラ上で実行され、結果は応答に直接含まれて返ってくる。",
+   "B": "viewやstr_replaceなどのコマンドはアプリ側で実行し、その結果をtool_resultとして返す。",
+   "C": "編集対象のファイルは事前にFiles APIへアップロードし、そのfile_idをツールに渡して編集させる。",
+   "D": "ツール定義にはtypeとnameを指定すればよく、input_schemaを自分で記述する必要はない。",
+   "E": "自社の用途に合わせて、input_schemaにコマンドや引数を追加してツールの挙動を拡張する。"
+  },
+  "en_question": "A software maintenance company is developing a feature that uses the Messages API to have Claude modify customers' configuration files. For this feature, they adopted the text editor tool whose schema is defined by Anthropic (text_editor_20250728).\nWhich statements correctly describe integrating this tool? (Select TWO.)",
+  "en_choices": {
+   "A": "Viewing and editing of files are executed on Anthropic's infrastructure, and the results are returned directly in the response.",
+   "B": "Commands such as view and str_replace are executed by the application, and the results are returned as tool_result.",
+   "C": "Upload the files to be edited to the Files API in advance, and pass their file_id to the tool to have them edited.",
+   "D": "The tool definition only needs type and name; you do not need to write input_schema yourself.",
+   "E": "Extend the tool's behavior by adding commands and arguments to input_schema to suit your own use case."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0041",
+  "question": "ある不動産ポータルが、Messages APIの上に自前のエージェントループを実装しています。web searchのサーバー側ツールを有効にして、物件周辺の再開発計画や交通機関の最新情報をClaudeに調べさせています。\n調べる範囲が広い依頼では、応答のstop_reasonがpause_turnとなり、回答が途中で止まってしまいます。\nハーネスの対処として最も適切なものはどれですか。",
+  "choices": {
+   "A": "server_tool_useブロックごとにtool_resultを作成し、次のユーザーメッセージとして返して処理を続けさせる。",
+   "B": "pause_turnを一時的なエラーとして扱い、ジッター付きの指数バックオフで同じリクエストを再試行する。",
+   "C": "返されたアシスタントの応答をそのまま会話に追加し、同じツール定義で再度リクエストして続きを生成させる。",
+   "D": "max_tokensを引き上げたうえで同じリクエストを最初から送り直し、1回の応答で調査を完了させる。"
+  },
+  "en_question": "A real estate portal implements its own agent loop on top of the Messages API. With the web search server tool enabled, it has Claude research the latest information on redevelopment plans and transit near properties.\nFor requests with a broad research scope, the response's stop_reason is pause_turn and the answer stops partway through.\nWhat is the most appropriate way for the harness to handle this?",
+  "en_choices": {
+   "A": "Create a tool_result for each server_tool_use block and return them as the next user message to continue processing.",
+   "B": "Treat pause_turn as a transient error and retry the same request with exponential backoff with jitter.",
+   "C": "Append the returned assistant response to the conversation as-is, and send the request again with the same tool definitions to generate the continuation.",
+   "D": "Raise max_tokens and resend the same request from the beginning so that the research completes in a single response."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0042",
+  "question": "ある人材紹介SaaSが、提携先の応募者追跡システム（ATS）から新規応募のwebhookを受信し、イベントごとにClaudeで職務経歴書をスクリーニングしています。\nイベント駆動のwebhook受信エンドポイントの基本的な設計として最も適切なものはどれですか。",
+  "choices": {
+   "A": "受信後すぐに2xxを返してキューで非同期に処理し、署名を検証してイベントIDで重複を除く。",
+   "B": "リクエストの署名は検証するが、再送されたイベントも毎回新しい応募としてスクリーニングする。",
+   "C": "受信後すぐに2xxを返してキューで処理し、送信元の確認はIPアドレスの許可リストで済ませる。",
+   "D": "webhookのハンドラ内でClaudeを同期で呼び出し、スクリーニングの結果をレスポンス本文で返す。"
+  },
+  "en_question": "A recruiting SaaS company receives new-application webhooks from a partner's applicant tracking system (ATS) and screens résumés with Claude for each event.\nWhat is the most appropriate basic design for an event-driven webhook receiving endpoint?",
+  "en_choices": {
+   "A": "Return 2xx immediately on receipt and process asynchronously via a queue, verifying the signature and deduplicating by event ID.",
+   "B": "Verify the request signature, but screen redelivered events as new applications every time.",
+   "C": "Return 2xx immediately on receipt and process via a queue, relying on an IP address allowlist alone to verify the sender.",
+   "D": "Call Claude synchronously within the webhook handler and return the screening result in the response body."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0043",
+  "question": "ある病院が、Claude Agent SDKで患者記録を読み取るエージェントを構築しています。このエージェントには記録の閲覧だけを許可し、ファイルの変更や削除は一切できないようにしたいと考えています。\n最も適切な権限の絞り方はどれですか。",
+  "choices": {
+   "A": "システムプロンプトに「ファイルを変更・削除しないこと」と書き、作業方針として守らせる。",
+   "B": "読み取り系のツールをallowed_toolsで許可し、書き込み系はdisallowed_toolsで除外する。",
+   "C": "全ツールをallowed_toolsで許可し、PostToolUseフックで各ツールの実行内容を記録して事後に監査する。",
+   "D": "permission_modeをacceptEditsに設定して編集の承認を自動化し、変更内容を作業ログに残す。"
+  },
+  "en_question": "A hospital is building an agent with the Claude Agent SDK that reads patient records. They want to allow the agent only to view records and make it completely unable to modify or delete files.\nWhat is the most appropriate way to restrict permissions?",
+  "en_choices": {
+   "A": "Write \"Do not modify or delete files\" in the system prompt and have the agent follow it as a working policy.",
+   "B": "Allow read-only tools with allowed_tools and exclude write tools with disallowed_tools.",
+   "C": "Allow all tools with allowed_tools, and log each tool's execution with a PostToolUse hook for after-the-fact auditing.",
+   "D": "Set permission_mode to acceptEdits to auto-approve edits, and record the changes in a work log."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0044",
+  "question": "ある自動車メーカーが、生産スケジューリングAPIに問い合わせ、部品データベースを読み取るClaudeエージェントを本番導入しようとしています。セキュリティ部門は、セキュアバイデザインを求めています。\n最小権限とIAMの観点で最も適切な方針はどれですか。",
+  "choices": {
+   "A": "組織の管理者権限を持つAdmin APIキーをエージェントに渡し、どのAPIも権限エラーなく呼べる状態にする。",
+   "B": "システムプロンプトでアクセスしてよいリソースを指示し、タスク外のリソースに触れさせない。",
+   "C": "開発・ステージング・本番で1本のAPIキーを共有し、ローテーションを1か所で済ませる。",
+   "D": "エージェント用のキーを必要な範囲に絞り、ワークスペースで環境を分け、キーの利用状況を監査する。"
+  },
+  "en_question": "An automaker is about to deploy to production a Claude agent that queries a production scheduling API and reads a parts database. The security department requires secure by design.\nFrom the standpoint of least privilege and IAM, which policy is most appropriate?",
+  "en_choices": {
+   "A": "Give the agent an Admin API key with organization administrator privileges so that it can call any API without permission errors.",
+   "B": "Specify the resources it may access in the system prompt so that it does not touch resources outside the task.",
+   "C": "Share a single API key across development, staging, and production so that rotation is done in one place.",
+   "D": "Scope the agent's key to only what is needed, separate environments with workspaces, and audit key usage."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0045",
+  "question": "あるコンサルティング会社が、レポート生成に使うプロンプトを継続的に改善しています。新しいプロンプトに変えると、出力品質が下がることがあります。その場合は、すぐに元へ戻したいと考えています。\nプロンプトのバージョン管理とロールバックの方針として最も適切なものはどれですか。",
+  "choices": {
+   "A": "プロンプトは本番環境の設定画面で直接編集し、変更前の内容は編集者が手元のメモに残しておく。",
+   "B": "プロンプトをバージョン管理して本番のバージョンを固定し、劣化時は良好だったバージョンへ戻す。",
+   "C": "品質が下がったときは、評価結果を見ながらプロンプトをその場で書き直して本番に反映する。",
+   "D": "プロンプトは実行のたびにClaudeに自動生成させ、生成結果の良かったものを採用していく。"
+  },
+  "en_question": "A consulting firm continuously improves the prompts it uses for report generation. Switching to a new prompt sometimes degrades output quality. When that happens, they want to revert immediately.\nWhich policy for prompt versioning and rollback is most appropriate?",
+  "en_choices": {
+   "A": "Edit prompts directly in the production settings screen, and have the editor keep the previous content in personal notes.",
+   "B": "Version-control the prompts and pin the production version, and when quality degrades, roll back to a version that performed well.",
+   "C": "When quality drops, rewrite the prompt on the spot while looking at the evaluation results and push it to production.",
+   "D": "Have Claude automatically generate the prompt on every run, and adopt the ones that produced good results."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0046",
+  "question": "ある調査会社が、Claude Agent SDKで動くリサーチエージェントをコンテナ上で運用しています。エージェントは外部のWebページを取得して要約するほか、社内の顧客資料も読み取れます。\n取得したページに埋め込まれた隠し指示による注入が成功した場合でも、社内データが任意の外部サーバーへ送信されることを、仕組みとして防ぎたいと考えています。\n最も適切な対策はどれですか。",
+  "choices": {
+   "A": "PostToolUseフックで各ツールの実行内容を記録し、外部への送信の痕跡がないか定期的に監査する。",
+   "B": "コンテナのネットワークを遮断し、許可したドメインだけに中継するプロキシ経由でのみ外部へ接続させる。",
+   "C": "システムプロンプトで外部へのデータ送信を禁止し、取得したページは信頼できないデータとして扱うよう指示する。",
+   "D": "取得したページを軽量モデルで事前に審査し、注入の疑いがある内容をエージェントに渡す前に除外する。"
+  },
+  "en_question": "A research firm runs a research agent built on the Claude Agent SDK in a container. The agent fetches and summarizes external web pages and can also read internal customer materials.\nEven if an injection via hidden instructions embedded in a fetched page succeeds, they want a structural safeguard that prevents internal data from being sent to arbitrary external servers.\nWhat is the most appropriate countermeasure?",
+  "en_choices": {
+   "A": "Log each tool's execution with a PostToolUse hook and periodically audit for traces of outbound transmission.",
+   "B": "Cut off the container's network and allow external connections only through a proxy that relays to allowed domains.",
+   "C": "Prohibit sending data externally in the system prompt, and instruct the agent to treat fetched pages as untrusted data.",
+   "D": "Pre-screen fetched pages with a lightweight model and remove content suspected of injection before passing it to the agent."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0047",
+  "question": "ある会計事務所が、複数の帳簿を横断する長時間の照合タスクを、Claudeエージェントで実行しています。しかし、会話がコンテキストウィンドウの上限に近づくと、作業を続けられなくなります。\n長時間のタスクを継続させるコンテキスト管理の方針として最も適切なものはどれですか。",
+  "choices": {
+   "A": "会話履歴をプロンプトキャッシングの対象にし、キャッシュ済みの部分を上限の計算から外して続ける。",
+   "B": "サーバー側で古いやり取りを要約に置き換え、上限を超えて作業を続ける。",
+   "C": "トークンカウントAPIで入力を見積もり、上限に近づいた時点で新しい会話を最初から始め直す。",
+   "D": "1Mトークンのコンテキストウィンドウを持つモデルへ切り替え、全履歴を保持したまま作業を続ける。"
+  },
+  "en_question": "An accounting firm uses a Claude agent to run a long-running reconciliation task across multiple ledgers. However, when the conversation approaches the context window limit, the work can no longer continue.\nWhich context management policy is most appropriate for keeping long-running tasks going?",
+  "en_choices": {
+   "A": "Make the conversation history a target of prompt caching, and continue by excluding the cached portion from the limit calculation.",
+   "B": "Replace older exchanges with a summary on the server side and continue working beyond the limit.",
+   "C": "Estimate the input with the token counting API, and start a new conversation from scratch when the limit is approached.",
+   "D": "Switch to a model with a 1M-token context window and continue working while retaining the full history."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0048",
+  "question": "ある化学メーカーのアプリでは、安全データシートの項目を、Claudeと社内システムの間で構造化データとしてやり取りします。\n境界をまたぐ入出力スキーマを「契約」として設計する方針として最も適切なものはどれですか。",
+  "choices": {
+   "A": "フィールド名の一覧だけをプロンプトで示し、型や必須の判断は受け取り側の実装ごとに任せる。",
+   "B": "各フィールドの型と必須かどうかを定義したJSON Schemaを契約とし、出力と入力をその定義で検証する。",
+   "C": "Claudeには自由文で所見を書かせ、受け取り側で正規表現により項目を抜き出して社内システムに登録する。",
+   "D": "要件が変わるたびにスキーマ検証を外して暫定運用し、仕様が落ち着いてからスキーマを作り直す。"
+  },
+  "en_question": "A chemical manufacturer's app exchanges safety data sheet fields as structured data between Claude and internal systems.\nWhat is the most appropriate policy for designing input/output schemas that cross boundaries as \"contracts\"?",
+  "en_choices": {
+   "A": "Show only a list of field names in the prompt, and leave decisions about types and required fields to each receiving implementation.",
+   "B": "Use a JSON Schema that defines each field's type and whether it is required as the contract, and validate outputs and inputs against that definition.",
+   "C": "Have Claude write findings in free text, and have the receiver extract the fields with regular expressions and register them in the internal systems.",
+   "D": "Remove schema validation and operate provisionally whenever requirements change, and rebuild the schema once the specification settles."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0049",
+  "question": "ある物流会社は、Claude SDKを含む複数のnpmパッケージに依存するNode.jsサービスを毎月リリースしています。package.jsonでは、依存を^付きの範囲で指定しています。\n障害を調査したところ、ステージングで回帰評価に合格したビルドと、その後に本番向けに作り直したビルドとで、一部の依存パッケージのバージョンが食い違っていたことが分かりました。\n環境をまたいで同じ依存ツリーを再現する方法として最も適切なものはどれですか。",
+  "choices": {
+   "A": "package.jsonの範囲指定を^から~に変え、各ビルドではnpm installで最新のパッチ版を取り込んで揃える。",
+   "B": "package-lock.jsonを.gitignoreに加え、各環境のnpm installでその環境専用のロックファイルを生成させる。",
+   "C": "各ビルドの前にnode_modulesを削除してからnpm installを実行し、依存をクリーンな状態で解決し直す。",
+   "D": "package-lock.jsonをリポジトリにコミットし、ステージングと本番のビルドはnpm ciで依存をインストールする。"
+  },
+  "en_question": "A logistics company releases a Node.js service every month that depends on multiple npm packages, including the Claude SDK. In package.json, dependencies are specified as ^ ranges.\nAn incident investigation revealed that the versions of some dependency packages differed between the build that passed regression evaluation in staging and the build later rebuilt for production.\nWhat is the most appropriate way to reproduce the same dependency tree across environments?",
+  "en_choices": {
+   "A": "Change the range specifiers in package.json from ^ to ~, and align versions by pulling in the latest patch versions with npm install in each build.",
+   "B": "Add package-lock.json to .gitignore, and have npm install in each environment generate a lockfile specific to that environment.",
+   "C": "Delete node_modules before each build and then run npm install to re-resolve dependencies from a clean state.",
+   "D": "Commit package-lock.json to the repository, and install dependencies with npm ci for the staging and production builds."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0050",
+  "question": "あるセキュリティ運用センター（SOC）が、大量のアラートを毎晩まとめてClaudeで分類しています。緊急性は低く、共通の分類ガイドライン（長い固定プロンプト）をすべてのリクエストで再利用します。\nコストモデリングとして最も適切なものはどれですか。",
+  "choices": {
+   "A": "固定のガイドラインをプロンプトキャッシングでキャッシュし、Batches APIの割引も重ねてコストを見積もる。",
+   "B": "プロンプトキャッシングは使わず、入力トークンを基本入力単価のまま計算してコストを見積もる。",
+   "C": "入力トークン数に入力単価を掛けて見積もり、件数の少ない出力トークンは計算から外す。",
+   "D": "バッチAPIとプロンプトキャッシングは二者択一とみなし、割引率の大きいバッチAPIの割引で見積もる。"
+  },
+  "en_question": "A security operations center (SOC) classifies large volumes of alerts with Claude in a batch every night. Urgency is low, and a common classification guideline (a long fixed prompt) is reused in every request.\nWhich cost modeling approach is most appropriate?",
+  "en_choices": {
+   "A": "Cache the fixed guideline with prompt caching, and estimate costs with the Message Batches API discount stacked on top.",
+   "B": "Do not use prompt caching, and estimate costs by calculating input tokens at the base input price.",
+   "C": "Estimate by multiplying the number of input tokens by the input price, and exclude output tokens from the calculation because they are fewer.",
+   "D": "Treat the Message Batches API and prompt caching as mutually exclusive, and estimate using the Message Batches API discount, which has the larger discount rate."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0051",
+  "question": "あるEdTech企業が、Claudeベースのサービスで扱うAPIキーやシークレットの管理を強化しています。\nシークレット管理のベストプラクティスとして正しいものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "シークレットは実行時に環境変数やシークレットマネージャから注入し、ソース管理には置かない。",
+   "B": "キーの権限を必要最小限に絞り、有効期限を設けて定期的にローテーションする。",
+   "C": "全環境と全チームで1本の長期キーを共有し、発行と管理の手間をまとめる。",
+   "D": "APIキーを設定ファイルに書き込み、アプリのコードと一緒にリポジトリへコミットする。",
+   "E": "モバイルアプリの中にAPIキーを埋め込み、バックエンドを経由せずに端末から直接Claude APIを呼ぶ。"
+  },
+  "en_question": "An EdTech company is strengthening the management of API keys and secrets handled by its Claude-based service.\nWhich are best practices for secret management? (Select TWO.)",
+  "en_choices": {
+   "A": "Inject secrets at runtime from environment variables or a secrets manager, and do not keep them in source control.",
+   "B": "Scope key permissions to the minimum necessary, set expiration dates, and rotate them regularly.",
+   "C": "Share a single long-lived key across all environments and teams to consolidate the effort of issuing and managing keys.",
+   "D": "Write API keys into configuration files and commit them to the repository along with the app code.",
+   "E": "Embed the API key in the mobile app and call the Claude API directly from the device without going through a backend."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0052",
+  "question": "ある非営利団体の開発チームが、Claudeを使ってコード変更を生成し、既存のソフトウェア開発プロセスに組み込もうとしています。\nブランチ戦略と、AI生成コードのレビューの進め方として最も適切なものはどれですか。",
+  "choices": {
+   "A": "AI生成の変更はmainブランチに直接コミットし、月末にまとめてコードレビューを実施する。",
+   "B": "AI生成の変更もフィーチャーブランチでプルリクエストにし、人のレビューとCIを経てマージする。",
+   "C": "AI生成の変更は専用のリポジトリで管理し、本体とは別の成果物としてリリースする。",
+   "D": "AI生成の変更はClaudeによる自動レビューを通過したものを、人のレビューなしでマージする。"
+  },
+  "en_question": "A nonprofit's development team plans to use Claude to generate code changes and incorporate it into its existing software development process.\nWhich is the most appropriate branching strategy and approach to reviewing AI-generated code?",
+  "en_choices": {
+   "A": "Commit AI-generated changes directly to the main branch and conduct code reviews in bulk at the end of the month.",
+   "B": "Put AI-generated changes into pull requests from feature branches as well, and merge them after human review and CI.",
+   "C": "Manage AI-generated changes in a dedicated repository and release them as an artifact separate from the main codebase.",
+   "D": "Merge AI-generated changes that pass an automated review by Claude without human review."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0053",
+  "question": "ある小売企業が、在庫照会と需要予測の集計ツールを提供する社内MCPサーバーを、Streamable HTTPで公開しています。利用の増加に合わせて、複数のサーバーインスタンスをロードバランサの背後に並べ、スケールアウトしたいと考えています。\n集計ツールの中には、完了までに数分かかり、途中経過を後から問い合わせるものもあります。\n2026-07-28版のMCP仕様に沿ったサーバー設計として最も適切なものはどれですか。",
+  "choices": {
+   "A": "各要求は_metaに含まれる情報だけで処理し、要求をまたぐ集計ジョブは明示的なIDで共有ストアから参照する。",
+   "B": "ロードバランサでスティッキーセッションを有効にし、同じクライアントの要求を常に同じインスタンスへ送る。",
+   "C": "最初の要求で受け取ったクライアントの情報と能力をインスタンスのメモリに保持し、以後の要求で使い回す。",
+   "D": "接続ごとに会話セッションを割り当て、接続が切れた時点でその接続に属するジョブの状態を破棄する。"
+  },
+  "en_question": "A retailer exposes an internal MCP server over Streamable HTTP that provides inventory lookup and demand forecast aggregation tools. As usage grows, they want to scale out by placing multiple server instances behind a load balancer.\nSome of the aggregation tools take several minutes to complete, and their progress is queried later.\nWhich server design is most appropriate under the 2026-07-28 version of the MCP specification?",
+  "en_choices": {
+   "A": "Process each request using only the information contained in its _meta, and reference aggregation jobs that span requests from a shared store using explicit IDs.",
+   "B": "Enable sticky sessions on the load balancer so that requests from the same client are always sent to the same instance.",
+   "C": "Store the client information and capabilities received in the first request in the instance's memory and reuse them for subsequent requests.",
+   "D": "Assign a conversation session to each connection, and discard the state of the jobs belonging to that connection when it disconnects."
+  }
+ }
+]

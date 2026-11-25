@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="400" viewBox="0 0 880 400" role="img" aria-label="prompt 변경과 model upgrade 때마다 versioned eval set을 regression suite로 실행하고, production 실패 사례를 새 case로 추가한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Regression suite 흐름</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-regression-suite" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-regression-suite-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Regression suite: 변경 때마다 실행하고, production 실패로 키운다</text>
+<rect x="20" y="74" width="170" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105.0" y="100.5" text-anchor="middle"><tspan x="105.0" dy="0" font-size="13" fill="#1F2937">prompt 변경</tspan></text>
+<rect x="20" y="134" width="170" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105.0" y="160.6" text-anchor="middle"><tspan x="105.0" dy="0" font-size="13" fill="#1F2937">model upgrade</tspan></text>
+<rect x="250" y="70" width="200" height="112" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="350.0" y="108.9" text-anchor="middle"><tspan x="350.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">versioned eval set</tspan><tspan x="350.0" dy="16" font-size="13" fill="#1F2937">= regression suite</tspan><tspan x="350.0" dy="14" font-size="11" fill="#6B7280">깨지면 안 되는 동작을</tspan><tspan x="350.0" dy="14" font-size="11" fill="#6B7280">계속 테스트</tspan></text>
+<polygon points="600,84.0 690.0,126 600,168.0 510.0,126" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="600" y="122.5" text-anchor="middle"><tspan x="600" dy="0" font-size="13" fill="#1F2937">기존 동작</tspan><tspan x="600" dy="16" font-size="13" fill="#1F2937">모두 유지?</tspan></text>
+<rect x="740" y="104" width="120" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="800.0" y="130.9" text-anchor="middle"><tspan x="800.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">ship</tspan></text>
+<rect x="520" y="214" width="160" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="600.0" y="239.6" text-anchor="middle"><tspan x="600.0" dy="0" font-size="13" fill="#1F2937">regression 발견</tspan><tspan x="600.0" dy="14" font-size="11" fill="#6B7280">ship 전에 변경 수정</tspan></text>
+<rect x="740" y="214" width="120" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="800.0" y="239.6" text-anchor="middle"><tspan x="800.0" dy="0" font-size="13" fill="#1F2937">production</tspan><tspan x="800.0" dy="14" font-size="11" fill="#6B7280">실패 사례 발생</tspan></text>
+<path d="M190,96 L250,96" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regression-suite)"/>
+<rect x="204.0" y="77" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="220" y="89" font-size="12" fill="#1F2937" text-anchor="middle">매번</text>
+<path d="M190,156 L250,156" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regression-suite)"/>
+<rect x="204.0" y="137" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="220" y="149" font-size="12" fill="#1F2937" text-anchor="middle">매번</text>
+<path d="M450,126 L510,126" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regression-suite)"/>
+<rect x="449.5" y="107" width="63.0" height="17" fill="#FFFFFF"/>
+<text x="481" y="119" font-size="12" fill="#1F2937" text-anchor="middle">전체 실행</text>
+<path d="M690,126 L740,126" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regression-suite)"/>
+<rect x="705.0" y="107" width="20.0" height="17" fill="#FFFFFF"/>
+<text x="715" y="119" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M600,168 L600,214" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regression-suite)"/>
+<rect x="604.0" y="184" width="44.0" height="17" fill="#FFFFFF"/>
+<text x="608" y="196" font-size="12" fill="#1F2937" text-anchor="start">아니오</text>
+<path d="M800,148 L800,214" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regression-suite)"/>
+<path d="M800,270 L800,320 L350,320 L350,182" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-regression-suite)"/>
+<rect x="489.2" y="313" width="171.7" height="17" fill="#FFFFFF"/>
+<text x="575" y="325" font-size="12" fill="#1F2937" text-anchor="middle">실패 사례를 새 case로 추가</text>
+<rect x="20" y="214" width="230" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="135.0" y="241.6" text-anchor="middle"><tspan x="135.0" dy="0" font-size="13" fill="#1F2937">latency · rate limit · cost</tspan><tspan x="135.0" dy="14" font-size="11" fill="#6B7280">운영 신호일 뿐 correctness 신호 아님</tspan></text>
+<path d="M20,376 L56,376" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="64" y="380" font-size="11" fill="#6B7280" text-anchor="start">점선: production에서 돌아오는 비동기 feedback</text>
+</svg>

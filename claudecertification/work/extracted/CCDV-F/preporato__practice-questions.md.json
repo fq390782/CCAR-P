@@ -1,0 +1,302 @@
+[
+  {
+    "number": "1",
+    "heading": "Question 1",
+    "question": "A chatbot sends only the newest user message to the API on each turn. Users complain that it forgets what they said two messages earlier. What fixes this?",
+    "choices": {"A": "Raise `max_tokens`", "B": "Switch to a model with a larger context window", "C": "Enable prompt caching so earlier turns are remembered", "D": "Send the conversation history, alternating user and assistant turns, with every request"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "The Messages API is stateless: the history you send is the model's entire memory of the conversation (D). Caching (C) makes repeated prefixes cheaper and faster, and it only applies to content you actually send. `max_tokens` (A) limits output length. A larger window (B) is useless when the earlier turns are never included.",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "2",
+    "heading": "Question 2",
+    "question": "Which `stop_reason` tells you the response ended because it filled the model's context window, as opposed to hitting the `max_tokens` value you set?",
+    "choices": {"A": "`pause_turn`", "B": "`model_context_window_exceeded`", "C": "`end_turn`", "D": "`max_tokens`"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "B means the response ran into the model's context window limit. D means it hit your own `max_tokens` cap. A means a server-side tool loop paused and should be continued, and C means Claude finished naturally. The first two both mean the output may be incomplete and shouldn't be parsed as a finished answer.",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "3",
+    "heading": "Question 3",
+    "question": "Which TWO problems does streaming solve? (Select TWO)",
+    "choices": {"A": "Rate-limit errors during traffic peaks", "B": "High token prices on long outputs", "C": "Users waiting several seconds for the first words of a chat reply", "D": "Answers that contain factual errors", "E": "HTTP timeouts on requests with very large `max_tokens` values"},
+    "answer": ["C", "E"],
+    "select_count": 2,
+    "explanation": "Streaming sends tokens as they're generated, which shortens perceived latency (C) and keeps long-running requests alive instead of waiting on one large response (E). It doesn't change token pricing (B), accuracy (D) or rate limits (A).",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "4",
+    "heading": "Question 4",
+    "question": "Your app sends a different subset of 30 tools on each request depending on the user's plan, and the order of the tool list varies between requests. The system prompt is identical every time, yet the cache hit rate is near zero. Why?",
+    "choices": {"A": "The system prompt must be placed before the tools to be cached", "B": "Requests that include tools can't be cached", "C": "Tools come first in the cache prefix, so any change to the tool list or its order invalidates everything after it, including the system prompt; send a stable, consistently ordered tool list per plan", "D": "The 5-minute cache lifetime is too short and needs the 1-hour option"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "The cache is a prefix match in a fixed order (tools, then system, then messages), so a changing tool list breaks the prefix at its very start (C). The order of those sections isn't yours to choose (A), tools are cacheable (B), and a longer lifetime (D) doesn't help a prefix that never repeats.",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "5",
+    "heading": "Question 5",
+    "question": "You add `cache_control` to a 600-token system prompt on a model whose minimum cacheable length is 1,024 tokens. Both `cache_creation_input_tokens` and `cache_read_input_tokens` stay at 0, and the API returns no error. What is happening?",
+    "choices": {"A": "The prefix is below the model's minimum cacheable length, so the request is processed without caching and no error is raised", "B": "The cache expired between requests", "C": "The API needs a beta header to enable caching", "D": "`cache_control` only works in batch requests"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Prompts shorter than the model's minimum cacheable length are processed normally without caching, and the API doesn't report an error, which is why checking the usage fields matters (A). Caching works for regular requests (D). An expired cache (B) would still show cache_creation tokens when the entry is written again. No beta header is needed (C).",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "6",
+    "heading": "Question 6",
+    "question": "A nightly batch of 5,000 requests shares a 20,000-token system prompt. Batches can take longer than five minutes to process. How should prompt caching be set up?",
+    "choices": {"A": "Mark the shared prefix with the 1-hour cache duration and accept its higher write price for better hit rates across the batch", "B": "Put the system prompt after the messages so it caches last", "C": "Skip caching, because it can't be combined with batches", "D": "Keep the default 5-minute duration, since it's always the cheapest option"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Anthropic's documentation recommends the 1-hour duration for batches because their requests can be processed over a longer window, and cache hits on batches are best-effort (A). With the 5-minute default (D), entries can expire between requests. Caching does work with batches (C). The system prompt's position in the request (B) is fixed.",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "7",
+    "heading": "Question 7",
+    "question": "Your batch job writes results to the database in the order they come back, pairing each with the input at the same position. Some records end up with another record's classification. Why?",
+    "choices": {"A": "The batch expired before all requests finished", "B": "Results are only kept for 29 days", "C": "Batch results can come back in any order; match each result to its request by `custom_id`", "D": "Sampling makes the classifications non-deterministic"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Results aren't guaranteed to follow request order, which is why every request carries a `custom_id` (C). An expired batch (A) produces 'expired' results, which wouldn't swap labels between records. Non-determinism (D) can change a label but doesn't explain systematic mismatches. Retention (B) is unrelated.",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "8",
+    "heading": "Question 8",
+    "question": "A downstream parser broke after your model outputs changed format overnight. Nobody touched the code. Which TWO practices prevent this kind of silent change? (Select TWO)",
+    "choices": {"A": "Pin a specific model version in production and upgrade on purpose after running evals", "B": "Keep prompts under version control (or in a prompt registry) and run evals before changing them", "C": "Edit prompts directly in production for speed", "D": "Always call the newest model alias to pick up improvements", "E": "Add retries around the parser"},
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Pinning (A) keeps model behavior fixed until you choose to move, and versioned prompts (B) make every behavior change reviewable and revertible. A floating alias (D) and direct production edits (C) are how silent changes happen. Retries (E) repeat the same broken output.",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "9",
+    "heading": "Question 9",
+    "question": "A receipt-processing app sends 4,000 x 3,000-pixel phone photos. Latency is high, and tests show accuracy holds at lower resolution. What should change?",
+    "choices": {"A": "Send the receipts through the Batch API", "B": "Convert the images to base64 text and paste them into the prompt", "C": "Place the image after the question in the message", "D": "Resize the images in the app before upload; oversized images are scaled down on Anthropic's side anyway, which adds latency, and image tokens grow with pixel area up to the model's limit"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Each model has a maximum native resolution, and larger images are downscaled before processing, so sending them full-size costs upload time and latency without adding detail (D). Base64 (B) is the normal transport for images and changes nothing about their size. Batch (A) trades latency for price, the wrong direction here. Placement (C) has a small effect on quality, and Anthropic recommends putting images before the text.",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "10",
+    "heading": "Question 10",
+    "question": "Before launch, you need to know whether a 180-page contract plus your instructions fits in the model's context window, and what each request will cost. What is the best approach?",
+    "choices": {"A": "Send the request and see whether it fails", "B": "Call the token counting endpoint with the exact request (system prompt, tools and messages)", "C": "Estimate four characters per token", "D": "Ask Claude how many tokens the contract contains"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The token counting endpoint measures the request exactly as the model will receive it (B). A rule of thumb (C) can be far off, especially with tables, code or non-English text. Trial and error (A) costs money and tells you nothing until it fails. Claude can't reliably count its own input tokens (D).",
+    "source_section": "Applications and Integration"
+  },
+  {
+    "number": "11",
+    "heading": "Question 11",
+    "question": "A team's monthly API bill doubled, and evals show quality is fine. Which TWO levers should they try before downgrading the model tier? (Select TWO)",
+    "choices": {"A": "Move all traffic to the fast tier today", "B": "Trim context: drop stale tool outputs and history the model no longer needs", "C": "Cache the stable prefix (tools and system prompt)", "D": "Send all traffic, live chat included, through the Batch API", "E": "Raise `max_tokens` so fewer responses get cut off"},
+    "answer": ["B", "C"],
+    "select_count": 2,
+    "explanation": "Trimming (B) and caching (C) cut cost without touching the model, so they come before a tier change, which should only happen with eval evidence (A). Batch (D) fits only work nobody is waiting for. A higher `max_tokens` (E) can raise spend.",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "12",
+    "heading": "Question 12",
+    "question": "A coding agent on a model that supports the effort parameter works well but runs slowly and uses many tokens on routine refactors. Evals show quality holds at a lower effort level for those tasks. What should change?",
+    "choices": {"A": "Switch to a smaller model without testing it", "B": "Set `max_tokens` to 512 for every request", "C": "Lower `output_config.effort` for routine refactors and keep a higher level for hard tasks", "D": "Turn on extended thinking with a large budget"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Effort controls how many tokens Claude spends across the whole response, thinking and tool calls included, without changing models, and the evals already show the lower level holds (C). A skips the evidence step. A hard cap (B) truncates work midway. More thinking (D) adds tokens and latency, the opposite of the goal.",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "13",
+    "heading": "Question 13",
+    "question": "A team enabled extended thinking on every request, including one-line greetings in their chatbot. Latency and cost rose, with no measurable quality gain on those replies. What is the best response?",
+    "choices": {"A": "Raise the thinking budget further", "B": "Decide per workload: keep deeper reasoning where evals show gains on multi-step problems, and reduce it for simple turns", "C": "Turn thinking off everywhere", "D": "Move to the most capable model"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Thinking buys accuracy on multi-step problems and costs output tokens and latency everywhere else, so it's a per-workload choice backed by evals (B). C gives up the gains where they exist. A and D spend more on replies that didn't need it.",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "14",
+    "heading": "Question 14",
+    "question": "Your test suite checks that the model's summary exactly equals a stored 'golden' string, and the tests keep flaking. What is a better approach?",
+    "choices": {"A": "Assert on structure and key facts (schema validity, required fields, the figures that must appear) or grade against a rubric", "B": "Retry each test until it matches", "C": "Delete the flaky tests", "D": "Set temperature to 0 and keep exact string matching, since that makes outputs fully deterministic"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Sampled outputs vary between runs, so tests should check what matters about an output instead of its exact wording (A). A temperature of 0 (D) reduces variation and still doesn't guarantee identical text. Retrying until a pass (B) hides real regressions, and deleting tests (C) removes the safety net.",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "15",
+    "heading": "Question 15",
+    "question": "An autocomplete feature must return short suggestions within a few hundred milliseconds, and the quality bar is modest. Which setup fits?",
+    "choices": {"A": "A top-tier model with extended thinking", "B": "A balanced-tier model with `max_tokens` of 32,000", "C": "The Batch API", "D": "A fast-tier (Haiku-class) model with streaming and a small `max_tokens`"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Latency-critical, high-volume, bounded tasks are the fast tier's case (D). A adds the most latency of all the options. Batch (C) is asynchronous. B misses the latency target, and a huge output budget is pointless for short suggestions.",
+    "source_section": "Model Selection and Optimization"
+  },
+  {
+    "number": "16",
+    "heading": "Question 16",
+    "question": "A team wants an autonomous agent to convert CSV exports into a fixed JSON layout. The column mapping never changes. What is the best approach?",
+    "choices": {"A": "An Agent SDK agent with file tools", "B": "A manager agent with three subagents", "C": "A deterministic script, or a single model call with a schema if some fields need interpretation, with no agent loop", "D": "An orchestration framework with a state graph"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Apply the four-question test: the task isn't complex, its path is fully known, and code can avoid errors cheaply, so autonomy only adds cost and unpredictability (C). A, B and D each add machinery the problem doesn't need.",
+    "source_section": "Agents and Workflows"
+  },
+  {
+    "number": "17",
+    "heading": "Question 17",
+    "question": "Which TWO things does the Claude Agent SDK give you that you would otherwise build yourself in a custom loop? (Select TWO)",
+    "choices": {"A": "A visual drag-and-drop workflow designer", "B": "Automatic fine-tuning on your traces", "C": "Context management, plus hooks and permissions for deterministic control", "D": "The agent loop with built-in tools for files, shell commands and search", "E": "A hosted vector database for retrieval"},
+    "answer": ["C", "D"],
+    "select_count": 2,
+    "explanation": "The Agent SDK packages the same harness Claude Code runs on: the loop and built-in tools (D), plus context management, hooks, permissions and subagents (C). It doesn't host a vector database (E), fine-tune models (B) or provide a visual designer (A).",
+    "source_section": "Agents and Workflows"
+  },
+  {
+    "number": "18",
+    "heading": "Question 18",
+    "question": "A bank's agent must keep all code execution and data inside its own network for data-residency rules. A startup wants the fastest path to production. Which deployment fits each?",
+    "choices": {"A": "Managed for the bank, self-hosted for the startup", "B": "Self-hosted for the bank, managed for the startup", "C": "Self-hosted for both", "D": "Managed for both"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Residency and custom-runtime requirements point to self-hosted execution, and speed to production points to a managed deployment where the provider runs the loop and the sandbox (B). D puts the bank's data outside its network. C slows the startup down for a requirement it doesn't have. A reverses both.",
+    "source_section": "Agents and Workflows"
+  },
+  {
+    "number": "19",
+    "heading": "Question 19",
+    "question": "An agent must summarize 12 long PDFs independently, then write a comparison across them. The single-agent version runs out of context. What is the best design?",
+    "choices": {"A": "One agent reads all 12 PDFs in sequence in a single context", "B": "Twelve agents that send their findings to each other directly", "C": "Raise `max_tokens` on the single agent", "D": "An orchestrator gives each PDF to a subagent with its own context, runs them in parallel, and writes the comparison from their summaries"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "The summaries are independent subtasks, so isolated subagent contexts fit, and only compact reports return to the orchestrator (D). A is the design that already failed. `max_tokens` (C) limits output, and the problem is input. Agents talking to each other directly (B) remove the coordinator that merges results and isolates failures.",
+    "source_section": "Agents and Workflows"
+  },
+  {
+    "number": "20",
+    "heading": "Question 20",
+    "question": "You pass a 50-page contract and ask detailed questions about it. Answers sometimes miss relevant clauses. Which prompt structure follows Anthropic's long-context guidance?",
+    "choices": {"A": "The contract first, wrapped in tags such as `<contract>`, then the instructions and question at the end, optionally asking Claude to quote the relevant clauses before answering", "B": "The question first, then the contract", "C": "The contract twice, once before and once after the question", "D": "The question in the middle of the contract"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Anthropic recommends putting long documents at the top and the query at the end, and reports up to 30% better responses in tests with complex inputs; asking for supporting quotes first also helps Claude focus (A). B and D go against that guidance. C doubles the cost and the noise.",
+    "source_section": "Prompt and Context Engineering"
+  },
+  {
+    "number": "21",
+    "heading": "Question 21",
+    "question": "Your code forced JSON output by prefilling the assistant turn with an opening brace. After moving to a newer model, requests with the prefilled last assistant turn return a 400 error. What is the recommended replacement?\n\n```python\nmessages = [\n    {\"role\": \"user\", \"content\": f\"Extract the fields from: {doc}\"},\n    {\"role\": \"assistant\", \"content\": \"{\"},   # prefill\n]\n```",
+    "choices": {"A": "Stay on the older model permanently", "B": "Prefill with an opening square bracket instead", "C": "Add 'respond only in JSON' and extract the first {...} block with a regex", "D": "Structured outputs: send the JSON schema in `output_config.format` and remove the prefill"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Starting with the Claude 4.6 models, a prefilled last assistant turn is rejected, and Anthropic's migration guidance for format control points to structured outputs (D). B is still a prefill. C goes back to probabilistic formatting with fragile parsing. A blocks every future upgrade.",
+    "source_section": "Prompt and Context Engineering"
+  },
+  {
+    "number": "22",
+    "heading": "Question 22",
+    "question": "Which TWO practices make a few-shot prompt for a tricky classification more reliable? (Select TWO)",
+    "choices": {"A": "Examples that all share the same label", "B": "Examples wrapped in tags such as `<example>`, clearly separated from the input to classify", "C": "Examples that contradict the instructions, to test robustness", "D": "Fifty near-identical examples", "E": "Two to four varied examples, including one the model should correctly reject"},
+    "answer": ["B", "E"],
+    "select_count": 2,
+    "explanation": "A small, varied set with a negative case teaches the boundary (E), and clear separation keeps the model from mixing examples with the real input (B). Near-identical examples (D) and single-label sets (A) teach a narrow pattern. Contradictory examples (C) teach the model to ignore your instructions.",
+    "source_section": "Prompt and Context Engineering"
+  },
+  {
+    "number": "23",
+    "heading": "Question 23",
+    "question": "Which statement about server-side tools such as web search is correct?",
+    "choices": {"A": "They're available only through MCP", "B": "They run on Anthropic's infrastructure, so your code doesn't execute them or send `tool_result` blocks for them", "C": "Your application must implement and execute them", "D": "They work only in the Batch API"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Server tools execute on Anthropic's side, and their results come back inside the response (B). Client tools are the ones your code runs (C). Server tools are declared in the tools parameter like any other tool (A), and they work in regular requests (D).",
+    "source_section": "Tools and MCPs"
+  },
+  {
+    "number": "24",
+    "heading": "Question 24",
+    "question": "Your company's quarterly-report procedure is 12 steps with templates and formatting rules. Teams want Claude to follow it in claude.ai, Claude Code and the API. No new external system is involved. Which mechanism fits?",
+    "choices": {"A": "An MCP server", "B": "A fine-tuned model", "C": "A Skill: packaged instructions and templates that load when the task matches", "D": "A custom tool"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "The need is know-how and workflow steps, which is what Skills package (C). Tools (D) and MCP servers (A) add actions or data access, and nothing here needs a new action or data source. Fine-tuning (B) is heavy machinery for a procedure that fits in a document.",
+    "source_section": "Tools and MCPs"
+  },
+  {
+    "number": "25",
+    "heading": "Question 25",
+    "question": "An agent calls `create_shipment` with inputs that sometimes have the wrong type (weight as a string) or miss required fields, which breaks your handler. Which API feature addresses this at the source?",
+    "choices": {"A": "`strict: true` on the tool definition, so tool inputs follow the `input_schema`", "B": "A lower temperature", "C": "A longer tool description", "D": "`tool_choice` set to `auto`"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Strict tool use applies schema validation to the tool's inputs (A). A better description (C) helps the model pick and fill the tool and still guarantees nothing. `auto` (D) is the default and changes nothing. Temperature (B) affects variation and can't guarantee types.",
+    "source_section": "Tools and MCPs"
+  },
+  {
+    "number": "26",
+    "heading": "Question 26",
+    "question": "A research agent reads web pages. One page hides text telling the agent to email the user's files to an outside address, and the agent has a `send_email` tool. Which TWO controls most directly reduce this risk? (Select TWO)",
+    "choices": {"A": "A system-prompt line telling the agent to ignore malicious instructions, as the only defense", "B": "A deterministic gate in code that blocks or holds any action sending data to an external address", "C": "A larger model", "D": "A higher temperature", "E": "Scope tools by least privilege: the research agent gets no `send_email` tool, or outbound email requires human approval"},
+    "answer": ["B", "E"],
+    "select_count": 2,
+    "explanation": "Content the agent reads is an untrusted channel, so the strongest controls limit what an injected instruction can do: no dangerous capability (E) and a programmatic check on risky actions (B). A prompt instruction on its own (A) is probabilistic. Model size (C) and temperature (D) aren't security controls.",
+    "source_section": "Security and Safety"
+  },
+  {
+    "number": "27",
+    "heading": "Question 27",
+    "question": "A developer put the production API key into a system-prompt template in the repository 'so the agent can call internal APIs.' Which TWO steps fix this? (Select TWO)",
+    "choices": {"A": "Rotate the key, and store secrets in environment variables or a secret manager", "B": "Tell the model never to reveal the key", "C": "Base64-encode the key in the template", "D": "Have your tool code authenticate to the internal APIs, so the model never sees the credential", "E": "Move the key to the end of the prompt"},
+    "answer": ["A", "D"],
+    "select_count": 2,
+    "explanation": "A key in a repository and a prompt is already exposed, so it gets rotated and stored properly (A), and credentials belong in the code that executes tools, outside the model's context (D). Encoding (C) is trivially reversed, an instruction (B) is probabilistic, and moving the key (E) keeps it in the prompt.",
+    "source_section": "Security and Safety"
+  },
+  {
+    "number": "28",
+    "heading": "Question 28",
+    "question": "An internal HR assistant answers every employee's questions using one service account that can read all employee records. A junior employee asked about a colleague's salary and got an answer. What is the root fix?",
+    "choices": {"A": "Remove salary data from the HR system", "B": "Add a system-prompt rule: 'Never reveal salaries'", "C": "Filter out responses that contain the word 'salary'", "D": "Run lookups with the calling user's identity and permissions, and log each tool call against that user"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "The shared over-privileged account erased per-user authorization and the audit trail, and acting as the caller restores both (D). B is a probabilistic patch. A breaks legitimate HR work. A keyword filter (C) is easy to get around and blocks legitimate answers.",
+    "source_section": "Security and Safety"
+  },
+  {
+    "number": "29",
+    "heading": "Question 29",
+    "question": "Which files should hold a team's shared Claude Code permission rules (for example, allowing `Bash(npm run test *)`) and one developer's personal overrides for the same project?",
+    "choices": {"A": "`~/.claude/settings.json` for the team; `.claude/settings.json` for the developer", "B": "`CLAUDE.md` for both", "C": "`.claude/settings.json`, committed, for the team; `.claude/settings.local.json`, gitignored, for the developer", "D": "`.mcp.json` for the team; `CLAUDE.local.md` for the developer"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "The project settings file is shared through version control, and the local settings file holds personal overrides for that project without being committed (C). User-level settings (A) apply to one person across all projects. `CLAUDE.md` files (B, D) hold instructions, while permissions are enforced from settings files, and `.mcp.json` configures MCP servers.",
+    "source_section": "Claude Code"
+  },
+  {
+    "number": "30",
+    "heading": "Question 30",
+    "question": "After you add a new tool named `get order status`, every request returns 400 `invalid_request_error`. What is the first move?",
+    "choices": {"A": "Fix the request: tool names may contain only letters, digits, underscores and hyphens, so rename it (for example, `get_order_status`)", "B": "Switch to a different model", "C": "Retry with exponential backoff", "D": "Rewrite the system prompt"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "A 400 is a client error caused by the request itself, and the tool name breaks the documented pattern `^[a-zA-Z0-9_-]{1,128}$` (A). Retries (C) repeat the same invalid request. The model (B) and the prompt (D) play no part in request validation.",
+    "source_section": "Eval, Testing, and Debugging"
+  }
+]

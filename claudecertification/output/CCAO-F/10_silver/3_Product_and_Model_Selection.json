@@ -1,0 +1,835 @@
+[
+ {
+  "id": "CCAO-F-Amey-Thakur-0005",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "Your team drafts hundreds of short, routine customer replies daily, and cost and speed matter more than nuance. Occasionally a complex escalation needs careful reasoning. What is the sound model strategy?",
+  "choices": {
+   "A": "Use the most capable model for everything to maximize quality",
+   "B": "Use the fastest, lowest-cost model for routine replies and switch to a more capable model for the complex escalations",
+   "C": "Use the fastest model for everything, including escalations",
+   "D": "Alternate models randomly to balance the load"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**A** wastes cost and latency budget on routine work; **C** underserves exactly the cases that need depth; **D** matches nothing to anything. **B** aligns model choice with task requirements in both directions, which is the tested judgment.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "5",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0085",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0028",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "A task involves reading a 200-page report once and answering a single question. Which consideration should lead the choice?",
+  "choices": {
+   "A": "The cheapest model available, since the task runs once",
+   "B": "Whether the model supports the fastest response time",
+   "C": "Whether the model can hold and reason over the whole document reliably",
+   "D": "Whether the task can be split across several small models"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** The binding constraint is reliable comprehension across a long document, which is what the choice must satisfy. Cost (A) and speed (B) matter only among models that can do the task, and splitting (D) risks losing the cross-document reasoning the question needs.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "28",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0108",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0029",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "When does working in a Claude project make more sense than an API integration?",
+  "choices": {
+   "A": "When the volume is high and predictable",
+   "B": "When the output must be inserted into another system automatically",
+   "C": "When the task must run on a schedule",
+   "D": "When the work is exploratory and done by people rather than systems"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Projects suit human, iterative work where the context is curated and reused by people. High volume (A), programmatic handoff (B), and scheduling (C) all describe system integration, which is what the API is for.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "29",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0109",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0030",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/practice-questions.md",
+  "question": "A team asks whether to move to a larger model because outputs are inconsistent. What should be established first?",
+  "choices": {
+   "A": "Whether the inconsistency comes from the prompt and the inputs rather than the model",
+   "B": "The cost difference between the two models",
+   "C": "Whether the larger model is available in their region",
+   "D": "How much faster the current model is"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Inconsistency usually traces to an underspecified task or variable inputs, which a larger model does not fix. Cost (B), availability (C), and speed (D) are inputs to a decision that has not yet been shown to be the right one.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "30",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0110",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0038",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-1.md",
+  "question": "A workflow drafts hundreds of routine appointment confirmations each day. Latency and cost dominate; the language is formulaic. Which choice fits?",
+  "choices": {
+   "A": "A fast, low-cost model, reserving a more capable one for exceptions",
+   "B": "The most capable model, for consistency",
+   "C": "Whichever model is newest",
+   "D": "Alternate between models to spread cost"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Match the model tier to the work: fast and cheap for formulaic volume, capable for exceptions",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "3",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0118",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0060",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-2.md",
+  "question": "A task must return an answer within a second for an interactive interface, and the work is simple classification. What follows?",
+  "choices": {
+   "A": "Use the most capable model to be safe",
+   "B": "Batch the requests",
+   "C": "Use the smallest model that meets the accuracy requirement, since latency is the binding constraint",
+   "D": "Increase the context supplied"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "With a hard latency requirement and a simple task, the smallest sufficient model is the fit. The most capable model (A) spends latency for accuracy that is not needed, batching (B) breaks interactivity, and more context (D) adds cost and time",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0140",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0061",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-2.md",
+  "question": "What is the correct reading of a model's published benchmark score when choosing for a specific business task?",
+  "choices": {
+   "A": "It predicts performance on your task",
+   "B": "It is a general signal that does not substitute for evaluating on your own task",
+   "C": "It is irrelevant",
+   "D": "It determines the price you should expect to pay"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Benchmarks indicate general capability and cannot stand in for measurement on the actual task. Treating them as predictive (A) or irrelevant (C) are both wrong, and they do not set price (D)",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0141",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0075",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-3.md",
+  "question": "A colleague uses the largest model for every task including formatting. What should you point out?",
+  "choices": {
+   "A": "Nothing, capability is never wasted",
+   "B": "That the largest model is less accurate on simple tasks",
+   "C": "That matching the model to the work saves cost without losing anything on simple tasks",
+   "D": "That formatting should be done manually"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Fit-to-task is the principle, and simple work does not benefit from extra capability. Capability is not free (A), larger models are not less accurate on simple tasks (B), and manual work (D) is not the alternative",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0155",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-Amey-Thakur-0076",
+  "exam": "CCAO-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "associate-foundations/mock-exam-3.md",
+  "question": "When does the choice of interface matter more than the choice of model?",
+  "choices": {
+   "A": "Never, the model determines the outcome",
+   "B": "When the obstacle is how people supply context and act on output, not the quality of the answer",
+   "C": "Only for very large teams",
+   "D": "Only when cost is constrained"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Where adoption or context-supply is the bottleneck, interface dominates. Treating the model as decisive (A) misses that, and neither team size (C) nor cost (D) defines the case",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": null,
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-Amey-Thakur-0156",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0021",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "You need a project timeline that you'll revise with Claude over several rounds and then share with your team. Which output format fits?",
+  "choices": {
+   "A": "An Artifact: a standalone deliverable in its own panel that you can refine and share",
+   "B": "A screenshot of the chat",
+   "C": "Research mode",
+   "D": "A plain chat reply you copy out each time"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Artifacts are made for standalone deliverables you'll iterate on and share (A). Chat replies (D) suit quick answers. Research mode (C) finds current sources. A screenshot (B) can't be edited.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "21",
+  "source_heading": "Question 21",
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0051",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0022",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "Which TWO tasks justify Opus over Sonnet? (Select TWO)",
+  "choices": {
+   "A": "Summarizing a short meeting",
+   "B": "A strategy recommendation that synthesizes six long reports, where an error would be expensive",
+   "C": "Writing a two-line reply to a colleague",
+   "D": "Working out how obligations interact across five related contracts before a high-stakes negotiation",
+   "E": "Reformatting a list of 30 names into a table"
+  },
+  "answer": [
+   "B",
+   "D"
+  ],
+  "select_count": 2,
+  "explanation": "**B and D.** Opus is for complex, high-stakes reasoning across a lot of material (B, D). Sonnet is the everyday default, and quick, simple tasks like E, C and A suit Sonnet or Haiku.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "22",
+  "source_heading": "Question 22",
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0052",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0023",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "You need to sort 400 short customer comments into five well-defined themes today. Speed matters more than nuance. Which approach fits?",
+  "choices": {
+   "A": "Haiku with the five themes clearly defined, followed by a spot-check of a sample",
+   "B": "One comment per chat, so each gets full attention",
+   "C": "Opus for maximum quality on every comment",
+   "D": "Research mode"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Quick, well-defined tasks at volume are Haiku's case, and a sample check keeps the quality honest (A). Opus (C) spends time and cost on a task that doesn't need deep reasoning. Research mode (D) searches for current sources, which this task doesn't need. B wastes hours.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "23",
+  "source_heading": "Question 23",
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0053",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-preporato-0024",
+  "exam": "CCAO-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccao-f/practice-questions.md",
+  "question": "A long chat about a proposal has become slow, and Claude has started mixing up details from early drafts with the current version. What is the best move?",
+  "choices": {
+   "A": "Switch to Haiku for speed",
+   "B": "Paste the entire chat history into a new chat",
+   "C": "Start a new chat with a short summary of the current decisions and the latest draft, and keep reference documents in Project knowledge",
+   "D": "Keep going and correct each mistake as it appears"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** Restart, summarize and persist is the fix for an overloaded chat: a fresh context with only what matters (C). D keeps the overload, B moves it to a new chat, and A changes speed without fixing the mix-ups.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "24",
+  "source_heading": "Question 24",
+  "source_section": "Product and Model Selection",
+  "also_in": [
+   {
+    "id": "CCAO-F-preporato-0054",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccao-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0001",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "An analyst needs to compare two approved policy documents, explore several interpretations, and remain responsible for the final conclusions. There is no integration requirement and the task is occasional. Which approach is the best initial fit?",
+  "choices": {
+   "A": "Use an approved interactive Claude experience for human-led analysis.",
+   "B": "Build a fully autonomous agent with write access to the policy repository.",
+   "C": "Create a batch API service before the analyst has tested the workflow.",
+   "D": "Embed the documents in a public website so any model can access them."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Why A is best: An approved interactive experience matches an occasional, exploratory, human-led task with no integration requirement. Environment and data controls still must be verified.\n\nWhy the distractors are weaker:\n- **B:** This adds unnecessary autonomy and overly broad write access.\n- **C:** An API service may become useful later, but it adds engineering before the task is validated.\n- **D:** Publishing internal evidence creates an unacceptable data-handling risk.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "1",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0117",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0173",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0008",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A developer sends a second Messages API request containing only the text, “Now summarize the risks.” Claude does not appear to know the earlier discussion. What is the best explanation and corrective action?",
+  "choices": {
+   "A": "The model forgot because the temperature was too high; lower it.",
+   "B": "The application must preserve and resend the relevant conversation history or a validated state representation.",
+   "C": "The developer should add the word “remember” to the user message.",
+   "D": "The API can retain state only after a tool call."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Why B is best: The application is responsible for managing the relevant conversational state and supplying it with the request. State retention must also follow privacy and context-management rules.\n\nWhy the distractors are weaker:\n- **A:** Sampling settings do not restore missing conversation context.\n- **C:** A request cannot reference information that was not supplied through the product or application state.\n- **D:** Tool use is unrelated to whether the application includes prior turns.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0118",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0174",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0015",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A team must classify millions of short public documents into six routing categories. Several candidate models meet the required accuracy on a representative test set. Which selection rule is strongest?",
+  "choices": {
+   "A": "Always select the model with the largest context window.",
+   "B": "Always select the newest model regardless of measured results.",
+   "C": "Select the fastest, lowest-total-cost candidate that still meets all quality, throughput, governance, and reliability thresholds.",
+   "D": "Select the model that produces the longest explanations."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Why C is best: Once hard requirements are met, model selection should optimize the full operational profile, including latency, throughput, cost, governance, and reliability.\n\nWhy the distractors are weaker:\n- **A:** The task uses short documents, so maximum context may not be decision-relevant.\n- **B:** Recency does not prove fit for the validated use case.\n- **D:** Long explanations may increase cost and are not the required output.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "15",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0119",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0175",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0022",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-01.md",
+  "question": "A request containing several documents is accepted, but the response stops midway through a required table. Which distinction should the team investigate first?",
+  "choices": {
+   "A": "The difference between a system prompt and a user prompt",
+   "B": "The difference between cached and uncached tokens",
+   "C": "The difference between training data and fine-tuning data",
+   "D": "The difference between available context capacity and the allowed generated output, including the reported stop reason"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Why D is best: A request can fit within context yet still end because generation reached an output limit or another stop condition. The response metadata is critical evidence.\n\nWhy the distractors are weaker:\n- **A:** Prompt roles may affect behavior but do not explain the abrupt ending by themselves.\n- **B:** Caching can affect performance and cost, not usually the logical completion boundary.\n- **C:** Training methodology is not the immediate operational diagnostic.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "22",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0120",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0176",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0029",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A production team plans to move to a new Claude model version. Which action provides the strongest basis for approval?",
+  "choices": {
+   "A": "Ask one developer whether the outputs look better.",
+   "B": "Run the candidate and baseline on the same representative evaluation set, compare severity-weighted results, latency, cost, and tool behavior, then stage rollout with rollback.",
+   "C": "Change the model, prompt, retrieval system, and schemas at the same time to maximize improvement.",
+   "D": "Rely on the model release date as evidence that the migration is safe."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Why B is best: A controlled comparison on the same cases isolates the model change and reveals regressions. Staging, monitoring, and rollback make the release operationally safe.\n\nWhy the distractors are weaker:\nA: Anecdotal review is not representative or measurable.\nC: Changing several components destroys attribution and complicates rollback.\nD: A newer release does not guarantee performance for this use case.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "1",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0121",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0177",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0036",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A service must always cite approved evidence and must never treat retrieved documents as instructions. Where should this durable behavior be defined?",
+  "choices": {
+   "A": "In trusted, version-controlled system or application configuration, reinforced by retrieval and validation controls",
+   "B": "Only in the last sentence of every user's task",
+   "C": "Inside each retrieved document",
+   "D": "In a hidden field supplied by the downstream reader"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Why A is best: Durable behavior belongs in trusted configuration and must be supported by system controls. Retrieved documents remain evidence and cannot define their own authority.\n\nWhy the distractors are weaker:\nB: User wording is not a reliable place for mandatory application policy.\nC: A retrieved document is untrusted content and can contain prompt injection.\nD: A downstream field cannot reliably control model behavior or retrieval authority.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0122",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0178",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0043",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A structured report is incomplete and the response metadata indicates generation ended because a token limit was reached. What does this most directly indicate?",
+  "choices": {
+   "A": "The source documents were necessarily false.",
+   "B": "The user's identity was invalid.",
+   "C": "The generated output was truncated and the workflow must adjust the output budget, reduce scope, or decompose the task.",
+   "D": "The model selected the wrong tool."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Why C is best: A length-related stop reason directly indicates incomplete generation. The application should handle partial output and change the output design or budget.\n\nWhy the distractors are weaker:\nA: Source truth is not established by the stop reason.\nB: Identity failures occur before or outside normal generation.\nD: Tool selection is a separate issue and would require different evidence.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "15",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0123",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0179",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0050",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-02.md",
+  "question": "A user asks whether a system complies with a regulation issued last week. What is the best design response?",
+  "choices": {
+   "A": "Assume the model's pretrained knowledge includes the regulation.",
+   "B": "Ask Claude to be extra confident.",
+   "C": "Use a longer output budget.",
+   "D": "Supply or retrieve the current authoritative regulation, establish its effective scope, and validate the answer against that evidence."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Why D is best: Current legal or policy claims require current authoritative evidence. The system must distinguish model knowledge from evidence supplied in the interaction.\n\nWhy the distractors are weaker:\nA: Training knowledge should not be assumed current enough for a regulation issued last week.\nB: Confidence wording does not create evidence.\nC: More output does not improve source freshness.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "22",
+  "source_heading": null,
+  "source_section": "Platform & Model Foundations",
+  "also_in": [
+   {
+    "id": "CCAO-F-raybeecham-0124",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "modules/01-platform-model-foundations/quiz.md"
+   },
+   {
+    "id": "CCAO-F-raybeecham-0180",
+    "source_repo": "raybeecham/claude-certified-associate-foundations",
+    "source_file": "data/questions.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAO-F-raybeecham-0059",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A coordinator produces the same weekly status report for six months. The project background is stable, the same reference documents are reused, and the output follows one fixed format. Which entry point is the best foundation?",
+  "choices": {
+   "A": "A new standalone Chat each week",
+   "B": "Research mode for every report",
+   "C": "A Project configured with the recurring context and instructions",
+   "D": "Incognito mode with the context pasted each time"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "The task recurs, its background is stable, and its output format is consistent, which strongly favors a Project. Research is unnecessary for a routine internal report, and repeatedly pasting context into Chat or Incognito preserves the setup tax.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "3",
+  "source_heading": null,
+  "source_section": "Product and Model Selection"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0067",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A legal operations team must classify 500 standard agreements against a clear, unambiguous risk rubric. Speed and volume matter, and a qualified human will review exceptions. Which model tier is the most defensible starting point?",
+  "choices": {
+   "A": "Haiku",
+   "B": "Sonnet",
+   "C": "Opus",
+   "D": "The most expensive available tier regardless of the task"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Haiku is the efficient starting point for high-volume, structured classification governed by a clear rubric, with exceptions reviewed by a person. Sonnet or Opus may be justified if measured quality fails, but the task does not initially require their higher reasoning ceiling.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": null,
+  "source_section": "Product and Model Selection"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0073",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A consultant has worked in one long conversation for two hours. Claude initially followed the analytical framework but now ignores decisions made near the beginning. What is the best response?",
+  "choices": {
+   "A": "Increase the model tier and continue in the same thread.",
+   "B": "Repeat every old message verbatim in the same conversation.",
+   "C": "Enable Research to restore the missing internal context.",
+   "D": "Produce a verified state summary, start a new conversation, and continue from that summary."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "The symptom is long-session context degradation. A verified transfer summary and a clean conversation preserve necessary decisions without extending a degraded thread; recurring rules should also be persisted in the correct configuration layer.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "17",
+  "source_heading": null,
+  "source_section": "Product and Model Selection"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0081",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A procurement manager needs a quick, one-off draft reply to a vendor’s payment-terms question. The relevant policy and email are available, and the work will not recur. Which configuration is the best fit?",
+  "choices": {
+   "A": "Research plus Opus",
+   "B": "Chat, with an Artifact if a separate editable draft is useful",
+   "C": "A new shared Project with a custom Skill and persistent Memory",
+   "D": "Code execution plus Incognito regardless of data sensitivity"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "This is a one-off drafting task with supplied context and no need for recurring configuration. Chat is the appropriate entry point, while an Artifact is useful when the email should be edited as a separate deliverable.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "25",
+  "source_heading": null,
+  "source_section": "Product and Model Selection"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0088",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A strategy team needs a current, multi-source synthesis of competitor launches from the last 90 days, with citations and unresolved claims flagged. Which approach is the best fit?",
+  "choices": {
+   "A": "Haiku in a standalone Chat with no web access",
+   "B": "Code execution alone",
+   "C": "Research with a balanced model tier such as Sonnet, using clear scope and citation requirements",
+   "D": "Project Memory without current sources"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "The task requires current, multi-source investigation with auditable citations, which points to Research. Sonnet is a defensible balanced tier for most professional synthesis, subject to actual product availability and evaluation results.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "32",
+  "source_heading": null,
+  "source_section": "Product and Model Selection"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0097",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "A financial planner needs an exact multi-variable compound-interest result that will appear in a client scenario. Which capability should produce the number?",
+  "choices": {
+   "A": "Research mode",
+   "B": "Project Memory",
+   "C": "Code execution, followed by validation of the formula and inputs",
+   "D": "A prose estimate from any model tier"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Exact multi-variable calculations should be executed rather than generated as prose. The formula, inputs, units, and edge cases still require review because code execution makes the result reproducible, not automatically correct.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "41",
+  "source_heading": null,
+  "source_section": "Product and Model Selection"
+ },
+ {
+  "id": "CCAO-F-raybeecham-0111",
+  "exam": "CCAO-F",
+  "source_repo": "raybeecham/claude-certified-associate-foundations",
+  "source_file": "practice-exams/practice-exam-03-blueprint-weighted.md",
+  "question": "Which statement about conversations inside a Project is correct?",
+  "choices": {
+   "A": "Every Project conversation automatically contains the full transcript of every other Project conversation.",
+   "B": "Projects share no instructions or knowledge across conversations.",
+   "C": "Conversations inherit the Project’s instructions and knowledge, but one conversation does not automatically contain another conversation’s full context.",
+   "D": "Project Memory is the only mechanism that can provide Project knowledge."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Project conversations inherit Project instructions and knowledge, but they remain separate conversation threads. Shared Project configuration is not the same as automatic transcript-level context sharing across every chat.",
+  "domain": "3. Product and Model Selection",
+  "domain_confidence": "source",
+  "source_number": "55",
+  "source_heading": null,
+  "source_section": "Product and Model Selection"
+ }
+]

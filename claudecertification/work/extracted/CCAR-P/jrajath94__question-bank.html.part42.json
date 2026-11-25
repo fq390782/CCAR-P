@@ -1,0 +1,153 @@
+[
+  {
+    "number": "M3-Q60",
+    "heading": "M3-Q60 (V2-D7.1)",
+    "question": "Scenario. A team of 40 uses Claude Code. Interns join monthly. The repo has customer data exports. Question. What is the correct configuration?",
+    "choices": {
+      "A": "Make a CLAUDE.md note for interns.",
+      "B": "Enforce permissions in committed settings. Deny rules on data export paths. Use scoped subagents for interns. Use managed policies for the non-negotiables.",
+      "C": "Do not use a config. Supervise the interns.",
+      "D": "Ban interns from the repo."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Interns join monthly... customer data exports.\" Why: rotating users plus sensitive data need enforcement, not notes. Scoped subagents bound intern blast radius. Counterfactual: A wins for workflow tips, never for data protection.",
+    "source_section": "V2-D7.1"
+  },
+  {
+    "number": "M3-Q61",
+    "heading": "M3-Q61 (V2-D7.1)",
+    "question": "Scenario. A solo developer's scratch repo has no secrets and no deploy scripts. Question. What is the correct configuration?",
+    "choices": {
+      "A": "Full managed policies with deny rules.",
+      "B": "Light guidance in CLAUDE.md. No enforceable controls needed with nothing to protect.",
+      "C": "A 50-page policy.",
+      "D": "An approval board."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"no secrets and no deploy scripts.\" Why: controls match the threat model. With nothing to protect, guidance fits and enforcement is overhead. Counterfactual: A wins when secrets arrive.",
+    "source_section": "V2-D7.1"
+  },
+  {
+    "number": "M3-Q62",
+    "heading": "M3-Q62 (V2-D7.2)",
+    "question": "Scenario. An AI assistant drafts a database migration. The engineer reviews the diff, runs it on staging, inspects the result, and checks for secrets. Question. Did she meet the verification bar?",
+    "choices": {
+      "A": "No. She should never use AI for migrations.",
+      "B": "Yes: she reviewed the work, ran it in a safe environment, inspected the result, and checked secrets. That is the V2-D7.2 bar.",
+      "C": "No. She must also rewrite it by hand.",
+      "D": "Yes, and skip staging next time."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"reviews the diff, runs it on staging, inspects the result, and checks for secrets.\" Why: the bar is verification, not authorship. She verified in a safe environment. Counterfactual: A wins never as a blanket rule.",
+    "source_section": "V2-D7.2"
+  },
+  {
+    "number": "M3-Q63",
+    "heading": "M3-Q63 (V2-D7.3)",
+    "question": "Scenario. An agent's answers get slower over the day. Mornings are fine. The runbook's latency branch maps symptoms to investigations. Question. What does it check?",
+    "choices": {
+      "A": "The time of day as the cause.",
+      "B": "Latency to context or dependency drift: context growth across the day, cache hit-rate decay, and downstream slowdowns, measured per-stage.",
+      "C": "The user's patience.",
+      "D": "The stock market."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"slower over the day. Mornings are fine.\" Why: V2-D7.3 maps latency to context and dependency investigations. Growth across the day is the classic pattern. Counterfactual: none.",
+    "source_section": "V2-D7.3"
+  },
+  {
+    "number": "M4-Q01",
+    "heading": "M4-Q01 (V2-D1.1)",
+    "question": "Scenario. A pharmacy chain processes 15,000 refill requests per day. About 85% are routine repeats with fixed records. About 15% need pharmacist judgment on interactions. One hard rule: no dispense on an unverified prescription record. Question. Which design fits best?",
+    "choices": {
+      "A": "One agent dispenses everything with no checks.",
+      "B": "Deterministic rules process the 85% routine refills. Claude drafts the interaction summary for the 15% complex cases. A code gate blocks any dispense until the record check passes.",
+      "C": "The most capable tier dispenses everything with no checks.",
+      "D": "A pharmacist reviews all 15,000 requests."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"no dispense on an unverified prescription record.\" Why: the fork maps fixed records to rules and judgment cases to Claude. The gate enforces the hard rule. D cannot scale. Counterfactual: D wins at 60 requests per day with liability per dispense.",
+    "source_section": "V2-D1.1"
+  },
+  {
+    "number": "M4-Q02",
+    "heading": "M4-Q02 (V2-D1.1)",
+    "question": "Scenario. A university wants an AI that \"advises students automatically.\" About 80% of questions are degree-requirement lookups. About 20% are complex transfer-credit cases. The provost states one rule: no graduation advice on an unverified transcript. Question. What is the best FIRST action?",
+    "choices": {
+      "A": "Build the advising agent this semester.",
+      "B": "Write the rule into the design. Fork lookups to deterministic rules. Route transfer cases to Claude. Gate every advice on the transcript check in code.",
+      "C": "Benchmark tiers first.",
+      "D": "Draft a prompt that forbids bad advice."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"no graduation advice on an unverified transcript.\" Why: the constraint filters the design before build. D puts an advising rule in a prompt. Counterfactual: A wins for a demo with no real students.",
+    "source_section": "V2-D1.1"
+  },
+  {
+    "number": "M4-Q03",
+    "heading": "M4-Q03 (V2-D1.2)",
+    "question": "Scenario. A grant pipeline runs: application intake, validation, eligibility check, model scoring, verification, award letter, feedback. The awards database is the system of record. A wrong award is reversible but publicly embarrassing. Question. Where does verification sit, and at what strength?",
+    "choices": {
+      "A": "After scoring and before the award letter: check eligibility inputs against source documents in code, plus sampled human review given the public embarrassment risk.",
+      "B": "After the award letter.",
+      "C": "Before intake.",
+      "D": "Nowhere."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"wrong award is reversible but publicly embarrassing.\" Why: verification sits before the side effect. Reversible keeps the code check. Embarrassment adds sampled human review. Counterfactual: a full human gate wins if awards were irreversible.",
+    "source_section": "V2-D1.2"
+  },
+  {
+    "number": "M4-Q04",
+    "heading": "M4-Q04 (V2-D1.2), Select TWO",
+    "question": "Scenario. A support pipeline takes chat, validates, pulls the CRM (system of record), runs a sentiment model, and updates the ticket. Chat may be abusive or manipulative. Question. Which TWO are trust boundaries? Select TWO.",
+    "choices": {
+      "A": "Between chat input and validation.",
+      "B": "Between the sentiment model and the ticket update.",
+      "C": "Between the CRM read and the sentiment model.",
+      "D": "Between the logger and disk.",
+      "E": "Between two pure functions."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"Chat may be abusive or manipulative... updates the ticket.\" Why: untrusted chat crosses at validation. The ticket write is the side effect needing authorization in code. The rest are internal. Counterfactual: none.",
+    "source_section": "V2-D1.2"
+  },
+  {
+    "number": "M4-Q05",
+    "heading": "M4-Q05 (V2-D1.3)",
+    "question": "Scenario. A payroll system processes salaries. The steps are fixed. Collect hours. Apply rules. Compute. Review. Pay. About 3% of cases need judgment on unusual contracts. Question. Which pattern fits?",
+    "choices": {
+      "A": "Agent loop for everything.",
+      "B": "Deterministic workflow for the fixed steps with an agent call for the 3% unusual contracts, then back to the workflow for pay.",
+      "C": "Augmented single call with no rules.",
+      "D": "Manual payroll."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"Steps are fixed... 3% need judgment.\" Fixed steps need the workflow. The 3% needs runtime judgment. The hybrid joins them at a handoff. A wins when you cannot list a step order.",
+    "source_section": "V2-D1.3"
+  },
+  {
+    "number": "M4-Q06",
+    "heading": "M4-Q06 (V2-D1.3)",
+    "question": "Scenario. A data team classifies support tickets. They use fixed categories with stable definitions. No retrieval is necessary. Question. Which approach fits?",
+    "choices": {
+      "A": "RAG over the ticket archive.",
+      "B": "A classifier (fine-tuned or rules) on the fixed categories: the need is stable behavior, not retrieved facts.",
+      "C": "An autonomous research loop.",
+      "D": "Manual classification forever."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"fixed categories with stable definitions. No retrieval is necessary.\" Why: the need is behavior (a decision boundary), not facts. Retrieval adds tokens. Retrieval does not change the boundary. Counterfactual: A wins when categories change each week. Auditors demand sources.",
+    "source_section": "V2-D1.3"
+  }
+]

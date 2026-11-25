@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="540" viewBox="0 0 940 540" role="img" aria-label="Coordinator 평가 후 부족분만 재위임하고 실패는 subagent 안에서 흡수하는 흐름" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Coordinator 평가 후 부족분만 재위임하고 실패는 subagent 안에서 흡수하는 흐름</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-coordinator-eval-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-coordinator-eval-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-coordinator-eval-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-coordinator-eval-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Coordinator 평가 · 재위임 — 부족분만 다시 맡기고 실패는 안에서 흡수</text>
+<rect x="20" y="50" width="600" height="470" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="34" y="72" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">평가 · 재위임 loop (coordinator)</text>
+<rect x="30" y="100" width="160" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="110.0" y="121.0" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">통합 출력</text>
+<text x="110.0" y="136.3" font-size="11" fill="#6B7280" text-anchor="middle">subagent 결과 통합</text>
+<polygon points="340,72.0 460.0,124 340,176.0 220.0,124" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="340" y="123.0" font-size="13" fill="#1F2937" text-anchor="middle">품질 기준 충족?</text>
+<text x="340" y="138.3" font-size="11" fill="#6B7280" text-anchor="middle">기준 = prompt에 명기</text>
+<path d="M190,124 L220,124" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="500" y="100" width="110" height="48" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="555.0" y="128.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">보고서 진행</text>
+<path d="M460,124 L500,124" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="465.0" y="104.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="480" y="115.0" font-size="11" fill="#1F2937" text-anchor="middle">충족</text>
+<rect x="220" y="196" width="240" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="340.0" y="221.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">부족분만 재위임</text>
+<text x="340.0" y="236.3" font-size="11" fill="#6B7280" text-anchor="middle">범위 좁힌 query로 지시</text>
+<path d="M340,176 L340,196" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="351.0" y="178.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="366" y="189.0" font-size="11" fill="#1F2937" text-anchor="middle">부족</text>
+<rect x="220" y="284" width="240" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="340.0" y="309.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">검색 · 분석 subagent</text>
+<text x="340.0" y="324.4" font-size="11" fill="#6B7280" text-anchor="middle">결과 수신 → 통합 재호출</text>
+<path d="M340,252 L340,284" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-b)"/>
+<rect x="319.5" y="260.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="340" y="271.0" font-size="11" fill="#2563EB" text-anchor="middle">재위임</text>
+<polygon points="340,365.0 440.0,410 340,455.0 240.0,410" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="340" y="406.1" font-size="13" fill="#1F2937" text-anchor="middle">반복 상한</text>
+<text x="340" y="423.1" font-size="13" fill="#1F2937" text-anchor="middle">도달?</text>
+<path d="M340,340 L340,365" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<path d="M240,410 L110,410 L110,148" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="86.3" y="275.0" width="47.4" height="30" fill="#FFFFFF"/>
+<text x="110" y="286.0" font-size="11" fill="#1F2937" text-anchor="middle">아니오:</text>
+<text x="110" y="300.0" font-size="11" fill="#1F2937" text-anchor="middle">재평가</text>
+<rect x="480" y="385" width="130" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="545.0" y="407.1" font-size="13" fill="#1F2937" text-anchor="middle">미해결 항목에 주석</text>
+<text x="545.0" y="422.4" font-size="11" fill="#6B7280" text-anchor="middle">(coverage 표기)</text>
+<path d="M440,410 L480,410" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="450.5" y="390.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="460" y="401.0" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M545,385 L545,148" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="30" y="462" width="290" height="46" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="175.0" y="481.4" font-size="11" fill="#6B7280" text-anchor="middle">품질 기준 예: 숫자 주장 = 독립 출처 2개 이상</text>
+<text x="175.0" y="496.4" font-size="11" fill="#6B7280" text-anchor="middle">필수 관점 6개</text>
+<rect x="330" y="462" width="280" height="46" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="470.0" y="481.4" font-size="11" fill="#6B7280" text-anchor="middle">통합 출력을 그대로 최종 보고서로 사용</text>
+<text x="470.0" y="496.4" font-size="11" fill="#6B7280" text-anchor="middle">→ 빠진 관점 · 근거 1개 주장 방치</text>
+<rect x="650" y="50" width="270" height="470" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="664" y="72" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">subagent 내부 실패 처리</text>
+<rect x="670" y="92" width="230" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="785.0" y="113.0" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Subagent 작업 중</text>
+<text x="785.0" y="128.3" font-size="11" fill="#6B7280" text-anchor="middle">tool 오류 발생</text>
+<rect x="670" y="176" width="230" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="785.0" y="197.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">subagent 안에서 재시도</text>
+<text x="785.0" y="212.3" font-size="11" fill="#6B7280" text-anchor="middle">일시 오류 = 내부에서 흡수</text>
+<path d="M785,140 L785,176" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="757.4" y="150.0" width="55.3" height="16" fill="#FFFFFF"/>
+<text x="785" y="161.0" font-size="11" fill="#1F2937" text-anchor="middle">일시 오류</text>
+<rect x="670" y="260" width="230" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="785.0" y="280.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">구조화해서 반환</text>
+<text x="785.0" y="295.9" font-size="11" fill="#6B7280" text-anchor="middle">오류 내용 · 시도 내용</text>
+<text x="785.0" y="310.9" font-size="11" fill="#6B7280" text-anchor="middle">확보한 정보원</text>
+<path d="M785,224 L785,260" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-k)"/>
+<rect x="755.7" y="234.0" width="58.6" height="16" fill="#FFFFFF"/>
+<text x="785" y="245.0" font-size="11" fill="#1F2937" text-anchor="middle">해결 안 됨</text>
+<rect x="670" y="358" width="230" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="785.0" y="383.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Coordinator</text>
+<text x="785.0" y="398.4" font-size="11" fill="#6B7280" text-anchor="middle">내부를 안 보고 다음 수 결정</text>
+<path d="M785,322 L785,358" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-coordinator-eval-b)"/>
+<rect x="746.4" y="332.0" width="77.3" height="16" fill="#FFFFFF"/>
+<text x="785" y="343.0" font-size="11" fill="#2563EB" text-anchor="middle">판단용 요약만</text>
+<rect x="670" y="440" width="230" height="66" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="785.0" y="462.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">원칙</text>
+<text x="785.0" y="477.9" font-size="11" fill="#6B7280" text-anchor="middle">내부 실패 처리 = 내부</text>
+<text x="785.0" y="492.9" font-size="11" fill="#6B7280" text-anchor="middle">밖으로는 판단용 요약만</text>
+</svg>

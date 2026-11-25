@@ -1,0 +1,401 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0691",
+  "question": "A finance audience and a security audience review a model option. The vendor claims zero risk and perfect accuracy. The record must give each audience the facts it decides on. Select two entries that meet this constraint.",
+  "choices": {
+   "A": "Attach the Usage and Cost API export as proof of zero risk.",
+   "B": "State the cost per completed task with the date of the price list.",
+   "C": "Show the per-token list price alone as the cost field for each option.",
+   "D": "Name the measured accuracy with its evaluation set, and give an uncertainty beside it."
+  },
+  "explanation": "Finance decides on cost per completed task, and list prices drift over time. Security needs a measured figure with its evaluation set and uncertainty, not an absolute claim. (Inference) Trap. An attached usage export looks like evidence, but that report measures spend, not risk."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0692",
+  "question": "A finance lead wants daily cost totals in USD for each team workspace. The script must use credentials that the usage and cost endpoints accept. Which setup meets the constraint?",
+  "choices": {
+   "A": "Call the usage and cost endpoints with the workspace API key that the script already holds.",
+   "B": "Set the Cost API bucket to one minute to get finer daily totals.",
+   "C": "Stream each response usage field into a warehouse, and rebuild the totals every hour.",
+   "D": "Call the usage and cost endpoints with an Admin API key, and read the daily cost report by workspace."
+  },
+  "explanation": "The usage and cost endpoints accept Admin API credentials only, so a workspace key fails. The Cost report gives daily totals in USD, and it can group them by workspace. Trap. A workspace API key looks sufficient for a script, but the usage and cost endpoints do not accept workspace keys."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0693",
+  "question": "An on-call engineer must see a traffic spike within seconds. The team has a usage report and a cost report. The team cannot wait for a daily total. Which action meets the constraint?",
+  "choices": {
+   "A": "Poll the Usage and Cost API once per minute and alert on each new total.",
+   "B": "Set a monthly spend alert on the workspace to catch a spike within seconds.",
+   "C": "Read the usage fields in each live response, and log them as responses return.",
+   "D": "Add a live response log, and also run a weekly cost review with finance."
+  },
+  "explanation": "The aggregate reports typically lag each request by up to 5 minutes, so they are too slow for this check. Per-response usage fields report each call as it completes. Trap. Polling the usage endpoints every minute looks fast, but the aggregate data can trail each request by up to 5 minutes."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0694",
+  "question": "A company runs one workspace for each team. The owner wants a monthly budget for each team and rate limits for each model. Select two settings that meet both requests.",
+  "choices": {
+   "A": "Set a monthly spend limit and alerts on each team workspace.",
+   "B": "Set a per-minute spend limit on each workspace to cap traffic bursts.",
+   "C": "Set rate limits per model on requests, input tokens, and output tokens per minute.",
+   "D": "Put every team on the Default Workspace, and set one spend limit there."
+  },
+  "explanation": "A spend limit and its alerts apply to one workspace, so each team gets its own budget. Rate limits cap requests and tokens per minute for each model. Trap. One spend limit on the Default Workspace looks like a shared budget, but that workspace accepts no spend limit."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0695",
+  "question": "A decision record names a model by family only. A successor cannot tell which model the evaluation measured. The record must name the measured model exactly. Which entry meets the constraint?",
+  "choices": {
+   "A": "Attach the full evaluation notebook and every raw response to the record.",
+   "B": "Write the exact model ID and the platform in the record.",
+   "C": "Record the model family name only, since the family name identifies the model.",
+   "D": "Record the API version header as the model ID for the evaluation."
+  },
+  "explanation": "From the 4.6 generation on, a dateless ID names one fixed snapshot. The exact ID and the platform let a successor identify the measured model. Trap. A model family name looks like enough, but it does not name the snapshot that the evaluation measured."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0696",
+  "question": "A decision record names a model ID. The platform posts a retirement notice with a date for that ID. The notice names a replacement model. The team must keep the record accurate and avoid an outage on that date. Which action meets the constraint?",
+  "choices": {
+   "A": "Record the retirement date beside the ID, then test the named replacement before that date.",
+   "B": "Keep the ID in the record, since a dateless ID is a fixed snapshot that never retires.",
+   "C": "Freeze all model work for the year, and rebuild every decision record from scratch.",
+   "D": "Add the Usage page CSV to the record as the model version number."
+  },
+  "explanation": "Every model ID has its own retirement schedule, and a notice sets the date. A tested replacement lets the team move traffic before that date. Trap. A dateless ID looks permanent, but it is a fixed snapshot that still follows its own retirement schedule."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0697",
+  "question": "A team writes a decision record for a Claude model in production. A successor must run the system later and must check the decision. Select two entries that meet both needs.",
+  "choices": {
+   "A": "Record the model family and let the successor choose the newest model.",
+   "B": "Record the workspace spend limit as the model version for the decision.",
+   "C": "Record the exact model ID with its platform and deprecation date.",
+   "D": "Write the review criteria that reopen the decision as measurable thresholds."
+  },
+  "explanation": "The exact ID, the platform, and the deprecation date tell a successor what runs and when it retires. Measurable review criteria tell the successor when to reopen the decision. (Inference) Trap. A model family name looks like a stable reference, but it does not identify the snapshot that was measured."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0698",
+  "question": "A release moves the client to API version 2026-10-21. Every request now fails with a 400 error, because the client sends a temperature value. The fix must remove the cause and pass a test gate before release. Which action meets the constraint?",
+  "choices": {
+   "A": "Keep the temperature value, and add a retry with backoff, since the error may clear.",
+   "B": "Raise the workspace rate limit, so that the 400 errors clear.",
+   "C": "Remove the temperature value, and also rewrite the prompts and logs before the test gate.",
+   "D": "Remove the temperature value from each request, then run the test gate before release."
+  },
+  "explanation": "The 400 error comes from a parameter that the new API version removes. The parameter removal fixes the cause, and the test gate confirms the release before traffic moves. (Inference) Trap. A retry with backoff looks like a standard fix, but the parameter itself causes the 400 error on each request."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0699",
+  "question": "A deprecation notice names a retirement date for a model that the production service calls. The notice names a replacement. The team must avoid an outage on the retirement date. Which action meets the constraint?",
+  "choices": {
+   "A": "Wait for the retirement date, then switch the model in one release.",
+   "B": "Export usage by API key and model, test the named replacement, and move traffic before the date.",
+   "C": "Move the whole product to a new cloud platform, and rewrite its prompts before the date.",
+   "D": "Keep the retired model on a backup route, which still returns answers after the date."
+  },
+  "explanation": "The usage export lists each API key and model, so the team finds every caller of the old model. The test and the move come before the date, because requests to a retired model fail. Trap. A switch at the retirement date looks simple, but requests to a retired model fail after that date."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0700",
+  "question": "A team runs development and production traffic in one shared workspace. The team needs separate rate limits and separate cost reports for each environment. Select two changes that meet both requests.",
+  "choices": {
+   "A": "Create a production workspace, and scope the production API key to it.",
+   "B": "Rename the Default Workspace to production, since the Default Workspace can be renamed.",
+   "C": "Create a development workspace, and set lower rate limits on it than on production.",
+   "D": "Keep one workspace, and add an environment label to each API key name."
+  },
+  "explanation": "Each request runs in exactly one workspace, so each environment needs its own workspace for keys, limits, and reports. The Default Workspace cannot be renamed, so the team creates new workspaces instead. Trap. A rename of the Default Workspace looks like the quickest split, but that workspace cannot be renamed."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0701",
+  "question": "A team wants the agent to never read files in a secrets folder, in every clone. A note in CLAUDE.md asks the agent to avoid that folder. The block must hold even when the model ignores the note. Which change meets the constraint?",
+  "choices": {
+   "A": "Deploy the deny rule in managed settings, and add a sandbox on every developer machine.",
+   "B": "Add the deny rule to the personal local settings of the team lead only.",
+   "C": "Add a Read deny rule for the secrets folder in the committed settings file.",
+   "D": "Add a PostToolUse hook that blocks reads of the secrets folder."
+  },
+  "explanation": "A deny rule in the committed settings file reaches every clone after a pull. The rule blocks the read before the tool runs, so the result does not depend on the model. Trap. A PostToolUse hook that blocks reads looks like enforcement, but that hook runs only after the tool call succeeds."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0702",
+  "question": "A team wants a research subagent that only reads files. The subagent must not receive any write tool. Which setup meets the constraint?",
+  "choices": {
+   "A": "Set the tools field to Read and Grep, and add a second reviewer subagent for each folder.",
+   "B": "Create the subagent without a tools field, and add a CLAUDE.md line that forbids edits.",
+   "C": "Set the model field to read-only, which blocks write tools for the subagent.",
+   "D": "Set the subagent tools field to Read and Grep only."
+  },
+  "explanation": "The tools field limits the tools that a subagent can use. Read and Grep cannot write files, so the role stays read-only. Trap. A CLAUDE.md line that forbids edits looks like a restriction, but a subagent without a tools field inherits every tool."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0703",
+  "question": "A team needs one enforced rule on every clone. One developer also needs a personal exception that does not weaken the team rule. Select two actions that meet both needs.",
+  "choices": {
+   "A": "Commit the team deny rule in the shared settings file.",
+   "B": "Put the team deny rule in the user settings file of each developer.",
+   "C": "Put a personal allow rule for one extra command in the local settings file, which stays out of git.",
+   "D": "Put the team deny rule in CLAUDE.md, which Claude Code enforces as a permission."
+  },
+  "explanation": "The shared settings file applies to every clone after a pull. The local file stays out of git, and a deny rule from any scope still applies. Trap. A personal settings file looks flexible, but it cannot enforce the rule across the team."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0704",
+  "question": "A CI job runs Claude Code to check a pull request. The job must restrict the run to the Read and Grep tools. A failed run must fail the job. Which command setup meets both constraints?",
+  "choices": {
+   "A": "Run claude -p with --allowedTools set to Read and Grep, then check the exit status.",
+   "B": "Run claude -p with --json-schema, which limits the tools that the run can use.",
+   "C": "Run claude -p with --tools set to Read and Grep, then check the exit status in the next CI step.",
+   "D": "Run claude -p with --tools set to Read and Grep, check the exit status, and store every transcript in a database."
+  },
+  "explanation": "The --tools flag restricts which built-in tools exist for the run. The exit status tells the CI step whether the run succeeded. Trap. An --allowedTools list looks like a restriction, but the flag only lets the listed tools run without a prompt."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0705",
+  "question": "A script runs Claude Code and reads one typed field from the reply. The script must also record the total cost of each run. Which setup meets both constraints?",
+  "choices": {
+   "A": "Run with --output-format json and --json-schema, then read structured_output and total_cost_usd.",
+   "B": "Parse the free-text reply with a pattern match, and skip the cost field.",
+   "C": "Run with --output-format json and --json-schema, and store every full transcript in a database.",
+   "D": "Run with --tools set to a fixed list, and read the per-model breakdown from the --tools output."
+  },
+  "explanation": "The json output format with a schema returns typed fields in structured_output. The JSON output also includes total_cost_usd for each run. Trap. A pattern match on free text looks simple, but it gives the script no typed field and no cost value."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0706",
+  "question": "A team wants one credential for six repositories that run comment-triggered workflows. The credential must not depend on the subscription of one person. Select two actions that meet the constraint.",
+  "choices": {
+   "A": "Run the setup-token command, and store the OAuth token as one organization-level secret.",
+   "B": "Create an API key in the Claude Console for the shared secret.",
+   "C": "Set the use_bedrock input to true, which shares one credential across repositories.",
+   "D": "Store one organization-level Actions secret that all six repositories share."
+  },
+  "explanation": "The OAuth token is tied to one subscription, but an API key from the Claude Console can serve a shared secret. An organization-level Actions secret lets the repositories share one stored copy. Trap. An OAuth token from the setup command looks easy to share, but it is tied to the subscription of one person."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0707",
+  "question": "A hook in the shared settings file does not run after edits. The team must find out whether the hook is loaded. The check must not change any file. Which action meets the constraint?",
+  "choices": {
+   "A": "Run /hooks, then start with claude --debug, and export the metrics to a collector.",
+   "B": "Run /hooks in the current session to see the hook configuration.",
+   "C": "Add a CLAUDE.md line that asks Claude to run the hook after each edit.",
+   "D": "Run /context to list each hook match and its exit code."
+  },
+  "explanation": "The /hooks command shows the hook configurations in the current session. The command only reads configuration, so no file changes. Trap. A CLAUDE.md line that asks for the hook looks like a fix, but a guidance note never starts a hook."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0708",
+  "question": "Cost rose after a prompt change in the sessions of one team. The team must find the cause before it changes the model. The first step must use per-session data. Which action meets the constraint?",
+  "choices": {
+   "A": "Switch to a smaller model at once, since a smaller model lowers the cost of each session.",
+   "B": "Check claude_code.session.count to see the cost of each prompt.",
+   "C": "Run /usage in each affected session to read its cost.",
+   "D": "Export OpenTelemetry metrics to a team collector, and build a cost dashboard before any session is checked."
+  },
+  "explanation": "The /usage command shows the cost of the current session. Per-session cost identifies the affected sessions before any model change. Trap. A smaller model looks like the fastest cost fix, but it may miss the cause and can lower answer quality."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0709",
+  "question": "An agent edit must be undone. Some changes came from a Bash command that changed files Claude never edited. The undo must cover both kinds of change. Select two actions that meet the constraint.",
+  "choices": {
+   "A": "Use /rewind to undo the tracked Claude edits from the recent checkpoints.",
+   "B": "Press Esc twice to rewind the Bash-only file change, since rewind covers every change.",
+   "C": "Set cleanupPeriodDays to 90 to restore snapshots that were already deleted.",
+   "D": "Use version control to revert the files that only the Bash command changed."
+  },
+  "explanation": "Rewind restores file edits that Claude tracked, within the checkpoints that the session keeps. Files that only a Bash command changed are not tracked, so version control reverts them. Trap. A double Esc press looks like a full undo, but rewind does not track Bash changes to files that Claude never edited."
+ },
+ {
+  "id": "CCAR-P-preporato-0001",
+  "question": "A support team wants answers to product questions grounded in a 300-page manual. Questions are single-turn, and the manual is updated monthly. What is the simplest sufficient architecture?",
+  "choices": {
+   "A": "An augmented LLM: retrieval over the manual feeding a single model call that cites the passages it used",
+   "B": "An autonomous agent that browses the manual page by page",
+   "C": "A multi-agent research system with a planner and three specialists",
+   "D": "A model fine-tuned on the manual every month"
+  },
+  "explanation": "**A.** One well-scoped, grounded call meets the requirement, so retrieval plus a single call is the simplest sufficient pattern (A). C and B add autonomy the task doesn't need, with the cost and latency to match. Monthly fine-tuning (D) is heavy, slower to update than re-indexing, and gives no citations."
+ },
+ {
+  "id": "CCAR-P-preporato-0002",
+  "question": "Which architecture proposal for an invoice-processing assistant is complete?",
+  "choices": {
+   "A": "Extraction with schema validation; posting to the ERP; a dashboard of monthly volume",
+   "B": "Email intake and OCR; extraction with schema validation; posting to the ERP with an exceptions queue; per-field accuracy evals, user corrections and monitoring fed back into prompt and model decisions",
+   "C": "Email intake and OCR; extraction with the most capable model; posting to the ERP",
+   "D": "Email intake; a multi-agent extraction team; posting to the ERP; a launch announcement"
+  },
+  "explanation": "**B.** A complete architecture has input, processing, output and a feedback loop that turns evals, user corrections and monitoring into design changes (B). C has no feedback loop. A has no input stage, and a volume dashboard measures activity without feeding quality back. D adds complexity and still has no feedback loop."
+ },
+ {
+  "id": "CCAR-P-preporato-0003",
+  "question": "Two designs meet the accuracy target. Design 1 uses the top tier: p95 latency 6 seconds, \\$0.09 per request. Design 2 routes between the fast and balanced tiers: p95 latency 2 seconds, \\$0.02 per request. The client's stated constraint is a 3-second p95 SLA at 2 million requests a month. Which design, and why?",
+  "choices": {
+   "A": "Run both in production indefinitely",
+   "B": "Postpone the decision until a newer model is released",
+   "C": "Design 1, for quality headroom",
+   "D": "Design 2, because it meets the latency SLA and the cost pillar at the same accuracy"
+  },
+  "explanation": "**D.** When both options meet accuracy, the stated business constraint decides, and only Design 2 meets the 3-second SLA, at about \\$40,000 a month against \\$180,000 (D). C breaks the SLA. A doubles cost and complexity for no reason. B ignores a decision the data already supports."
+ },
+ {
+  "id": "CCAR-P-preporato-0004",
+  "question": "A due-diligence system must analyze each target company's financials, legal filings and press coverage. The three analyses are independent, and each needs different tools and sources. Which design fits?",
+  "choices": {
+   "A": "Three separate systems whose reports nobody combines",
+   "B": "One agent holding all the tools for all three analyses",
+   "C": "An orchestrator with three scoped subagents running in parallel, followed by a synthesis step",
+   "D": "One agent doing the three analyses in sequence"
+  },
+  "explanation": "**C.** Independent subtasks with different tool needs are what justifies decomposition: each subagent gets a narrow toolset and its own context, and the orchestrator merges the results (C). B is capability bloat. D gives up parallelism and mixes three contexts. A skips the synthesis the client actually needs."
+ },
+ {
+  "id": "CCAR-P-preporato-0005",
+  "question": "A global retailer's policy assistant covers 14 regions. Each region's policies differ and are owned by different teams. Answers mix rules from different regions. What is the best design change?",
+  "choices": {
+   "A": "Put all 14 regions' policies in every request",
+   "B": "Partition by data domain: tag documents with their region and filter retrieval by the user's region before semantic search",
+   "C": "Fourteen agents that negotiate with each other on every question",
+   "D": "Ask users to mention their region and change nothing else"
+  },
+  "explanation": "**B.** The data has a clean partition, so filtering on region metadata keeps other regions' rules out of the context (B). C adds coordination machinery to a retrieval problem. A is context stuffing. D leaves the mixed retrieval in place."
+ },
+ {
+  "id": "CCAR-P-preporato-0006",
+  "question": "Which TWO workloads benefit most from prompt caching? (Select TWO)",
+  "choices": {
+   "A": "Single requests shorter than the minimum cacheable length",
+   "B": "Requests whose first line is the current timestamp",
+   "C": "An agent loop that resends the same 12,000-token system prompt and tool definitions on every turn",
+   "D": "An endpoint where many users ask questions about the same 50-page policy within minutes of each other",
+   "E": "A weekly job that sends one unique 3,000-token prompt"
+  },
+  "explanation": "**C and D.** Caching pays off when a long, stable prefix repeats within the cache lifetime (C, D). A weekly unique prompt (E) never repeats in time. A timestamp at the start (B) breaks the prefix on every request. Prompts under the minimum length (A) are never cached."
+ },
+ {
+  "id": "CCAR-P-preporato-0007",
+  "question": "An eligibility step must apply six interacting rules. Accuracy is the priority, and the latency budget is generous. Which prompting approach fits?",
+  "choices": {
+   "A": "A lower temperature",
+   "B": "Few-shot examples alone, with no stated rules",
+   "C": "Have the model reason through the rules step by step (or enable thinking) before deciding, with each rule stated as an explicit criterion, then validate the decision",
+   "D": "A zero-shot prompt kept as short as possible"
+  },
+  "explanation": "**C.** Multi-step logic benefits from explicit reasoning before the answer, and the generous latency budget covers its cost (C). Zero-shot (D) suits simple, unambiguous tasks. Examples (B) teach format and edge cases, and six interacting rules still need to be stated. Temperature (A) adds no reasoning."
+ },
+ {
+  "id": "CCAR-P-preporato-0008",
+  "question": "An enterprise assistant's system prompt has grown to 60,000 tokens of procedures for 40 business processes, and most requests need one or two of them. Latency and cost are high, and instruction-following has slipped. What is the best restructuring?",
+  "choices": {
+   "A": "Build 40 separate assistants and make users choose",
+   "B": "Move to a model with a larger context window",
+   "C": "Mark the most important procedures in capitals",
+   "D": "Keep the system prompt to the core role and rules, and package each procedure as a Skill or retrievable module that loads only when relevant"
+  },
+  "explanation": "**D.** Loading procedures on demand keeps the context small and focused, which improves attention, cost and latency together (D). Emphasis (C) doesn't shrink the prompt. A bigger window (B) holds more of the same dilution. A moves the routing problem onto users."
+ },
+ {
+  "id": "CCAR-P-preporato-0009",
+  "question": "Downstream systems consume the assistant's JSON, and occasional schema violations cause failed transactions. Which change addresses this at the source, and what still needs checking?",
+  "choices": {
+   "A": "Structured outputs with the integration schema, which guarantees schema-valid JSON, plus semantic validation of the values and handling of the refusal and `max_tokens` stop reasons",
+   "B": "A stronger instruction to follow the schema",
+   "C": "A retry loop and nothing else",
+   "D": "A regex that repairs broken JSON"
+  },
+  "explanation": "**A.** Constrained decoding removes schema violations at the source, and semantic checks plus stop-reason handling cover what it doesn't guarantee (A). Retries (C) and instructions (B) reduce failures without eliminating them. Regex repair (D) guesses at intent and can corrupt data quietly."
+ },
+ {
+  "id": "CCAR-P-preporato-0010",
+  "question": "A procurement agent must get quotes from a supplier's own AI agent, which runs on the supplier's systems with its own tools, policies and reasoning. Which integration mechanism fits?",
+  "choices": {
+   "A": "Agent-to-agent delegation over a defined protocol, with explicit request and response contracts, authentication, and failure isolation",
+   "B": "A direct API call to Claude with the supplier's price list pasted into the prompt",
+   "C": "An MCP server that gives your agent direct access to the supplier's database",
+   "D": "A shared system prompt that both companies edit"
+  },
+  "explanation": "**A.** Two autonomous systems with separate owners, tools and policies call for delegation between agents, with contracts and isolation so either side can fail independently (A). C bypasses the supplier's agent and policies and assumes access you won't get. B works only if you already have current prices, which is what you're asking for. D merges two organizations' control into one prompt."
+ },
+ {
+  "id": "CCAR-P-preporato-0011",
+  "question": "One internal app sends support tickets to Claude for tagging. One team owns it, and no reuse is planned. A platform engineer proposes building an MCP server first. What is the right assessment?",
+  "choices": {
+   "A": "Fine-tune a tagging model instead",
+   "B": "Build the MCP server, since every integration should use MCP",
+   "C": "Use a direct API integration now; MCP adds a protocol layer and maintenance without a reuse need, so revisit it if other surfaces need the capability",
+   "D": "Use agent-to-agent delegation"
+  },
+  "explanation": "**C.** MCP pays off when one capability serves many clients or surfaces, and one app with one owner is the direct-API case (C). B adds maintenance for a benefit that doesn't exist yet. D adds autonomous-system machinery to a single call. A skips a simpler option that works."
+ },
+ {
+  "id": "CCAR-P-preporato-0012",
+  "question": "Which TWO observations are signs of capability bloat in a production agent? (Select TWO)",
+  "choices": {
+   "A": "Two tools have overlapping descriptions, and both plausibly handle 'find a customer'",
+   "B": "Each subagent's tools are scoped to its responsibility",
+   "C": "The reporting agent uses read-only credentials",
+   "D": "It exposes 45 tools, and invocation logs show only 9 ever used",
+   "E": "Tool descriptions state when not to use each tool"
+  },
+  "explanation": "**A and D.** Unused tools that ship with every request (D) and overlapping tools that blur selection (A) are classic signs of bloat. Scoped toolsets (B), read-only credentials for a read-only job (C) and boundary statements in descriptions (E) are the cure."
+ },
+ {
+  "id": "CCAR-P-preporato-0013",
+  "question": "An agent connects to six MCP servers exposing 300 tools, and every request front-loads all of their definitions. Tool selection is poor and costs are high. What is the best fix?",
+  "choices": {
+   "A": "Add more examples to the system prompt",
+   "B": "Shorten every tool description to one line",
+   "C": "Move to a model with a larger context window",
+   "D": "Progressive discovery: load tool definitions on demand (for example with tool search and deferred loading), and give each agent only the servers its responsibility needs"
+  },
+  "explanation": "**D.** Loading tools as the agent narrows in cuts tokens and improves selection accuracy, and scoping servers per responsibility removes tools that never belonged (D). A bigger window (C) holds the same noise. One-line descriptions (B) make selection worse. Examples (A) add tokens without reducing the tool count."
+ },
+ {
+  "id": "CCAR-P-preporato-0014",
+  "question": "A company assistant answers questions over the document store using a service account that can read every folder, including HR and legal. A contractor asked about salaries and got an answer. What is the root fix?",
+  "choices": {
+   "A": "Remove HR documents from the index",
+   "B": "Run retrieval and tools with the calling user's identity and permissions, and attribute every access to that user in the logs",
+   "C": "Add a system-prompt rule: 'Never discuss salaries'",
+   "D": "Filter out responses that contain the word 'salary'"
+  },
+  "explanation": "**B.** The shared over-privileged account erased per-user authorization and made every access unattributable, so the fix is acting as the caller (B). C is a probabilistic patch, A breaks legitimate HR use, and D is easy to get around and blocks legitimate answers."
+ },
+ {
+  "id": "CCAR-P-preporato-0015",
+  "question": "Engineers search an internal knowledge base with exact error codes such as 'E-4031.' Semantic search returns conceptually similar documents about other errors. What is the best fix?",
+  "choices": {
+   "A": "A larger embedding model",
+   "B": "Hybrid search: keyword matching for exact identifiers combined with semantic search, then re-ranking",
+   "C": "Retrieve more chunks per query",
+   "D": "Fine-tune the generation model on error codes"
+  },
+  "explanation": "**B.** Exact identifiers such as error codes and SKUs need keyword matching, which hybrid search adds alongside semantic retrieval (B). Better embeddings (A) still treat codes as fuzzy meaning. More chunks (C) add noise. The generation model (D) can't fix documents that were never retrieved."
+ },
+ {
+  "id": "CCAR-P-preporato-0016",
+  "question": "A contract-extraction service has three complaints: wrong values, slow responses at peak hours, and a rising monthly bill. Which THREE metrics should the monitoring plan track? (Select THREE)",
+  "choices": {
+   "A": "Field-level accuracy against a labeled dataset",
+   "B": "Average response length",
+   "C": "p95 and p99 latency",
+   "D": "Number of prompt revisions per month",
+   "E": "Cost per document and tokens per task"
+  },
+  "explanation": "**A, C, E.** Each complaint maps to a metric: wrong values to accuracy (A), slowness to tail latency (C), and the bill to cost per unit of work (E). Prompt revision counts (D) and response length (B) measure activity, and neither shows whether the complaints are fixed."
+ },
+ {
+  "id": "CCAR-P-preporato-0017",
+  "question": "A team tuned its prompt against the same 200 examples it uses to report accuracy. Testing shows 98%, and production shows 84%. What went wrong, and what is the fix?",
+  "choices": {
+   "A": "The eval set leaked into prompt development and inflated the score; tune on a separate development set and report on a held-out set that mirrors production",
+   "B": "The model is too small; upgrade the tier",
+   "C": "Production traffic is low quality; filter it",
+   "D": "200 examples is too few; add 20 more of the same kind"
+  },
+  "explanation": "**A.** Tuning against the test set overfits to it, so the score stops predicting production (A). C blames the data the system has to handle. B changes the model without fixing the measurement. D keeps the same leak with a slightly bigger set."
+ }
+]

@@ -1,0 +1,210 @@
+<h3 id="bank-mocks-h242">M4-Q37 (V2-D4.4)</h3>
+
+<p id="sec-bank-mocks-p1079" data-kind="prose"><strong>Scenario.</strong> A RAG bot&#x27;s answers became worse. The team changed the embedding model. Chunks, prompts, and the LLM did not change.</p>
+
+<p id="sec-bank-mocks-p1080" data-kind="prose"><strong>Question.</strong> Which layer failed?</p>
+
+<p id="sec-bank-mocks-p1081" data-kind="prose"><strong>Options.</strong>
+A) The LLM.
+B) The retrieval layer: the embedding change altered what gets
+retrieved. Re-run retrieval evals on the new embeddings.
+C) The prompt.
+D) The users.</p>
+
+<p id="sec-bank-mocks-p1082" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "after the team switched the embedding
+model... unchanged." Why: the change log names the embedding swap.
+Retrieval behavior follows embeddings. Fix the failing component.
+Counterfactual: C wins when the prompt changed.</p>
+
+
+<h3 id="bank-mocks-h243">M4-Q38 (V2-D4.4), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1083" data-kind="prose"><strong>Scenario.</strong> A bot's answers degrade. Investigation shows: the vector
+index was rebuilt with a bug that dropped 30% of documents, and the
+drop matches the degradation start.</p>
+
+<p id="sec-bank-mocks-p1084" data-kind="prose"><strong>Question.</strong> Which TWO facts convict the index? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1085" data-kind="prose"><strong>Options.</strong>
+A) The index rebuild removed 30% of documents.
+B) The timing matches the start of the degradation.
+C) The model version did not change.
+D) Latency is good.
+E) The moon phase.</p>
+
+<p id="sec-bank-mocks-p1086" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1087" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "dropped 30% of documents... matches
+the degradation start." Why: the cause and the onset align at the
+index. C clears the model. Counterfactual: C wins the argument for a
+model fault if the version changed that day.</p>
+
+
+<h3 id="bank-mocks-h244">M4-Q39 (V2-D4.5)</h3>
+
+<p id="sec-bank-mocks-p1088" data-kind="prose"><strong>Scenario.</strong> A support bot re-ranks 50 documents per query. The top 5
+always win. Rerank costs 1.5 s.</p>
+
+<p id="sec-bank-mocks-p1089" data-kind="prose"><strong>Question.</strong> Which optimization fits?</p>
+
+<p id="sec-bank-mocks-p1090" data-kind="prose"><strong>Options.</strong>
+A) Rerank 100 documents.
+B) Rerank fewer candidates (e.g., top 15): the winners come from the
+top 5 anyway, so the extra 35 reranks buy nothing.
+C) A bigger model.
+D) More documents.</p>
+
+<p id="sec-bank-mocks-p1091" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "The top 5 always win... Rerank costs 1.5
+s." Why: per-stage measurement shows the waste. Cutting candidates
+cuts latency with no quality change. Counterfactual: A wins when
+winners come from deep in the list.</p>
+
+
+<h3 id="bank-mocks-h245">M4-Q40 (V2-D4.5)</h3>
+
+<p id="sec-bank-mocks-p1092" data-kind="prose"><strong>Scenario.</strong> A team cuts tokens 30% by truncating user messages at 200
+characters. Quality complaints rise.</p>
+
+<p id="sec-bank-mocks-p1093" data-kind="prose"><strong>Question.</strong> What went wrong?</p>
+
+<p id="sec-bank-mocks-p1094" data-kind="prose"><strong>Options.</strong>
+A) Nothing. Tokens were cut.
+B) The cut broke the quality floor: truncation destroyed needed
+context. Optimization must hold quality and safety floors. Measure
+before and after.</p>
+
+<p id="sec-bank-mocks-p1095" data-kind="prose">C) 200 characters is too generous.
+D) Users complain too much.</p>
+
+<p id="sec-bank-mocks-p1096" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "Quality complaints rise." Why: V2-D4.5
+holds the floors. A cut that degrades quality is not an optimization.
+Counterfactual: A wins when quality holds.</p>
+
+
+<h3 id="bank-mocks-h246">M4-Q41 (V2-D4.6)</h3>
+
+<p id="sec-bank-mocks-p1097" data-kind="prose"><strong>Scenario.</strong> A content bot's toxicity rate creeps up over three
+months. The watch tracks latency and cost only.</p>
+
+<p id="sec-bank-mocks-p1098" data-kind="prose"><strong>Question.</strong> What gap exists?</p>
+
+<p id="sec-bank-mocks-p1099" data-kind="prose"><strong>Options.</strong>
+A) A bigger model.
+B) The safety watch: toxicity is a safety metric, so it needs a line,
+a window, an owner, and an alert like any other watch.
+C) More latency watches.
+D) A new brand.</p>
+
+<p id="sec-bank-mocks-p1100" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "toxicity rate creeps up... tracks latency
+and cost only." Why: V2-D4.6 watches include safety metrics. The
+system's risks decide the watch list. Counterfactual: A wins never for
+a missing watch.</p>
+
+
+<h3 id="bank-mocks-h247">M4-Q42 (V2-D5.1)</h3>
+
+<p id="sec-bank-mocks-p1101" data-kind="prose"><strong>Scenario.</strong> A recruiting agent may email candidates. The email
+template sometimes includes the wrong candidate's details.</p>
+
+<p id="sec-bank-mocks-p1102" data-kind="prose"><strong>Question.</strong> Which control fits?</p>
+
+<p id="sec-bank-mocks-p1103" data-kind="prose"><strong>Options.</strong>
+A) Send and apologize later.
+B) A code check before send: the recipient and the details must match
+the candidate record, or the send blocks.
+C) Log the mistake.
+D) A bigger model.</p>
+
+<p id="sec-bank-mocks-p1104" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "sometimes includes the wrong candidate's
+details." Why: the send is the side effect. The match check in code
+gates it. C logs the harm. Counterfactual: C wins as a complement,
+never alone.</p>
+
+
+<h3 id="bank-mocks-h248">M4-Q43 (V2-D5.1), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1105" data-kind="prose"><strong>Scenario.</strong> A finance agent processes invoices from email
+attachments.</p>
+
+<p id="sec-bank-mocks-p1106" data-kind="prose"><strong>Question.</strong> Which TWO controls fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1107" data-kind="prose"><strong>Options.</strong>
+A) Input screening: scan attachments for malicious content before the
+model reads them.
+B) A code gate on payment: totals verified against the source document
+before money moves.
+C) A friendly prompt.
+D) Auto-paying every invoice.
+E) Deleting the invoices.</p>
+
+<p id="sec-bank-mocks-p1108" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1109" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: &quot;invoices from email attachments.&quot;
+Why: untrusted attachments need screening. Money needs the code gate.
+C is guidance. D is the failure.</p>
+
+<p id="sec-bank-mocks-p1110" data-kind="prose">Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h249">M4-Q44 (V2-D5.2)</h3>
+
+<p id="sec-bank-mocks-p1111" data-kind="prose"><strong>Scenario.</strong> An agent's system prompt contains the production database
+password so it can "connect directly."</p>
+
+<p id="sec-bank-mocks-p1112" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p1113" data-kind="prose"><strong>Options.</strong>
+A) Nothing. It needs the password.
+B) Secrets in prompts: the password travels through logs, caches, and
+vendors. Move it to a secrets manager. The tool layer connects on the
+agent&#x27;s behalf.</p>
+
+<p id="sec-bank-mocks-p1114" data-kind="prose">C) The password is too short.
+D) Prompts are too long.</p>
+
+<p id="sec-bank-mocks-p1115" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "system prompt contains the production
+database password." Why: prompts are not credential stores. Every
+system that touches prompts gets the password. Counterfactual: A wins
+never for secrets in prompts.</p>
+
+
+<h3 id="bank-mocks-h250">M4-Q45 (V2-D5.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p1116" data-kind="prose"><strong>Scenario.</strong> A social media agent posts as the brand. It reads DMs to
+find customer issues.</p>
+
+<p id="sec-bank-mocks-p1117" data-kind="prose"><strong>Question.</strong> Which TWO risks are present? Select TWO.</p>
+
+<p id="sec-bank-mocks-p1118" data-kind="prose"><strong>Options.</strong>
+A) Indirect injection: DMs can carry instructions to the posting tool.
+B) Data exposure: DMs may contain personal data the agent could
+republish.
+C) Slow posting.
+D) Boring content.
+E) Low battery.</p>
+
+<p id="sec-bank-mocks-p1119" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p1120" data-kind="prose"><strong>Key.</strong> A, B. The decisive phrase is &quot;posts as the brand... reads DMs.&quot;
+DMs are untrusted content next to a publishing tool. Personal data in DMs can leak into posts. Both are textbook risks. There is no counterfactual.</p>
+
+
+<h3 id="bank-mocks-h251">M4-Q46 (V2-D5.3)</h3>
+
+<p id="sec-bank-mocks-p1121" data-kind="prose"><strong>Scenario.</strong> A legal bot drafts contracts. A wrong clause creates
+liability. Volume is 30 per day.</p>
+
+<p id="sec-bank-mocks-p1122" data-kind="prose"><strong>Question.</strong> Which review shape fits?</p>
+
+<p id="sec-bank-mocks-p1123" data-kind="prose"><strong>Options.</strong>
+A) Post-action sampled review.
+B) Pre-action approval: a lawyer reviews each draft's clauses before
+anything goes to the client.
+C) No review. 30 per day is too many.
+D) Annual review.</p>
+
+<p id="sec-bank-mocks-p1124" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "A wrong clause creates liability." Why:
+liability plus 30-per-day volume fits a real human gate. The reviewer
+sees the actual clauses. Counterfactual: A wins for internal memo
+drafts.</p>
+

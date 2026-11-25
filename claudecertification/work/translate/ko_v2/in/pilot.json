@@ -1,0 +1,168 @@
+[
+ {
+  "id": "CCAR-F-Amey-Thakur-0042",
+  "question": "A repeated multi-step review procedure should be available to the whole team as a single invocation. What is the right mechanism?",
+  "choices": {
+   "A": "A shared document describing the steps",
+   "B": "A longer CLAUDE.md",
+   "C": "A saved chat transcript",
+   "D": "A custom slash command or skill committed to the repository"
+  },
+  "explanation": "Repeatable team procedures belong in committed commands or skills, not prose"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0020",
+  "question": "A skill and a subagent could both address a need. What decides between them?",
+  "choices": {
+   "A": "Skills are always preferable",
+   "B": "Whether the need is reusable know-how or an isolated line of work with its own context",
+   "C": "Whether the task is long",
+   "D": "Whether the repository already has a CLAUDE.md"
+  },
+  "explanation": "**B.** The two solve different problems: a skill packages reusable procedure, a subagent isolates context. A blanket preference (A), duration (C), and existing files (D) do not address that distinction."
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0051",
+  "question": "A pipeline has four steps whose order never varies and whose outputs are each checkable. What should it be?",
+  "choices": {
+   "A": "An agent that plans each run",
+   "B": "Four agents, one per step",
+   "C": "A deterministic workflow with model calls at defined points",
+   "D": "A single prompt covering all four steps"
+  },
+  "explanation": "A known fixed order is encoded rather than rediscovered, which is cheaper and testable per step. Runtime planning (A, B) adds nondeterminism, and one prompt (D) removes the checkpoints"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0007",
+  "question": "The automated reviewer flags dozens of trivial style nits per pull request, and engineers have started ignoring it. Which change addresses the false-positive problem the way the blueprint suggests?",
+  "choices": {
+   "A": "Define explicit review criteria in the prompt: what to flag, what to ignore, and a severity bar, with a few worked examples of in-scope and out-of-scope findings",
+   "B": "Run the review twice and post only findings that appear both times",
+   "C": "Cap the reviewer at three findings per pull request",
+   "D": "Route all findings to a channel nobody reads"
+  },
+  "explanation": "**A.** Precision comes from explicit criteria and few-shot examples that draw the boundary between signal and noise. Double-running (B) filters randomness but not systematic nit-picking, an arbitrary cap (C) drops real findings on bad days, and (D) is surrender."
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0010",
+  "question": "Your codebase-exploration agent has get_file_contents, read_source, and fetch_file tools that all read files, and it frequently picks poorly among them. What is the correct fix?",
+  "choices": {
+   "A": "Add a fourth, better file-reading tool",
+   "B": "Fine-tune the model on the tool list",
+   "C": "Randomize which tool the harness dispatches",
+   "D": "Consolidate to one file-reading tool, or give the survivors sharply differentiated descriptions that state exactly when each applies"
+  },
+  "explanation": "**D.** Tool selection runs on descriptions; overlapping tools with vague descriptions produce dithering. Consolidation or sharp differentiation is the documented cure. Adding overlap (A) worsens it, fine-tuning (B) is disproportionate, and randomization (C) institutionalizes the confusion."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0053",
+  "question": "Production metrics show your agent averages 4+ API loops per resolution. Analysis reveals Claude often requests `get_customer` and `lookup_order` in separate sequential turns even when both are needed initially. What is the most effective way to reduce the number of loops?\n\nWhat is the most effective way to reduce loops?",
+  "choices": {
+   "A": "Implement speculative execution that automatically calls likely-needed tools in parallel with any requested tool and returns all results regardless of what was requested.",
+   "B": "Increase `max_tokens` to give Claude more room to plan and naturally combine tool requests.",
+   "C": "Create composite tools like `get_customer_with_orders` that bundle common lookup combinations into single calls.",
+   "D": "Instruct Claude in the prompt to bundle tool requests into one turn and return all results together before the next API call."
+  },
+  "explanation": "Prompting Claude to bundle related tool requests into a single turn leverages its native ability to request multiple tools at once. It directly fixes the sequential-call pattern with minimal architectural change."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0035",
+  "question": "Your team created a `/analyze-codebase` skill that performs deep code analysis—dependency scanning, test coverage counts, and code quality metrics. After running the command, team members report Claude becomes less responsive in the session and loses the context of the original task.\n\nHow do you most effectively fix this while keeping full analysis capabilities?",
+  "choices": {
+   "A": "Add `context: fork` in the skill frontmatter to run the analysis in an isolated subagent context.",
+   "B": "Add `model: haiku` in frontmatter to use a faster, cheaper model for analysis.",
+   "C": "Split the skill into three smaller skills, each producing less output.",
+   "D": "Add instructions to the skill to compress all results into a short summary before displaying them."
+  },
+  "explanation": "`context: fork` runs the analysis in an isolated subagent context so the large output does not pollute the main session’s context window and Claude does not lose track of the original task. It preserves full analysis capability while keeping the main session responsive."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0007",
+  "question": "Production logs show a persistent pattern: requests like “analyze the uploaded quarterly report” are routed to the web-search agent 45% of the time instead of the document analysis agent. Reviewing tool definitions, you find that the web-search agent has a tool `analyze_content` described as “analyzes content and extracts key information,” while the document analysis agent has a tool `analyze_document` described as “analyzes documents and extracts key information.” How should you fix the misrouting problem?\n\nHow should you fix the misrouting problem?",
+  "choices": {
+   "A": "Add a pre-routing classifier that detects whether the user refers to uploaded files or web content before the coordinator decides on delegation.",
+   "B": "Rename the web-search tool to `extract_web_results` and update its description to “processes and returns information retrieved from web search and URLs.”",
+   "C": "Add few-shot examples to the coordinator prompt showing correct routing: “User uploads a quarterly report → document analysis agent” and “User asks about a web page → web-search agent.”",
+   "D": "Expand the document analysis tool description with usage examples like “Use for uploaded PDFs, Word docs, and spreadsheets,” leaving the web-search tool unchanged."
+  },
+  "explanation": "Renaming the web-search tool to `extract_web_results` and updating its description to explicitly reference web search and URLs directly removes the root cause by eliminating semantic overlap between the two tool names and descriptions. This makes each tool’s purpose unambiguous, enabling the coordinator to reliably distinguish document analysis from web search."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0024",
+  "question": "Your automated review generates test-case suggestions for each PR. Reviewing a PR that adds course completion tracking, Claude suggests 10 test cases, but developer feedback shows that 6 duplicate scenarios already covered by the existing test suite. What change most effectively reduces duplicate suggestions?\n\nWhat change is most effective?",
+  "choices": {
+   "A": "Include the existing test file in context so Claude can determine what scenarios are already covered.",
+   "B": "Reduce the requested number of suggestions from 10 to 5, assuming Claude prioritizes the most valuable cases first.",
+   "C": "Add instructions directing Claude to focus exclusively on edge cases and error conditions rather than success paths.",
+   "D": "Implement post-processing that filters suggestions whose descriptions match existing test names via keyword overlap."
+  },
+  "explanation": "Including the existing test file fixes the root cause of duplication: Claude can only avoid suggesting already-covered scenarios if it knows what tests already exist. This gives Claude the information needed to propose genuinely new, valuable tests."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0038",
+  "question": "You find that including 2–3 full endpoint implementation examples as context significantly improves consistency when generating new API endpoints. However, this context is useful only when creating new endpoints—not when debugging, reviewing code, or other work in the API directory.\n\nWhich configuration approach is most effective?",
+  "choices": {
+   "A": "Add endpoint examples and pattern documentation to the project CLAUDE.md so they are always available.",
+   "B": "Manually reference endpoint examples in every generation request by copying code into the prompt.",
+   "C": "Configure path-specific rules in `.claude/rules/api/` that include endpoint examples and activate when working in the API directory.",
+   "D": "Create a skill that references the endpoint examples and contains pattern-following instructions, invoked on demand via a slash command."
+  },
+  "explanation": "A skill invoked on demand loads the example context only when generating new endpoints, not during unrelated tasks like debugging or review. This keeps the main context clean while preserving high-quality generation when needed."
+ },
+ {
+  "id": "CCAR-F-preporato-0002",
+  "question": "A retailer's support system uses a coordinator agent that receives each customer conversation and delegates to three subagents: an order-lookup agent with read-only order tools, a refund agent that can issue refunds, and a policy agent that searches the returns-policy knowledge base. Company policy: refunds above \\$250 need a human's approval, and customers can come back to an open conversation within 7 days.\n\nWhich TWO events should trigger a handoff to a human agent? (Select TWO)",
+  "choices": {
+   "A": "Answering the customer's question takes three tool calls",
+   "B": "The customer asks to speak to a person",
+   "C": "The model reports a confidence score of 0.62 on its eligibility decision",
+   "D": "The customer writes in capital letters and says they are furious about a covered \\$90 refund",
+   "E": "The customer requests a \\$400 refund for an order the policy covers"
+  },
+  "explanation": "An explicit request for a human (B) is a standing escalation trigger, and the \\$400 refund (E) crosses the \\$250 approval threshold, which makes the handoff mandatory under policy. Sentiment alone (D) is no trigger when the request sits inside clear policy; the agent can resolve it while acknowledging the frustration. Self-reported confidence (C) is poorly calibrated and makes an unreliable trigger. Task complexity (A) is the agent's job."
+ },
+ {
+  "id": "CCAR-F-preporato-0018",
+  "question": "A team requires that Claude never ends its work while the test suite is failing. Which hook enforces this?",
+  "choices": {
+   "A": "A `SessionEnd` hook that runs the tests",
+   "B": "A `Stop` hook that runs the tests and exits with code 2, printing the failures to stderr, when any test fails",
+   "C": "A `PostToolUse` hook that runs the tests after every file read",
+   "D": "A `UserPromptSubmit` hook that runs the tests before each prompt"
+  },
+  "explanation": "Exit code 2 from a `Stop` hook prevents Claude from stopping and feeds the stderr text back, so Claude keeps working on the failures (B). `SessionEnd` (A) fires as the session closes and can't block anything. D tests before the work happens. C runs constantly at the wrong moment and can't stop Claude from finishing."
+ },
+ {
+  "id": "CCAR-F-preporato-0008",
+  "question": "A security team runs a nightly audit across 40 repositories. A coordinator spawns one scanner subagent per repository. Each scanner has `Read`, `Grep` and `Glob` plus a dependency-check tool. The coordinator merges the findings into one report for the morning stand-up and opens tickets for new critical issues.\n\nThe morning report said 'No critical issues found across all repositories.' The team later learns that six scanners hit their token budgets and skipped their largest files. What should the report format have required?",
+  "choices": {
+   "A": "Nothing; the scanners needed a more capable model",
+   "B": "A longer narrative summary from each scanner",
+   "C": "A confidence score from each scanner",
+   "D": "A coverage annotation from every scanner (files reviewed, files skipped with reasons, coverage counts) carried into the merged report"
+  },
+  "explanation": "Without explicit coverage, 'no issues found' can't be told apart from 'no issues found in the part that ran.' D makes the gap visible so the skipped files can be queued for a focused pass. Self-reported confidence (C) is poorly calibrated and says nothing about what was skipped. A longer summary (B) adds words without the counts. A stronger model (A) can still hit a budget, and the report would still hide it."
+ },
+ {
+  "id": "CCAR-F-preporato-0003",
+  "question": "A retailer's support system uses a coordinator agent that receives each customer conversation and delegates to three subagents: an order-lookup agent with read-only order tools, a refund agent that can issue refunds, and a policy agent that searches the returns-policy knowledge base. Company policy: refunds above \\$250 need a human's approval, and customers can come back to an open conversation within 7 days.\n\nThe policy agent's knowledge-base search sometimes fails because the search service times out, and sometimes finds nothing because no policy covers the case. Both situations currently return an empty list. How should the tool respond instead?",
+  "choices": {
+   "A": "Keep returning an empty list in both cases and let the agent retry",
+   "B": "Return a structured error for the timeout (error type, retryable: true, what was attempted) and a successful empty result for the no-match case",
+   "C": "Return the closest-matching policy in both cases so the agent always has something to cite",
+   "D": "Raise an exception in both cases so the coordinator ends the conversation"
+  },
+  "explanation": "B separates a transient failure from a valid empty result, and the two need different recovery: retry the search, or tell the customer no policy applies. With A, the agent can't tell an outage from a real answer and may report that no policy covers the case during an outage. D ends conversations over a recoverable timeout. C invents relevance, which leads the agent to cite a policy that doesn't apply."
+ },
+ {
+  "id": "CCAR-F-preporato-0004",
+  "question": "A retailer's support system uses a coordinator agent that receives each customer conversation and delegates to three subagents: an order-lookup agent with read-only order tools, a refund agent that can issue refunds, and a policy agent that searches the returns-policy knowledge base. Company policy: refunds above \\$250 need a human's approval, and customers can come back to an open conversation within 7 days.\n\nA customer returns four days later to continue a conversation about a pending refund. Separately, a supervisor wants to test a different resolution on a copy of that conversation without changing what the customer sees. Which pairing fits?",
+  "choices": {
+   "A": "Start fresh sessions for both and paste the last assistant message into each system prompt",
+   "B": "Fork the session for the customer and resume it for the supervisor",
+   "C": "Resume the same session for both",
+   "D": "Resume the customer's session so the full history is restored, and fork a separate copy for the supervisor"
+  },
+  "explanation": "Resuming continues a session with its history intact, which is what the returning customer needs. Forking creates an independent branch from the same history, and changes in the fork never flow back, which is what the supervisor needs. D matches both. B swaps the two. C lets the supervisor's experiment change the customer's conversation. A throws away most of the context and relies on one message to carry it."
+ }
+]

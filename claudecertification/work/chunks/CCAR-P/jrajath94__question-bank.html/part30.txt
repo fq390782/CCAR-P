@@ -1,0 +1,214 @@
+<h3 id="bank-mocks-h74">M2-Q03 (V2-D1.2)</h3>
+
+<p id="sec-bank-mocks-p327" data-kind="prose"><strong>Scenario.</strong> A hiring pipeline runs: resume intake, validation, skill
+extraction, model ranking, verification, interview invite, feedback. The
+HR database is the system of record. A wrong invite wastes interviewer
+time but is reversible.</p>
+
+<p id="sec-bank-mocks-p328" data-kind="prose"><strong>Question.</strong> Where does verification sit, and at what strength?</p>
+
+<p id="sec-bank-mocks-p329" data-kind="prose"><strong>Options.</strong>
+A) After ranking and before the invite: check the extracted skills
+against the source resume in code. Lightweight, since the invite is
+reversible.
+B) After the invite is sent.
+C) Before intake.
+D) Nowhere.</p>
+
+<p id="sec-bank-mocks-p330" data-kind="prose"><strong>Key.</strong> A. Decisive phrase: "wrong invite wastes interviewer time but
+is reversible." Why: verification sits after the model and before the
+side effect. Reversibility keeps it lightweight: a code check, not a
+human gate. Counterfactual: a human gate wins if the invite were a
+binding job offer.</p>
+
+
+<h3 id="bank-mocks-h75">M2-Q04 (V2-D1.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p331" data-kind="prose"><strong>Scenario.</strong> A payment pipeline takes a chat request. The pipeline validates the request. The pipeline checks the ledger. The ledger is the system of record. The pipeline runs a fraud model.</p>
+
+<p id="sec-bank-mocks-p332" data-kind="prose">The pipeline executes the transfer. You can manipulate chat input. The ledger is a trusted system.</p>
+
+<p id="sec-bank-mocks-p333" data-kind="prose"><strong>Question.</strong> Which TWO are trust boundaries? Select TWO.</p>
+
+<p id="sec-bank-mocks-p334" data-kind="prose"><strong>Options.</strong>
+A) Between chat input and validation.
+B) Between the fraud model and the transfer execution.
+C) Between the ledger read and the fraud model.
+D) Between two internal services with mutual TLS in one VPC.
+E) Between the log writer and disk.</p>
+
+<p id="sec-bank-mocks-p335" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p336" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "Chat input may be manipulated... runs
+a fraud model, and executes the transfer." Why: untrusted chat crosses
+into validation (screen it). The transfer is the side effect, so the
+model-to-transfer crossing needs authorization in code. C, D, and E are
+internal trusted crossings. Counterfactual: D wins if the services sit
+in different trust zones.</p>
+
+
+<h3 id="bank-mocks-h76">M2-Q05 (V2-D1.3)</h3>
+
+<p id="sec-bank-mocks-p337" data-kind="prose"><strong>Scenario.</strong> A newsroom drafts market summaries. The steps are fixed. First, fetch prices. Second, compute changes. Third, draft.</p>
+
+<p id="sec-bank-mocks-p338" data-kind="prose">Fourth, an editor checks. Fifth, publish. About 10% of drafts need judgment for ambiguous events.</p>
+
+<p id="sec-bank-mocks-p339" data-kind="prose"><strong>Question.</strong> Which pattern fits?</p>
+
+<p id="sec-bank-mocks-p340" data-kind="prose"><strong>Options.</strong>
+A) Pure agent loop for everything.
+B) Deterministic workflow for the fixed steps with an agent call routed
+in for the ambiguous 10%, then back to the workflow for publish.
+C) Augmented single call with no tools.
+D) Manual only.</p>
+
+<p id="sec-bank-mocks-p341" data-kind="prose"><strong>Key.</strong> B. The decisive phrase is: &quot;Steps are fixed... 10% need judgment on ambiguous events.&quot; Fixed steps need the workflow. The ambiguous 10% needs runtime judgment. The hybrid joins them.</p>
+
+<p id="sec-bank-mocks-p342" data-kind="prose">A wins when you cannot fix the event list in advance.</p>
+
+
+<h3 id="bank-mocks-h77">M2-Q06 (V2-D1.3)</h3>
+
+<p id="sec-bank-mocks-p343" data-kind="prose"><strong>Scenario.</strong> A support bot answers from a knowledge base. One retrieval
+plus one judgment resolves 95% of chats.</p>
+
+<p id="sec-bank-mocks-p344" data-kind="prose"><strong>Question.</strong> Which pattern fits?</p>
+
+<p id="sec-bank-mocks-p345" data-kind="prose"><strong>Options.</strong>
+A) Autonomous loop with 10 steps.
+B) Augmented single call: retrieve, then judge once.
+C) Multi-agent coordinator.
+D) Deterministic workflow with 12 steps.</p>
+
+<p id="sec-bank-mocks-p346" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "One retrieval plus one judgment resolves
+95% of chats." Why: one judgment with tool context is the augmented
+call's exact shape. A loop adds iterations with no planning to do.
+Counterfactual: A wins when the next step depends on the previous tool
+result.</p>
+
+
+<h3 id="bank-mocks-h78">M2-Q07 (V2-D1.4)</h3>
+
+<p id="sec-bank-mocks-p347" data-kind="prose"><strong>Scenario.</strong> A code review uses three workers: lint, tests, security
+scan. They run in parallel and merge. The merge disagrees often because
+no rule says which finding wins.</p>
+
+<p id="sec-bank-mocks-p348" data-kind="prose"><strong>Question.</strong> What gap exists?</p>
+
+<p id="sec-bank-mocks-p349" data-kind="prose"><strong>Options.</strong>
+A) More workers.
+B) The disagree rule in the handoff contract: severity order or an
+arbiter, applied at merge and logged.
+C) A bigger model.
+D) A longer timeout.</p>
+
+<p id="sec-bank-mocks-p350" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "no rule says which finding wins." Why:
+V2-D1.4 requires the disagree rule in the contract. Parallel work
+without a merge rule is just parallel arguments. Counterfactual: A
+wins when the work splits into more independent pieces.</p>
+
+
+<h3 id="bank-mocks-h79">M2-Q08 (V2-D1.5)</h3>
+
+<p id="sec-bank-mocks-p351" data-kind="prose"><strong>Scenario.</strong> A product launch needs: market scan, pricing check, and
+channel plan. The three share no state and use different tools. The
+launch brief must merge them.</p>
+
+<p id="sec-bank-mocks-p352" data-kind="prose"><strong>Question.</strong> Which decomposition fits?</p>
+
+<p id="sec-bank-mocks-p353" data-kind="prose"><strong>Options.</strong>
+A) One sequential chain.
+B) Fan-out to three parallel specialists, fan-in to a merge step with a
+disagree rule.
+C) One agent improvising.
+D) Skip the merge.</p>
+
+<p id="sec-bank-mocks-p354" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "share no state and use different tools...
+must merge them." Why: independence plus different tools is the
+multi-agent win condition. The fan-in needs the merge and disagree
+rule. Counterfactual: A wins when the pieces share state.</p>
+
+
+<h3 id="bank-mocks-h80">M2-Q09 (V2-D1.5), Select TWO</h3>
+
+<p id="sec-bank-mocks-p355" data-kind="prose"><strong>Scenario.</strong> A quarterly business review needs: sales numbers, support
+ticket themes, and churn analysis. Each comes from a different system.
+The numbers must reconcile before the review.</p>
+
+<p id="sec-bank-mocks-p356" data-kind="prose"><strong>Question.</strong> Which TWO patterns fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p357" data-kind="prose"><strong>Options.</strong>
+A) Fan-out/fan-in: three parallel extractions merged into one brief.
+B) Validation pattern: a checker reconciles the numbers against source
+systems before the review.
+C) Chaining where churn depends on sales which depends on tickets.
+D) One call with no tools.
+E) Skipping the support themes.</p>
+
+<p id="sec-bank-mocks-p358" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p359" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "different system... numbers must
+reconcile before the review." Why: independent extractions fan out.
+Reconciliation is the validation pattern. C invents a false
+dependency. Counterfactual: C wins when churn truly derives from the
+sales output.</p>
+
+
+<h3 id="bank-mocks-h81">M2-Q10 (V2-D1.6)</h3>
+
+<p id="sec-bank-mocks-p360" data-kind="prose"><strong>Scenario.</strong> A clinic automates appointment reminders. Staff spent 2 hours per day on calls. The automated design costs $60 per month. The no-show rate does not change.</p>
+
+<p id="sec-bank-mocks-p361" data-kind="prose"><strong>Question.</strong> Which number decides the value?</p>
+
+<p id="sec-bank-mocks-p362" data-kind="prose"><strong>Options.</strong>
+A) The model's accuracy.
+B) Net monthly value: (2 hours x 30 x hourly labor cost) - $60.
+C) The p95 latency.
+D) The number of lines of code.</p>
+
+<p id="sec-bank-mocks-p363" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "Staff spent 2 hours per day... costs $60
+per month." Why: V2-D1.6 compares baseline labor against full cost.
+Time saved times labor rate, minus run cost, is the net. Counterfactual:
+C wins when an SLA names latency with a penalty.</p>
+
+
+<h3 id="bank-mocks-h82">M2-Q11 (V2-D1.6)</h3>
+
+<p id="sec-bank-mocks-p364" data-kind="prose"><strong>Scenario.</strong> A team proposes cutting model cost 50% on a fraud
+detector. The detector currently stops $200,000 per month in fraud. The
+cut risks 2% more missed fraud.</p>
+
+<p id="sec-bank-mocks-p365" data-kind="prose"><strong>Question.</strong> What decides?</p>
+
+<p id="sec-bank-mocks-p366" data-kind="prose"><strong>Options.</strong>
+A) The 50% cost cut alone.
+B) Net value: cost saved vs expected fraud missed (2% of $200,000 =
+$4,000 per month) plus quality floor effects.
+C) The tier name.
+D) The team's enthusiasm.</p>
+
+<p id="sec-bank-mocks-p367" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "stops $200,000 per month... risks 2% more
+missed fraud." Why: the cut's savings must beat $4,000 per month in new
+losses. Business value decides. The percentage cut does not.
+Counterfactual: A wins when misses cost nothing.</p>
+
+
+<h3 id="bank-mocks-h83">M2-Q12 (V2-D2.1)</h3>
+
+<p id="sec-bank-mocks-p368" data-kind="prose"><strong>Scenario.</strong> A travel bot handles 20,000 chats per day. About 94% are
+booking lookups. About 6% are complex multi-city itineraries where an
+error strands a traveler.</p>
+
+<p id="sec-bank-mocks-p369" data-kind="prose"><strong>Question.</strong> Which tier strategy fits?</p>
+
+<p id="sec-bank-mocks-p370" data-kind="prose"><strong>Options.</strong>
+A) Most capable tier for everything.
+B) Fast tier for lookups, stronger tier for itineraries, with a quality
+floor on the stranding-risk answers.
+C) Fast tier for everything.
+D) Stronger tier for lookups, Fast tier for itineraries.</p>
+
+<p id="sec-bank-mocks-p371" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "an error strands a traveler." Why: error
+cost sets the tier per class. D is backwards. Counterfactual: A wins
+when lookups also strand travelers.</p>
+

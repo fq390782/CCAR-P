@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-label="Batch 전송 간격을 SLA에서 역산하고 실패 request를 유형별로 재처리하는 흐름" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Batch 전송 간격을 SLA에서 역산하고 실패 request를 유형별로 재처리하는 흐름</title>
+<defs><marker id="arr-batch-schedule-retry" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="450" y="24" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Batch 운영: 전송 간격은 최악 지연으로 계산 · 실패는 유형별 재처리</text>
+<rect x="20" y="36" width="860" height="46" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="54.0" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">최악 지연 = 전송 간격 + 전처리 + batch 최대 24시간 + 후처리 ≤ SLA</text>
+<text x="450.0" y="71.0" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">간격 상한 = SLA − (전처리 + 24시간 + 후처리)</text>
+<text x="20" y="104" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">예: SLA 36시간 · 전처리 2시간 · 후처리 2시간 (1시간 = 17px)</text>
+<text x="20" y="142" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="start">8시간 간격</text>
+<rect x="110" y="120" width="136" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="178.0" y="139.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">간격 8h</text>
+<rect x="246" y="120" width="34" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="263.0" y="139.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">2h</text>
+<rect x="280" y="120" width="408" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="484.0" y="139.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">batch 최대 24h</text>
+<rect x="688" y="120" width="34" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="705.0" y="139.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">2h</text>
+<text x="20" y="204" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="start">12시간 간격</text>
+<rect x="110" y="182" width="204" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="212.0" y="201.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">간격 12h</text>
+<rect x="314" y="182" width="34" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="331.0" y="201.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">2h</text>
+<rect x="348" y="182" width="408" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="552.0" y="201.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">batch 최대 24h</text>
+<rect x="756" y="182" width="34" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="773.0" y="201.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">2h</text>
+<rect x="730" y="120" width="100" height="34" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="780.0" y="139.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">SLA 이내 ✓</text>
+<rect x="798" y="182" width="60" height="34" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="828.0" y="201.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">초과 ✗</text>
+<line x1="722" y1="112" x2="722" y2="224" stroke="#1F2937" stroke-width="2"/>
+<text x="722" y="238" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">SLA 36시간</text>
+<text x="263.0" y="168" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">전처리 2h</text>
+<text x="718" y="168" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="end">후처리 2h</text>
+<rect x="20" y="252" width="280" height="62" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="160.0" y="278.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">계산 기준 = 최악의 경우 합산</text>
+<text x="160.0" y="293.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">평소 처리 시간(1시간 이내) · 평균 ✗</text>
+<rect x="310" y="252" width="280" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="278.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">건수 기준 전송(N건마다) ✗</text>
+<text x="450.0" y="293.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">접수 적은 시기 대기 상한 없음 → SLA 보장 ✗</text>
+<rect x="600" y="252" width="280" height="62" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="740.0" y="278.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">검증 실패분</text>
+<text x="740.0" y="293.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">후처리 시간 안에 동기 API로 개별 재처리</text>
+<line x1="20" y1="332" x2="880" y2="332" stroke="#9CA3AF" stroke-width="1"/>
+<text x="20" y="356" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">실패 request 재처리: 같은 내용으로 다시 보내면 성공하는가</text>
+<rect x="20" y="378" width="140" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="90.0" y="394.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">results_url의 .jsonl</text>
+<text x="90.0" y="412.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">결과 유형 4종</text>
+<text x="90.0" y="427.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">succeeded · errored</text>
+<text x="90.0" y="442.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">canceled · expired</text>
+<polygon points="345.0,368 440,416.0 345.0,464 250,416.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="345.0" y="402.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">같은 내용으로</text>
+<text x="345.0" y="419.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">다시 보내면</text>
+<text x="345.0" y="436.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">성공하는가</text>
+<polyline points="160,416 250,416" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-schedule-retry)"/>
+<rect x="177.2" y="408.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="205.0" y="420.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">유형 확인</text>
+<rect x="560" y="362" width="320" height="54" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="720.0" y="385.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">expired: 내용 그대로 재전송</text>
+<text x="720.0" y="400.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">24시간 내 모델 미전송 · 과금 ✗</text>
+<rect x="560" y="426" width="320" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="720.0" y="446.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">errored + invalid_request_error: 수정 후 재전송</text>
+<text x="720.0" y="461.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">요청 본문 문제 · 과금 ✗</text>
+<text x="720.0" y="476.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">예: 문서가 context 상한 초과 → chunk 분할</text>
+<polyline points="440,416 490,416 490,389 560,389" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-schedule-retry)"/>
+<rect x="515.5" y="381.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="525" y="393" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="440,416 490,416 490,459 560,459" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-schedule-retry)"/>
+<rect x="504.5" y="451.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="525" y="463" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="560" y="500" width="320" height="30" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="720.0" y="517.9" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">같은 요청 그대로 재투입 ✗</text>
+<rect x="20" y="542" width="860" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="450.0" y="565.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">재전송 대상 = 실패한 custom_id만 (제출 순서 ✗) · 야간 job에서 유형별 집계</text>
+</svg>

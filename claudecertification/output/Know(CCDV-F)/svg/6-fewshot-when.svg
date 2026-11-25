@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440" role="img" aria-label="few-shot을 써야 할 때와 쓰지 말아야 할 때" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>few-shot을 써야 할 때와 쓰지 말아야 할 때</title>
+<defs><marker id="arr-fewshot-when" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<polygon points="336,20 564,20 580,46.0 564,72 336,72 320,46.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="450.0" y="50.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">무엇이 문제인가?</text>
+<rect x="40" y="120" width="340" height="120" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210.0" y="150.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Few-shot 사용</text>
+<text x="210.0" y="167.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">소수(3~5개) · relevant + diverse</text>
+<text x="210.0" y="184.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">경계 · reject case 포함</text>
+<text x="210.0" y="201.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">&lt;example&gt; 태그로 지시·입력과 분리</text>
+<text x="210.0" y="218.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">여러 제약이면 규칙을 지킨 worked example</text>
+<rect x="520" y="120" width="340" height="76" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="690.0" y="146.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Few-shot은 해법이 아님</text>
+<text x="690.0" y="163.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">사실 지식 보충 · latency 감소 · 작은 창 해결</text>
+<text x="690.0" y="178.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">예시는 오히려 token을 씀</text>
+<polyline points="320,46 210,46 210,120" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-fewshot-when)"/>
+<rect x="171.5" y="53" width="156.9" height="16" fill="#FFFFFF"/>
+<text x="250" y="65.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">형식 · edge-case가 흔들림</text>
+<polyline points="580,46 690,46 690,120" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-fewshot-when)"/>
+<rect x="569.6" y="53" width="180.7" height="16" fill="#FFFFFF"/>
+<text x="660" y="65.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">지식 부족 · latency · 작은 창</text>
+<rect x="520" y="240" width="340" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="690.0" y="265.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">양으로 채운 예시</text>
+<text x="690.0" y="282.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">선별 없는 수십 개 · 거의 같은 50개</text>
+<text x="690.0" y="299.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">모두 같은 label</text>
+<text x="690.0" y="315.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">좁거나 편향된 패턴 학습 + 컨텍스트 차지</text>
+<polyline points="380,200 450,200 450,278 520,278" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-fewshot-when)"/>
+<rect x="417.6" y="227" width="64.8" height="16" fill="#FFFFFF"/>
+<text x="450" y="239.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">질 대신 양</text>
+<polygon points="96,280 324,280 340,306.0 324,332 96,332 80,306.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210.0" y="310.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">지시와 예시가 모순되나?</text>
+<polyline points="210,240 210,280" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-fewshot-when)"/>
+<rect x="20" y="372" width="200" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="120.0" y="387.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">동작 예측 불가</text>
+<text x="120.0" y="404.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">precedence 없음</text>
+<text x="120.0" y="421.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">→ 모순 제거</text>
+<rect x="240" y="372" width="200" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="340.0" y="404.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">형식 · edge-case 고정</text>
+<polyline points="150,332 120,372" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-fewshot-when)"/>
+<rect x="115.5" y="341" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="125" y="353.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="270,332 340,372" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-fewshot-when)"/>
+<rect x="299.5" y="341" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="320" y="353.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">아니오</text>
+</svg>

@@ -1,0 +1,207 @@
+<h3 id="bank-mocks-h168">M3-Q30 (V2-D3.7), Select TWO</h3>
+
+<p id="sec-bank-mocks-p750" data-kind="prose"><strong>Scenario.</strong> A team integrates: (1) an internal API used by one
+service, (2) a device capability that exists only as a CLI.</p>
+
+<p id="sec-bank-mocks-p751" data-kind="prose"><strong>Question.</strong> Which TWO are correct? Select TWO.</p>
+
+<p id="sec-bank-mocks-p752" data-kind="prose"><strong>Options.</strong>
+A) Direct API for the single internal pair.
+B) CLI wrapper for the CLI-only device capability.
+C) MCP server for the single pair.
+D) MCP server for the one-off CLI.
+E) Carrier pigeon.</p>
+
+<p id="sec-bank-mocks-p753" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p754" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "one service... exists only as a
+CLI." Why: one pair takes the direct API. LI-only takes the wrapper.
+C and D pay protocol tax for single uses. Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h169">M3-Q31 (V2-D3.8)</h3>
+
+<p id="sec-bank-mocks-p755" data-kind="prose"><strong>Scenario.</strong> A support agent uses 40 tools. The SLA is 15 seconds.
+Token costs are the top complaint. Wrong-tool picks climb.</p>
+
+<p id="sec-bank-mocks-p756" data-kind="prose"><strong>Question.</strong> Which strategy fits?</p>
+
+<p id="sec-bank-mocks-p757" data-kind="prose"><strong>Options.</strong>
+A) Monolithic context.
+B) Progressive discovery: names first, schemas on demand. The loose
+SLA absorbs the round trip. Tokens and pick accuracy improve.
+C) Remove all tools.</p>
+
+<p id="sec-bank-mocks-p758" data-kind="prose">D) Add 40 more tools.</p>
+
+<p id="sec-bank-mocks-p759" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "40 tools... SLA is 15 seconds... Wrong-tool
+picks climb." Why: large surface plus loose SLA is the discovery
+win condition. Counterfactual: A wins with 6 tools and a 1-second SLA.</p>
+
+
+<h3 id="bank-mocks-h170">M3-Q32 (V2-D4.1)</h3>
+
+<p id="sec-bank-mocks-p760" data-kind="prose"><strong>Scenario.</strong> A fraud detector's requirement is "catch fraud." The team
+must set the acceptance threshold.</p>
+
+<p id="sec-bank-mocks-p761" data-kind="prose"><strong>Question.</strong> What is the correct threshold shape?</p>
+
+<p id="sec-bank-mocks-p762" data-kind="prose"><strong>Options.</strong>
+A) The team feels good.
+B) Recall on confirmed fraud is at or above 95%. The false-positive rate is at or below 2%. Measure this on a held-out set.
+C) A bigger model.</p>
+
+<p id="sec-bank-mocks-p763" data-kind="prose">D) 100% on the training set.</p>
+
+<p id="sec-bank-mocks-p764" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "'catch fraud.'" Why: vague requirements
+become measured thresholds with the metric, the line, and the
+measurement set named. D measures memorization. Counterfactual: A wins
+never as a threshold.</p>
+
+
+<h3 id="bank-mocks-h171">M3-Q33 (V2-D4.1)</h3>
+
+<p id="sec-bank-mocks-p765" data-kind="prose"><strong>Scenario.</strong> A voice bot needs fast responses. The team sets the p95 acceptance threshold under 2 seconds. No one answers for the threshold.</p>
+
+<p id="sec-bank-mocks-p766" data-kind="prose"><strong>Question.</strong> Which link of the Lesson 7-4A requirement chain is still
+missing?</p>
+
+<p id="sec-bank-mocks-p767" data-kind="prose"><strong>Options.</strong>
+A) Nothing. The requirement, the metric, the threshold, and the owner are all present.
+B) The owner. No one answers for the threshold.
+C) The requirement.</p>
+
+<p id="sec-bank-mocks-p768" data-kind="prose">No one wrote &quot;fast responses.&quot;
+D) The metric. No one named latency.</p>
+
+<p id="sec-bank-mocks-p769" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "No one is named to answer for the
+threshold." Why: the Lesson 7-4A chain runs requirement, metric,
+threshold, owner. The scenario gives the first three. Without a named
+owner, the threshold drifts when the traffic mix changes. A is the
+trap: "the team" is not a named owner. C and D contradict the stated
+scenario. Counterfactual: A wins when a named role owns the threshold
+and reviews it on a cadence.</p>
+
+
+<h3 id="bank-mocks-h172">M3-Q34 (V2-D4.2)</h3>
+
+<p id="sec-bank-mocks-p770" data-kind="prose"><strong>Scenario.</strong> A team grades answers with a judge model. Human review of
+100 sampled grades shows the judge is right 60% of the time.</p>
+
+<p id="sec-bank-mocks-p771" data-kind="prose"><strong>Question.</strong> What is the conclusion?</p>
+
+<p id="sec-bank-mocks-p772" data-kind="prose"><strong>Options.</strong>
+A) The judge is fine.
+B) The judge is not calibrated. 60% agreement is near chance on graded scales. Do not trust its grades. Fix or replace the judge.</p>
+
+<p id="sec-bank-mocks-p773" data-kind="prose">Or grade with code and humans.
+C) Sample more. Hope for a good result.
+D) Use a bigger judge.</p>
+
+<p id="sec-bank-mocks-p774" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "right 60% of the time." Why: the grading
+ladder requires calibrated judges. 60% agreement means the grades are
+noise. Counterfactual: A wins at 95% agreement with the disagreements
+characterized.</p>
+
+
+<h3 id="bank-mocks-h173">M3-Q35 (V2-D4.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p775" data-kind="prose"><strong>Scenario.</strong> An eval set for a code assistant has only Python tasks.</p>
+
+<p id="sec-bank-mocks-p776" data-kind="prose"><strong>Question.</strong> Which TWO drawers are absent? Select TWO.</p>
+
+<p id="sec-bank-mocks-p777" data-kind="prose"><strong>Options.</strong>
+A) Representative coverage of the other supported languages.
+B) Adversarial cases: prompts crafted to elicit insecure code.
+C) More Python tasks.
+D) The training set again.
+E) Blank files.</p>
+
+<p id="sec-bank-mocks-p778" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p779" data-kind="prose"><strong>Key.</strong> A, B. The decisive phrase is &quot;only Python tasks.&quot; The representative drawer misses all other languages. The adversarial drawer is empty. The threat (insecure code) has a name. Counterfactual: E wins as the malformed drawer, a third addition.</p>
+
+
+<h3 id="bank-mocks-h174">M3-Q36 (V2-D4.3)</h3>
+
+<p id="sec-bank-mocks-p780" data-kind="prose"><strong>Scenario.</strong> A team runs an A/B test on a risky auto-refund change
+with full traffic on day one.</p>
+
+<p id="sec-bank-mocks-p781" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p782" data-kind="prose"><strong>Options.</strong>
+A) Nothing. Fast tests are good.
+B) Risky changes go shadow first, then controlled exposure. Full
+traffic on day one maximizes blast radius.
+C) A/B tests never apply to refunds.</p>
+
+<p id="sec-bank-mocks-p783" data-kind="prose">D) The test needs no hypothesis.</p>
+
+<p id="sec-bank-mocks-p784" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "risky auto-refund change with full
+traffic on day one." Why: V2-D4.3's shadow-first rule for risky
+changes. The experiment design must bound user harm. Counterfactual: A
+wins for a low-risk copy change.</p>
+
+
+<h3 id="bank-mocks-h175">M3-Q37 (V2-D4.4)</h3>
+
+<p id="sec-bank-mocks-p785" data-kind="prose"><strong>Scenario.</strong> A vendor model update changed a support bot&#x27;s tone. The tone became rude. Prompts, retrieval, and data are not changed.</p>
+
+<p id="sec-bank-mocks-p786" data-kind="prose"><strong>Question.</strong> Which layer failed?</p>
+
+<p id="sec-bank-mocks-p787" data-kind="prose"><strong>Options.</strong>
+A) Retrieval.
+B) The model version: vendor behavior changed under the same prompt.
+Pin or change the version and re-run regression.
+C) The prompt.
+D) The office culture.</p>
+
+<p id="sec-bank-mocks-p788" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "after a vendor model update... unchanged."
+Why: the change log names the version. Version behavior is a layer in
+V2-D4.4. Fix it as a production change. Counterfactual: C wins when
+the prompt changed.</p>
+
+
+<h3 id="bank-mocks-h176">M3-Q38 (V2-D4.4), Select TWO</h3>
+
+<p id="sec-bank-mocks-p789" data-kind="prose"><strong>Scenario.</strong> A RAG bot hallucinates product specs. Traces show: chunks
+arrive, but the top chunk is a forum post, not the spec sheet. The
+spec sheet ranks fifth.</p>
+
+<p id="sec-bank-mocks-p790" data-kind="prose"><strong>Question.</strong> Which TWO fixes match the layer? Select TWO.</p>
+
+<p id="sec-bank-mocks-p791" data-kind="prose"><strong>Options.</strong>
+A) Boost authoritative sources in ranking (or filter to the spec
+corpus).
+B) Add source-type metadata and prefer it at retrieval.
+C) Upgrade the model tier.
+D) Rewrite the system prompt.
+E) Add more forums.</p>
+
+<p id="sec-bank-mocks-p792" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p793" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "top chunk is a forum post, not the
+spec sheet." Why: the retrieval layer returns the wrong authority.
+Ranking and metadata fixes belong to that layer. C and D fix proxies.
+Counterfactual: C wins when the spec chunk is top-ranked and the
+answer still errs.</p>
+
+
+<h3 id="bank-mocks-h177">M3-Q39 (V2-D4.5)</h3>
+
+<p id="sec-bank-mocks-p794" data-kind="prose"><strong>Scenario.</strong> A nightly job re-embeds 1M documents. Only 2% change per
+night.</p>
+
+<p id="sec-bank-mocks-p795" data-kind="prose"><strong>Question.</strong> Which optimization fits?</p>
+
+<p id="sec-bank-mocks-p796" data-kind="prose"><strong>Options.</strong>
+A) Re-embed everything nightly.
+B) Incremental embedding: embed only changed documents, reuse the rest.
+C) A bigger model.
+D) Delete the index.</p>
+
+<p id="sec-bank-mocks-p797" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "Only 2% change per night." Why: call
+elimination is the V2-D4.5 lever. Re-embedding 98% unchanged documents
+is pure waste. Counterfactual: A wins when change detection costs more
+than re-embedding.</p>
+

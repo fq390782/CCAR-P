@@ -1,0 +1,2378 @@
+## 시나리오: Multi-Agent Research System
+
+---
+
+## 문제 1(시나리오: Multi-Agent Research System)
+
+**상황:** 
+문서 분석 에이전트가 핵심 지표에 대해 두개의 신뢰할 수 있는 출처가 서로 정면으로 충돌하는 통계지표를 제시함을 발견했다.
+정부 보고서는 40%,산업분석은 12%라는 통계지표를 제시했다.
+두 출처 모두 신뢰할만한 기관에서 발행한 자료이며, 이 차이는 문서 분석 에이전트의 리서치 결론에 큰 영향을 줄 수 있습니다.
+문서 분석 에이전트는 이 상황을 어떻게 (효과적으로)처리해야 되나요?
+
+**[EN] Situation:** A document analysis agent discovers that two credible sources contain directly contradictory statistics for a key metric: a government report states 40% growth, while an industry analysis states 12%. Both sources look credible, and the discrepancy could materially affect the research conclusions. How should the document analysis agent handle this situation most effectively?
+
+**[JA] 状況:** ドキュメント分析エージェントが、重要なメトリクスについて2つの信頼できるソースが直接矛盾する統計を含んでいることを発見しました：政府レポートは40%の成長を述べ、業界分析は12%を述べています。両方のソースは信頼できるように見え、この不一致は調査の結論に大きな影響を与える可能性があります。ドキュメント分析エージェントはこの状況をどのように処理すべきでしょうか？
+
+**답 :** 
+1. (문서 분석 에이전트) 두 통계지표를 포함해 조사를 마무리한다.
+2. (문서 분석 에이전트) 이후 출처표시와 함께 충돌하는 내용에대하여 명시적으로 주석 처리를 한다.
+3. (문서 분석 에이전트) 는 Coordinator 에이전트에게 결과물을 전달한다.
+4. (Coordinator 에이전트) 는 두 통계지표를 어떻게할지 결정한다.
+5. (Coordinator 에이전트) 는 (Synthesis 에이전트)에게 결과물을 전달한다.
+6. (Synthesis 에이전트) 는 문서를 작성하고,다른 에이전트가 있으면 문서를 병합한다.
+7. (Synthesis 에이전트) 는 병합한 문서를 (Coordinator 에이전트)에게 전달한다.
+8. (Coordinator 에이전트)는 병합한 문서를 평가한다. 
+- 9.1 (Coordinator 에이전트)는 평가한 문서가 나쁘면 다른 에이전트에게 다시 조사를 맡긴다.
+- 9.2 (Coordinator 에이전트)는 평가한 문서가 좋으면 유저에게 이를 전달한다.
+
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] Which approach is most effective?**
+
+**[JA] 最も効果的なアプローチは何ですか？**
+
+- A) confidence heuristic을 적용해 가장 맞을 가능성이 큰 숫자를 선택하고, 그 값으로 분석을 마치며 불일치를 언급하는 각주를 추가한다.
+- B) 두 숫자를 충돌로 표시하지 않고 분석 출력에 모두 포함해, 종합 Agent가 더 넓은 context를 기준으로 사용할 값을 결정하게 한다.
+- C) 분석을 중단하고 즉시 Coordinator에게 escalation해, 계속하기 전에 어느 source가 더 권위 있는지 결정해 달라고 요청한다.
+- D) 두 숫자를 모두 포함해 분석을 마무리하되 source attribution과 함께 충돌을 명시적으로 주석 처리하고, 종합 단계로 넘기기 전에 Coordinator가 데이터를 조정할 방법을 결정하게 한다. **[정답]**
+
+**D인 이유:** 이 방식은 책임 분리를 유지합니다. 분석 Agent는 작업을 멈추지 않고 핵심 분석을 끝내고, 충돌하는 두 값을 명확한 attribution과 함께 보존하며, 더 넓은 context를 가진 Coordinator에게 조정 책임을 넘깁니다.
+
+**[EN] Why D:** This approach preserves separation of responsibilities: the analysis agent completes its core work without blocking, preserves both conflicting values with clear attribution, and correctly passes reconciliation to the coordinator, which has broader context.
+
+**[JA] Dの理由:** このアプローチは責任の分離を維持します：分析エージェントはブロックせずにコアワークを完了し、明確な帰属とともに両方の矛盾する値を保持し、より広いコンテキストを持つコーディネーターに調整を正しく渡します。
+
+---
+
+## 문제 2(시나리오: Multi-Agent Research System)
+
+**상황:** 
+
+웹 검색 Agent와 문서 분석 Agent가 작업을 완료하고 결과를 Coordinator에게 반환했습니다. 
+통합 research 보고서를 만들기 위한 다음 단계는 무엇인가요?
+
+**[EN] Situation:** The web-search and document-analysis agents have completed their tasks and returned results to the coordinator. What is the next step for creating an integrated research report?
+
+**[JA] 状況:** Web検索とドキュメント分析エージェントがタスクを完了し、結果をコーディネーターに返しました。統合された調査レポートを作成するための次のステップは何ですか？
+
+**답:** 
+
+1. 유저가 작업을 요청하고 (Coordinator 에이전트)가 업무를 분담하고 서브에이전트들에게 업무를 지시한다.
+1-1. (웹 검색 에이전트) 는 (Coordinator 에이전트)에게 결과물을 전달한다.
+1-2. (문서분석 에이전트) 는 (Coordinator 에이전트)에게 결과물을 전달한다.
+
+2. (Coordinator 에이전트)는 결과물을 평가한다.
+2-1 (Coordinator 에이전트)는 결과물이 나쁘면 반려하거나 다시 업무를 배정한다.
+2-2 (Coordinator 에이전트)는 결과물이 좋으면 (Synthesis 에이전트)에게 두 결과물(웹 검색 에이전트의 결과물,문서 분석 에이전트의 결과물)를 통합하라고 명령한다.
+
+3. (Synthesis 에이전트)는 서류를 통합하고, 통합한 서류는 (Coordinator 에이전트)에게 전달한다.
+
+4. (Coordinator 에이전트)는 결과물을 평가한다.
+4-1 (Coordinator 에이전트)는 결과물이 나쁘면 반려하거나 다시 업무를 배정한다.
+4-2 (Coordinator 에이전트)는 결과물이 좋으면 결과물을 (문서작성 에이전트)에게 전달한다.
+
+5. (문서작성 에이전트)는 citation이 포함된 최종 보고서를 작성하고, 작성한 보고서는 (Coordinator 에이전트)에게 전달한다.
+
+6. (Coordinator 에이전트)는 결과물을 평가한다.
+6-1 (Coordinator 에이전트)는 결과물이 나쁘면 반려하거나 다시 업무를 배정한다.
+6-2 (Coordinator 에이전트)는 결과물이 좋으면 유저에게 최종 보고서를 전달한다.
+
+
+**가장 적절한 다음 단계는 무엇인가요?**
+
+**[EN] Which next step is most appropriate?**
+
+**[JA] 最も適切な次のステップは何ですか？**
+
+- A) 각 Agent가 Coordinator를 우회해 보고서 작성 Agent에게 직접 결과를 보낸다.
+- B) 문서 분석 Agent가 웹 검색 결과를 요청해 내부적으로 병합한다.
+- C) Coordinator가 두 결과 집합을 종합 Agent에게 전달해 통합한다. **[정답]**
+- D) Coordinator가 두 Agent의 원시 출력을 연결해 최종 결과로 반환한다.
+
+**C인 이유:** Coordinator-subagent architecture에서 Coordinator는 두 결과 집합을 중앙에서 통합할 종합 Agent에게 전달하여 제어권을 유지하고 품질 높은 병합을 수행할 수 있습니다.
+
+**[EN] Why C:** In a coordinator–subagent architecture, the coordinator forwards both result sets to the synthesis agent for centralized integration, preserving control and ensuring high-quality merging.
+
+**[JA] Cの理由:** コーディネーター-サブエージェントアーキテクチャでは、コーディネーターが両方の結果セットを統合エージェントに転送して集中型の統合を行い、制御を維持し高品質なマージを確保します。
+
+---
+
+## 문제 3(시나리오: Multi-Agent Research System)
+
+**상황:** 
+
+(문서 분석 subagent)가 PDF 파일 처리에서 자주 실패합니다. 
+일부 파일에는 parsing 예외를 유발하는 손상된 섹션이 있고, 일부는 암호로 보호되어 있으며, 때로는 parsing 라이브러리가 큰 파일에서 멈춥니다. 현재는 예외가 발생하면 즉시 subagent를 종료하고 Coordinator에게 오류를 반환하며, Coordinator가 retry, 건너뛰기, 전체 작업 실패 여부를 결정해야 합니다. 
+
+이로 인해 일상적 오류 처리에 Coordinator가 과도하게 관여합니다. 가장 효과적인 architecture 개선은 무엇인가요?
+
+**[EN] Situation:** A document analysis subagent frequently fails when processing PDF files: some have corrupted sections that trigger parsing exceptions, others are password-protected, and sometimes the parsing library hangs on large files. Currently, any exception immediately terminates the subagent and returns an error to the coordinator, which must decide whether to retry, skip, or fail the whole task. This causes excessive coordinator involvement in routine error handling. What architectural improvement is most effective?
+
+**[JA] 状況:** ドキュメント分析サブエージェントはPDFファイルの処理時に頻繁に失敗します：一部は破損したセクションがあり、他はパスワード保護されており、大きなファイルでは解析ライブラリがハングする場合があります。現在、例外が発生するとサブエージェントが即座に終了し、コーディネーターがエラーを返します。これにより定常的なエラー処理へのコーディネーターの過剰な関与が生じます。最も効果的なアーキテクチャの改善は何ですか？
+
+**현재 흐름(문제 상황):**
+
+1. (Coordinator 에이전트)가 (문서 분석 에이전트)에게 PDF 파일 처리를 지시한다.
+
+2. (문서 분석 에이전트)가 PDF 파일을 처리하다가 예외가 발생한다.
+2-1 손상된 섹션이 있는 파일은 parsing 예외가 발생한다.
+2-2 암호로 보호된 파일은 열 수 없다.
+2-3 큰 파일은 parsing 라이브러리가 멈춘다.
+
+3. (문서 분석 에이전트)는 예외의 종류와 상관없이 즉시 종료하고, 오류를 (Coordinator 에이전트)에게 전달한다.
+
+4. (Coordinator 에이전트)는 오류가 올 때마다 직접 결정한다.
+4-1 (Coordinator 에이전트)는 다시 시도(retry)하게 한다.
+4-2 (Coordinator 에이전트)는 해당 파일을 건너뛰게 한다.
+4-3 (Coordinator 에이전트)는 전체 작업을 실패로 처리한다.
+
+5. 다시 해보면 해결되는 사소한 오류까지 전부 (Coordinator 에이전트)에게 올라와서, (Coordinator 에이전트)가 일상적 오류 처리에 과도하게 관여한다.
+
+**Best practice:**
+(문서 분석 에이전트)가 예외처리를 시도해 보다가 해보다가 안되면,안된거 기록 (Coordinator 에이전트)에게 전달한다.
+
+**가장 효과적인 개선은 무엇인가요?**
+
+**[EN] Which improvement is most effective?**
+
+**[JA] 最も効果的な改善は何ですか？**
+
+- A) 공유 큐를 통해 모든 실패를 모니터링하고 복구 동작을 결정하며, subagent에게 직접 재시작 명령을 보내는 전담 오류 처리 Agent를 만든다.
+- B) subagent가 항상 부분 결과를 성공 상태로 반환하고, 오류 세부사항은 metadata에 넣도록 구성한다. Coordinator는 모든 응답을 성공으로 처리한다.
+- C) Coordinator가 모든 문서를 subagent로 보내기 전에 validation해 실패를 유발할 수 있는 문서를 거부한다.
+- D) subagent에서 일시적 실패에 대한 로컬 복구를 구현하고, 해결할 수 없는 오류만 시도한 단계와 부분 결과를 포함해 Coordinator에게 escalation한다. **[정답]**
+
+**D인 이유:** 오류는 해결할 수 있는 가장 낮은 수준에서 처리합니다. 로컬 복구는 Coordinator의 부담을 줄이면서, 실제로 복구할 수 없는 이슈는 전체 context와 부분 진행 상황을 포함해 escalation합니다.
+
+**[EN] Why D:** Handle errors at the lowest level capable of resolving them. Local recovery reduces coordinator workload while still escalating truly unrecoverable issues with full context and partial progress.
+
+**[JA] Dの理由:** エラーを解決できる最も低いレベルで処理します。ローカルリカバリはコーディネーターのワークロードを削減しながら、完全なコンテキストと部分的な進捗を持つ真に回復不可能な問題をエスカレーションします。
+
+---
+
+## 문제 4(시나리오: Multi-Agent Research System)
+
+**상황:** 
+
+"AI가 창작 산업에 미치는 영향"에 대해 시스템을 실행한 후, 모든 subagent가 성공적으로 완료되는 것을 확인했습니다. 
+웹 검색 Agent는 관련 기사를 찾고, 문서 분석 Agent는 이를 제대로 summary하며, 종합 Agent는 일관된 텍스트를 생성합니다. 
+하지만 최종 보고서는 시각 예술만 다루고 음악, 문학, 영화를 전혀 다루지 못합니다. Coordinator 로그에는 주제가 "디지털 아트의 AI", "그래픽 디자인의 AI", "사진의 AI"라는 세 하위 작업으로 분해된 것이 보입니다. 가장 가능성이 높은 근본 원인은 무엇인가요?
+
+**[EN] Situation:** After running the system on “AI impact on creative industries,” you observe that every subagent completes successfully: the web-search agent finds relevant articles, the document analysis agent summarizes them correctly, and the synthesis agent produces coherent text. However, final reports cover only visual art and completely miss music, literature, and film. In the coordinator logs, you see it decomposed the topic into three subtasks: “AI in digital art,” “AI in graphic design,” and “AI in photography.” What is the most likely root cause?
+
+**[JA] 状況:** 「クリエイティブ産業へのAIの影響」でシステムを実行した後、すべてのサブエージェントが正常に完了することが観察されます：Web検索エージェントは関連する記事を見つけ、ドキュメント分析エージェントは正しく要約し、統合エージェントは一貫したテキストを生成します。しかし、最終レポートは視覚芸術のみをカバーし、音楽、文学、映画を完全に見落としています。コーディネーターのログでは、トピックが3つのサブタスクに分解されたことが確認できます：「デジタルアートにおけるAI」「グラフィックデザインにおけるAI」「写真撮影におけるAI」。最も可能性の高い根本原因は何ですか？
+
+**가장 가능성이 높은 근본 원인은 무엇인가요?**
+
+**[EN] What is the most likely root cause?**
+
+**[JA] 最も可能性の高い根本原因は何ですか？**
+(Coordinator 에이전트)의 주 업무 분해,위임,결과물 평가(집계/검증) 그리고 최종적으로 유저한테 전달이다.
+이 경우에는 업무 분해를 잘못해서 나온 결과이다.
+
+
+- A) 종합 Agent에 커버리지 공백을 감지하라는 지시가 부족하다.
+- B) 문서 분석 Agent가 지나치게 엄격한 관련성 기준 때문에 비시각 자료를 필터링한다.
+- C) Coordinator의 작업 분해가 너무 좁아 관련 영역 전체를 포괄하지 못하는 작업을 subagent에게 할당했다. **[정답]**
+- D) 웹 검색 Agent의 쿼리가 불충분하며 더 많은 분야를 포괄하도록 넓혀야 한다.
+
+**C인 이유:** Coordinator가 넓은 주제를 시각 예술 하위 작업으로만 분해해 음악, 문학, 영화를 완전히 놓쳤습니다. subagent는 할당된 작업을 올바르게 실행했으므로, 좁은 분해가 가장 직접적인 원인입니다.
+
+**[EN] Why C:** The coordinator decomposed a broad topic only into visual-art subtasks, missing music, literature, and film entirely. Since subagents executed their assignments correctly, the narrow decomposition is the obvious root cause.
+
+**[JA] Cの理由:** コーディネーターが広いトピックを視覚芸術のサブタスクのみに分解し、音楽、文学、映画を完全に見落としました。サブエージェントは割り当てを正しく実行したため、狭い分解が明らかな根本原因です。
+
+---
+
+## 문제 5(시나리오: Multi-Agent Research System)
+
+**상황:** 웹 검색 subagent가 요청된 5개 source 범주 중 3개에 대해서만 결과를 반환합니다(경쟁사 사이트와 산업 보고서는 성공했지만 뉴스 아카이브와 소셜 피드는 타임아웃). 문서 분석 subagent는 제공된 모든 문서를 성공적으로 처리했습니다. 종합 subagent는 품질이 섞인 upstream 입력으로 summary를 생성해야 합니다. 가장 효과적인 오류 전파 전략은 무엇인가요?
+
+**[EN] Situation:** The web-search subagent returns results for only 3 of 5 requested source categories (competitor sites and industry reports succeed, but news archives and social feeds time out). The document analysis subagent successfully processes all provided documents. The synthesis subagent must produce a summary from mixed-quality upstream inputs. Which error-propagation strategy is most effective?
+
+**[JA] 状況:** Web検索サブエージェントは5つの要求されたソースカテゴリのうち3つのみの結果を返します（競合サイトと業界レポートは成功しましたが、ニュースアーカイブとソーシャルフィードはタイムアウトしました）。ドキュメント分析サブエージェントは提供されたすべてのドキュメントを正常に処理します。統合サブエージェントは混合品質の上流入力からサマリーを生成する必要があります。最も効果的なエラー伝播戦略はどれですか？
+
+**가장 효과적인 오류 전파 전략은 무엇인가요?**
+
+**[EN] Which error-propagation strategy is most effective?**
+
+**[JA] 最も効果的なエラー伝播戦略は何ですか？**
+
+- A) 성공한 source만 사용해 종합을 계속하고 어떤 데이터를 사용할 수 없었는지 언급하지 않고 출력을 생성한다.
+- B) 종합 subagent가 Coordinator에게 오류를 반환해 불완전한 데이터 때문에 전체 retry나 작업 실패를 트리거한다.
+- C) 종합 subagent가 시작 전에 Coordinator에게 더 긴 타임아웃으로 시간 초과 source를 retry하도록 요청한다.
+- D) 사용할 수 없는 source로 인한 공백과 근거가 충분한 결론을 나타내는 커버리지 주석으로 종합 출력을 구조화한다. **[정답]**
+
+**D인 이유:** 커버리지 주석은 투명성을 갖춘 graceful degradation을 구현합니다. 완료된 작업의 가치를 보존하면서 불확실성을 전파해 confidence를 근거 있게 판단할 수 있습니다.
+
+**[EN] Why D:** Coverage annotations implement graceful degradation with transparency, preserving value from completed work while propagating uncertainty to enable informed decisions about confidence.
+
+**[JA] Dの理由:** カバレッジ注釈は透明性を持ったグレースフルデグラデーションを実装し、完了した作業の価値を保持しながら、信頼度について情報に基づく決定を可能にするために不確実性を伝播します。
+
+커버리지 주석은 결과물의 각 부분이 자료를 얼마나 충분히 조사한 것인지 적어 둔 표시입니다.
+
+커버리지(coverage)는 "조사가 미친 범위"
+주석(annotation)은 "덧붙인 표시"입니다. 
+풀어 쓰면 "여기는 다 조사했음 / 여기는 일부만 조사했음"이라는 꼬리표
+
+그리고 이 꼬리표를 Coordinator에게 보냄. Coordinator는 다시 일시킬지 말지 결정(실제 예시는 10.4절)
+
+---
+
+## 문제 6(시나리오: Multi-Agent Research System)
+
+**상황:** 문서 분석 subagent가 parsing할 수 없는 손상된 PDF 파일을 만났습니다. 시스템 오류 처리를 설계할 때 이 실패를 처리하는 가장 효과적인 방법은 무엇인가요?
+
+**[EN] Situation:** The document analysis subagent encounters a corrupted PDF file that it cannot parse. When designing the system’s error handling, what is the most effective way to handle this failure?
+
+**[JA] 状況:** ドキュメント分析サブエージェントが解析できない破損したPDFファイルに遭遇しました。システムのエラーハンドリングを設計する際、この失敗を処理する最も効果的な方法は何ですか？
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] Which approach is most effective?**
+
+**[JA] 最も効果的なアプローチは何ですか？**
+
+- A) Coordinator Agent에게 context를 담은 오류를 반환해 진행 방법을 결정할 수 있게 한다. **[정답]**
+- B) workflow 중단을 피하기 위해 손상된 문서를 아무 알림 없이 건너뛰고 나머지 파일 처리를 계속한다.
+- C) 실패를 보고하기 전에 지수 백오프로 문서 parsing을 세 번 자동 retry한다.
+- D) 전체 research workflow를 종료하도록 예외를 전파한다.
+
+**A인 이유:** context를 담은 오류를 Coordinator에게 반환하는 것이 가장 효과적입니다. Coordinator가 파일을 건너뛸지, 대체 parsing 방법을 시도할지, 사용자에게 알릴지 근거를 갖고 결정할 수 있으며 실패가 보이도록 유지합니다.
+
+**[EN] Why A:** Returning an error with context to the coordinator is the most effective approach because it lets the coordinator make an informed decision—skip the file, try an alternative parsing method, or notify the user—while maintaining visibility into the failure.
+
+**[JA] Aの理由:** コンテキストとともにコーディネーターにエラーを返すことは最も効果的なアプローチです。コーディネーターがファイルのスキップ、代替解析方法の試み、またはユーザーへの通知など、情報に基づいた決定を行えるようにしながら、失敗の可視性を維持するからです。
+
+---
+
+## 문제 7(시나리오: Multi-Agent Research System)
+
+**상황:** 
+프로덕션 로그는 "업로드된 분기 보고서를 분석해줘" 같은 요청이 문서 분석 Agent 대신 웹 검색 Agent로 45% routing되는 지속적 패턴을 보여줍니다. 
+
+tool 정의를 검토하니 
+웹 검색 Agent에는 "콘텐츠를 분석하고 핵심 정보를 extraction한다"라고 설명된 `analyze_content` tool이 있고,
+문서 분석 Agent에는 "문서를 분석하고 핵심 정보를 extraction한다"라고 설명된 `analyze_document` tool이 있습니다. 
+
+잘못된 routing 문제를 어떻게 고쳐야 하나요?
+
+**[EN] Situation:** Production logs show a persistent pattern: requests like “analyze the uploaded quarterly report” are routed to the web-search agent 45% of the time instead of the document analysis agent. Reviewing tool definitions, you find that the web-search agent has a tool `analyze_content` described as “analyzes content and extracts key information,” while the document analysis agent has a tool `analyze_document` described as “analyzes documents and extracts key information.” How should you fix the misrouting problem?
+
+**[JA] 状況:** 本番ログに一貫したパターンが示されています：「アップロードされた四半期レポートを分析して」などのリクエストが、ドキュメント分析エージェントの代わりに45%の割合でWeb検索エージェントにルーティングされています。ツール定義を確認すると、Web検索エージェントには「コンテンツを分析し主要情報を抽出する」と説明された`analyze_content`というツールがあり、ドキュメント分析エージェントには「ドキュメントを分析し主要情報を抽出する」と説明された`analyze_document`というツールがあります。誤ルーティングの問題をどのように修正すべきですか？
+
+**상황:내 버전**
+세션 로그를 분석해봤다.
+"업로드된 분기 보고서를 분석해줘" 같은 요청이 왔는데 (문서 분석 Agent)가 아닌 (웹 검색 Agent)가 일을 시작했다.
+이러한 오류가 45%나 되었다. 
+
+왜 그런지 tool 정의를 검토해봤다.
+웹 검색 Agent에는 "콘텐츠를 분석하고 핵심 정보를 extraction한다"라고 설명된 `analyze_content` tool이 있고,
+문서 분석 Agent에는 "문서를 분석하고 핵심 정보를 extraction한다"라고 설명된 `analyze_document` tool이 있습니다. 
+...라는 툴이 있단다.
+
+즉,coordinator가 보고서를 분석해줘 까지는 했는데 이게 서류인지 콘텐츠인지 헷갈렸다는거다.
+그래서 웹 검색 툴을 바꾸면 될거같다.
+**잘못된 routing 문제를 어떻게 고쳐야 하나요?**
+
+**[EN] How should you fix the misrouting problem?**
+
+**[JA] 誤ルーティングの問題をどのように修正すべきですか？**
+
+- A) Coordinator가 위임을 결정하기 전에 사용자가 업로드 파일을 말하는지 웹 콘텐츠를 말하는지 감지하는 사전 routing classifier를 추가한다.
+- B) 웹 검색 tool 이름을 `extract_web_results`로 바꾸고 설명을 "웹 검색과 URL에서 검색된 정보를 처리하고 반환한다"로 업데이트한다. **[정답]**
+- C) Coordinator prompt에 올바른 routing을 보여주는 few-shot 예시를 추가한다: "사용자가 분기 보고서를 업로드 -> 문서 분석 Agent", "사용자가 웹 페이지를 질문 -> 웹 검색 Agent".
+- D) 문서 분석 tool 설명에 "업로드된 PDF, Word 문서, 스프레드시트에 사용" 같은 사용 예시를 추가하고 웹 검색 tool은 그대로 둔다.
+
+**B인 이유:** 웹 검색 tool 이름을 `extract_web_results`로 바꾸고 설명에 웹 검색과 URL을 명시하면 두 tool 이름과 설명 사이의 의미상 겹침을 제거해 근본 원인을 직접 해결합니다. 각 tool의 목적이 명확해져 Coordinator가 문서 분석과 웹 검색을 안정적으로 구분할 수 있습니다.
+
+**[EN] Why B:** Renaming the web-search tool to `extract_web_results` and updating its description to explicitly reference web search and URLs directly removes the root cause by eliminating semantic overlap between the two tool names and descriptions. This makes each tool’s purpose unambiguous, enabling the coordinator to reliably distinguish document analysis from web search.
+
+**[JA] Bの理由:** Web検索ツールを`extract_web_results`に名前変更し、説明をWeb検索とURLを明示的に参照するように更新することで、2つのツール名と説明の意味的な重複を排除し、根本原因に直接対処します。これにより各ツールの目的が明確になり、コーディネーターがドキュメント分析とWeb検索を確実に区別できるようになります。
+
+---
+
+## 문제 8(시나리오: Multi-Agent Research System)
+
+**상황:** 동료가 문서 분석 Agent가 Coordinator를 우회해 종합 Agent에게 결과를 직접 보내야 한다고 제안합니다. subagent 간 모든 통신에서 Coordinator를 중앙 허브로 유지하는 핵심 장점은 무엇인가요?
+
+**[EN] Situation:** A colleague proposes that the document analysis agent should send its results directly to the synthesis agent, bypassing the coordinator. What is the main advantage of keeping the coordinator as the central hub for all communication between subagents?
+
+**[JA] 状況:** 同僚がドキュメント分析エージェントはコーディネーターをバイパスして統合エージェントに直接結果を送るべきだと提案しています。サブエージェント間のすべての通信の中央ハブとしてコーディネーターを維持することの主な利点は何ですか？
+
+**Coordinator를 중앙 허브로 유지하는 핵심 장점은 무엇인가요?**
+
+**[EN] What is the main advantage of keeping the coordinator as the central hub?**
+
+**[JA] コーディネーターを中央ハブとして維持することの主な利点は何ですか？**
+
+- A) Coordinator가 모든 상호작용을 관찰하고, 오류를 일관되게 처리하며, 각 subagent가 어떤 정보를 받을지 결정할 수 있다. **[정답]**
+- B) Coordinator가 subagent에 대한 여러 요청을 batch 처리해 총 API 호출과 전체 지연 시간을 줄인다.
+- C) Coordinator를 통한 routing은 직접 Agent 간 호출만으로는 어려운 자동 retry 로직을 제공한다.
+- D) subagent는 격리된 memory를 사용하며, 직접 통신은 Coordinator만 수행할 수 있는 복잡한 직렬화를 요구한다.
+
+**A인 이유:** Coordinator 패턴은 모든 상호작용에 대한 중앙 가시성, 시스템 전반의 일관된 오류 처리, 각 subagent가 받는 정보에 대한 세밀한 제어를 제공합니다. 이것이 hub-and-spoke 통신 구조의 주요 장점입니다.
+
+**[EN] Why A:** The coordinator pattern provides centralized visibility into all interactions, uniform error handling across the system, and fine-grained control over what information each subagent receives—these are the primary advantages of a star-shaped communication topology.
+
+**[JA] Aの理由:** コーディネーターパターンはすべての相互作用への集中した可視性、システム全体での均一なエラーハンドリング、各サブエージェントが受け取る情報へのきめ細かい制御を提供します—これらはスター型の通信トポロジーの主な利点です。
+
+---
+
+## 문제 9(시나리오: Multi-Agent Research System)
+
+**상황:** 웹 검색 subagent가 복잡한 주제를 조사하다 타임아웃됩니다. 이 실패 정보를 Coordinator에게 어떻게 돌려줄지 설계해야 합니다. 복구 판단에 가장 도움이 되는 오류 전파 접근 방식은 무엇인가요?
+
+**[EN] Situation:** The web-search subagent times out while researching a complex topic. You need to design how information about this failure is returned to the coordinator. Which error-propagation approach best enables intelligent recovery?
+
+**[JA] 状況:** Web検索サブエージェントが複雑なトピックを調査中にタイムアウトします。この失敗に関する情報をコーディネーターにどのように返すかを設計する必要があります。どのエラー伝播アプローチがインテリジェントなリカバリを最もよく可能にしますか？
+
+**복구 판단에 가장 도움이 되는 오류 전파 접근 방식은 무엇인가요?**
+
+**[EN] Which error-propagation approach best enables intelligent recovery?**
+
+**[JA] どのエラー伝播アプローチがインテリジェントなリカバリを最もよく可能にしますか？**
+
+- A) 실패 유형, 실행된 쿼리, 부분 결과, 가능한 대안 접근법을 포함한 structured error context를 Coordinator에게 반환한다. **[정답]**
+- B) subagent 내부에서 타임아웃을 잡고 빈 결과 집합을 성공으로 표시해 반환한다.
+- C) subagent 내부에서 지수 백오프 자동 retry를 구현하고, retry를 모두 소진한 뒤 일반적인 "search unavailable" 상태만 반환한다.
+- D) 타임아웃 예외를 최상위 핸들러에 직접 전파해 전체 research workflow를 종료한다.
+
+**A인 이유:** 실패 유형, 실행된 쿼리, 부분 결과, 대안 접근법을 포함한 structured error context를 반환하면 Coordinator가 수정된 쿼리로 retry할지, 부분 결과로 계속할지 같은 복구 방향을 판단하는 데 필요한 정보를 얻습니다. 이는 조정 수준의 근거 있는 의사결정을 위해 필요한 context를 최대한 유지합니다.
+
+**[EN] Why A:** Returning structured error context—including failure type, executed query, partial results, and alternative approaches—gives the coordinator everything needed to make intelligent recovery decisions (e.g., retry with a modified query or continue with partial results). It preserves maximum context for informed coordination-level decision-making.
+
+**[JA] Aの理由:** 失敗タイプ、実行されたクエリ、部分的な結果、代替アプローチを含む構造化されたエラーコンテキストを返すことで、コーディネーターはインテリジェントなリカバリの決定を行うために必要なすべてのもの（例：変更されたクエリで再試行するか、部分的な結果で続行するか）を得られます。インテリジェントなコーディネーションレベルの意思決定のために最大のコンテキストを保持します。
+
+---
+
+## 문제 10(시나리오: Multi-Agent Research System)
+
+**상황:** 시스템 설계에서 문서 분석 Agent가 URL로 문서를 다운로드할 수 있도록 범용 tool `fetch_url` 접근 권한을 부여했습니다. 프로덕션 로그는 이 Agent가 이제 임시 웹 검색을 수행하기 위해 검색 엔진 결과 페이지를 자주 다운로드한다는 것을 보여줍니다. 이 동작은 웹 검색 Agent를 통해 routing되어야 하며, 현재는 결과 불일치를 유발합니다. 가장 효과적인 수정안은 무엇인가요?
+
+**[EN] Situation:** In your system design, you gave the document analysis agent access to a general-purpose tool `fetch_url` so it could download documents by URL. Production logs show this agent now frequently downloads search engine results pages to perform ad hoc web search—behavior that should be routed through the web-search agent—causing inconsistent results. Which fix is most effective?
+
+**[JA] 状況:** システム設計では、ドキュメント分析エージェントにURLでドキュメントをダウンロードできる汎用ツール`fetch_url`へのアクセスを与えました。本番ログはこのエージェントが頻繁に検索エンジンの結果ページをダウンロードしてアドホックなWeb検索を実行していることを示しており、これはWeb検索エージェントを通じてルーティングされるべき動作です。最も効果的な修正はどれですか？
+
+**가장 효과적인 수정안은 무엇인가요?**
+
+**[EN] Which fix is most effective?**
+
+**[JA] 最も効果的な修正はどれですか？**
+
+- A) `fetch_url`을 URL이 문서 형식을 가리키는지 validation하는 `load_document` tool로 교체한다. **[정답]**
+- B) 문서 분석 Agent에서 `fetch_url`을 제거하고 모든 URL 가져오기를 Coordinator를 통해 웹 검색 Agent로 routing한다.
+- C) 알려진 검색 엔진 도메인에 대한 `fetch_url` 호출을 차단하고 다른 URL은 허용하는 필터링을 구현한다.
+- D) 문서 분석 Agent prompt에 `fetch_url`은 검색이 아니라 문서 URL 다운로드에만 사용해야 한다는 지시를 추가한다.
+
+**A인 이유:** 범용 `fetch_url`을 문서 형식 URL만 validation하는 전용 `load_document` tool로 바꾸면 interface 단계에서 기능 범위가 줄어듭니다. 최소 권한 원칙에 맞고, 원치 않는 검색 동작을 prompt 지시로 막는 대신 구조적으로 차단합니다.
+
+**[EN] Why A:** Replacing a general-purpose tool with a document-specific tool that validates URLs against document formats fixes the root cause by constraining capability at the interface level. This follows the principle of least privilege, making undesired search behavior impossible rather than merely discouraged.
+
+**[JA] Aの理由:** 汎用ツールをURLをドキュメント形式に対して検証するドキュメント固有のツールに置き換えることで、インターフェースレベルで機能を制限することによって根本原因を修正します。これは最小権限の原則に従い、望ましくない検索動作を単に思いとどまらせるのではなく不可能にします。
+
+---
+
+## 문제 11(시나리오: Multi-Agent Research System)
+
+**상황:** 넓은 주제를 조사하는 동안 웹 검색 Agent와 문서 분석 Agent가 같은 하위 주제를 조사해 출력에 중복이 크게 발생합니다. token 사용량은 거의 두 배가 되지만 research 폭이나 깊이는 그만큼 늘지 않습니다. 이 문제를 가장 효과적으로 해결하려면 어떻게 해야 하나요?
+
+**[EN] Situation:** While researching a broad topic, you observe that the web-search agent and the document analysis agent investigate the same subtopics, leading to substantial duplication in their outputs. Token usage nearly doubles without a proportional increase in research breadth or depth. What is the most effective way to address this?
+
+**[JA] 状況:** 広いトピックを調査する際、Web検索エージェントとドキュメント分析エージェントが同じサブトピックを調査し、出力に大幅な重複が生じます。調査の幅や深さの比例した増加なしにトークン使用量がほぼ倍増します。これに対処する最も効果的な方法は何ですか？
+
+**이 문제를 가장 효과적으로 해결하려면 어떻게 해야 하나요?**
+
+**[EN] What is the most effective way to address this?**
+
+**[JA] 最も効果的な方法は何ですか？**
+
+- A) 두 Agent가 병렬로 끝나도록 허용한 뒤 Coordinator가 겹치는 결과를 중복 제거하고 종합 Agent에게 전달한다.
+- B) Coordinator가 위임 전에 research 공간을 명시적으로 분할해 각 Agent에 서로 다른 하위 주제나 source 유형을 할당한다. **[정답]**
+- C) Agent들이 현재 집중 영역을 기록해 다른 Agent가 실행 중 동적으로 중복을 피할 수 있도록 공유 상태 메커니즘을 구현한다.
+- D) 웹 검색이 완료된 뒤 문서 분석을 실행하는 순차 실행으로 전환하고, 웹 검색 결과를 context로 사용해 중복을 피한다.
+
+**B인 이유:** Coordinator가 위임 전에 research 공간을 명시적으로 분할하는 것이 가장 효과적입니다. 작업이 시작되기 전에 모호한 작업 경계라는 근본 원인을 해결하기 때문입니다. 병렬성을 보존하면서 중복 작업과 token 낭비를 방지합니다.
+
+**[EN] Why B:** Having the coordinator explicitly partition the research space before delegating is most effective because it addresses the root cause—unclear task boundaries—before any work begins. It preserves parallelism while preventing duplicated effort and wasted tokens.
+
+**[JA] Bの理由:** コーディネーターが委譲前に調査空間を明示的に分割することが最も効果的です。なぜなら、作業が始まる前に根本原因—不明確なタスク境界—に対処するからです。重複した作業や無駄なトークンを防ぎながら並列処理を保持します。
+
+---
+
+## 문제 12(시나리오: Multi-Agent Research System)
+
+**상황:** research 중 웹 검색 subagent가 세 source 범주를 조회했으며 결과가 서로 다릅니다. 학술 데이터베이스는 관련 논문 15편을 반환하고, 산업 보고서는 "0 results"를 반환하며, 특허 데이터베이스는 "Connection timeout"을 반환합니다. Coordinator로의 오류 전파를 설계할 때 어떤 접근 방식이 복구 결정을 가장 잘 돕나요?
+
+**[EN] Situation:** During research, the web-search subagent queries three source categories with different outcomes: academic databases return 15 relevant papers, industry reports return “0 results,” and patent databases return “Connection timeout.” When designing error propagation to the coordinator, which approach enables the best recovery decisions?
+
+**[JA] 状況:** 調査中、Web検索サブエージェントは異なる結果で3つのソースカテゴリに対してクエリを実行します：学術データベースは15の関連論文を返し、業界レポートは「0件の結果」を返し、特許データベースは「接続タイムアウト」を返します。コーディネーターへのエラー伝播を設計する際、どのアプローチが最良のリカバリ決定を可能にしますか？
+
+**어떤 접근 방식이 복구 결정을 가장 잘 돕나요?**
+
+**[EN] Which approach enables the best recovery decisions?**
+
+**[JA] どのアプローチが最良のリカバリ決定を可能にしますか？**
+
+- A) 결과를 하나의 성공률 지표(예: "67% source coverage")로 집계하고 자세한 로그는 요청 시 제공한다.
+- B) "timeout"과 "0 results"를 모두 Coordinator 개입이 필요한 실패로 보고한다.
+- C) 일시적 실패를 내부적으로 retry하고 지속적인 오류만 보고한다.
+- D) retry 결정이 필요한 접속 실패(timeout)와 성공한 쿼리를 나타내는 유효한 빈 결과("0 results")를 구분한다. **[정답]**
+
+**D인 이유:** 타임아웃(접근 실패)과 "0 results"(유효한 빈 결과)는 의미적으로 다른 결과이며 서로 다른 대응이 필요합니다. 이를 구분하면 Coordinator가 특허 데이터베이스는 retry하고, 산업 보고서의 "0 results"는 유효하고 의미 있는 결과로 받아들일 수 있습니다.
+
+**[EN] Why D:** A timeout (access failure) and “0 results” (valid empty result) are semantically different outcomes requiring different responses. Distinguishing them allows the coordinator to retry the patent database while accepting the industry reports “0 results” as a valid, informative finding.
+
+**[JA] Dの理由:** タイムアウト（アクセス失敗）と「0件の結果」（有効な空の結果）は異なる対応が必要な意味的に異なる結果です。これらを区別することで、コーディネーターは特許データベースを再試行しながら、業界レポートの「0件の結果」を有効な、情報価値のある発見として受け入れることができます。
+
+---
+
+## 문제 13(시나리오: Multi-Agent Research System)
+
+**상황:** 프로덕션 모니터링에서 종합 품질이 일관되지 않음을 확인했습니다. 집계 결과가 약 75K token일 때, 종합 Agent는 첫 15K token(웹 검색 헤드라인/스니펫)과 마지막 10K token(문서 분석 결론)의 정보는 안정적으로 citation으로 뒷받침하지만, 중간 50K token의 중요한 발견은 research 질문에 직접 답하더라도 자주 놓칩니다. 집계 입력을 어떻게 재구성해야 하나요?
+
+**[EN] Situation:** Production monitoring shows inconsistent synthesis quality. When aggregated results are ~75K tokens, the synthesis agent reliably cites information from the first 15K tokens (web-search headlines/snippets) and the last 10K tokens (document analysis conclusions), but often misses critical findings in the middle 50K tokens—even when they directly answer the research question. How should you restructure the aggregated input?
+
+**[JA] 状況:** 本番監視では統合品質が一貫していないことが示されています。集約された結果が約75Kトークンの場合、統合エージェントは最初の15Kトークン（Web検索の見出し/スニペット）と最後の10Kトークン（ドキュメント分析の結論）からの情報を確実に引用しますが、中間の50Kトークンの重要な発見を見落とすことが多く、それが調査の質問に直接答えるものであっても同様です。集約された入力をどのように再構築すべきですか？
+
+**집계 입력을 어떻게 재구성해야 하나요?**
+
+**[EN] How should you restructure the aggregated input?**
+
+**[JA] 集約された入力をどのように再構築すべきですか？**
+
+- A) 모델의 안정적 처리 범위 안에 콘텐츠를 유지하기 위해 모든 subagent 출력을 집계 전에 20K token 이하로 summary한다.
+- B) subagent 결과를 종합 Agent에 점진적으로 스트리밍해 웹 검색 결과를 먼저 완전히 처리한 뒤 문서 분석 결과를 추가한다.
+- C) 집계 입력 시작 부분에 핵심 발견을 summary로 앞에 모으고, 세부 결과를 명시적 섹션 제목으로 구성해 탐색을 쉽게 한다. **[정답]**
+- D) research 작업마다 어느 subagent 결과가 먼저 나오는지 번갈아 batch하는 회전을 구현해 두 source가 시간에 따라 동일하게 첫 위치를 얻도록 한다.
+
+**C인 이유:** 핵심 발견 summary를 시작 부분에 두면 primacy 효과를 활용해 중요한 정보가 가장 안정적으로 처리되는 위치에 놓입니다. 전체에 명시적 섹션 제목을 추가하면 모델이 중간 입력 콘텐츠를 탐색하고 주의를 기울이는 데 도움이 되어 "lost in the middle" 현상을 직접 완화합니다.
+
+**[EN] Why C:** Putting a key-findings summary at the start leverages primacy effects so critical information sits in the most reliably processed position. Adding explicit section headings throughout helps the model navigate and attend to mid-input content, directly mitigating the “lost in the middle” phenomenon.
+
+**[JA] Cの理由:** 先頭に重要な発見サマリーを置くことで、重要な情報が最も確実に処理される位置に置かれる初頭効果を活用します。全体に明示的なセクション見出しを追加することで、モデルが中間のコンテンツをナビゲートして注意を向けるのを助け、「中間消失」現象に直接対処します。
+
+---
+
+## 문제 14(시나리오: Multi-Agent Research System)
+
+**상황:** 테스트에서 웹 검색 Agent 출력(페이지 콘텐츠 포함 85K token)과 문서 분석 Agent 출력(사고 과정 포함 70K token)을 합치면 155K token이지만, 종합 Agent는 50K token 미만 입력에서 가장 잘 동작합니다. 가장 효과적인 해결책은 무엇인가요?
+
+**[EN] Situation:** In testing, the combined output of the web-search agent (85K tokens including page content) and the document analysis agent (70K tokens including chains of thought) totals 155K tokens, but the synthesis agent performs best with inputs under 50K tokens. Which solution is most effective?
+
+**[JA] 状況:** テストでは、Web検索エージェント（ページコンテンツを含む85Kトークン）とドキュメント分析エージェント（思考の連鎖を含む70Kトークン）の組み合わせ出力が155Kトークンになりますが、統合エージェントは50K未満の入力で最もよくパフォーマンスを発揮します。最も効果的なソリューションはどれですか？
+
+**가장 효과적인 해결책은 무엇인가요?**
+
+**[EN] Which solution is most effective?**
+
+**[JA] 最も効果的なソリューションはどれですか？**
+
+- A) upstream Agent가 장황한 콘텐츠와 추론 대신 structured data(핵심 사실, citation, 관련성 점수)를 반환하도록 수정한다. **[정답]**
+- B) 종합에 전달하기 전에 발견 사항을 압축하는 중간 summary Agent를 추가한다.
+- C) 종합 Agent가 호출 사이에 상태를 유지하면서 발견 사항을 순차 batch로 처리하게 한다.
+- D) 발견 사항을 vector 데이터베이스에 저장하고 종합 Agent에게 작업 중 조회할 검색 tool을 제공한다.
+
+**A인 이유:** upstream Agent가 structured data를 반환하도록 수정하면 필수 정보를 보존하면서 token량을 source에서 줄여 근본 원인을 해결합니다. 종합 단계 개선에 기여하지 않는 분량이 큰 페이지 콘텐츠와 추론 흔적을 전달하는 것을 피합니다.
+
+**[EN] Why A:** Modifying upstream agents to return structured data fixes the root cause by reducing token volume at the source while preserving essential information. It avoids passing bulky page content and reasoning traces that inflate tokens without improving the synthesis step.
+
+**[JA] Aの理由:** 上流エージェントを構造化データを返すように修正することで、重要な情報を保持しながらソースでのトークン量を削減して根本原因を修正します。統合ステップを改善せずにトークンを膨らませる大量のページコンテンツや推論トレースの受け渡しを避けます。
+
+---
+
+## 문제 15(시나리오: Multi-Agent Research System)
+
+**상황:** 테스트에서 종합 Agent가 결과를 병합하면서 특정 주장을 validation해야 하는 경우가 많다는 것을 관찰했습니다. 현재 validation이 필요하면 종합 Agent가 제어를 Coordinator에게 반환하고, Coordinator가 웹 검색 Agent를 호출한 뒤 결과와 함께 종합을 다시 호출합니다. 이로 인해 작업당 루프가 2-3회 추가되고 지연 시간이 40% 증가합니다. 평가 결과 이러한 validation의 85%는 단순 사실 확인(날짜, 이름, 통계)이고 15%는 더 깊은 research가 필요합니다. 시스템 안정성을 보존하면서 overhead를 가장 효과적으로 줄이는 접근 방식은 무엇인가요?
+
+**[EN] Situation:** In testing, you observe that the synthesis agent often needs to verify specific claims while merging results. Currently, when verification is needed, the synthesis agent returns control to the coordinator, which calls the web-search agent and then re-invokes synthesis with the results. This adds 2–3 extra loops per task and increases latency by 40%. Your assessment shows 85% of these verifications are simple fact checks (dates, names, stats) and 15% require deeper research. Which approach most effectively reduces overhead while preserving system reliability?
+
+**[JA] 状況:** テストでは、統合エージェントが結果をマージしながら特定の主張を確認する必要があることが多く観察されます。現在、確認が必要な場合、統合エージェントはコーディネーターに制御を返し、コーディネーターはWeb検索エージェントを呼び出し、その後結果とともに統合を再起動します。これによりタスクごとに2〜3回の追加ループが追加され、レイテンシが40%増加します。評価では、これらの確認の85%は単純なファクトチェック（日付、名前、統計）で、15%はより深い調査が必要です。オーバーヘッドを最も効果的に削減しながらシステムの信頼性を維持するアプローチはどれですか？
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] Which approach is most effective?**
+
+**[JA] 最も効果的なアプローチはどれですか？**
+
+- A) 종합 Agent에 모든 웹 검색 tool 접근 권한을 부여해 Coordinator 루프 없이 모든 validation 필요를 직접 처리하게 한다.
+- B) 종합 Agent가 모든 validation 필요 사항을 모아 마지막에 batch로 Coordinator에게 반환하면, Coordinator가 이를 한 번에 웹 검색 Agent에게 보낸다.
+- C) 웹 검색 Agent가 초기 research 중 종합에서 validation이 필요할 것을 예상해 각 source 주변의 추가 context를 사전에 cache한다.
+- D) 단순 확인을 위한 제한 범위 `verify_fact` tool을 종합 Agent에게 제공하고, 복잡한 validation은 Coordinator를 통해 웹 검색 Agent로 routing한다. **[정답]**
+
+**D인 이유:** 제한 범위 사실 validation tool은 종합 Agent가 단순 확인의 85%를 직접 처리하게 해 대부분의 추가 루프를 없애면서, 복잡한 validation 15%에는 Coordinator 위임 경로를 유지합니다. 이는 최소 권한 원칙을 지키면서 지연 시간을 크게 줄입니다.
+
+**[EN] Why D:** A limited-scope fact-verification tool lets the synthesis agent handle 85% of simple checks directly, eliminating most loops, while preserving the coordinator delegation path for the 15% of complex verifications. This applies least privilege while significantly reducing latency.
+
+**[JA] Dの理由:** 限定スコープのファクト確認ツールにより、統合エージェントは85%の単純なチェックを直接処理し、ほとんどのループを排除しながら、15%の複雑な確認のコーディネーター委譲パスを維持します。これは最小権限を適用しながらレイテンシを大幅に削減します。
+
+---
+
+## 시나리오: 지속적 통합을 위한 Claude Code
+
+---
+
+## 문제 16(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 
+CI pipeline이 코드 리뷰를 위한 프로젝트 context를 제공하기 위해 CLAUDE.md를 사용하며, Claude Code CLI를 `--print` 모드로 실행합니다. 
+개발자들은 대체로 리뷰가 실질적이라고 느낍니다. 하지만 발견 사항을 workflow에 통합하기 어렵다고 보고합니다. 
+Claude가 서술형 문단을 출력해 PR 댓글로 수동 복사해야 하기 때문입니다. 
+팀은 각 발견 사항을 코드의 관련 위치에 별도 인라인 PR 댓글로 자동 게시하고 싶어 하며, 이를 위해 파일 경로, 줄 번호, severity 수준, 제안 수정이 포함된 structured data가 필요합니다. 
+
+> 해석:
+클로드한테 CI 를 위한 코드리뷰를 시켰는데, PR이 존나 문장으로 나와서 징징대고 있다.
+structured data가 필요하다고 징징된다.
+어케하면 됨? 
+
+> 답 :`--output-format json`과 `--json-schema`를 사용해서 답변 형식을 고정하게 한다.
+> 결론 : 이 개씹 푸씨새끼들이  
+
+
+
+가장 효과적인 접근 방법은 무엇인가요?
+
+**[EN] Situation:** Your CI pipeline runs the Claude Code CLI (in `--print` mode) using CLAUDE.md to provide project context for code review, and developers generally find the reviews substantive. However, they report that integrating findings into the workflow is difficult—Claude outputs narrative paragraphs that must be manually copied into PR comments. The team wants to automatically post each finding as a separate inline PR comment at the relevant place in code, which requires structured data with file path, line number, severity level, and suggested fix. Which approach is most effective?
+
+**[JA] 状況:** CIパイプラインはCLAUDE.mdを使ってコードレビューのプロジェクトコンテキストを提供し、`--print`モードでClaude Code CLIを実行します。開発者は一般的にレビューが充実していると感じています。しかし、発見をワークフローに統合することが難しいと報告しています—ClaudeはPRコメントに手動でコピーする必要がある散文段落を出力します。チームはファイルパス、行番号、深刻度レベル、提案修正を含む構造化データを必要とする各発見をPRのコード内の関連箇所に別々のインラインPRコメントとして自動投稿したいです。最も効果的なアプローチはどれですか？
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] Which approach is most effective?**
+
+**[JA] 最も効果的なアプローチはどれですか？**
+
+- A) CLAUDE.md에 "Output Format for Review" 섹션과 structured 발견 예시를 추가해 Claude가 프로젝트 context에서 기대 형식을 학습하게 한다.
+- B) CLI 플래그 `--output-format json`과 `--json-schema`를 사용해 structured 발견을 강제한 뒤, 출력을 parsing해 GitHub API로 인라인 댓글을 게시한다. **[정답]**
+- C) 리뷰 prompt에 각 발견 사항이 `[FILE:path] [LINE:n] [SEVERITY:level] ...` 같은 parsing 가능한 template을 따르도록 명시적 형식 지시를 포함한다.
+- D) 서술형 리뷰 형식은 유지하되, Claude를 사용해 발견 사항의 structured JSON summary를 생성하는 summary 단계를 추가한다.
+
+**B인 이유:** 
+`--json-schema`와 함께 `--output-format json`을 사용하면 CLI 수준에서 structured output을 강제한다.
+GitHub API로 인라인 PR 댓글을 게시하기 위해 안정적으로 parsing 가능한 필수 필드(파일 경로, 줄 번호, severity, 제안 수정)를 갖춘 올바른 JSON을 보장합니다. 이는 structured output에 맞게 설계된 내장 CLI 기능을 활용합니다.
+
+**[EN] Why B:** Using `--output-format json` with `--json-schema` enforces structured output at the CLI level, guaranteeing well-formed JSON with the required fields (file path, line number, severity, suggested fix) that can be reliably parsed and posted as inline PR comments via the GitHub API. It leverages built-in CLI capabilities designed specifically for structured output.
+
+**[JA] Bの理由:** `--output-format json`と`--json-schema`を使用することで、CLIレベルでの構造化出力が強制され、GitHub APIを通じてインラインPRコメントとして確実に解析・投稿できる必要なフィールド（ファイルパス、行番号、深刻度、修正提案）を持つ適切な形式のJSONが保証されます。構造化出力のために特別に設計された組み込みのCLI機能を活用しています。
+
+---
+
+## 문제 17(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 
+팀은 코드 제안 생성에 Claude Code를 사용하지만, 한 가지 패턴을 발견했습니다. 
+엣지 케이스를 깨뜨리는 성능 최적화, 예상치 않게 동작을 바꾸는 정리 작업 같은 명확하지 않은 이슈는 다른 팀원이 PR을 리뷰할 때만 잡힙니다.
+생성 중 Claude의 추론을 보면 이러한 사례를 고려했지만 자신의 접근이 옳다고 결론 내렸습니다. 
+이 자기 점검 한계의 근본 원인을 직접 다루는 접근 방식은 무엇인가요?
+
+**[EN] Situation:** Your team uses Claude Code for generating code suggestions, but you notice a pattern: non-obvious issues—performance optimizations that break edge cases, cleanups that unexpectedly change behavior—are only caught when another team member reviews the PR. Claude’s reasoning during generation shows it considered these cases but concluded its approach was correct. Which approach directly addresses the root cause of this self-check limitation?
+
+**[JA] 状況:** チームはClaude Codeを使ってコード提案を生成していますが、パターンに気づきます：エッジケースを壊すパフォーマンス最適化、予期せず動作を変更するクリーンアップなど、非明白な問題は別のチームメンバーがPRをレビューするときにのみ発見されます。生成中のClaudeの推論はこれらのケースを考慮したが、そのアプローチが正しいと結論付けたことを示しています。この自己チェックの限界の根本原因に直接対処するアプローチはどれですか？
+
+> 해석:
+팀은 개씹 푸씨새끼처럼 코드생성에 클로드를 사용하고있다.
+근데 클로드한테 코드를 맡겨버리니,코드 해석을 못해서 씨발 다른 팀원이 PR해줘야 그제서야 파악<개폐급
+클로드한테 징징거리니 "나는 잘못없음ㅋㅋ"이라고 함
+어케함? 
+
+> 답 : 세션켜서 다시 코드 질문하셈(도 되는 것: 새 터미널에서 claude를 새로 실행하고 "이 변경 사항을 리뷰해 줘"라고 시킵니다. CI라면 git diff main | claude -p "리뷰해라"처럼 따로 한 번 더 실행합니다.)
+
+> 결론 : 이 개씹 푸씨새끼들이  
+
+**근본 원인을 직접 다루는 접근 방식은 무엇인가요?**
+
+**[EN] Which approach directly addresses the root cause?**
+
+**[JA] 根本原因に直接対処するアプローチはどれですか？**
+
+- A) 생성자의 추론에 접근하지 않는 두 번째 독립 Claude Code instance를 실행해 변경 사항을 리뷰한다. **[정답]**
+- B) 제안 생성 전에 더 철저히 숙고할 수 있도록 생성 단계에 extended thinking 모드를 활성화한다.
+- C) 최종 출력 전에 Claude가 자신의 제안을 비판하도록 생성 prompt에 명시적 자기 리뷰 지시를 추가한다.
+- D) 생성 중 기대 동작을 더 잘 이해하도록 전체 테스트 파일과 문서를 prompt context에 포함한다.
+
+**A인 이유:** 
+
+생성자의 추론에 접근하지 않는 두 번째 독립 Claude Code instance는 확증 편향을 피함으로써 근본 원인을 직접 해결합니다. 이 "fresh eyes" 관점은 작성자가 합리화한 이슈를 다른 리뷰어가 잡아내는 사람 동료 리뷰와 유사합니다.
+
+**[EN] Why A:** A second independent Claude Code instance without access to the generator’s reasoning directly addresses the root cause by avoiding confirmation bias. This “fresh eyes” perspective mirrors human peer review, where another reviewer catches issues the author rationalized.
+
+**[JA] Aの理由:** ジェネレーターの推論にアクセスしない2番目の独立したClaude Codeインスタンスは、確証バイアスを避けることによって根本原因に直接対処します。この「新鮮な目」の視点は、著者が合理化した問題を別のレビュアーが見つける人間のピアレビューを反映しています。
+
+**구현 방법:** "코드를 만든 Claude와 다른 Claude가 리뷰하게 한다"는 뜻이고, CI에서 `claude -p`를 한 번 더 따로 실행하는 것으로 구현합니다. 새로 실행한 Claude는 이전 대화를 모르는 상태로 시작하므로, 따로 실행하는 것 자체가 "추론에 접근하지 않음"을 보장합니다.
+
+```bash
+# 1단계: 코드 생성 (첫 번째 instance)
+claude -p "이 함수의 성능을 최적화해라"
+
+# 2단계: 리뷰 (두 번째 instance, 새 session)
+git diff main | claude -p "이 변경 사항을 리뷰해라. 엣지 케이스와 동작 변경을 찾아라."
+```
+
+2단계의 Claude가 받는 것은 `git diff`로 나온 코드 변경분뿐입니다. 1단계에서 "이 엣지 케이스는 괜찮다"고 판단한 추론 과정은 넘어가지 않습니다.
+
+**독립적인지 확인하는 기준:**
+
+- 독립이 되는 경우: `claude -p`를 새로 실행한다. 리뷰어에게 diff나 파일만 넘긴다.
+- 독립이 깨지는 경우: `--resume`이나 `--continue`로 생성 session을 이어서 리뷰를 시킨다. 생성 때의 대화 기록이나 추론 요약을 리뷰 prompt에 붙여 넣는다.
+
+**B, C, D가 틀린 이유:** 문제 상황에서 Claude는 엣지 케이스를 못 본 것이 아니라, 봤는데 "내 접근이 옳다"고 결론 냈습니다. 같은 session에서 다시 검토시키면 그 결론이 context에 그대로 남아 있어 같은 판단을 반복합니다. B(더 깊이 생각), C(자기 리뷰 지시), D(자료 추가)는 모두 같은 Claude가 같은 context에서 판단하는 구조를 바꾸지 못합니다.
+
+**개념 위치:** 5.9절의 "session context 격리" 문단, 8.3절 다중 패스 코드 리뷰
+
+---
+
+## 문제 18(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 
+코드 리뷰 컴포넌트는 반복적입니다. Claude가 변경된 파일을 분석한 뒤 최종 피드백 전에 context 이해를 위해 관련 파일(import, base class, tests)을 tool 호출로 요청할 수 있습니다. 애플리케이션은 Claude가 파일 내용을 요청할 수 있는 tool을 정의합니다. Claude는 tool을 호출하고 결과를 받은 뒤 분석을 계속합니다. API 비용 절감을 위해 batch 처리를 평가하고 있습니다. 이 workflow에서 batch 처리를 고려할 때 주요 기술적 한계는 무엇인가요?
+
+**[EN] Situation:** Your code review component is iterative: Claude analyzes the changed file, then may request related files (imports, base classes, tests) via tool calls to understand context before providing final feedback. Your application defines a tool that lets Claude request file contents; Claude calls the tool, gets results, and continues analysis. You’re evaluating batch processing to reduce API cost. What is the primary technical limitation when considering batch processing for this workflow?
+
+**[JA] 状況:** コードレビューコンポーネントは反復的です：Claudeは変更されたファイルを分析し、最終フィードバックを提供する前にコンテキストを理解するために関連ファイル（インポート、基底クラス、テスト）をツール呼び出しで要求する場合があります。アプリケーションはClaudeがファイルの内容を要求できるツールを定義し、ClaudeはツールXを呼び出し、結果を取得し、分析を続けます。APIコストを削減するためにバッチ処理を評価しています。このワークフローでバッチ処理を検討する際の主要な技術的制限は何ですか？
+
+**주요 기술적 한계는 무엇인가요?**
+
+**[EN] What is the primary technical limitation?**
+
+**[JA] 主要な技術的制限は何ですか？**
+
+- A) batch 처리는 출력을 입력 요청에 다시 매핑하는 상관관계 ID를 포함하지 않는다.
+- B) 비동기 모델은 요청 중간에 tool을 실행하고 Claude가 분석을 계속할 수 있도록 결과를 반환할 수 없다. **[정답]**
+- C) Batch API는 요청 매개변수의 tool 정의를 지원하지 않는다.
+- D) 최대 24시간의 batch 처리 지연이 풀 리퀘스트 피드백에는 너무 느리지만, 그 외에는 workflow가 작동한다.
+
+**B인 이유:** "fire-and-forget" 비동기 Batch API 모델에는 요청 중 tool 호출을 가로채고, tool을 실행한 후 Claude가 분석을 계속하도록 결과를 반환하는 메커니즘이 없습니다. 이는 단일 논리 상호작용 안에서 여러 tool 요청/응답 라운드가 필요한 반복적 tool 호출 workflow와 근본적으로 맞지 않습니다.
+
+**[EN] Why B:** A “fire-and-forget” asynchronous Batch API model has no mechanism to intercept a tool call during a request, execute the tool, and return results for Claude to continue analysis. This is fundamentally incompatible with iterative tool-calling workflows that require multiple tool request/response rounds within a single logical interaction.
+
+**[JA] Bの理由:** 「ファイアアンドフォーゲット」型の非同期Batch APIモデルには、リクエスト中にツール呼び出しを傍受し、ツールを実行し、Claudeが分析を継続するために結果を返すメカニズムがありません。これは、1つの論理的なインタラクション内で複数のツールリクエスト/レスポンスラウンドを必要とする反復的なツール呼び出しワークフローと根本的に互換性がありません。
+
+>**메모:** 
+>뭔말인지..
+>팀이 만든 코드 리뷰 프로그램이 Claude에게 변경된 파일을 보여 줍니다.
+Claude가 리뷰하다가 "이 함수가 상속한 base class를 봐야겠다"고 판단하면, 파일을 달라고 tool을 호출합니다.
+프로그램이 그 파일 내용을 읽어서 Claude에게 돌려줍니다.
+Claude가 그걸 보고 분석을 이어 갑니다. 필요하면 2~3번을 여러 번 반복합니다. 문제의 "반복적입니다"가 이 뜻입니다.
+다 보고 나면 최종 피드백을 냅니다.
+
+>즉 Claude와 프로그램이 여러 번 주고받아야 리뷰 한 건이 끝납니다.
+팀이 검토하는 것: 비용을 줄이려고 Batch API를 쓰려 합니다. Batch API는 요청을 묶어서 한 번에 제출해 두고, 나중에(최대 24시간 안에) 결과를 받아 가는 방식입니다. 대신 값이 절반입니다.
+
+> 왜 안 맞나(정답 B): Batch는 제출하면 끝입니다. 처리 도중에 Claude가 "이 파일 좀 줘"라고 해도, 그 요청을 받아서 파일을 읽어 돌려줄 프로그램이 그 순간에 연결돼 있지 않습니다. 위 2~3번의 주고받기가 불가능하므로 리뷰가 첫 tool 호출에서 멈춥니다.
+비유하면, 일반 API는 전화 통화이고 Batch API는 편지입니다. 통화 중에는 "그 서류 좀 읽어 줘"가 되지만, 편지 한 통으로는 중간에 물어볼 수 없습니다.
+
+
+
+
+---
+
+## 문제 19(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** CI/CD 시스템은 세 가지 Claude 기반 분석을 실행합니다. 
+
+(1) 완료 전까지 병합을 차단하는 모든 PR의 빠른 스타일 검사, 
+(2) 전체 코드베이스에 대한 포괄적인 주간 보안 감사, 
+(3) 최근 변경된 module에 대한 야간 테스트 케이스 생성. 
+
+Message Batches API는 50% 절감을 제공하지만 처리에 최대 24시간이 걸릴 수 있습니다. 
+허용 가능한 개발자 경험을 유지하면서 API 비용을 최적화하려고 합니다. 각 작업과 API 접근 방식을 올바르게 매칭한 조합은 무엇인가요?
+
+**[EN] Situation:** Your CI/CD system runs three Claude-based analyses: (1) fast style checks on every PR that block merging until completion, (2) comprehensive weekly security audits of the entire codebase, and (3) nightly test-case generation for recently changed modules. The Message Batches API offers 50% savings but processing can take up to 24 hours. You want to optimize API cost while maintaining an acceptable developer experience. Which combination correctly matches each task to an API approach?
+
+**[JA] 状況:** CI/CDシステムは3つのClaudeベースの分析を実行します：（1）マージが完了するまでブロックするすべてのPRに対する高速スタイルチェック、（2）コードベース全体の包括的な週次セキュリティ監査、（3）最近変更されたモジュールの夜間テストケース生成。Message Batches APIは50%の節約を提供しますが、処理には最大24時間かかる場合があります。APIコストを最適化しながら許容可能な開発者エクスペリエンスを維持したいです。各タスクを正しくAPIアプローチに一致させる組み合わせはどれですか？
+
+**올바른 조합은 무엇인가요?**
+
+**[EN] Which combination is correct?**
+
+**[JA] どの組み合わせが正しいですか？**
+
+- A) 50% 절감을 최대화하기 위해 세 작업 모두 Message Batches API를 사용하고, pipeline이 batch 완료를 polling하도록 구성한다.
+- B) PR 스타일 검사는 동기 호출을 사용하고, 주간 보안 감사와 야간 테스트 생성에는 Message Batches API를 사용한다. **[정답]**
+- C) 세 작업 모두 동기 호출을 사용해 일관된 응답 시간을 유지하고, 워크로드 전반의 비용 절감은 prompt caching에 의존한다.
+- D) PR 스타일 검사와 야간 테스트 생성은 동기 호출을 사용하고, 주간 보안 감사에만 Message Batches API를 사용한다.
+
+**B인 이유:** PR 스타일 검사는 개발자를 차단하며 동기 호출로 즉시 응답해야 합니다. 반면 주간 보안 감사와 야간 테스트 생성은 최대 24시간 batch window를 허용할 수 있는 마감이 비교적 유연한 예약 작업이므로 둘 다 50% 절감을 얻을 수 있습니다.
+
+**[EN] Why B:** PR style checks block developers and require immediate responses via synchronous calls, while weekly security audits and nightly test generation are scheduled tasks with flexible deadlines that can tolerate up to a 24-hour batch window—capturing 50% savings for both.
+
+**[JA] Bの理由:** PRスタイルチェックは開発者をブロックし、同期呼び出しによる即時レスポンスを必要としますが、週次セキュリティ監査と夜間テスト生成は最大24時間のバッチウィンドウを許容できる柔軟な期限を持つ予定されたタスクです—両方で50%の節約を実現できます。
+
+---
+
+## 문제 20(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 자동 리뷰가 실제 이슈를 찾지만 개발자들은 피드백이 실행 가능하지 않다고 보고합니다. 발견 사항에는 정확히 무엇을 바꿔야 하는지 지정하지 않은 채 "복잡한 티켓 routing 로직"이나 "잠재적 null pointer" 같은 문구가 포함됩니다. "항상 구체적 수정 제안을 포함하라" 같은 상세 지시를 추가해도 모델 출력은 여전히 어떤 때는 상세하지만 어떤 때는 모호해 일관성이 없습니다. 어떤 prompting 기법이 일관되게 실행 가능한 피드백을 가장 안정적으로 생성하나요?
+
+**[EN] Situation:** Your automated reviews find real issues, but developers report the feedback is not actionable. Findings include phrases like “complex ticket routing logic” or “potential null pointer” without specifying what exactly to change. When you add detailed instructions like “always include concrete fix suggestions,” the model still produces inconsistent output—sometimes detailed, sometimes vague. Which prompting technique most reliably produces consistently actionable feedback?
+
+**[JA] 状況:** 自動レビューは実際の問題を見つけますが、開発者はフィードバックが実用的でないと報告しています。発見には何を正確に変更するかを指定しない「複雑なチケットルーティングロジック」や「潜在的なnullポインター」などのフレーズが含まれています。「常に具体的な修正提案を含める」などの詳細な指示を追加しても、モデルは一貫性のない出力—時に詳細、時に曖昧—を生成します。一貫して実用的なフィードバックを最も確実に生成するプロンプティングテクニックはどれですか？
+
+**가장 신뢰할 수 있는 prompting 기법은 무엇인가요?**
+
+**[EN] Which prompting technique is most reliable?**
+
+**[JA] 最も確実なプロンプティングテクニックはどれですか？**
+
+- A) 피드백 형식의 각 부분(위치, 이슈, severity, 제안 수정)에 대해 더 명시적인 요구사항으로 지시를 더 다듬는다.
+- B) 모델이 구체적 수정을 제안할 충분한 정보를 갖도록 더 많은 주변 코드베이스를 context window에 포함한다.
+- C) 한 prompt는 이슈를 식별하고 두 번째 prompt는 수정을 생성하는 2패스 접근으로 전문화를 허용한다.
+- D) 식별된 이슈, 코드 위치, 구체적 수정 제안 등 정확히 필요한 형식을 보여주는 few-shot 예시 3-4개를 추가한다. **[정답]**
+
+**D인 이유:** Few-shot 예시는 지시만으로 출력이 가변적일 때 출력 형식을 일관되게 만드는 가장 효과적인 기법입니다. 원하는 구조(이슈, 위치, 구체적 수정)를 보여주는 예시 3-4개는 모델이 따를 구체적 패턴을 제공하며, 추상적인 지시만 쓰는 것보다 안정적입니다.
+
+**[EN] Why D:** Few-shot examples are the most effective technique for achieving consistent output format when instructions alone produce variable results. Providing 3–4 examples that show the exact desired structure (issue, location, concrete fix) gives the model a concrete pattern to follow, which is more reliable than abstract instructions.
+
+**[JA] Dの理由:** Few-shotサンプルは指示だけでは変動する出力が生成される場合に一貫した出力形式を達成するための最も効果的な技術です。正確な望ましい構造（問題、場所、具体的な修正）を示す3〜4のサンプルを提供することで、抽象的な指示よりも信頼性の高いパターンをモデルに与えます。
+
+---
+
+## 문제 21(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** CI pipeline에는 두 가지 Claude 기반 코드 리뷰 모드가 있습니다. 완료될 때까지 PR 병합을 차단하는 병합 전 커밋 hook과, 밤새 실행되어 batch 완료를 polling하고 PR에 자세한 제안을 게시하는 "deep analysis"입니다. 50% 절감을 제공하지만 polling이 필요하고 최대 24시간 걸릴 수 있는 Message Batches API를 사용해 API 비용을 줄이고 싶습니다. 어떤 모드가 batch 처리를 사용해야 하나요?
+
+**[EN] Situation:** Your CI pipeline includes two Claude-based code review modes: a pre-merge-commit hook that blocks PR merge until completion, and a “deep analysis” that runs overnight, polls for batch completion, and posts detailed suggestions to the PR. You want to reduce API cost using the Message Batches API, which offers 50% savings but requires polling and can take up to 24 hours. Which mode should use batch processing?
+
+**[JA] 状況:** CIパイプラインには2つのClaudeベースのコードレビューモードがあります：マージを完了するまでブロックするPRプリマージコミットフック、および夜間に実行され、バッチ完了をポーリングし、詳細な提案をPRに投稿する「深い分析」。50%の節約を提供するが最大24時間かかる可能性があるMessage Batches APIを使ってAPIコストを削減したいです。どのモードがバッチ処理を使うべきですか？
+
+**어떤 모드가 batch 처리를 사용해야 하나요?**
+
+**[EN] Which mode should use batch processing?**
+
+**[JA] どのモードがバッチ処理を使うべきですか？**
+
+- A) 병합 전 커밋 hook만.
+- B) deep analysis만. **[정답]**
+- C) 두 모드 모두.
+- D) 어느 모드도 아님.
+
+**B인 이유:** Deep analysis는 이미 밤새 실행되고 지연을 허용하고 결과 게시 전에 polling하는 구조이므로 batch 처리에 이상적인 후보입니다. 이는 Message Batches API의 비동기 polling 기반 architecture와 잘 맞고 50% 절감을 제공합니다.
+
+**[EN] Why B:** Deep analysis is an ideal candidate for batch processing because it already runs overnight, tolerates delay, and uses a polling model before publishing results—matching the asynchronous, polling-based architecture of the Message Batches API while capturing 50% savings.
+
+**[JA] Bの理由:** 深い分析は夜間に実行され、遅延を許容し、結果を公開する前のポーリングモデルを使用しているため、バッチ処理の理想的な候補です—Message Batches APIの非同期ポーリングベースのアーキテクチャに合致しながら50%の節約を実現します。
+
+---
+
+## 문제 22(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 자동 리뷰가 댓글과 docstring을 분석합니다. 현재 prompt는 Claude에게 "댓글이 정확하고 최신인지 확인하라"고 지시합니다. 발견 사항은 TODO 표시나 단순 설명 같은 허용 가능한 패턴을 자주 문제로 표시하면서, 코드가 더 이상 구현하지 않는 동작을 설명하는 댓글은 놓칩니다. 이 일관되지 않은 분석의 근본 원인을 해결하려면 무엇을 바꿔야 하나요?
+
+**[EN] Situation:** Your automated review analyzes comments and docstrings. The current prompt instructs Claude to “check that comments are accurate and up to date.” Findings often flag acceptable patterns (TODO markers, simple descriptions) while missing comments describing behavior the code no longer implements. What change addresses the root cause of this inconsistent analysis?
+
+**[JA] 状況:** 自動レビューはコメントとdocstringを分析します。現在のプロンプトはClaudeに「コメントが正確で最新であることを確認する」よう指示します。発見は許容可能なパターン（TODOマーカー、単純な説明）にフラグを立てる一方、コードが実装しなくなった動作を説明するコメントを見落とすことが多いです。この不一致な分析の根本原因に対処する変更はどれですか？
+
+**근본 원인을 해결하려면 무엇을 바꿔야 하나요?**
+
+**[EN] What change addresses the root cause?**
+
+**[JA] 根本原因に対処する変更はどれですか？**
+
+- A) Claude가 최근 코드 변경보다 오래된 댓글을 식별할 수 있도록 `git blame` 데이터를 포함한다.
+- B) 모델이 코드베이스의 유사 패턴을 인식하도록 오해를 부르는 댓글의 few-shot 예시를 추가한다.
+- C) 노이즈를 줄이기 위해 분석 전에 TODO, FIXME, 설명형 댓글 패턴을 필터링한다.
+- D) 명시적 기준을 지정한다. 댓글이 주장하는 동작이 코드의 실제 동작과 모순될 때만 표시한다. **[정답]**
+
+**D인 이유:** 명시적 기준, 즉 댓글이 주장하는 동작이 실제 코드 동작과 모순될 때만 표시한다는 기준은 모호한 지시를 구체적인 판정 기준으로 바꿔 근본 원인을 해결합니다. 이는 허용 가능한 패턴에 대한 false positive과 실제로 잘못된 댓글을 놓치는 문제도 줄입니다.
+
+**[EN] Why D:** Explicit criteria—flagging comments only when claimed behavior contradicts actual code behavior—directly addresses the root cause by replacing a vague instruction with a precise definition of what constitutes a problem. This reduces false positives on acceptable patterns and misses of truly misleading comments.
+
+**[JA] Dの理由:** 明示的な基準—主張された動作が実際のコード動作と矛盾する場合にのみコメントにフラグを立てる—は、曖昧な指示を問題の正確な定義に置き換えることで根本原因に直接対処します。これにより許容可能なパターンでの偽陽性が減り、本当に誤解を招くコメントの見落としが減ります。
+
+---
+
+## 문제 23(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 자동 코드 리뷰 시스템이 일관되지 않은 severity 평가를 보입니다. null pointer 위험 같은 유사 이슈가 어떤 PR에서는 "critical"로, 다른 PR에서는 "medium"으로 평가됩니다. 개발자 설문에서도 신뢰가 떨어졌다는 결과가 나왔습니다. 많은 개발자가 "절반은 틀렸다"고 느끼며 발견 사항을 읽지 않고 무시하기 시작합니다. false positive 비율이 높은 범주는 정확한 범주에 대한 신뢰까지 훼손합니다. 개발자 신뢰를 회복하면서 시스템을 개선하는 가장 좋은 접근은 무엇인가요?
+
+**[EN] Situation:** Your automated code review system shows inconsistent severity ratings—similar issues like null pointer risks are rated “critical” in some PRs but only “medium” in others. Developer surveys show growing distrust—many start dismissing findings without reading because “half are wrong.” High-false-positive categories erode trust in accurate categories. Which approach best restores developer trust while improving the system?
+
+**[JA] 状況:** 自動コードレビューシステムは一貫性のない深刻度評価を示しています—nullポインターリスクのような類似した問題が、あるPRでは「critical」と評価され、別のPRでは「medium」としか評価されません。開発者調査では不信感が高まっています—多くが「半分は間違っている」ために読まずに発見を無視し始めています。高い偽陽性カテゴリは正確なカテゴリへの信頼を損なっています。開発者の信頼を回復しながらシステムを改善する最善のアプローチはどれですか？
+
+**개발자 신뢰를 가장 잘 회복하는 접근은 무엇인가요?**
+
+**[EN] Which approach best restores developer trust?**
+
+**[JA] 開発者の信頼を最も回復するアプローチはどれですか？**
+
+- A) false positive 비율이 높은 범주(스타일, 명명, 문서화)를 일시적으로 비활성화하고, prompt를 개선하는 동안 정확도가 높은 범주만 유지한다. **[정답]**
+- B) 모든 범주를 활성화하되 각 발견 사항에 confidence 점수를 표시해 개발자가 조사할 대상을 결정하게 한다.
+- C) 모든 범주를 활성화한 채 다음 몇 주 동안 각 범주의 accuracy 개선을 위해 few-shot 예시를 추가한다.
+- D) 전체 false positive 비율을 낮추기 위해 모든 범주에 균일한 엄격도 완화를 적용한다.
+
+**A인 이유:** false positive 비율이 높은 범주를 일시적으로 비활성화하면 개발자가 모든 것을 무시하게 만드는 노이즈를 제거해 신뢰 하락을 즉시 멈출 수 있습니다. 동시에 보안과 정확성 같은 정확도가 높은 범주의 가치를 유지합니다. 또한 문제 범주를 다시 활성화하기 전에 prompt를 개선할 여지를 만듭니다.
+
+**[EN] Why A:** Temporarily disabling high-false-positive categories immediately stops trust erosion by removing noisy findings that cause developers to dismiss everything, while preserving value from high-precision categories like security and correctness. It also creates space to improve prompts for problematic categories before re-enabling them.
+
+**[JA] Aの理由:** 高偽陽性カテゴリを一時的に無効化することで、開発者がすべてを無視する原因となるノイズの多い発見を除去し、信頼の侵食を即座に停止しながら、セキュリティや正確性などの高精度カテゴリの価値を保持します。また、再有効化する前に問題のあるカテゴリのプロンプトを改善するための余地を作ります。
+
+---
+
+## 문제 24(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 자동 리뷰가 각 PR에 대해 테스트 케이스 제안을 생성합니다. 강의 완료 추적을 추가하는 PR을 리뷰할 때 Claude는 테스트 케이스 10개를 제안했지만, 개발자 피드백에 따르면 6개는 기존 테스트 스위트가 이미 다루는 중복 시나리오였습니다. 어떤 변경이 중복 제안을 가장 효과적으로 줄이나요?
+
+**[EN] Situation:** Your automated review generates test-case suggestions for each PR. Reviewing a PR that adds course completion tracking, Claude suggests 10 test cases, but developer feedback shows that 6 duplicate scenarios already covered by the existing test suite. What change most effectively reduces duplicate suggestions?
+
+**[JA] 状況:** 自動レビューは各PRにテストケースの提案を生成します。コース完了トラッキングを追加するPRをレビューする際、Claudeは10のテストケースを提案しますが、開発者のフィードバックでは6つが既存のテストスイートでカバーされているシナリオと重複しています。重複した提案を最も効果的に削減する変更はどれですか？
+
+**가장 효과적인 변경 사항은 무엇인가요?**
+
+**[EN] What change is most effective?**
+
+**[JA] 最も効果的な変更はどれですか？**
+
+- A) Claude가 이미 다뤄진 시나리오를 판단할 수 있도록 기존 테스트 파일을 context에 포함한다. **[정답]**
+- B) Claude가 가장 가치 있는 케이스를 먼저 우선순위화한다고 가정하고 제안 개수를 10개에서 5개로 줄인다.
+- C) 성공 경로가 아니라 엣지 케이스와 오류 조건에만 집중하라는 지시를 추가한다.
+- D) 설명이 키워드 겹침으로 기존 테스트 이름과 일치하는 제안을 필터링하는 후처리를 구현한다.
+
+**A인 이유:** 기존 테스트 파일을 포함하면 중복의 근본 원인을 해결합니다. Claude는 어떤 테스트가 이미 존재하는지 알아야만 이미 커버된 시나리오 제안을 피할 수 있습니다. 이를 통해 Claude는 실제로 새롭고 가치 있는 테스트를 제안하는 데 필요한 정보를 얻습니다.
+
+**[EN] Why A:** Including the existing test file fixes the root cause of duplication: Claude can only avoid suggesting already-covered scenarios if it knows what tests already exist. This gives Claude the information needed to propose genuinely new, valuable tests.
+
+**[JA] Aの理由:** 既存のテストファイルを含めることで、重複の根本原因を修正します：Claudeは既にどのテストが存在するかを知っている場合にのみ、既にカバーされているシナリオの提案を避けることができます。これにより、Claudeが真に新しく価値のあるテストを提案するために必要な情報が提供されます。
+
+---
+
+## 문제 25(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 초기 자동 리뷰가 12개 발견 사항을 식별한 뒤 개발자가 이슈를 해결하기 위해 새 커밋을 푸시합니다. 리뷰를 다시 실행하면 8개 발견 사항이 나오지만, 개발자들은 새 커밋에서 이미 수정된 코드에 대한 이전 댓글 5개가 중복된다고 보고합니다. 리뷰의 철저함은 유지하면서 이 중복 피드백을 제거하는 가장 효과적인 방법은 무엇인가요?
+
+**[EN] Situation:** After an initial automated review identifies 12 findings, a developer pushes new commits to address issues. Re-running review produces 8 findings, but developers report that 5 duplicate previous comments on code that was already fixed in the new commits. What is the most effective way to eliminate this redundant feedback while maintaining thoroughness?
+
+**[JA] 状況:** 最初の自動レビューで12の発見が特定された後、開発者は問題に対処するために新しいコミットをプッシュします。レビューを再実行すると8の発見が生成されますが、開発者は新しいコミットで既に修正されたコードに対する5つの以前のコメントの重複を報告します。徹底性を維持しながらこの冗長なフィードバックを排除する最も効果的な方法はどれですか？
+
+**중복 피드백을 제거하는 가장 효과적인 방법은 무엇인가요?**
+
+**[EN] What is the most effective way to eliminate redundant feedback?**
+
+**[JA] 最も効果的な方法はどれですか？**
+
+- A) 중간 커밋 리뷰를 건너뛰고 PR 생성 시점과 최종 병합 전 상태에서만 리뷰를 실행한다.
+- B) 게시 전에 파일 경로와 이슈 설명으로 이전 발견 사항과 일치하는 항목을 제거하는 후처리 필터를 추가한다.
+- C) 리뷰 범위를 가장 최근 push에서 변경된 파일로 제한하고 이전 커밋의 파일은 제외한다.
+- D) 이전 리뷰 발견 사항을 context에 포함하고 Claude에게 새 이슈나 아직 해결되지 않은 이슈만 보고하도록 지시한다. **[정답]**
+
+**D인 이유:** 이전 리뷰 발견 사항을 context에 포함하면 Claude가 새 문제와 최근 커밋에서 이미 해결된 문제를 구분할 수 있습니다. 이렇게 하면 리뷰의 철저함은 유지하면서도 Claude가 새 이슈와 해결된 이슈를 구분해, 수정된 코드에 대한 중복 피드백을 피할 수 있습니다.
+
+**[EN] Why D:** Including prior review findings in context lets Claude distinguish new problems from those already addressed in recent commits. This preserves review thoroughness while using Claude’s reasoning to avoid redundant feedback on fixed code.
+
+**[JA] Dの理由:** コンテキストに以前のレビュー発見を含めることで、Claudeが最近のコミットで既に対処された問題と新しい問題を区別できるようにします。これにより修正されたコードへの冗長なフィードバックを避けながら、Claudeの推論を使ってレビューの徹底性を維持します。
+
+---
+
+## 문제 26(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** pipeline 스크립트가 `claude "Analyze this pull request for security issues"`를 실행하지만 작업이 끝나지 않고 멈춰 있습니다. 로그는 Claude Code가 대화형 입력을 기다리는 상태입니다. 자동화 pipeline에서 Claude Code를 실행하는 올바른 접근 방식은 무엇인가요?
+
+**[EN] Situation:** Your pipeline script runs `claude "Analyze this pull request for security issues"`, but the job hangs indefinitely. Logs show Claude Code is waiting for interactive input. What is the correct approach to run Claude Code in an automated pipeline?
+
+**[JA] 状況:** パイプラインスクリプトが`claude "このプルリクエストのセキュリティ問題を分析してください"`を実行しますが、ジョブが無期限にハングします。ログはClaude Codeがインタラクティブな入力を待っていることを示しています。自動化されたパイプラインでClaude Codeを実行する正しいアプローチは何ですか？
+
+**올바른 접근 방식은 무엇인가요?**
+
+**[EN] What is the correct approach?**
+
+**[JA] 正しいアプローチは何ですか？**
+
+- A) `--batch` 플래그 추가: `claude --batch "Analyze this pull request for security issues"`.
+- B) `-p` 플래그 추가: `claude -p "Analyze this pull request for security issues"`. **[정답]**
+- C) stdin을 `/dev/null`에서 리디렉션: `claude "Analyze this pull request for security issues" < /dev/null`.
+- D) 명령 실행 전에 환경 변수 `CLAUDE_HEADLESS=true` 설정.
+
+**B인 이유:** `-p`(또는 `--print`) 플래그는 Claude Code를 비대화형으로 실행하는 문서화된 방법입니다. prompt를 처리하고 결과를 stdout에 출력한 뒤 사용자 입력을 기다리지 않고 종료합니다. CI/CD pipeline에 적합합니다.
+
+**[EN] Why B:** The `-p` (or `--print`) flag is the documented way to run Claude Code non-interactively. It processes the prompt, prints the result to stdout, and exits without waiting for user input—ideal for CI/CD pipelines.
+
+**[JA] Bの理由:** `-p`（または`--print`）フラグはClaude Codeを非インタラクティブで実行するための文書化された方法です。プロンプトを処理し、結果をstdoutに出力し、ユーザー入力を待たずに終了します—CI/CDパイプラインに最適です。
+
+---
+
+## 문제 27(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 풀 리퀘스트가 재고 추적 module의 14개 파일을 변경합니다. 모든 파일을 함께 분석하는 단일 패스 리뷰는 일부 파일에는 자세한 피드백을 주지만 다른 파일에는 얕은 댓글을 달고, 명백한 버그를 놓치며, 한 파일에서는 패턴을 문제로 표시하지만 같은 PR의 동일 코드에서는 승인하는 모순된 피드백을 생성합니다. 리뷰를 어떻게 재구성해야 하나요?
+
+**[EN] Situation:** A pull request changes 14 files in an inventory tracking module. A single-pass review that analyzes all files together produces inconsistent results: detailed feedback on some files but shallow comments on others, missed obvious bugs, and contradictory feedback (a pattern is flagged in one file but identical code is approved in another file in the same PR). How should you restructure the review?
+
+**[JA] 状況:** プルリクエストが在庫追跡モジュールの14ファイルを変更しています。すべてのファイルを一緒に分析する単一パスのレビューは一貫性のない結果を生成します：一部のファイルには詳細なフィードバック、他のファイルには浅いコメント、明らかなバグの見落とし、矛盾したフィードバック（同じPR内の別のファイルでは同一コードが承認されているのに、1つのファイルでパターンにフラグが立てられる）。レビューをどのように再構築すべきですか？
+
+**리뷰를 어떻게 재구성해야 하나요?**
+
+**[EN] How should you restructure the review?**
+
+**[JA] どのように再構築すべきですか？**
+
+- A) 전체 PR 리뷰 패스를 세 번 독립적으로 실행하고 세 번 중 최소 두 번 나타나는 이슈만 표시한다.
+- B) 집중된 패스로 분할한다. 각 파일을 개별적으로 로컬 이슈에 대해 리뷰한 뒤, 파일 간 데이터 흐름을 검토하는 별도 통합 지향 패스를 실행한다. **[정답]**
+- C) 자동 리뷰를 실행하기 전에 개발자에게 큰 PR을 3-4개 파일의 더 작은 제출로 나누도록 요구한다.
+- D) 더 큰 context window가 있는 큰 모델로 전환해 14개 파일 모두에 한 번에 충분히 주의를 기울일 수 있게 한다.
+
+**B인 이유:** 집중된 파일별 패스는 주의 분산이라는 근본 원인을 다루어 파일마다 비슷한 깊이로 리뷰할 수 있고 로컬 이슈도 더 안정적으로 찾을 수 있습니다. 이후 별도 통합 지향 패스가 의존성과 데이터 흐름 상호작용 같은 파일 간 문제를 다룹니다.
+
+**[EN] Why B:** Focused per-file passes address the root cause—attention dilution—by ensuring consistent depth and reliable local issue detection. A separate integration-oriented pass then covers cross-file concerns such as dependency and data-flow interactions.
+
+**[JA] Bの理由:** 集中したファイルごとのパスは根本原因—注意力の希薄化—に対処し、一貫した深さと信頼できるローカルの問題検出を確保します。別の統合指向のパスは、依存関係やデータフローの相互作用などのクロスファイルの懸念事項をカバーします。
+
+---
+
+## 문제 28(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 자동 코드 리뷰는 풀 리퀘스트당 평균 15개 발견 사항을 생성하며, 개발자는 40% false positive 비율을 보고합니다. 병목은 조사 시간입니다. 개발자는 수정할지 무시할지 결정하기 전에 각 발견 사항을 클릭해 Claude의 근거를 읽어야 합니다. CLAUDE.md에는 이미 허용 가능한 패턴에 대한 포괄적 규칙이 포함되어 있고, 이해관계자들은 개발자가 보기 전에 발견 사항을 필터링하는 모든 접근을 거부했습니다. 조사 시간을 가장 잘 줄이는 변경은 무엇인가요?
+
+**[EN] Situation:** Your automated code review averages 15 findings per pull request, and developers report a 40% false-positive rate. The bottleneck is investigation time: developers must click into each finding to read Claude’s rationale before deciding whether to fix or dismiss it. Your CLAUDE.md already contains comprehensive rules for acceptable patterns, and stakeholders rejected any approach that filters findings before developers see them. What change best addresses investigation time?
+
+**[JA] 状況:** 自動コードレビューはPRごとに平均15の発見を示し、開発者は40%の偽陽性率を報告しています。ボトルネックは調査時間です：開発者は修正するか無視するかを決める前に各発見をクリックしてClaudeの根拠を読む必要があります。CLAUDE.mdには許容可能なパターンに対する包括的なルールがすでに含まれており、利害関係者は開発者が見る前に発見をフィルタリングするアプローチを拒否しました。調査時間に最も対処する変更はどれですか？
+
+**조사 시간을 가장 잘 줄이는 변경은 무엇인가요?**
+
+**[EN] What change best addresses investigation time?**
+
+**[JA] 調査時間に最も対処する変更はどれですか？**
+
+- A) Claude가 각 발견 사항에 근거와 confidence 추정치를 직접 포함하도록 요구한다. **[정답]**
+- B) 발견 패턴을 분석하고 과거 false positive 시그니처와 일치하는 항목을 자동 억제하는 후처리기를 추가한다.
+- C) 발견 사항을 "차단 이슈"와 "제안"으로 classification하고 수준별로 다른 리뷰 요구사항을 둔다.
+- D) Claude가 높은 confidence 발견만 보여주도록 구성해 개발자가 보기 전에 불확실한 플래그를 필터링한다.
+
+**A인 이유:** 각 발견 사항에 근거와 confidence를 직접 포함하면 개발자가 각 항목을 따로 열어보지 않고도 빠르게 triage할 수 있어 조사 시간이 줄어듭니다. 모든 발견 사항은 계속 보이므로 발견 사항을 숨기지 않는다는 제약도 지키면서 개발자 의사결정을 빠르게 합니다.
+
+**[EN] Why A:** Including rationale and confidence directly in each finding reduces investigation time by letting developers quickly triage without opening each finding. It satisfies the “no filtering” constraint because all findings remain visible while accelerating developer decision-making.
+
+**[JA] Aの理由:** 各発見に根拠と信頼度を直接含めることで、開発者が各発見を開くことなく迅速にトリアージできるようにし、調査時間を削減します。すべての発見が表示されたままであるため「フィルタリングなし」の制約を満たしながら、開発者の意思決定を加速します。
+
+---
+
+## 문제 29(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 자동 코드 리뷰 분석 결과 발견 범주별 false positive 비율 차이가 큽니다. 보안/정확성 발견은 false positive 8%, 성능 발견은 18%, 스타일/명명 발견은 52%, 문서화 발견은 48%입니다. 개발자 설문에서도 신뢰가 떨어졌다는 결과가 나왔습니다. 많은 개발자가 "절반은 틀렸다"고 느끼며 발견 사항을 읽지 않고 무시하기 시작합니다. false positive 비율이 높은 범주는 정확한 범주에 대한 신뢰까지 훼손합니다. 개발자 신뢰를 회복하면서 시스템을 개선하는 가장 좋은 접근은 무엇인가요?
+
+**[EN] Situation:** Analysis of your automated code review shows large differences in false-positive rates by finding category: security/correctness findings have 8% false positives, performance findings 18%, style/naming findings 52%, and documentation findings 48%. Developer surveys show growing distrust—many start dismissing findings without reading because “half are wrong.” High-false-positive categories erode trust in accurate categories. Which approach best restores developer trust while improving the system?
+
+**[JA] 状況:** 自動コードレビューの分析では、発見カテゴリ別に大きな偽陽性率の違いが示されています：セキュリティ/正確性の発見は8%の偽陽性、パフォーマンスは18%、スタイル/ネーミングは52%、ドキュメントは48%。開発者調査では不信感が高まっています—多くが「半分は間違っている」ために読まずに発見を無視し始めています。高偽陽性カテゴリは正確なカテゴリへの信頼を損なっています。開発者の信頼を最も回復しながらシステムを改善するアプローチはどれですか？
+
+**개발자 신뢰를 가장 잘 회복하는 접근은 무엇인가요?**
+
+**[EN] Which approach best restores developer trust?**
+
+**[JA] 開発者の信頼を最も回復するアプローチはどれですか？**
+
+- A) false positive 비율이 높은 범주(스타일, 명명, 문서화)를 일시적으로 비활성화하고, prompt를 개선하는 동안 정확도가 높은 범주만 유지한다. **[정답]**
+- B) 모든 범주를 활성화하되 각 발견 사항에 confidence 점수를 표시해 개발자가 조사할 대상을 결정하게 한다.
+- C) 모든 범주를 활성화한 채 다음 몇 주 동안 각 범주의 accuracy 개선을 위해 few-shot 예시를 추가한다.
+- D) 전체 false positive 비율을 낮추기 위해 모든 범주에 균일한 엄격도 완화를 적용한다.
+
+**A인 이유:** false positive 비율이 높은 범주를 일시적으로 비활성화하면 개발자가 모든 것을 무시하게 만드는 노이즈를 제거해 신뢰 하락을 즉시 멈출 수 있습니다. 동시에 보안과 정확성 같은 정확도가 높은 범주의 가치를 유지합니다. 또한 문제 범주를 다시 활성화하기 전에 prompt를 개선할 여지를 만듭니다.
+
+**[EN] Why A:** Temporarily disabling high-false-positive categories immediately stops trust erosion by removing noisy findings that cause developers to dismiss everything, while preserving value from high-precision categories like security and correctness. It also creates space to improve prompts for problematic categories before re-enabling them.
+
+**[JA] Aの理由:** 高偽陽性カテゴリを一時的に無効化することで、開発者がすべてを無視する原因となるノイズの多い発見を除去し、信頼の侵食を即座に停止しながら、セキュリティや正確性などの高精度カテゴリの価値を保持します。また、再有効化する前に問題のあるカテゴリのプロンプトを改善するための余地を作ります。
+
+---
+
+## 문제 30(시나리오: 지속적 통합을 위한 Claude Code)
+
+**상황:** 팀은 자동 분석 API 비용을 줄이고 싶어 합니다. 현재 동기 Claude 호출은 두 workflow를 지원합니다. (1) 개발자가 병합하기 전에 반드시 완료되어야 하는 차단형 병합 전 검사, (2) 다음 날 아침에 검토할 수 있도록 밤새 생성되는 기술 부채 보고서. 관리자는 50% 절감을 위해 둘 다 Message Batches API로 옮기자고 제안합니다. 이 제안을 어떻게 평가해야 하나요?
+
+**[EN] Situation:** Your team wants to reduce API costs for automated analysis. Currently, synchronous Claude calls support two workflows: (1) a blocking pre-merge check that must complete before developers can merge, and (2) a technical debt report generated overnight for review the next morning. Your manager proposes moving both to the Message Batches API to save 50%. How should you evaluate this proposal?
+
+**[JA] 状況:** チームはAPIコストを削減したいです。現在、同期Claude呼び出しが2つのワークフローをサポートします：（1）開発者がマージできるようになる前に完了する必要があるブロッキングプリマージチェック、（2）翌朝のレビューのために夜間に生成される技術的負債レポート。マネージャーは50%節約のためにMessage Batches APIに両方を移行することを提案しています。この提案をどのように評価すべきですか？
+
+**이 제안을 어떻게 평가해야 하나요?**
+
+**[EN] How should you evaluate this proposal?**
+
+**[JA] どのように評価すべきですか？**
+
+- A) 둘 다 batch 처리로 옮기고, batch가 너무 오래 걸리면 동기 호출로 fallback한다.
+- B) 두 workflow 모두 batch 처리로 옮기고 완료 확인을 위해 상태를 polling한다.
+- C) 기술 부채 보고서에만 batch 처리를 사용하고, 병합 전 검사는 동기 호출을 유지한다. **[정답]**
+- D) batch 결과 순서 문제를 피하기 위해 두 workflow 모두 동기 호출을 유지한다.
+
+**C인 이유:** Message Batches API 처리는 최대 24시간 걸릴 수 있고 지연 시간 SLA가 없어, 야간 기술 부채 보고서에는 허용 가능하지만 개발자가 기다리는 차단형 병합 전 검사에는 허용되지 않습니다. 핵심은 각 workflow의 지연 허용 범위에 맞는 API를 고르는 것입니다.
+
+**[EN] Why C:** Message Batches API processing can take up to 24 hours with no latency SLA, which is acceptable for overnight technical debt reports but unacceptable for blocking pre-merge checks where developers wait. This matches each workflow to the right API based on latency requirements.
+
+**[JA] Cの理由:** Message Batches APIの処理は最大24時間かかる可能性があり、レイテンシSLAの保証がありません。これは開発者が待つブロッキングプリマージチェックには許容できませんが、技術的負債レポートのような夜間バッチワークロードには理想的です。各ワークフローをレイテンシ要件に基づいて適切なAPIに一致させます。
+
+---
+
+## 시나리오: Claude Code를 사용한 코드 생성
+
+---
+
+## 문제 31(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** Claude Code에 API 응답을 내부 normalization 형식으로 변환하는 함수를 구현해 달라고 요청했습니다. 두 번의 반복 후에도 출력 구조가 기대와 맞지 않습니다. 일부 필드는 다르게 중첩되고 타임스탬프 형식도 잘못되어 있습니다. 요구사항은 산문으로 설명했지만 Claude가 매번 다르게 해석합니다.
+
+**[EN] Situation:** You asked Claude Code to implement a function that transforms API responses into an internal normalized format. After two iterations, the output structure still doesn’t match expectations—some fields are nested differently and timestamps are formatted incorrectly. You described requirements in prose, but Claude interprets them differently each time.
+
+**[JA] 状況:** Claudeに、APIレスポンスを内部の正規化された形式に変換する関数を実装するよう依頼しました。2回の反復後も、出力構造が期待と一致しません—一部のフィールドは異なるネスト方法で、タイムスタンプの形式が間違っています。要件を散文で説明しましたが、Claudeは毎回異なる解釈をします。
+
+**다음 반복에 가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] Which approach is most effective for the next iteration?**
+
+**[JA] 次の反復で最も効果的なアプローチはどれですか？**
+
+- A) 기대 출력 구조를 설명하는 JSON schema를 작성하고 각 반복 후 Claude의 출력을 validation한다.
+- B) 대표 API 응답에 대해 기대 변환을 보여주는 구체적인 입력-출력 예시 2-3개를 제공한다. **[정답]**
+- C) 정확한 필드 매핑, 중첩 규칙, 타임스탬프 형식 문자열을 지정해 요구사항을 더 기술적으로 정확하게 다시 작성한다.
+- D) 해석이 갈라지는 지점을 파악하기 위해 Claude에게 현재 요구사항 이해를 설명하게 한다.
+
+**B인 이유:** 구체적인 입력-출력 예시는 Claude에게 정확히 기대되는 변환 결과를 보여줌으로써 글로만 설명했을 때 생기는 모호함을 줄입니다. 이는 필드 중첩과 타임스탬프 형식에 대한 명확한 패턴을 제공하므로, 산문 요구사항을 다르게 해석하는 문제를 줄입니다.
+
+**[EN] Why B:** Concrete input-output examples remove ambiguity inherent in prose descriptions by showing Claude the exact expected transformation results. This directly addresses the root cause—misinterpretation of textual requirements—by providing unambiguous patterns for field nesting and timestamp formatting.
+
+**[JA] Bの理由:** 具体的な入力-出力サンプルは、フィールドのネストとタイムスタンプ形式のための明確なパターンを提供することで、散文の説明に固有の曖昧さを排除します。これは根本原因—テキスト要件の誤解—を直接解決します。
+
+---
+
+## 문제 32(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 새 알림 채널로 Slack을 추가해야 합니다. 기존 코드베이스에는 email, SMS, push 채널에 대한 명확한 기존 패턴이 있습니다. 하지만 Slack API는 근본적으로 다른 통합 접근을 제공합니다. incoming webhook(단순, 단방향), bot token(전달 확인과 프로그래밍 제어 지원), Slack App(양방향 이벤트, 워크스페이스 승인 필요)입니다. 작업은 고급 기능(전달 추적 등) 요구 없이 "Slack 지원 추가"라고만 말합니다.
+
+**[EN] Situation:** You need to add Slack as a new notification channel. The existing codebase has clear, established patterns for email, SMS, and push channels. However, Slack’s API offers fundamentally different integration approaches—incoming webhooks (simple, one-way), bot tokens (support delivery confirmation and programmatic control), or Slack Apps (two-way events, requires workspace approval). Your task says “add Slack support” without specifying integration method or requiring advanced features like delivery tracking.
+
+**[JA] 状況:** 新しいSlack通知チャネルを追加する必要があります。既存のコードベースにはメール、SMS、プッシュチャネルの明確なパターンがあります。しかし、SlackのAPIは根本的に異なる統合アプローチを提供しています—インカミングWebhook（シンプルな一方向）、ボットトークン（配信確認とプログラム制御をサポート）、またはSlack App（双方向イベント、ワークスペースの承認が必要）。タスクには統合方法や高度な機能（配信追跡など）の要件が指定されていません。
+
+**이 작업에 어떻게 접근해야 하나요?**
+
+**[EN] How should you approach this task?**
+
+**[JA] このタスクにどうアプローチすべきですか？**
+
+- A) 기존 단방향 알림 패턴에 맞게 incoming webhook을 사용해 직접 실행 모드로 시작한다.
+- B) 계획 모드로 전환해 통합 옵션과 architecture 함의를 탐색한 뒤 구현 전 권장안을 제시한다. **[정답]**
+- C) 기존 패턴을 사용해 Slack 채널 클래스를 스캐폴딩하는 직접 실행 모드로 시작하고 통합 방식 결정은 미룬다.
+- D) 전달 확인이 가능하도록 bot-token 접근 방식으로 직접 실행 모드를 시작한다.
+
+**B인 이유:** Slack 통합에는 architecture에 미치는 영향이 서로 다른 여러 선택지가 있고 요구사항도 모호합니다. 계획 모드에서는 webhook, bot token, Slack App 사이의 trade-off를 먼저 평가하고 구현 전에 방향을 맞출 수 있습니다.
+
+**[EN] Why B:** Slack integration has multiple valid approaches with significantly different architectural implications, and requirements are ambiguous. Planning mode lets you evaluate trade-offs among webhooks, bot tokens, and Slack Apps and align on an approach before implementation.
+
+**[JA] Bの理由:** Slack統合には大きく異なるアーキテクチャ的影響を持つ複数の有効なアプローチがあり、要件が曖昧です。計画モードにより、Webhook、ボットトークン、Slack Appのトレードオフを評価し、実装前にアプローチに合意できます。
+
+---
+
+## 문제 33(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 
+CLAUDE.md 파일이 400줄 이상으로 커져 코딩 표준, 테스트 규칙, 상세 PR 리뷰 체크리스트, 배포 지시사항, 데이터베이스 migration 절차가 포함되어 있습니다.
+
+Claude가 코딩 표준과 테스트 규칙은 항상 따르되, PR 리뷰, 배포, migration 지침은 해당 작업을 할 때만 적용하기를 원합니다.
+
+**[EN] Situation:** Your CLAUDE.md file has grown to 400+ lines containing coding standards, testing conventions, a detailed PR review checklist, deployment instructions, and database migration procedures. You want Claude to always follow coding standards and testing conventions, but apply PR review, deploy, and migration guidance only when doing those tasks.
+
+**[JA] 状況:** CLAUDE.mdファイルは400行以上に成長し、コーディング標準、テスト規約、詳細なPRレビューチェックリスト、デプロイ手順、データベースマイグレーション手順が含まれています。コーディング標準とテスト規約は常に適用させたいですが、PRレビュー、デプロイ、マイグレーションのガイダンスはそれらのタスクを実行するときのみ適用させたいです。
+
+**가장 효과적인 재구성 접근 방식은 무엇인가요?**
+
+**[EN] Which restructuring approach is most effective?**
+
+**[JA] 最も効果的な再構築アプローチはどれですか？**
+
+- A) 모든 지침을 workflow 유형별 별도 Skills 파일로 옮기고 CLAUDE.md에는 간단한 프로젝트 설명만 남긴다.
+- B) 모든 것을 CLAUDE.md에 유지하되 `@import` 문법을 사용해 범주별로 별도 관리 파일로 구성한다.
+- C) CLAUDE.md를 `.claude/rules/` 아래 파일로 나누고 path-bound glob 패턴을 사용해 관련 파일 유형에만 각 규칙을 로드한다.
+- D) 범용 표준은 CLAUDE.md에 유지하고, workflow별 지침(PR 리뷰, 배포, migration)은 트리거 키워드가 있는 Skills로 만든다. **[정답]**
+
+**D인 이유:** CLAUDE.md 내용은 모든 session에 로드되어 코딩 표준과 테스트 규칙이 항상 적용되게 합니다. 반면 Skills는 Claude가 트리거 키워드를 감지할 때 on-demand로 호출되므로 PR 리뷰, 배포, migration 같은 workflow별 지침을 넣기에 적합합니다.
+
+**[EN] Why D:** CLAUDE.md content loads in every session, ensuring coding standards and testing conventions always apply, while Skills are invoked on demand when Claude detects trigger keywords—ideal for workflow-specific guidance like PR review, deployment, and migrations.
+
+**[JA] Dの理由:** CLAUDE.mdのコンテンツはすべてのセッションでロードされ、コーディング標準とテスト規約が常に適用されることを確保する一方、スキルはClaudeがトリガーキーワードを検出したときにオンデマンドで呼び出されます—PRレビュー、デプロイ、マイグレーションのようなワークフロー固有のガイダンスに最適です。
+
+---
+
+## 문제 34(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀의 모놀리식 애플리케이션을 마이크로서비스로 재구성하는 작업을 맡았습니다. 이는 수십 개 파일에 걸친 변경에 영향을 주며 서비스 경계와 module 의존성에 대한 결정이 필요합니다.
+
+**[EN] Situation:** You’re tasked with restructuring your team’s monolithic application into microservices. This impacts changes across dozens of files and requires decisions about service boundaries and module dependencies.
+
+**[JA] 状況:** チームのモノリシックアプリケーションをマイクロサービスに再構築するタスクを担当しています。これは数十のファイルにわたる変更とサービス境界やモジュール依存関係についての決定を必要とします。
+
+**어떤 접근 방식을 선택해야 하나요?**
+
+**[EN] Which approach should you choose?**
+
+**[JA] どのアプローチを選択すべきですか？**
+
+- A) 변경하기 전에 계획 모드로 전환해 코드베이스를 탐색하고, 의존성을 이해하며, 구현 접근 방식을 설계한다. **[정답]**
+- B) 직접 실행 모드로 시작하고 구현 중 예상치 못한 복잡성을 만나면 그때 계획으로 전환한다.
+- C) 직접 실행 모드로 시작해 점진적으로 변경하며 구현 과정에서 자연스러운 서비스 경계가 드러나게 한다.
+- D) 각 서비스 구조를 지정하는 상세한 사전 지시와 함께 직접 실행을 사용한다.
+
+**A인 이유:** 계획 모드는 모놀리스 분리 같은 복잡한 architecture 재구성에 적합한 전략입니다. 많은 파일에 걸친 비용이 큰 변경을 확정하기 전에 안전하게 탐색하고 경계를 근거 있게 판단할 수 있습니다.
+
+**[EN] Why A:** Planning mode is the right strategy for complex architectural restructuring like splitting a monolith: it allows safe exploration and informed decisions about boundaries before committing to potentially expensive changes across many files.
+
+**[JA] Aの理由:** 計画モードはモノリスの分割のような複雑なアーキテクチャの再構築に適した戦略です：多くのファイルにまたがる高価な変更にコミットする前に、安全な探索と境界についての情報に基づいた決定を可能にします。
+
+---
+
+## 문제 35(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀이 깊은 코드 분석(의존성 스캔, 테스트 커버리지 수, 코드 품질 지표)을 수행하는 `/analyze-codebase` Skill을 만들었습니다. 명령 실행 후 팀원들은 Claude가 session에서 덜 반응하고 원래 작업의 context를 잃는다고 보고합니다.
+
+**[EN] Situation:** Your team created a `/analyze-codebase` skill that performs deep code analysis—dependency scanning, test coverage counts, and code quality metrics. After running the command, team members report Claude becomes less responsive in the session and loses the context of the original task.
+
+**[JA] 状況:** チームは深いコード分析を実行する`/analyze-codebase`スキルを作成しました—依存関係スキャン、テストカバレッジカウント、コード品質メトリクス。コマンドを実行した後、チームメンバーはClaudeがセッション内でレスポンスが遅くなり、元のタスクのコンテキストを失うと報告します。
+
+**전체 분석 기능을 유지하면서 이를 가장 효과적으로 고치려면 어떻게 해야 하나요?**
+
+**[EN] How do you most effectively fix this while keeping full analysis capabilities?**
+
+**[JA] 全分析機能を維持しながら最も効果的にこれを修正する方法はどれですか？**
+
+- A) Skill frontmatter에 `context: fork`를 추가해 격리된 subagent context에서 분석을 실행한다. **[정답]**
+- B) 분석에 더 빠르고 저렴한 모델을 사용하기 위해 frontmatter에 `model: haiku`를 추가한다.
+- C) Skill을 출력이 적은 세 개의 작은 Skill로 나눈다.
+- D) 표시 전에 모든 결과를 짧은 summary로 압축하라는 지시를 Skill에 추가한다.
+
+**A인 이유:** `context: fork`는 분석을 격리된 subagent context에서 실행해 큰 출력이 메인 session context window를 불필요하게 채우지 않게 하고 Claude가 원래 작업의 context를 잃지 않게 합니다. 전체 분석 기능을 보존하면서 메인 session의 반응성을 유지합니다.
+
+**[EN] Why A:** `context: fork` runs the analysis in an isolated subagent context so the large output does not pollute the main session’s context window and Claude does not lose track of the original task. It preserves full analysis capability while keeping the main session responsive.
+
+**[JA] Aの理由:** `context: fork`は隔離されたサブエージェントコンテキストで分析を実行するため、大量の出力がメインセッションのコンテキストウィンドウを汚染せず、Claudeが元のタスクを見失わなくなります。完全な分析機能を維持しながらメインセッションのレスポンスを維持します。
+
+---
+
+## 문제 36(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀은 `.claude/skills/commit/SKILL.md`의 `/commit` Skill을 사용합니다. 한 개발자가 팀원에게 영향을 주지 않고 개인 workflow(다른 커밋 메시지 형식, 추가 검사)에 맞게 이를 사용자 지정하고 싶어 합니다.
+
+**[EN] Situation:** Your team uses a `/commit` skill in `.claude/skills/commit/SKILL.md`. A developer wants to customize it for their personal workflow (different commit message format, extra checks) without affecting teammates.
+
+**[JA] 状況:** チームは`.claude/skills/commit/SKILL.md`に`/commit`スキルを使用しています。ある開発者がチームメンバーに影響を与えずに個人的なワークフロー（異なるコミットメッセージ形式、追加のチェック）のためにカスタマイズしたいと考えています。
+
+**무엇을 권장하나요?**
+
+**[EN] What do you recommend?**
+
+**[JA] 何を推奨しますか？**
+
+- A) `~/.claude/skills/` 아래 `/my-commit` 같은 다른 이름으로 개인 버전을 만든다.
+- B) 프로젝트 Skill frontmatter에 사용자 이름 기반 조건부 로직을 추가한다.
+- C) 같은 이름으로 `~/.claude/skills/commit/SKILL.md`에 개인 버전을 만든다. **[정답]**
+- D) 개인 Skill frontmatter에 `override: true`를 설정해 프로젝트 버전보다 우선하게 한다.
+
+**C인 이유:** Skill 해석은 위치에 따라 결정됩니다. 엔터프라이즈가 개인을 덮어쓰고, 개인이 프로젝트를 덮어씁니다. 따라서 `~/.claude/skills/commit/SKILL.md`에 둔 개인 Skill은 그 개발자에게만 팀의 `.claude/skills/commit/SKILL.md`를 가립니다. 저장소에는 아무 변경도 생기지 않으므로 팀원들은 계속 프로젝트 버전을 실행하고, 다른 모두에게 `/commit`은 그대로 동작합니다. A는 동작 자체는 하지만 더 약한 권장안입니다. 프로젝트의 `/commit`이 `/my-commit`과 함께 계속 활성 상태로 남고, `description`이 거의 같은 Skill이 둘이면 Claude의 자동 Skill 선택이 예측하기 어려워지며, `/commit`을 실행하도록 안내하는 팀 문서와 몸에 익은 습관도 깨집니다. B는 Skill frontmatter에 조건부 로직이나 사용자 이름 기능이 없고, 시나리오가 배제한 공유 프로젝트 파일을 수정해야 하므로 맞지 않습니다. D는 `override` 필드 자체가 없기 때문에 틀립니다. 우선순위는 선언이 아니라 위치에서 나옵니다.
+
+**[EN] Why C:** Skill resolution is positional: enterprise overrides personal, and personal overrides project. A personal skill at `~/.claude/skills/commit/SKILL.md` therefore shadows the team's `.claude/skills/commit/SKILL.md` for that developer alone — nothing in the repository changes, so teammates keep running the project version and `/commit` behaves the same for everyone else. A works mechanically but is the weaker recommendation: the project `/commit` stays active alongside `/my-commit`, and two skills with near-identical `description` fields make Claude's automatic skill selection unpredictable, while breaking the muscle memory and team docs that say to run `/commit`. B fails because skill frontmatter has no conditional or username facility, and it would require editing the shared project file the scenario rules out. D fails because there is no `override` field — precedence comes from location, not from a declaration.
+
+**[JA] Cの理由:** スキルの解決は配置場所によって決まります。エンタープライズが個人を上書きし、個人がプロジェクトを上書きします。したがって`~/.claude/skills/commit/SKILL.md`に置いた個人スキルは、その開発者に対してのみチームの`.claude/skills/commit/SKILL.md`を覆い隠します。リポジトリには何の変更も入らないため、チームメンバーは引き続きプロジェクト版を実行し、`/commit`の挙動は他の全員にとって変わりません。Aは仕組みとしては動作しますが、推奨としては劣ります。プロジェクトの`/commit`が`/my-commit`と並存し続けるうえ、`description`がほぼ同じスキルが2つあるとClaudeの自動スキル選択が予測しにくくなり、`/commit`を実行すると定めたチームの習慣やドキュメントも崩れてしまいます。Bはスキルのフロントマターに条件分岐やユーザー名を扱う仕組みが存在せず、しかも設問が除外している共有プロジェクトファイルの編集が必要になるため誤りです。Dは`override`というフィールドが存在しないため誤りです。優先順位は宣言ではなく配置場所によって決まります。
+
+---
+
+## 문제 37(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀은 몇 달 동안 Claude Code를 사용해 왔습니다. 최근 세 명의 개발자는 Claude가 "항상 포괄적인 오류 처리를 포함하라"는 지침을 따른다고 보고하지만, 새로 합류한 네 번째 개발자는 Claude가 이를 따르지 않는다고 말합니다. 네 명 모두 같은 저장소에서 최신 코드를 사용합니다.
+
+**[EN] Situation:** Your team has used Claude Code for months. Recently, three developers report Claude follows the guidance “always include comprehensive error handling,” but a fourth developer who just joined says Claude does not follow it. All four work in the same repo and have up-to-date code.
+
+**[JA] 状況:** チームは数ヶ月間Claude Codeを使用しています。最近、3人の開発者は「包括的なエラーハンドリングを含める」というガイダンスにClaudeが従うと報告していますが、先週参加した4番目の開発者はClaudeが従わないと言っています。4人全員が同じリポジトリで作業し、最新のコードを持っています。
+
+**가장 가능성 높은 원인과 수정은 무엇인가요?**
+
+**[EN] What is the most likely cause and fix?**
+
+**[JA] 最も可能性の高い原因と修正は何ですか？**
+
+- A) 지침이 프로젝트 `.claude/CLAUDE.md`가 아니라 기존 개발자들의 사용자 수준 `~/.claude/CLAUDE.md` 파일에 있다. 모든 팀원이 받도록 지시를 프로젝트 수준 파일로 옮긴다. **[정답]**
+- B) 새 개발자의 `~/.claude/CLAUDE.md`에 프로젝트 설정을 override하는 충돌 지시가 있으며, 충돌 섹션을 삭제해야 한다.
+- C) Claude Code는 사용자별 선호를 시간이 지나며 학습하므로, 새 개발자는 Claude가 "기억"할 때까지 요구사항을 반복해야 한다.
+- D) Claude Code는 처음 읽은 뒤 CLAUDE.md를 cache하며 기존 개발자들은 cache된 버전을 사용한다. 모두 Claude Code cache를 지워야 한다.
+
+**A인 이유:** 지침이 프로젝트 수준 `.claude/CLAUDE.md`가 아니라 기존 개발자들의 사용자 수준 구성에만 추가되었다면 새 팀원은 이를 받지 못합니다. 프로젝트 수준 구성으로 옮기면 현재와 미래의 모든 팀원이 자동으로 해당 지침을 받습니다.
+
+**[EN] Why A:** If the guidance was added only to the original developers’ user-level configs and not to the project-level `.claude/CLAUDE.md`, new team members won’t receive it. Moving it to the project-level configuration ensures all current and future team members automatically get the guidance.
+
+**[JA] Aの理由:** ガイダンスが元の開発者のユーザーレベル設定にのみ追加され、プロジェクトレベルの`.claude/CLAUDE.md`には追加されなかった場合、新しいチームメンバーはそれを受け取りません。プロジェクトレベルの設定に移動することで、現在および将来のすべてのチームメンバーが自動的にガイダンスを受け取れるようになります。
+
+---
+
+## 문제 38(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 새 API endpoint를 생성할 때 context로 전체 endpoint 구현 예시 2-3개를 포함하면 일관성이 크게 향상된다는 것을 발견했습니다. 하지만 이 context는 새 endpoint를 만들 때만 유용하며, API 디렉터리에서 디버깅, 코드 리뷰, 기타 작업을 할 때는 유용하지 않습니다.
+
+**[EN] Situation:** You find that including 2–3 full endpoint implementation examples as context significantly improves consistency when generating new API endpoints. However, this context is useful only when creating new endpoints—not when debugging, reviewing code, or other work in the API directory.
+
+**[JA] 状況:** コンテキストとして2〜3の完全なエンドポイント実装サンプルを含めることで、新しいAPIエンドポイントを生成する際の一貫性が大幅に向上することがわかりました。しかし、このコンテキストは新しいエンドポイントを作成する場合にのみ有用で、デバッグ、コードレビュー、またはAPIディレクトリの他の作業には有用ではありません。
+
+**가장 효과적인 구성 접근 방식은 무엇인가요?**
+
+**[EN] Which configuration approach is most effective?**
+
+**[JA] 最も効果的な設定アプローチはどれですか？**
+
+- A) endpoint 예시와 패턴 문서를 프로젝트 CLAUDE.md에 추가해 항상 사용할 수 있게 한다.
+- B) 모든 생성 요청마다 코드를 prompt에 복사해 endpoint 예시를 수동 참조한다.
+- C) API 디렉터리에서 작업할 때 활성화되는 `.claude/rules/api/`의 경로별 규칙에 endpoint 예시를 포함한다.
+- D) endpoint 예시를 참조하고 패턴 준수 지시를 포함하는 Skill을 만들고, 슬래시 명령으로 on-demand 호출한다. **[정답]**
+
+**D인 이유:** on-demand로 호출되는 Skill은 새 endpoint를 생성할 때만 예시 context를 로드하고 디버깅이나 리뷰 같은 무관한 작업 중에는 로드하지 않습니다. 이렇게 하면 메인 context는 깔끔하게 유지하고, 새 endpoint 생성에 필요한 예시 context만 필요한 순간에 로드할 수 있습니다.
+
+**[EN] Why D:** A skill invoked on demand loads the example context only when generating new endpoints, not during unrelated tasks like debugging or review. This keeps the main context clean while preserving high-quality generation when needed.
+
+**[JA] Dの理由:** オンデマンドで呼び出されるスキルは、デバッグやレビューのような関係のないタスク中ではなく、新しいエンドポイントを生成する場合にのみサンプルコンテキストをロードします。これにより必要なときに高品質な生成を維持しながらメインのコンテキストをクリーンに保ちます。
+
+---
+
+## 문제 39(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀이 데이터베이스 migration 파일을 생성하는 `/migration` Skill을 만들었습니다. 이 Skill은 `$ARGUMENTS`로 migration 이름을 받습니다. 프로덕션에서 세 가지 문제가 관찰됩니다. (1) 개발자가 종종 인수 없이 Skill을 실행해 파일 이름이 부적절해짐, (2) Skill이 때때로 관련 없는 이전 대화의 데이터베이스 schema 세부사항을 사용함, (3) Skill이 넓은 tool 접근 권한을 가져 개발자가 실수로 파괴적 테스트 정리를 실행함.
+
+**[EN] Situation:** Your team created a `/migration` skill that generates database migration files. It takes the migration name via `$ARGUMENTS`. In production you observe three issues: (1) developers often run the skill without arguments, causing poorly named files, (2) the skill sometimes uses database schema details from unrelated prior conversations, and (3) a developer accidentally ran destructive test cleanup when the skill had broad tool access.
+
+**[JA] 状況:** チームはデータベースのマイグレーションファイルを生成する`/migration`スキルを作成しました。`$ARGUMENTS`でマイグレーション名を受け取ります。本番環境では3つの問題が観察されます：（1）開発者がしばしば引数なしでスキルを実行し、名前の付け方が悪いファイルが生成される、（2）スキルが時々無関係な以前の会話からのデータベーススキーマの詳細を使用する、（3）開発者がスキルに広いツールアクセスがあったとき、誰かが偶然に破壊的なテストのクリーンアップを実行した。3つの問題すべてを修正する設定アプローチはどれですか？
+
+**세 문제를 모두 해결하는 구성 접근 방식은 무엇인가요?**
+
+**[EN] Which configuration approach fixes all three problems?**
+
+**[JA] 3つの問題すべてを修正する設定アプローチはどれですか？**
+
+- A) `$ARGUMENTS` 대신 위치 매개변수 `$1`과 `$2`를 사용해 특정 입력을 강제하고, context 제어를 위해 `@` 문법으로 명시적 schema 파일 참조를 포함하며, frontmatter description에 파괴적 작업 경고를 추가한다.
+- B) frontmatter에 `argument-hint`를 추가해 필수 매개변수를 요청하고, `context: fork`로 실행을 격리하며, `allowed-tools`를 파일 쓰기 작업으로 제한한다. **[정답]**
+- C) `/migration-create`와 `/migration-apply` Skill로 나누고, migration 이름이 누락되면 요청하는 validation 지시를 추가하며, 각각 다른 `allowed-tools` 범위를 사용한다.
+- D) `$ARGUMENTS`가 유효한 이름인지 확인하는 validation 지시를 SKILL.md에 추가하고, 이전 대화 context를 무시하라는 prompt를 추가하며, 피해야 할 금지 작업을 나열한다.
+
+**B인 이유:** 세 가지 별도 구성 기능으로 각 문제를 다룹니다. `argument-hint`는 인수 입력을 개선해 누락 인수를 줄이고, `context: fork`는 이전 대화의 context 누수를 방지하며, `allowed-tools`는 Skill을 안전한 파일 쓰기 작업으로 제한해 파괴적 동작을 막습니다.
+
+**[EN] Why B:** This uses three separate configuration features to address each problem: `argument-hint` improves argument entry and reduces missing arguments, `context: fork` prevents context leakage from prior conversations, and `allowed-tools` constrains the skill to safe file-writing operations, preventing destructive actions.
+
+**[JA] Bの理由:** これは各問題に対処するために3つの別々の設定機能を使用します：`argument-hint`は引数入力を改善し引数の欠如を減らし、`context: fork`は以前の会話からのコンテキストの漏洩を防ぎ、`allowed-tools`はスキルを安全なファイル書き込み操作に制限し、破壊的なアクションを防ぎます。
+
+---
+
+## 문제 40(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 코드베이스에는 서로 다른 코딩 규칙을 가진 영역이 있습니다. React 컴포넌트는 hooks가 있는 함수형 스타일을 사용하고, API handler는 특정 오류 처리와 함께 async/await를 사용하며, 데이터베이스 모델은 repository 패턴을 따릅니다. 테스트 파일은 테스트 대상 코드 옆에 코드베이스 전반에 분산되어 있습니다(예: `Button.tsx` 옆의 `Button.test.tsx`). 모든 테스트가 위치와 관계없이 같은 규칙을 따르기를 원합니다.
+
+**[EN] Situation:** Your codebase contains areas with different coding conventions: React components use functional style with hooks, API handlers use async/await with specific error handling, and database models follow the repository pattern. Test files are distributed across the codebase next to the code under test (e.g., `Button.test.tsx` next to `Button.tsx`), and you want all tests to follow the same conventions regardless of location.
+
+**[JA] 状況:** コードベースには異なるコーディング規約を持つ領域があります：Reactコンポーネントはhooksを使ったファンクショナルスタイルを使用し、APIハンドラーは特定のエラーハンドリングを含むasync/awaitを使用し、データベースモデルはリポジトリパターンに従います。テストファイルはコードの隣にコードベース全体に分散しています（例：`Button.tsx`の隣に`Button.test.tsx`）。そして、場所に関係なくすべてのテストが同じ規約に従ってほしいです。
+
+**Claude가 코드 생성 시 올바른 규칙을 자동 적용하도록 보장하는 가장 지원되는 방법은 무엇인가요?**
+
+**[EN] What is the most supported way to ensure Claude automatically applies the correct conventions when generating code?**
+
+**[JA] Claudeがコードを生成する際に正しい規約を自動的に適用するための最もサポートされた方法は何ですか？**
+
+- A) 모든 규칙을 루트 CLAUDE.md에 영역별 제목 아래 넣고 Claude가 적용할 섹션을 추론하도록 의존한다.
+- B) 각 코드 유형에 대해 `.claude/skills/`에 Skill을 만들고 각 SKILL.md에 규칙을 포함한다.
+- C) 해당 영역의 규칙을 포함하는 별도 CLAUDE.md 파일을 각 하위 디렉터리에 둔다.
+- D) 파일 경로를 기반으로 규칙을 조건부 적용하도록 glob 패턴을 지정하는 YAML frontmatter가 있는 규칙 파일을 `.claude/rules/` 아래 만든다. **[정답]**
+
+**D인 이유:** `.claude/rules/` 파일과 YAML frontmatter, glob 패턴(예: `**/*.test.tsx`, `src/api/**/*.ts`)을 쓰면 디렉터리 구조와 관계없이 파일 경로에 맞는 규칙을 결정적으로 적용할 수 있습니다. 분산된 테스트 파일처럼 여러 디렉터리에 걸친 패턴에는 이 방식이 가장 적합합니다.
+
+**[EN] Why D:** `.claude/rules/` files with YAML frontmatter and glob patterns (e.g., `**/*.test.tsx`, `src/api/**/*.ts`) enable deterministic, path-based convention application regardless of directory structure. This is the most supported approach for cross-cutting patterns like distributed test files.
+
+**[JA] Dの理由:** YAMLフロントマターとglobパターン（例：`**/*.test.tsx`、`src/api/**/*.ts`）を使った`.claude/rules/`ファイルは、ディレクトリ構造に関係なくパスベースの規約の確定的な適用を可能にします。これは分散したテストファイルのようなクロスカッティングパターンに最もサポートされたアプローチです。
+
+---
+
+## 문제 41(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀의 표준 코드 리뷰 체크리스트를 실행하는 사용자 지정 슬래시 명령 `/review`를 만들고 싶습니다. 저장소를 클론하거나 업데이트하는 모든 개발자가 사용할 수 있어야 합니다.
+
+**[EN] Situation:** You want to create a custom slash command `/review` that runs your team’s standard code review checklist. It should be available to every developer when they clone or update the repository.
+
+**[JA] 状況:** チームの標準コードレビューチェックリストを実行するカスタムスラッシュコマンド`/review`を作成したいです。リポジトリをクローンまたは更新したときにすべての開発者が利用できるようにしたいです。
+
+**명령 파일을 어디에 만들어야 하나요?**
+
+**[EN] Where should you create the command file?**
+
+**[JA] コマンドファイルはどこに作成すべきですか？**
+
+- A) 각 개발자 홈 디렉터리의 `~/.claude/commands/`.
+- B) 프로젝트 저장소의 `.claude/commands/`. **[정답]**
+- C) `.claude/config.json`의 commands 배열.
+- D) 루트 프로젝트 CLAUDE.md.
+
+**B인 이유:** 프로젝트 저장소 안의 `.claude/commands/` 아래에 사용자 지정 슬래시 명령을 두면 버전 관리되며 저장소를 클론하거나 업데이트하는 모든 개발자가 자동으로 사용할 수 있습니다. Claude Code에서 프로젝트 수준 사용자 지정 명령은 이 위치에 두는 것이 맞습니다.
+
+**[EN] Why B:** Putting custom slash commands under `.claude/commands/` inside the project repository ensures they are version-controlled and automatically available to every developer who clones or updates the repo. This is the intended location for project-level custom commands in Claude Code.
+
+**[JA] Bの理由:** プロジェクトリポジトリの`.claude/commands/`の下にカスタムスラッシュコマンドを置くことで、バージョン管理され、リポジトリをクローンまたは更新したすべての開発者が自動的に利用できるようになります。これはClaude Codeのプロジェクトレベルのカスタムコマンドの意図された場所です。
+
+---
+
+## 문제 42(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀의 CLAUDE.md가 500줄을 넘어 TypeScript 규칙, 테스트 지침, API 패턴, 배포 절차가 섞여 있습니다. 개발자들은 올바른 섹션을 찾고 업데이트하기 어렵다고 느낍니다.
+
+**[EN] Situation:** Your team’s CLAUDE.md grew beyond 500 lines mixing TypeScript conventions, testing guidance, API patterns, and deployment procedures. Developers find it hard to locate and update the right sections.
+
+**[JA] 状況:** チームのCLAUDE.mdはTypeScript規約、テストガイダンス、APIパターン、デプロイ手順が混在して500行を超えています。開発者は適切なセクションを見つけて更新するのが難しいと感じています。
+
+**Claude Code가 프로젝트 수준 지시사항을 집중된 주제별 module로 구성하기 위해 지원하는 접근 방식은 무엇인가요?**
+
+**[EN] What approach does Claude Code support to organize project-level instructions into focused topical modules?**
+
+**[JA] Claude Codeがプロジェクトレベルの指示をトピック別のモジュールに整理するためにサポートするアプローチは何ですか？**
+
+- A) 파일 패턴을 CLAUDE.md 내부 특정 섹션에 매핑하는 `.claude/config.yaml`을 정의한다.
+- B) `.claude/rules/`에 각 주제를 다루는 별도 Markdown 파일을 만든다(예: `testing.md`, `api-conventions.md`). **[정답]**
+- C) 관련 하위 디렉터리의 README.md 파일로 지시사항을 나누면 Claude가 자동으로 지시사항으로 로드한다.
+- D) 디렉터리 트리의 여러 수준에 CLAUDE.md라는 이름의 파일을 여러 개 만들어 각각 부모 지시사항을 override하게 한다.
+
+**B인 이유:** Claude Code는 `.claude/rules/` 디렉터리를 지원하며, 여기에 주제별 지침(예: `testing.md`, `api-conventions.md`)을 위한 별도 Markdown 파일을 만들 수 있습니다. 이를 통해 팀은 큰 지시사항 세트를 집중되고 유지보수 가능한 module로 구성할 수 있습니다.
+
+**[EN] Why B:** Claude Code supports a `.claude/rules/` directory where you can create separate Markdown files for topical guidance (e.g., `testing.md`, `api-conventions.md`), allowing teams to organize large instruction sets into focused, maintainable modules.
+
+**[JA] Bの理由:** Claude Codeは`.claude/rules/`ディレクトリをサポートし、そこにトピック別のガイダンス（例：`testing.md`、`api-conventions.md`）のための別のMarkdownファイルを作成でき、チームが大きな指示セットを集中管理されたモジュールに整理できます。
+
+---
+
+## 문제 43(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀이 구현 접근 방식을 선택하기 전에 brainstorming하고 평가하는 사용자 지정 Skill `/explore-alternatives`를 만들었습니다. 개발자들은 Skill 실행 후 후속 Claude 응답이 대안 논의의 영향을 받는다고 보고합니다. 때로는 거부된 접근을 언급하거나 실제 구현에 방해가 되는 탐색 context를 유지합니다.
+
+**[EN] Situation:** You create a custom skill `/explore-alternatives` that your team uses to brainstorm and evaluate implementation approaches before choosing one. Developers report that after running the skill, subsequent Claude responses are influenced by the alternatives discussion—sometimes referencing rejected approaches or retaining exploration context that interferes with actual implementation.
+
+**[JA] 状況:** チームが実装アプローチを選択する前にブレインストーミングと評価に使用するカスタムスキル`/explore-alternatives`を作成しました。スキルを実行した後、その後のClaudeのレスポンスが代替案の議論の影響を受けることがあります—拒否されたアプローチを参照したり、実際の実装を妨げる探索コンテキストを保持したりします。
+
+**이 Skill을 가장 효과적으로 어떻게 구성해야 하나요?**
+
+**[EN] How should you most effectively configure this skill?**
+
+**[JA] このスキルを最も効果的に設定するにはどうすればよいですか？**
+
+- A) Skill에서 `!` 접두사를 사용해 탐색 로직을 bash subprocess로 실행한다.
+- B) Skill frontmatter에 `context: fork`를 추가한다. **[정답]**
+- C) 탐색 context를 버려야 하는 경계를 표시하기 위해 `/explore-start`와 `/explore-end` 두 Skill로 나눈다.
+- D) `.claude/skills/` 대신 `~/.claude/skills/`에 Skill을 만든다.
+
+**B인 이유:** `context: fork`는 Skill을 격리된 subagent context에서 실행해 탐색 논의가 메인 대화 기록을 불필요하게 채우지 않게 합니다. 이를 통해 거부된 접근과 brainstorming context가 후속 구현 작업에 영향을 주는 것을 방지합니다.
+
+**[EN] Why B:** `context: fork` runs the skill in an isolated subagent context so exploration discussions do not pollute the main conversation history. This prevents rejected approaches and brainstorming context from influencing subsequent implementation work.
+
+**[JA] Bの理由:** `context: fork`は隔離されたサブエージェントコンテキストでスキルを実行するため、探索の議論がメインの会話履歴を汚染しません。これにより拒否されたアプローチやブレインストーミングのコンテキストが後続の実装作業に影響を与えることを防ぎます。
+
+---
+
+## 문제 44(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 팀은 Claude Code를 통해 PR 검색과 CI 상태 확인을 할 수 있도록 GitHub MCP 서버를 추가하고 싶어 합니다. 여섯 명의 개발자는 각자 개인 GitHub 액세스 token을 가지고 있습니다. 자격 증명을 버전 관리에 커밋하지 않으면서 팀 전체에 일관된 tool을 제공하고 싶습니다.
+
+**[EN] Situation:** Your team wants to add a GitHub MCP server for searching PRs and checking CI status via Claude Code. Each of six developers has their own personal GitHub access token. You want consistent tooling across the team without committing credentials to version control.
+
+**[JA] 状況:** チームはClaude Codeを通じてPRを検索しCIステータスを確認するためのGitHub MCPサーバーを追加したいです。6人の開発者それぞれが独自の個人GitHubアクセストークンを持っています。バージョン管理にクレデンシャルをコミットせずに、チーム全体で一貫したツールを提供したいです。
+
+**가장 효과적인 구성 접근 방식은 무엇인가요?**
+
+**[EN] Which configuration approach is most effective?**
+
+**[JA] 最も効果的な設定アプローチはどれですか？**
+
+- A) 각 개발자가 `claude mcp add --scope user`로 사용자 범위에 서버를 추가하게 한다.
+- B) `.env` 파일에서 token을 읽고 GitHub API 호출을 프록시하는 MCP 서버 래퍼를 만든 뒤, 그 래퍼를 프로젝트 `.mcp.json`에 추가한다.
+- C) 인증에 환경 변수 치환(`${GITHUB_TOKEN}`)을 사용해 프로젝트 `.mcp.json`에 서버를 추가하고, 필요한 환경 변수를 프로젝트 README에 문서화한다. **[정답]**
+- D) placeholder token으로 프로젝트 범위에 서버를 구성한 뒤, 개발자에게 로컬 구성에서 이를 override하라고 말한다.
+
+**C인 이유:** 환경 변수 치환을 사용하는 프로젝트 `.mcp.json`은 관용적입니다. MCP 구성에 대한 버전 관리되는 단일 기준을 제공하면서 각 개발자가 환경 변수로 자격 증명을 제공할 수 있습니다. 변수를 문서화하면 비밀을 커밋하지 않고 온보딩도 쉬워집니다.
+
+**[EN] Why C:** A project `.mcp.json` with environment variable substitution is idiomatic: it provides a single version-controlled source of truth for MCP configuration while letting each developer supply credentials via environment variables. Documenting the variable makes onboarding easy without committing secrets.
+
+**[JA] Cの理由:** 環境変数の置換を使ったプロジェクト`.mcp.json`は慣用的なアプローチです：シークレットをコミットせずに各開発者が環境変数でクレデンシャルを提供できるようにしながら、MCP設定のバージョン管理された単一のソースオブトゥルースを提供します。変数を文書化することでオンボーディングが簡単になります。
+
+---
+
+## 문제 45(시나리오: Claude Code를 사용한 코드 생성)
+
+**상황:** 120개 파일 코드베이스 전반의 외부 API 호출 주변에 오류 처리 wrapper를 추가하고 있습니다. 작업은 세 단계입니다. (1) 모든 호출 지점과 패턴 발견, (2) 오류 처리 접근 방식 공동 설계, (3) wrapper를 일관되게 구현. 1단계에서 Claude는 수백 개 호출 지점과 context를 나열하는 큰 출력을 생성해, 발견이 끝나기 전에 context window가 빠르게 차오릅니다.
+
+**[EN] Situation:** You’re adding error-handling wrappers around external API calls across a 120-file codebase. The work has three phases: (1) discover all call sites and patterns, (2) collaboratively design the error-handling approach, and (3) implement wrappers consistently. In Phase 1, Claude generates large output listing hundreds of call sites with context, quickly filling the context window before discovery finishes.
+
+**[JA] 状況:** 120ファイルのコードベース全体で外部API呼び出しにエラーハンドリングラッパーを追加しています。作業には3つのフェーズがあります：（1）すべての呼び出しサイトとパターンを発見する、（2）エラーハンドリングアプローチを共同設計する、（3）一貫してラッパーを実装する。フェーズ1では、Claudeが数百の呼び出しサイトとコンテキストをリストする大きな出力を生成し、発見が完了する前にすぐにコンテキストウィンドウを満たしてしまいます。
+
+**구현 일관성을 유지하면서 작업을 완료하는 가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] Which approach is most effective to complete the task while maintaining implementation consistency?**
+
+**[JA] 実装の一貫性を維持しながらタスクを完了する最も効果的なアプローチはどれですか？**
+
+- A) 1단계에는 Explore subagent를 사용해 상세 발견 출력을 격리하고 summary를 반환하게 한 뒤, 2-3단계는 메인 대화에서 계속한다. **[정답]**
+- B) 모든 단계를 메인 대화에서 수행하고 파일을 진행하면서 주기적으로 `/compact`를 사용해 context 사용량을 줄인다.
+- C) `--continue`와 함께 headless 모드로 전환하고, 연속성을 유지하기 위해 batch 호출 사이에 명시적 context summary를 전달한다.
+- D) 오류 처리 패턴을 CLAUDE.md에 정의한 뒤, 일관성을 위해 공유 memory 파일에 의존하며 여러 session에서 파일을 batch로 처리한다.
+
+**A인 이유:** Explore subagent는 상세한 발견 출력을 별도 context에 격리하고 메인 대화에는 간결한 summary만 반환합니다. 이는 context가 특히 중요한 공동 설계와 일관된 구현 단계에 메인 context window를 아껴 둘 수 있습니다.
+
+**[EN] Why A:** An Explore subagent isolates the verbose discovery output in a separate context and returns only a concise summary to the main conversation. This preserves the main context window for the collaborative design and consistent implementation phases where retained context is most valuable.
+
+**[JA] Aの理由:** 探索サブエージェントは詳細な発見出力を別のコンテキストに隔離し、メインの会話には簡潔なサマリーのみを返します。これにより、保持されたコンテキストが最も価値あるフェーズ2とフェーズ3（共同設計と一貫した実装）のためにメインのコンテキストウィンドウを保存します。
+
+---
+
+## 시나리오: 고객 지원 Agent
+
+---
+
+## 문제 46(시나리오: 고객 지원 Agent)
+
+**상황:** 테스트 중 사용자가 주문 상태를 물을 때 `lookup_order`가 더 적절함에도 Agent가 `get_customer`를 자주 호출하는 것을 확인했습니다. 이 문제를 해결하기 위해 먼저 무엇을 확인해야 하나요?
+
+**[EN] Situation:** While testing, you notice the agent often calls `get_customer` when users ask about order status, even though `lookup_order` would be more appropriate. What should you check first to address this problem?
+
+**[JA] 状況:** テスト中、エージェントが注文ステータスについて尋ねるユーザーに対して`lookup_order`がより適切であるにもかかわらず、よく`get_customer`を呼び出すことに気づきます。この問題に対処するために最初に確認すべきことは何ですか？
+
+**먼저 무엇을 확인해야 하나요?**
+
+**[EN] What should you check first?**
+
+**[JA] 最初に確認すべきことは何ですか？**
+
+- A) 주문 관련 요청을 감지해 `lookup_order`로 직접 routing하는 전처리 classifier를 구현한다.
+- B) 선택을 단순화하기 위해 Agent가 사용할 수 있는 tool 수를 줄인다.
+- C) tool 선택을 개선하기 위해 가능한 모든 주문 요청 패턴을 다루는 few-shot 예시를 system prompt에 추가한다.
+- D) tool 설명이 각 tool의 목적을 명확히 구분하는지 확인한다. **[정답]**
+
+**D인 이유:** tool 설명은 모델이 어떤 tool을 호출할지 결정하는 데 사용하는 기본 입력입니다. Agent가 지속적으로 잘못된 tool을 선택할 때 첫 진단 단계는 tool 설명이 각 tool의 목적과 사용 경계를 명확히 분리하는지 확인하는 것입니다.
+
+**[EN] Why D:** Tool descriptions are the primary input the model uses to decide which tool to call. When an agent consistently picks the wrong tool, the first diagnostic step is to verify that tool descriptions clearly separate each tool’s purpose and usage boundaries.
+
+**[JA] Dの理由:** ツールの説明はモデルが呼び出すツールを決定するための主要な入力です。エージェントが一貫して間違ったツールを選択する場合、最初の診断ステップはツールの説明が各ツールの目的と使用境界を明確に分離していることを確認することです。
+
+---
+
+## 문제 47(시나리오: 고객 지원 Agent)
+
+**상황:** Agent는 단일 이슈 요청(예: "주문 #1234 환불이 필요합니다")을 94% accuracy로 처리합니다. 하지만 고객이 한 메시지에 여러 이슈를 포함하면(예: "주문 #1234 환불이 필요하고 주문 #5678의 배송 주소도 업데이트하고 싶습니다") tool 선택 accuracy가 58%로 떨어집니다. Agent는 보통 하나의 이슈만 해결하거나 요청 간 매개변수를 섞습니다. 다중 이슈 요청의 안정성을 가장 효과적으로 개선하는 접근은 무엇인가요?
+
+**[EN] Situation:** Your agent handles single-issue requests with 94% accuracy (e.g., “I need a refund for order #1234”). But when customers include multiple issues in one message (e.g., “I need a refund for order #1234 and also want to update the shipping address for order #5678”), tool selection accuracy drops to 58%. The agent usually solves only one issue or mixes parameters across requests. What approach most effectively improves reliability for multi-issue requests?
+
+**[JA] 状況:** エージェントは94%の精度で単一の問題リクエスト（例：「注文#1234の返金が必要です」）を処理します。しかし、顧客が1つのメッセージに複数の問題を含めると（例：「注文#1234の返金が必要で、注文#5678の配送先住所も変更したいです」）、ツール選択の精度は58%に落ちます。エージェントは通常1つの問題のみを解決するか、リクエスト間でパラメータを混同します。マルチ問題リクエストの信頼性を最も効果的に改善するアプローチは何ですか？
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] What approach is most effective?**
+
+**[JA] 最も効果的なアプローチは何ですか？**
+
+- A) 별도 모델 호출을 사용해 다중 이슈 메시지를 별도 요청으로 분해하고, 각 요청을 독립적으로 처리한 뒤 결과를 병합하는 전처리 계층을 구현한다.
+- B) 관련 tool을 더 적은 범용 tool로 결합한다.
+- C) 다중 이슈 요청에 대한 올바른 추론과 tool 순서를 보여주는 few-shot 예시를 prompt에 추가한다. **[정답]**
+- D) 불완전한 답변을 감지하고 누락된 이슈를 해결하도록 Agent에 자동으로 다시 prompt하는 응답 validation을 구현한다.
+
+**C인 이유:** Agent가 단일 이슈에서는 이미 잘 수행하므로, 필요한 것은 여러 이슈를 분해하고 routing하며 매개변수를 분리해 유지하는 패턴에 대한 지침입니다. 이를 보여주는 few-shot 예시가 가장 효과적입니다.
+
+**[EN] Why C:** Few-shot examples that demonstrate correct reasoning and tool sequencing for multi-issue requests are most effective because the agent already performs well on single issues—what it needs is guidance on the pattern for decomposing and routing multiple issues and keeping parameters separated.
+
+**[JA] Cの理由:** エージェントは既に単一の問題については高いパフォーマンスを発揮しています。必要なのは、複数の問題を分解してルーティングし、パラメータを分離するパターンのガイダンスです。Few-shotサンプルによってその判断ロジックを最も直接的に示すことができます。Aは追加インフラを必要とする過剰なエンジニアリングです。Bはツールの専門性を損なわせます。Dは根本原因ではなく症状を後追いするだけです。
+
+---
+
+## 문제 48(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 로그에 따르면 "주문 #1234 환불" 같은 단순 요청은 Agent가 3-4회 tool 호출로 91% 성공률을 보입니다. 하지만 "이중 청구되었고, 할인이 적용되지 않았으며, 취소하고 싶습니다" 같은 복잡한 요청은 평균 12회 이상의 tool 호출과 54% 성공률을 보입니다. Agent는 종종 이슈를 순차적으로 조사하고 각 이슈마다 중복으로 고객 데이터를 가져옵니다. 복잡한 요청 처리를 가장 효과적으로 개선하는 변경은 무엇인가요?
+
+**[EN] Situation:** Production logs show that for simple requests like “refund for order #1234,” your agent resolves the issue in 3–4 tool calls with 91% success. But for complex requests like “I was billed twice, my discount didn’t apply, and I want to cancel,” the agent averages 12+ tool calls with only 54% success—often investigating issues sequentially and fetching redundant customer data for each. What change most effectively improves handling of complex requests?
+
+**[JA] 状況:** 本番ログによると、「注文#1234の返金」のようなシンプルなリクエストでは、エージェントは3〜4回のツール呼び出しで91%の成功率で解決します。しかし、「2回請求された、割引が適用されていない、キャンセルしたい」のような複雑なリクエストでは、平均12回以上のツール呼び出しで成功率わずか54%です。エージェントは問題を順次調査し、各問題ごとに冗長な顧客データを取得することが多いです。複雑なリクエストの処理を最も効果的に改善する変更は何ですか？
+
+**가장 효과적인 변경 사항은 무엇인가요?**
+
+**[EN] What change is most effective?**
+
+**[JA] 最も効果的な変更は何ですか？**
+
+- A) 단계 사이에 명시적 validation 체크포인트를 추가해, 각 이슈 해결 후 다음으로 넘어가기 전에 진행 상황을 기록하게 한다.
+- B) `get_customer`, `lookup_order`, billing 관련 tool을 하나의 `investigate_issue` tool로 결합해 tool 수를 줄인다.
+- C) 요청을 별도 이슈로 분해한 뒤 공유 고객 context를 사용해 각 이슈를 병렬 조사하고 최종 해결책을 종합한다. **[정답]**
+- D) 다양한 다면적 billing 시나리오에 대한 이상적인 tool 호출 순서를 보여주는 few-shot 예시를 system prompt에 추가한다.
+
+**C인 이유:** 별도 이슈로 분해하고 공유 고객 context로 병렬 조사하면 두 핵심 문제가 모두 해결됩니다. 이슈 간 공유 context를 재사용해 중복 데이터 조회를 없애고, 단일 해결책을 종합하기 전에 조사를 병렬화해 총 tool 호출 루프를 줄입니다.
+
+**[EN] Why C:** Decomposing into separate issues and investigating in parallel with shared customer context fixes both key problems: it eliminates redundant data retrieval by reusing shared context across issues and reduces total tool-call loops by parallelizing investigation before synthesizing a single resolution.
+
+**[JA] Cの理由:** 問題を分解して共有顧客コンテキストで並列調査することで、2つの主要な問題を同時に解決します。共有コンテキストを再利用することで冗長なデータ取得を排除し、1回の統合解決策を統合する前に調査を並列化することでツール呼び出しの合計ループ数を削減します。Aはシーケンシャルなボトルネックを維持します。Bはツールの専門性を失わせます。Dは根本的な並列化の問題を解決しません。
+
+---
+
+## 문제 49(시나리오: 고객 지원 Agent)
+
+**상황:** Agent의 첫 문의 해결률은 목표 80%보다 훨씬 낮은 55%입니다. 로그는 Agent가 단순한 케이스(사진 증거가 있는 손상 상품의 표준 교체)는 escalation하면서, 정책 예외가 필요한 복잡한 상황은 자율적으로 처리하려 한다는 것을 보여줍니다. escalation calibration을 개선하는 가장 효과적인 방법은 무엇인가요?
+
+**[EN] Situation:** Your agent achieves 55% first-contact resolution, well below the 80% target. Logs show it escalates simple cases (standard replacements for damaged goods with photo proof) while trying to handle complex situations requiring policy exceptions autonomously. What is the most effective way to improve escalation calibration?
+
+**[JA] 状況:** エージェントの初回解決率は55%で、目標の80%を大きく下回っています。ログを見ると、写真証拠付きの破損品に対する標準交換のようなシンプルなケースをエスカレーションしている一方、ポリシー例外が必要な複雑な状況を自律的に処理しようとしています。エスカレーションのキャリブレーションを改善する最も効果的な方法は何ですか？
+
+**escalation calibration을 개선하는 가장 효과적인 방법은 무엇인가요?**
+
+**[EN] What is the most effective way to improve escalation calibration?**
+
+**[JA] 最も効果的な方法は何ですか？**
+
+- A) 각 응답 전에 Agent가 confidence를 1-10 척도로 자체 평가하게 하고, confidence가 임계값 아래로 떨어지면 자동으로 사람 리뷰로 routing한다.
+
+- B) 메인 Agent가 처리를 시작하기 전에 어떤 요청이 escalation이 필요한지 예측하도록 과거 티켓으로 학습한 별도 classifier 모델을 배포한다.
+- C) system prompt에 escalation할 때와 자율 해결할 때를 보여주는 few-shot 예시와 함께 명시적 escalation 기준을 추가한다. **[정답]**
+- D) 고객 불만 수준을 판단하는 감정 분석을 구현하고 부정 감정 임계값을 넘으면 자동으로 escalation한다.
+
+**C인 이유:** few-shot 예시가 포함된 명시적 escalation 기준은 단순 케이스와 복잡한 케이스 사이의 불명확한 결정 경계라는 근본 원인을 직접 해결합니다. 추가 인프라 없이 Agent에게 언제 escalation하고 언제 자율 해결할지 가르치는 가장 현실적이고 효과적인 첫 수정입니다.
+
+**[EN] Why C:** Explicit escalation criteria with few-shot examples directly address the root cause—unclear decision boundaries between simple and complex cases. It’s the most proportional, effective first intervention that teaches the agent when to escalate and when to resolve autonomously without extra infrastructure.
+
+**[JA] Cの理由:** 明示的なエスカレーション基準とFew-shotサンプルは、根本原因—シンプルなケースと複雑なケースの間の不明確な判断境界—に直接対処します。追加インフラを必要とせず、エスカレーションすべきタイミングと自律的に解決すべきタイミングをエージェントに教える最も効果的で適切な最初の介入です。Aは信頼性がありません（モデルは自信を持って誤る可能性があります）。Bは過剰なエンジニアリングです。Dは別の問題（感情 ≠ ケースの複雑さ）を解決しようとしています。
+
+---
+
+## 문제 50(시나리오: 고객 지원 Agent)
+
+**상황:** `get_customer`와 `lookup_order`를 호출한 후 Agent는 사용 가능한 시스템 데이터는 모두 조회했지만 여전히 판단이 애매한 상황입니다. 어떤 상황이 `escalate_to_human` 호출을 가장 정당화할 수 있나요?
+
+**[EN] Situation:** After calling `get_customer` and `lookup_order`, the agent has all available system data but still faces uncertainty. Which situation is the most justified trigger for calling `escalate_to_human`?
+
+**[JA] 状況:** `get_customer` と `lookup_order` を呼び出した後、エージェントは利用可能なすべてのシステムデータを持っていますが、依然として不確実性に直面しています。`escalate_to_human` を呼び出す最も正当な状況はどれですか？
+
+**어떤 상황이 escalation에 가장 정당한가요?**
+
+**[EN] Which situation is most justified for escalation?**
+
+**[JA] どの状況がエスカレーションに最も正当ですか？**
+
+- A) 고객이 어제 배송되어 내일 도착 예정인 주문을 취소하려 한다. 고객이 패키지를 받은 후 마음을 바꿀 수 있으므로 escalation해야 한다.
+- B) 고객은 주문을 받지 못했다고 주장하지만 추적 정보는 3일 전 고객 주소에서 배송 완료 및 서명 수령을 보여준다. 모순 증거를 제시하면 고객 관계를 해칠 수 있으므로 escalation해야 한다.
+- C) 고객이 경쟁사 가격 매칭을 요청한다. 정책은 자사 사이트의 14일 내 가격 인하에 대한 가격 조정은 허용하지만 경쟁사 가격에 대해서는 언급하지 않는다. 정책 해석을 위해 escalation해야 한다. **[정답]**
+- D) 고객 메시지에 billing 질문과 제품 반품이 모두 포함되어 있다. 사람이 한 상호작용에서 두 이슈를 조정할 수 있도록 escalation해야 한다.
+
+**C인 이유:** 이는 실제 정책 공백입니다. 회사 규칙은 자사 사이트의 가격 인하는 다루지만 경쟁사 가격 매칭은 다루지 않습니다. Agent는 정책을 지어내면 안 되므로, 기존 규칙을 어떻게 해석하거나 확장할지는 사람에게 escalation해야 합니다.
+
+**[EN] Why C:** This is a genuine policy gap: company rules cover price drops on your own site but do not address competitor price matching. The agent must not invent policy and should escalate for human judgment on how to interpret or extend existing rules.
+
+**[JA] C の理由:** これは真のポリシーのギャップです: 会社のルールは自社サイトでの価格下落をカバーしていますが、競合他社の価格マッチングには対応していません。エージェントはポリシーを作り上げてはならず、既存のルールをどのように解釈または拡張するかについて人間の判断のためにエスカレーションする必要があります。
+
+---
+
+## 문제 51(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 로그에 따르면 12%의 경우 Agent가 `get_customer`를 건너뛰고 고객이 제공한 이름만으로 `lookup_order`를 직접 호출해, 때로는 잘못된 계정을 식별하고 잘못된 환불을 유발합니다. 이 안정성 문제를 가장 효과적으로 해결하는 변경은 무엇인가요?
+
+**[EN] Situation:** Production logs show that in 12% of cases your agent skips `get_customer` and calls `lookup_order` directly using only the customer-provided name, sometimes leading to misidentified accounts and incorrect refunds. What change most effectively fixes this reliability problem?
+
+**[JA] 状況:** 本番ログでは、12% のケースでエージェントが `get_customer` をスキップして顧客が提供した名前のみを使用して `lookup_order` を直接呼び出し、時に誤って識別されたアカウントと誤った返金につながることが示されています。
+
+**가장 효과적인 변경 사항은 무엇인가요?**
+
+**[EN] What change is most effective?**
+
+**[JA] この信頼性の問題を最も効果的に修正する変更は何ですか？**
+
+- A) 고객이 자발적으로 주문 세부사항을 제공하더라도 Agent가 항상 `get_customer`를 먼저 호출하는 few-shot 예시를 추가한다.
+- B) 각 요청을 분석하고 해당 요청 유형에 적절한 일부 tool만 활성화하는 routing classifier를 구현한다.
+- C) `get_customer`가 validated 고객 식별자를 반환할 때까지 `lookup_order`와 `process_refund`를 차단하는 코드 수준의 사전조건을 추가한다. **[정답]**
+- D) 주문 작업 전 `get_customer`를 통한 고객 validation이 필수라고 system prompt를 더 강하게 작성한다.
+
+**C인 이유:** 코드 수준의 사전조건은 필요한 순서가 지켜진다는 결정적 보장을 제공합니다. LLM 동작과 관계없이 validation을 건너뛸 가능성을 제거하므로 가장 효과적인 접근입니다.
+
+**[EN] Why C:** A programmatic precondition provides a deterministic guarantee that required sequencing is followed. It’s the most effective approach because it eliminates the possibility of skipping verification, regardless of LLM behavior.
+
+**[JA] C の理由:** プログラム的な前提条件は必要なシーケンシングが従われることを決定論的に保証します。LLM の動作に関係なく確認をスキップする可能性を排除するため最も効果的なアプローチです。
+
+---
+
+## 문제 52(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 지표는 복잡한 billing 분쟁이나 다중 주문 반품을 해결할 때, 해결이 기술적으로는 맞더라도 고객 만족도 점수가 단순 케이스보다 15% 낮다는 것을 보여줍니다. 근본 원인 분석에 따르면 Agent는 정확한 해결책을 제공하지만 근거 설명이 일관되지 않습니다. 때로는 관련 정책 세부사항을 빠뜨리고, 때로는 일정 정보나 다음 단계를 놓칩니다. 구체적인 context 공백은 케이스마다 다릅니다. 사람의 감독을 추가하지 않고 솔루션 품질을 개선하고 싶습니다. 가장 효과적인 접근 방법은 무엇인가요?
+
+**[EN] Situation:** Production metrics show that when resolving complex billing disputes or multi-order returns, customer satisfaction scores are 15% lower than for simple cases—even when the resolution is technically correct. Root-cause analysis shows the agent provides accurate solutions but inconsistently explains rationale: sometimes omitting relevant policy details, sometimes missing timeline info or next steps. The specific context gaps vary case by case. You want to improve solution quality without adding human oversight. What approach is most effective?
+
+**[JA] 状況:** 本番メトリクスでは、複雑な請求紛争やマルチ注文の返品を解決する際、解決策が技術的に正しい場合でも顧客満足スコアがシンプルなケースより 15% 低いことが示されています。根本原因分析では、エージェントが正確な解決策を提供しているが根拠を一貫性なく説明していることが示されています: 時に関連するポリシーの詳細を省略し、時にタイムライン情報や次のステップを見逃します。人間の監督を追加せずに解決策の品質を改善したい。
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] What approach is most effective?**
+
+**[JA] どのアプローチが最も効果的ですか？**
+
+- A) Agent가 초안 응답의 완전성을 평가하는 자기 비판 단계를 추가한다. 고객 이슈를 해결하는지, 관련 context를 포함하는지, 후속 질문을 예상하는지 확인한다. **[정답]**
+- B) 종료 전에 Agent가 "이것이 문제를 완전히 해결하나요?"라고 묻는 확인 단계를 추가해, 고객이 필요한 추가 정보를 요청할 수 있게 한다.
+- C) 미리 정의한 복잡도 지표로 복잡한 케이스를 routing해 모델을 Haiku에서 Sonnet으로 업그레이드한다.
+- D) 정책 context, 일정, 다음 단계를 포함하는 방법을 보여주는 다섯 가지 일반 복잡 케이스에 대한 완전한 설명 few-shot 예시를 system prompt에 구현한다.
+
+**A인 이유:** 자기 비판 단계(evaluator-optimizer 패턴)는 정책 context, 일정, 다음 단계 같은 구체 기준에 대해 Agent가 자신의 초안을 평가하도록 강제해 설명 완성도가 들쭉날쭉한 문제를 직접 줄입니다. 이는 사람의 감독 없이 케이스별 공백을 잡아냅니다.
+
+**[EN] Why A:** A self-critique stage (the evaluator-optimizer pattern) directly addresses inconsistent explanation completeness by forcing the agent to assess its own draft against concrete criteria—such as policy context, timelines, and next steps—before presenting it. This catches case-specific gaps without human oversight.
+
+**[JA] A の理由:** 自己批評ステージ（評価者-最適化者パターン）は、エージェントが提示する前に具体的な基準——ポリシーコンテキスト、タイムライン、次のステップなど——に対して自分の下書きを評価するよう強制することで、一貫性のない説明の完全性に直接対処します。人間の監督なしにケース固有のギャップをキャッチします。
+
+---
+
+## 문제 53(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 지표는 Agent가 해결당 평균 4회 이상의 API 루프를 사용함을 보여줍니다. 분석 결과 Claude는 처음부터 둘 다 필요한 경우에도 `get_customer`와 `lookup_order`를 별도 순차 턴으로 요청하는 경우가 많습니다. 루프 수를 가장 효과적으로 줄이려면 어떻게 해야 하나요?
+
+**[EN] Situation:** Production metrics show your agent averages 4+ API loops per resolution. Analysis reveals Claude often requests `get_customer` and `lookup_order` in separate sequential turns even when both are needed initially. What is the most effective way to reduce the number of loops?
+
+**[JA] 状況:** 本番メトリクスでは、エージェントが解決ごとに平均 4 以上の API ループをかけていることが示されています。分析では、Claude が両方が最初に必要な場合でも `get_customer` と `lookup_order` を別々の逐次ターンでリクエストすることが多いことが明らかになっています。
+
+**루프를 줄이는 가장 효과적인 방법은 무엇인가요?**
+
+**[EN] What is the most effective way to reduce loops?**
+
+**[JA] ループ数を削減する最も効果的な方法は何ですか？**
+
+- A) 요청된 tool과 병렬로 필요할 가능성이 있는 tool을 자동 호출하고 Claude가 요청했는지와 관계없이 모든 결과를 반환하는 speculative execution을 구현한다.
+- B) Claude가 계획할 공간을 더 많이 갖고 자연스럽게 tool 요청을 결합하도록 `max_tokens`를 늘린다.
+- C) 일반 조회 조합을 단일 호출로 묶는 `get_customer_with_orders` 같은 복합 tool을 만든다.
+- D) prompt에서 Claude에게 관련 tool 요청을 한 턴에 묶고 다음 API 호출 전에 모든 결과를 함께 반환하라고 지시한다. **[정답]**
+
+**D인 이유:** Claude에게 관련 tool 요청을 단일 턴에 묶도록 prompt하면 한 번에 여러 tool을 요청하는 Claude의 기본 능력을 활용할 수 있습니다. 이는 최소한의 architecture 변경으로 순차 호출 패턴을 줄입니다.
+
+**[EN] Why D:** Prompting Claude to bundle related tool requests into a single turn leverages its native ability to request multiple tools at once. It directly fixes the sequential-call pattern with minimal architectural change.
+
+**[JA] D の理由:** 関連するツールリクエストを単一のターンにまとめるよう Claude にプロンプトすることで、複数のツールを一度にリクエストするというその本来の能力を活用します。最小限のアーキテクチャ変更で逐次呼び出しパターンを直接修正します。
+
+---
+
+## 문제 54(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 로그는 고객이 특정 금액을 언급하지만(예: "제가 말한 15% 할인") Agent가 잘못된 값으로 응답하는 패턴을 보여줍니다. 조사 결과 이러한 세부사항은 20턴 이상 전에 언급되었고 "프로모션 가격이 논의됨" 같은 모호한 summary로 압축되었습니다. 가장 효과적인 수정안은 무엇인가요?
+
+**[EN] Situation:** Production logs show a pattern: customers reference specific amounts (e.g., “the 15% discount I mentioned”), but the agent responds with incorrect values. Investigation shows these details were mentioned 20+ turns ago and condensed into vague summaries like “promotional pricing was discussed.” What fix is most effective?
+
+**[JA] 状況:** 本番ログでは一貫したパターンが示されています: 顧客が特定の金額（例: 「私が言及した 15% の割引」）を参照するが、エージェントが誤った値で応答します。調査では、これらの詳細が 20 以上のターン前に言及され、「プロモーション価格について議論された」などの曖昧なサマリーに凝縮されていることが示されています。
+
+**가장 효과적인 수정안은 무엇인가요?**
+
+**[EN] What fix is most effective?**
+
+**[JA] どの修正が最も効果的ですか？**
+
+- A) summary가 트리거되기 전 대화에 더 많은 공간을 주도록 summary 임계값을 70%에서 85%로 높인다.
+- B) 전체 대화 기록을 외부 저장소에 저장하고 Agent가 "앞서 말했듯이" 같은 참조를 감지하면 검색을 구현한다.
+- C) 거래 관련 사실(금액, 날짜, 주문 번호)을 summary 기록 밖에 있는 지속적 "case facts" 블록으로 extraction해 모든 prompt에 포함한다. **[정답]**
+- D) 모든 숫자, 백분율, 날짜, 고객이 말한 기대사항을 원문 그대로 보존하도록 summary prompt를 수정한다.
+
+**C인 이유:** summary는 본질적으로 정확한 세부사항을 잃습니다. 거래 관련 사실을 summary 기록 밖의 구조화된 "case facts" 블록으로 extraction하면 몇 턴이 summary되었는지와 관계없이 중요한 정보가 모든 prompt에서 안정적으로 사용 가능합니다.
+
+**[EN] Why C:** Summarization inherently loses precise details. Extracting transactional facts into a structured “case facts” block outside the summarized history preserves critical information so it’s reliably available in every prompt regardless of how many turns have been summarized.
+
+**[JA] C の理由:** 要約は本質的に正確な詳細を失います。トランザクションの事実を要約された履歴の外の構造化された「ケース事実」ブロックに抽出することで、何ターン要約されていても重要な情報がすべてのプロンプトで確実に利用できるようになります。
+
+---
+
+## 문제 55(시나리오: 고객 지원 Agent)
+
+**상황:** `get_customer` tool은 이름으로 검색할 때 모든 일치 항목을 반환합니다. 현재 여러 결과가 있으면 Claude가 가장 최근 주문이 있는 고객을 선택하지만, 프로덕션 데이터는 모호한 일치에서 이 방식이 15%의 경우 잘못된 계정을 선택함을 보여줍니다. 이를 어떻게 해결해야 하나요?
+
+**[EN] Situation:** Your `get_customer` tool returns all matches when searching by name. Currently, when there are multiple results, Claude picks the customer with the most recent order, but production data shows this selects the wrong account 15% of the time for ambiguous matches. How should you address this?
+
+**[JA] 状況:** `get_customer` ツールは名前で検索する際にすべての一致を返します。現在、複数の結果がある場合、Claude は最も最近の注文を持つ顧客を選択しますが、本番データでは曖昧な一致の 15% で誤ったアカウントを選択することが示されています。
+
+**어떻게 해결해야 하나요?**
+
+**[EN] How should you address this?**
+
+**[JA] どのように対処すべきですか？**
+
+- A) 85% 이상 confidence에서는 자율적으로 행동하고 그 아래에서는 clarification을 요청하는 confidence 점수 시스템을 구현한다.
+- B) `get_customer`가 여러 일치 항목을 반환하면 고객별 동작을 하기 전에 추가 식별자(email, phone, order number)를 요청하도록 Claude에 지시한다. **[정답]**
+- C) `get_customer`를 수정해 ranking 알고리즘 기반으로 가장 가능성 높은 단일 일치만 반환하게 하여 모호성을 제거한다.
+- D) 모호한 일치에 대한 올바른 추론과 tool 순서를 보여주는 few-shot 예시를 prompt에 추가한다.
+
+**B인 이유:** 추가 식별자를 사용자에게 요청하는 것이 모호성을 해결하는 가장 신뢰할 수 있는 방법입니다. 사용자는 자신의 신원에 대한 확정적 지식을 가지고 있기 때문입니다. 잘못된 계정을 선택해 생기는 15% 오류율을 제거하기 위해 대화 한 턴을 추가하는 것은 작은 비용입니다.
+
+**[EN] Why B:** Asking the user for an additional identifier is the most reliable way to resolve ambiguity because the user has definitive knowledge of their identity. One extra conversational turn is a small price to pay to eliminate a 15% error rate caused by choosing the wrong account.
+
+**[JA] B の理由:** 追加の識別子をユーザーに要求することは、曖昧さを解決する最も信頼性の高い方法です。なぜなら、ユーザーは自分のアイデンティティについて決定的な知識を持っているからです。1 回の余分な会話ターンは、誤ったアカウントを選択する 15% のエラー率を排除するためのわずかなコストです。
+
+---
+
+## 문제 56(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 로그는 일관된 패턴을 보여줍니다. 고객이 메시지에 "account"라는 단어를 포함하면(예: "I want to check my account for an order I made yesterday") Agent가 78%의 경우 `get_customer`를 먼저 호출합니다. 고객이 유사한 요청을 "account" 없이 표현하면(예: "I want to check an order I made yesterday") 93%의 경우 `lookup_order`를 먼저 호출합니다. tool 설명은 명확하고 모호하지 않습니다. 이 불일치의 가장 가능성이 높은 근본 원인은 무엇인가요?
+
+**[EN] Situation:** Production logs show a consistent pattern: when customers include the word “account” in their message (e.g., “I want to check my account for an order I made yesterday”), the agent calls `get_customer` first 78% of the time. When customers phrase similar requests without “account” (e.g., “I want to check an order I made yesterday”), it calls `lookup_order` first 93% of the time. Tool descriptions are clear and unambiguous. What is the most likely root cause of this discrepancy?
+
+**[JA] 状況:** 本番ログでは一貫したパターンが示されています: 顧客がメッセージに「アカウント」という単語を含める場合（例: 「昨日した注文についてアカウントを確認したい」）、エージェントは 78% の確率で最初に `get_customer` を呼び出します。顧客が「アカウント」なしで類似のリクエストを表現する場合（例: 「昨日した注文を確認したい」）、93% の確率で最初に `lookup_order` を呼び出します。ツールの説明は明確で曖昧さがありません。
+
+**가장 가능성이 높은 근본 원인은 무엇인가요?**
+
+**[EN] What is the most likely root cause?**
+
+**[JA] この不一致の最も可能性の高い根本原因は何ですか？**
+
+- A) system prompt에 "account" 같은 용어를 기준으로 동작을 유도하는 키워드 민감 지시사항이 있어 의도치 않은 tool 선택 패턴을 만든다. **[정답]**
+- B) 모델의 기본 학습이 "account" 용어와 고객 관련 작업 사이의 연관을 만들어 tool 설명을 덮어쓴다.
+- C) 모델에는 다중 개념 메시지에 대한 더 많은 학습 데이터가 필요하며 account와 order 용어가 모두 포함된 예시로 fine-tuning해야 한다.
+- D) 이 키워드 유발 혼동을 막기 위해 각 tool을 언제 사용하지 말아야 하는지 지정하는 부정 예시를 tool 설명에 추가해야 한다.
+
+**A인 이유:** 체계적인 키워드 기반 패턴(78% vs 93%)은 system prompt의 명시적 routing 로직이 "account"라는 단어에 반응해 Agent를 고객 관련 tool로 유도하고 있음을 강하게 시사합니다. tool 설명이 이미 명확하므로, 불일치는 의도치 않은 행동 유도를 만드는 prompt 수준 지시를 가리킵니다.
+
+**[EN] Why A:** The systematic keyword-driven pattern (78% vs 93%) strongly indicates explicit routing logic in the system prompt reacting to the word “account” and steering the agent toward customer-related tools. Since tool descriptions are already clear, the discrepancy points to prompt-level instructions creating unintended behavioral steering.
+
+**[JA] A の理由:** 系統的なキーワード駆動のパターン（78% vs 93%）は、システムプロンプトの明示的なルーティングロジックが「アカウント」という単語に反応して顧客関連ツールへとエージェントを誘導していることを強く示しています。ツールの説明がすでに明確なため、不一致はプロンプトレベルの命令が意図しない動作の誘導を作り出していることを指し示しています。
+
+---
+
+## 문제 57(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 로그는 사용자가 주문에 대해 물을 때(예: "check my order #12345") `lookup_order` 대신 `get_customer`를 호출하는 경우가 많음을 보여줍니다. 두 tool은 최소한의 설명("Gets customer information" / "Gets order details")만 가지고 있고 유사해 보이는 식별자 형식을 받습니다. tool 선택 신뢰성을 개선하기 위한 가장 효과적인 첫 단계는 무엇인가요?
+
+**[EN] Situation:** Production logs show the agent often calls `get_customer` when users ask about orders (e.g., “check my order #12345”) instead of calling `lookup_order`. Both tools have minimal descriptions (“Gets customer information” / “Gets order details”) and accept similar-looking identifier formats. What is the most effective first step to improve tool selection reliability?
+
+**[JA] 状況:** 本番ログでは、「注文 #12345 を確認してください」のようなリクエストに対してエージェントが `lookup_order` を呼び出す代わりに `get_customer` を呼び出すことが多いことが示されています。両方のツールの説明は最小限（「顧客情報を取得します」/「注文の詳細を取得します」）で、類似した見た目の識別子フォーマットを受け付けます。
+
+**가장 효과적인 첫 단계는 무엇인가요?**
+
+**[EN] What is the most effective first step?**
+
+**[JA] ツール選択の信頼性を改善する最初のステップとして最も効果的なものは何ですか？**
+
+- A) 각 턴 전에 사용자 입력을 분석하고 감지된 키워드와 ID 패턴을 기반으로 올바른 tool을 사전 선택하는 routing 계층을 구현한다.
+- B) 두 tool을 모든 식별자를 받고 내부적으로 어떤 backend를 조회할지 결정하는 단일 `lookup_entity`로 결합한다.
+- C) 주문 관련 쿼리를 `lookup_order`로 routing하는 5-8개 예시와 함께 올바른 tool 선택 패턴을 보여주는 few-shot 예시를 system prompt에 추가한다.
+- D) 각 tool 설명을 입력 형식, 예시 쿼리, 엣지 케이스, 유사 tool 대비 사용 시점을 설명하는 경계까지 포함하도록 확장한다. **[정답]**
+
+**D인 이유:** 입력 형식, 예시 쿼리, 엣지 케이스, 명확한 경계를 포함해 tool 설명을 확장하면 LLM이 유사한 tool을 구분할 만큼 충분한 정보를 받지 못하는 문제를 해결합니다. 이는 LLM이 tool 선택에 사용하는 기본 메커니즘을 개선하는 저노력, 고효과의 첫 단계입니다.
+
+**[EN] Why D:** Expanding tool descriptions with input formats, example queries, edge cases, and clear boundaries directly fixes the root cause—minimal descriptions that don’t give the LLM enough information to distinguish similar tools. It’s a low-effort, high-impact first step that improves the primary mechanism the LLM uses for tool selection.
+
+**[JA] D の理由:** 入力フォーマット、サンプルクエリ、エッジケース、明確な境界でツールの説明を拡張することで、根本原因——LLM に類似ツールを区別するための十分な情報を与えない最小限の説明——を直接修正します。LLM がツール選択のために使用する主要なメカニズムを改善する低コストで高いインパクトの最初のステップです。
+
+---
+
+## 문제 58(시나리오: 고객 지원 Agent)
+
+**상황:** 지원 Agent를 위한 Agent 루프를 구현하고 있습니다. 각 Claude API 호출 후 루프를 계속할지(요청된 tool을 실행하고 Claude를 다시 호출) 또는 중지할지(최종 답변을 고객에게 제시) 결정해야 합니다. 이 결정을 무엇을 기준으로 판단해야 하나요?
+
+**[EN] Situation:** You are implementing the agent loop for your support agent. After each Claude API call, you must decide whether to continue the loop (run requested tools and call Claude again) or stop (present the final answer to the customer). What determines this decision?
+
+**[JA] 状況:** サポートエージェントのエージェントループを実装しています。各 Claude API 呼び出しの後、ループを続行するか（リクエストされたツールを実行して Claude を再度呼び出す）または停止するか（最終回答を顧客に提示する）を決定する必要があります。
+
+**이 결정을 무엇을 기준으로 판단해야 하나요?**
+
+**[EN] What determines this decision?**
+
+**[JA] この決定を何が決定しますか？**
+
+- A) Claude 응답의 `stop_reason` 필드를 확인한다. `tool_use`이면 계속하고 `end_turn`이면 중지한다. **[정답]**
+- B) "I'm done" 또는 "Can I help with anything else?" 같은 문구를 Claude 텍스트에서 parsing한다. 자연어 신호가 작업 완료를 나타낸다.
+- C) 최대 반복 횟수(예: 10회 호출)를 설정하고 Claude가 더 필요하다고 나타내는지와 관계없이 도달하면 중지한다.
+- D) 응답에 assistant 텍스트 콘텐츠가 포함되어 있는지 확인한다. Claude가 설명 텍스트를 생성했다면 루프는 종료되어야 한다.
+
+**A인 이유:** `stop_reason`은 루프 제어를 위한 Claude의 명시적 structured 신호입니다. `tool_use`는 Claude가 tool을 실행하고 결과를 돌려받고 싶다는 뜻이고, `end_turn`은 Claude가 응답을 완료했으며 루프가 끝나야 함을 뜻합니다.
+
+**[EN] Why A:** `stop_reason` is Claude’s explicit structured signal for loop control: `tool_use` indicates Claude wants to run a tool and receive results back, while `end_turn` indicates Claude has completed its response and the loop should end.
+
+**[JA] A の理由:** `stop_reason` はループ制御のための Claude の明示的な構造化シグナルです: `tool_use` はツールを実行して結果を返してほしいことを示し、`end_turn` は Claude がレスポンスを完了してループが終了すべきことを示します。
+
+---
+
+## 문제 59(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 로그는 Agent가 MCP tool 출력을 잘못 해석한다는 것을 보여줍니다. `get_customer`의 Unix timestamp, `lookup_order`의 ISO 8601 날짜, 숫자 상태 코드(1=pending, 2=shipped)가 혼재합니다. 일부 tool은 수정할 수 없는 third-party MCP 서버입니다. 데이터 형식 normalization에 가장 유지보수하기 좋은 접근은 무엇인가요?
+
+**[EN] Situation:** Production logs show the agent misinterprets outputs from your MCP tools: Unix timestamps from `get_customer`, ISO 8601 dates from `lookup_order`, and numeric status codes (1=pending, 2=shipped). Some tools are third-party MCP servers you cannot modify. Which approach to data format normalization is most maintainable?
+
+**[JA] 状況:** 本番ログでは、エージェントが MCP ツールからの出力を誤って解釈していることが示されています: `get_customer` からの Unix タイムスタンプ、`lookup_order` からの ISO 8601 日付、数値のステータスコード（1=保留中、2=出荷済み）。一部のツールは変更できないサードパーティの MCP サーバーです。
+
+**가장 유지보수하기 좋은 접근은 무엇인가요?**
+
+**[EN] Which approach is most maintainable?**
+
+**[JA] データフォーマットの正規化にどのアプローチが最も保守しやすいですか？**
+
+- A) PostToolUse hook을 사용해 Agent가 처리하기 전에 tool 출력을 가로채고 형식 변환을 적용한다. **[정답]**
+- B) 제어 가능한 tool을 사람이 읽기 쉬운 형식을 반환하도록 수정하고 third-party tool용 wrapper를 만든다.
+- C) 모든 데이터 조회 후 Agent가 값을 변환하기 위해 호출하는 `normalize_data` tool을 만든다.
+- D) 각 tool의 데이터 규칙을 설명하는 상세 형식 문서를 system prompt에 추가한다.
+
+**A인 이유:** PostToolUse hook은 third-party MCP 서버 데이터를 포함한 모든 tool 출력을 Agent가 처리하기 전에 가로채 normalization할 수 있는 중앙화되고 결정적인 지점을 제공합니다. 변환이 코드에 존재하고 균일하게 적용되므로 LLM 해석에 의존하는 것보다 유지보수하기 좋습니다.
+
+**[EN] Why A:** A PostToolUse hook provides a centralized, deterministic point to intercept and normalize all tool outputs—including third-party MCP server data—before the agent processes them. It’s more maintainable because transformations live in code and apply uniformly, rather than relying on LLM interpretation.
+
+**[JA] A の理由:** PostToolUse フックはすべてのツール出力（サードパーティ MCP サーバーのデータを含む）をエージェントが処理する前にインターセプトして正規化するための集中した決定論的なポイントを提供します。変換がコードに存在して均一に適用されるため LLM の解釈に頼るよりも保守しやすいです。
+
+---
+
+## 문제 60(시나리오: 고객 지원 Agent)
+
+**상황:** 프로덕션 로그는 특히 "최근 구매 건을 도와주세요" 같은 모호한 쿼리에서 Agent가 `lookup_order`가 더 적절한데도 때때로 `get_customer`를 선택함을 보여줍니다. tool 선택을 개선하기 위해 system prompt에 few-shot 예시를 추가하기로 했습니다. 어떤 접근이 문제를 가장 효과적으로 다루나요?
+
+**[EN] Situation:** Production logs show the agent sometimes chooses `get_customer` when `lookup_order` would be more appropriate, especially for ambiguous queries like “I need help with my recent purchase.” You decide to add few-shot examples to the system prompt to improve tool selection. Which approach most effectively addresses the problem?
+
+**[JA] 状況:** 本番ログでは、エージェントが「最近の購入について助けが必要です」のような曖昧なクエリに対して特に `lookup_order` の方が適切なのに `get_customer` を選択することがあることが示されています。ツール選択を改善するためにシステムプロンプトに Few-shot 例を追加することにしました。
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] Which approach is most effective?**
+
+**[JA] どのアプローチが最も効果的ですか？**
+
+- A) 모호한 사례를 포함해 각 tool 설명에 명시적 "use when"과 "don't use when" 지침을 추가한다.
+- B) tool별로 예시를 그룹화한다. 모든 `get_customer` 시나리오를 모은 뒤 모든 `lookup_order` 시나리오를 모은다.
+- C) 모호한 시나리오를 겨냥한 4-6개 예시를 추가하고, 각 예시에 왜 한 tool이 가능한 대안보다 선택되었는지 근거를 포함한다. **[정답]**
+- D) 각 tool의 일반적 시나리오에 대한 올바른 tool 선택을 보여주는 명확하고 모호하지 않은 요청 예시 10-15개를 추가한다.
+
+**C인 이유:** 오류가 발생하는 특정 모호한 시나리오를 겨냥하고, 왜 한 tool이 대안보다 나은지 명시적 근거를 포함한 few-shot 예시는 엣지 케이스에 필요한 비교 판단 과정을 모델에 가르칩니다. 일반 예시나 선언적 규칙보다 이 상황에 더 잘 맞습니다.
+
+**[EN] Why C:** Targeting few-shot examples at the specific ambiguous scenarios where errors occur, with explicit rationale for why one tool is preferable to alternatives, teaches the model the comparative decision process needed for edge cases. This is more effective than generic examples or declarative rules.
+
+**[JA] C の理由:** エラーが発生する具体的な曖昧なシナリオをターゲットにした Few-shot 例を、代替案よりも一方のツールを好む理由の明示的な根拠と共に提供することで、エッジケースに必要な比較的な意思決定プロセスをモデルに教えます。これは汎用的な例や宣言的なルールよりも効果的です。
+
+---
+
+## 문제 61(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** `remove_team_member` tool은 실행 전 영향을 미리 보기 위해 `dry_run: boolean` 매개변수를 사용합니다. 프로덕션 모니터링은 Agent가 `dry_run=false`로 직접 호출해 미리보기 단계를 우회한다는 것을 보여줍니다. 모든 제거 작업이 사용자가 명시적으로 확인한 미리보기 이후에만 수행되도록 해야 합니다.
+
+**[EN] Situation:** Your `remove_team_member` tool uses a `dry_run: boolean` parameter for previewing impacts before execution. Production monitoring shows the agent bypasses the preview step by calling with `dry_run=false` directly. You need to ensure every removal is preceded by a preview that the user explicitly confirms.
+
+**[JA] 状況:** `remove_team_member` ツールは、実行前に影響をプレビューするための `dry_run: boolean` パラメーターを使用しています。本番監視では、エージェントが `dry_run=false` で直接呼び出すことでプレビューステップをバイパスしていることが示されています。各削除操作の前に、ユーザーが明示的に確認するプレビューが行われるように保証する必要があります。
+
+**가장 신뢰할 수 있는 접근 방식은 무엇인가요?**
+
+**[EN] What is the most reliable approach?**
+
+**[JA] 最も信頼性の高いアプローチはどれですか？**
+
+- A) 동일한 매개변수의 `dry_run=true` 호출이 지난 60초 내에 있었을 때만 `dry_run=false`를 허용하는 서버 측 validation을 추가한다.
+- B) tool에 confirmation 필요 표시를 하고, annotated tool 호출을 전달하기 전에 사용자 승인을 요청하도록 orchestration 계층을 구성한다.
+- C) tool 설명에 Agent가 항상 먼저 `dry_run=true`로 호출하고 사용자 확인을 기다린 뒤 다시 호출해야 한다는 상세 지시와 few-shot 예시를 추가한다.
+- D) 두 tool로 교체한다. `preview_remove_member`는 영향 세부사항과 1회용 confirmation token을 반환하고, `execute_remove_member`는 그 token을 요구해 실행을 미리보기에 바인딩한다. **[정답]**
+
+**D인 이유:** 두 tool로 나누고 token-binding을 적용하면 사전 미리보기 없이 실행하는 경로가 architecture상 사라집니다. 실행 tool이 미리보기 tool에서만 발급되는 token을 반드시 요구하기 때문입니다. 따라서 LLM이 지시를 잘 따르는지(C), 시간 간격 heuristic이 맞는지(A), orchestration 계층이 제대로 동작하는지(B)에 기대지 않고 코드 수준에서 제약을 강제할 수 있습니다.
+
+**[EN] Why D:** The two-tool token-binding approach makes it architecturally impossible to execute without a prior preview—the execute tool literally requires a token that only the preview tool can generate. This is the only approach that enforces the constraint at the code level rather than relying on LLM compliance with instructions (C), timing heuristics (A), or orchestration infrastructure (B).
+
+**[JA] D の理由:** トークンバインディングアプローチにより、事前プレビューなしでの実行がアーキテクチャ上不可能になります—実行ツールは文字通り、プレビューツールだけが生成できるトークンを必要とします。これは、LLMによる指示の遵守 (C)、タイミングヒューリスティクス (A)、またはオーケストレーションインフラ (B) に依存するのではなく、コードレベルで制約を強制する唯一のアプローチです。
+
+---
+
+## 문제 62(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 프로덕션 모니터링에 따르면 `search_catalog` tool이 12% 실패합니다. 8%는 retry하면 성공하는 네트워크 타임아웃이고, 4%는 retry해도 절대 성공하지 않는 쿼리 구문 오류입니다. 현재 두 오류 유형이 동일하게 반환되어 불필요한 retry를 유발합니다.
+
+**[EN] Situation:** Production monitoring shows your `search_catalog` tool fails 12% of the time: 8% are network timeouts that succeed when retried, and 4% are query syntax errors that never succeed regardless of retries. Currently both error types are returned identically, causing wasted retries.
+
+**[JA] 状況:** 本番監視では、`search_catalog` ツールが 12% の時間失敗することが示されています：8% は再試行で成功するネットワークタイムアウト、4% は再試行に関わらず決して成功しないクエリ構文エラーです。現在、両方のエラータイプは同一に返されており、無駄な再試行が発生しています。
+
+**tool의 오류 처리를 어떻게 수정해야 하나요?**
+
+**[EN] How should you modify the tool's error handling?**
+
+**[JA] ツールのエラー処理をどのように修正すべきですか？**
+
+- A) 네트워크 오류와 구문 오류를 구분하는 방법을 보여주는 few-shot 예시를 system prompt에 추가한다.
+- B) 모든 오류에 지수 백오프 retry 로직을 균일하게 적용한다.
+- C) 네트워크 타임아웃에는 tool 내부에서 backoff 자동 retry를 구현하고, 구문 오류는 매개변수 validation 세부사항과 함께 즉시 반환한다. **[정답]**
+- D) 모든 오류를 `retryable` boolean 플래그와 오류 유형 세부사항과 함께 반환한다.
+
+**C인 이유:** 일시적 오류에 대한 retry를 tool 수준에서 처리하는 것이 올바른 추상화 경계입니다. tool은 오류 유형을 확정적으로 알고 있으며, Agent가 플래그(D)를 해석하거나 prompt 지시(A)를 따르는 것에 의존하지 않고 결정적 retry 로직을 구현할 수 있습니다. 균일한 backoff(B)는 절대 성공하지 않을 구문 오류에 시간을 낭비합니다.
+
+**[EN] Why C:** Handling retries at the tool level for transient errors is the correct abstraction boundary—the tool has definitive knowledge of the error type and can implement deterministic retry logic without relying on the agent to interpret a flag (D) or follow prompt-level instructions (A). Uniform backoff (B) wastes time on syntax errors that will never succeed.
+
+**[JA] C の理由:** 一時的なエラーに対してツールレベルで再試行を処理することが正しい抽象境界です—ツールはエラータイプについて確実な知識を持ち、エージェントがフラグ (D) を解釈したりプロンプト指示 (A) に従ったりすることに依存せずに、確定的な再試行ロジックを実装できます。均一なバックオフ (B) は決して成功しない構文エラーに時間を無駄にします。
+
+---
+
+## 문제 63(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 투자 전략을 여러 턴에 걸쳐 논의하는 동안 사용자는 "위험 허용도가 매우 낮다"고 말했고, 나중에는 "수익을 극대화하고 싶다"고 말했습니다. 이제 "무엇에 투자해야 하나요?"라고 묻습니다.
+
+**[EN] Situation:** Over several turns discussing investment strategy, a user stated "I have a very low risk tolerance" and later "I want to maximize my returns." They now ask: "What should I invest in?"
+
+**[JA] 状況:** 投資戦略について複数のターンで議論する中で、ユーザーは「リスク許容度が非常に低い」と述べ、その後「リターンを最大化したい」と述べました。今、「何に投資すべきか？」と尋ねます。
+
+**추천이 사용자의 실제 우선순위에 맞도록 가장 잘 보장하는 접근은 무엇인가요?**
+
+**[EN] Which approach best ensures the recommendation aligns with the user's actual priority?**
+
+**[JA] ユーザーの実際の優先事項に沿った推奨を最も確実に保証するアプローチはどれですか？**
+
+- A) 모순을 드러내고 무엇이 더 중요한지 사용자에게 명확히 해 달라고 요청한다. **[정답]**
+- B) 두 시나리오에 대해 별도 추천을 제공한다.
+- C) 가장 최근에 말한 선호로 진행한다.
+- D) 충돌을 다루지 않고 균형 잡힌 포트폴리오를 추천한다.
+
+**A인 이유:** 사용자 선호가 직접 모순될 때 충돌을 드러내고 clarification을 요청하는 것이 추천이 사용자의 진짜 의도에 맞도록 보장하는 유일한 방법입니다. 다른 접근은 틀릴 수 있는 가정을 포함합니다. 수익 극대화와 낮은 위험 허용도는 근본적으로 양립하기 어려운 목표이며 사람의 결정이 필요합니다.
+
+**[EN] Why A:** When user preferences directly contradict each other, surfacing the conflict and asking for clarification is the only way to guarantee the recommendation aligns with the user's true intent. Any other approach involves making an assumption that may be wrong—maximizing returns and low risk tolerance are fundamentally incompatible goals that require a human decision.
+
+**[JA] A の理由:** ユーザーの好みが直接矛盾する場合、矛盾を表面化して明確化を求めることが、推奨がユーザーの真の意図に沿っていることを保証する唯一の方法です。リターンの最大化と低いリスク許容度は根本的に相容れない目標であり、人間の判断が必要です。
+
+---
+
+## 문제 64(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 사용자는 여러 대화 턴에 걸쳐 플레이리스트 선호를 다듬습니다. 사용자가 "재즈를 좋아해"라고 말한 두 메시지 뒤에 Claude가 "어떤 장르를 좋아하나요?"라고 묻습니다.
+
+**[EN] Situation:** Users refine playlist preferences over multiple conversation turns. Two messages after a user said "I love jazz," Claude asks "What genres do you enjoy?"
+
+**[JA] 状況:** ユーザーは複数の会話ターンにわたってプレイリストの好みを洗練させます。ユーザーが「ジャズが好き」と言った2つのメッセージ後、Claudeは「どのジャンルが好きですか？」と尋ねます。
+
+**가장 가능성이 높은 원인은 무엇인가요?**
+
+**[EN] What is the most likely cause?**
+
+**[JA] 最も可能性の高い原因は何ですか？**
+
+- A) Claude는 대화 memory를 유지하려면 vector database 연결이 필요하다.
+- B) 모델의 context window가 초과되었다.
+- C) Claude API에는 `session_id` 매개변수가 필요하다.
+- D) 애플리케이션이 이전 메시지를 `messages` 배열에 포함하지 않고 있다. **[정답]**
+
+**D인 이유:** Claude에는 서버 측 memory가 없습니다. 모든 API 호출은 stateless입니다. 각 요청의 `messages` 배열에 전체 대화 기록을 포함하지 않으면 Claude는 이전 턴을 알 수 없습니다. Vector database(A)와 `session_id`(C)는 Claude architecture의 일부가 아니며, 두 메시지 교환에서 context window 초과(B)는 불가능합니다.
+
+**[EN] Why D:** Claude has no server-side memory—every API call is stateless. Without including the full conversation history in the `messages` array of each request, Claude has no knowledge of prior turns. Vector databases (A) and `session_id` (C) are not part of Claude's architecture; context window overflow (B) is impossible for two-message exchanges.
+
+**[JA] D の理由:** Claudeはサーバー側の記憶を持ちません—各 API 呼び出しはステートレスです。各リクエストの `messages` 配列に完全な会話履歴を含めないと、Claudeは以前のターンで何が言われたかを知る方法がありません。ベクターデータベース (A) と `session_id` (C) は Claude アーキテクチャの一部ではなく、2つのメッセージ交換でのコンテキストウィンドウオーバーフロー (B) は不可能です。
+
+---
+
+## 문제 65(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 40분 요리 session 후 대화가 78,000token에 도달했습니다. 기록에는 알레르기, 레시피 배율 조정, clarification된 요리 용어, 일반 논의가 포함됩니다. 중요한 정보를 보존하면서 token을 줄여야 합니다.
+
+**[EN] Situation:** After a 40-minute cooking session, the conversation reaches 78,000 tokens. History includes allergies, recipe scaling, clarified cooking terms, and general discussion. You must reduce tokens while preserving important information.
+
+**[JA] 状況:** 40 分間の料理セッション後、会話は 78,000 トークンに達しました。履歴にはアレルギー、レシピのスケーリング、料理用語の説明、一般的な議論が含まれています。重要な情報を保持しながらトークンを削減する必要があります。
+
+**보존과 token 감소의 균형을 가장 잘 맞추는 접근은 무엇인가요?**
+
+**[EN] What approach best balances preservation with token reduction?**
+
+**[JA] 保持とトークン削減のバランスが最も優れているアプローチはどれですか？**
+
+- A) 전체 대화 기록을 summary한다.
+- B) 가장 최근 20,000token만 유지한다.
+- C) 중요한 structured data(알레르기, 수량, 선호)를 extraction하고, 일반 논의는 summary로 압축하고, 최근 교환은 원문 그대로 유지한다. **[정답]**
+- D) 전체 대화를 외부에 저장하고 semantic search로 관련 부분을 검색한다.
+
+**C인 이유:** 하이브리드 방식은 가치가 큰 정보를 낮은 비용으로 유지합니다. 알레르기와 레시피 수량 같은 중요 사실은 압축된 structured 블록으로 extraction해 summary 중 발생하는 정밀도 손실을 방지하고, 일반 논의는 summary로 압축하고, 최근 교환은 대화 일관성을 위해 원문 그대로 유지합니다. A와 B는 중요한 식이 정보를 잃을 위험이 있고, D는 단일 요리 session에는 architecture상 과합니다.
+
+**[EN] Why C:** The hybrid approach preserves the highest-value information at the lowest cost. Critical facts like allergies and recipe quantities are extracted into a compact structured block (preventing the precision loss that occurs during summarization), general discussion is summarized, and recent exchanges are kept verbatim for conversational coherence. Options A and B risk losing critical dietary information; D is architectural overkill for a single cooking session.
+
+**[JA] C の理由:** ハイブリッドアプローチは最低コストで最高価値の情報を保持します。アレルギーやレシピの数量などの重要な事実はコンパクトな構造化ブロックに抽出され（要約中に発生する精度損失を防止）、一般的な議論は要約され、最近の交換は会話の一貫性のために逐語的に保持されます。オプション A と B は重要な食事情報を失うリスクがあり、D は単一の料理セッションには過剰です。
+
+---
+
+## 문제 66(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 사용자는 긴 대화 중 assistant가 이전 주제와 선호를 놓친다고 보고합니다. 현재 구현은 마지막 25개 메시지 쌍만 유지합니다.
+
+**[EN] Situation:** Users report that during extended conversations the assistant loses track of earlier topics and preferences. Your current implementation keeps only the last 25 message pairs.
+
+**[JA] 状況:** ユーザーは、長い会話の中でアシスタントが以前のトピックや好みを追跡できなくなると報告しています。現在の実装では、最後の 25 メッセージペアのみを保持しています。
+
+**가장 효과적인 해결책은 무엇인가요?**
+
+**[EN] What is the most effective solution?**
+
+**[JA] 最も効果的な解決策は何ですか？**
+
+- A) 하이브리드 접근: 오래된 메시지는 summary하고 최근 메시지는 원문 그대로 유지한다. **[정답]**
+- B) 전체 대화 기록에 대한 vector similarity search.
+- C) window를 50개 메시지 쌍으로 늘린다.
+- D) 매 턴 삭제된 메시지를 summary하고 running summary를 앞에 붙인다.
+
+**A인 이유:** 하이브리드 방식은 문제의 두 차원을 모두 다룹니다. 대화 일관성에 중요한 정확한 최근 context를 유지하면서, 쌍이 삭제될 때 전체 손실을 막기 위해 이전 선호의 압축 표현을 유지합니다. window 확대(C)는 같은 문제를 지연할 뿐입니다. Vector search(B)는 현재 쿼리와 의미적으로 유사하지 않은 중요한 context를 놓칠 수 있습니다. 매 턴 전체 summary(D)은 overhead를 추가하고 summary 오류를 누적합니다.
+
+**[EN] Why A:** The hybrid approach addresses both dimensions of the problem: retaining exact recent context (critical for conversational coherence) while maintaining a compressed representation of earlier preferences (preventing total loss when pairs are dropped). Increasing the window (C) simply delays the same problem. Vector search (B) may miss important context that isn't semantically similar to the current query. Full per-turn summarization (D) adds overhead and accumulates summarization errors.
+
+**[JA] A の理由:** ハイブリッドアプローチは問題の両方の側面に対処します：正確な最近のコンテキストを保持（会話の一貫性に不可欠）しながら、以前の好みの圧縮表現を維持します。ウィンドウを増やすこと (C) は同じ問題を先延ばしにするだけです。ベクター検索 (B) は現在のクエリとセマンティックに類似していない重要なコンテキストを見逃す可能性があります。
+
+---
+
+## 문제 67(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 사용자는 대화가 50턴을 넘으면 지연 시간이 증가하고 비용이 오른다고 보고합니다.
+
+**[EN] Situation:** Users report that latency increases and costs rise when conversations exceed 50 turns.
+
+**[JA] 状況:** ユーザーは、会話が 50 ターンを超えると遅延が増加し、コストが上昇すると報告しています。
+
+**주요 원인은 무엇인가요?**
+
+**[EN] What is the primary cause?**
+
+**[JA] 主な原因は何ですか？**
+
+- A) 전체 대화 기록이 각 API 요청에 포함된다. **[정답]**
+- B) 모델이 점점 더 긴 응답을 생성한다.
+- C) 기록이 커지면서 데이터베이스 작업이 느려진다.
+- D) 모델이 내부 사용자 프로필을 구축해 더 많은 처리가 필요하다.
+
+**A인 이유:** Claude API는 완전히 stateless입니다. 모든 요청은 `messages` 배열에 완전한 대화 기록을 포함해야 합니다. 대화가 커질수록 각 요청이 더 많은 token을 운반하므로 처리 지연과 비용이 직접 증가합니다. 모델은 호출 사이에 내부 상태를 유지하지 않으며(D는 거짓), 응답 길이가 대화 길이와 본질적으로 연결된 것은 아닙니다(B).
+
+**[EN] Why A:** Claude's API is fully stateless—every request must include the complete conversation history in the `messages` array. As conversations grow, each request carries more tokens, which directly increases both processing latency and cost. The model does not maintain any internal state between calls (D is false), and response length is not inherently tied to conversation length (B).
+
+**[JA] A の理由:** Claude の API は完全にステートレスです—各リクエストは `messages` 配列に完全な会話履歴を含める必要があります。会話が増えると、各リクエストがより多くのトークンを運び、処理遅延とコストの両方が直接増加します。モデルは呼び出し間で内部状態を維持しません (D は偽)。
+
+---
+
+## 문제 68(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 3개월간의 주간 session 후 대화 기록이 85,000token으로 커졌습니다. 사용자가 "고립이라는 주제에 대해 우리가 어떤 결론을 냈지?"라고 묻자 assistant는 이전 논의를 참조하지 않고 일반적인 답변을 합니다.
+
+**[EN] Situation:** After three months of weekly sessions, conversation history grows to 85,000 tokens. When a user asks "What did we conclude about the theme of isolation?", the assistant gives generic answers instead of referencing previous discussions.
+
+**[JA] 状況:** 3 ヶ月間の週次セッション後、会話履歴は 85,000 トークンに増加しました。ユーザーが「孤立のテーマについて何を結論付けましたか？」と尋ねると、アシスタントは以前の議論を参照する代わりに一般的な回答をします。
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] What is the most effective approach?**
+
+**[JA] 最も効果的なアプローチは何ですか？**
+
+- A) Rolling window truncation.
+- B) 핵심 결론을 포착하는 점진적 summary.
+- C) 관련 교환을 검색하는 semantic embeddings. **[정답]**
+- D) 논의 결론을 표시하는 structured XML 태그 추가.
+
+**C인 이유:** 대화 기록에 대한 semantic search는 3개월간의 논의로 확장되면서도 필요한 특정 관련 교환을 on-demand로 표면화할 수 있는 유일한 접근입니다. Rolling window(A)는 대부분의 기록을 버립니다. 점진적 summary(B)은 논의를 추상화로 압축해 사용자가 묻는 구체적 결론을 잃습니다. XML 태그(D)는 모든 과거 콘텐츠 재구성을 요구하며 이 규모의 검색 문제를 해결하지 못합니다.
+
+**[EN] Why C:** Semantic search over conversation history is the only approach that scales to three months of discussion while being able to surface specific relevant exchanges on demand. Rolling window (A) would discard most of the history. Progressive summarization (B) compresses discussions into abstractions that lose the specific conclusions users are asking about. XML tags (D) require restructuring all past content and don't solve the retrieval problem at this scale.
+
+**[JA] C の理由:** 会話履歴に対するセマンティック検索は、3 ヶ月分の議論にスケールしながら、要求に応じて特定の関連する交換を表面化できる唯一のアプローチです。ローリングウィンドウ切り捨て (A) は履歴の大部分を廃棄します。段階的な要約 (B) は議論を抽象化に圧縮し、ユーザーが尋ねる具体的な結論が失われます。
+
+---
+
+## 문제 69(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** QA 테스트 중 Claude는 처음 10-15턴 동안 system prompt 지침을 따르지만 이후 응답은 벗어납니다. 대화는 여전히 token 한도 내에 있습니다.
+
+**[EN] Situation:** During QA testing, Claude follows system prompt guidelines for the first 10–15 turns, but later responses deviate. The conversation is still within token limits.
+
+**[JA] 状況:** QA テスト中、Claudeは最初の 10～15 ターンはシステムプロンプトのガイドラインに従いますが、その後の応答は逸脱します。会話はまだトークン制限内です。
+
+**가장 좋은 해결책은 무엇인가요?**
+
+**[EN] What is the best solution?**
+
+**[JA] 最善の解決策は何ですか？**
+
+- A) 행동 지침을 첫 번째 사용자 메시지로 옮긴다.
+- B) 20턴 후 새 대화를 시작한다.
+- C) 대화 분기점에 지침을 강화하는 user-role 메시지를 삽입한다. **[정답]**
+- D) 응답 후 validation을 사용해 비준수 응답을 재생성한다.
+
+**C인 이유:** 행동 reminder를 주기적으로 주입하면 대화 기록이 누적될 때 정기적으로 제약을 재확립해 instruction drift에 직접 대응합니다. 지침을 첫 사용자 메시지로 옮기면(A) 권위가 낮아집니다. 새 대화를 시작하면(B) context가 사라집니다. 응답 후 validation(D)은 예방이 아니라 교정이며 상당한 지연을 추가합니다.
+
+**[EN] Why C:** Periodic injection of behavioral reminders directly combats instruction drift by re-establishing constraints at regular intervals as conversation history accumulates. Moving guidelines to the first user message (A) reduces their authority. Starting a new conversation (B) destroys context. Post-response validation (D) is corrective rather than preventive and adds significant latency.
+
+**[JA] C の理由:** 行動リマインダーの定期的な注入は、履歴が蓄積するにつれて定期的な間隔で制約を再確立することで、指示のドリフトに直接対抗します。ガイドラインを最初のユーザーメッセージに移動すること (A) はその権威を低下させます。事後検証 (D) は予防的ではなく修正的であり、大幅な遅延を追加します。
+
+---
+
+## 문제 70(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** AI 튜터에는 교수 방법론과 적응 규칙을 정의하는 2,800token system prompt가 있습니다. 12턴 후 assistant가 숙련도 수준을 무시하기 시작합니다.
+
+**[EN] Situation:** Your AI tutor has a 2,800-token system prompt defining teaching methodology and adaptation rules. After 12 turns, the assistant starts ignoring proficiency levels.
+
+**[JA] 状況:** AI チューターには、教授方法論と適応ルールを定義する 2,800 トークンのシステムプロンプトがあります。12 ターン後、アシスタントは習熟度レベルを無視し始めます。
+
+**가장 효과적인 수정안은 무엇인가요?**
+
+**[EN] What is the most effective fix?**
+
+**[JA] 最も効果的な修正は何ですか？**
+
+- A) 4-5턴마다 reminder를 주입한다.
+- B) 장황한 규칙을 숙련도 수준 적응을 보여주는 few-shot 예시로 교체한다. **[정답]**
+- C) 중요한 규칙을 system prompt 끝에 batch한다.
+- D) 응답을 평가하고 난이도 수준이 맞지 않으면 재생성한다.
+
+**B인 이유:** 선언적 규칙이 있는 2,800token system prompt는 모델이 매 턴 이를 추론해야 하므로 drift에 취약합니다. 장황한 규칙을 올바른 숙련도 수준 적응을 보여주는 구체적인 few-shot 예시로 바꾸면 모델이 맞출 명확한 행동 패턴을 제공합니다. 이는 여러 턴에 걸쳐 추상 지시보다 더 안정적으로 따릅니다. Reminder 주입(A)은 도움이 되지만 증상을 다루고, 끝 batch(C)는 초기에는 도움이 되지만 턴 수준 drift에는 부족하며, 재생성(D)은 수정 비용이 큽니다.
+
+**[EN] Why B:** A 2,800-token system prompt with declarative rules is vulnerable to drift because abstract rules require the model to reason about them on every turn. Replacing verbose rules with concrete few-shot examples that demonstrate correct proficiency-level adaptation gives the model clear behavioral patterns to match—this is more reliably followed across many turns than abstract instructions. Reminder injection (A) helps but addresses symptoms; end-placement (C) helps initially but not with turn-level drift; regeneration (D) is expensive and corrective.
+
+**[JA] B の理由:** 宣言的なルールを含む 2,800 トークンのシステムプロンプトはドリフトに脆弱です。なぜなら、抽象的なルールはモデルに各ターンで推論を要求するからです。冗長なルールを正しい習熟度レベルの適応を示す具体的な Few-shot 例に置き換えることで、モデルにマッチングする明確な行動パターンが提供されます—これは多くのターンにわたって抽象的な指示よりも信頼性高く遵守されます。
+
+---
+
+## 문제 71(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** assistant는 열정적인 톤을 유지하고, 자신의 추론을 설명하며, clarification 질문을 해야 합니다. 이러한 행동 지침은 어디에 정의해야 하나요?
+
+**[EN] Situation:** Your assistant must maintain an enthusiastic tone, explain its reasoning, and ask clarifying questions. Where should these behavioral guidelines be defined?
+
+**[JA] 状況:** アシスタントは熱心なトーンを維持し、推論を説明し、明確化の質問をする必要があります。これらの行動ガイドラインはどこで定義すべきですか？
+
+**이 행동 지침은 어디에 정의해야 하나요?**
+
+**[EN] Where should these behavioral guidelines be defined?**
+
+**[JA] これらの行動ガイドラインはどこで定義すべきですか？**
+
+- A) 각 사용자 메시지 앞에 붙인다.
+- B) system prompt에 둔다. **[정답]**
+- C) 첫 번째 assistant 메시지에 둔다.
+- D) 환경 변수에 둔다.
+
+**B인 이유:** system prompt는 전체 대화에 적용되는 지속적 행동 제약과 지침을 위해 특별히 설계되었습니다. 각 사용자 메시지에 붙이는 방식(A)은 불필요한 overhead를 만듭니다. 첫 번째 assistant 메시지(C)는 모델이 자신의 이전 진술에서 벗어날 수 있어 신뢰할 수 없습니다. 환경 변수(D)는 모델 동작에 영향을 주지 않습니다.
+
+**[EN] Why B:** The system prompt is specifically designed for persistent behavioral constraints and guidelines that apply throughout the entire conversation. Prepending to each user message (A) is redundant overhead. The first assistant message (C) is unreliable because the model can deviate from its own prior statements. Environment variables (D) have no effect on model behavior.
+
+**[JA] B の理由:** システムプロンプトは、会話全体を通じて適用される永続的な行動制約とガイドラインのために特別に設計されています。各ユーザーメッセージの前に追加すること (A) は冗長なオーバーヘッドです。最初のアシスタントメッセージ (C) は信頼性が低く、モデルは自身の以前の発言から逸脱する可能性があります。環境変数 (D) はモデルの動作に影響を与えません。
+
+---
+
+## 문제 72(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 사용자는 "Certainly!"나 "I'd be happy to help!" 같은 반복적인 응답 시작을 보고합니다.
+
+**[EN] Situation:** Users report repetitive response openings like "Certainly!" and "I'd be happy to help!"
+
+**[JA] 状況:** ユーザーは「もちろん！」や「喜んでお手伝いします！」などの繰り返しの応答の書き出しを報告しています。
+
+**가장 효과적인 접근 방법은 무엇인가요?**
+
+**[EN] What is the most effective approach?**
+
+**[JA] 最も効果的なアプローチは何ですか？**
+
+- A) 직접적인 응답 시작으로 partial assistant message를 덧붙인다. **[정답]**
+- B) temperature 설정을 낮춘다.
+- C) 후처리로 인사말을 제거한다.
+- D) system prompt에 해당 문구를 피하라는 지시를 추가한다.
+
+**A인 이유:** assistant 응답을 직접 답변의 시작으로 prefill하면 생성 수준에서 인사 패턴을 방지합니다. 모델은 새 시작 문구를 생성하는 대신 prefill에서 이어서 생성합니다. system prompt 지시(D)는 도움이 될 수 있지만 모델이 여전히 변형을 생성할 수 있어 덜 신뢰할 수 있습니다. 후처리(C)는 취약한 우회입니다. Temperature(B)는 무작위성을 제어하지 특정 문구 패턴을 제어하지 않습니다.
+
+**[EN] Why A:** Prefilling the assistant's response with the beginning of a direct answer prevents greeting patterns at the generation level—the model continues from the prefill rather than generating new opening phrases. System prompt instructions (D) can help but are less reliable since the model may still produce variants. Post-processing (C) is a fragile workaround. Temperature (B) controls randomness, not specific phrase patterns.
+
+**[JA] A の理由:** 直接的な回答の書き出しでアシスタントの応答をプリフィルすることで、生成レベルで挨拶パターンを防止します—モデルは新しい書き出しフレーズを生成するのではなく、プリフィルから続けます。システムプロンプトの指示 (D) は役立つかもしれませんが、信頼性が低くなります。後処理 (C) は脆弱な回避策です。温度 (B) はランダム性を制御しますが、特定のフレーズパターンは制御しません。
+
+---
+
+## 문제 73(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 사용자가 활발히 채팅하는 동안 webhook이 사용자의 패키지가 배송되었다고 시스템에 알립니다. assistant가 이를 다음 응답에 자연스럽게 반영하길 원합니다.
+
+**[EN] Situation:** A webhook notifies your system that a user's package has shipped while the user is actively chatting. You want the assistant to incorporate this naturally into the next response.
+
+**[JA] 状況:** ユーザーがチャット中に、webhookがシステムにユーザーの荷物が発送されたことを通知します。アシスタントがこれを次の応答に自然に組み込むようにしたいです。
+
+**가장 좋은 접근은 무엇인가요?**
+
+**[EN] What is the best approach?**
+
+**[JA] 最善のアプローチは何ですか？**
+
+- A) 배송 상태를 system prompt에 추가한다.
+- B) 즉시 합성 사용자 메시지를 보낸다.
+- C) 매 턴 상태 tool을 호출하도록 assistant를 강제한다.
+- D) 다음 사용자 메시지의 prefix로 상태 업데이트를 덧붙인다. **[정답]**
+
+**D인 이유:** 다음 사용자 메시지에 상태 업데이트를 prefix로 주입하면 대화 흐름을 방해하지 않고 자연스러운 대화 경계에서 실시간 context를 주입할 수 있습니다. system prompt 수정(A)은 session 재구성이 필요하거나 architecture상 번거롭습니다. 합성 사용자 메시지(B)는 자연스러운 대화 흐름을 깨고 attribution을 혼란스럽게 할 수 있습니다. 매 턴 tool 호출 강제(C)는 이벤트가 드문 경우 낭비입니다.
+
+**[EN] Why D:** Prefixing the status update to the next user message injects real-time context at a natural conversation boundary without disrupting the flow. Modifying the system prompt (A) requires rebuilding the session or is architecturally cumbersome. A synthetic user message (B) can break the natural dialogue flow and confuse attribution. Forcing a tool call each turn (C) is wasteful when events are rare.
+
+**[JA] D の理由:** ステータス更新を次のユーザーメッセージへのプレフィックスとして追加することで、フローを中断することなく自然な会話の境界でリアルタイムのコンテキストを注入します。システムプロンプトの変更 (A) はセッションの再構築が必要です。合成ユーザーメッセージ (B) は自然な会話の流れを乱す可能性があります。毎ターンツール呼び出しを強制すること (C) はイベントが稀な場合に無駄です。
+
+---
+
+## 문제 74(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 사용자가 "파티 장소를 예약해줘" 같은 요청을 자주 보냅니다. assistant는 4개 이상의 clarification 질문을 하며, 이로 인해 35% 이탈이 발생합니다.
+
+**[EN] Situation:** Users frequently send requests like "Book a venue for the party." The assistant asks 4+ clarifying questions, causing 35% abandonment.
+
+**[JA] 状況:** ユーザーは「パーティーのために会場を予約して」などのリクエストを頻繁に送信します。アシスタントは 4 つ以上の明確化の質問をし、35% の放棄率を引き起こしています。
+
+**trade-off를 가장 잘 개선하는 접근은 무엇인가요?**
+
+**[EN] What approach best improves the trade-off?**
+
+**[JA] トレードオフを最もよく改善するアプローチは何ですか？**
+
+- A) 숨겨진 기본값으로 진행한다.
+- B) 모든 clarification 질문을 하나의 복합 메시지로 묻는다.
+- C) 가정을 명시적으로 밝히고 진행하되 수정을 초대한다. **[정답]**
+- D) 구조화된 intake form을 사용한다.
+
+**C인 이유:** 가정을 명시적으로 밝히고 진행하면 사용자는 즉시 유용한 응답을 받으면서도 잘못된 가정을 수정할 수 있습니다. 숨겨진 기본값(A)은 사용자가 무엇이 가정되었는지 알 수 없게 합니다. 복합 질문 목록(B)은 여전히 사용자에게 선행 노력을 요구합니다. structured 양식(D)은 더 많은 마찰을 추가해 이탈 감소 목표와 반대입니다.
+
+**[EN] Why C:** Stating assumptions explicitly and proceeding gives the user an immediate, useful response while preserving their ability to correct wrong assumptions. Hidden defaults (A) leave the user unaware of what was assumed. A compound question list (B) still demands upfront effort from the user. A structured form (D) adds more friction, not less—contradicting the goal of reducing abandonment.
+
+**[JA] C の理由:** 仮定を明示的に述べて進めることで、ユーザーに即座に有用な応答を提供しながら、誤った仮定を修正する能力を保持します。隠れたデフォルト (A) はユーザーに何が仮定されたかを伝えません。複合質問リスト (B) は依然としてユーザーからの初期努力を要求します。構造化フォーム (D) は摩擦を減らすのではなく増やします。
+
+---
+
+## 문제 75(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** assistant는 contractor persona system prompt를 사용합니다. 초기 턴은 규칙을 따르지만 7턴째에는 일반적인 조언을 제공합니다. 대화 길이는 2,500token에 불과합니다.
+
+**[EN] Situation:** Your assistant uses a contractor-persona system prompt. Early turns follow the rules, but by turn 7 the assistant gives generic advice. Conversation length is only 2,500 tokens.
+
+**[JA] 状況:** アシスタントはコントラクターペルソナのシステムプロンプトを使用しています。初期のターンはルールに従いますが、ターン 7 までにアシスタントは一般的なアドバイスを提供します。会話の長さはわずか 2,500 トークンです。
+
+**가장 가능성이 높은 원인은 무엇인가요?**
+
+**[EN] What is the most likely cause?**
+
+**[JA] 最も可能性の高い原因は何ですか？**
+
+- A) system prompt는 초기 동작만 설정한다.
+- B) 턴이 누적되면서 모델 주의가 약해진다.
+- C) 누적된 assistant 응답이 system prompt 영향을 희석한다. **[정답]**
+- D) system prompt가 한 번만 전송된다.
+
+**C인 이유:** assistant 응답이 대화 기록에 누적되면서 system prompt의 행동 제약을 반영하는 텍스트 비율이 증가하는 assistant 생성 콘텐츠에 비해 줄어듭니다. 모델은 system prompt보다 자신의 이전 출력에 점점 더 패턴 매칭하면서 짧은 token 길이에서도 drift가 누적됩니다. system prompt는 모든 API 호출에 포함되며(D는 단독 설명으로 거짓), 모델 주의 저하(B)는 2,500token에서 작동하는 설명이 아닙니다.
+
+**[EN] Why C:** As assistant responses accumulate in the conversation history, the proportion of text reflecting the system prompt's behavioral constraints decreases relative to the growing body of assistant-generated content. The model increasingly pattern-matches to its own prior outputs rather than the system prompt, compounding drift even at short token lengths. The system prompt is included in every API call (D is false as a standalone explanation), and model attention degradation (B) doesn't operate at 2,500 tokens.
+
+**[JA] C の理由:** 会話履歴にアシスタントの応答が蓄積するにつれて、システムプロンプトの行動制約を反映するテキストの割合が、増大するアシスタント生成コンテンツに対して減少します。モデルは短いトークン長でも、システムプロンプトの指示よりも自身の以前の出力パターンにますます従うようになり、ドリフトを複合させます。
+
+---
+≤
+## 문제 76(시나리오: Conversational AI Architecture Patterns)
+
+**상황:** 사용자가 "보고서 좀 도와줄 수 있어?" 같은 모호한 요청을 합니다. assistant는 여러 질문(어떤 보고서? 어떤 도움? 마감일?)으로 응답하며, 이로 인해 40% 이탈이 발생합니다.
+
+**[EN] Situation:** Users ask vague requests like "Can you help with the report?" The assistant responds by asking multiple questions (which report? what help? deadline?), causing 40% abandonment.
+
+**[JA] 状況:** ユーザーは「レポートを手伝ってもらえますか？」などの漠然としたリクエストをします。アシスタントは複数の質問（どのレポート？どんな手伝い？締め切りは？）で応答し、40% の放棄率を引き起こしています。
+
+**가장 좋은 해결책은 무엇인가요?**
+
+**[EN] What is the best solution?**
+
+**[JA] 最善の解決策は何ですか？**
+
+- A) 합리적인 가정을 하고, 이를 명시적으로 밝히며, 조정할 수 있다고 제안한다. **[정답]**
+- B) 응답 전에 작은 모델로 모호성을 classification한다.
+- C) 가정을 밝히지 않고 사전 정의된 해석을 사용한다.
+- D) assistant를 턴당 하나의 clarification 질문으로 제한한다.
+
+**A인 이유:** 합리적인 명시적 가정으로 진행하면 사용자가 정보를 알고 통제권을 유지하면서도 왕복을 완전히 제거할 수 있습니다. 조용한 사전 정의 해석(C)은 응답이 의도와 맞지 않을 때 사용자를 혼란스럽게 합니다. 한 질문 제한(D)은 여전히 여러 턴의 왕복을 요구합니다. 작은 classification 모델(B)은 핵심 UX 문제를 해결하지 못하면서 지연과 인프라 복잡성을 추가합니다.
+
+**[EN] Why A:** Proceeding with reasonable stated assumptions eliminates the back-and-forth entirely while keeping the user informed and in control. Predefined silent interpretations (C) leave users confused when the response doesn't match their intent. A single-question limit (D) still requires turns of back-and-forth. A smaller classification model (B) adds latency and infrastructure complexity without solving the core UX problem.
+
+**[JA] A の理由:** 合理的な明示された仮定で進めることで、ユーザーに情報提供しコントロールを保持させながら、往復のやり取りを完全に排除します。静かな事前定義の解釈 (C) は応答がユーザーの意図に合わない場合にユーザーを混乱させます。1 質問制限 (D) は依然として往復のターンを必要とします。小さな分類モデル (B) はコア UX 問題を解決せずに遅延とインフラの複雑さを追加します。
+
+---
+
+# 실습 과제
+
+## 과제 1: escalation 로직을 갖춘 멀티 tool Agent
+
+**목표:** tool 통합, structured error 처리, escalation을 포함한 Agent 루프를 설계합니다.
+
+**단계:**
+1. 상세 설명이 있는 MCP tool 3-4개 정의(tool 선택 테스트를 위해 유사한 tool 2개 포함)
+2. `stop_reason`(`"tool_use"` / `"end_turn"`)을 확인하는 Agent 루프 구현
+3. structured error 응답 추가: `errorCategory`, `isRetryable`, description
+4. 임계값을 초과하는 작업을 차단하고 escalation으로 routing하는 interceptor hook 구현
+5. 다면적 요청으로 테스트
+
+**도메인:** 1(Agent architecture), 2(tool과 MCP), 5(context와 안정성)
+
+---
+
+## 과제 2: 팀 개발을 위한 Claude Code 구성
+
+**목표:** CLAUDE.md, 사용자 지정 명령, 경로별 규칙, MCP 서버를 구성합니다.
+
+**단계:**
+1. 범용 표준을 포함한 프로젝트 수준 CLAUDE.md 생성
+2. 서로 다른 코드 영역을 위한 YAML frontmatter가 있는 `.claude/rules/` 파일 생성(`paths: ["src/api/**/*"]`, `paths: ["**/*.test.*"]`)
+3. `context: fork`와 `allowed-tools`가 있는 프로젝트 Skill을 `.claude/skills/` 아래 생성
+4. 환경 변수를 사용하는 MCP 서버를 `.mcp.json`에 구성하고 `~/.claude.json`에 개인 override 추가
+5. 서로 다른 복잡도의 작업에서 계획 모드와 직접 실행 테스트
+
+**도메인:** 3(Claude Code 구성), 2(tool과 MCP)
+
+---
+
+## 과제 3: structured data extraction pipeline
+
+**목표:** JSON schema, structured output을 위한 `tool_use`, validation/retry 루프, batch 처리.
+
+**단계:**
+1. JSON schema가 있는 extraction tool 정의(필수/선택 필드, "other"가 있는 enum, nullable 필드)
+2. validation 루프 구축: 오류 시 문서, 잘못된 extraction, 구체적 validation 오류와 함께 retry
+3. 서로 다른 구조의 문서를 위한 few-shot 예시 추가
+4. Message Batches API를 통한 batch 처리 사용: 문서 100개, `custom_id`로 실패 처리
+5. 사람 리뷰로 routing: 필드별 confidence 점수, 문서 유형별 분석
+
+**도메인:** 4(Prompt Engineering), 5(context와 안정성)
+
+---
+
+## 과제 4: multi-agent research pipeline 설계와 디버깅
+
+**목표:** subagent orchestration, context 전달, 오류 전파, source 추적이 포함된 종합.
+
+**단계:**
+1. 2개 이상의 subagent를 가진 Coordinator(`allowedTools`에 `"Task"` 포함, context는 prompt에 명시적으로 전달)
+2. 단일 응답에서 여러 `Task` 호출로 subagent를 병렬 실행
+3. 구조화된 subagent 출력 요구: claim, quote, source URL, publication date
+4. subagent 타임아웃 시뮬레이션: structured error context를 Coordinator에게 반환하고 부분 결과로 계속 진행
+5. 충돌 데이터로 테스트: 두 값을 모두 source와 함께 보존하고, 확인된 발견과 논쟁적 발견을 분리
+
+**도메인:** 1(Agent architecture), 2(tool과 MCP), 5(context와 안정성)
+
+---
+
+# 부록: 기술과 개념
+
+| 기술 | 핵심 측면 |
+|---|---|
+| **Claude Agent SDK** | AgentDefinition, Agent 루프, `stop_reason`, hook(PostToolUse), Task를 통한 subagent 생성, `allowedTools` |
+| **Model Context Protocol(MCP)** | MCP 서버, tool, resource, `isError`, tool 설명, `.mcp.json`, 환경 변수 |
+| **Claude Code** | CLAUDE.md 계층, glob 패턴이 있는 `.claude/rules/`, `.claude/commands/`, SKILL.md가 있는 `.claude/skills/`, 계획 모드, `/compact`, `--resume`, `fork_session` |
+| **Claude Code CLI** | 비대화형 모드를 위한 `-p` / `--print`, `--output-format json`, `--json-schema` |
+| **Claude API** | JSON schema를 사용한 `tool_use`, `tool_choice`("auto"/"any"/forced), `stop_reason`, `max_tokens`, system prompt |
+| **Message Batches API** | 50% 비용 절감, 최대 24시간 window, `custom_id`, 멀티턴 tool 호출 없음 |
+| **JSON Schema** | 필수 vs 선택, nullable 필드, enum 타입, "other" + detail, strict mode |
+| **Pydantic** | schema validation, 의미 오류, validation/retry 루프 |
+| **built-in tool** | Read, Write, Edit, Bash, Grep, Glob — 목적과 선택 기준 |
+| **Few-shot prompting** | 모호한 상황을 위한 목표 예시, 새 패턴으로 일반화 |
+| **prompt chaining** | 집중된 패스로 순차 분해 |
+| **context window** | token 예산, 점진적 summary, "lost in the middle", 스크래치패드 파일 |
+| **session 관리** | Resume, `fork_session`, 이름 있는 session, context 격리 |
+| **confidence calibration** | 필드 수준 점수, 라벨링 세트 기반 calibration, 계층화 sampling |
+
+---
+
+# 범위 제외 주제
+
+다음 인접 주제는 시험에 **출제되지 않습니다**.
+
+- Claude 모델 fine-tuning 또는 사용자 지정 모델 학습
+- Claude API 인증, billing, 계정 관리
+- 특정 프로그래밍 언어나 프레임워크의 상세 구현(tool/schema 구성에 필요한 범위를 넘어서는 내용)
+- MCP 서버 배포 또는 호스팅(인프라, 네트워킹, 컨테이너 orchestration)
+- Claude의 내부 architecture, 학습 과정, 모델 가중치
+- Constitutional AI, RLHF, 안전 학습 방법론
+- Embedding 모델 또는 vector database 구현 세부사항
+- Computer use(브라우저 자동화, 데스크톱 상호작용)
+- 이미지 분석 기능(Vision)
+- Streaming API 또는 server-sent events
+- Rate limiting, quota, 상세 API 비용 계산
+- OAuth, API 키 rotation, 인증 프로토콜 세부사항
+- Cloud provider별 구성(AWS, GCP, Azure)
+- 성능 benchmark 또는 모델 비교 지표
+- Prompt caching 구현 세부사항(존재를 아는 것 이상)
+- token 카운팅 알고리즘 또는 토크나이제이션 세부사항
+
+---
+
+# 준비 권장사항
+
+1. **Claude Agent SDK로 Agent를 구축하세요** — tool 호출, 오류 처리, session 관리를 포함한 전체 Agent 루프를 구현합니다. subagent와 명시적 context 전달을 연습하세요.
+
+2. **실제 프로젝트에 Claude Code를 구성하세요** — CLAUDE.md 계층, `.claude/rules/`의 경로별 규칙, `context: fork`와 `allowed-tools`가 있는 Skill, MCP 서버 통합을 사용합니다.
+
+3. **MCP tool을 설계하고 테스트하세요** — 유사 tool을 구분하는 설명을 작성하고, 범주와 retry 플래그가 있는 structured error를 반환하며, 모호한 사용자 요청에 대해 테스트합니다.
+
+4. **데이터 extraction pipeline을 구축하세요** — JSON schema가 있는 `tool_use`, validation/retry 루프, 선택/nullable 필드, Message Batches API를 통한 batch 처리를 사용합니다.
+
+5. **Prompt Engineering을 연습하세요** — 모호한 시나리오를 위한 few-shot 예시, 명시적 리뷰 기준, 큰 코드 리뷰를 위한 다중 패스 architecture를 추가합니다.
+
+6. **context 관리 패턴을 학습하세요** — 상세 출력에서 사실을 extraction하고, 스크래치패드 파일을 사용하며, context 한도를 처리하기 위해 발견 작업을 subagent에게 위임합니다.
+
+7. **escalation과 human-in-the-loop를 이해하세요** — 언제 escalation할지(정책 공백, 명시적 사용자 요청, 진행 불가)와 confidence 기반 routing workflow를 익힙니다.
+
+8. **실제 시험 전에 연습 시험을 보세요.** 같은 시나리오와 형식을 사용합니다.

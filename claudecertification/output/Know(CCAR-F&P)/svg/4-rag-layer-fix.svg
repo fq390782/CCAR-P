@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="580" viewBox="0 0 920 580" role="img" aria-label="증상이 아니라 trace가 실패 계층을 지목하면, 그 계층의 구성 요소를 고친다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>RAG 실패의 계층별 수정</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-rag-layer-fix" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">RAG 실패: 계층은 증상이 아니라 trace가 결정, 지목된 계층의 구성 요소를 고친다</text>
+<rect x="20" y="50" width="180" height="54" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="110.0" y="74.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">chunking</text>
+<text x="110.0" y="89.3" font-size="11" fill="#6B7280" text-anchor="middle">문서를 chunk로 분할</text>
+<rect x="250" y="50" width="180" height="54" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="340.0" y="74.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">retrieval</text>
+<text x="340.0" y="89.3" font-size="11" fill="#6B7280" text-anchor="middle">chunk 검색 · ranking</text>
+<rect x="480" y="50" width="180" height="54" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="570.0" y="74.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">context window</text>
+<text x="570.0" y="89.3" font-size="11" fill="#6B7280" text-anchor="middle">긴 문서를 window에 넣음</text>
+<rect x="710" y="50" width="180" height="54" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="800.0" y="74.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">generation</text>
+<text x="800.0" y="89.3" font-size="11" fill="#6B7280" text-anchor="middle">context로 답변 생성</text>
+<path d="M200,77 L250,77" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<text x="225" y="69" font-size="11" fill="#1F2937" text-anchor="middle">chunk</text>
+<path d="M430,77 L480,77" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<text x="455" y="69" font-size="11" fill="#1F2937" text-anchor="middle">검색 결과</text>
+<path d="M660,77 L710,77" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<text x="685" y="69" font-size="11" fill="#1F2937" text-anchor="middle">입력</text>
+<path d="M110.0,104 L110.0,144" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="112.0" y="117" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="116.0" y="129" font-size="12" fill="#1F2937" text-anchor="start">증상</text>
+<rect x="20" y="144" width="180" height="116" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="110.0" y="178.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">증상</text>
+<text x="110.0" y="193.3" font-size="11" fill="#6B7280" text-anchor="middle">규칙 chunk만 retrieve</text>
+<text x="110.0" y="207.3" font-size="11" fill="#6B7280" text-anchor="middle">예외는 다음 문단에 있음</text>
+<text x="110.0" y="221.3" font-size="11" fill="#6B7280" text-anchor="middle">조항이 문장 중간에서</text>
+<text x="110.0" y="235.3" font-size="11" fill="#6B7280" text-anchor="middle">분할됨</text>
+<path d="M110.0,260 L110.0,304" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="112.0" y="275" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="116.0" y="287" font-size="12" fill="#1F2937" text-anchor="start">수정</text>
+<rect x="20" y="304" width="180" height="136" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="110.0" y="355.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">수정</text>
+<text x="110.0" y="370.4" font-size="11" fill="#6B7280" text-anchor="middle">섹션 구조 따라 re-chunk</text>
+<text x="110.0" y="384.4" font-size="11" fill="#6B7280" text-anchor="middle">약간의 overlap</text>
+<text x="110.0" y="398.4" font-size="11" fill="#6B7280" text-anchor="middle">→ 규칙과 예외 함께 유지</text>
+<path d="M340.0,104 L340.0,144" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="342.0" y="117" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="346.0" y="129" font-size="12" fill="#1F2937" text-anchor="start">증상</text>
+<rect x="250" y="144" width="180" height="116" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="340.0" y="185.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">증상</text>
+<text x="340.0" y="200.3" font-size="11" fill="#6B7280" text-anchor="middle">최상위 chunk =</text>
+<text x="340.0" y="214.3" font-size="11" fill="#6B7280" text-anchor="middle">포럼 게시물</text>
+<text x="340.0" y="228.3" font-size="11" fill="#6B7280" text-anchor="middle">사양서는 5위</text>
+<path d="M340.0,260 L340.0,304" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="342.0" y="275" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="346.0" y="287" font-size="12" fill="#1F2937" text-anchor="start">수정</text>
+<rect x="250" y="304" width="180" height="136" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="340.0" y="348.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">수정</text>
+<text x="340.0" y="363.4" font-size="11" fill="#6B7280" text-anchor="middle">ranking에서 권위 출처 우대</text>
+<text x="340.0" y="377.4" font-size="11" fill="#6B7280" text-anchor="middle">(또는 사양 corpus filter)</text>
+<text x="340.0" y="391.4" font-size="11" fill="#6B7280" text-anchor="middle">source-type metadata 추가</text>
+<text x="340.0" y="405.4" font-size="11" fill="#6B7280" text-anchor="middle">→ retrieval에서 우선</text>
+<path d="M570.0,104 L570.0,144" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="572.0" y="117" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="576.0" y="129" font-size="12" fill="#1F2937" text-anchor="start">증상</text>
+<rect x="480" y="144" width="180" height="116" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="570.0" y="178.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">증상</text>
+<text x="570.0" y="193.3" font-size="11" fill="#6B7280" text-anchor="middle">180K 문서에서 100K 이후</text>
+<text x="570.0" y="207.3" font-size="11" fill="#6B7280" text-anchor="middle">위치 사실 정확도 급락</text>
+<text x="570.0" y="221.3" font-size="11" fill="#6B7280" text-anchor="middle">(200K window 모델)</text>
+<text x="570.0" y="235.3" font-size="11" fill="#6B7280" text-anchor="middle">원인: 먼 위치 attention 저하</text>
+<path d="M570.0,260 L570.0,304" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="572.0" y="275" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="576.0" y="287" font-size="12" fill="#1F2937" text-anchor="start">수정</text>
+<rect x="480" y="304" width="180" height="136" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="570.0" y="348.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">수정</text>
+<text x="570.0" y="363.4" font-size="11" fill="#6B7280" text-anchor="middle">retrieve-then-read</text>
+<text x="570.0" y="377.4" font-size="11" fill="#6B7280" text-anchor="middle">관련 섹션을 먼저 가져옴</text>
+<text x="570.0" y="391.4" font-size="11" fill="#6B7280" text-anchor="middle">작고 집중된 context에서 추론</text>
+<text x="570.0" y="405.4" font-size="11" fill="#6B7280" text-anchor="middle">위치 구간별 정확도 평가</text>
+<path d="M800.0,104 L800.0,144" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="802.0" y="117" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="806.0" y="129" font-size="12" fill="#1F2937" text-anchor="start">증상</text>
+<rect x="710" y="144" width="180" height="116" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="800.0" y="178.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">증상</text>
+<text x="800.0" y="193.3" font-size="11" fill="#6B7280" text-anchor="middle">그럴듯한 가짜 판례 인용</text>
+<text x="800.0" y="207.3" font-size="11" fill="#6B7280" text-anchor="middle">(실제 같은 이름 · 올바른 형식)</text>
+<text x="800.0" y="221.3" font-size="11" fill="#6B7280" text-anchor="middle">= ungrounded generation</text>
+<text x="800.0" y="235.3" font-size="11" fill="#6B7280" text-anchor="middle">(parametric memory에서 생성)</text>
+<path d="M800.0,260 L800.0,304" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-layer-fix)"/>
+<rect x="802.0" y="275" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="806.0" y="287" font-size="12" fill="#1F2937" text-anchor="start">수정</text>
+<rect x="710" y="304" width="180" height="136" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="800.0" y="341.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">수정</text>
+<text x="800.0" y="356.4" font-size="11" fill="#6B7280" text-anchor="middle">인용이 검색된 출처로</text>
+<text x="800.0" y="370.4" font-size="11" fill="#6B7280" text-anchor="middle">해소되도록 요구</text>
+<text x="800.0" y="384.4" font-size="11" fill="#6B7280" text-anchor="middle">인용-출처 검증 단계</text>
+<text x="800.0" y="398.4" font-size="11" fill="#6B7280" text-anchor="middle">groundedness = 판례의</text>
+<text x="800.0" y="412.4" font-size="11" fill="#6B7280" text-anchor="middle">corpus 내 존재 확인</text>
+<text x="20" y="468" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">오답: 계층을 지목하지 않은 수정</text>
+<rect x="20" y="478" width="880" height="76" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="460.0" y="505.9" font-size="11" fill="#6B7280" text-anchor="middle">모델 tier 상향 · 큰 모델 · system prompt 재작성 (proxy 수정)</text>
+<text x="460.0" y="519.9" font-size="11" fill="#6B7280" text-anchor="middle">"예외 기억" · "환각하지 말 것" · "끝부분 주의" 지시 (검증 불가)</text>
+<text x="460.0" y="533.9" font-size="11" fill="#6B7280" text-anchor="middle">chunk 5 → 30개 (노이즈) · 100K로 절단 (사실 삭제) · 재시도 · 다음 릴리스 대기</text>
+</svg>

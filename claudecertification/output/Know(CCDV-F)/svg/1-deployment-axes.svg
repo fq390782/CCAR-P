@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="390" viewBox="0 0 920 390" role="img" aria-label="Deployment 3축: loop, tool 실행, state가 각각 어디에 있나" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Deployment 3축: loop, tool 실행, state가 각각 어디에 있나</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-deployment-axes-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-deployment-axes-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-deployment-axes-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-deployment-axes-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Deployment 3축 — loop · tool 실행 · state의 위치</text>
+<rect x="240" y="50" width="210" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="345.0" y="70.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Agent SDK</text>
+<text x="345.0" y="86.7" font-size="11" fill="#6B7280" text-anchor="middle">self-hosted</text>
+<rect x="470" y="50" width="210" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="575.0" y="70.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Managed Agents</text>
+<text x="575.0" y="86.7" font-size="11" fill="#6B7280" text-anchor="middle">Anthropic cloud sandbox</text>
+<rect x="700" y="50" width="210" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="805.0" y="70.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Managed Agents</text>
+<text x="805.0" y="86.7" font-size="11" fill="#6B7280" text-anchor="middle">self-hosted sandbox</text>
+<rect x="20" y="110" width="210" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="125.0" y="138.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">loop를 누가 돌리나</text>
+<rect x="240" y="110" width="210" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="345.0" y="138.1" font-size="13" fill="#1F2937" text-anchor="middle">자사 프로세스</text>
+<rect x="470" y="110" width="210" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="575.0" y="138.1" font-size="13" fill="#1F2937" text-anchor="middle">Anthropic</text>
+<rect x="700" y="110" width="210" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="805.0" y="138.1" font-size="13" fill="#1F2937" text-anchor="middle">Anthropic</text>
+<rect x="20" y="170" width="210" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="125.0" y="198.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">tool은 어디서 실행되나</text>
+<rect x="240" y="170" width="210" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="345.0" y="190.1" font-size="13" fill="#1F2937" text-anchor="middle">자사 인프라</text>
+<text x="345.0" y="206.7" font-size="11" fill="#6B7280" text-anchor="middle">파일·명령을 직접 다룸</text>
+<rect x="470" y="170" width="210" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="575.0" y="198.1" font-size="13" fill="#1F2937" text-anchor="middle">Anthropic cloud</text>
+<rect x="700" y="170" width="210" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="805.0" y="198.1" font-size="13" fill="#1F2937" text-anchor="middle">자사 sandbox</text>
+<rect x="20" y="230" width="210" height="50" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="125.0" y="250.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">state는 어디에 남나</text>
+<text x="125.0" y="266.7" font-size="11" fill="#6B7280" text-anchor="middle">세션 · event log</text>
+<rect x="240" y="230" width="210" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="345.0" y="250.1" font-size="13" fill="#1F2937" text-anchor="middle">자사 쪽</text>
+<text x="345.0" y="266.7" font-size="11" fill="#6B7280" text-anchor="middle">디스크 JSONL / SessionStore</text>
+<rect x="470" y="230" width="210" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="575.0" y="258.1" font-size="13" fill="#1F2937" text-anchor="middle">Anthropic</text>
+<rect x="700" y="230" width="210" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="805.0" y="250.1" font-size="13" fill="#1F2937" text-anchor="middle">Anthropic</text>
+<text x="805.0" y="266.7" font-size="11" fill="#6B7280" text-anchor="middle">sandbox가 자사여도 동일</text>
+<rect x="240" y="292" width="14" height="14" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="260" y="304" font-size="11" fill="#6B7280" text-anchor="start">자사 인프라</text>
+<rect x="370" y="292" width="14" height="14" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="390" y="304" font-size="11" fill="#6B7280" text-anchor="start">Anthropic</text>
+<rect x="490" y="292" width="14" height="14" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="510" y="304" font-size="11" fill="#6B7280" text-anchor="start">자주 틀리는 함정</text>
+<rect x="20" y="325" width="440" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="240.0" y="344.1" font-size="13" fill="#1F2937" text-anchor="middle">data residency: 실행·데이터·세션 로그 모두 자사</text>
+<text x="240.0" y="360.7" font-size="11" fill="#6B7280" text-anchor="middle">→ Agent SDK (self-hosted)</text>
+<rect x="480" y="325" width="420" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="690.0" y="344.1" font-size="13" fill="#1F2937" text-anchor="middle">production 출시 속도 우선</text>
+<text x="690.0" y="360.7" font-size="11" fill="#6B7280" text-anchor="middle">→ Managed Agents</text>
+</svg>

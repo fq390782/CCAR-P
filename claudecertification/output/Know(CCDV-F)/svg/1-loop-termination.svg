@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="390" viewBox="0 0 900 390" role="img" aria-label="Loop 종료: success condition과 hard step ceiling의 조합" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Loop 종료: success condition과 hard step ceiling의 조합</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-loop-termination-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-loop-termination-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-loop-termination-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-loop-termination-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Loop 종료 — success condition + hard step ceiling</text>
+<rect x="60" y="60" width="230" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="175.0" y="80.1" font-size="13" fill="#1F2937" text-anchor="middle">agent step 실행</text>
+<text x="175.0" y="96.7" font-size="11" fill="#6B7280" text-anchor="middle">모델 호출 + tool 실행</text>
+<polygon points="430,40.0 550.0,85 430,130.0 310.0,85" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="430" y="79.1" font-size="13" fill="#1F2937" text-anchor="middle">success condition</text>
+<text x="430" y="97.1" font-size="13" fill="#1F2937" text-anchor="middle">충족?</text>
+<rect x="610" y="55" width="260" height="60" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="740.0" y="72.1" font-size="13" fill="#1F2937" text-anchor="middle">정상 종료</text>
+<text x="740.0" y="88.7" font-size="11" fill="#6B7280" text-anchor="middle">앱 수준 success condition</text>
+<text x="740.0" y="104.7" font-size="11" fill="#6B7280" text-anchor="middle">모델의 end_turn도 함께 처리</text>
+<polygon points="430,190.0 550.0,235 430,280.0 310.0,235" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="430" y="229.1" font-size="13" fill="#1F2937" text-anchor="middle">step 수 ≥</text>
+<text x="430" y="247.1" font-size="13" fill="#1F2937" text-anchor="middle">hard ceiling?</text>
+<rect x="610" y="205" width="260" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="740.0" y="222.1" font-size="13" fill="#1F2937" text-anchor="middle">안전망 종료</text>
+<text x="740.0" y="238.7" font-size="11" fill="#6B7280" text-anchor="middle">비수렴 시 피해·비용을 묶어 둔다</text>
+<text x="740.0" y="254.7" font-size="11" fill="#6B7280" text-anchor="middle">(성공 실행의 비용 절감·속도 목적 아님)</text>
+<path d="M290,85 L310,85" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-loop-termination-k)"/>
+<path d="M550,85 L610,85" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-loop-termination-k)"/>
+<rect x="571.5" y="78" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="580" y="89" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M430,130 L430,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-loop-termination-k)"/>
+<rect x="433.0" y="153" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="436" y="164" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<path d="M550,235 L610,235" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-loop-termination-k)"/>
+<rect x="571.5" y="228" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="580" y="239" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M310,235 L175,235 L175,110" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-loop-termination-k)"/>
+<rect x="183.7" y="228" width="116.7" height="15" fill="#FFFFFF"/>
+<text x="242" y="239" font-size="11" fill="#1F2937" text-anchor="middle">아니오 → 다음 step</text>
+<text x="20" y="310" font-size="13" fill="#1F2937" text-anchor="start" font-weight="bold">올바른 종료 조건이 아닌 것</text>
+<rect x="20" y="322" width="280" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="160.0" y="342.1" font-size="13" fill="#1F2937" text-anchor="middle">고정 N회 반복</text>
+<text x="160.0" y="358.7" font-size="11" fill="#6B7280" text-anchor="middle">모델 신호를 무시</text>
+<rect x="310" y="322" width="280" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="342.1" font-size="13" fill="#1F2937" text-anchor="middle">wall-clock timeout만 사용</text>
+<text x="450.0" y="358.7" font-size="11" fill="#6B7280" text-anchor="middle">단독 종료 조건으로는 오답</text>
+<rect x="600" y="322" width="280" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="740.0" y="342.1" font-size="13" fill="#1F2937" text-anchor="middle">컨텍스트 소진</text>
+<text x="740.0" y="358.7" font-size="11" fill="#6B7280" text-anchor="middle">종료가 아니라 실패</text>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="700" viewBox="0 0 960 700" role="img" aria-label="지식 구조 선택, 통제와 감사, 숫자와 SLA, 비용과 가치, 파일럿 확대, 이해관계자, 문서와 인계, 운영과 사고 여덟 갈래로 나눈 판단 규칙">
+<title>상황의 성격에 따라 정답 판단 규칙을 고르는 decision tree</title>
+<defs><marker id="arr-situation-decision-tree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="480.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">상황의 성격을 먼저 가르고 그 갈래의 판단 규칙을 적용</text>
+<polygon points="90,310.5 170.0,362.5 90,414.5 10.0,362.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="90" y="358.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">상황의</text>
+<text x="90" y="374.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">성격은?</text>
+<polyline points="170,362.5 186,362.5" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="186,79.0 186,646.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="186,79.0 200,79.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="48" width="250" height="62" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="76.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">지식 · 구조 선택</text>
+<text x="325.0" y="90.7" font-size="11" fill="#1F2937" text-anchor="middle">갱신 지식 · 고정 분류 · 두 문제 · 과잉 설계</text>
+<polyline points="450,79.0 490,79.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="73.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="48" width="450" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="69.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">갱신 지식 = index 검색 · 월 갱신 인용 = augmented LLM</text>
+<text x="715.0" y="83.7" font-size="11" fill="#1F2937" text-anchor="middle">고정 카테고리 = classifier · 형태 다른 두 문제 = 단순 구성요소 둘</text>
+<text x="715.0" y="97.7" font-size="11" fill="#1F2937" text-anchor="middle">복잡성은 명시 요구사항으로만 정당화</text>
+<polyline points="186,158.0 200,158.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="120" width="250" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="155.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">통제 · 책임 · 감사</text>
+<text x="325.0" y="169.7" font-size="11" fill="#1F2937" text-anchor="middle">자동화 경계 · 규제 통제 · 돈 · 승인 규칙</text>
+<polyline points="450,158.0 490,158.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="152.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="120" width="450" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="141.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">책임 수반 결정은 사람 · 필수 통제는 모델 밖 코드 gate</text>
+<text x="715.0" y="155.7" font-size="11" fill="#1F2937" text-anchor="middle">첫 행동 = 제약 기록 → 입력 분기 → 코드 gate</text>
+<text x="715.0" y="169.7" font-size="11" fill="#1F2937" text-anchor="middle">감사 = 7 gate 코드 배치 + request ID 하나의 trace</text>
+<text x="715.0" y="183.7" font-size="11" fill="#1F2937" text-anchor="middle">verification = 모델 이후 · side effect 이전</text>
+<polyline points="186,244.0 200,244.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="206" width="250" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="241.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">숫자 · SLA · 약속</text>
+<text x="325.0" y="255.7" font-size="11" fill="#1F2937" text-anchor="middle">정확도 요구 · 단일 숫자 · 계약 문구 · 형용사</text>
+<polyline points="450,244.0 490,244.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="238.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="206" width="450" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="227.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">측정값 · 한계 · 날짜 · 검토 트리거로 재진술</text>
+<text x="715.0" y="241.7" font-size="11" fill="#1F2937" text-anchor="middle">99.9% · 절대 틀리지 않음 = 종단 간 성과 + 측정 목표 + 오류 예산</text>
+<text x="715.0" y="255.7" font-size="11" fill="#1F2937" text-anchor="middle">영업 SLA · 벤더 슬로건 = 파일럿 실측 + 단계별 SLA</text>
+<text x="715.0" y="269.7" font-size="11" fill="#1F2937" text-anchor="middle">정확도 동률 + SLA · 비용 명시 = 제약 충족 설계</text>
+<polyline points="186,330.0 200,330.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="292" width="250" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="327.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">비용 · 가치 결정</text>
+<text x="325.0" y="341.7" font-size="11" fill="#1F2937" text-anchor="middle">구축 여부 · 예산 · tier · CFO · 가격 변동</text>
+<polyline points="450,330.0 490,330.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="324.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="292" width="450" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="313.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">순가치 공식으로 판단 (구축 · 오류 · 고정비 · 물량 포함)</text>
+<text x="715.0" y="327.7" font-size="11" fill="#1F2937" text-anchor="middle">음수 → 구축 ✗ · 기준선 미측정 → 고정 범위 파일럿 → 순가치</text>
+<text x="715.0" y="341.7" font-size="11" fill="#1F2937" text-anchor="middle">고정 예산 · 개선안 2개 → 가격 매긴 가치가 큰 쪽</text>
+<text x="715.0" y="355.7" font-size="11" fill="#1F2937" text-anchor="middle">서명 후 가격 변동 → 재계산 + 재서명 + 숫자에 날짜</text>
+<polyline points="186,409.0 200,409.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="378" width="250" height="62" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="406.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">파일럿 · 출시 확대</text>
+<text x="325.0" y="420.7" font-size="11" fill="#1F2937" text-anchor="middle">호평 · 데모 성공 · 표본 · 롤아웃</text>
+<polyline points="450,409.0 490,409.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="403.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="378" width="450" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="399.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">결과 지표 · 대표 표본 · 평가 범위로 확대 판단</text>
+<text x="715.0" y="413.7" font-size="11" fill="#1F2937" text-anchor="middle">호평은 높고 결과 지표 정체 → 확대 보류 · 원인 조사</text>
+<text x="715.0" y="427.7" font-size="11" fill="#1F2937" text-anchor="middle">데모 몇 건 성공 → 평가 범위 공개 + 단계적 롤아웃</text>
+<polyline points="186,488.0 200,488.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="450" width="250" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="485.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">이해관계자 · 요구사항</text>
+<text x="325.0" y="499.7" font-size="11" fill="#1F2937" text-anchor="middle">형용사 요구 · 수치 충돌 · 청중 · 일정 충돌</text>
+<polyline points="450,488.0 490,488.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="482.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="450" width="450" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="471.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">형용사는 수치로 · 충돌은 책임자 서명 · 청중별 축으로 전달</text>
+<text x="715.0" y="485.7" font-size="11" fill="#1F2937" text-anchor="middle">형용사 → 임계값 + 소유자 서명 + 미해결 가정 기록</text>
+<text x="715.0" y="499.7" font-size="11" fill="#1F2937" text-anchor="middle">수치 충돌 → 의사결정 책임자 서명 · 서명 전 설계 보류</text>
+<text x="715.0" y="513.7" font-size="11" fill="#1F2937" text-anchor="middle">보안 vs 제품 일정 → 위험 등급별 단계적 출시</text>
+<polyline points="186,567.0 200,567.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="536" width="250" height="62" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="564.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">문서 · 인계</text>
+<text x="325.0" y="578.7" font-size="11" fill="#1F2937" text-anchor="middle">이유 기록 · 낡은 문서 · handoff</text>
+<polyline points="450,567.0 490,567.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="561.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="536" width="450" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="557.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">ADR · handoff 패키지로 기록</text>
+<text x="715.0" y="571.7" font-size="11" fill="#1F2937" text-anchor="middle">ADR = 결정 시점 작성 + 검토 기준 · 낡은 ADR = 새 ADR이 supersede</text>
+<text x="715.0" y="585.7" font-size="11" fill="#1F2937" text-anchor="middle">handoff = ADR · runbook · eval · prompt 버전 · 담당자</text>
+<polyline points="186,646.0 200,646.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<rect x="200" y="608" width="250" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="643.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">운영 · 장애 · 사고</text>
+<text x="325.0" y="657.7" font-size="11" fill="#1F2937" text-anchor="middle">프로덕션 실패 · deprecation · 사고 후 대응</text>
+<polyline points="450,646.0 490,646.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-situation-decision-tree)"/>
+<text x="470" y="640.0" font-size="11" fill="#1F2937" text-anchor="middle">정답</text>
+<rect x="490" y="608" width="450" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="715.0" y="629.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">건너뛴 단계로 복귀 · 장애 중에는 hotfix 우선</text>
+<text x="715.0" y="643.7" font-size="11" fill="#1F2937" text-anchor="middle">프로덕션 실패 + 요구사항 부재 → discovery · design 복귀</text>
+<text x="715.0" y="657.7" font-size="11" fill="#1F2937" text-anchor="middle">모델 deprecation → frozen eval → shadow → 점진 전환</text>
+<text x="715.0" y="671.7" font-size="11" fill="#1F2937" text-anchor="middle">사고 후 규제 · 피해자 → 직접 통지 + blameless postmortem</text>
+</g>
+</svg>

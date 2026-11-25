@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="530" viewBox="0 0 900 530" role="img" aria-label="scanner 중단 후 manifest checkpoint에서 이어서 재개하는 흐름">
+<title>scanner 중단 후 manifest checkpoint에서 이어서 재개하는 흐름</title>
+<defs><marker id="arr-checkpoint-idempotent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">중단 복구: 진행 상태는 프로세스 밖 manifest에 · side effect는 idempotent로</text>
+<rect x="20" y="76" width="170" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105" y="118.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">저장소 scan</text>
+<rect x="250" y="76" width="170" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="335" y="111.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">handoff 검증</text>
+<text x="335" y="126.2" font-size="11" fill="#1F2937" text-anchor="middle">빈 결과 ≠ 성공</text>
+<rect x="480" y="76" width="170" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="565" y="104.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">finding 티켓 생성</text>
+<text x="565" y="119" font-size="11" fill="#1F2937" text-anchor="middle">idempotent: 저장소 +</text>
+<text x="565" y="133.3" font-size="11" fill="#1F2937" text-anchor="middle">finding id를 키로</text>
+<rect x="710" y="76" width="170" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="795" y="95.7" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">manifest에</text>
+<text x="795" y="112.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">checkpoint</text>
+<text x="795" y="127.5" font-size="11" fill="#1F2937" text-anchor="middle">완료 · 남은 저장소 · 지금까지</text>
+<text x="795" y="141.8" font-size="11" fill="#1F2937" text-anchor="middle">결과</text>
+<polyline points="190,114 250,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="220" y="106" font-size="11" fill="#1F2937" text-anchor="middle">결과</text>
+<polyline points="420,114 480,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="450" y="106" font-size="11" fill="#1F2937" text-anchor="middle">통과</text>
+<polyline points="650,114 710,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="680" y="106" font-size="11" fill="#1F2937" text-anchor="middle">생성</text>
+<polyline points="795,76 795,56 105,56 105,76" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="450" y="50" font-size="11" fill="#1F2937" text-anchor="middle">다음 저장소</text>
+<polyline points="335,152 335,196" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="343" y="178" font-size="11" fill="#1F2937" text-anchor="start">건너뜀 감지</text>
+<rect x="250" y="198" width="170" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="335" y="223.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">소유자 알림</text>
+<text x="335" y="238.2" font-size="11" fill="#1F2937" text-anchor="middle">checkpoint에서 재개</text>
+<polyline points="795,152 795,276 335,276 335,318" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="560" y="268" font-size="11" fill="#1F2937" text-anchor="middle">manifest 파일 (프로세스 밖)에서 읽음</text>
+<text x="20" y="300" font-size="11" font-weight="bold" fill="#6B7280" text-anchor="start">프로세스가 27번째 저장소에서 중단된 뒤 재실행</text>
+<rect x="20" y="320" width="170" height="76" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="105" y="355.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">27번째에서 중단</text>
+<text x="105" y="370.2" font-size="11" fill="#1F2937" text-anchor="middle">프로세스 종료</text>
+<polyline points="190,358 250,358" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="220" y="350" font-size="11" fill="#1F2937" text-anchor="middle">재실행</text>
+<rect x="250" y="320" width="170" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="335" y="355.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">시작 시 manifest 읽기</text>
+<text x="335" y="370.2" font-size="11" fill="#1F2937" text-anchor="middle">완료 · 남은 저장소 복원</text>
+<polyline points="420,358 480,358" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="450" y="350" font-size="11" fill="#1F2937" text-anchor="middle">복원</text>
+<rect x="480" y="320" width="170" height="76" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="565" y="355.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">이어서 시작</text>
+<text x="565" y="370.2" font-size="11" fill="#1F2937" text-anchor="middle">1번부터 다시 ✗</text>
+<polyline points="650,358 710,358" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-checkpoint-idempotent)"/>
+<text x="680" y="350" font-size="11" fill="#1F2937" text-anchor="middle">재처리</text>
+<rect x="710" y="320" width="170" height="76" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="795" y="348.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">중복 티켓 없음</text>
+<text x="795" y="363" font-size="11" fill="#1F2937" text-anchor="middle">재실행해도 중복 side effect</text>
+<text x="795" y="377.3" font-size="11" fill="#1F2937" text-anchor="middle">없음</text>
+<rect x="20" y="424" width="860" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450" y="456.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: scanner context window 확대 · 시작 시 coordinator에게 완료 저장소 질의</text>
+<text x="450" y="471.2" font-size="11" fill="#1F2937" text-anchor="middle">프로세스가 죽으면 context 소멸 · API stateless → 이전 실행 기억 없음</text>
+</g>
+</svg>

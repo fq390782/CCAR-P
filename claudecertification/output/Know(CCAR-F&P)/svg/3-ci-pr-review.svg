@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="925" height="330" viewBox="0 0 925 330" role="img" aria-label="CI PR 리뷰 파이프라인: PR의 diff를 수정 session과 분리된 리뷰 job이 CLAUDE.md 기준과 이전 리뷰 결과로 검토하고 코멘트만 게시하며 승인은 사람이 한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>CI PR 리뷰 파이프라인</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-cipr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="462" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">리뷰는 수정 session과 분리하고, 이전 결과를 context로 넘기며, 결정은 사람이 한다</text>
+
+  <rect x="215" y="46" width="140" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="285" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">CLAUDE.md</text>
+  <text x="285" y="86" text-anchor="middle" font-size="11" fill="#6B7280">리뷰 기준</text>
+  <rect x="375" y="46" width="140" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="445" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">이전 리뷰 결과</text>
+  <text x="445" y="86" text-anchor="middle" font-size="11" fill="#6B7280">+ "새 · 미해결만 보고"</text>
+  <line x1="285" y1="98" x2="285" y2="138" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cipr)"/>
+  <text x="293" y="123" font-size="11" fill="#6B7280">기준</text>
+  <line x1="445" y1="98" x2="445" y2="138" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cipr)"/>
+  <text x="453" y="123" font-size="11" fill="#6B7280">중복 방지</text>
+
+  <rect x="20" y="156" width="150" height="58" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="95" y="177" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">PR 생성 · push</text>
+  <text x="95" y="194" text-anchor="middle" font-size="11" fill="#6B7280">Claude 작성 PR도</text>
+  <text x="95" y="207" text-anchor="middle" font-size="11" fill="#6B7280">사람 PR과 같은 workflow</text>
+  <line x1="170" y1="185" x2="213" y2="185" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cipr)"/>
+  <text x="192" y="177" text-anchor="middle" font-size="11" fill="#6B7280">diff</text>
+  <rect x="215" y="140" width="300" height="90" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="365" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">리뷰 job (독립 실행)</text>
+  <text x="365" y="182" text-anchor="middle" font-size="11" fill="#6B7280">--continue 없는 별도 claude -p</text>
+  <text x="365" y="198" text-anchor="middle" font-size="11" fill="#6B7280">또는 새 context의 subagent</text>
+  <text x="365" y="214" text-anchor="middle" font-size="11" fill="#6B7280">수정 시 대화 없이 diff + CLAUDE.md만 입력</text>
+  <line x1="515" y1="185" x2="558" y2="185" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cipr)"/>
+  <text x="537" y="177" text-anchor="middle" font-size="11" fill="#6B7280">코멘트</text>
+  <rect x="560" y="156" width="150" height="58" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="635" y="177" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">리뷰 코멘트 게시</text>
+  <text x="635" y="194" text-anchor="middle" font-size="11" fill="#6B7280">기계적 검사 한정</text>
+  <text x="635" y="207" text-anchor="middle" font-size="11" fill="#6B7280">결정권 = 사람</text>
+  <line x1="710" y1="185" x2="753" y2="185" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cipr)"/>
+  <text x="732" y="177" text-anchor="middle" font-size="11" fill="#6B7280">승인</text>
+  <rect x="755" y="156" width="150" height="58" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="830" y="177" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">사람의 승인</text>
+  <text x="830" y="194" text-anchor="middle" font-size="11" fill="#6B7280">봇은 merge 금지</text>
+  <text x="830" y="207" text-anchor="middle" font-size="11" fill="#6B7280">→ 자율 승인 방지</text>
+
+  <rect x="215" y="252" width="300" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="365" y="273" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">자기 리뷰 ✗</text>
+  <text x="365" y="291" text-anchor="middle" font-size="11" fill="#6B7280">수정한 같은 session을 --continue · --resume으로 이어 리뷰</text>
+  <text x="365" y="307" text-anchor="middle" font-size="11" fill="#6B7280">→ 독립 리뷰보다 효과 낮음</text>
+</svg>

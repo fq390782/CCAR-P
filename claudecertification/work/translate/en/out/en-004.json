@@ -1,0 +1,192 @@
+[
+ {
+  "id": "CCAR-F-Udemy02-0006",
+  "question": "A startup in supply chain analytics is using the Claude Agent SDK to build a multi-agent research report system. A coordinator agent delegates work to specialized subagents. The subagents include one that collects supplier data, one that analyzes shipment risk, one that synthesizes findings, and one that writes executive reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nIn one evaluation run, the coordinator's first Messages API response contained a short text block and two tool_use blocks for Task. However, when you review the run history, no tool_result message was ever sent before the report was generated. The report is always based only on the coordinator's initial text.\n\nWhich changes should be made to the coordinator's loop? (Select two.)",
+  "choices": {
+    "A": "Send each subagent's output as a tool_result block in a user turn, keyed by the tool_use id.",
+    "B": "Forward the coordinator's text block as-is to the synthesis step, skip executing the Task calls, and end the turn at that point if there is text.",
+    "C": "Limit the coordinator to three iterations, summarize partial findings, and stop when the limit is reached.",
+    "D": "Execute each requested Task and return a tool_result, and keep calling until stop_reason is end_turn."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0007",
+  "question": "A telecom carrier is using the Claude Agent SDK to build a customer-facing agent. The agent handles ambiguous requests such as billing inquiries, SIM swaps, and device warranties. It accesses internal systems through custom Model Context Protocol (MCP) tools (get_subscriber, lookup_invoice, process_credit, escalate_to_tier2). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nReviewing production traces, you find that every incoming request is routed sequentially through the following separate subagents:\n\nIdentity verification\n\nBilling details\n\nCredit policy\n\nEscalation summary\n\nLatency is high even for questions that only need a simple billing status check, and some answers even include irrelevant credit policy disclaimers.\n\nWhich changes would most improve the design while keeping the specialized workers available for the cases that truly need them? (Select two.)",
+  "choices": {
+    "A": "Give all subagents the same backend tools and instruct each worker to skip them on its own when they are not needed.",
+    "B": "Answer simple billing status checks directly, and delegate to subagents only for cases that need specialized handling.",
+    "C": "Merge the identity verification and billing subagents into one to reduce the number of hops.",
+    "D": "Add a coordinator step that inspects the case, invokes only the subagents that are needed, and passes each a self-contained task summary."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0008",
+  "question": "The platform team at a fintech company is using Claude Code to accelerate software development. They use it for code generation, refactoring, debugging, and documentation, and integrate it into their development workflow using custom slash commands and CLAUDE.md configuration. They also need to understand how to choose between plan mode and direct execution.\n\nThe team wants to add its own MCP server and client-side integration to handle engineering reference materials (design documents, runbooks, database schemas, and architecture notes). The developers' requirements are as follows:\n\nHave the host display a browsable list of these reference materials\n\nAttach the selected content to Claude's context only when needed\n\nAvoid having Claude spend turns on exploratory function calls just to find out what exists\n\nWhich design best matches the MCP control model?",
+  "choices": {
+    "A": "Add a list_reference_material tool and have Claude call it first, then retrieve the chosen documents with additional tool calls.",
+    "B": "Copy the material catalog into CLAUDE.md, update it every time the repository is updated, and have Claude ask the developer for document names.",
+    "C": "Declare the resources capability, present the list via resources/list, and have the content read via resources/read.",
+    "D": "Expose each reference material as a prompt, and have developers run it with a slash command to inject the document body."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0009",
+  "question": "You are on a team responsible for maintaining legacy systems, using Claude Code to streamline your development workflow. You integrate it into your development workflow using custom slash commands and CLAUDE.md configuration, and you need to understand how to choose between plan mode and direct execution.\n\nThe team needs a reusable workflow for adding comprehensive tests to an unfamiliar legacy billing calculation module. The work usually starts with reading the module, but the steps after that vary depending on the following:\n\nThe dependencies found\n\nThe existing test patterns\n\nWhether code seams exist\n\nThe team cares more about producing useful coverage than about minimizing latency.\n\nWhich orchestration choice is most appropriate?",
+  "choices": {
+    "A": "Use one broad slash command that gives Claude the full set of files and requirements in a single unconstrained request.",
+    "B": "Use dynamic decomposition: have Claude investigate the module, create subtasks from what it discovers, and consolidate them into a test plan.",
+    "C": "Use a fixed prompt chain that has Claude analyze the files, write tests, run tests, and fix failures, in that order, every time.",
+    "D": "Use direct execution: have Claude start writing tests immediately and deal with missing context only after failures appear."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0010",
+  "question": "You are using the Claude Agent SDK to build a customer support resolution agent for a telecom carrier. The agent handles highly ambiguous requests such as refunds, billing disputes, and account issues. It can access backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nA customer support platform uses a client-side tool-use loop with the Messages API. During the beta period, the policy requires human review for refunds over $500.\n\nIn several emotionally charged billing dispute cases, after lookup_order the agent issued a process_refund tool_use request with an amount above the threshold, and the application executed that request as-is.\n\nWhich changes would most effectively enforce this workflow requirement? (Select two.)",
+  "choices": {
+    "A": "Block process_refund calls above the threshold on the application side and route them to escalate_to_human.",
+    "B": "Use tool_choice to force a call to escalate_to_human every time for billing disputes involving refunds.",
+    "C": "State explicitly in the system prompt that refunds above the threshold must be sent to escalate_to_human.",
+    "D": "Validate the requested amount in the process_refund implementation and reject requests above the threshold there."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0011",
+  "question": "An investment research desk is using the Claude Agent SDK to build a multi-agent equity research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches financial news and filings, one that analyzes brokerage analyst PDF reports, one that synthesizes findings, and one that generates reports.\n\nThe team has added a prompt-based quality gate that classifies findings in draft reports before publication.\n\nOne of its categories, \"unsupported market trend claims,\" has started producing many false positives on synthesized paragraphs that are well sourced. Other categories, such as missing citations and contradictions between sources, are working well. As a result, engineers have started ignoring the entire quality report.\n\nWhat should the team do next?",
+  "choices": {
+    "A": "Leave the noisy category enabled, add a note that false positives are possible, and ask engineers to ignore them manually.",
+    "B": "Temporarily remove only the noisy category, and rebuild it with real examples and definitions, evaluated with precision and recall.",
+    "C": "Have the quality gate return strict JSON and reject malformed output, and use schema conformance as the main trust metric.",
+    "D": "Pause the entire quality gate for one release cycle, fix the prompt, and then re-enable all categories."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0012",
+  "question": "An education SaaS company is integrating Claude Code into its automated code review pipeline. The system runs an automated review on each pull request, generates test cases, and returns specific, actionable feedback. You need to design prompts that minimize false positives.\n\nA coordinator delegates the review of a pull request to specialized subagents responsible for security, test coverage, and maintainability. Each subagent returns useful findings to the coordinator, but the final review summary often omits the following information that the coordinator should already have received:\n\nSpecific file paths\n\nNames of failed tests\n\nSupporting code snippets\n\nWhich changes would most effectively address this reliability problem? (Select two.)",
+  "choices": {
+    "A": "Save the security and test coverage instructions in CLAUDE.md so that subsequent CI runs load them.",
+    "B": "Have the coordinator summarize each specialized subagent's results before passing them to the synthesis subagent, to keep the input small.",
+    "C": "Pass the structured data returned by each subagent as-is, without summarizing, into the synthesis subagent's prompt.",
+    "D": "Have each specialized subagent return results in a fixed schema that requires per-finding evidence (file paths, test names, and code excerpts)."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0013",
+  "question": "The platform team at a mobile app company is integrating Claude Code into its CI/CD pipeline. The system runs automated code reviews, generates test cases, and returns feedback on pull requests. You need to design prompts that return specific, actionable feedback and minimize false positives.\n\nThe team's CI review job needs a project-scoped HTTP MCP server that handles pull request metadata. The server requires a bearer token in the Authorization header. The team has two requirements:\n\nShare the MCP configuration across all checkouts\n\nDo not commit credentials\n\nWhich implementation best meets these requirements?",
+  "choices": {
+    "A": "Register the MCP server, including the Authorization token, only in ~/.claude.json, and document manual setup steps for everyone.",
+    "B": "Commit a .mcp.json that references Bearer ${PR_API_TOKEN} in headers, and set the value in each environment.",
+    "C": "Commit a .mcp.json that references Bearer $PR_API_TOKEN (without braces) in headers, and rely on expansion at connection time.",
+    "D": "Commit a .mcp.json with the bearer token written directly in headers, and limit repository access to approved maintainers."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0014",
+  "question": "An environmental policy think tank is using the Claude Agent SDK to build a policy research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring evaluation, you find that although the final report cites its sources, it sometimes treats the following kinds of evidence as equivalent for the same claim:\n\nPeer-reviewed academic research\n\nVendor-published benchmarks\n\nInternal survey research\n\nThe search subagent and the document analysis subagent currently return only a concise summary of findings and a generic list of the sources they consulted.\n\nWhich changes are most appropriate for making downstream synthesis accurate? (Select two.)",
+  "choices": {
+    "A": "Have each subagent return structured claim records that include the source's location, publication date, and an excerpt of the evidence.",
+    "B": "In the synthesis step, weight the evidence according to the type of source.",
+    "C": "Have the coordinator keep the subagents' complete conversation transcripts, and have the synthesis agent infer source provenance from them.",
+    "D": "Give each subagent broader tool access so that it can investigate all available sources before writing its summary."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0015",
+  "question": "A company in the solar equipment leasing business is using the Claude Agent SDK to build a customer-facing agent. The agent handles ambiguous requests such as billing disputes, equipment malfunctions, and account issues. It accesses internal systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team wants to provide a Claude Code workflow named case-review that support engineers can run on demand. The requirements are as follows:\n\nRun outside the main conversation context in order to produce long investigation notes\n\nClaude can read and search project files without repeatedly showing permission prompts\n\nShow the expected case ID when a developer invokes it\n\nWhich configuration best matches these requirements?",
+  "choices": {
+    "A": "Set up .claude/skills/case-review/SKILL.md with context: fork, allowed-tools as an exclusive allowlist, and argument-hint as a validator.",
+    "B": "Create .claude/skills/case-review.md with context: fork, allowed-tools of Read and Grep, and argument-hint: [case-id].",
+    "C": "Create .claude/skills/case-review/SKILL.md with context: main, allowed-tools of Read and Grep, and argument-hint: [case-id].",
+    "D": "Create .claude/skills/case-review/SKILL.md with context: fork, allowed-tools of Read and Grep, and argument-hint: [case-id]."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0016",
+  "question": "An investment research desk is using the Claude Agent SDK to build a multi-agent equity research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches financial news and filings, one that analyzes brokerage analyst PDF reports, one that synthesizes findings, and one that generates reports.\n\nThe synthesis phase is given the following two client tools:\n\nanalyze_content (analyzes web search excerpts)\n\nanalyze_content_docs (analyzes uploaded PDFs)\n\nDuring evaluation, the model frequently makes mistakes such as calling the PDF tool on search results and calling the web tool on PDF excerpts. The descriptions of both tools are nearly identical and say only \"Analyzes content and returns key findings.\"\n\nThe team needs to continue exposing separate analysis tools for web excerpts and for PDFs, because it manages output specifications and audit logs separately.\n\nWhich change would most effectively reduce incorrect tool calls?",
+  "choices": {
+    "A": "Rename the tools to indicate their sources, and write in each description the boundaries of when to use and when not to use it.",
+    "B": "Leave the tool names as they are, add examples to the synthesis phase prompt, and ask Claude to choose carefully.",
+    "C": "Merge the two analysis tools into one general-purpose tool, and let the tool decide internally how to handle each source.",
+    "D": "Use tool_choice to force the document analysis tool first, and call the web analysis tool only when the results are insufficient."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0017",
+  "question": "You are using the Claude Agent SDK to build a member-facing agent for a health insurer. The agent handles highly ambiguous requests such as claim appeals, premium billing, and coverage verification. It can access backend systems through custom Model Context Protocol (MCP) tools (get_member, lookup_claim, process_reimbursement, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe support automation team at an insurance company finds that MCP tool calls succeed, but the return value formats are inconsistent. Two kinds of responses are mixed together:\n\nResponses that use Unix timestamps and numeric status codes\n\nResponses that use ISO 8601 dates and string status values\n\nClaude sometimes confuses these fields when deciding whether a claim is eligible for reimbursement.\n\nWhat should the team implement to give Claude a normalized representation before it uses successful tool results for reasoning? (Select two.)",
+  "choices": {
+    "A": "Normalize the date and status fields in the MCP tool implementation so that it returns normalized values.",
+    "B": "Add a PostToolUse hook that reads tool_response and returns hookSpecificOutput.updatedToolOutput containing the normalized fields.",
+    "C": "Add a PostToolUse hook that returns hookSpecificOutput.additionalContext containing a mapping for the inconsistent fields.",
+    "D": "Add a PostToolUse hook that returns decision: \"block\" when a tool response uses non-normalized fields."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0018",
+  "question": "You work at a fintech company and are using the Messages API to embed Claude as an automated review agent in your release pipeline. The agent runs static analysis on each pull request and generates test case suggestions and review feedback.\n\nDuring the review of one PR, Claude called the submit_review_findings tool. The argument JSON was syntactically correct and fully conformed to the schema. However, the internal CI validation logic rejected this run because it contained the following findings:\n\nFindings that reference files that were not changed\n\nFindings that violate the internal review policy\n\nWhich actions should the integration take next to make it easier for Claude to correct its review output? (Select two.)",
+  "choices": {
+    "A": "Send the next request while keeping the rejected tool_use and its error result in the conversation history.",
+    "B": "Publish only the findings that passed validation, discard the rejected findings, and complete the run.",
+    "C": "Return a tool_result with is_error: true for that tool_use_id, stating the reason for rejection for each finding.",
+    "D": "Add the general instruction \"Review findings must satisfy internal policy\" to the system prompt and rerun."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0019",
+  "question": "The live operations team at a game studio is integrating Claude Code into its CI/CD pipeline. The system runs automated code reviews, generates test cases, and returns feedback on pull requests. You need to design prompts that return specific, actionable feedback and minimize false positives.\n\nThe team is designing a new automated review feature that detects flaky test risks. However, the following product and workflow questions about the desired behavior remain unresolved:\n\nWhich comments are actionable, and which are noise\n\nWhat should be verified to prove that the implementation is correct\n\nWhat should the team do first, before asking Claude Code to implement it?",
+  "choices": {
+    "A": "Periodically run an autonomous Claude Code job that infers the missing requirements from recent pull request discussions.",
+    "B": "Have a subagent delegated through the Agent tool ask questions with AskUserQuestion, and pass the record to the implementing session.",
+    "C": "Include a detailed review checklist in the prompt, run it directly, and adjust after seeing the first CI failures.",
+    "D": "Have Claude ask questions with AskUserQuestion while compiling a SPEC.md, and then implement in a new session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0020",
+  "question": "You are using the Claude Agent SDK to build a claims handling agent for insurance. The agent handles highly ambiguous inquiries such as payment adjustments, coverage questions, and payout eligibility. It accesses backend systems through custom MCP tools (get_policyholder, lookup_claim, issue_payout, escalate_to_adjuster). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe engineering team at an insurance company is building this agent using the Claude Agent SDK and these MCP tools. Looking at the agent's traces during testing, Claude requests lookup_claim via MCP, but the results of the claim lookup are never observed. The session ends without producing a final response to the customer.\n\nWhich implementation change should the team make?",
+  "choices": {
+    "A": "Run all the support MCP tools before startup and have Claude summarize their outputs in one turn.",
+    "B": "Detect phrases indicating completion in the assistant's text, and end the workflow when it says the issue is resolved.",
+    "C": "Add to the system instructions that Claude itself must execute each MCP backend operation before responding.",
+    "D": "Run in the SDK's agent loop, returning the results of tool calls and continuing processing until the final response."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0021",
+  "question": "A renewable energy company is using the Claude Agent SDK to build a grid interconnection feasibility study system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes technical documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring evaluation, you find that when the synthesis subagent receives a long text made by concatenating the subagents' outputs, it tends to do the following:\n\nIt repeatedly omits well-supported findings located in the middle of the bundle\n\nFindings near the beginning and end are retained\n\nWhich change would most effectively reduce this failure while keeping the synthesis step grounded in the original evidence?",
+  "choices": {
+    "A": "Replace the detailed evidence with progressively shorter summaries, and pass only the latest summary to the synthesis agent.",
+    "B": "Prepend a concise findings map before the aggregated output, and group the detailed evidence under explicit headings by source and topic.",
+    "C": "Move all source URLs to an appendix at the end, and keep the descriptive evidence together in a single continuous section.",
+    "D": "Concatenate the subagent outputs in order of completion, and have the synthesis agent infer the main themes from the whole bundle."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0022",
+  "question": "An investment research desk is using the Claude Agent SDK to build a multi-agent equity research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches financial news and filings, one that analyzes brokerage analyst PDF reports, one that synthesizes findings, and one that generates reports.\n\nBefore finalizing a refactoring plan, the team uses a named subagent that examines dependency impact to investigate the packages to be changed.\n\nHowever, after the subagent identifies several affected files, the local test command intermittently times out. Only the result \"impact analysis failed\" is returned to the parent conversation, so useful findings are dropped from the plan.\n\nWhich change would best preserve resilience to failures without flooding the parent conversation with raw investigation output?",
+  "choices": {
+    "A": "Have the parent inspect the subagent's intermediate Bash calls and re-run only the failed commands before planning.",
+    "B": "Leave tools and disallowedTools unset, and use the inherited access to suppress Bash retries.",
+    "C": "Have the subagent retry transient failures internally and include the findings it obtained and any unresolved errors in its final result.",
+    "D": "Move the dependency impact investigation back into the parent conversation, and keep the command logs as material for creating the plan."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0023",
+  "question": "You are using the Claude Agent SDK to build a customer support resolution agent for a video streaming service. The agent handles highly ambiguous requests such as cancellations, billing disputes, and account issues. It can access backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team wants to move its low-urgency post-resolution quality checks to the Message Batches API. The conditions are as follows:\n\nCases arrive continuously\n\nFor audit triage, each check must have the batch's final result within 30 hours of the case's arrival\n\nAssume that a batch may use the entire 24-hour processing window stated in the documentation before it yields results or expires\n\nWhich submission interval should the team use?",
+  "choices": {
+    "A": "Submit the accumulated requests once a day, matching each case's result by custom_id.",
+    "B": "Submit the accumulated requests every 8 hours, matching each case's result by custom_id.",
+    "C": "Submit the accumulated requests every 12 hours, matching each case's result by custom_id.",
+    "D": "Submit the accumulated requests every 4 hours, matching each case's result by custom_id."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0024",
+  "question": "A research team at a consulting firm is using the Claude Agent SDK to build a multi-agent research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nWhen you run a benchmark on a broad topic, processing is slow and coverage is uneven. Looking at the logs, the coordinator processed things in the following order:\n\nHave one specialized subagent investigate all aspects in sequence\n\nPass a compressed text summary to the next specialized subagent\n\nOnly after that, request the final report\n\nThe relevant aspects were already known at the start, and they have no dependencies on each other.\n\nWhich design changes would be most effective for improving latency and coverage while maintaining a consistent final report? (Select two.)",
+  "choices": {
+    "A": "Have each specialized subagent hand off its unfinished aspects to another specialized subagent, merge each other's private context, and return the merged answer to the coordinator.",
+    "B": "Have the coordinator disable parallel tool use and handle each aspect in a separate turn, appending all raw results as it goes, and synthesize after the last subtask.",
+    "C": "Have the coordinator split the request into per-aspect subtasks, invoke independent specialized subagents together with shared constraints attached, and then consolidate their findings.",
+    "D": "Have the coordinator give each specialized subagent a self-contained brief so that no specialized subagent has to wait for another subagent's summary."
+  }
+ }
+]

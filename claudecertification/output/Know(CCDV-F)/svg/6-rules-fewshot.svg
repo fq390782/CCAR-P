@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480" role="img" aria-label="판단 규칙 ②: 형식 · few-shot" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>판단 규칙 ②: 형식 · few-shot</title>
+<defs><marker id="arr-rules-fewshot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">판단 규칙 ②: 형식 · few-shot</text>
+<polygon points="36,50 404,50 420,80.0 404,110 36,110 20,80.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="83.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">내용은 맞는데 형식이 매번 다름?</text>
+<rect x="480" y="50" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="68.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">정확한 출력 예시 3~5개 (&lt;example&gt; 태그)</text>
+<text x="680.0" y="85.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">+ 긍정형 형식 지정</text>
+<text x="680.0" y="100.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: neat 요청, 큰 모델, temperature ↑</text>
+<polyline points="420,80.0 480,80.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="440.5" y="60.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="72.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,110 220.0,134" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="224.0" y="113" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="125.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,134 404,134 420,164.0 404,194 36,194 20,164.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="167.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">여러 제약을 동시에 지켜야 함?</text>
+<rect x="480" y="134" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="160.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">규칙을 지킨 출력 예시 (worked example)</text>
+<text x="680.0" y="176.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 가장 중요한 제약 강조, 끝에 반복</text>
+<polyline points="420,164.0 480,164.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="440.5" y="144.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="156.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,194 220.0,218" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="224.0" y="197" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="209.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,218 404,218 420,248.0 404,278 36,278 20,248.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="251.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">까다로운 classification few-shot?</text>
+<rect x="480" y="218" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="236.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">다양한 소수 예시 + reject case</text>
+<text x="680.0" y="253.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">&lt;example&gt; 태그로 실제 입력과 분리</text>
+<text x="680.0" y="268.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 모두 같은 label, 거의 같은 예시 50개</text>
+<polyline points="420,248.0 480,248.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="440.5" y="228.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="240.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,278 220.0,302" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="224.0" y="281" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="293.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,302 404,302 420,332.0 404,362 36,362 20,332.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="335.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">지시와 예시가 모순됨?</text>
+<rect x="480" y="302" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="328.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">결과 예측 불가 → 모순 제거</text>
+<text x="680.0" y="344.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 지시가 이김 / 예시가 이김 / 거부됨</text>
+<polyline points="420,332.0 480,332.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="440.5" y="312.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="324.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,362 220.0,386" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="224.0" y="365" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="377.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,386 404,386 420,416.0 404,446 36,446 20,416.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="411.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">지식 부족 · latency · 작은 창 문제에</text>
+<text x="220.0" y="428.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">few-shot?</text>
+<rect x="480" y="386" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="411.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">few-shot이 아님</text>
+<text x="680.0" y="428.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">형식 · edge-case가 흔들릴 때만 쓴다</text>
+<polyline points="420,416.0 480,416.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-fewshot)"/>
+<rect x="440.5" y="396.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="408.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+</svg>

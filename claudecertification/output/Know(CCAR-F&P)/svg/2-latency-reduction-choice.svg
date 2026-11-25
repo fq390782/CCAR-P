@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="530" viewBox="0 0 900 530" role="img" aria-label="줄일 지연 종류에 따라 streaming, fast mode, effort 중 수단을 고르는 판단" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>줄일 지연 종류에 따라 streaming, fast mode, effort 중 수단을 고르는 판단</title>
+<defs><marker id="arr-latency-reduction-choice" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="450" y="24" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">지연 종류마다 수단이 다름 · 첫 단어 = streaming</text>
+<text x="310" y="50" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">수단</text>
+<text x="620" y="50" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">오답</text>
+<polygon points="95.0,193.0 170,248.0 95.0,303.0 20,248.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="95.0" y="243.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">줄일 지연은</text>
+<text x="95.0" y="260.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">무엇인가</text>
+<rect x="310" y="60" width="270" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="445.0" y="88.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">streaming</text>
+<text x="445.0" y="103.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">모델 · 답변 품질 그대로</text>
+<rect x="620" y="60" width="260" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="750.0" y="79.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">fast mode → 첫 토큰까지 시간엔 적용 ✗</text>
+<text x="750.0" y="94.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">답변 캐시 → 완료 후에만 표시 ✗</text>
+<text x="750.0" y="109.8" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">Message Batch → 다음 날 읽기 ✗</text>
+<polyline points="170,248.0 205,248.0 205,92.0 310,92.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-reduction-choice)"/>
+<rect x="223.0" y="84.0" width="70.0" height="16" fill="#FFFFFF"/>
+<text x="258" y="96.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">첫 단어 표시</text>
+<rect x="310" y="138" width="270" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="445.0" y="166.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">fast mode</text>
+<text x="445.0" y="181.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">속도 향상 = 초당 출력 토큰 수</text>
+<polyline points="170,248.0 205,248.0 205,170.0 310,170.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-reduction-choice)"/>
+<rect x="223.0" y="162.0" width="70.0" height="16" fill="#FFFFFF"/>
+<text x="258" y="174.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">초당 토큰 수</text>
+<rect x="310" y="216" width="270" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="445.0" y="244.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">effort를 더 낮게 설정</text>
+<text x="445.0" y="259.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">출력 · thinking 작업량 감소</text>
+<polyline points="170,248.0 205,248.0 205,248.0 310,248.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-reduction-choice)"/>
+<rect x="230.2" y="240.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="258" y="252.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">단순 요청</text>
+<rect x="310" y="294" width="270" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="445.0" y="322.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">medium effort 유지</text>
+<text x="445.0" y="337.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">정확도 하한 확보</text>
+<rect x="620" y="294" width="260" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="750.0" y="321.4" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">모든 요청을 high effort 큰 모델로 ✗</text>
+<text x="750.0" y="336.4" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">→ 호출마다 오래 걸려 지연 목표 이탈 가능</text>
+<polyline points="170,248.0 205,248.0 205,326.0 310,326.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-reduction-choice)"/>
+<rect x="224.7" y="318.0" width="66.5" height="16" fill="#FFFFFF"/>
+<text x="258" y="330.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">어려운 요청</text>
+<rect x="310" y="372" width="270" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="445.0" y="400.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">프롬프트에서 더 짧은 답변 요청</text>
+<text x="445.0" y="415.9" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">출력 길이가 시간을 늘림</text>
+<polyline points="170,248.0 205,248.0 205,404.0 310,404.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-reduction-choice)"/>
+<rect x="230.2" y="396.0" width="55.5" height="16" fill="#FFFFFF"/>
+<text x="258" y="408.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">출력 길이</text>
+<text x="20" y="464" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">주의: "streaming은 총 생성 작업량 감소 ✗" · "큰 모델은 지연 목표 이탈 가능"은 해설의 (Inference) 표기로 문서 직접 근거 아님</text>
+<text x="20" y="482" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="start">주의: fast mode 지원 모델 · 배율은 시점에 따라 변동 → 사용 전 공식 fast mode 문서 확인</text>
+</svg>

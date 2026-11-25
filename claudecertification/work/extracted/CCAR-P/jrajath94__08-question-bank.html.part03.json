@@ -1,0 +1,212 @@
+[
+  {
+    "number": "Q29",
+    "heading": "Q29",
+    "question": "A document-processing pipeline handles 10 million tokens per day. Finance mandates a 40 percent cost cut next quarter. Current accuracy is 94 percent on the eval set, and the SLA floor is 90 percent. The pipeline uses a large model for every document with a 4,000-token system prompt repeated on each call.\n\nConstraint: cut cost 40 percent while staying at or above 90 percent accuracy.\n\nWhich optimization plan best fits?",
+    "choices": {
+      "A": "Reduce the eval set size so accuracy is cheaper to measure.",
+      "B": "Switch everything to the cheapest model and hope accuracy holds.",
+      "C": "Cache the repeated 4,000-token system prompt. Use a smaller model for the easy document tier. Verify the smaller model on the eval set. Use shorter output limits. Re-run the eval set. Confirm accuracy stays above 90 percent.",
+      "D": "Process documents only on weekdays to cut volume 28 percent."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Caching attacks the repeated-prefix waste directly. Tiering moves easy work to cheaper models. It does not touch hard cases. The evaluation re-run proves the 90 percent floor still holds. Cost drops on three fronts. You verify accuracy.\n\nIt is not hoped for.\nB is wrong. \"Hope accuracy holds\" violates the verified-accuracy half of the constraint.\nD is wrong. It cuts service. It does not cut cost efficiency. Weekend documents still need processing.\nA is wrong. Shrinking the evaluation set hides regressions. It changes the measurement. It does not change the cost.",
+    "source_section": "D4"
+  },
+  {
+    "number": "Q30",
+    "heading": "Q30",
+    "question": "Every call to a classification API includes the same 4,000-token system prompt. The system prompt has a role, rules, and 12 few-shot examples. A short user message follows the system prompt. This repeated prefix uses most tokens. The system prompt changes about one time each month.\n\nConstraint: cut token cost on the repeated prefix without changing model behavior.\n\nWhat is the right optimization?",
+    "choices": {
+      "A": "Batch 100 user messages per call to amortize the prefix.",
+      "B": "Delete the few-shot examples to shorten the prompt.",
+      "C": "Enable prompt caching on the stable prefix. The system bills it one time. The system reuses it across calls.",
+      "D": "Switch to a model with cheaper input tokens but different behavior."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Prompt caching is for this purpose. It reuses a long stable prefix across calls. The system processes the prefix one time. The system caches the prefix. This cuts cost. It does not change behavior.\nB is wrong. Deleting examples changes behavior. It likely changes accuracy. The constraint forbids behavior change.\nD is wrong. A different model changes behavior by definition.\nA is wrong. Batching changes latency characteristics. It risks cross-contamination between messages. It is a workaround. It is not the purpose-built fix.",
+    "source_section": "D4"
+  },
+  {
+    "number": "Q31",
+    "heading": "Q31",
+    "question": "A team evaluates a code-generation agent with a single metric: unit-test pass rate on 300 tasks. The agent scores 82 percent. In pilot, developers complain the code is unreadable, ignores project conventions, and sometimes passes tests while solving the wrong problem.\n\nConstraint: the eval must reflect real developer acceptance, not just test passage.\n\nWhich two additions fix the eval blind spots? (Select two.)",
+    "choices": {
+      "A": "An LLM-judge review scoring code readability and convention adherence against the project style guide.",
+      "B": "Human spot-checks on a sample, rating whether the code actually solves the requested problem.",
+      "C": "More unit tests, raising the set from 300 to 3,000 tasks.",
+      "D": "Measuring tokens per task to reward efficiency."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Why A, B is correct: The blind spots are readability and conventions. A LLM judge checks against the style guide. This scales across all tasks (A). Wrong-problem solutions can still pass tests. Humans verify intent match on a sample (B). This is mixed-methodology evaluation.\nIt uses automated functional tests, a judge, and human review. Each covers what the others miss.\nC is wrong. More of the same metric does not fix the metric's blind spots. 3,000 pass-rate tests still ignore readability and intent.\nD is wrong. Token efficiency is not related to the complaints. Optimizing it can even reward terse, unreadable code.",
+    "source_section": "D4"
+  },
+  {
+    "number": "Q32",
+    "heading": "Q32",
+    "question": "A due-diligence agent reads deal documents up to 180,000 tokens. The team chose a model with a 200,000-token window, assuming it handles the full length. In testing, accuracy on facts buried past the 100,000-token mark drops sharply, even though everything fits in the window.\n\nConstraint: facts anywhere in the 180K document must be found with uniform reliability.\n\nWhat is the diagnosis and the fix?",
+    "choices": {
+      "A": "Diagnosis: prompt failure. Fix: add \"pay attention to the end of the document\" to the prompt.",
+      "B": "Diagnosis: the documents are too long. Fix: truncate to 100,000 tokens.",
+      "C": "Diagnosis: advertised context length is not effective context length; attention degrades on distant content (\"lost in the middle\" and late-position decay). Fix: retrieve-then-read (pull the relevant sections first, then reason over a small focused context), and eval accuracy at each position band.",
+      "D": "Diagnosis: the model is defective. Fix: wait for the next model release."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Fitting in the window does not mean the model uses the whole window well. This is the known effective-vs-advertised context gap. Retrieve-then-read shrinks the reasoning context. It shrinks it to the relevant sections. This restores uniform reliability. Position-banded evaluations prove this.\nB is wrong. Truncation deletes the facts. The constraint requires finding these facts.\nD is wrong. The behavior is a known property of long-context models. It is not a defect in one release.\nA is wrong. A prompt plea does not repair attention decay. This decay occurs over 180,000 tokens.",
+    "source_section": "D4"
+  },
+  {
+    "number": "Q33",
+    "heading": "Q33",
+    "question": "A customer-facing agent has a strict policy: it must never reveal system instructions, even under jailbreak attempts. The team wants production monitoring that detects successful prompt-injection attacks, not just attempts.\n\nConstraint: detect successful injections (instructions actually leaked) within hours, at high traffic volume, with a low false-positive rate.\n\nWhich monitoring design works?",
+    "choices": {
+      "A": "Log all conversations and have analysts read them daily.",
+      "B": "Block any user message containing the word \"system.\"",
+      "C": "Keyword search for \"ignore previous instructions\" in user messages; alert on every match.",
+      "D": "Train an output-side classifier. The classifier detects leaked system content. Run the classifier over sampled completions. Plant canary tokens in the system prompt. The appearance of canary tokens in outputs proves a leak. Alert on classifier hits.\n\nAlert on canary sightings."
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Why D is correct: Attempts are input-side and noisy. Success is output-side. The classifier detects leaked content in outputs. Canary tokens give near-zero-false-positive proof of a leak. Sampling keeps it affordable at volume. Detection happens within hours.\nC is wrong. It detects attempts, not successes. Attackers constantly rephrase. False positives flood the team.\nA is wrong. Manual review cannot cover high volume. It cannot cover it within hours.\nB is wrong. It blocks legitimate messages. For example, \"my system is down.\" It misses rephrased attacks.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q34",
+    "heading": "Q34",
+    "question": "A support agent sometimes pastes customers' full credit-card numbers into its replies when quoting past tickets. The compliance team requires that no full card number ever appears in any agent output.\n\nConstraint: The output must not show full card numbers. The control must work. The control must work even if the model asks for the number.\n\nWhich guardrail design satisfies the constraint?",
+    "choices": {
+      "A": "Add \"never share card numbers\" to the system prompt.",
+      "B": "Redact card numbers from the retrieved context. Do this before the numbers reach the model. This is input minimization. Use a deterministic output filter. This filter blocks or masks card number patterns. Do this before the system sends the reply.",
+      "C": "Train the support team to not ask about card numbers.",
+      "D": "Log all outputs and review them at the end of each week."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Why B is correct: A prompt request is bypassable. The constraint needs structural controls. Input minimization means the model often does not see the number. The deterministic output filter catches what slips through. Two independent layers make \"zero\" achievable.\nA is wrong. User instructions can override prompt instructions. This is not a guarantee.\nC is wrong. It controls the humans. It does not control the agent's outputs under adversarial input.\nD is wrong. Weekly review detects leaks days late. The constraint is prevention. It is not after-the-fact detection.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q35",
+    "heading": "Q35",
+    "question": "A bank uses a Claude agent. The agent drafts loan decisions. It can approve, deny, or refer. Regulators require human review for denials.\n\nA human must review every denial. A human must sign off on every denial. Do this before the denial reaches the applicant. There are no exceptions.\n\nWhich human-in-the-loop design complies?",
+    "choices": {
+      "A": "The agent issues denials directly but logs them for audit.",
+      "B": "The agent issues decisions directly; humans review a 5 percent sample afterward.",
+      "C": "The agent drafts every decision. It attaches its reasoning. Approvals can auto-issue below a risk threshold. Every denial waits in a queue. A human reviews and signs off on every denial.",
+      "D": "Humans write the decisions and the agent only formats them."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: The constraint stops denials. Each denial needs human sign-off. Do this before delivery. The agent attaches the reasoning. This makes the review informed. Approvals below a risk threshold can flow through.\n\nIt does not change the constraint.\nB is wrong. Sampling lets 95 percent of denials through unreviewed. This violates \"no exceptions.\"\nD is wrong. It removes the agent's value. The constraint needs human review of denials. It does not need human authorship of everything.\nA is wrong. Logging is not review. The denial still reaches the applicant unreviewed.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q36",
+    "heading": "Q36",
+    "question": "A DevOps agent has a tool. The tool can delete cloud resources. In a test, a misread instruction caused a problem. The agent deleted a staging database. The team must keep the delete capability. This capability is necessary for cleanup work.\n\nThe team must make accidents structurally unlikely.\n\nConstraint: keep the delete tool, but a single model mistake must never cause an irreversible deletion.\n\nWhich control set meets the constraint?",
+    "choices": {
+      "A": "A system prompt telling the agent to \"be very careful with deletions.\"",
+      "B": "Rate-limit the delete tool to one call per hour.",
+      "C": "Remove the delete tool and do all deletions manually.",
+      "D": "A confirmation gate is for destructive calls. A human or a second approval is necessary. A dry-run preview shows what the system will delete. Least-privilege scopes prevent the tool from touching production databases."
+    },
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Why D is correct: There are three independent layers. The confirmation gate stops a single mistake from executing. The dry-run shows the blast radius before action. Least-privilege scopes contain what the tool can reach. These layers together make one mistake insufficient for disaster.\nC is wrong. It deletes the capability the team needs. It does not control the capability.\nA is wrong. Prompt wording is not a structural control. Mistakes still execute.\nB is wrong. Rate limiting slows accidents. It does not stop the one wrong deletion.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q37",
+    "heading": "Q37",
+    "question": "A European retailer deploys a Claude shopping assistant for EU customers. It stores conversation logs (which may contain names, addresses, and order details) for quality review. The legal team requires GDPR compliance, including the right to erasure.\n\nConstraint: honor erasure requests fully, and never use customer conversations for model training.\n\nWhich two measures are necessary? Select two measures.",
+    "choices": {
+      "A": "A signed data processing agreement with the model provider, plus zero data retention (or documented non-training) terms.",
+      "B": "An erasure pipeline: find all stored copies of a user's data (logs, eval samples, backups) and delete them on request within the legal deadline.",
+      "C": "Anonymize all analytics dashboards shown to executives.",
+      "D": "Store the logs in the cheapest available region."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Why A, B is correct: A covers the provider side. It includes contractual non-training terms. It also includes a DPA. GDPR needs the DPA for processors. B covers the company's own side. Erasure is not useful if backups and evaluation samples keep copies.\n\nEach addresses a different part of the constraint.\nC is good hygiene. It does not satisfy either part of the constraint. Dashboards are not the erasure problem. They are not the training problem.\nD is wrong and risky. The cheapest region can be outside the EU. This creates a data-residency problem. It adds to other problems.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q38",
+    "heading": "Q38",
+    "question": "A clinic makes a triage assistant. The assistant reads patient messages. The messages contain PHI. The assistant suggests urgency levels to nurses. The compliance officer asks what is necessary before PHI touches the system.\n\nConstraint: PHI can only flow through HIPAA-eligible services. The services must have proper agreements. The system can only use the minimum necessary data.\n\nWhat is the minimum compliant setup?",
+    "choices": {
+      "A": "Any model API works as long as the app encrypts traffic with HTTPS.",
+      "B": "A HIPAA-eligible deployment (for example Anthropic models on Bedrock or Vertex with HIPAA-eligible configuration), a signed BAA (business associate agreement), minimum-necessary data collection, and audit logging of PHI access.",
+      "C": "On-premise servers only; cloud providers can never handle PHI.",
+      "D": "Patient consent forms, with no other technical measures needed."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Why B is correct: HIPAA needs the legal instrument (BAA). It needs the eligible service configuration. It needs the minimum-necessary standard. It needs auditability. B is the complete minimum set. Each element maps to a specific HIPAA requirement.\nA is wrong. HTTPS is necessary. It is not sufficient. It provides no BAA. It provides no eligibility. It provides no audit trail.\nC is wrong. HIPAA-eligible cloud configurations exist for this purpose. On-prem is not a legal requirement.\nD is wrong. Consent does not replace the BAA. It does not replace safeguards. It does not replace minimum-necessary requirements.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q39",
+    "heading": "Q39",
+    "question": "A company pilots an agent that screens job applications and ranks candidates for interviews. Early results show candidates from certain universities ranked consistently higher, and the team worries about bias.\n\nConstraint: screening must be fair and demonstrably so: decisions traceable to job-relevant criteria, with disparate impact measured, not assumed away.\n\nWhich design best addresses the fairness concern?",
+    "choices": {
+      "A": "Add more training data so the model becomes fair on its own.",
+      "B": "Remove university names from the inputs, keep everything else the same, and ship.",
+      "C": "Do a structured evaluation. Hide identifying details. Score each candidate against a fixed job-relevant rubric. Log the rubric scores as the decision record. Run disparate-impact analysis across demographic groups before launch.",
+      "D": "Use the agent only for scheduling interviews, never for ranking."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: Blinding removes the obvious proxy. The fixed rubric forces job-relevant criteria. Logged scores make decisions auditable. Disparate-impact analysis verifies fairness with data. It does not use assumptions. It is the only option that is demonstrable.\nB is wrong. Proxies survive blinding. These include wording, employment gaps, and zip codes. You cannot know it worked without measurement.\nD is wrong. It abandons the use case. It does not make the use case fair.\nA is wrong. More data does not de-bias a model. It can entrench existing patterns.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q40",
+    "heading": "Q40",
+    "question": "A federal agency wants a Claude document assistant for internal analysts. Procurement requires FedRAMP authorization for any cloud service handling the data. The team proposes the direct Anthropic API because \"it is simpler.\"\n\nConstraint: the deployment must satisfy FedRAMP authorization requirements. Simplicity does not override procurement rules.\n\nWhat should the architect recommend?",
+    "choices": {
+      "A": "Run the assistant on analysts' laptops to avoid cloud authorization entirely.",
+      "B": "Proceed with the direct API; FedRAMP applies to infrastructure, not AI APIs.",
+      "C": "Deploy through a FedRAMP-authorized route. Use Claude for Government. This is Anthropic's FedRAMP High authorized platform. Or use Anthropic models via AWS Bedrock GovCloud. Or use Vertex AI Assured Workloads. Add compliant audit logging.\n\nDocument the authorization boundary.",
+      "D": "Self-attest that the direct API meets FedRAMP controls and file the attestation."
+    },
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Why C is correct: FedRAMP authorization attaches to the service boundary. Claude for Government carries Anthropic's own FedRAMP High authorization. The Bedrock GovCloud and Vertex AI Assured Workloads routes inherit their clouds' authorizations. The audit logging plus boundary documentation is what assessors actually check.\nB is wrong. The commercial direct API is not FedRAMP authorized. Anthropic's FedRAMP High authorization applies to Claude for Government, a separate platform. AI APIs handling agency data are in scope. \"Simpler\" is not an authorization.\nD is wrong. Self-attestation is not FedRAMP authorization. It will fail procurement review.\nA is wrong. Laptops create a worse security posture. They have no central logging and no patch control. They do not dodge the requirement for agency systems.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q41",
+    "heading": "Q41",
+    "question": "Before launching a customer-facing financial advice assistant, the risk team orders pre-launch safety testing. The assistant must refuse disallowed requests (for example instructions to commit fraud), must not leak internal data, and must stay in its role under adversarial users.\n\nThe testing must actively try to break the safety controls. You must document residual risks for sign-off. Do not hide residual risks.\n\nWhich two elements belong in the pre-launch safety plan? (Select two.)",
+    "choices": {
+      "A": "A marketing review of the assistant's greeting messages.",
+      "B": "Load testing to 10x expected traffic.",
+      "C": "An adversarial test set: jailbreak attempts, fraud-request phrasings, and role-confusion probes, run against the system with pass/fail grading.",
+      "D": "A residual-risk register: documented known weaknesses, their severity, mitigations in place, and explicit sign-off by risk owners."
+    },
+    "answer": ["C", "D"],
+    "select_count": 2,
+    "explanation": "Why C, D is correct: C does red-teaming: it actively attacks the controls, which the constraint requires. D is governance: write down residual risks with severity and sign-off instead of discovering them after launch. Testing finds the holes. The register makes them a managed decision.\nA is about tone, not safety controls. It does not try to break anything.\nB is a reliability activity. It is valuable but unrelated to the safety-testing constraint.",
+    "source_section": "D5"
+  },
+  {
+    "number": "Q42",
+    "heading": "Q42",
+    "question": "A public benefits assistant answers questions about government programs. Users act on its answers. They apply for benefits. They appeal denials. A user advocate group asks for transparency. People must know they talk to AI.\n\nThey must know where answers come from. They must have recourse when answers are wrong.\n\nConstraint: users must be able to tell it is AI, verify its claims, and challenge wrong answers.\n\nWhich transparency design satisfies all three?",
+    "choices": {
+      "A": "Clear AI disclosure at conversation start, citations linking each factual claim to its source document, and a visible appeal path (human review request) for disputed answers.",
+      "B": "Publishing the system prompt so users can see how it works.",
+      "C": "A disclaimer that the assistant \"may make mistakes\" with no other changes.",
+      "D": "A small \"AI assistant\" label in the footer of the page."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Why A is correct: Each constraint maps to one element. Upfront disclosure tells users it is AI. Per-claim citations let them verify. The appeal path gives recourse. All three together make transparency operational rather than decorative.\nD is wrong. A footer label is easy to miss. It provides no verifiability or recourse.\nB is wrong. Publishing the prompt exposes internals. It does not help users verify any specific answer.\nC is wrong. A generic disclaimer shifts blame to the user. It provides no verification or appeal.",
+    "source_section": "D5"
+  }
+]

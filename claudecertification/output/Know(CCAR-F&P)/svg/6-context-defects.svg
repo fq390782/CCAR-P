@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="Context 결함 5종: 증거 문구에서 결함 이름과 처방으로 1:1 대응" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Context 결함 5종: 증거 문구에서 결함 이름과 처방으로 1:1 대응</title>
+<defs><marker id="arr-context-defects" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="20" y="26" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">증거 문구</text>
+<text x="370" y="26" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">결함</text>
+<text x="580" y="26" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">처방</text>
+<rect x="20" y="44" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170.0" y="65.0" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">매 호출 대량 로드 (한 학기 · 한 시즌 · 분기</text>
+<text x="170.0" y="82.0" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">전체)</text>
+<polygon points="386,44 504,44 520,70.0 504,96 386,96 370,70.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="445.0" y="73.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">growth</text>
+<rect x="580" y="44" width="300" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="73.5" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">just-in-time retrieval</text>
+<polyline points="320,70 370,70" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="330.0" y="62.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="345.0" y="74.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">진단</text>
+<polyline points="520,70 580,70" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="535.0" y="62.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="550.0" y="74.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">처방</text>
+<rect x="20" y="104" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170.0" y="133.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">같은 내용 반복 삽입 (정책 4번 · 측정값 2~3번)</text>
+<polygon points="386,104 504,104 520,130.0 504,156 386,156 370,130.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="445.0" y="133.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">duplication</text>
+<rect x="580" y="104" width="300" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="133.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">조립 시점 dedupe (표준 fact key 필요)</text>
+<polyline points="320,130 370,130" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="330.0" y="122.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="345.0" y="134.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">진단</text>
+<polyline points="520,130 580,130" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="535.0" y="122.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="550.0" y="134.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">처방</text>
+<rect x="20" y="164" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170.0" y="193.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">compaction 후 이름 · 결정 · 숫자 소실</text>
+<polygon points="386,164 504,164 520,190.0 504,216 386,216 370,190.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="445.0" y="193.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">loss</text>
+<rect x="580" y="164" width="300" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="193.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">요약이 사실을 보존하도록 수정</text>
+<polyline points="320,190 370,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="330.0" y="182.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="345.0" y="194.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">진단</text>
+<polyline points="520,190 580,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="535.0" y="182.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="550.0" y="194.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">처방</text>
+<rect x="20" y="224" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170.0" y="253.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">작업 도중 window 가득 → 중단 · 오류</text>
+<polygon points="386,224 504,224 520,250.0 504,276 386,276 370,250.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="445.0" y="253.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">exhaustion</text>
+<rect x="580" y="224" width="300" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="245.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">여유 공간 확보 · 이른 compaction (임계값</text>
+<text x="730.0" y="262.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">튜닝 필요)</text>
+<polyline points="320,250 370,250" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="330.0" y="242.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="345.0" y="254.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">진단</text>
+<polyline points="520,250 580,250" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="535.0" y="242.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="550.0" y="254.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">처방</text>
+<rect x="20" y="284" width="300" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170.0" y="305.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">엉뚱한 구간에 attention (7월 질문에 3월</text>
+<text x="170.0" y="322.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">데이터 · 틀린 판례)</text>
+<polygon points="386,284 504,284 520,310.0 504,336 386,336 370,310.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="445.0" y="313.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">dilution</text>
+<rect x="580" y="284" width="300" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="313.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">더 적고 더 잘 배치된 chunk</text>
+<polyline points="320,310 370,310" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="330.0" y="302.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="345.0" y="314.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">진단</text>
+<polyline points="520,310 580,310" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-context-defects)"/>
+<rect x="535.0" y="302.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="550.0" y="314.0" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">처방</text>
+<rect x="20" y="356" width="420" height="124" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="230.0" y="396.4" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">처방 한 개로 전부 해결 ✗</text>
+<text x="230.0" y="413.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">duplication에 chunk 추가 → 반복 배가</text>
+<text x="230.0" y="430.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">exhaustion에 턴별 요약 → drift · 비용 누적</text>
+<text x="230.0" y="447.6" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">감사관이 전체 대화 요구 → growth 아님 → 별도 보관 필요</text>
+<rect x="460" y="356" width="420" height="124" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="670.0" y="387.9" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">진단 규칙: 증거가 명시된 결함만 선택</text>
+<text x="670.0" y="405.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">overflow · 오류 언급 없으면 exhaustion 제외</text>
+<text x="670.0" y="422.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">turn 소실 언급 없으면 loss 제외</text>
+<text x="670.0" y="439.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">조합: 대량 로드 + 엉뚱한 답 → growth + dilution</text>
+<text x="670.0" y="456.1" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">조합: 대량 로드 + 반복 삽입 → growth + duplication</text>
+</svg>

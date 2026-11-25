@@ -1,0 +1,222 @@
+[
+ {
+  "id": "CCAR-F-Udemy01-0044",
+  "question": "You are using the Claude Agent SDK to build a multi-agent system that performs literature reviews in the pharmaceutical field. A coordinator agent delegates work to specialized subagents. The subagents include ones that search the web, ones that parse documents, ones that synthesize findings, and ones that generate reports.\n\nThe search subagent and the document analysis subagent are each supposed to connect to separate MCP servers: one for clinical trial database search, one for internal document access, and one for citation export.\n\nOne proposed design has the runtime keep only one server enabled per subagent and reconnect each time a subagent needs a tool from a different server.\n\nWhich approaches should be recommended instead of this proposal? (Select two.)",
+  "choices": {
+   "A": "Connect to each MCP server a subagent needs and retrieve the tool lists, expose them as a unified registry, and route calls to the server that owns each tool.",
+   "B": "Assign each subagent only the MCP servers its role actually requires, and keep all of them connected for the entire run.",
+   "C": "Connect only the MCP servers needed for the next research phase, reconnect between phases, and rebuild the subagents' tools before each step.",
+   "D": "Consolidate the external services behind a single custom MCP server, retire the individual servers, and expose only one aggregated research tool to the subagents."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0045",
+  "question": "The R&D team at a pharmaceutical company runs a literature research agent unattended overnight using the Claude Agent SDK. Each night it runs dozens of research requests, each in a separate query(), and researchers review the results the next morning.\n\nMost requests finish in around 20 turns. However, broad requests such as \"comprehensively investigate the latest trends in this area\" can lead to hundreds of consecutive tool calls, and a single request sometimes consumes most of a night's budget.\n\nThe team wants to achieve the following two things:\n\nSet a reliable upper limit on the amount of work per request\n\nAvoid mistaking a request that stopped partway for a completed investigation, and allow it to be picked up and continued later\n\nWhich changes should be made? (Select two.)",
+  "choices": {
+   "A": "Register a Stop hook in the options of each query() that terminates the run when the cumulative cost exceeds a limit.",
+   "B": "If the result's subtype is error_max_turns or similar, save the session_id and resume it later.",
+   "C": "Set effort in ClaudeAgentOptions to \"low\" to reduce the number of tokens used for reasoning in each turn.",
+   "D": "Set max_turns and max_budget_usd to place limits on the number of turns and the cost per request."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0046",
+  "question": "A consulting firm is using the Claude Agent SDK to build a multi-agent research system for environmental impact assessments. A coordinator agent delegates work to specialized subagents (a web search subagent, a source analysis subagent, a findings synthesis subagent, and a report generation subagent). The system investigates a project and produces a comprehensive report with cited sources.\n\nThe report generation step always receives the same structured findings data from the synthesis subagent, but the wording of the generated text varies every time. In some runs it produces one cited bullet point per finding, but in other runs it does the following:\n\nMerges multiple findings into one\n\nOmits the supporting excerpt\n\nRelegates the source date to a footnote\n\nThe current instruction is: \"Convert each finding into a concise cited bullet point that includes the complete source details.\"\n\nWhich changes most directly improve the consistency of this conversion? (Select two.)",
+  "choices": {
+   "A": "Add an examples block showing a representative finding as input and an ideal cited bullet point as output.",
+   "B": "Add an explicit output template for the cited bullet point that defines the required elements and the order in which they appear.",
+   "C": "Add a PreToolUse hook that halts report creation when a cited bullet point omits the publication date.",
+   "D": "Rewrite instruction words such as \"concise\" and \"complete\" into stronger phrasing using bold text or capital letters."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0047",
+  "question": "The billing dispute handling team at a telecommunications carrier is using Claude to build a structured data extraction system. The system extracts information from unstructured documents and validates its output using a JSON schema. It must handle edge cases gracefully and integrate with downstream systems.\n\nPartway through extraction, some records require escalation because the contents of the statement contradict the customer account data. The escalation has the following conditions:\n\nThe reviewer does not receive the model's entire conversation or tool usage history\n\nThe escalation packet received by the intake queue must be the model's final response itself, not the arguments of a tool call\n\nConsistent JSON containing the customer identifier, the suspected root cause, and the recommended next action is required\n\nWhich designs should the team adopt? (Select two.)",
+  "choices": {
+   "A": "Use Structured outputs to produce a schema-conforming escalation packet as the final response.",
+   "B": "Have the model call an escalation tool with a defined schema, and use the call arguments as the handoff to the reviewer.",
+   "C": "Validate the packet against the same JSON schema before it enters the intake queue, and send back any that do not conform.",
+   "D": "Hand over the raw extracted excerpts and the conversation history as they are, and have the reviewer reconstruct the contents."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0048",
+  "question": "A logistics company is using the Claude Agent SDK to build an internal research assistant. A coordinator agent delegates work to specialized subagents responsible for route search, document analysis, synthesis, and report generation, respectively.\n\nEvaluation revealed that the following two problems occur repeatedly:\n\nReport generation stalls on every trivial fact check\n\nPreviously, when the role of the synthesis subagent was broadened, it began doing the same work as the route search subagent\n\nWhich change is the most appropriate improvement to this design?",
+  "choices": {
+   "A": "Give the synthesis subagent the same Read, Grep, and Glob permissions as the route search subagent.",
+   "B": "Combine synthesis and report generation into a single subagent that shares a prompt and tool permissions.",
+   "C": "Remove the synthesis subagent's tools and make it obtain the coordinator's approval each time it verifies evidence before moving on to the next task.",
+   "D": "Give the synthesis subagent only a narrowly scoped verify_fact tool, and have it return broader investigations to the coordinator."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0049",
+  "question": "A team is using Claude to build a structured data extraction system that extracts information from medical records. The system must extract information from unstructured documents, validate its output using a JSON (JavaScript Object Notation) schema, and maintain high accuracy. It must also handle edge cases gracefully and integrate with downstream systems.\n\nIn one validation rollout, processing began failing because downstream code still expects the old extraction field name insured_party. The situation is as follows:\n\nIt is not known which files reference that field\n\nThe file names themselves do not contain that string\n\nThe built-in Glob and Grep are enabled in this session\n\nWhat is the most appropriate Claude Code tool operation to perform first?",
+  "choices": {
+   "A": "Run git log with Bash and look for commit messages that touched insured_party.",
+   "B": "Use Grep to search the contents of the repository's files for the string insured_party.",
+   "C": "Use Glob to find repository paths whose file names contain the string insured_party.",
+   "D": "Use Read to read the project root and visually examine candidates from the directory listing."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0050",
+  "question": "You are building a QA automation agent that automatically fixes broken test fixtures. The agent uses built-in tools (Read, Write, Bash, Grep, Glob) and also integrates with Model Context Protocol (MCP) servers.\n\nIn one automated fix, an Edit call failed because the specified old_string appears multiple times in the same source file. The situation is as follows:\n\nThe intended change is a one-time fix to the final contents of the file, not replacing every matching location\n\nYou tried to make old_string unique by adding surrounding context, but still could not make it unique\n\nThe desired full contents of the file are in a state where they can be assembled\n\nWhat should you do next to make the fix reliably?",
+  "choices": {
+   "A": "Retry Edit with a regex-style old_string that loosely matches the target occurrence.",
+   "B": "Retry Edit with replace_all: true and update all matching locations to the same content at once.",
+   "C": "Identify the target line number with Grep, and then call Edit with the same non-unique old_string.",
+   "D": "Read the current file with Read, assemble the desired full contents, and overwrite the file with Write."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0051",
+  "question": "An engineer uses Claude Code for refactoring, debugging, and documentation of an internal system. They have set up custom slash commands and CLAUDE.md configuration, and they understand how to choose between plan mode and direct execution.\n\nYesterday, during a long conversation about a refactoring plan, they noted the session ID in the environment variable session_id. Today, they want to resume that specific past conversation while sending the first follow-up prompt from the terminal.\n\nWhich action should they take?",
+  "choices": {
+   "A": "Run claude -p \"昨日の調査を続けて\" --continue.",
+   "B": "Start claude, paste the value of session_id, and then ask it to continue yesterday's investigation.",
+   "C": "Run claude -p \"昨日の調査を続けて\" --resume \"$session_id\".",
+   "D": "Run claude -p \"$session_id の調査を続けて\"."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0052",
+  "question": "The developer productivity team at a logistics company is implementing a tool use mechanism with the Messages API to assist with work on a codebase.\n\nDuring testing, when developers ask the following kinds of questions, Claude calls the repository grep tool or the MCP repository search tool even when no codebase lookup is needed:\n\n\"Come up with a simpler name for this helper\"\n\n\"Search your reasoning about the edge cases\"\n\nThe current configuration is as follows:\n\nThe descriptions of these tools already state clearly that they are for examining repository contents and MCP-provided project data\n\nThe request uses the default tool_choice behavior\n\nThe system prompt contains the sentence: \"When the user says find, search, locate, or look up, always use the search tool before answering\"\n\nWhat change should be made first?",
+  "choices": {
+   "A": "Replace the broad keyword rule with an instruction to search only when repository or MCP data needs to be examined.",
+   "B": "Set tool_choice to {\"type\":\"any\"} and have the model choose the best tool on every user turn.",
+   "C": "Add more examples of requests for which each tool should not be called to the descriptions of the repository grep tool and the MCP tool.",
+   "D": "Rename the search tools to names that do not resemble words users commonly use, such as find and search."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0053",
+  "question": "You are using Claude to build a structured data extraction system. The system extracts information from purchase orders, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nThe validation logs show that the JSON is syntactically correct, but a large number of quantity and amount inconsistency flags are piling up in the review queue.\n\nMost of the flags are caused by harmless differences in notation\n\nMeanwhile, some actual calculation errors are being missed\n\nThe current instruction is: \"Find suspicious totals and flag them for review.\"\n\nWhich prompt change most directly improves consistency?",
+  "choices": {
+   "A": "Strengthen the instruction so that it judges conservatively and sends only high-confidence total anomalies to review.",
+   "B": "Ask Claude to explain every suspicious total anomaly before outputting the final JSON.",
+   "C": "Replace the ambiguous flagging instruction with a measurable rule for when the parsed line items contradict the stated total.",
+   "D": "Raise the temperature so that Claude can consider more interpretations of each purchase order's layout."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0054",
+  "question": "An observability engineering team is using the Claude Messages API to generate anomaly maps while analyzing production logs. These anomaly maps are used on an internal dashboard.\n\nThe current prompt says \"Return only JSON that matches this schema.\" However, the logs show that the parser occasionally fails for reasons such as the following:\n\nExtra commentary is appended at the end\n\nFields are missing\n\nA string value appears where an array is expected\n\nThe dashboard integration is designed to receive tool calls rather than free-form assistant text.\n\nWhich change most reliably enforces schema-conforming output?",
+  "choices": {
+   "A": "Define a client tool with an input_schema and strict: true, and receive the response as tool_use.",
+   "B": "Write a custom MCP server that validates the parsed JSON after the response and rejects invalid dashboard payloads.",
+   "C": "Prefill the assistant response with an opening curly brace, add a stop sequence, and parse the returned text as JSON.",
+   "D": "Leave the JSON schema in the prompt, add stronger wording saying that only valid JSON is accepted, and retry if parsing fails."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0055",
+  "question": "You are using Claude to build a structured data extraction system for due diligence document review in corporate mergers. The system extracts information from unstructured documents, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nIn testing, when reviewing a document packet consisting of 30 files, all of the original files and all of the extracted JSON objects are sent together in a single review prompt. This approach causes the following problems:\n\nFile-specific extraction errors are often overlooked\n\nIt sometimes returns contradictory conclusions about the totals across the entire packet\n\nIn addition, the intermediate artifacts of the review must be logged so that they can be evaluated.\n\nWhich response is the most appropriate?",
+  "choices": {
+   "A": "Perform per-file reviews using explicit prompt chaining, and consolidate those findings in a separate synthesis call.",
+   "B": "Use a single, even larger review call that includes all files, the schema, the notes so far, and stricter check instructions.",
+   "C": "Use a single review call that has Claude critique its own findings before returning the final list of issues.",
+   "D": "Repeatedly run review calls over the entire packet at a low temperature, and adopt only the findings that appear consistently across multiple runs."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0056",
+  "question": "You are using Claude to build a structured data extraction system. The system extracts information from unstructured documents, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nThe team has added client tools named classify_document, extract_claim_fields, validate_extraction, and queue_human_review. The nature of the documents varies widely, and includes the following:\n\nRecords that require multiple validation passes\n\nRecords that should be sent to review\n\nRequests that require no tool calls at all\n\nWhich designs are most suitable for letting Claude vary its next action for each document while leaving tool execution to the application? (Select two.)",
+  "choices": {
+   "A": "Leave tool_choice at the default auto behavior, so that requests that need no tool calls can be answered without calling any tools.",
+   "B": "Build a fixed controller that always calls classify_document, extract_claim_fields, validate_extraction, and queue_human_review in that order.",
+   "C": "Define the tools with clear descriptions and schemas, and run a loop that executes each tool_use request and returns the corresponding tool_result block.",
+   "D": "Parse Claude's natural-language responses, look for phrases such as \"validation is needed\", and call the corresponding extraction tool."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0057",
+  "question": "You are using Claude to build a structured data extraction system. The system extracts information from unstructured documents, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nAfter a schema update, the following three extraction failures occurred at the same time:\n\nCarrier alias resolution\n\nDelivery date normalization\n\nFreight total reconciliation\n\nAll of the failures involve the same parser module and shared test fixtures, and fixing one in isolation keeps breaking another.\n\nWhich Claude Code workflows should the team use next? (Select two.)",
+  "choices": {
+   "A": "Limit the scope of changes to the parser module and the shared fixtures, and do not include unrelated downstream cleanup this time.",
+   "B": "Continue the current conversation as is, and fix any remaining failures one by one each time the validation is run.",
+   "C": "Start plan mode with all of the failing fixtures, the shared schema constraints, and the validation command gathered together.",
+   "D": "Run direct edits separately for each failing fixture, and clear the context between validation command runs."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0058",
+  "question": "The developer tools team at a SaaS company operates a PR review helper built on Claude Code. The helper runs on every push and posts inline comments on GitHub.\n\nHowever, subsequent runs often report again what was already flagged in earlier runs. The team wants repeated reviews to be useful without hiding problems that remain unresolved.\n\nWhich changes should the team make? (Select two.)",
+  "choices": {
+   "A": "Deduplicate based only on matching file paths and line numbers before posting subsequent comments.",
+   "B": "Persist the findings from earlier PR runs, pass them to each rerun, and instruct it to report only new or unresolved issues.",
+   "C": "Switch subsequent reviews to manual requests, and let developers decide whether generating repeated comments is worthwhile.",
+   "D": "Re-examine the code at the previously flagged locations each time, and report again only if the problem still remains."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0059",
+  "question": "The claims processing automation team at an insurance company is using Claude to build a structured data extraction system. The system must extract information from claim documents, which are unstructured documents, validate its output using a JSON schema, and maintain high accuracy.\n\nThe extraction coordinator has specialized subagents for table parsing, clause extraction, and schema repair, but the SDK configuration auto-approves only file-viewing tools. As a result, the coordinator does not delegate individual subtasks and keeps doing all of the extraction work itself.\n\nWhich changes should the team make? (Select two.)",
+  "choices": {
+   "A": "Define each specialized subagent through the agents option or as a file under .claude/agents.",
+   "B": "Change permissionMode to bypassPermissions, and leave the coordinator's tool settings and delegation instructions as they are.",
+   "C": "Add Agent to the coordinator's allowedTools (allowed_tools in Python).",
+   "D": "Force the extraction tool with tool_choice so that the JSON schema extraction tool is called for each document."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0060",
+  "question": "You are using Claude to build an insurance claims processing system. The system extracts information from unstructured documents, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream claims management systems.\n\nIn pilot testing, the following messages were submitted:\n\nOne claimant wrote, \"Stop this automated review and have a person handle it.\" The missing field was something that could be extracted easily\n\nAnother claimant wrote, \"The accident date is missing. Can you fix it?\" The original document contained a clear date\n\nWhich escalation policies should be implemented? (Select two.)",
+  "choices": {
+   "A": "Score the claimant's level of frustration, and escalate only when it exceeds a certain threshold.",
+   "B": "Attempt automatic repair only for requests that do not ask for a human, and escalate if validation still fails after the repair.",
+   "C": "Route explicit requests for a human directly to review, and offer automatic repair for simple correction requests.",
+   "D": "Estimate how difficult it is to extract each missing field, and route easy ones to automatic repair and difficult ones to review."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0001",
+  "question": "The platform team at a cloud infrastructure company is using Claude Code to accelerate software development. They use it for code generation, refactoring, debugging, and documentation, and integrate it into their development workflow using custom slash commands and CLAUDE.md configuration. They also need to understand how to choose between plan mode and direct execution.\n\nThe /upgrade-plan command that the team created on its own parses a repository's upgrade guide and converts it into JSON for downstream automation.\n\nEvaluation produces valid JSON, but required fields such as rollback_command and compatibility_note are returned as null when the source information is written in forms like the following:\n\nFenced shell blocks\n\nMarkdown checklists\n\nProse paragraphs\n\nThe information itself is present in the source material. In addition, the current prompt already enumerates the schema and instructs the model not to omit required fields.\n\nWhich changes most directly address this extraction failure? (Select two.)",
+  "choices": {
+   "A": "Move the schema description into CLAUDE.md so that it is loaded every time this command runs.",
+   "B": "Raise the temperature so that it interprets a wider range of upgrade guide formats.",
+   "C": "Add 3 to 5 structured examples that map diverse guide formats to the expected JSON fields.",
+   "D": "For each required field, describe where in the source material and in what form (shell block, checklist, etc.) it appears."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0002",
+  "question": "A law firm is using the Claude Agent SDK to build a multi-agent system for case law research. A coordinator agent delegates work to specialized subagents. The subagents include ones that search case law databases, ones that analyze case documents, ones that synthesize legal arguments, and ones that generate legal memos. The system researches a topic and produces a comprehensive memo with citations.\n\nThe document analysis subagent uses a client-side tool to read documents from a licensed case law database and extract supporting statements. When a document is unavailable, the tool returns a tool_result with is_error: true. However, its content is always the fixed text \"操作に失敗しました\", regardless of causes such as the following:\n\nExpired license\n\nTransient timeout\n\nUnsupported file format\n\nA valid search result with no matching passages\n\nAs a result, the coordinator chooses unpredictably among retrying, discarding that source, and escalating.\n\nWhich changes can best improve recovery behavior? (Select two.)",
+  "choices": {
+   "A": "Return a failed document read as an empty result set and let the synthesis process continue as is.",
+   "B": "Make it retry only errors indicated as retryable, and route the others to switching sources or escalation.",
+   "C": "Return a tool_result error that includes the classification of the cause and whether a retry is possible.",
+   "D": "Expand the document tool's description to steer Claude toward avoiding the use of tools that might fail."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0003",
+  "question": "The live operations team at a game studio has integrated Claude Code into its CI/CD pipeline. The system runs automated code reviews, generates test cases, and returns feedback on pull requests. They need to design prompts that return specific, actionable feedback and minimize false positives.\n\nThree months after launch, the system has begun attaching high confidence scores to the majority of its structured review findings and generated test suggestions.\n\nThe human review process is scheduled to be scaled back. The team still needs to continue doing the following:\n\nMeasure the error rate in the production environment\n\nCatch rare failure modes in areas such as migrations, security-related changes, and language-specific conventions\n\nWhich monitoring approaches are best suited to this purpose? (Select two.)",
+  "choices": {
+   "A": "Even after raising the confidence cutoff, continue to review at least a certain number of samples of high-confidence outputs.",
+   "B": "Sample high-confidence findings stratified by change type, language, and finding category, and label errors and novel failure types separately.",
+   "C": "Sample high-confidence findings uniformly across all repositories, and publish a single aggregate error rate for the entire pipeline.",
+   "D": "Prioritize reviewing low-confidence findings, and for the high-confidence band, check only the overall monthly accuracy."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0004",
+  "question": "You are using Claude Code to accelerate software development. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You integrate it into your development workflow using custom slash commands and CLAUDE.md configuration, and you need to understand how to choose between plan mode and direct execution.\n\nA team at an electronic medical records platform is about to migrate a shared authentication library used in more than 50 files. There are two feasible migration approaches, each with different infrastructure requirements. The maintainer wants Claude Code to investigate the codebase and propose an approach before starting implementation.\n\nWhich workflow is the most appropriate to take first?",
+  "choices": {
+   "A": "Enter plan mode, have Claude investigate the scope of impact, and review the proposed plan before choosing an execution mode.",
+   "B": "Start with bypassPermissions, let Claude run commands freely, and check for regressions with tests afterward.",
+   "C": "Start with acceptEdits, let Claude apply the migration, and review the diff after the changes are complete.",
+   "D": "Start with a prompt that directs direct implementation, let Claude choose the approach, and refine the design while editing."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy02-0005",
+  "question": "The internal help desk at a logistics company is using the Claude Agent SDK to build an agent that resolves ambiguous inquiries such as shipping delays, return handling, and account permission issues. The agent accesses internal systems through custom Model Context Protocol (MCP) tools (get_employee, lookup_ticket, issue_replacement, escalate_to_manager). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team invokes Claude Code in nightly pull request checks to inspect changes to the replacement handling and escalation logic. However, the CI environment has no terminal user to respond to follow-up confirmation prompts. As a result, the job displays a prompt and keeps waiting until the runner times out.\n\nWhich changes are most appropriate to prevent this failure? (Select two.)",
+  "choices": {
+   "A": "Create a shared slash command in .claude/commands/ and invoke that command from the CI job.",
+   "B": "Run Claude Code with the -p (--print) flag and pass the review prompt non-interactively.",
+   "C": "Pre-approve the tools needed for the review in the CI job's permission settings.",
+   "D": "Run Claude Code in plan mode and have the job automatically approve the generated plan."
+  }
+ }
+]

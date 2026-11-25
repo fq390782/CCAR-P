@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="470" viewBox="0 0 920 470" role="img" aria-label="Hybrid 설계: 입력 형태별로 고정 단계는 코드가 처리하고 열린 판단만 Claude가 맡으며 사이에 gate를 둔다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Hybrid 설계: 입력 형태별로 고정 단계는 코드가 처리하고 열린 판단만 Claude가 맡으며 사이에 gate를 둔다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-hybrid-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-hybrid-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-hybrid-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-hybrid-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Hybrid 설계 — 고정 단계는 코드 · 열린 판단만 Claude · 사이에 gate</text>
+<rect x="20" y="165" width="120" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="80.0" y="187.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">입력</text>
+<text x="80.0" y="202.3" font-size="11" fill="#6B7280" text-anchor="middle">형태별 lane 배정</text>
+<polygon points="290,135.0 390.0,190 290,245.0 190.0,190" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="290" y="186.1" font-size="13" fill="#1F2937" text-anchor="middle">입력 형태가</text>
+<text x="290" y="203.1" font-size="13" fill="#1F2937" text-anchor="middle">고정 매핑인가?</text>
+<path d="M140,190 L190,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-hybrid-k)"/>
+<text x="430" y="62" font-size="11" fill="#6B7280" text-anchor="start">고정 단계 = 결정론적 코드</text>
+<rect x="430" y="70" width="200" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="97.0" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">결정론적 코드</text>
+<text x="530.0" y="112.3" font-size="11" fill="#6B7280" text-anchor="middle">parser · 규칙 (고정 매핑)</text>
+<path d="M290,135 L290,100 L430,100" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-hybrid-b)"/>
+<rect x="300.5" y="110.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="310" y="121.0" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<text x="430" y="257" font-size="11" fill="#6B7280" text-anchor="start">열린 판단 = Claude</text>
+<rect x="430" y="265" width="200" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="289.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Claude agentic loop</text>
+<text x="530.0" y="304.9" font-size="11" fill="#6B7280" text-anchor="middle">모호한 소수 사례(3~15%)</text>
+<text x="530.0" y="319.9" font-size="11" fill="#6B7280" text-anchor="middle">step 상한으로 평가 비용 제한</text>
+<path d="M290,245 L290,300 L430,300" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-hybrid-b)"/>
+<rect x="304.5" y="264.0" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="325" y="275.0" font-size="11" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="690" y="150" width="210" height="80" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="795.0" y="179.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">code gate</text>
+<text x="795.0" y="194.8" font-size="11" fill="#6B7280" text-anchor="middle">원본(메시지 · 사진 · 기록) 대조</text>
+<text x="795.0" y="209.8" font-size="11" fill="#6B7280" text-anchor="middle">통과 전 차단 (fail closed)</text>
+<path d="M630,100 L660,100 L660,175 L690,175" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-hybrid-b)"/>
+<path d="M630,300 L660,300 L660,205 L690,205" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-hybrid-b)"/>
+<rect x="636.9" y="247.0" width="46.3" height="30" fill="#FFFFFF"/>
+<text x="660" y="258.0" font-size="11" fill="#2563EB" text-anchor="middle">고정</text>
+<text x="660" y="272.0" font-size="11" fill="#2563EB" text-anchor="middle">schema</text>
+<rect x="690" y="60" width="210" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="795.0" y="85.0" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">차단</text>
+<text x="795.0" y="100.3" font-size="11" fill="#6B7280" text-anchor="middle">실패 건은 출시 · 지급 ✗</text>
+<path d="M795,150 L795,116" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-hybrid-r)"/>
+<rect x="805.0" y="125.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="820" y="136.0" font-size="11" fill="#DC2626" text-anchor="middle">실패</text>
+<rect x="690" y="290" width="210" height="76" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="795.0" y="317.6" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">deterministic workflow</text>
+<text x="795.0" y="332.9" font-size="11" fill="#6B7280" text-anchor="middle">지급 · 경고 · 게시</text>
+<text x="795.0" y="347.9" font-size="11" fill="#6B7280" text-anchor="middle">쓰기 = 앱 코드</text>
+<path d="M795,230 L795,290" fill="none" stroke="#16A34A" stroke-width="1.5" marker-end="url(#arr-hybrid-g)"/>
+<rect x="805.0" y="252.0" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="820" y="263.0" font-size="11" fill="#16A34A" text-anchor="middle">통과</text>
+<rect x="20" y="396" width="430" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="235.0" y="421.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">절감의 원천 = lane 선택 (tier 선택 ✗)</text>
+<text x="235.0" y="436.4" font-size="11" fill="#6B7280" text-anchor="middle">고정분 → deterministic parser · 열린 형식 → Claude</text>
+<rect x="470" y="396" width="430" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="685.0" y="421.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">handoff 지점 = workflow ↔ agent 전환</text>
+<text x="685.0" y="436.4" font-size="11" fill="#6B7280" text-anchor="middle">loop 출력 = workflow schema 계약 · 새 layout은 Claude로 라우팅</text>
+</svg>

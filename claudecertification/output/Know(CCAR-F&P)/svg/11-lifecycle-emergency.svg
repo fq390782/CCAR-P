@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="discovery design handoff monitoring iteration 순서와 프로덕션 실패 시 discovery나 design으로 복귀하는 경로, 장애 시 hotfix를 먼저 배포하는 긴급 경로">
+<title>lifecycle 단계 순서, 실패 시 건너뛴 단계로 복귀, 장애 시 hotfix 긴급 경로</title>
+<defs><marker id="arr-lifecycle-emergency" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">실패는 건너뛴 단계로 복귀 · 긴급 장애에서만 hotfix 지름길</text>
+<rect x="20" y="50" width="136" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="88.0" y="74.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">discovery</text>
+<text x="88.0" y="88.7" font-size="11" fill="#1F2937" text-anchor="middle">요구사항 · 금지 동작</text>
+<text x="88.0" y="102.7" font-size="11" fill="#1F2937" text-anchor="middle">· 소유자</text>
+<rect x="201" y="50" width="136" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="269.0" y="74.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">design</text>
+<text x="269.0" y="88.7" font-size="11" fill="#1F2937" text-anchor="middle">측정 데이터로 임계값</text>
+<text x="269.0" y="102.7" font-size="11" fill="#1F2937" text-anchor="middle">→ ADR 기록</text>
+<rect x="382" y="50" width="136" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="74.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">handoff</text>
+<text x="450.0" y="88.7" font-size="11" fill="#1F2937" text-anchor="middle">ADR · runbook · eval</text>
+<text x="450.0" y="102.7" font-size="11" fill="#1F2937" text-anchor="middle">· 담당자</text>
+<rect x="563" y="50" width="136" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="631.0" y="74.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">monitoring</text>
+<text x="631.0" y="88.7" font-size="11" fill="#1F2937" text-anchor="middle">알림 = 임계값</text>
+<text x="631.0" y="102.7" font-size="11" fill="#1F2937" text-anchor="middle">+ 대응자(소유자)</text>
+<rect x="744" y="50" width="136" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="812.0" y="74.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">iteration</text>
+<text x="812.0" y="88.7" font-size="11" fill="#1F2937" text-anchor="middle">비긴급 변경은</text>
+<text x="812.0" y="102.7" font-size="11" fill="#1F2937" text-anchor="middle">게이트 우선</text>
+<polyline points="156,84 201,84" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="178.5" y="76" font-size="11" fill="#1F2937" text-anchor="middle">완료 후</text>
+<polyline points="337,84 382,84" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="359.5" y="76" font-size="11" fill="#1F2937" text-anchor="middle">완료 후</text>
+<polyline points="518,84 563,84" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="540.5" y="76" font-size="11" fill="#1F2937" text-anchor="middle">완료 후</text>
+<polyline points="699,84 744,84" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="721.5" y="76" font-size="11" fill="#1F2937" text-anchor="middle">완료 후</text>
+<rect x="560" y="190" width="320" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="720.0" y="212.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">프로덕션 실패 · 오라우팅 지속</text>
+<text x="720.0" y="226.7" font-size="11" fill="#1F2937" text-anchor="middle">오류가 임계값 부근에 집중</text>
+<text x="720.0" y="240.7" font-size="11" fill="#1F2937" text-anchor="middle">요구사항 · 소유자 부재</text>
+<polyline points="560,236 88,236 88,118" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="96" y="164" font-size="11" fill="#1F2937" text-anchor="start">요구사항 · 금지 동작</text>
+<text x="96" y="178" font-size="11" fill="#1F2937" text-anchor="start">· 소유자 작성 후 수정</text>
+<polyline points="560,212 269,212 269,118" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="277" y="150" font-size="11" fill="#1F2937" text-anchor="start">임계값 추측 → 측정 데이터로</text>
+<text x="277" y="164" font-size="11" fill="#1F2937" text-anchor="start">임계값 설정 → ADR → 실제 수치에 알림</text>
+<rect x="20" y="268" width="500" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="270.0" y="290.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">대리 수정(proxy fix) ✗</text>
+<text x="270.0" y="304.7" font-size="11" fill="#1F2937" text-anchor="middle">대시보드 · 더 큰 모델 · 전수 사람 검토</text>
+<text x="270.0" y="318.7" font-size="11" fill="#1F2937" text-anchor="middle">discovery 미완료 상태의 대시보드 · 알림 = 단계 대체 오류</text>
+<text x="20" y="372" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">긴급 경로: 프로덕션 장애 + hotfix 준비됨</text>
+<rect x="20" y="388" width="230" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="135.0" y="410.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">프로덕션 장애</text>
+<text x="135.0" y="424.7" font-size="11" fill="#1F2937" text-anchor="middle">hotfix 준비됨</text>
+<text x="135.0" y="438.7" font-size="11" fill="#1F2937" text-anchor="middle">프로세스는 사전 리뷰 · ADR 요구</text>
+<polyline points="250,420 330,420" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="290" y="412" font-size="11" fill="#1F2937" text-anchor="middle">긴급 시</text>
+<rect x="330" y="388" width="230" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="445.0" y="410.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">hotfix 먼저 배포</text>
+<text x="445.0" y="424.7" font-size="11" fill="#1F2937" text-anchor="middle">리뷰 · 위원회 대기 ✗</text>
+<text x="445.0" y="438.7" font-size="11" fill="#1F2937" text-anchor="middle">장애 중 discovery ✗ (다운타임 연장)</text>
+<polyline points="560,420 640,420" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lifecycle-emergency)"/>
+<text x="600" y="412" font-size="11" fill="#1F2937" text-anchor="middle">사후</text>
+<rect x="640" y="388" width="240" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760.0" y="410.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">사후 인시던트 기간</text>
+<text x="760.0" y="424.7" font-size="11" fill="#1F2937" text-anchor="middle">ADR · 리뷰 작성</text>
+<text x="760.0" y="438.7" font-size="11" fill="#1F2937" text-anchor="middle">(사후 기간이 실제 일정)</text>
+<rect x="20" y="480" width="860" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="500.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">규모에 맞춘 게이트</text>
+<text x="450.0" y="514.7" font-size="11" fill="#1F2937" text-anchor="middle">비긴급 변경은 게이트 우선 · 2인 팀 내부 도구는 경량 점검</text>
+<text x="450.0" y="528.7" font-size="11" fill="#1F2937" text-anchor="middle">전체 gate는 프로덕션 · 인계 변경만 (리뷰 4회 유지 ✗ · 게이트 0 ✗)</text>
+</g>
+</svg>

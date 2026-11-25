@@ -1,0 +1,8 @@
+{"add": {
+ "## 3. 자주 나오는 오답 함정": ["CCAR-F-Amey-Thakur-0077"],
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-P-jrajath94-0414", "CCAR-P-jrajath94-0351", "CCAR-P-jrajath94-0541"],
+ "## 5. 시험 직전 체크리스트": ["CCAR-P-jrajath94-0630", "CCAR-P-jrajath94-0414"]},
+ "rep": [
+ ["| tool search tool 자체 | `defer_loading` 적용 ✗<br>최소 1개는 non-deferred |", "| tool search tool 자체 | `defer_loading` 적용 ✗ |"],
+ ["| 400 오류 · 자주 쓰는 tool도 검색 왕복 발생 |", "| 자주 쓰는 tool도 검색 왕복 발생 |"]
+]}

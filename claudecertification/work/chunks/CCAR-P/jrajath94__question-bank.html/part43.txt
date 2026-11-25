@@ -1,0 +1,209 @@
+<h3 id="bank-mocks-h212">M4-Q07 (V2-D1.4)</h3>
+
+<p id="sec-bank-mocks-p939" data-kind="prose"><strong>Scenario.</strong> A fraud review uses a coordinator with a transaction worker
+and a device worker. The workers often disagree, and the coordinator
+picks the transaction worker every time with no logged reason.</p>
+
+<p id="sec-bank-mocks-p940" data-kind="prose"><strong>Question.</strong> What gap exists?</p>
+
+<p id="sec-bank-mocks-p941" data-kind="prose"><strong>Options.</strong>
+A) A bigger model.
+B) The disagree rule in the handoff contract: which evidence wins and
+why, applied and logged per dispute instead of a silent default.
+C) More workers.
+D) A longer timeout.</p>
+
+<p id="sec-bank-mocks-p942" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "picks the transaction worker every time
+with no logged reason." Why: a silent default is not a disagree rule.
+The contract must name the rule and the log must show its application.
+Counterfactual: C wins when the work splits further.</p>
+
+
+<h3 id="bank-mocks-h213">M4-Q08 (V2-D1.5)</h3>
+
+<p id="sec-bank-mocks-p943" data-kind="prose"><strong>Scenario.</strong> A conference needs: venue booking, speaker invites, and
+sponsor outreach. Venue booking must finish before sponsor outreach
+(sponsors ask about the venue). Speaker invites are independent.</p>
+
+<p id="sec-bank-mocks-p944" data-kind="prose"><strong>Question.</strong> Which decomposition fits?</p>
+
+<p id="sec-bank-mocks-p945" data-kind="prose"><strong>Options.</strong>
+A) Do all three in parallel.
+B) Fan-out to venue booking and speaker invites in parallel. Then do sponsor outreach after the venue booking is complete. Fan-in to a readiness check.
+C) One agent improvises.</p>
+
+<p id="sec-bank-mocks-p946" data-kind="prose">D) Do all sequential.</p>
+
+<p id="sec-bank-mocks-p947" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "Venue booking must finish before sponsor
+outreach... Speaker invites are independent." Why: the dependency
+orders venue before sponsors. Independence parallelizes invites.
+Counterfactual: A wins when sponsors do not ask about the venue.</p>
+
+
+<h3 id="bank-mocks-h214">M4-Q09 (V2-D1.5), Select TWO</h3>
+
+<p id="sec-bank-mocks-p948" data-kind="prose"><strong>Scenario.</strong> A merger review needs: financial audit, legal review, and
+culture assessment. Each uses different experts and tools. The findings
+must merge into one recommendation.</p>
+
+<p id="sec-bank-mocks-p949" data-kind="prose"><strong>Question.</strong> Which TWO patterns fit? Select TWO.</p>
+
+<p id="sec-bank-mocks-p950" data-kind="prose"><strong>Options.</strong>
+A) Fan-out/fan-in: three parallel expert tracks merged into one
+recommendation.
+B) Critique pattern: each track's findings checked against the review
+charter before merge.
+C) Chaining where culture depends on finance.
+D) One call with no experts.
+E) Skipping legal.</p>
+
+<p id="sec-bank-mocks-p951" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p952" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "different experts and tools... must
+merge into one recommendation." Why: independence takes fan-out. The
+charter check is the critique pattern. C invents a dependency.
+Counterfactual: C wins when culture findings truly derive from the
+audit.</p>
+
+
+<h3 id="bank-mocks-h215">M4-Q10 (V2-D1.6)</h3>
+
+<p id="sec-bank-mocks-p953" data-kind="prose"><strong>Scenario.</strong> A library automates cataloging. Librarians spent 30 hours per week. They spent $35 per hour. The automated design costs $400 per month. Catalog quality is the same.</p>
+
+<p id="sec-bank-mocks-p954" data-kind="prose"><strong>Question.</strong> What is the monthly net value?</p>
+
+<p id="sec-bank-mocks-p955" data-kind="prose"><strong>Options.</strong>
+A) $35 per hour.
+B) (30 x 4.33 x $35) - $400 = about $4,146 per month.
+C) The model's accuracy.
+D) The p95 latency.</p>
+
+<p id="sec-bank-mocks-p956" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "30 hours per week at $35 per hour...
+$400 per month.". Why: 130 hours per month x $35 = $4,546 gross, minus
+$400 = about $4,146 net. The chain is baseline to net. Counterfactual:
+C wins when quality differs between options.</p>
+
+
+<h3 id="bank-mocks-h216">M4-Q11 (V2-D1.6)</h3>
+
+<p id="sec-bank-mocks-p957" data-kind="prose"><strong>Scenario.</strong> A team wants the "best" model for a batch job. The most
+capable tier costs 10x the Fast tier and scores 2% higher on the eval.</p>
+
+<p id="sec-bank-mocks-p958" data-kind="prose"><strong>Question.</strong> What decides?</p>
+
+<p id="sec-bank-mocks-p959" data-kind="prose"><strong>Options.</strong>
+A) The 2% gain alone.
+B) Net value: whether the 2% gain is worth 10x the cost at the job's
+volume, against the quality floor.
+C) The tier name's prestige.
+D) The vendor's recommendation.</p>
+
+<p id="sec-bank-mocks-p960" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "costs 10x... scores 2% higher." Why:
+V2-D1.6 prices improvement against cost. A 2% gain at 10x cost usually
+loses unless the floor demands it. Counterfactual: A wins when the 2%
+decides a binding quality floor.</p>
+
+
+<h3 id="bank-mocks-h217">M4-Q12 (V2-D2.1)</h3>
+
+<p id="sec-bank-mocks-p961" data-kind="prose"><strong>Scenario.</strong> A government helpline handles 50,000 chats per day. About
+97% are office hours and form locations. About 3% are benefits
+eligibility where a wrong answer costs a citizen money.</p>
+
+<p id="sec-bank-mocks-p962" data-kind="prose"><strong>Question.</strong> Which tier strategy fits?</p>
+
+<p id="sec-bank-mocks-p963" data-kind="prose"><strong>Options.</strong>
+A) Most capable tier for everything.
+B) Fast tier for logistics, stronger tier for eligibility, with a
+quality floor on the money-risk answers.
+C) Fast tier for everything.
+D) Stronger tier for logistics, Fast tier for eligibility.</p>
+
+<p id="sec-bank-mocks-p964" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "a wrong answer costs a citizen money."
+Why: error cost sets the tier per class. D is backwards.
+Counterfactual: A wins when logistics answers also cost citizens
+money.</p>
+
+
+<h3 id="bank-mocks-h218">M4-Q13 (V2-D2.1)</h3>
+
+<p id="sec-bank-mocks-p965" data-kind="prose"><strong>Scenario.</strong> A team always uses the most capable tier "to be safe."</p>
+
+<p id="sec-bank-mocks-p966" data-kind="prose"><strong>Question.</strong> What is wrong?</p>
+
+<p id="sec-bank-mocks-p967" data-kind="prose"><strong>Options.</strong>
+A) Nothing. Safety first.
+B) Cost without measurement: the team never tested whether a cheaper
+tier clears the quality floor. Route by evals, not by fear.
+C) The tier is too safe.</p>
+
+<p id="sec-bank-mocks-p968" data-kind="prose">D) Safety is bad.</p>
+
+<p id="sec-bank-mocks-p969" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "always uses the most capable tier 'to be
+safe.'" Why: V2-D2.1 picks tiers on measured trade-offs with quality
+floors. "To be safe" without evals is budget without evidence.
+Counterfactual: A wins when evals prove only the top tier clears the
+floor.</p>
+
+
+<h3 id="bank-mocks-h219">M4-Q14 (V2-D2.2)</h3>
+
+<p id="sec-bank-mocks-p970" data-kind="prose"><strong>Scenario.</strong> A health bot must never provide diagnoses. It may provide
+general health information.</p>
+
+<p id="sec-bank-mocks-p971" data-kind="prose"><strong>Question.</strong> What is the correct control?</p>
+
+<p id="sec-bank-mocks-p972" data-kind="prose"><strong>Options.</strong>
+A) Use a system prompt line: &quot;do not diagnose.&quot;
+B) Use a code classifier on outputs. The system blocks diagnosis-like content. Or the system rewrites diagnosis-like content to general information before display. Test the boundary on adversarial phrasings.
+C) Use a longer prompt.</p>
+
+<p id="sec-bank-mocks-p973" data-kind="prose">D) Trust the system.</p>
+
+<p id="sec-bank-mocks-p974" data-kind="prose"><strong>Key.</strong> B. Decisive phrase: "must never provide diagnoses." Why:
+"never" is a control in code. The classifier enforces the boundary.
+Adversarial testing proves it holds. Counterfactual: A wins for tone,
+never for medical boundaries.</p>
+
+
+<h3 id="bank-mocks-h220">M4-Q15 (V2-D2.2), Select TWO</h3>
+
+<p id="sec-bank-mocks-p975" data-kind="prose"><strong>Scenario.</strong> A trading bot must: block orders above the risk limit, and
+allow balance inquiries freely.</p>
+
+<p id="sec-bank-mocks-p976" data-kind="prose"><strong>Question.</strong> Which TWO placements are correct? Select TWO.</p>
+
+<p id="sec-bank-mocks-p977" data-kind="prose"><strong>Options.</strong>
+A) The risk-limit gate in code before the order tool runs.
+B) Balance inquiries served from the account API with no gate.
+C) The risk limit in the system prompt only.
+D) The gate in the model's judgment.
+E) No controls.</p>
+
+<p id="sec-bank-mocks-p978" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mocks-p979" data-kind="prose"><strong>Key.</strong> A, B. Decisive phrase: "block orders above the risk limit,
+and allow balance inquiries freely." Why: the money gate lives in
+code. Read-only balance needs no gate. C and D trust the model with
+money. Counterfactual: none.</p>
+
+
+<h3 id="bank-mocks-h221">M4-Q16 (V2-D2.3)</h3>
+
+<p id="sec-bank-mocks-p980" data-kind="prose"><strong>Scenario.</strong> An invoice parser extracts line items. It fails on
+multi-page invoices, merging items across pages.</p>
+
+<p id="sec-bank-mocks-p981" data-kind="prose"><strong>Question.</strong> Which technique fits first?</p>
+
+<p id="sec-bank-mocks-p982" data-kind="prose"><strong>Options.</strong>
+A) Few-shot examples of multi-page invoices showing page-aware
+extraction, plus a structured output schema.
+B) Zero-shot.
+C) A bigger model.
+D) One page per invoice.</p>
+
+<p id="sec-bank-mocks-p983" data-kind="prose"><strong>Key.</strong> A. Decisive phrase: "fails on multi-page invoices." Why:
+examples teach the page boundary. The schema fixes the format.
+Simplest technique that passes evals. Counterfactual: C wins when good
+examples still fail.</p>
+

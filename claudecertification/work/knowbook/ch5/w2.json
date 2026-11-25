@@ -1,0 +1,659 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0029",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "문서 처리 파이프라인이 하루 1,000만 토큰을 처리한다. 재무팀은 다음 분기에 비용을 40퍼센트 절감하라고 지시했다. 현재 평가 세트 기준 정확도는 94퍼센트이며, SLA 하한선은 90퍼센트이다. 이 파이프라인은 모든 문서에 대형 모델을 사용하고, 호출할 때마다 4,000토큰짜리 system prompt를 반복해서 보낸다.\n\n제약 조건: 정확도를 90퍼센트 이상으로 유지하면서 비용을 40퍼센트 절감한다.\n\n어떤 최적화 계획이 가장 적합한가?",
+  "ch": {
+   "A": "정확도를 더 싸게 측정할 수 있도록 평가 세트 크기를 줄인다.",
+   "B": "모든 처리를 가장 저렴한 모델로 바꾸고 정확도가 유지되기를 바란다.",
+   "C": "반복되는 4,000토큰 system prompt를 캐시한다. 쉬운 문서 등급에는 더 작은 모델을 사용한다. 평가 세트로 더 작은 모델을 검증한다. 출력 길이 제한을 더 짧게 둔다. 평가 세트를 다시 실행한다. 정확도가 90퍼센트 이상으로 유지되는지 확인한다.",
+   "D": "문서를 평일에만 처리하여 처리량을 28퍼센트 줄인다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "C가 정답인 이유: 캐싱은 반복되는 prefix의 낭비를 직접 겨냥한다. 등급 분리는 쉬운 작업을 더 저렴한 모델로 옮기며, 어려운 사례에는 손대지 않는다. 평가를 다시 실행하면 90퍼센트 하한선이 여전히 지켜지는지 입증된다. 비용은 세 가지 측면에서 줄어든다. 정확도는 검증한다.\n\n희망에 기대지 않는다.\nB는 오답이다. \"정확도가 유지되기를 바란다\"는 것은 제약 조건 중 검증된 정확도라는 절반을 위반한다.\nD는 오답이다. 서비스를 줄일 뿐 비용 효율을 줄이지 못한다. 주말 문서도 여전히 처리해야 한다.\nA는 오답이다. 평가 세트를 줄이면 성능 저하가 가려진다. 측정 방식이 바뀔 뿐 비용은 바뀌지 않는다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0030",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "분류 API를 호출할 때마다 동일한 4,000토큰 system prompt가 포함된다. system prompt에는 역할, 규칙, 12개의 few-shot 예시가 들어 있다. system prompt 뒤에는 짧은 사용자 메시지가 이어진다. 이렇게 반복되는 prefix가 대부분의 토큰을 차지한다. system prompt는 한 달에 한 번 정도 바뀐다.\n\n제약 조건: 모델 동작을 바꾸지 않고 반복되는 prefix에 드는 토큰 비용을 줄인다.\n\n올바른 최적화는 무엇인가?",
+  "ch": {
+   "A": "prefix 비용을 분산하기 위해 호출 한 번에 사용자 메시지 100개를 묶어 보낸다.",
+   "B": "프롬프트를 줄이기 위해 few-shot 예시를 삭제한다.",
+   "C": "안정적인 prefix에 prompt caching을 활성화한다. 시스템이 이를 한 번만 청구하고, 여러 호출에 걸쳐 재사용한다.",
+   "D": "입력 토큰이 더 저렴하지만 동작이 다른 모델로 바꾼다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "C가 정답인 이유: Prompt caching은 바로 이런 목적을 위한 기능이다. 길고 안정적인 prefix를 여러 호출에 걸쳐 재사용한다. 시스템은 prefix를 한 번만 처리하고 캐시한다. 이렇게 하면 비용이 줄어들며 동작은 바뀌지 않는다.\nB는 오답이다. 예시를 삭제하면 동작이 바뀐다. 정확도도 바뀔 가능성이 크다. 제약 조건은 동작 변경을 금지한다.\nD는 오답이다. 다른 모델은 정의상 동작이 달라진다.\nA는 오답이다. 배치 처리는 지연 시간 특성을 바꾼다. 메시지 간 교차 오염의 위험도 있다. 이는 우회책이며, 목적에 맞게 만들어진 해결책이 아니다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0087",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "송장 추출을 위한 두 후보 prompt가 정확도에서 동률이다(eval 세트에서 96.2% 대 96.1%). Prompt A는 문서당 $0.021이 들고, Prompt B는 문서당 $0.007이 든다. 월 400,000개 문서에서 그 차이는 실제 돈이 된다.\n\n제약 조건: 숨은 회귀 없이 더 저렴한 prompt를 고른다.\n\n아키텍트는 어떻게 결정해야 하는가?",
+  "ch": {
+   "A": "더 단순하므로 템플릿의 토큰이 더 적은 prompt를 고른다.",
+   "B": "둘 다 한 달간 프로덕션에서 실행하고 어느 쪽이 더 나은 느낌인지 본다.",
+   "C": "Prompt A를 고른다. 96.2가 96.1보다 높고 정확도가 최고이다.",
+   "D": "완료된 문서당 총비용(입력 토큰 더하기 출력 토큰, 재시도, tool 호출)을 비교하고, 정확도 동률이 hold-out 세트에서도 유지되는지 확인하며, guardrail 지표(지연 시간, 형식 유효성)를 점검한 다음 Prompt B를 고른다."
+  },
+  "answer": [
+   "D"
+  ],
+  "ex": "D가 정답인 이유: 정확도가 동률일 때는 완료된 작업당 총비용이 결정 기준이 된다. 이는 동률이 실제임을 확인한 후에만 해당한다. hold-out 세트로 동률을 확인한다. 어떤 guardrail도 회귀하지 않았음을 확인한다. 각 단계는 \"더 저렴한\" 선택이 신기루일 수 있는 하나의 경우를 막는다. C는 틀렸다. 0.1점의 평가 차이는 잡음이다. 측정 가능한 것은 아무것도 없이 세 배의 비용이 든다. A는 틀렸다. 템플릿 토큰 수는 출력 토큰을 무시한다. 재시도와 tool 호출도 무시한다. 실제 비용은 여기에 있다. B는 틀렸다. \"어느 쪽이 더 나은 느낌인지 본다\"는 측정이 아니다. 결정되지 않은 실험을 프로덕션에 내보내는 것이다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0198",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "파이프라인의 p95는 2초 SLA에 비해 2.9초이다. 품질은 모든 지표에서 floor 위에 있다. 단계별 측정값: retrieval 400 ms, rerank 700 ms (+1 point), reasoning 900 ms (+2 points), verification 300 ms (+4 points). 팀이 어디를 줄여야 하는지 묻는다.\n\n최선의 첫 번째 삭감은 무엇인가?",
+  "ch": {
+   "A": "rerank 단계를 삭감한다. point당 700 ms로 가장 얇은 receipt이다.",
+   "B": "verification을 삭감한다. 300 ms가 가장 작은 숫자이다.",
+   "C": "retrieval을 삭감한다. 모든 호출에서 실행된다.",
+   "D": "reasoning을 삭감한다. 900 ms가 가장 큰 숫자이다."
+  },
+  "answer": [
+   "A"
+  ],
+  "ex": "방법 단계 (Steps 1-10).\n1. 문제 유형은 SLA 하에서의 최선의 첫 삭감이다.\n2. 수명주기 단계는 operation(최적화)이다.\n3. 목표는 p95를 2초 미만으로 만드는 것이다. floor는 유지되어야 한다.\n4. 하드 제약은 다음과 같다: floor는 모든 곳에서 유지된다. SLA가 구속한다.\n5. 시스템 layer는 비용-성능 최적화이다.\n6. 실행 불가능한 보기를 제거한다. 모든 보기가 실행 가능하다.\n7. 제약을 위반하는 보기를 제거한다.\n제약을 직접 위반하는 보기는 없다. 삭감 후에도 floor 계산이 유지되어야 한다.\n8. 목표 기준으로 보기를 비교한다. A는 point당 ms가 가장 나쁜 단계를 제거한다. floor는 유지된다 (D3 예시에서 93%에서 92%).\n9. 숨은 의존성은 다음과 같다: 단계별 수치를 측정한다. 삭감에는 평가 재실행이 필요하다.\n10. 선택을 검증한다. A 하나.\n하나만 선택한다.\n\n해설.\n1. 정답: A.\n2. 결정적인 시나리오 문구: \"Quality sits above the floor on every metric\" 그리고 \"p95 is 2.9 s against a 2 s SLA.\"\n3. 요구사항-보기 매트릭스:\nRequirement | A | B | C | D\nWorst ms per point cut | Yes | No | No | No\nFloor survives | Yes | Risked | Risked | Yes\n\n1. A가 모든 하드 제약을 충족하는 이유: point당 700 ms는 가장 얇은 receipt이며, 이를 제거해도 정확도는 floor 위에 유지된다.\n2. A가 목표를 가장 잘 충족하는 이유: V2-D4.5는 SLA가 구속하고 floor가 유지될 때는 가장 얇은 receipt를 먼저 삭감하라고 말한다.\n3. B는 가장 작은 원시 숫자를 삭감한다. Verification은 point당 75 ms이다. 이것은 정확성 보호 장치이다. 원시 ms는 receipt가 아니다. C는 retrieval(point당 67 ms)을 삭감한다. 이것은 가장 좋은 receipt이다.\n이를 삭감하면 6 points가 사라진다. floor가 깨진다. D는 가장 큰 원시 숫자를 삭감한다. Reasoning의 point당 450 ms는 rerank의 700 ms보다 낫다. 가장 큰 것이 가장 얇은 것은 아니다.\n4. 정확한 한계 또는 트레이드오프: 이 삭감은 1 point의 여유를 소모하므로, 팀은 삭감 후 floor를 지켜봐야 한다.\n5. 관련 근거 (날짜 포함): lesson-D4-5 (§9)의 \"SLA binds, floor holds: cut the thinnest receipt first\", 2026년 10월 6일, S03/S04를 통한 시험 범위, 2026년 9월.\n6. B는 첫 삭감으로는 결코 정답이 되지 않는다. C는 retrieval의 points가 측정되지 않았다면 정답이 된다. 그러면 측정되지 않은 단계이다. D는 reasoning의 2 points가 측정되지 않았다면 정답이 된다.\n7. 테스트하는 오해: 가장 큰 latency나 가장 작은 latency를 삭감한다는 것. receipt(정확도 point당 ms)가 결정하며, 원시 숫자는 양쪽 모두로 오해를 낳는다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0199",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "사용자들이 어시스턴트가 \"느리게 느껴진다\"고 불평한다. p95 SLA는 완료 시점을 3초로 측정한다. 팀은 첫 token이 0.5초에 도착하도록 출력을 streaming하자고 제안한다.\n\n최선의 대응은 무엇인가?",
+  "ch": {
+   "A": "승인한다. streaming이 사용자가 느끼는 느림을 해결한다.",
+   "B": "streaming을 체감 latency 개선으로서 승인하되, 사실을 명시한다: p95 완료 시간은 여전히 3초이므로 SLA에는 여전히 실제 삭감이 필요하다(가장 얇은 receipt부터).",
+   "C": "streaming을 거부한다. 전혀 도움이 되지 않는다.",
+   "D": "SLA를 없앤다. 사용자는 첫 token을 느낀다."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "방법 단계 (Steps 1-10).\n1. 문제 유형: latency 제안에 대한 최선의 대응.\n2. 수명주기 단계: operation(최적화).\n3. 목표: 정직한 latency 개선.\n4. 하드 제약: SLA는 완료 시점을 측정하며, streaming은 완료가 아니라 첫 token을 앞당긴다.\n5. 시스템 layer: latency 최적화.\n6. 실행 불가능한 보기 제거: 모두 실행 가능하다.\n7. 제약을 위반하는 보기 제거: 명백히 위반하는 것은 없다.\n8. 목표 기준 비교: B만이 체감 latency와 측정된 latency를 구분하는 보기이다.\n9. 숨은 의존성: 실제 삭감에는 단계별 receipt를 측정해야 한다.\n10. 검증: B 하나. 단일 선택.\n\n해설.\n1. 정답: B.\n2. 결정적인 시나리오 문구: \"The p95 SLA measures completion at 3 s\" 그리고 \"the first token arrives in 0.5 s.\"\n3. 요구사항-보기 매트릭스:\nRequirement | A | B | C | D\nPerceived latency helped | Yes | Yes | No | Partial\nSLA honestly addressed | No | Yes | No | No\n\n1. B가 모든 하드 제약을 충족하는 이유: streaming은 체감을 위해 배포하고, SLA는 별도로 실제 삭감을 받는다.\n2. B가 목표를 가장 잘 충족하는 이유: V2-D4.5의 lesson은 streaming만으로는 반응성을 보여 줄 뿐이라고 말한다. 완료 시간은 변하지 않는다. SLA는 완료 시간을 측정한다.\n3. 거부된 모든 보기에 대한 설명: A는 lesson의 valid-but-inferior이다. 사용자는 더 빠르다고 느끼지만 p95 완료 시간은 여전히 3초이고 SLA는 여전히 실패한다. C는 실제 체감 latency 개선을 거부하는 것이다. streaming은 체감에 도움이 되며, 단지 SLA를 움직이지 못할 뿐이다. D는 계약을 충족하는 대신 삭제하는 것이며, 사용자의 대기 시간은 여전히 3초이다.\n4. 정확한 한계 또는 트레이드오프는 다음과 같다: streaming과 실제 삭감을 함께 하려면 streaming 작업과 삭감 작업 양쪽의 비용이 든다. 팀은 둘 다 해야 한다. 하나로 다른 하나를 대체하지 않는다.\n5. 관련 근거 (날짜 포함): lesson-D4-5 (§10)의 \"streaming alone\" valid-but-inferior, 2026년 10월 6일, S03/S04를 통한 시험 범위, 2026년 9월.\n6. SLA가 time-to-first-token을 측정한다면 A가 정답이 된다. 그러면 streaming이 SLA를 움직인다. C는 결코 단독으로 정답이 되지 않는다. D는 결코 정답이 되지 않는다. 사람들은 SLA를 재협상한다. SLA를 삭제하지는 않는다.\n7. 테스트하는 오해: 더 빠르게 느껴지는 것이 더 빠른 것이라는 생각. 첫 token은 UX이고, 완료는 SLA이다. 둘 다 중요하며, 서로 다른 숫자이다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0200",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀의 파이프라인이 품질 floor를 충족하지 못한다: groundedness가 기준 92%에 비해 88%이다. p95도 SLA를 초과한다. 팀은 latency를 먼저 해결하기 위해 rerank 단계를 삭감하자고 제안한다.\n\n최선의 대응은 무엇인가?",
+  "ch": {
+   "A": "승인한다. latency가 먼저이고 품질은 그다음이다.",
+   "B": "삭감을 거부한다. floor가 충족되지 않았으므로 삭감은 없다. 먼저 품질을 고치고, 그다음 유지된 floor를 기준으로 latency를 최적화한다.",
+   "C": "rerank를 삭감하고 동시에 더 큰 tier를 추가한다.",
+   "D": "groundedness 기준을 88%로 낮춘다."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "방법 단계 (Steps 1-10).\n1. 문제 유형: 순서 판단(품질 대 latency).\n2. 수명주기 단계: operation(최적화).\n3. 목표: floor를 유지한 다음 SLA를 충족하는 것.\n4. 하드 제약: groundedness 88% 대 기준 92%, floor가 충족되지 않았다.\n5. 시스템 layer: 비용-성능 최적화.\n6. 실행 불가능한 보기 제거: 모두 실행 가능하다.\n7. 제약을 위반하는 보기 제거: D는 시스템 대신 기준을 옮긴다.\n8. 목표 기준 비교: B만이 floor-first 순서를 강제한다.\n9. 숨은 의존성: 품질 수정에는 진단(어느 layer가 groundedness에서 실패하는지)이 필요하다.\n10. 검증: B 하나. 단일 선택.\n\n해설.\n1. 정답: B.\n2. 결정적인 시나리오 문구: \"groundedness is 88% against a 92% bar\" 그리고 \"proposes cutting the rerank stage to fix latency first.\"\n3. 요구사항-보기 매트릭스:\nRequirement | A | B | C | D\nFloor fixed before cuts | No | Yes | No | Evaded\nLatency addressed | Yes | After | Partial | No\n\n1. B가 모든 하드 제약을 충족하는 이유: 삭감은 정확도 points를 소모한다. floor가 충족되지 않았다. 쓸 수 있는 points가 없다.\n2. B가 목표를 가장 잘 충족하는 이유: V2-D4.5는 품질 floor가 충족되지 않았다면 삭감은 없고 먼저 품질을 고치라고 말한다.\n3. 거부된 모든 보기에 대한 설명: A는 기준을 충족하지 못하는 파이프라인을 최적화하는 것이며, 빠르게 틀린 답도 여전히 틀린 답이다. C는 둘을 한꺼번에 하는 것으로, tier 변경이 품질 진단을 뒤섞고, 삭감은 floor에 없는 points를 여전히 소모한다. D는 숫자를 맞추려고 기준을 낮추는 것이며, 기준은 요구사항을 따르는 것이지 시스템의 편안함을 따르는 것이 아니다.\n4. 정확한 한계 또는 트레이드오프: B는 latency 개선을 늦추며, 팀은 이를 분명히 말하고 groundedness layer를 먼저 고쳐야 한다.\n5. 관련 근거 (날짜 포함): lesson-D4-5 (§9)의 \"quality floor unmet: no cuts, fix quality first\", 2026년 10월 6일, S03/S04를 통한 시험 범위, 2026년 9월.\n6. 각 그럴듯한 대안이 정답이 되는 반사실적 상황: A는 floor가 유지되는 경우 정답이 된다(그러면 가장 얇은 receipt가 먼저이다). C는 결합된 조치로서는 결코 정답이 되지 않으며, tier 테스트는 floor가 유지된 후에 순서대로 진행한다. D는 92% 기준이 임의적이었고 실제 요구사항이 88%인 경우 정답이 된다(그러면 잘못된 것은 시스템이 아니라 기준이었다).\n7. 테스트하는 오해: latency와 품질이 병렬로 최적화된다는 것. 둘은 순서가 있다: floor가 먼저이고, 그다음 삭감이다. 삭감은 정확도를 소모하며, 깨진 floor에는 소모할 것이 없다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0201",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀의 호출당 비용 내역: context 8,000 token(대부분 반복되는 지시문), retrieval 1,500, generation 500. 품질 floor는 유지된다. 예산이 구속한다.\n\n올바른 조치 두 가지는 무엇인가? 두 개를 선택하라.",
+  "ch": {
+   "A": "caching 전에 context를 줄인다: 반복되는 지시문을 중복 제거하고 안정적인 블록을 cache prefix로 옮긴다.",
+   "B": "router가 eval에서 쉬운 호출임을 입증한 후, 쉬운 호출을 더 저렴한 tier로 라우팅한다.",
+   "C": "더 나은 품질을 위해 rerank 단계를 추가한다.",
+   "D": "변동되는 꼬리 부분을 포함한 전체 대화를 cache한다.",
+   "E": "여유를 위해 모든 트래픽을 가장 성능이 높은 tier로 업그레이드한다."
+  },
+  "answer": [
+   "A",
+   "B"
+  ],
+  "ex": "방법 단계 (Steps 1-10).\n1. 문제 유형: 비용 최적화 조치 선택(복수 선택).\n2. 수명주기 단계: operation(최적화).\n3. 목표: floor를 유지하면서 비용을 줄이는 것.\n4. 하드 제약: context가 지배적이고(10,000 token 중 8,000), floor가 유지되며, 예산이 구속한다.\n5. 시스템 layer: token 및 비용 최적화.\n6. 실행 불가능한 보기 제거: 모두 실행 가능하다.\n7. 제약을 위반하는 보기 제거: 명백히 위반하는 것은 없다.\n8. 목표 기준 비교: A는 지배적인 비용을 공략하고, B는 입증된 쉬운 호출을 아래로 라우팅한다.\n9. 숨은 의존성: A는 prefix가 안정적이어야 하고, B는 router의 \"easy\"가 가정이 아니라 eval에서 입증되어야 한다.\n10. 검증: A와 B. 두 개를 선택한다.\n\n해설.\n1. 정답: A, B.\n2. 결정적인 시나리오 문구: \"context 8,000 tokens (mostly repeated instructions)\" 그리고 \"Quality floor holds.\"\n3. 요구사항-보기 매트릭스:\nTest | A | B | C | D | E\nAttacks the dominant cost | Yes | Partial | No | No | No\nFloor provably held | Yes | With evals | n/a | n/a | Yes\n\n1. A와 B가 모든 하드 제약을 충족하는 이유: 8,000 token context를 줄이면 가장 큰 항목이 줄고, 입증된 쉬운 호출만 라우팅하면 floor가 보호된다.\n2. A와 B가 목표를 가장 잘 충족한다. V2-D4.5는 context가 비용을 지배한다고 말한다. 이는 caching 전에 context를 줄이라는 뜻이다. 또한 router가 쉽다고 입증한 것만 라우팅하라는 뜻이다.\n3. 거부된 모든 보기에 대한 설명: C는 이미 floor가 유지되는 파이프라인에 단계(더 많은 비용)를 추가하며, 예산은 반대 방향으로 구속한다. D는 변동되는 꼬리 부분을 cache하므로 prefix가 안정되지 않고 write가 계속 과금된다. E는 floor가 필요로 하지 않는 여유를 최상위 tier 가격으로 구매한다.\n4. 정확한 한계 또는 트레이드오프: A는 안정적인 블록의 버전 관리가 필요하고, B는 트래픽이 변함에 따라 router를 다시 입증해야 한다.\n5. 관련 근거 (날짜 포함): lesson-D4-5 (§9)의 \"context dominates cost: shrink context before caching\" 및 \"route only what the router proves easy\", 2026년 10월 6일, S03/S04를 통한 시험 범위, 2026년 9월.\n6. 각 그럴듯한 대안이 정답이 되는 반사실적 상황: C는 floor가 충족되지 않았다면 정답이 된다(그러면 품질이 삭감보다 먼저이다). D는 결코 정답이 되지 않는다. E는 floor가 충족되지 않았고 성능이 높은 tier가 입증된 수정책인 경우 정답이 된다.\n7. 테스트하는 오해: caching이 context 비용을 해결한다는 것. Caching은 안정적인 prefix를 할인해 줄 뿐이고, 줄이기가 먼저이다. 더 작은 context가 할인된 큰 context보다 낫기 때문이다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0311",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "문서 Q&A 서비스의 비용이 월 $3,000이다. CFO는\n$1,800을 원한다. 품질 하한선: 인용된 답변의 정밀도 95%, 매주\n측정. 현재 정밀도: 97%.\n\n하한선을 유지하면서 비용을 줄이는 수단 두 가지는 무엇인가? 두 개를\n선택하라.",
+  "ch": {
+   "A": "안정적인 6,000 토큰 instruction prefix에 prompt caching 적용.",
+   "B": "Tier 라우팅: 단순 조회는 Fast tier로 보내고, 어려운 추론은\n현재 tier에 유지한다.",
+   "C": "검증 비용을 절반으로 줄이기 위해 grounding 검사를 제거한다.",
+   "D": "채점 비용을 아끼기 위해 eval 표본을 절반으로 줄인다.",
+   "E": "더 저렴한 선택지를 열기 위해 품질 하한선을 없앤다."
+  },
+  "answer": [
+   "A",
+   "B"
+  ],
+  "ex": "방법 단계별 풀이(Steps 1-10).\n1. 문제 유형: 하한선 아래에서의 비용 최적화(복수 선택).\n2. 수명 주기 단계: 운영 및 최적화.\n3.\n목표: 월 $1,200을 절감한다. 정밀도는 95% 이상이어야 한다.\n4. 하드 제약: 95% 하한선을 매주 측정한다. 하한선은 유지되어야 한다.\n5.\n시스템 계층: 토큰 및 비용 최적화(V2-D4.5).\n6. 실현 불가능한 보기 제거: 다섯 가지 모두 실현 가능하다.\n7. 제약을 위반하는 보기 제거: C, D, E는 하한선 또는 그 측정을 공격한다.\n8.\n목표 기준으로 비교: A와 B는 비용 입력을 줄인다. 품질 입력은 줄이지 않는다.\n9. 숨은 의존성: 라우팅에는 신뢰할 수 있는 난이도 분류기가 필요하다. 캐싱에는 prefix 안정성이 필요하다.\n10.\n검증: A와 B. 나머지는 하한선을 깨뜨린다.\n\n1. 정답: A, B.\n2. 결정적인 시나리오 문구: \"품질 하한선: 인용된 답변의 정밀도\n95%, 매주 측정.\"\n3. 요구사항-보기 매트릭스:\n수단 | A | B | C | D | E\n실제 비용 절감 | 예 | 예 | 예 | 아니오 | 경우에 따라\n95% 하한선 유지 | 예 | 예 | 아니오 | 하락을 숨김 | 아니오\n\nA와 B가 목표를 충족하는 이유: 캐싱은 prefix 토큰 비용을 줄인다. 라우팅은\n쉬운 질문에 대한 호출당 tier 비용을 줄인다. 어느 쪽도 grounding 검사나\n측정을 건드리지 않으므로 하한선이 유지된다.\nA와 B가 목표를 가장 잘 충족한다. V2-D4.5는 단계별로 측정하라고 말한다. 그런 다음 과도한 컨텍스트, 캐싱, 라우팅, 호출 제거를 줄인다. 품질과 안전 하한선은 유지한다. A와 B는 교과서적인 수단이다.\n거부된 모든 보기에 대한 설명: C는 하한선을 지키는 검사를 없앤다.\n하한선은 속도와 절감보다 우선한다. D는 표본을 줄여 하락이\n감지되지 않게 한다. 이는 측정 연극이다. E는 하한선 자체를 없애는데, 이는\n최적화가 아니라 항복이다.\n정확한 한계 또는 트레이드오프: 라우터는 오분류할 수 있고,\n캐시에는 prefix 관리가 필요하다. 둘 다 모니터링이 필요하다.\n관련 근거(날짜 포함): lesson-D4-5(§4)의 단계별 측정과 하한선 규율,\n2026년 10월 6일.\n각 그럴듯한 대안이 이기는 반례 상황: C는 하한선이 유지되는 동안은\n절대 이기지 못한다. D는 절대 이기지 못한다. E는 비즈니스가\n하한선을 명시적으로 포기하고 위험을 떠안을 때 이긴다.\n시험하는 오해: \"어떤 비용 절감이든 최적화이다.\" 하한선을 유지하는\n절감만 해당한다. 나머지는 위장된 품질 삭감이다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0370",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "Q&A 서비스가 매일 같은 질문 200개를 반복한다. 호출마다 4,000토큰짜리 전체 가이드 prefix에 대해 모델을 다시 실행한다. 어떤 최적화가 가장 먼저 적합한가?",
+  "ch": {
+   "A": "더 큰 모델.",
+   "B": "안정적인 4,000토큰 prefix에 대한 prompt caching.",
+   "C": "더 많은 eval 사례.",
+   "D": "두 번째 모델."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "결정적 문구: \"같은 질문 200개... 전체 4,000토큰 가이드 prefix.\" 이유: 안정적인 prefix가 반복되므로 caching이 입력 비용을 줄인다. 질문도 반복되지만 확실한 이득은 prefix이다. 반대 경우: 답변도 동일하고 안정적이라면 응답 caching이 이긴다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0433",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 지원 봇이 매 호출마다 30페이지 전체 정책을 보낸다:\n25,000 tokens. 질문은 한 섹션만 필요로 한다.\n가장 먼저 어떤 최적화가 적합한가?",
+  "ch": {
+   "A": "더 큰 모델.",
+   "B": "30페이지 전체를 보내는 대신 관련 섹션을 just-in-time으로 retrieve한다.",
+   "C": "더 긴 system prompt.",
+   "D": "더 많은 정책."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "결정적 문구: \"Questions need one section... 25,000\ntokens.\" 이유: 과대한 컨텍스트가 V2-D4.5의 첫 번째 절감 대상이다. Retrieval이\n통째로 쏟아붓는 방식을 대체한다. 반사실 가정: 올바른 섹션이 있는데도 trace에서 모델이\n실패한다면 A가 정답이 된다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0434",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 batch job이 매일 밤 100,000개 문서를 처리한다. 비용은\n밤당 $400이다. 팀은 $250을 원한다.\n어떤 수단이 가장 적합한가?",
+  "ch": {
+   "A": "Tier routing: 문서를 난이도별로 분류하고, 쉬운 것은\nFast tier로 보내고, 어려운 것은 그대로 두며, quality floor를\n유지한다.",
+   "B": "문서의 절반을 삭제한다.",
+   "C": "evals를 끈다.",
+   "D": "희망."
+  },
+  "answer": [
+   "A"
+  ],
+  "ex": "결정적 문구는 \"100,000 documents nightly... hold the quality floor.\"이다.\n난이도가 허용하면 routing이 단가를 줄인다. 규모가 클수록 절감이 커진다. floor는 유지된다.\nB는 작업을 파괴한다.\n\nC는 측정을 파괴한다.\n실제 워크로드에서 B는 정답이 되지 않는다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0496",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "야간 작업이 문서 100만 건을 다시 임베딩한다. 밤마다 변경되는 것은 2%뿐이다.\n\n어떤 최적화가 적합한가?",
+  "ch": {
+   "A": "매일 밤 전체를 다시 임베딩한다.",
+   "B": "증분 임베딩: 변경된 문서만 임베딩하고 나머지는 재사용한다.",
+   "C": "더 큰 모델.",
+   "D": "인덱스를 삭제한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "결정적 문구: \"밤마다 변경되는 것은 2%뿐이다.\" 이유: 호출 제거(call elimination)는 V2-D4.5의 레버이다. 변경되지 않은 98%의 문서를 다시 임베딩하는 것은 순수한 낭비이다. 반사실: 변경 감지 비용이 재임베딩 비용보다 크다면 A가 정답이 된다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0497",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "채팅 서비스의 p99 latency가 14초이다. 팀은 중앙값을 1.2초에서 0.9초로 최적화한다. 사용자들은 여전히 불만을 제기한다.\n\n무엇이 잘못되었는가?",
+  "ch": {
+   "A": "잘못된 것이 없다. 중앙값이 개선되었다.",
+   "B": "꼬리(tail)가 문제이다. p99가 14초라는 것은 사용자의 1%가 심하게 오래 기다린다는 뜻이다. 중앙값이 아니라 꼬리(타임아웃, 재시도, 느린 단계)를 최적화한다.",
+   "C": "모델이 너무 작다.",
+   "D": "사용자가 불평이 너무 많다."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "결정적 문구는 \"p99 latency가 14초\"이다. V2-D4.5는 대화형 시스템에 대해 p95/p99를 목표로 한다. 중앙값 작업은 고통받는 꼬리를 무시한다. SLA가 중앙값에 걸려 있다면 A가 정답이 된다. 사용자가 만족한다면 A가 정답이 된다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0559",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "지원 봇이 쿼리당 문서 50개를 re-rank한다. 상위 5개가\n항상 이긴다. Rerank에 1.5초가 든다.\n\n어떤 최적화가 적합한가?",
+  "ch": {
+   "A": "문서 100개를 rerank한다.",
+   "B": "더 적은 후보를 rerank한다(예: 상위 15개): 어차피 승자는 상위 5개에서 나오므로 추가 35개의 rerank는 아무것도 얻지 못한다.",
+   "C": "더 큰 모델.",
+   "D": "더 많은 문서."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "결정적 문구: \"상위 5개가 항상 이긴다... Rerank에 1.5초가\n든다.\" 이유: 단계별 측정이 낭비를 보여 준다. 후보를 줄이면\n품질 변화 없이 지연 시간이 줄어든다. 반사실: 승자가\n목록 깊은 곳에서 나온다면 A가 맞다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0560",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 사용자 메시지를 200자에서 잘라 토큰을 30% 줄인다.\n품질 불만이 늘어난다.\n\n무엇이 잘못되었는가?",
+  "ch": {
+   "A": "아무 문제 없다. 토큰은 줄었다.",
+   "B": "이 삭감이 품질 하한선을 깨뜨렸다: 잘라 내기가 필요한 컨텍스트를 파괴했다. 최적화는 품질 및 안전 하한선을 지켜야 한다. 전후를 측정한다.",
+   "C": "200자는 너무 넉넉하다.",
+   "D": "사용자가 너무 불평한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "결정적 문구: \"품질 불만이 늘어난다.\" 이유: V2-D4.5는\n하한선을 지키게 한다. 품질을 떨어뜨리는 삭감은 최적화가 아니다.\n반사실: 품질이 유지된다면 A가 맞다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0584",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 Claude Haiku 5.5에서 새 워크로드를 계획한다. 각 요청에는 input 토큰과 output 토큰이 있으며, 각 토큰 종류마다 고유한 요율이 있다. 팀은 출시 전에 월간 수치가 필요하고 새 서비스를 만들어서는 안 된다. 어떤 접근 방식이 이 제약을 충족하는가?",
+  "ch": {
+   "A": "input 토큰에 input 요율을 곱하고 output 토큰은 무시한다.",
+   "B": "각 요청과 그 사용량을 데이터베이스에 기록하는 사용량 서비스를 구축한다.",
+   "C": "각 토큰 종류에 자체 요율을 곱하고, 종류별 값을 더한 다음, 요청량과 일수로 확장한다.",
+   "D": "워크스페이스 지출 한도를 활성화하고 그 한도를 월간 수치로 보고한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "각 토큰 종류는 100만 토큰당 고유한 요율을 가지므로 요청 하나의 비용은 종류별 비용의 합이다. 그 비용을 요청량과 일수로 확장하면 새 서비스 없이 월간 수치를 얻는다. 함정. input만 계산하는 추정은 단순해 보이지만 output 토큰은 자체 요율로 과금되므로 청구액을 과소평가한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0586",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 Claude Haiku 5.5 워크로드 두 개를 운영한다. 야간 보고서는 최대 24시간까지 기다릴 수 있고, 실시간 채팅 기능은 즉시 답변이 필요하다. 팀은 각 워크로드를 올바른 요율로 예측해야 한다. 이 제약을 충족하는 두 가지 진술은 무엇인가?",
+  "ch": {
+   "A": "두 워크로드 모두 batch 요율로 책정해 예측을 단순하게 유지한다.",
+   "B": "야간 보고서는 기본 가격보다 50퍼센트 낮은 batch 요율로 책정한다.",
+   "C": "채팅 프롬프트가 반복되므로 실시간 채팅은 cache hit 요율로 책정한다.",
+   "D": "실시간 채팅은 100만 토큰당 기본 입력 및 출력 요율로 책정한다."
+  },
+  "answer": [
+   "B",
+   "D"
+  ],
+  "ex": "Batch 가격은 50퍼센트 할인되며 기다릴 수 있는 작업에 적용된다. 실시간 채팅은 즉시 답변이 필요하므로 표준 기본 요율을 유지한다. 함정. Cache hit 가격은 반복되는 채팅 프롬프트에 대한 할인처럼 보이지만, 전체 워크로드가 아니라 캐시된 토큰에만 적용된다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0596",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 보험 청구 팀이 같은 레이아웃을 공유하는 양식에서 고정된 필드를 추출한다. 팀은 모델 비용을 줄이고 같은 입력에 같은 출력을 반환해야 한다. 어떤 설계가 이 제약을 충족하는가?",
+  "ch": {
+   "A": "코드 규칙으로 고정 필드를 읽고 모델 호출을 건너뛴다.",
+   "B": "각 양식을 temperature 0의 Claude Haiku 5.5로 보내며, 이는 같은 입력에 같은 출력을 반환한다.",
+   "C": "가장 큰 티어가 가장 정확하므로 각 양식을 필드 추출을 위해 Claude Opus 5.5로 보낸다.",
+   "D": "cache hit로 반복되는 필드 읽기가 무료가 되는 Claude Haiku 5.5로 각 양식을 보낸다."
+  },
+  "answer": [
+   "A"
+  ],
+  "ex": "고정된 레이아웃은 고정된 출력에 대응하므로, 코드 규칙은 토큰당 비용 없이 같은 결과를 반환한다. 열린 입력만 모델 호출이 필요하다 (Inference). 함정. Cache hit는 무료 읽기처럼 보이지만, cache hit도 100만 토큰당 소액의 비용이 든다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0598",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 다음 날 아침까지 제출해야 하는 보고서를 위해 매일 밤 50,000건의 지원 티켓에 점수를 매긴다. 실시간 채팅 답변은 몇 초 안에 도착해야 한다. 팀은 야간 작업의 토큰 비용을 낮게 유지해야 한다. 이 제약을 충족하는 두 가지 옵션은 무엇인가?",
+  "ch": {
+   "A": "토큰 비용을 낮추기 위해 실시간 채팅을 Message Batches API로 보낸다.",
+   "B": "야간 티켓을 batch 요율로 Message Batches API를 통해 보낸다.",
+   "C": "batch가 끝나기 전에 모델이 작성하는 대로 각 야간 결과를 읽는다.",
+   "D": "즉시 답변을 위해 실시간 채팅을 동기 Messages API에 유지한다."
+  },
+  "answer": [
+   "B",
+   "D"
+  ],
+  "ex": "Batch는 비용이 50퍼센트 낮고 대부분의 batch는 1시간 안에 끝나므로 야간 작업에 적합하다. 실시간 채팅은 즉시 답변이 필요하므로 동기 API에 유지한다. 함정. Batch 요율은 실시간 채팅에도 절감처럼 보인다. 그러나 batch 결과는 batch가 끝나야 도착하므로 채팅 답변이 몇 초 안에 도착하지 못한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0608",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 batch 가격으로 문서 요청 150,000건을 밤새 채점해야 한다. 즉시 답변이 필요한 요청은 없고, 각 요청은 1 KB 미만이다. 각 batch는 문서화된 한도 안에 있어야 한다. 어떤 계획이 이 제약을 충족하는가?",
+  "ch": {
+   "A": "batch 하나가 모두 담을 수 있으므로 150,000건을 한 batch로 보낸다.",
+   "B": "150,000건을 밤새 동기 Messages API로 한 번에 하나씩 보낸다.",
+   "C": "작업을 각각 100,000건 미만인 두 batch로 나누고 두 결과 세트를 모두 수집한다.",
+   "D": "150,000건이 제시간에 끝나도록 batch 만료를 29일로 설정한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "Batch는 최대 100,000건 또는 256 MB 중 먼저 도달하는 한도까지 담는다. 각각 1 KB인 75,000건짜리 batch 두 개는 두 한도를 모두 지키면서 batch 가격을 유지한다. 함정. 전부를 한 batch로 보내는 것이 가장 단순해 보이지만, batch는 최대 100,000건 또는 256 MB까지만 담는다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0610",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 야간 채점을 위한 리뷰 텍스트 80,000건을 가지고 있다. 한 실시간 위젯은 사용자가 입력하는 동안 텍스트 하나를 채점한다. 팀은 각 경로를 올바른 API에 유지해야 한다. 이 제약을 충족하는 두 가지 옵션은 무엇인가?",
+  "ch": {
+   "A": "각 점수의 비용이 줄도록 실시간 위젯 요청을 batch로 보낸다.",
+   "B": "batch가 256건을 담으므로 야간 텍스트를 256건 단위의 batch로 나눈다.",
+   "C": "batch가 최대 100,000건을 담으므로 야간 텍스트를 하나의 Message Batch로 보낸다.",
+   "D": "실시간 위젯 요청을 텍스트당 호출 한 번으로 동기 Messages API를 통해 보낸다."
+  },
+  "answer": [
+   "C",
+   "D"
+  ],
+  "ex": "Batch는 최대 100,000건 또는 256 MB를 담으며, 결과는 처리 후에 나온다. 실시간 위젯은 사용자가 입력하는 동안 각 답변이 필요하므로 동기 API를 사용한다. 함정. 256이라는 숫자는 요청 수처럼 보이지만, 이는 batch의 256 MB 크기 한도이다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0611",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "Claude Haiku 5.5의 요약 요청 하나가 입력 토큰 3,000개와 출력 토큰 800개를 사용한다. 프롬프트는 100,000토큰 미만이다. 팀은 공개된 가격으로 요청당 비용을 구해야 한다. 어떤 방법이 이 제약을 충족하는가?",
+  "ch": {
+   "A": "3,800토큰 전체에 100만 토큰당 입력 가격을 곱한다.",
+   "B": "각 토큰 수에 해당 요율을 곱하고 100만으로 나눈 다음, 두 결과를 더한다.",
+   "C": "각 토큰 수에 해당 요율을 곱한 다음, 각 결과를 대시보드가 있는 비용 원장에 기록한다.",
+   "D": "프롬프트가 재사용되므로 모든 입력 토큰을 cache hit 요율로 책정한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "Haiku 5.5에는 입력과 출력에 대해 각각 100만 토큰당 별도의 기본 요율이 있다. 여기서 입력은 0.0003달러, 출력은 0.0004달러로 합계 0.0007달러이다. 함정. Cache hit 요율은 저렴한 입력 가격처럼 보이지만, 캐시가 실제로 반환하는 토큰에만 적용된다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0612",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 더 저렴한 모델 티어에서 절감액을 반영하려고 한다. 더 저렴한 티어는 eval 세트의 91퍼센트를 통과하고, 합의된 임계값은 95퍼센트이다. 제약: 품질 임계값이 유지되는 동안에만 가치 주장을 유지한다. 어떤 조치가 이 제약을 충족하는가?",
+  "ch": {
+   "A": "절감액을 지금 반영하고, 다음 분기 이후에 임계값을 조정한다.",
+   "B": "더 저렴한 티어에 session budget을 설정하면 절감이 유지됨이 입증된다.",
+   "C": "더 저렴한 티어가 같은 eval 세트에서 임계값을 통과할 때까지 절감 주장을 보류한다.",
+   "D": "절감액을 지금 반영하고, 재테스트 전에 eval 세트를 10,000건으로 다시 만든다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "이 주장은 더 저렴한 티어가 같은 eval 세트에서 합의된 임계값을 통과해야 성립한다. Session budget은 지출을 제한하지만 품질을 측정하지는 않는다. 함정. 이른 절감 주장은 진전처럼 보이지만, 더 저렴한 티어는 오늘 합의된 임계값을 통과하지 못한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0613",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 장기 agent 실행이 고정된 단계를 따르며, 기다리는 사용자는 없다. 재무 팀이 이 실행의 지출 상한을 정한다. 팀에는 상한에서 새 요청을 중단시키고 실행 중 지출을 보여 주는 budget이 필요하다. 이 제약을 충족하는 두 가지 옵션은 무엇인가?",
+  "ch": {
+   "A": "세션을 만들 때 session budget을 설정해 상한에서 새 요청이 중단되게 한다.",
+   "B": "청구서가 도착한 뒤에 budget을 설정해 합계를 바로잡을 수 있게 한다.",
+   "C": "Default Workspace에 같은 금액의 workspace spend limit을 설정한다.",
+   "D": "현재까지의 list cost를 담고 있는 세션 객체의 usage.list_cost를 읽는다."
+  },
+  "answer": [
+   "A",
+   "D"
+  ],
+  "ex": "Session budget은 세션을 만들 때 설정하며, 상한에서 새 모델 요청을 중단시킨다. 플랫폼은 세션 가격을 지속적으로 계산하며, 세션 객체의 usage.list_cost가 현재까지의 합계를 담는다. 함정. Workspace spend limit은 같은 통제처럼 보이지만, Default Workspace에는 spend limit을 둘 수 없다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0636",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "평가 실행에 프롬프트 50,000개가 있다. 결과는 하루 안에 도착하면 되고, 실행 비용은 표준 호출보다 낮아야 한다. 이 결과를 기다리는 사용자는 없다.",
+  "ch": {
+   "A": "각 프롬프트를 high effort로 표준 경로에서 하나씩 전송한다.",
+   "B": "호출 가격이 절반인 Priority Tier 약정을 구매한다.",
+   "C": "Message Batch 하나를 제출하고, 전체 세트를 표준 경로에서도 실행한다.",
+   "D": "프롬프트를 Message Batch 하나로 제출하고, 처리가 끝난 뒤 결과를 읽는다."
+  },
+  "answer": [
+   "D"
+  ],
+  "ex": "Batch 사용량은 표준 API 가격의 절반으로 청구된다. 결과는 최대 24시간이 걸릴 수 있으며, 이는 사용자가 기다리지 않는 평가 실행에 적합하다. 함정. 표준 호출은 단순해 보이지만, 하루를 기다릴 수 있는 작업에 표준 가격을 그대로 적용한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0639",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "재무팀은 워크스페이스별 월간 API 지출 내역을 청구서와 대조해 확인해야 한다. 수치는 앱 로그가 아니라 플랫폼 보고서에서 가져와야 한다.",
+  "ch": {
+   "A": "워크스페이스별로 그룹화하여 Admin API 키로 cost 보고서를 호출한다.",
+   "B": "cost 보고서와 usage 보고서를 모두 워크스페이스별로 그룹화하여 시간별로 호출한다.",
+   "C": "각 앱 응답의 입력 토큰을 합산한 뒤 정가를 곱한다.",
+   "D": "월간 내역을 얻기 위해 시간 단위 버킷으로 cost 보고서를 호출한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "ex": "Cost 보고서는 USD 합계를 반환하며 결과를 워크스페이스별로 그룹화한다. 일 단위 버킷은 재무팀이 청구서와 대조하는 월간 내역에 적합하다. 함정. 앱 응답의 입력 토큰 합계는 정확해 보이지만, 재무팀은 청구서 대조를 위해 플랫폼의 비용 합계가 필요하다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0654",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "팀이 더 저렴한 모델로 옮기자 월간 지출이 줄었다. 완료된 작업은 더 크게 줄었다. 팀은 모델 버전별로 작업당 가치를 보여 주는 일간 보고서가 필요하다.",
+  "ch": {
+   "A": "재무팀이 청구서를 읽고 청구서가 줄었으므로, 월간 총 지출만 비교한다.",
+   "B": "분 단위 버킷이 작업당 지출을 보여 주므로, 각 작업에 대해 Cost API를 1분 단위 버킷으로 읽는다.",
+   "C": "모든 토큰 수를 작업 결과와 실시간으로 조인하는 웨어하우스 파이프라인을 구축한다.",
+   "D": "일간 지출을 완료된 작업 수로 나누면 작업당 가치가 나오므로, 그 값을 각 모델 및 프롬프트 버전별로 비교한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "ex": "Cost API는 일 단위 버킷으로 USD 지출을 보고하며, 이는 일간 보고서에 적합하다. 그러면 작업당 가치로 동일한 가치 단위에서 버전들을 비교한다. 함정. 1분 단위 Cost API 버킷은 작업당 지출에 맞아 보이지만, Cost API는 일 단위 버킷만 지원한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0660",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "후보 모델이 품질 하한선을 3점 넘는다. 완료된 작업당 비용은 대조군보다 25퍼센트 높다. 변경은 하한선을 넘고 완료된 작업당 비용을 유지하거나 낮출 때만 출시된다. 이 규칙을 충족하는 선택지는 무엇인가?",
+  "ch": {
+   "A": "품질 점수가 높다는 것은 팀이 목표를 달성한다는 뜻이므로 후보를 출시한다.",
+   "B": "후보에 effort 할인을 적용하여 모든 작업의 토큰당 가격을 낮춘다.",
+   "C": "더 저렴한 후보를 찾기 위해 새 프롬프트를 쓰는 군을 세 개 더 추가하고, 모두 보고한 뒤에만 결정한다.",
+   "D": "후보가 완료된 작업당 비용을 높이므로 대조군을 유지한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "ex": "후보는 완료된 작업당 비용이 상승하므로 비용 규칙을 충족하지 못한다. 대조군만이 규칙을 충족하는 선택지이다. 함정. 더 높은 품질 점수를 근거로 전환하는 것은 옳아 보이지만, 변경은 완료된 작업당 비용도 유지하거나 낮춰야 한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0661",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 팀이 기본 effort가 high인 모델에서 확인 가능한 작업을 실행한다. 팀은 완료된 작업당 비용을 낮춰야 하며, 통과율은 그대로 유지되어야 한다. 두 제약을 모두 충족하는 두 가지 변경은 무엇인가?",
+  "ch": {
+   "A": "첫 번째 패스는 low effort로 실행하고, 실패한 작업만 high effort로 다시 실행한다.",
+   "B": "비용 확인 전에 각 통과율이 개선되도록 모든 작업에 더 높은 effort를 설정한다.",
+   "C": "eval 세트에서 low effort 통과율을 측정하고, 변경을 출시하기 전에 통과율을 확인한다.",
+   "D": "실패한 작업에 대한 할인을 켜서 각 재실행이 비용 없이 이루어지게 한다."
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "ex": "Anthropic 테스트에서, low effort로 실행하고 실패한 작업을 high effort로 다시 실행하면 같은 통과율에서 비용이 약 40퍼센트 적게 들었다. eval 세트는 변경을 출시하기 전에 통과율을 확인해 준다. 함정. 실패한 작업에 대한 할인은 비용 절감책처럼 들리지만, 문서에는 그러한 할인이 설명되어 있지 않다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0665",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "야간 작업이 40,000개의 eval 케이스를 채점한다. 결과를 기다리는 사용자는 없다. 팀은 가장 낮은 토큰 가격을 원하며, 사용자가 보는 모든 호출은 동기식으로 유지되어야 한다.",
+  "ch": {
+   "A": "같은 토큰 가격으로 첫 결과가 더 빨리 도착하도록 야간 작업을 스트리밍한다.",
+   "B": "야간 작업을 배치 처리로 옮기고, 사용자 대면 호출은 동기식으로 유지한다.",
+   "C": "각 호출이 한 번에 반환되도록 야간 작업의 rate limit을 높인다.",
+   "D": "야간 작업을 위해 재시도, 대시보드, 우선순위 레인을 갖춘 커스텀 큐 서비스를 구축한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "ex": "Message Batches API는 기다릴 수 있는 작업에 대해 토큰당 50퍼센트 할인을 제공한다. 동기식 호출은 Messages API에 남으므로 사용자는 빠른 답변을 유지한다. 함정. 야간 작업을 스트리밍하는 것은 속도 개선책처럼 보이지만, 작업은 여전히 동기식 토큰 가격을 지불한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0667",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "무인 채점자 실행에 150,000개의 요청이 있다. 결과를 기다리는 사용자는 없다. 실행은 배치 한도에 맞아야 하며, 팀은 결과 이용 가능 기간 내에 모든 결과를 읽어야 한다. 이 제약을 충족하는 두 가지 조치는 무엇인가?",
+  "ch": {
+   "A": "150,000개의 요청을 각각 100,000개 요청과 256 MB 이내인 최소 두 개의 배치로 나눈다.",
+   "B": "Batch API가 제공하는, 배치를 5분 이내에 반환하는 priority 옵션을 설정한다.",
+   "C": "결과가 아직 이용 가능한 동안인 배치 생성 후 29일 이내에 각 배치 결과를 읽는다.",
+   "D": "자체 rate limit이 있는 전용 workspace로 실행을 옮기고, 모든 행에 두 번째 모델을 추가한다."
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "ex": "하나의 배치는 최대 100,000개 요청 또는 256 MB를 담을 수 있으며, 둘 중 먼저 도달하는 한도가 적용된다. 결과는 생성 후 29일 동안 다운로드할 수 있다. 함정. 5분 결과를 위한 priority 옵션은 유용하게 들리지만, 문서에는 배치용 옵션이 설명되어 있지 않다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0668",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "월간 지출이 30퍼센트 늘었는데 완료된 작업은 그대로였다. 팀은 예산이 깨지기 전에 알림이 필요하다. 알림은 각 작업의 가치를 반영해야 하며, 지정된 담당자가 있어야 한다.",
+  "ch": {
+   "A": "토큰 수는 지출과 함께 늘어나므로, 일일 총 토큰 수에 알림을 건다.",
+   "B": "지연 시간, 토큰 수, 사용자별 지출을 포함한 40개의 지표에 각각 담당자를 두고 알림을 건다.",
+   "C": "완료된 작업당 비용에 알림을 걸고, 기준선이 깨질 때 조치할 담당자를 지정한다.",
+   "D": "지출 이상이 1분 안에 보이도록 Cost API가 1분 단위 버킷에 알림을 보내게 설정한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "완료된 작업당 비용은 지출이 완료된 작업을 사는 데 쓰이는지를 보여 준다. 지정된 담당자는 알림을 누군가 조치하는 통제 수단으로 만든다. (추론) 함정. 1분 단위 Cost API 버킷은 더 빠른 알림처럼 보이지만, Cost API는 일 단위 버킷만 지원한다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0674",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "새 에이전트가 밤새 루프를 돌며 API 지출을 끌어올린다. 팀은 하나의 조직을 세 프로젝트가 공유한다. 팀은 각 프로젝트의 월간 상한과, 단일 폭주 루프를 멈추는 장치가 필요하다.",
+  "ch": {
+   "A": "각 프로젝트 workspace에 알림이 있는 월간 지출 한도를 설정하고, 코드에서 실행당 도구 호출 수를 제한한다.",
+   "B": "루프가 같은 시간 안에 작업을 끝내도록 workspace rate limit을 높인다.",
+   "C": "프로젝트 키를 보유한 Default Workspace에 지출 한도를 설정한다.",
+   "D": "각 프로젝트마다 자체 청구와 대시보드를 가진 별도의 조직을 만든다."
+  },
+  "answer": [
+   "A"
+  ],
+  "ex": "workspace 지출 한도는 각 프로젝트의 월간 지출을 제한하며, 알림은 선택한 임계값에서 발생한다. 코드의 호출 상한은 폭주하는 단일 실행을 몇 분 안에 멈춘다. (추론) 함정. 더 높은 rate limit은 멈춘 루프의 해결책처럼 보이지만, 더 많은 호출을 허용하여 지출을 늘린다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0687",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 프로젝트 팀이 자체 트래픽에만 적용되는 월간 지출 상한이 필요하다. 상한에는 다른 팀의 트래픽이 포함되어서는 안 된다. 이 제약을 충족하는 구성은 무엇인가?",
+  "ch": {
+   "A": "프로젝트 workspace와 스테이징 workspace를 만들고, 각 API 키의 범위를 지정하고, 각각에 지출 한도를 설정한다.",
+   "B": "공유 키가 있는 Default Workspace를 사용하고, 거기에 지출 한도를 설정한다.",
+   "C": "프로젝트용 workspace를 만들고, 그 workspace로 API 키의 범위를 지정하고, 거기에 지출 한도를 설정한다.",
+   "D": "프로젝트 키에 분당 rate limit을 설정하여 월간 지출을 제한한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "workspace에는 자체 지출 한도가 있으며, 그 workspace로 범위가 지정된 키는 그 한도에만 반영된다. Default Workspace는 지출 한도를 제공하지 않으므로, 프로젝트에는 자체 workspace가 필요하다. 함정. Default Workspace의 지출 한도는 가장 단순한 상한처럼 보이지만, 그 workspace는 지출 한도를 받지 않는다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0689",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "예산 담당자가 두 모델을 비교한다. 모델 X는 토큰당 가격이 더 낮다. 모델 Y는 더 적은 요청으로 각 작업을 끝낸다. 담당자는 완료된 작업 하나의 비용을 기준으로 선택해야 한다. 이 제약을 충족하는 측정 방법은 무엇인가?",
+  "ch": {
+   "A": "완료된 작업 하나에 대한 모든 요청의 토큰 가격을 합산한 다음, 합계를 비교한다.",
+   "B": "공개되어 있고 안정적이므로 토큰당 정가를 비교한다.",
+   "C": "어떤 비교보다 먼저 귀속 기능이 있는 개발자별 비용 대시보드를 구축한다.",
+   "D": "각 Messages API 응답의 price 필드를 읽어 두 모델을 비교한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "ex": "더 낮은 토큰 가격은 완료된 작업의 비용을 보여 주지 않는다. 완료된 작업에 대해 비용을 지불하므로, 완료된 작업당 비용으로 모델을 비교한다. 함정. 더 낮은 토큰당 가격은 더 저렴해 보이지만, 더 많은 요청이 필요한 모델은 완료된 작업당 비용이 더 클 수 있다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0690",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 제안이 품질에 민감한 작업을 더 저렴한 모델 tier로 옮기려 한다. 팀에는 자체 작업에 대한 테스트가 없다. 결정은 실제 트래픽에 대해 측정된 품질과 비용에 근거해야 한다. 이 제약을 충족하는 단계는 무엇인가?",
+  "ch": {
+   "A": "토큰당 가격이 더 낮으므로 작업을 더 저렴한 tier로 전환한다.",
+   "B": "Usage 및 Cost API 합계를 읽고 각 답변의 품질 점수로 간주한다.",
+   "C": "실제 트래픽처럼 가중치를 둔 프로덕션 작업을 샘플링하고, 각 tier의 점수를 지출과 대비하여 도표로 그린다.",
+   "D": "세 개의 provider에서 제품을 다시 구축한 다음, 실제 트래픽에 대해 6개월간 비교를 실행한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "ex": "프로덕션 작업은 각 tier가 실제 트래픽에서 어떻게 수행하는지 보여 준다. 지출 옆의 점수는 더 저렴한 tier가 더 낮은 작업당 비용으로 기준을 충족하는지 보여 준다. 함정. 가장 낮은 토큰당 가격에 따른 전환은 절감처럼 보이지만, 그러면 팀은 더 저렴한 tier가 기준을 충족한다는 증거가 없다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0692",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "재무 책임자는 각 팀 workspace의 일별 비용 합계를 USD로 보고 싶어 한다. 스크립트는 usage 및 cost 엔드포인트가 허용하는 자격 증명을 사용해야 한다. 이 제약을 충족하는 구성은 무엇인가?",
+  "ch": {
+   "A": "스크립트가 이미 보유한 workspace API 키로 usage 및 cost 엔드포인트를 호출한다.",
+   "B": "더 세밀한 일별 합계를 얻기 위해 Cost API 버킷을 1분으로 설정한다.",
+   "C": "각 응답의 usage 필드를 웨어하우스로 스트리밍하고, 매시간 합계를 다시 계산한다.",
+   "D": "Admin API 키로 usage 및 cost 엔드포인트를 호출하고, workspace별 일별 비용 보고서를 읽는다."
+  },
+  "answer": [
+   "D"
+  ],
+  "ex": "usage 및 cost 엔드포인트는 Admin API 자격 증명만 허용하므로 workspace 키로는 실패한다. Cost 보고서는 일별 합계를 USD로 제공하며 workspace별로 그룹화할 수 있다. 함정. workspace API 키는 스크립트에 충분해 보이지만, usage 및 cost 엔드포인트는 workspace 키를 허용하지 않는다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ },
+ {
+  "id": "CCAR-P-jrajath94-0694",
+  "exam": "CCAR-P",
+  "domain": "4. Evaluation, Testing & Optimization",
+  "q": "한 회사가 팀마다 workspace 하나씩을 운영한다. 소유자는 팀별 월간 예산과 모델별 rate limit을 원한다. 두 요청을 모두 충족하는 설정 두 개를 고르시오.",
+  "ch": {
+   "A": "각 팀 workspace에 월간 지출 한도와 알림을 설정한다.",
+   "B": "트래픽 급증을 제한하기 위해 각 workspace에 분당 지출 한도를 설정한다.",
+   "C": "분당 요청 수, 입력 토큰 수, 출력 토큰 수에 대해 모델별 rate limit을 설정한다.",
+   "D": "모든 팀을 Default Workspace에 두고 그곳에 지출 한도를 하나 설정한다."
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "ex": "지출 한도와 알림은 하나의 workspace에 적용되므로 각 팀이 자체 예산을 갖게 된다. rate limit은 모델별로 분당 요청 수와 토큰 수를 제한한다. 함정. Default Workspace에 지출 한도를 하나 두면 공유 예산처럼 보이지만, 그 workspace는 지출 한도를 받지 않는다.",
+  "topic": "4. Evaluation, Testing & Optimization"
+ }
+]

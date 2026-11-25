@@ -1,0 +1,152 @@
+[
+  {
+    "number": "1",
+    "heading": null,
+    "question": "A client requires that inference run inside their own AWS account. What does this determine?",
+    "choices": {"A": "The model family only", "B": "That a data processing agreement is sufficient", "C": "Deployment through Amazon Bedrock in the client's account and region", "D": "That request logging must be disabled"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Running inside the client's own cloud boundary is what the requirement describes. A contract (B) and logging settings (D) do not keep the data in the account, and the model family (A) is a separate choice",
+    "source_section": "Integration"
+  },
+  {
+    "number": "2",
+    "heading": null,
+    "question": "An enterprise standardised on Google Cloud wants identity and audit handled by existing controls. What follows?",
+    "choices": {"A": "Deploy through Vertex AI so the platform's identity, billing, and audit apply", "B": "Use the Claude API and rebuild the controls", "C": "Use Bedrock for feature parity", "D": "Let each team decide"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Aligning with the governed platform makes existing controls apply without duplication. Rebuilding (B) drifts, a different cloud (C) creates a second control plane, and per-team choice (D) removes governance",
+    "source_section": "Integration"
+  },
+  {
+    "number": "3",
+    "heading": null,
+    "question": "What is the main architectural benefit of routing all model traffic through one internal service?",
+    "choices": {"A": "Lower token prices", "B": "It removes the need for evaluation", "C": "It guarantees lower latency", "D": "Authentication, rate limiting, logging, and routing are applied consistently in one place"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "A single integration point is where cross-cutting concerns are enforced and changed once. It does not change unit price (A), remove evaluation (B), or reduce latency (C)",
+    "source_section": "Integration"
+  },
+  {
+    "number": "4",
+    "heading": null,
+    "question": "Two designs both satisfy the requirement; one is materially simpler. What decides?",
+    "choices": {"A": "The more capable design, since headroom is valuable", "B": "Whether any stated requirement needs the extra capability, against the ongoing cost of complexity", "C": "Whichever the team prefers to build", "D": "The one with more components, for flexibility"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Complexity is paid for continuously, so it must be bought by a real requirement. Headroom (A), preference (C), and speculative flexibility (D) pay that cost without justification",
+    "source_section": "Solution Design & Architecture"
+  },
+  {
+    "number": "5",
+    "heading": null,
+    "question": "A required compliance control depends on the model behaving correctly. What is the correct judgment?",
+    "choices": {"A": "Acceptable if measured accuracy is very high", "B": "Not acceptable: a required control must be enforced deterministically outside the model", "C": "Acceptable with a documented residual risk", "D": "Acceptable if a larger model is used"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "A control that must hold needs a guarantee, which probabilistic behavior cannot supply. High accuracy (A), documentation (C), and model size (D) do not convert a tendency into a guarantee",
+    "source_section": "Solution Design & Architecture"
+  },
+  {
+    "number": "6",
+    "heading": null,
+    "question": "Where should the boundary of automation be drawn in a solution that makes customer-affecting decisions?",
+    "choices": {"A": "Wherever the model performs well in testing", "B": "As far as the budget allows", "C": "At whatever the client requests", "D": "Where accountability for the decision sits, keeping those decisions with a person"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Accountability determines what may be automated at all, and that boundary is an architectural decision. Test performance (A), budget (B), and unexamined requests (C) do not address responsibility",
+    "source_section": "Solution Design & Architecture"
+  },
+  {
+    "number": "7",
+    "heading": null,
+    "question": "What must exist before a solution is declared production-ready?",
+    "choices": {"A": "A defined success criterion and measured performance against representative data", "B": "A successful demonstration", "C": "Sign-off from the engineering team", "D": "A completed cost model"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Readiness is a measured claim against a stated bar. A demonstration (B), consensus (C), and cost (D) do not establish whether it works",
+    "source_section": "Evaluation, Testing & Optimization"
+  },
+  {
+    "number": "8",
+    "heading": null,
+    "question": "An evaluation set contains only cases the system already handles. What is the effect?",
+    "choices": {"A": "It provides a reliable quality measure", "B": "It is fine if it is large", "C": "It overstates performance and conceals the failures that matter", "D": "It matters only in regulated contexts"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "An unrepresentative sample measures the wrong distribution, and size does not correct bias. It is not reliable (A), scale does not fix it (B), and the problem is general (D)",
+    "source_section": "Evaluation, Testing & Optimization"
+  },
+  {
+    "number": "9",
+    "heading": null,
+    "question": "How should a request to log every prompt and response for audit be handled?",
+    "choices": {"A": "Implement it, since audit takes precedence", "B": "Decline, because logging creates risk", "C": "Log responses but not prompts", "D": "Establish what the audit requires, because prompts and responses may contain personal or confidential data"},
+    "answer": ["D"],
+    "select_count": 1,
+    "explanation": "Audit and data protection are both real, and the design must serve the audit purpose without retaining more than warranted. Blanket action (A) or refusal (B) ignores one side, and an arbitrary split (C) is unjustified",
+    "source_section": "Governance, Safety & Risk Management"
+  },
+  {
+    "number": "10",
+    "heading": null,
+    "question": "Who is accountable when an automated Claude workflow produces a harmful decision?",
+    "choices": {"A": "The model provider", "B": "The engineer who wrote the prompt", "C": "The organization that deployed it", "D": "No one, because the decision was automated"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Deploying an automated decision means owning its outcomes. The provider (A) supplies a capability, individual authorship (B) does not transfer organizational responsibility, and automation does not remove accountability (D)",
+    "source_section": "Governance, Safety & Risk Management"
+  },
+  {
+    "number": "11",
+    "heading": null,
+    "question": "A sponsor asks for one number that shows whether the solution is working. What is the right response?",
+    "choices": {"A": "Give the headline accuracy figure", "B": "Give the measure tied to the decision they face, and state what it does not cover", "C": "Explain that this cannot be reduced to a number", "D": "Give the model's benchmark score"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "A useful metric matches the decision and is honest about its limits. A bare accuracy figure (A) and a benchmark (D) can mislead, and refusing (C) fails the sponsor",
+    "source_section": "Stakeholder Communication & Lifecycle Management"
+  },
+  {
+    "number": "12",
+    "heading": null,
+    "question": "A ten-user pilot is about to expand to two thousand users. What should the architect raise first?",
+    "choices": {"A": "Which assumptions held at ten users and may not hold at two thousand", "B": "License cost", "C": "Whether a larger model is needed", "D": "The training rollout plan"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Scale invalidates assumptions about inputs, support, and edge cases, and surfacing those is the architect's contribution. Cost (B), model size (C), and training (D) follow from knowing what breaks",
+    "source_section": "Stakeholder Communication & Lifecycle Management"
+  },
+  {
+    "number": "13",
+    "heading": null,
+    "question": "How should a model be chosen for a solution containing several distinct tasks?",
+    "choices": {"A": "Match each task to the smallest model meeting its requirement, and evaluate the choices", "B": "One model everywhere, for simplicity", "C": "The largest model everywhere, for safety", "D": "The newest model everywhere"},
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "Different tasks have different requirements, and matching each keeps cost proportionate on evidence. Uniform choices (B, C, D) optimise for convenience rather than fit",
+    "source_section": "Claude Models, Prompting & Context Engineering"
+  },
+  {
+    "number": "14",
+    "heading": null,
+    "question": "How should the context window be treated in a production design?",
+    "choices": {"A": "As capacity to fill as completely as possible", "B": "As a budget allocated deliberately between instructions, retrieved material, and working state", "C": "As a concern only for long documents", "D": "As a setting to increase whenever quality drops"},
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Context is scarce and its allocation drives quality, so it is designed. Filling it (A) dilutes, it matters beyond long documents (C), and enlarging it (D) does not fix allocation",
+    "source_section": "Claude Models, Prompting & Context Engineering"
+  },
+  {
+    "number": "15",
+    "heading": null,
+    "question": "An organization wants consistent Claude Code practice across dozens of repositories. What is most durable?",
+    "choices": {"A": "A policy document circulated once", "B": "A single training session", "C": "Committed project memory and shared skills in each repository, reviewed like code", "D": "Requiring approval for every use"},
+    "answer": ["C"],
+    "select_count": 1,
+    "explanation": "Conventions persist when they live in the repository and are reviewed with the work. Policies (A) and training (B) fade, and per-use approval (D) adds friction without conveying practice",
+    "source_section": "Developer Productivity & Operational Enablement"
+  }
+]

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="470" viewBox="0 0 940 470" role="img" aria-label="prompt caching prefix 배치와 cache hit/miss" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>prompt caching prefix 배치와 cache hit/miss</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-prompt-caching-prefix" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="470" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">캐시는 prefix 일치: tools → system → messages 순서로 breakpoint까지 이전 요청과 완전히 같아야 hit</text>
+<text x="400" y="56" font-size="11" text-anchor="middle" fill="#6B7280">요청 2의 prefix (요청 1과 비교)</text>
+<text x="790" y="56" font-size="11" text-anchor="middle" fill="#6B7280">결과</text>
+<text x="90" y="102.0" font-size="13" text-anchor="middle" fill="#1F2937">① 권장 배치</text>
+<text x="90" y="119.0" font-size="11" text-anchor="middle" fill="#6B7280">고정 → 변동</text>
+<rect x="175" y="84" width="80" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="215.0" y="110.5" font-size="12" text-anchor="middle" fill="#1F2937">tools</text>
+<rect x="261" y="84" width="110" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="316.0" y="110.5" font-size="12" text-anchor="middle" fill="#1F2937">system</text>
+<rect x="377" y="84" width="120" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="437.0" y="102.0" font-size="12" text-anchor="middle" fill="#1F2937">고정 문서</text>
+<text x="437.0" y="119.0" font-size="11" text-anchor="middle" fill="#6B7280">정책·계약서</text>
+<rect x="503" y="84" width="110" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="558.0" y="102.0" font-size="12" text-anchor="middle" fill="#1F2937">질문·시각</text>
+<text x="558.0" y="119.0" font-size="11" text-anchor="middle" fill="#6B7280">매번 바뀜</text>
+<line x1="500" y1="76" x2="500" y2="136" stroke="#2563EB" stroke-width="3"/>
+<text x="500" y="72" font-size="11" text-anchor="middle" fill="#2563EB" font-weight="bold">cache_control</text>
+<polyline points="619,106 639,106" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-caching-prefix)"/>
+<rect x="639" y="80" width="281" height="52" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="779.5" y="102.0" font-size="12" text-anchor="middle" fill="#1F2937">breakpoint까지 동일 → cache hit</text>
+<text x="779.5" y="119.0" font-size="12" text-anchor="middle" fill="#1F2937">read 0.1배 · TTFT 감소</text>
+<text x="90" y="196.0" font-size="13" text-anchor="middle" fill="#1F2937">② tool 목록·순서</text>
+<text x="90" y="213.0" font-size="11" text-anchor="middle" fill="#6B7280">요청마다 바뀜</text>
+<rect x="175" y="178" width="80" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="215.0" y="196.0" font-size="12" text-anchor="middle" fill="#1F2937">tools</text>
+<text x="215.0" y="213.0" font-size="11" text-anchor="middle" fill="#6B7280">순서 바뀜</text>
+<rect x="261" y="178" width="110" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="316.0" y="204.5" font-size="12" text-anchor="middle" fill="#1F2937">system</text>
+<rect x="377" y="178" width="120" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="437.0" y="196.0" font-size="12" text-anchor="middle" fill="#1F2937">고정 문서</text>
+<text x="437.0" y="213.0" font-size="11" text-anchor="middle" fill="#6B7280">정책·계약서</text>
+<rect x="503" y="178" width="110" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="558.0" y="196.0" font-size="12" text-anchor="middle" fill="#1F2937">질문·시각</text>
+<text x="558.0" y="213.0" font-size="11" text-anchor="middle" fill="#6B7280">매번 바뀜</text>
+<line x1="500" y1="170" x2="500" y2="230" stroke="#2563EB" stroke-width="3"/>
+<text x="500" y="166" font-size="11" text-anchor="middle" fill="#2563EB" font-weight="bold">cache_control</text>
+<polyline points="619,200 639,200" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-caching-prefix)"/>
+<rect x="639" y="174" width="281" height="52" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="779.5" y="196.0" font-size="12" text-anchor="middle" fill="#1F2937">맨 앞부터 불일치 → system까지</text>
+<text x="779.5" y="213.0" font-size="12" text-anchor="middle" fill="#1F2937">전부 miss, 매번 write</text>
+<text x="90" y="290.0" font-size="13" text-anchor="middle" fill="#1F2937">③ 바뀌는 블록에</text>
+<text x="90" y="307.0" font-size="11" text-anchor="middle" fill="#6B7280">breakpoint</text>
+<rect x="175" y="272" width="80" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="215.0" y="298.5" font-size="12" text-anchor="middle" fill="#1F2937">tools</text>
+<rect x="261" y="272" width="110" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="316.0" y="298.5" font-size="12" text-anchor="middle" fill="#1F2937">system</text>
+<rect x="377" y="272" width="120" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="437.0" y="290.0" font-size="12" text-anchor="middle" fill="#1F2937">고정 문서</text>
+<text x="437.0" y="307.0" font-size="11" text-anchor="middle" fill="#6B7280">정책·계약서</text>
+<rect x="503" y="272" width="110" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="558.0" y="290.0" font-size="12" text-anchor="middle" fill="#1F2937">질문·시각</text>
+<text x="558.0" y="307.0" font-size="11" text-anchor="middle" fill="#6B7280">매번 바뀜</text>
+<line x1="616" y1="264" x2="616" y2="324" stroke="#2563EB" stroke-width="3"/>
+<text x="616" y="260" font-size="11" text-anchor="middle" fill="#2563EB" font-weight="bold">cache_control</text>
+<polyline points="619,294 639,294" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-caching-prefix)"/>
+<rect x="639" y="268" width="281" height="52" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="779.5" y="290.0" font-size="12" text-anchor="middle" fill="#1F2937">breakpoint까지 매번 다름</text>
+<text x="779.5" y="307.0" font-size="12" text-anchor="middle" fill="#1F2937">hit 0번, write 비용만 계속</text>
+<text x="90" y="384.0" font-size="13" text-anchor="middle" fill="#1F2937">④ prefix가 짧음</text>
+<text x="90" y="401.0" font-size="11" text-anchor="middle" fill="#6B7280">최소 길이 미달</text>
+<rect x="175" y="366" width="80" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="215.0" y="392.5" font-size="12" text-anchor="middle" fill="#1F2937">tools</text>
+<rect x="261" y="366" width="110" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="316.0" y="392.5" font-size="12" text-anchor="middle" fill="#1F2937">짧은 system</text>
+<line x1="374" y1="358" x2="374" y2="418" stroke="#2563EB" stroke-width="3"/>
+<text x="374" y="354" font-size="11" text-anchor="middle" fill="#2563EB" font-weight="bold">cache_control</text>
+<polyline points="377,388 397,388" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-caching-prefix)"/>
+<rect x="397" y="362" width="523" height="52" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="658.5" y="384.0" font-size="12" text-anchor="middle" fill="#1F2937">minimum cacheable length(모델별 512~4,096토큰) 미만</text>
+<text x="658.5" y="401.0" font-size="12" text-anchor="middle" fill="#1F2937">→ 오류 없이 캐시 안 됨 (cache 토큰 0)</text>
+<text x="470" y="450" font-size="11" text-anchor="middle" fill="#6B7280">확인: usage.cache_creation_input_tokens(write) / cache_read_input_tokens(read) · 캐시된 prefix도 매번 보내고 window를 그대로 차지</text>
+</svg>

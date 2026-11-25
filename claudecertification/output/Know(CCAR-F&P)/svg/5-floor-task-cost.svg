@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="절감 · 출시 판단: 같은 eval에서 floor 유지 입증 후, 완료 작업당 비용으로 비교">
+<title>절감 · 출시 판단: 같은 eval에서 floor 유지 입증 후, 완료 작업당 비용으로 비교</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-floor-task-cost" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="480" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">절감 · 출시 판단: 같은 eval에서 floor 유지 입증 후, 완료 작업당 비용으로 비교</text>
+<rect x="60" y="70" width="260" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="190" y="91.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">절감안 적용 후</text>
+<text x="190" y="108.05" font-size="13" text-anchor="middle" fill="#1F2937">같은 eval 세트로 재실행</text>
+<polyline points="190,120 190,160" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-floor-task-cost)"/>
+<rect x="197.0" y="134" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="200" y="145" font-size="11" text-anchor="start" fill="#1F2937">결과</text>
+<polygon points="190,160 290,205 190,250 90,205" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="190" y="209.55" font-size="13" text-anchor="middle" fill="#1F2937">floor 통과?</text>
+<polyline points="290,205 340,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-floor-task-cost)"/>
+<rect x="295.5" y="188" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="315" y="199" font-size="11" text-anchor="middle" fill="#1F2937">아니오</text>
+<rect x="340" y="155" width="190" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="435" y="179.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">절감 주장 보류</text>
+<text x="435" y="194.85" font-size="11" text-anchor="middle" fill="#6B7280">삭감 금지 · 품질 먼저 수정</text>
+<text x="435" y="209.85" font-size="11" text-anchor="middle" fill="#6B7280">→ 유지된 floor 기준</text>
+<text x="435" y="224.85" font-size="11" text-anchor="middle" fill="#6B7280">latency 최적화</text>
+<text x="435" y="239.85" font-size="11" text-anchor="middle" fill="#6B7280">(예: 91% &lt; 임계값 95%)</text>
+<polyline points="190,250 190,320" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-floor-task-cost)"/>
+<rect x="197.0" y="279" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="200" y="290" font-size="11" text-anchor="start" fill="#1F2937">예</text>
+<rect x="20" y="320" width="310" height="86" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="175" y="352.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">완료 작업당 비용 계산</text>
+<text x="175" y="367.85" font-size="11" text-anchor="middle" fill="#6B7280">모든 요청 합산: input · output · 재시도 · tool 호출</text>
+<text x="175" y="382.85" font-size="11" text-anchor="middle" fill="#6B7280">일간 지출 ÷ 완료 작업 수 (모델 · prompt 버전별)</text>
+<polyline points="330,363 400,363" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-floor-task-cost)"/>
+<rect x="332.9" y="346" width="64.3" height="15" fill="#FFFFFF"/>
+<text x="365" y="357" font-size="11" text-anchor="middle" fill="#1F2937">대조군 비교</text>
+<polygon points="500,315 600,363 500,411 400,363" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="500" y="359.05" font-size="13" text-anchor="middle" fill="#1F2937">작업당 비용</text>
+<text x="500" y="376.05" font-size="13" text-anchor="middle" fill="#1F2937">유지 · 하락?</text>
+<polyline points="600,363 660,363" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-floor-task-cost)"/>
+<rect x="621.5" y="346" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="630" y="357" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="660" y="330" width="280" height="66" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="800" y="360.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">출시</text>
+<text x="800" y="375.35" font-size="11" text-anchor="middle" fill="#6B7280">floor 초과 AND 작업당 비용 유지 · 하락</text>
+<polyline points="500,411 500,445" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-floor-task-cost)"/>
+<rect x="507.0" y="422" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="510" y="433" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<rect x="365" y="445" width="270" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="500" y="470.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">대조군 유지</text>
+<text x="500" y="485.35" font-size="11" text-anchor="middle" fill="#6B7280">품질 +3점 · 비용 +25%여도 출시 ✗</text>
+<rect x="560" y="70" width="380" height="168" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="750" y="99.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">✗ floor 우회 · 잘못된 비교</text>
+<text x="750" y="116.05" font-size="13" text-anchor="middle" fill="#1F2937">eval 세트 · 표본 축소 → 하락 은폐</text>
+<text x="750" y="133.05" font-size="13" text-anchor="middle" fill="#1F2937">임계값 조정 · eval 세트 재구성 후 재테스트</text>
+<text x="750" y="150.05" font-size="13" text-anchor="middle" fill="#1F2937">grounding 검사 제거</text>
+<text x="750" y="167.05" font-size="13" text-anchor="middle" fill="#1F2937">floor 기준 하향 = 최적화가 아닌 항복</text>
+<text x="750" y="184.05" font-size="13" text-anchor="middle" fill="#1F2937">삭감 + 더 큰 tier 동시 적용 → 진단 뒤섞임</text>
+<text x="750" y="201.05" font-size="13" text-anchor="middle" fill="#1F2937">토큰당 정가 비교 · 월 총지출만 비교</text>
+<text x="750" y="218.05" font-size="13" text-anchor="middle" fill="#1F2937">session budget · Usage · Cost 합계 = 품질 점수 ✗</text>
+</g>
+</svg>

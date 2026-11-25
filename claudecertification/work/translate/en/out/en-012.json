@@ -1,0 +1,252 @@
+[
+ {
+  "id": "CCAR-F-Udemy04-0057",
+  "question": "A development team at an e-commerce company is building a developer productivity tool with the Claude Agent SDK. An engineer wants to identify every place affected before changing the specification of applyDiscount, an internal discount calculation function.\n\nWhen the agent searched for applyDiscount with Grep, it found only two call sites. In reality, however, many screens go through a wrapper module, lib/pricing/index.ts, which re-exports the function under an alias, as in export { applyDiscount as discountedPrice }.\n\nWhich approach is most appropriate for tracing every usage without omissions?",
+  "choices": {
+   "A": "Identify every name the wrapper exports, and run Grep for each of those names.",
+   "B": "Use Read to read the screen component files from the top, looking for discount handling.",
+   "C": "Use Glob to list the files matching **/pricing/**, then use Read to read and check all of them.",
+   "D": "Search for applyDiscount again with a case-insensitive Grep to catch spelling variations as well."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0058",
+  "question": "A development team at a healthcare system vendor is using Claude Code to write a function that converts the display format of lab results. Strings output by lab instruments, such as \"GLU 126 H\", must be converted into the display 「血糖値: 126 mg/dL（基準値より高い）」.\n\nThe team described the conversion rules in detail in prose, but the generated function interprets them inconsistently from one generation to the next, for example forgetting to append the unit or treating \"L\", which indicates a low value, as a high value.\n\nWhich is the most effective way to communicate the requirements for this conversion?",
+  "choices": {
+   "A": "Use the interview pattern to have Claude ask questions about the points it wants to confirm regarding the conversion.",
+   "B": "Show two or three concrete before-and-after pairs, including high, low, and within-range values.",
+   "C": "Expand the description of the conversion rules to three times its current length, including per-item exceptions.",
+   "D": "Specify the name and parameters of the function responsible for the conversion, and have Claude rewrite only that function."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0059",
+  "question": "A development team at a construction company is using Claude Code to develop a monorepo for a construction management system. Shared standards are placed in docs/standards/ at the repository root, and the policy is that each package maintainer selects only the standards they need and pulls them in with @import from the package's CLAUDE.md.\n\nThe team wrote @docs/standards/estimate.md in packages/estimate/CLAUDE.md for the estimate package, but when they checked with /context, this standards file was not loaded.\n\nWhich is the most appropriate fix?",
+  "choices": {
+   "A": "Always launch Claude Code from the repository root so that paths are resolved relative to the root.",
+   "B": "Stop using @import, and copy and paste the contents of estimate.md into packages/estimate/CLAUDE.md.",
+   "C": "Move the @import line to ~/.claude/CLAUDE.md so that it is loaded at the user level.",
+   "D": "Change the @import path to a relative path based on the location of the CLAUDE.md file."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0060",
+  "question": "A development team at a security product vendor is building a customer support resolution agent with the Claude Agent SDK. The agent can use the following three tools, but each description is only a single short sentence.\n\nget_alert_detail (description: 「アラートを取得する」)\n\nget_incident (description: 「インシデントを取得する」)\n\nsearch_kb (description: 「検索する」)\n\nWhen a customer asked, 「昨夜通知されたブルートフォースのアラートALT-20931は対応済みですか」, the agent searched the FAQ with search_kb and answered with generic remediation steps.\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "In the description of search_kb, state that it is for the FAQ and is not to be used to check the status of an individual alert.",
+   "B": "Remove search_kb and give the agent only the two tools for alerts and incidents.",
+   "C": "In the descriptions of get_alert_detail and get_incident, state the ID format, the fields returned, and when to use each.",
+   "D": "In the system prompt, instruct the agent to use get_alert_detail for any question that contains the word \"alert\"."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0001",
+  "question": "The IT department of an environmental conservation organization uses Claude Code to automatically review pull requests for its donation intake platform. The review prompt says 「コードのコメントが正確かどうかも確認すること」.\n\nThere are about 210 comment-related findings per week, and about 70% of them are findings unrelated to the code's behavior, such as the following, which developers dismiss.\n\nThe wording is confusing\n\nPunctuation is inconsistent\n\nA TODO is outdated\n\nMeanwhile, a real problem was missed: a comment said 「金額は税込で返す」, but the code actually returned amounts excluding tax.\n\nWhich changes are appropriate for improving the accuracy of comment reviews? (Select two.)",
+  "choices": {
+   "A": "Add an instruction to the prompt such as \"Be conservative in your judgments and report only high-confidence findings.\"",
+   "B": "Specifically list what not to report, such as wording, punctuation, and outdated TODOs that do not contradict the behavior.",
+   "C": "Have each finding output a confidence score, and post only findings with a confidence of 0.8 or higher to the PR.",
+   "D": "Change the prompt's instruction to \"Flag a comment only when its description contradicts the behavior of the code.\""
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0002",
+  "question": "A technical research team at a railway company uses a multi-agent research system to analyze vehicle failure reports and maintenance records. The model used in this system supports tool_choice \"any\" and specifying a particular tool. The three places where tool_choice is to be reviewed are as follows.\n\nThe coordinator answers simple questions directly by itself and calls subagents only when necessary\n\nIn document analysis, every time, it first uses extract_metadata to extract the document type and date, and then uses the enrichment tool (a process that adds information from the maintenance ledger)\n\nIn report generation, it returns results through either of the output tools, report_table or report_text, and does not end with conversational text alone\n\nWhich are appropriate tool_choice settings? (Select two.)",
+  "choices": {
+   "A": "Force extract_metadata on every turn of document analysis, and have enrichment also be performed from the same result.",
+   "B": "Set tool_choice to \"any\" for report generation requests so that one of the output tools is always called.",
+   "C": "Force extract_metadata only on the first request of document analysis, and handle the rest in subsequent turns.",
+   "D": "Set tool_choice to \"any\" for the coordinator so that it always calls one of the subagents every time."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0003",
+  "question": "A home appliance manufacturer operates a structured data extraction system. The system extracts the model number, serial number, purchase date, and retailer name from images of warranty cards sent by customers and converts them to JSON. Extraction results are checked by a validation script, and when there are errors, the system retries up to three times with the validation errors attached.\n\nAn analysis of last week's validation errors showed the following breakdown.\n\n58% were purchase dates left in Japanese notation such as 「2026年9月14日」 rather than converted to the required ISO 8601 format\n\nThe remaining 42% were missing model numbers; those warranty cards had no model number field, and the model number appeared only on the enclosed purchase statement\n\nNot a single missing model number has been resolved even after three retries.\n\nWhich is the most appropriate way to revise the retry operation?",
+  "choices": {
+   "A": "Retry only missing model numbers, and route format errors in purchase dates to human review.",
+   "B": "Stop retrying and route all validation errors to human review.",
+   "C": "Increase the retry limit from three to five for both types of errors.",
+   "D": "Fix format errors with retries, and resolve missing model numbers by adding the purchase statement to the input."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0004",
+  "question": "The research division of a securities firm uses a multi-agent research system to produce market trend reports by stock. The MCP tool of the subagent that retrieves market data currently returns a uniform \"Operation failed\" error for any failure, and the coordinator repeats the same request three times on every failure.\n\nExamining the past week's failures revealed the following three types.\n\nTimeout of an exchange API\n\nSpecification of a nonexistent ticker code\n\nAccess denied to data from an overseas exchange not covered by the contract\n\nThe team decided to return different error responses depending on the type of failure.\n\nWhich combination of error response and coordinator behavior is most appropriate?",
+  "choices": {
+   "A": "Return the denial of data from an exchange outside the contract as a permission error, and have it reported as a gap in information sources.",
+   "B": "Return the exchange API timeout as a validation error, and have it correct the input and call again.",
+   "C": "Return the specification of a nonexistent ticker code as a transient error, and have it retry after waiting some time.",
+   "D": "Return the denial of data from an exchange outside the contract as a transient error, and have it repeat the same request."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0005",
+  "question": "A development team at an ad delivery company used Claude Code to implement a feature that limits the number of times an ad is shown to the same user to three per day. When they asked Claude to \"implement this feature and write tests too,\" all 42 tests passed.\n\nHowever, in production, a bug was found in which the limit does not work correctly around midnight Japan time, when the date rolls over, and on the third impression. Reviewing the tests showed that most of them simply traced the implementation's branches, and none verified date boundaries or the exact count at the limit.\n\nThe feature must also meet a performance requirement of within 5 milliseconds per request.\n\nWhich are appropriate ways to iterate with Claude Code in reworking this feature? (Select two.)",
+  "choices": {
+   "A": "After the implementation is finished, ask Claude to add tests until coverage exceeds 90%.",
+   "B": "Before the implementation, prepare tests first that verify date boundaries, the exact count at the limit, and the performance requirement.",
+   "C": "Give Claude the names and output of failing tests and have it repeat fixes, instructing it not to modify the tests themselves.",
+   "D": "Rewrite the requirements description in more detail, and then have Claude create the implementation and tests together in a single request."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0006",
+  "question": "A research and development team at a chemical manufacturer is using Claude Code to develop code that integrates with a laboratory information management system (LIMS). The repository has a team-shared .mcp.json committed, and the headers of the LIMS MCP server specify \"Authorization\": \"Bearer ${LIMS_TOKEN}\".\n\nThe following symptoms occur only in the environments of two members who joined this month.\n\nCalls to LIMS tools fail with a 401 error\n\nRunning claude mcp list shows a warning that this server has unset environment variables\n\nOther members can use the same repository without problems.\n\nWhat is the most likely cause and remedy?",
+  "choices": {
+   "A": "${LIMS_TOKEN} is not expanded in the headers values, so write the token value directly into .mcp.json and commit it again.",
+   "B": "LIMS_TOKEN is not set in the two members' environments, so each should set the token in their own environment variables before launching Claude Code.",
+   "C": "Project-scoped servers are not loaded for new members, so each should register it again with claude mcp add --scope user.",
+   "D": "The two members have rejected the approval of .mcp.json, so run claude mcp reset-project-choices and approve it again."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0007",
+  "question": "A development team at a telecommunications company runs a CI job that uses Claude Code to generate unit tests for each pull request of a billing calculation service. The job passes only the PR diff with claude -p and instructs \"Write the tests needed for this change.\"\n\nReviewing a month of generated tests revealed the following.\n\n38% had the same scenarios as tests that already exist, such as in tests/billing/test_rating.py\n\nEach time, a new helper was defined that was nearly identical to a fixture already provided in conftest.py\n\nWhich is the most appropriate change to the CI job to reduce duplication?",
+  "choices": {
+   "A": "Concatenate the roughly 2,400 test files of the entire repository into the prompt every time.",
+   "B": "Run a separate job after generation that deletes only tests whose names match existing tests.",
+   "C": "Pass only the latest coverage rate (78% overall) and instruct it to add tests until it exceeds 80%.",
+   "D": "Have it read the existing tests for the changed module and conftest.py, and exclude existing scenarios."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0008",
+  "question": "A development team at an accounting firm uses Claude Code to generate code for a tax return preparation tool. The in-house MCP server provides the following three tools.\n\nlist_tax_forms (returns a list of forms, 20 at a time)\n\nget_tax_form (returns the field structure of one form)\n\ncreate_return (creates a tax return)\n\nThere are about 1,800 types of forms, and their contents change only once a year at the time of the annual revision.\n\nThe logs show that, for each task, Claude calls list_tax_forms and get_tax_form an average of seven times to find the forms to use, and the work is interrupted each time.\n\nWhich are appropriate changes to the MCP server design? (Select two.)",
+  "choices": {
+   "A": "Expose the list of forms and the field structure of each form as MCP resources.",
+   "B": "Keep create_return as a tool, and remove the tools that return the list and field structures.",
+   "C": "Increase the number of items list_tax_forms returns in one call from 20 to 1,800.",
+   "D": "Write the full text of the list of forms into the description of the list_tax_forms tool."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0009",
+  "question": "A development team at a staffing services company uses Claude Code to generate HTML templates for job postings. Because the design guidelines changed, the class name of the salary field in job_card.html is to be changed from salary to salary-range.\n\nThe state of the file is as follows.\n\nThere are 14 occurrences of class=\"salary\" for the salary field, and all are to be changed in the same way\n\nThere are also 6 occurrences of class=\"salary-note\" for the supplementary field, but these are not to be changed\n\nEach job card has the same structure, and the lines before and after the salary field are also identical\n\nWhen Claude was asked to make the change, an Edit with class=\"salary\" as old_string failed with the error 「ファイル内で14か所に一致する」.\n\nWhich is the most appropriate way to make this change?",
+  "choices": {
+   "A": "Shorten old_string to just salary, and have Edit called with replace_all: true specified.",
+   "B": "Keep old_string as class=\"salary\", and have Edit called with replace_all: true specified.",
+   "C": "Extend old_string to include the surrounding lines, and have the 14 occurrences replaced one at a time with Edit in sequence.",
+   "D": "Have the entire file read with Read, and have the content with the 14 occurrences rewritten written to the whole file with Write."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0010",
+  "question": "An information security company operates a customer support resolution agent that handles inquiries from subscribers to its monitoring service. Cases the agent cannot resolve, such as complaints about false-positive alerts or account lockouts in the admin console, are handed off to human representatives with escalate_to_human. Representatives work in a separate ticketing system and cannot access the record of the conversation with the agent.\n\nCurrently, the handoff is only a single sentence such as 「お客様がアラートについて困っています」. Representatives spend an average of nine minutes asking customers about the situation again, and in customer satisfaction surveys, the most common complaint is 「同じ説明を2回させられた」.\n\nWhich are appropriate improvements to the contents of the handoff? (Select two.)",
+  "choices": {
+   "A": "Attach the full transcript of the conversation with the agent so that representatives can find and read the parts they need.",
+   "B": "Include the agent's recommended next action and the rationale for that judgment as items in the handoff.",
+   "C": "Pass the customer's sentiment score and the number of conversation turns, as input for representatives to decide response priority.",
+   "D": "Pass the verified customer ID, the root cause analysis, and the remedies already tried as structured fields."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0011",
+  "question": "A development team at a law firm is using Claude Code to develop a contract template generation system. The team created a custom research subagent, .claude/agents/finder.md, and specified only Read, Grep, and Glob in tools (Bash is not included).\n\nThe team asked this subagent to \"list all test files for the contract templates.\" It used Grep to search the entire repository for the string \"template\", read over 1,900 matches, and in the end missed some files.\n\nThe test files are scattered within each module with names such as contract.template.spec.ts.\n\nWhich is the most appropriate method for this subagent to use?",
+  "choices": {
+   "A": "Use Read to load the repository's root directory, and follow the file listing to search.",
+   "B": "Use Bash to run the find command and search by file name pattern.",
+   "C": "Use Grep to search for the string \"spec\", and have it output only the list of matching files.",
+   "D": "Use Glob with a file name pattern, and list the files whose names match."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0012",
+  "question": "The maintenance systems division of an airline is developing an aircraft maintenance record application with Claude Code. Recently, it was discovered that some members had written team conventions in their own ~/.claude/CLAUDE.md. As a result, the style of the generated code varied from member to member. The team decided to review what should be written in the user-level file.\n\nWhich of the instructions listed in the choices is appropriate for each member to write in their own ~/.claude/CLAUDE.md?",
+  "choices": {
+   "A": "Commit messages follow the format defined within the company.",
+   "B": "Store maintenance record dates and times in UTC.",
+   "C": "Run builds and tests with make ci.",
+   "D": "I would like explanations returned in short, concise bullet points."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0013",
+  "question": "A development team at a medical device manufacturer is using Claude Code to develop an integration module with electronic medical records. The team compiled the following conventions common to all code into .claude/skills/coding-standards/SKILL.md and committed it to the repository.\n\nDo not output patient IDs or names to logs\n\nStore dates and times in UTC\n\nIn sessions where /coding-standards is run, the conventions are followed. However, when the code generated in sessions where it was not run was examined, about 40% contained patient IDs output to logs.\n\nWhich is the most appropriate remedy?",
+  "choices": {
+   "A": "Add disable-model-invocation: true to the frontmatter of SKILL.md so that developers invoke it explicitly.",
+   "B": "Add context: fork to the frontmatter of SKILL.md so that the convention check runs in an isolated subagent.",
+   "C": "Move the conventions common to all code into the project's CLAUDE.md, and leave only the procedures for specific tasks in the skill.",
+   "D": "Add to the team's development procedures document that /coding-standards must always be run at the start of a session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0014",
+  "question": "A development team at a cybersecurity company is building a developer productivity tool with the Claude Agent SDK. Over 40 minutes, the agent analyzed the cause of a vulnerability in the authentication module and the dependencies among the related files. The results remain within the session.\n\nBased on this analysis, the team wants to evaluate the following two approaches in parallel.\n\nAn approach that reworks the existing session management\n\nAn approach that replaces the authentication mechanism with a new library\n\nThe team does not want to spend time redoing the analysis. They also want the two evaluations not to affect each other.\n\nWhich are appropriate ways to handle the session? (Select two.)",
+  "choices": {
+   "A": "Resume the analyzed session with fork_session enabled, and branch it for each approach.",
+   "B": "Record a session ID for each approach, and resume them individually later to compare the evaluation results.",
+   "C": "Start two new sessions and have each redo the 40-minute analysis from the beginning.",
+   "D": "Resume the analyzed session ID simultaneously from two processes without forking."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0015",
+  "question": "A development team at a law firm is using the Claude Agent SDK to build an in-house developer productivity tool. It integrates with three MCP servers: case law search (caselaw), contract document management (contracts), and issue tracking (tickets), with a total of 11 tools.\n\nAbout half of all requests span multiple servers, such as 「判例を調べ、関連する契約書のテンプレートを特定し、結果を課題に記録する」. However, the prototype launched a session connected to only one server depending on the type of request, so such requests stalled midway every time.\n\nWhich are appropriate designs for this tool? (Select two.)",
+  "choices": {
+   "A": "Configure the three MCP servers together in mcpServers so that they can be used in a single session.",
+   "B": "Specify server-level wildcards such as mcp__caselaw__* in allowedTools to permit them.",
+   "C": "Build a router that determines the request type, and launch a new session for each request connected only to the determined server.",
+   "D": "Implement a new MCP server that integrates the case law search and document management functions, consolidating into a single server."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0016",
+  "question": "A semiconductor trading company has built a customer support resolution agent with the Claude Agent SDK to handle inquiries about returns, exchanges, and warranties for semiconductor components. The agent can arrange shipment of replacement items with the create_replacement_order tool. The four rules listed in the choices are all currently specified in the system prompt.\n\nIn the logs, responses that violate each of the rules were found in 0.2 to 0.5% of all responses. The team wants to reliably enforce, with Agent SDK hooks, only those rules whose violation leads directly to legal violations or major financial loss.\n\nWhich rule should be enforced with a hook?",
+  "choices": {
+   "A": "Rephrase technical explanations to match the customer's level of expertise.",
+   "B": "Do not ship export-controlled items to countries outside the allowlist.",
+   "C": "Begin the response by addressing the customer by their company name.",
+   "D": "For inquiries outside the warranty period, include guidance on paid repair."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0017",
+  "question": "A development team at an asset management company built a developer productivity tool with its own agent loop that calls the Messages API directly, before adopting the Claude Agent SDK. The loop's termination logic is as follows.\n\nIf the response contains a text block, it is regarded as \"a final answer has been obtained\" and the loop ends\n\nIf there is no text and only tool calls, it executes the tools and continues\n\nThe logs show that 31% of tasks ended after returning only the text of the first response, 「まず、該当するファイルを検索します。」. These responses also contained a Grep tool_use block after the text.\n\nWhich is the most appropriate fix?",
+  "choices": {
+   "A": "Set tool_choice to \"any\" so that a tool is always called in every response.",
+   "B": "Add \"Do not write explanatory text when calling tools\" to the system prompt.",
+   "C": "Stop judging by the presence of text, and continue if stop_reason is \"tool_use\".",
+   "D": "Increase max_tokens only for the first request so that output extends through the tool call after the text."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0018",
+  "question": "An e-commerce logistics company is building a developer productivity tool with the Claude Agent SDK. The agent is given the built-in tools Read, Write, Edit, Bash, Grep, and Glob.\n\nEvery night, it runs a task that regenerates carriers.generated.json (about 1,200 lines) from the carrier master data. This file is dedicated to automatic generation and is never edited by hand.\n\nAccording to the logs, the agent reads the old file and then calls Edit 40 to 80 times, once for each value that changes. Because the same string, such as \"status\": \"active\", appears dozens of times, some Edit calls fail because they do not match uniquely, and this month there were three occasions when a partially updated file was left behind.\n\nWhich is the most appropriate method to use for this task?",
+  "choices": {
+   "A": "Have it generate the new content and write the entire file at once with Write.",
+   "B": "Have it issue Edit calls in parallel to shorten the time taken for replacement.",
+   "C": "Have it replace the changed values together with Edit using replace_all: true.",
+   "D": "Have it replace the changed lines together with a regular expression using sed via Bash."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0019",
+  "question": "A research team at a travel company is using a multi-agent research system to investigate 「南欧方面の団体ツアーの予約が前年より35%減った理由」. At the start of the investigation, the coordinator determines three subtasks from the wording of the question: \"competitor prices,\" \"exchange rates,\" and \"advertising spend.\" It then delegates each to a subagent and consolidates the results.\n\nIn the initial investigation, the search subagent found the information that \"major airlines are reducing direct flights to Southern Europe starting in spring.\" However, because this was not included in the subtasks decided at the start, the impact of the flight reductions was not addressed in the final report.\n\nWhich are appropriate changes to how the coordinator plans? (Select two.)",
+  "choices": {
+   "A": "Determine the subtasks at the start of the investigation, and pass information found along the way to the synthesis agent to add as a supplement in the final report.",
+   "B": "Have a broad investigation conducted first, and add the next subtasks according to the factors found (such as flight reductions).",
+   "C": "During the investigation, review the priority of subtasks according to the results obtained, and discontinue investigations with little impact.",
+   "D": "Have a subagent that finds new information launch further subagents on its own judgment and investigate freely."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0020",
+  "question": "A live music ticket sales company operates a customer support resolution agent. The system prompt contains the instruction 「『チケット』という言葉が含まれる問い合わせでは、必ずlookup_orderで注文を確認すること」.\n\nLast month, the description of each tool was rewritten, and lookup_order was given an explicit boundary: 「個別の注文の状況を確認する。払い戻しの規定などの一般的な質問にはsearch_policyを使う」.\n\nEven so, in 22% of general questions such as 「チケットの払い戻しの規定を教えて」, the agent called lookup_order and asked the customer for an order number. There are five tools, and the descriptions are clearly distinguished from one another.\n\nWhich is the most likely root cause?",
+  "choices": {
+   "A": "The description of lookup_order is still too short and does not sufficiently convey the difference from search_policy.",
+   "B": "The system prompt lacks few-shot examples showing questions about refund policies.",
+   "C": "There are too many tools, which lowers the reliability of the agent's tool selection.",
+   "D": "An instruction in the system prompt that reacts to a specific keyword is taking precedence over the tool descriptions."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0021",
+  "question": "A development team at a bank operates a CI job that summarizes static analysis results for the entire repository overnight with the Message Batches API and produces a review report for each module the next morning. The job is implemented as follows.\n\nEach request is assigned a sequential custom_id starting from \"req-0001\"\n\nThe results file is read from top to bottom, and results are assigned to modules in the order of the module list at the time of submission\n\nSince last week, 12 reports have come in saying 「あるモジュールのレポートに、別のモジュールのクラス名や指摘が書かれている」. The prompt and model have not been changed, and each individual summary was accurate when read as the analysis result of a different module.\n\nWhich is the most likely root cause?",
+  "choices": {
+   "A": "The order of results is not guaranteed to match the submission order, yet results are assigned by row order rather than by custom_id.",
+   "B": "Prompt caching is shared between requests within a batch, and the contents of other modules are mixed into responses.",
+   "C": "Because load is high at night, the Message Batches API combines multiple requests into one for processing.",
+   "D": "For requests whose input exceeded the context limit, the contents of the adjacent request are concatenated into the input."
+  }
+ }
+]

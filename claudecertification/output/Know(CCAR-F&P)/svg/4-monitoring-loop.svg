@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-label="watch 대상을 정해 계측하고 drift를 감지하면 담당자가 runbook으로 대응하고 suite와 baseline을 갱신한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Monitoring과 alert 운영 흐름</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-monitoring-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Monitoring: 감지 → alert → 담당자 → runbook → suite 갱신</text>
+<rect x="20" y="50" width="240" height="96" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="140.0" y="81.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">1. watch 대상 선정</text>
+<text x="140.0" y="96.3" font-size="11" fill="#6B7280" text-anchor="middle">성과 · 안전 · 품질 · 비용</text>
+<text x="140.0" y="110.3" font-size="11" fill="#6B7280" text-anchor="middle">시스템의 존재 이유와 위험이</text>
+<text x="140.0" y="124.3" font-size="11" fill="#6B7280" text-anchor="middle">monitoring 목록을 결정</text>
+<rect x="330" y="50" width="240" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="81.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">2. 계측</text>
+<text x="450.0" y="96.3" font-size="11" fill="#6B7280" text-anchor="middle">구조화 trace (단계별 span ·</text>
+<text x="450.0" y="110.3" font-size="11" fill="#6B7280" text-anchor="middle">request id · token · latency)</text>
+<text x="450.0" y="124.3" font-size="11" fill="#6B7280" text-anchor="middle">sample에 매일 자동 faithfulness 평가</text>
+<rect x="640" y="50" width="240" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760.0" y="81.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">3. drift 감지</text>
+<text x="760.0" y="96.3" font-size="11" fill="#6B7280" text-anchor="middle">baseline 기간 · window ·</text>
+<text x="760.0" y="110.3" font-size="11" fill="#6B7280" text-anchor="middle">threshold와 비교</text>
+<text x="760.0" y="124.3" font-size="11" fill="#6B7280" text-anchor="middle">분 단위 · 주 단위 line을 짝으로</text>
+<path d="M260,98 L330,98" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-monitoring-loop)"/>
+<rect x="267.4" y="78" width="55.3" height="17" fill="#FFFFFF"/>
+<text x="295" y="90" font-size="11" fill="#1F2937" text-anchor="middle">계측 추가</text>
+<path d="M570,98 L640,98" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-monitoring-loop)"/>
+<rect x="575.5" y="78" width="59.0" height="17" fill="#FFFFFF"/>
+<text x="605" y="90" font-size="11" fill="#1F2937" text-anchor="middle">baseline</text>
+<path d="M760,146 L760,196" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-monitoring-loop)"/>
+<rect x="766.0" y="164" width="98.2" height="17" fill="#FFFFFF"/>
+<text x="770" y="176" font-size="12" fill="#1F2937" text-anchor="start">threshold 초과</text>
+<rect x="640" y="196" width="240" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760.0" y="227.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">4. alert → 지정 담당자 1명</text>
+<text x="760.0" y="242.3" font-size="11" fill="#6B7280" text-anchor="middle">튜닝 · 대응 · 폐기 책임</text>
+<text x="760.0" y="256.4" font-size="11" fill="#6B7280" text-anchor="middle">튜닝 권한 · 대응 시간 필요</text>
+<text x="760.0" y="270.4" font-size="11" fill="#6B7280" text-anchor="middle">병목 → 대리인 · 순환 근무</text>
+<rect x="330" y="196" width="240" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="234.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">5. runbook 대응</text>
+<text x="450.0" y="249.3" font-size="11" fill="#6B7280" text-anchor="middle">행동하려면 runbook 필요</text>
+<text x="450.0" y="263.4" font-size="11" fill="#6B7280" text-anchor="middle">보는 사람 없는 dashboard ✗</text>
+<rect x="20" y="196" width="240" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="140.0" y="227.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">6. regression suite</text>
+<text x="140.0" y="242.3" font-size="11" fill="#6B7280" text-anchor="middle">drift가 품질 변화인지</text>
+<text x="140.0" y="256.4" font-size="11" fill="#6B7280" text-anchor="middle">모집단 변화인지 구분</text>
+<text x="140.0" y="270.4" font-size="11" fill="#6B7280" text-anchor="middle">대표 eval data로 유지</text>
+<path d="M640,244 L570,244" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-monitoring-loop)"/>
+<rect x="590.0" y="224" width="30.0" height="17" fill="#FFFFFF"/>
+<text x="605" y="236" font-size="11" fill="#1F2937" text-anchor="middle">대응</text>
+<path d="M330,244 L260,244" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-monitoring-loop)"/>
+<rect x="267.4" y="224" width="55.3" height="17" fill="#FFFFFF"/>
+<text x="295" y="236" font-size="11" fill="#1F2937" text-anchor="middle">원인 구분</text>
+<path d="M140,292 L140,342" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-monitoring-loop)"/>
+<rect x="144.0" y="310" width="117.2" height="17" fill="#FFFFFF"/>
+<text x="148" y="322" font-size="12" fill="#1F2937" text-anchor="start">suite가 stale이면</text>
+<rect x="20" y="342" width="240" height="96" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="140.0" y="380.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">7. suite 갱신 · baseline 재설정</text>
+<text x="140.0" y="395.4" font-size="11" fill="#6B7280" text-anchor="middle">새 제품 line case 추가</text>
+<text x="140.0" y="409.4" font-size="11" fill="#6B7280" text-anchor="middle">labeling 비용 · 달력에 일정화</text>
+<text x="330" y="334" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">운영 규칙</text>
+<rect x="330" y="342" width="240" height="96" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="373.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">빠른 line + 느린 line</text>
+<text x="450.0" y="388.4" font-size="11" fill="#6B7280" text-anchor="middle">빠른: 오류율 · traffic 분 단위 alert</text>
+<text x="450.0" y="402.4" font-size="11" fill="#6B7280" text-anchor="middle">느린: 사람 라벨 sample 성공률</text>
+<text x="450.0" y="416.4" font-size="11" fill="#6B7280" text-anchor="middle">주 단위 추세 · 두 담당자 필요</text>
+<rect x="640" y="342" width="240" height="96" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="760.0" y="373.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">alert 위생</text>
+<text x="760.0" y="388.4" font-size="11" fill="#6B7280" text-anchor="middle">매주 발동 · 조치 없음 →</text>
+<text x="760.0" y="402.4" font-size="11" fill="#6B7280" text-anchor="middle">재튜닝 또는 폐기</text>
+<text x="760.0" y="416.4" font-size="11" fill="#6B7280" text-anchor="middle">배치 시간대 제외는 별도 검토</text>
+<rect x="20" y="466" width="860" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="491.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">담당자 없는 alert · 월 1회 수동 dashboard 검토 · latency만 alert ✗</text>
+<text x="450.0" y="506.4" font-size="11" fill="#6B7280" text-anchor="middle">수동 검토 = 품질 하락을 42일 뒤 발견 · 담당자 없는 instrument = dashboard일 뿐</text>
+</svg>

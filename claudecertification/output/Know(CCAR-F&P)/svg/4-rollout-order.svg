@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-label="회귀 평가 세트를 먼저 돌리고 위험한 변경은 shadow, 통제된 노출 A/B를 거쳐 전체 배포한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>변경 배포 순서</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-rollout-order" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">변경 배포 순서: offline eval → shadow → 통제된 노출 → 전체 배포</text>
+<rect x="20" y="60" width="260" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="150.0" y="87.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">1. 회귀 평가 세트 실행</text>
+<text x="150.0" y="102.3" font-size="11" fill="#6B7280" text-anchor="middle">깨짐 포착</text>
+<path d="M280,90 L420,90" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rollout-order)"/>
+<rect x="314.2" y="70" width="71.6" height="17" fill="#FFFFFF"/>
+<text x="350" y="82" font-size="12" fill="#1F2937" text-anchor="middle">위험도 판단</text>
+<polygon points="500,48.0 580.0,90 500,132.0 420.0,90" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="500" y="94.5" font-size="13" fill="#1F2937" text-anchor="middle">위험한 변경?</text>
+<path d="M580,90 L640,90" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rollout-order)"/>
+<rect x="588.0" y="70" width="44.0" height="17" fill="#FFFFFF"/>
+<text x="610" y="82" font-size="12" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="640" y="60" width="240" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="760.0" y="87.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">위험 낮은 문구 변경</text>
+<text x="760.0" y="102.3" font-size="11" fill="#6B7280" text-anchor="middle">빠른 test 가능</text>
+<path d="M500,132 L500,166 L135,166 L135,206" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rollout-order)"/>
+<rect x="240.6" y="149" width="178.9" height="17" fill="#FFFFFF"/>
+<text x="330" y="161" font-size="12" fill="#1F2937" text-anchor="middle">예: 위험한 변경 (자동 환불 등)</text>
+<rect x="20" y="206" width="230" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="135.0" y="238.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">2. shadow 먼저</text>
+<text x="135.0" y="253.3" font-size="11" fill="#6B7280" text-anchor="middle">영향 범위(blast radius)부터 제한</text>
+<path d="M250,241 L330,241" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rollout-order)"/>
+<rect x="257.3" y="221" width="65.4" height="17" fill="#FFFFFF"/>
+<text x="290" y="233" font-size="12" fill="#1F2937" text-anchor="middle">shadow 후</text>
+<rect x="330" y="206" width="300" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="480.0" y="231.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">3. 통제된 노출</text>
+<text x="480.0" y="246.3" font-size="11" fill="#6B7280" text-anchor="middle">미리 정의한 지표로 현재 prompt와 A/B</text>
+<text x="480.0" y="260.4" font-size="11" fill="#6B7280" text-anchor="middle">(실제 traffic)</text>
+<path d="M630,241 L710,241" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rollout-order)"/>
+<rect x="640.2" y="221" width="59.6" height="17" fill="#FFFFFF"/>
+<text x="670" y="233" font-size="12" fill="#1F2937" text-anchor="middle">개선 입증</text>
+<rect x="710" y="206" width="170" height="70" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="795.0" y="238.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">4. 전체 배포</text>
+<text x="795.0" y="253.3" font-size="11" fill="#6B7280" text-anchor="middle">개선 입증 후</text>
+<text x="20" y="314" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">오답</text>
+<rect x="20" y="324" width="270" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="155.0" y="351.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">첫날 전체 traffic ✗</text>
+<text x="155.0" y="366.4" font-size="11" fill="#6B7280" text-anchor="middle">blast radius 최대</text>
+<rect x="315" y="324" width="270" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="351.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">데모 · 팀 투표 · 배너 배포 ✗</text>
+<text x="450.0" y="366.4" font-size="11" fill="#6B7280" text-anchor="middle">일화 · 대조군 없는 실험</text>
+<rect x="610" y="324" width="270" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="745.0" y="351.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">offline 통과 → live 생략 ✗</text>
+<text x="745.0" y="366.4" font-size="11" fill="#6B7280" text-anchor="middle">production 분포 변화 미포괄</text>
+</svg>

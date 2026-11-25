@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="590" viewBox="0 0 920 590" role="img" aria-label="tier 하향 · 버전 교체는 프로덕션 변경: holdout → canary 순서로 측정">
+<title>tier 하향 · 버전 교체는 프로덕션 변경: holdout → canary 순서로 측정</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-change-validation" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="460" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">tier 하향 · 버전 교체는 프로덕션 변경: holdout → canary 순서로 측정</text>
+<rect x="20" y="55" width="210" height="86" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="125" y="80.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">변경 사유</text>
+<text x="125" y="95.35" font-size="11" text-anchor="middle" fill="#6B7280">tier 하향 · 새 버전 출시</text>
+<text x="125" y="110.35" font-size="11" text-anchor="middle" fill="#6B7280">pin 버전 deprecated 예고</text>
+<text x="125" y="125.35" font-size="11" text-anchor="middle" fill="#6B7280">같은 tier ≠ 같은 동작</text>
+<polyline points="230,98 290,98" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-change-validation)"/>
+<rect x="233.3" y="81" width="53.3" height="15" fill="#FFFFFF"/>
+<text x="260" y="92" font-size="11" text-anchor="middle" fill="#1F2937">후보 버전</text>
+<rect x="290" y="55" width="250" height="86" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="415" y="80.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">1단계: 고정 holdout regression</text>
+<text x="415" y="95.35" font-size="11" text-anchor="middle" fill="#6B7280">대표 · edge · adversarial 사례</text>
+<text x="415" y="110.35" font-size="11" text-anchor="middle" fill="#6B7280">고정 baseline과 비교</text>
+<text x="415" y="125.35" font-size="11" text-anchor="middle" fill="#6B7280">통과해도 프로덕션 안전 ✗</text>
+<polyline points="540,98 600,98" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-change-validation)"/>
+<rect x="548.9" y="81" width="42.3" height="15" fill="#FFFFFF"/>
+<text x="570" y="92" font-size="11" text-anchor="middle" fill="#1F2937">통과 후</text>
+<rect x="600" y="55" width="300" height="86" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="750" y="80.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">2단계: canary (실제 트래픽 일부)</text>
+<text x="750" y="95.35" font-size="11" text-anchor="middle" fill="#6B7280">floor 지표 실시간 계측</text>
+<text x="750" y="110.35" font-size="11" text-anchor="middle" fill="#6B7280">이전 구성 보존 = rollback 경로</text>
+<text x="750" y="125.35" font-size="11" text-anchor="middle" fill="#6B7280">비용: 며칠 소요 · 이중 serving</text>
+<polyline points="750,141 750,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-change-validation)"/>
+<rect x="757.0" y="159" width="85.2" height="15" fill="#FFFFFF"/>
+<text x="760" y="170" font-size="11" text-anchor="start" fill="#1F2937">floor 모니터링</text>
+<polygon points="750,190 845,235 750,280 655,235" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="750" y="239.55" font-size="13" text-anchor="middle" fill="#1F2937">floor 유지?</text>
+<polyline points="655,235 610,235" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-change-validation)"/>
+<rect x="623.5" y="218" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="632" y="229" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="330" y="207" width="280" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="470" y="232.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">전환 확정</text>
+<text x="470" y="247.35" font-size="11" text-anchor="middle" fill="#6B7280">이전 구성 삭제 = 성공 후 · 아카이브 후</text>
+<polyline points="750,280 750,330" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-change-validation)"/>
+<rect x="757.0" y="299" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="760" y="310" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<rect x="650" y="330" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="750" y="352.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">rollback</text>
+<text x="750" y="367.35" font-size="11" text-anchor="middle" fill="#6B7280">이전 구성으로 복귀</text>
+<rect x="20" y="185" width="280" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="160" y="217.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">shadow deploy</text>
+<text x="160" y="232.35" font-size="11" text-anchor="middle" fill="#6B7280">복사 트래픽 · 사용자 영향 없음</text>
+<text x="160" y="247.35" font-size="11" text-anchor="middle" fill="#6B7280">→ 이 경우에만 프로덕션 관찰 정당</text>
+<text x="160" y="262.35" font-size="11" text-anchor="middle" fill="#6B7280">(100% 라우팅 후 관찰은 ✗)</text>
+<rect x="20" y="405" width="880" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="460" y="431.05" font-size="13" text-anchor="middle" fill="#1F2937">같은 tier 새 버전도 같은 절차: 버전 간 drift → 이름이 아닌 버전을 테스트</text>
+<text x="460" y="448.05" font-size="13" text-anchor="middle" fill="#1F2937">일정 압박에도 서두른 교체 &lt; 늦은 교체 · 전환 = 프로덕션 변경으로 계획</text>
+<rect x="20" y="480" width="880" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="460" y="505.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">✗ 오답</text>
+<text x="460" y="522.05" font-size="13" text-anchor="middle" fill="#1F2937">같은 tier 가정 후 ID 교체 · 모델에게 준비 여부 질문 · 종료일 대기</text>
+<text x="460" y="539.05" font-size="13" text-anchor="middle" fill="#1F2937">100% 라우팅 후 대시보드 관찰 · canary 중 이전 구성 삭제</text>
+<text x="460" y="556.05" font-size="13" text-anchor="middle" fill="#1F2937">사용자에게 품질 업그레이드로 공지 · 자기 출력으로 분류기 재학습</text>
+</g>
+</svg>

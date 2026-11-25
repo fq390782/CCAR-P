@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="350" viewBox="0 0 900 350" role="img" aria-label="validation error를 붙여 retry하는 루프" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>validation error를 붙여 retry하는 루프</title>
+<defs><marker id="arr-validation-retry" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<rect x="20" y="50" width="170" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="105.0" y="77.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">추출 요청</text>
+<text x="105.0" y="94.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">tool use로 스키마 강제</text>
+<rect x="235" y="50" width="170" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="320.0" y="78.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Claude 출력</text>
+<text x="320.0" y="94.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">untrusted input으로 취급</text>
+<polygon points="466,50 654,50 670,82.0 654,114 466,114 450,82.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="560.0" y="78.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">파싱 + 검증 통과?</text>
+<text x="560.0" y="94.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">필수 필드 · 스키마</text>
+<rect x="720" y="50" width="160" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="800.0" y="86.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">다운스트림 전달</text>
+<polyline points="190,82 240,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-retry)"/>
+<polyline points="405,82 450,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-retry)"/>
+<rect x="412.0" y="59" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="427" y="71.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">파싱</text>
+<polyline points="670,82 720,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-retry)"/>
+<rect x="680.0" y="59" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="695" y="71.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">통과</text>
+<rect x="430" y="170" width="260" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="560.0" y="197.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">validation error를 덧붙여 retry</text>
+<text x="560.0" y="214.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">모델이 스스로 고침 (1회)</text>
+<polyline points="560,114 560,170" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-retry)"/>
+<rect x="545.0" y="133" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="560" y="145.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">실패</text>
+<polyline points="430,202 320,202 320,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-validation-retry)"/>
+<rect x="354.5" y="193" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="375" y="205.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">재요청</text>
+<text x="20" y="278" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">실패했을 때 하지 말 것</text>
+<rect x="20" y="290" width="420" height="48" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="230.0" y="317.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">try로 감싸 빈 객체 반환 → 실패를 숨겨 다운스트림으로 넘김</text>
+<rect x="460" y="290" width="420" height="48" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="670.0" y="317.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">누락 필드를 regex 후처리로 삽입 → 가짜 데이터 생성</text>
+</svg>

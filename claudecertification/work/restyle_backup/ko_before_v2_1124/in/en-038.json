@@ -1,0 +1,518 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0444",
+  "question": "A hiring bot's interview invites favor one university. The aggregate invite rate looks fine.\n\nWhat is necessary?",
+  "choices": {
+   "A": "Nothing. The aggregate is fine.",
+   "B": "Subgroup evaluation: measure invite rates per school and other groups, find the bias source, and fix the data or rule.",
+   "C": "Hide the school field.",
+   "D": "Trust the model."
+  },
+  "explanation": "Decisive phrase: \"favor one university... aggregate looks fine.\" Why: V2-D5.5 measures across subgroups, not aggregate only. The aggregate hides the skew. Counterfactual: A wins never against subgroup evidence."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0445",
+  "question": "A retailer wants a returns bot that is \"helpful.\" Volume is 2,000 returns per day. Fraudulent returns cost $40 each.\n\nWhat is the first discovery output?",
+  "choices": {
+   "A": "A vendor contract.",
+   "B": "Measurable requirements: \"helpful\" becomes resolution rate and CSAT targets, plus the fraud cost constraint, volume, and prohibited behaviors (never approve obvious fraud).",
+   "C": "A system prompt.",
+   "D": "A tier choice."
+  },
+  "explanation": "The decisive phrase is \"'helpful'... Fraudulent returns cost $40 each.\" Discovery shows adjectives. Discovery records cost limits and prohibited behaviors. A wins after sign-off on the requirements."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0446",
+  "question": "Discovery for a trading bot records: latency target set, cost limit set, but the data feed's reliability and the compliance reviewer are both unknown.\n\nWhich TWO assumptions are open? Select TWO.",
+  "choices": {
+   "A": "The data feed's reliability and fallback.",
+   "B": "Who the compliance reviewer is and when they review.",
+   "C": "The office snack policy.",
+   "D": "The vendor's logo.",
+   "E": "The team's lunch hour."
+  },
+  "explanation": "Decisive phrase: \"reliability... unknown... reviewer... unknown.\" Why: both shape the design and have no owner yet. V2-D6.1 records them explicitly. Counterfactual: none. Trivia is never discovery."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0447",
+  "question": "An architect presents build-vs-buy for a vector database to the engineering team.\n\nWhat does the engineering team need?",
+  "choices": {
+   "A": "Only the price.",
+   "B": "Benefit, cost, risk, reversal cost, and operational burden per option: migration effort, ownership, and on-call impact.",
+   "C": "The vendor's ad campaign.",
+   "D": "A coin flip."
+  },
+  "explanation": "Decisive phrase: \"presents build-vs-buy... to engineering.\" Why: engineering decides on operational axes. V2-D6.2 adapts the message to the audience. Counterfactual: A wins as the CFO's first question, never alone for engineering."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0448",
+  "question": "A team must tell the CEO why the RAG project needs two more months.\n\nWhat does the CEO need?",
+  "choices": {
+   "A": "The chunking algorithm details.",
+   "B": "Business framing: what the two months buy (which risks retire), cost, and what happens without them.",
+   "C": "The git log.",
+   "D": "Silence."
+  },
+  "explanation": "Decisive phrase: \"tell the CEO why... two more months.\" Why: execs decide on business outcomes, cost, and risk. Technical detail does not decide. Counterfactual: A wins for the engineering review, never for the CEO."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0449",
+  "question": "A vendor demo promises \"human-level support automation.\"\n\nWhich TWO responses keep expectations honest? Select TWO.",
+  "choices": {
+   "A": "Measured pilot results per ticket class with dates, not the vendor's slogan.",
+   "B": "Named review triggers and consequences for quality drops.",
+   "C": "Repeating the slogan louder.",
+   "D": "Signing the slogan into the contract.",
+   "E": "Skipping the pilot."
+  },
+  "explanation": "Decisive phrase: \"'human-level support automation.'\" Why: honest expectations rest on measured, dated results and on triggers with consequences. C, D, and E adopt the slogan. Counterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0450",
+  "question": "A support bot's quality metric is \"thumbs up rate.\" The team ships a change that makes the thumbs-up button bigger. The rate rises. Quality did not.\n\nWhat is the lesson?",
+  "choices": {
+   "A": "Bigger buttons are better.",
+   "B": "The metric was gameable. Pick metrics tied to the business outcome (resolution rate, reopen rate), not to UI artifacts.",
+   "C": "Ship more button changes.",
+   "D": "Delete the metric."
+  },
+  "explanation": "Decisive phrase: \"makes the thumbs-up button bigger. The rate rises. Quality did not.\" Why: V2-D6.3 demands measurable quality that tracks the outcome. A gameable proxy is not quality. Counterfactual: A wins never as a quality claim."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0451",
+  "question": "A team chooses the Fast tier for a batch job and records an ADR. Six months later the job's quality floor rises.\n\nWhat happens next?",
+  "choices": {
+   "A": "Nothing. The ADR is permanent.",
+   "B": "The ADR's review criteria trigger a re-evaluation: does the Fast tier still clear the new floor, or does the decision change.",
+   "C": "Delete the ADR quietly.",
+   "D": "Blame the tier."
+  },
+  "explanation": "Decisive phrase: \"the job's quality floor rises.\" Why: ADRs carry review criteria for exactly this. Changed conditions reopen the decision. Counterfactual: A wins never. Decisions expire."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0452",
+  "question": "Two architects disagree about a past decision. One says \"we chose X for cost.\" The other says \"we chose X for speed.\"\n\nWhat resolves it?",
+  "choices": {
+   "A": "A louder argument.",
+   "B": "The ADR: it records the decision, the date, the alternatives, and the reasons, so memory does not decide.",
+   "C": "A coin flip.",
+   "D": "Asking the model."
+  },
+  "explanation": "Decisive phrase: \"disagree about a past decision.\" Why: the ADR is the written record. Memory is not a source of truth. Counterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0453",
+  "question": "A pilot ends. The team debates what \"done\" means.\n\nWhich TWO mark production readiness? Select TWO.",
+  "choices": {
+   "A": "Named owners for monitoring, iteration, and incidents.",
+   "B": "A runbook with escalation and rollback.",
+   "C": "A demo video.",
+   "D": "The team's good intentions.",
+   "E": "Deleting the eval set."
+  },
+  "explanation": "Decisive phrase: \"what 'done' means.\" Why: V2-D6.5: lifecycle ownership is the finish line. Owners plus runbook make the system operable. C is promotion. D is hope. E destroys measurement. Counterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0454",
+  "question": "A 5-person team shares one repo. Secrets live in a vault. The agent must never print them.\n\nWhat is the correct configuration?",
+  "choices": {
+   "A": "A CLAUDE.md note says: \"do not print secrets.\"",
+   "B": "A deny rule is on secret-printing patterns. Hooks redact vault output. The team commits these in the shared settings.",
+   "C": "There is no config. Five people are careful.",
+   "D": "People print secrets for debugging."
+  },
+  "explanation": "Decisive phrase: \"must never print them.\" Why: \"never\" is enforcement in code. Notes are guidance. Counterfactual: A wins for workflow tips, never for secrets."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0455",
+  "question": "A platform team supports 200 developers on Claude Code. Each team wants its own hooks, but secret-path deny rules must hold everywhere.\n\nWhich split is correct?",
+  "choices": {
+   "A": "Everything in managed policies.",
+   "B": "Managed policies for the secret-path deny rules (org non-negotiables). Project defaults for team hooks (team workflow).",
+   "C": "Everything in CLAUDE.md.",
+   "D": "No config at all."
+  },
+  "explanation": "The decisive phrase is \"must hold everywhere... its own hooks.\" The split follows authority. Org non-negotiables take managed policies. Team workflow takes project defaults. A wins when the team cannot customize."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0456",
+  "question": "An AI assistant refactors a billing module. The engineer runs the test suite: green. She merges.\n\nWhat did she still miss?",
+  "choices": {
+   "A": "Do nothing. Green is green.",
+   "B": "Inspect the results yourself. Green on weak tests shows little. You must check what the tests cover. Confirm no secrets are in the diff.",
+   "C": "Ask the AI for more tests.",
+   "D": "Have a celebration."
+  },
+  "explanation": "Decisive phrase: \"runs the test suite: green.\" Why: V2-D7.2: tests ran AND results inspected. Green on a weak suite is not verification. The diff also needs a secret check. Counterfactual: A wins never for billing code."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0457",
+  "question": "An agent's tool calls start failing with permission errors after a platform migration. Nothing in the agent changed. What does the runbook check?",
+  "choices": {
+   "A": "The model's feelings.",
+   "B": "Tool failures to credentials, permissions, or throttling: verify the service identity, its scopes, and quota after the migration.",
+   "C": "The office network cable.",
+   "D": "The vendor's blog."
+  },
+  "explanation": "Decisive phrase: \"permission errors after a platform migration.\" Why: V2-D7.3 maps tool failures to creds, perms, and throttling. Migration changes identities and scopes. Counterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0458",
+  "question": "An airline handles 20,000 baggage claims per day. About 88% are standard: tag number, flight, one photo. About 12% involve disputed liability between carriers. One hard rule: no compensation on an unverified tag. Which design fits best?",
+  "choices": {
+   "A": "One agent handles every claim with no checks.",
+   "B": "Deterministic rules process the 88% standard claims. Claude drafts the liability summary for the 12% disputed claims. A code gate blocks any compensation until the tag check passes.",
+   "C": "The most capable tier handles everything with no checks.",
+   "D": "Staff review all 20,000 claims."
+  },
+  "explanation": "Decisive phrase: \"no compensation on an unverified tag.\" Why: the fork matches input shape to lane and the gate enforces the hard rule. D cannot scale to 20,000. Counterfactual: D wins at 60 claims per day with fraud risk."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0459",
+  "question": "A bank's fraud team wants an AI that \"blocks bad transactions automatically.\" About 90% of transactions are low-risk recurring payments. About 10% are unusual. Compliance states one rule: no block on a transaction without a logged reason. What is the best FIRST action?",
+  "choices": {
+   "A": "Build the auto-block agent this week.",
+   "B": "Write the rule into the design. Deterministic rules pass the 90% low-risk flow. Claude assesses the 10% unusual flow. A code gate logs the reason before any block.",
+   "C": "Benchmark tiers first.",
+   "D": "Draft a prompt that forbids unexplained blocks."
+  },
+  "explanation": "Decisive phrase: \"no block on a transaction without a logged reason.\" Why: the constraint filters the design before build. D puts a compliance rule in a prompt. Counterfactual: A wins for a sandbox demo with no real transactions."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0460",
+  "question": "A content pipeline runs: draft, style check, fact check, legal review, publish, feedback. The published article is the system of record for corrections. A wrong fact in a medical article harms readers. Where does the strongest verification sit?",
+  "choices": {
+   "A": "Before drafting.",
+   "B": "After fact check and legal review, before publish: verify claims against sources in code plus human sign-off on medical claims.",
+   "C": "After publish.",
+   "D": "Nowhere. The draft is usually right."
+  },
+  "explanation": "Decisive phrase: \"A wrong fact in a medical article harms readers.\" Why: verification sits after the model stages and before the irreversible publish. Medical claims get the human gate with source checks. Counterfactual: C wins for a personal blog with no readers."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0461",
+  "question": "A recruiting pipeline takes web applications, validates them, scores them with a model, and writes interview invites to the HR system. Web input may be hostile. The HR system is the system of record. Which TWO are trust boundaries? Select TWO.",
+  "choices": {
+   "A": "Between web input and validation.",
+   "B": "Between the model score and the HR system write.",
+   "C": "Between validation and the model.",
+   "D": "Between the log writer and storage.",
+   "E": "Between two functions in one process."
+  },
+  "explanation": "Decisive phrase: \"Web input may be hostile... writes interview invites to the HR system.\" Why: hostile input crosses at validation (screen it). The HR write is the side effect (authorize it in code). The rest are internal. Counterfactual: none. Internal crossings are not boundaries."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0462",
+  "question": "A factory monitors 500 sensors. Readings follow fixed thresholds. About 5% of alerts need judgment on ambiguous patterns. Which pattern fits?",
+  "choices": {
+   "A": "Agent loop for all readings.",
+   "B": "Deterministic workflow on thresholds, with an agent call for the 5% ambiguous patterns, then back to the workflow for the alert.",
+   "C": "Augmented single call per sensor with no thresholds.",
+   "D": "Manual monitoring."
+  },
+  "explanation": "The decisive phrase is \"Readings follow fixed thresholds... 5% need judgment.\" Thresholds are deterministic. Ambiguity needs runtime judgment. The hybrid covers both cases. A wins when you cannot define thresholds."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0463",
+  "question": "A compliance team reviews vendor contracts against a fixed 20-point checklist. Every contract gets the same checks in the same order. Which pattern fits?",
+  "choices": {
+   "A": "Use an autonomous agent loop.",
+   "B": "Use a deterministic workflow. The checklist is fixed. The order is fixed. The trace must be identical per contract.",
+   "C": "Use an augmented single call with no checklist.",
+   "D": "There is no pattern. Skip the review."
+  },
+  "explanation": "Decisive phrase: \"fixed 20-point checklist... same checks in the same order.\" Why: fixed steps plus identical-trace demand is the workflow's exact win condition. An agent would vary the plan. Counterfactual: A wins when the checklist itself is unknown per contract."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0464",
+  "question": "A translation pipeline uses a coordinator with a translator worker and a reviewer worker. The reviewer rejects 30% of translations with no reason codes. What gap exists?",
+  "choices": {
+   "A": "A bigger model.",
+   "B": "The handoff contract's disagree rule: rejection reason codes and the rework path, applied by the coordinator and logged.",
+   "C": "More translators.",
+   "D": "A longer timeout."
+  },
+  "explanation": "Decisive phrase: \"rejects 30% of translations with no reason codes.\" Why: the contract must name the disagree rule: structured reasons and the rework path. Without it, rejections are dead ends. Counterfactual: C wins when throughput, not disputes, is the problem."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0465",
+  "question": "A disaster response plan needs: damage assessment, shelter setup, and supply routing. Assessment must finish before supply routing. Shelter setup is independent. Which decomposition fits?",
+  "choices": {
+   "A": "All three in parallel.",
+   "B": "Assessment first, then fan-out to shelter setup and supply routing in parallel, fan-in to a coordination check.",
+   "C": "One agent improvising.",
+   "D": "All three sequential."
+  },
+  "explanation": "Decisive phrase: \"Assessment must finish before supply routing. Shelter setup is independent.\" Why: the dependency orders assessment first. Independence parallelizes the rest. A breaks the dependency. D wastes time. Counterfactual: A wins when assessment is not needed for routing."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0466",
+  "question": "A software release needs: build, test, security scan, and deploy. Build must precede test and scan. Deploy needs all three green. Which TWO orderings are valid? Select TWO.",
+  "choices": {
+   "A": "Build, then test and security scan in parallel, then deploy.",
+   "B": "Build, test, scan, deploy in strict sequence.",
+   "C": "Deploy first, then build.",
+   "D": "Test before build.",
+   "E": "Scan and deploy in parallel."
+  },
+  "explanation": "Decisive phrase: \"Build must precede test and scan. Deploy needs all three green.\" Why: both respect the dependencies. Test and scan are independent after the build, so parallel or sequence both work. C, D, and E break stated dependencies. Counterfactual: none. Dependencies decide."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0467",
+  "question": "A hotel automates check-in. Front-desk labor costs $8,000 per month for check-ins. The kiosk design costs $1,200 per month. The kiosk design has a $5,000 one-time cost. Guest satisfaction does not change.\n\nWhat is the first-year net value?",
+  "choices": {
+   "A": "$8,000 - $1,200 = $6,800 per month.",
+   "B": "(12 x ($8,000 - $1,200)) - $5,000 = $76,600.",
+   "C": "The kiosk's screen size.",
+   "D": "The model's tier."
+  },
+  "explanation": "Decisive phrase: \"$8,000 per month... $1,200 per month\nplus $5,000 one-time.\" Why: net value includes the one-time cost.\n12 x $6,800 = $81,600, minus $5,000 = $76,600. A ignores the one-time\ncost and the year horizon. Counterfactual: A wins as the monthly\nrun-rate answer, not the first-year net."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0468",
+  "question": "A team celebrates cutting p95 latency from 9 s to 3 s on\nan overnight batch job. No user waits for the job.\n\nWhat is the correct assessment?",
+  "choices": {
+   "A": "A major win. Ship the announcement.",
+   "B": "Motion without value: no user waits, so the latency cut buys no\nbusiness outcome. The V2-D1.6 question is what the improvement is\nworth.",
+   "C": "Cut latency further.",
+   "D": "A bigger model."
+  },
+  "explanation": "Decisive phrase: \"overnight batch job. No user waits for\nthe job.\" Why: technical optimization without a value case is the\nfastest route to a system nobody needed. The chain asks what the\nimprovement earns. Counterfactual: A wins when the job blocks the\nmorning shift."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0469",
+  "question": "An insurance bot handles 30,000 chats per day. About 96%\nare policy lookups. About 4% are claim disputes where a wrong answer\ncreates legal exposure.\n\nWhich tier strategy fits?",
+  "choices": {
+   "A": "Most capable tier for everything.",
+   "B": "Fast tier for lookups, stronger tier for disputes, with a quality\nfloor on the legal-exposure answers.",
+   "C": "Fast tier for everything.",
+   "D": "Stronger tier for lookups, Fast tier for disputes."
+  },
+  "explanation": "Decisive phrase: \"a wrong answer creates legal exposure.\"\nWhy: error cost sets the tier per class. D is backwards.\nCounterfactual: A wins when lookups also carry legal exposure."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0470",
+  "question": "A team cascades: Fast tier first, escalate to the\nBalanced tier when the Fast tier's answer fails a confidence check.\n\nWhat is the flaw?",
+  "choices": {
+   "A": "Cascading is always wrong.",
+   "B": "The model's own confidence is the escalation trigger. The model's confidence is uncalibrated. The trigger must be a measured check. For example, use a verifier or a quality floor test.",
+   "C": "Tiers must never mix.",
+   "D": "Fast is too fast."
+  },
+  "explanation": "The decisive phrase is \"fails a confidence check.\" The model confidence is not calibrated. The model confidence is prompt-injectable. The escalation gate needs a measurement. The escalation gate does not need a self-report.\n\nA never wins. Cascading with a measured trigger is good."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0471",
+  "question": "A bank bot must never reveal account balances to anyone\nexcept the verified account holder. Balances sit behind the account\nAPI.\n\nWhat is the correct control?",
+  "choices": {
+   "A": "A system prompt line about balances.",
+   "B": "Identity verification plus a code gate: the balance tool runs only\nfor the verified holder, and an output check blocks balance figures\notherwise.",
+   "C": "A longer prompt.",
+   "D": "Removing the balance tool for everyone."
+  },
+  "explanation": "Decisive phrase: \"except the verified account holder.\"\nWhy: identity plus code enforcement. A and C are guidance. D breaks\nthe product. Counterfactual: A wins for tone, never for balances."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0472",
+  "question": "A kids' learning bot must: keep ads out, and keep chat\nage-appropriate.\n\nWhich TWO placements are correct? Select TWO.",
+  "choices": {
+   "A": "Ad content excluded at the retrieval/index level in code.",
+   "B": "An output check in code for age-appropriateness before display.",
+   "C": "A system prompt asking advertisers to stay away.",
+   "D": "Trusting the model to know what is appropriate.",
+   "E": "No controls."
+  },
+  "explanation": "Decisive phrase: \"must: keep ads out, and keep chat\nage-appropriate.\" Why: both are \"must\" rules, so both live in code:\nretrieval exclusion plus output check. C and D are guidance and hope.\nCounterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0473",
+  "question": "A ticket classifier sorts into 40 categories. It fails on\ntickets that match two categories.\n\nWhich technique fits first?",
+  "choices": {
+   "A": "Few-shot examples of dual-category tickets with the tie-break rule\nshown, plus a structured output schema.",
+   "B": "Zero-shot.",
+   "C": "A bigger model.",
+   "D": "Fewer categories."
+  },
+  "explanation": "Decisive phrase: \"fails on tickets that match two\ncategories.\" Why: examples teach the tie-break. The schema fixes the\nformat. Simplest technique that passes evals. Counterfactual: C wins\nwhen good examples still fail."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0474",
+  "question": "A research assistant loads 25 full papers into every\ncall. The bill is 5x the budget. Questions need two or three papers.\n\nWhat is the first fix?",
+  "choices": {
+   "A": "A larger window.",
+   "B": "Retrieve the relevant papers just in time instead of loading all\n25.",
+   "C": "A stronger tier.",
+   "D": "Shorter questions."
+  },
+  "explanation": "The decisive phrase is \"Questions need two or three papers... loads 25 full papers.\" Growth is the diagnosed fault. Retrieval is its fix. A wins when you need all 25 papers for every call. A wins when the budget allows this."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0475",
+  "question": "A meeting bot's context holds: the whole quarter's\ntranscripts, the same action-items list pasted 3 times, and no\nsummaries.\n\nWhich TWO faults are present? Select TWO.",
+  "choices": {
+   "A": "Growth: the whole quarter loads every call.",
+   "B": "Duplication: the action-items list appears 3 times.",
+   "C": "Loss: old turns vanish.",
+   "D": "Exhaustion: the window errors.",
+   "E": "Perfect context."
+  },
+  "explanation": "Decisive phrase: \"whole quarter's transcripts... pasted\n3 times.\" Why: the load is growth. The triple paste is duplication. C\nand D have no evidence. Counterfactual: D wins when the call errors\non window size."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0476",
+  "question": "A tax assistant reuses a 12,000-token regulation prefix\nacross 5,000 calls per day. The prefix changes with each tax law\nupdate, about monthly.\n\nWhat bounds the caching win?",
+  "choices": {
+   "A": "The call count.",
+   "B": "The monthly prefix resets: each update re-pays the cache write\ncost, so the win depends on the hit rate between updates vs\nbreak-even.",
+   "C": "The model's tier.",
+   "D": "Nothing. It always wins."
+  },
+  "explanation": "Decisive phrase: \"changes with each tax law update, about\nmonthly.\" Why: prefix stability bounds prompt caching. Monthly resets\nre-pay the write cost. Only the measured hit rate decides.\nCounterfactual: D wins never.\n\nMeasurement decides."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0477",
+  "question": "A data agent has export_csv with no row limit. Its task\nexports at most 100 rows. The team proposes logging exports.\nWhat is correct?",
+  "choices": {
+   "A": "Keep the unlimited export and log it.",
+   "B": "Limit the tool to 100 rows in the schema and scope it to the task.\nLogging is observability, not the fix.",
+   "C": "Remove all exports.",
+   "D": "Add a second export tool."
+  },
+  "explanation": "Decisive phrase: \"no row limit... at most 100 rows.\" Why:\nleast privilege limits data visibility. The schema cap is the control.\nLogs watch. Counterfactual: A wins never as the fix for an over-wide\ntool."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0478",
+  "question": "A marketing agent has 22 tools. post_tweet,\npublish_tweet, and send_tweet are identical. A drop_database\ntool exists with no marketing use.\nWhich TWO removals are correct? Select TWO.",
+  "choices": {
+   "A": "Remove two of the three identical tweet tools.",
+   "B": "Remove drop_database.",
+   "C": "Remove the analytics reader used daily.",
+   "D": "Remove the audit log.",
+   "E": "Add more tweet tools."
+  },
+  "explanation": "The decisive phrase is \"identical... no marketing use.\" Overlap is the bloat signal. The database tool is not needed. The database tool is dangerous. You use C.\nD blinds the team. There is no counterfactual."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0479",
+  "question": "A school bot shows student records. The design checks the\nparent's login, then shows any student whose name the parent types.\nWhat is wrong?",
+  "choices": {
+   "A": "Do nothing. The system checked the login.",
+   "B": "This is authentication without authorization. The login proves the parent's identity. Nothing checks the parent's right to see the typed student.\nAdd the code check against the guardian roster.",
+   "C": "The bot needs a bigger model.",
+   "D": "Typing is too slow."
+  },
+  "explanation": "The decisive phrase is \"checks the parent's login, then shows any student whose name the parent types.\" This is why. Authentication without authorization is a locked front door with open rooms. The roster check is the missing authorization. A wins if the roster check exists."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0480",
+  "question": "A support agent needs to read the user's order history.\nThe design gives the agent the company's master API key.\nWhat is wrong?",
+  "choices": {
+   "A": "Nothing. The agent needs access.",
+   "B": "Confused deputy with ambient authority: the master key gives the\nagent everyone's orders. Use per-user delegated tokens with narrow\nscopes instead.",
+   "C": "The agent needs a bigger model.",
+   "D": "Order history is not sensitive."
+  },
+  "explanation": "Decisive phrase: \"the company's master API key.\" Why: the\nmaster key is ambient authority. Delegated per-user tokens carry the\nreal user's identity with least privilege. Counterfactual: A wins\nnever for a master key on user data."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0481",
+  "question": "An image pipeline measures p95: download 0.3 s, detect\n1.9 s, classify 2.0 s, store 0.2 s. Total 4.4 s. The SLA is 2.5 s.\nWhich stage must you optimize first?",
+  "choices": {
+   "A": "Download.",
+   "B": "Detect and classify: together they hold 3.9 of 4.4 seconds.",
+   "C": "Store.",
+   "D": "Add a filter stage."
+  },
+  "explanation": "Decisive phrase: \"detect 1.9 s, classify 2.0 s... SLA is\n2.5 s.\" Why: the two stages hold 89% of the budget. The 1.9 s cut\nmust come from them. Counterfactual: A wins when download dominates."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0482",
+  "question": "A loan agent calls the model, then a bureau API, then a\nqueue. The bureau API is slow. The team cannot tell whether the queue\nor the bureau caused a timeout.\nWhat gap exists?",
+  "choices": {
+   "A": "A bigger model.",
+   "B": "Per-hop latency in the trace with one run id: the trace must show\neach hop's duration so the slow hop is visible.",
+   "C": "More queues.",
+   "D": "A second model."
+  },
+  "explanation": "Decisive phrase: \"cannot tell whether the queue or the\nbureau caused a timeout.\" Why: V2-D3.4 traces model calls, tools,\nqueues, and dependencies with timings. The run id links them.\nCounterfactual: A wins never for a latency question."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0483",
+  "question": "A RAG pipeline ingests PDFs. Answers cite page numbers\nthat do not exist.\nWhich stage failed?",
+  "choices": {
+   "A": "Retrieval.",
+   "B": "Parsing or chunking: the page metadata is wrong, so citations point\nat phantom pages. Fix the parser's page tracking.",
+   "C": "The model tier.",
+   "D": "The network."
+  },
+  "explanation": "The decisive phrase is \"cite page numbers that do not exist.\" This is why. Phantom pages are a metadata failure at parse or chunk time. The citation gets bad metadata. Fix the failing component.\nA wins if the system retrieves the wrong chunk."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0484",
+  "question": "An audit finds two missing stages in a RAG pipeline for contracts.\nWhich TWO are the most likely missing verification\nstages? Select TWO.",
+  "choices": {
+   "A": "Grounding checks: claims verified against source chunks.",
+   "B": "Citation checks: cited spans verified to support claims.",
+   "C": "Ingestion.",
+   "D": "Chunking.",
+   "E": "Indexing."
+  },
+  "explanation": "Decisive phrase: \"missing verification stages.\" Why:\ningestion, chunking, and indexing are build stages. Grounding and\ncitation checks are the verification stages pipelines skip.\nCounterfactual: none. , D, and E are not verification."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0485",
+  "question": "A stock-trading bot shows prices from a daily index\nrefresh. Prices move every second during market hours.\nWhat is wrong?",
+  "choices": {
+   "A": "Nothing. Daily refresh is fine.",
+   "B": "Stale index for live state: prices move every second, so the daily\nindex is wrong all day. Put live prices behind a tool call.",
+   "C": "The bot needs a bigger model.",
+   "D": "Markets should close."
+  },
+  "explanation": "Decisive phrase: \"Prices move every second... daily index\nrefresh.\" Why: live transactional state belongs behind a tool call,\nnot a stale index. Counterfactual: A wins for slow data like company\naddresses."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0486",
+  "question": "A vendor ships an SDK for one language. One team in that\nlanguage needs the capability.\nWhich mechanism fits?",
+  "choices": {
+   "A": "MCP server.",
+   "B": "Direct API/SDK: one consumer, one language, vendor SDK exists.",
+   "C": "CLI wrapper.",
+   "D": "Rebuild the vendor's service."
+  },
+  "explanation": "Decisive phrase: \"One team in that language... SDK for one\nlanguage.\" Why: the vendor SDK is the direct API path with zero\nintegration tax. MCP adds a layer for no consumers. Counterfactual: A\nwins when five teams in three languages need it."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0487",
+  "question": "A team integrates: (1) an internal API used by one\nservice, (2) a device capability that exists only as a CLI.\n\nWhich TWO are correct? Select TWO.",
+  "choices": {
+   "A": "Direct API for the single internal pair.",
+   "B": "CLI wrapper for the CLI-only device capability.",
+   "C": "MCP server for the single pair.",
+   "D": "MCP server for the one-off CLI.",
+   "E": "Carrier pigeon."
+  },
+  "explanation": "Decisive phrase: \"one service... exists only as a\nCLI.\" Why: one pair takes the direct API. LI-only takes the wrapper.\nC and D pay protocol tax for single uses. Counterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0488",
+  "question": "A support agent uses 40 tools. The SLA is 15 seconds.\nToken costs are the top complaint. Wrong-tool picks climb.\n\nWhich strategy fits?",
+  "choices": {
+   "A": "Monolithic context.",
+   "B": "Progressive discovery: names first, schemas on demand. The loose\nSLA absorbs the round trip. Tokens and pick accuracy improve.",
+   "C": "Remove all tools.",
+   "D": "Add 40 more tools."
+  },
+  "explanation": "Decisive phrase: \"40 tools... SLA is 15 seconds... Wrong-tool\npicks climb.\" Why: large surface plus loose SLA is the discovery\nwin condition. Counterfactual: A wins with 6 tools and a 1-second SLA."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0489",
+  "question": "A fraud detector's requirement is \"catch fraud.\" The team\nmust set the acceptance threshold.\n\nWhat is the correct threshold shape?",
+  "choices": {
+   "A": "The team feels good.",
+   "B": "Recall on confirmed fraud is at or above 95%. The false-positive rate is at or below 2%. Measure this on a held-out set.",
+   "C": "A bigger model.",
+   "D": "100% on the training set."
+  },
+  "explanation": "Decisive phrase: \"'catch fraud.'\" Why: vague requirements\nbecome measured thresholds with the metric, the line, and the\nmeasurement set named. D measures memorization. Counterfactual: A wins\nnever as a threshold."
+ }
+]

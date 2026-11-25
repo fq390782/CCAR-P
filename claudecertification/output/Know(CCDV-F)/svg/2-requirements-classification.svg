@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="470" viewBox="0 0 920 470" role="img" aria-label="요구사항 분류 판단 트리" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>요구사항 분류 판단 트리</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-requirements-classification" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="460" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">요구 문장을 비즈니스 / 기능 / 비기능 / 프로젝트 제약으로 분류한다</text>
+<rect x="20" y="70" width="150" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="95.0" y="99.5" font-size="13" text-anchor="middle" fill="#1F2937">요구 문장</text>
+<polygon points="330,40.0 460.0,95 330,150.0 200.0,95" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="330" y="82.5" font-size="13" text-anchor="middle" fill="#1F2937">"시스템은 ~을 받아</text>
+<text x="330" y="99.5" font-size="13" text-anchor="middle" fill="#1F2937">~을 출력한다"로</text>
+<text x="330" y="116.5" font-size="13" text-anchor="middle" fill="#1F2937">바꿔 쓸 수 있나?</text>
+<polyline points="170,95 200,95" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="560" y="70" width="340" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="91.0" font-size="13" text-anchor="middle" fill="#1F2937">기능 요구</text>
+<text x="730.0" y="108.0" font-size="11" text-anchor="middle" fill="#6B7280">입력·처리·출력, 테스트로 확인 가능</text>
+<polyline points="460,95 560,95" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="500.5" y="73.0" width="19.0" height="18" fill="#FFFFFF"/>
+<text x="510" y="86.5" font-size="11" text-anchor="middle" fill="#6B7280">예</text>
+<polygon points="330,175.0 450.0,220 330,265.0 210.0,220" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="330" y="224.5" font-size="13" text-anchor="middle" fill="#1F2937">목표·KPI인가?</text>
+<polyline points="330,150 330,175" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="339.5" y="151.0" width="41.0" height="18" fill="#FFFFFF"/>
+<text x="360" y="164.5" font-size="11" text-anchor="middle" fill="#6B7280">아니오</text>
+<rect x="560" y="195" width="340" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="216.0" font-size="13" text-anchor="middle" fill="#1F2937">비즈니스 요구</text>
+<text x="730.0" y="233.0" font-size="11" text-anchor="middle" fill="#6B7280">예: 작성 시간 30% 단축</text>
+<polyline points="450,220 560,220" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="495.5" y="198.0" width="19.0" height="18" fill="#FFFFFF"/>
+<text x="505" y="211.5" font-size="11" text-anchor="middle" fill="#6B7280">예</text>
+<polygon points="330,295.0 450.0,340 330,385.0 210.0,340" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="330" y="336.0" font-size="13" text-anchor="middle" fill="#1F2937">성능·가용성·</text>
+<text x="330" y="353.0" font-size="13" text-anchor="middle" fill="#1F2937">보안 수준인가?</text>
+<polyline points="330,265 330,295" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="339.5" y="271.0" width="41.0" height="18" fill="#FFFFFF"/>
+<text x="360" y="284.5" font-size="11" text-anchor="middle" fill="#6B7280">아니오</text>
+<rect x="560" y="315" width="340" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="336.0" font-size="13" text-anchor="middle" fill="#1F2937">비기능 요구</text>
+<text x="730.0" y="353.0" font-size="11" text-anchor="middle" fill="#6B7280">예: 동시 100건, p95 10초</text>
+<polyline points="450,340 560,340" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="495.5" y="318.0" width="19.0" height="18" fill="#FFFFFF"/>
+<text x="505" y="331.5" font-size="11" text-anchor="middle" fill="#6B7280">예</text>
+<rect x="560" y="385" width="160" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="640.0" y="411.5" font-size="11" text-anchor="middle" fill="#1F2937">응답 속도 → streaming</text>
+<rect x="735" y="385" width="165" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="817.5" y="411.5" font-size="11" text-anchor="middle" fill="#1F2937">처리량 → rate limit 용량</text>
+<polyline points="640,365 640,385" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<polyline points="817,365 817,385" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="20" y="400" width="300" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="170.0" y="421.0" font-size="13" text-anchor="middle" fill="#1F2937">프로젝트 제약</text>
+<text x="170.0" y="438.0" font-size="11" text-anchor="middle" fill="#6B7280">기간 · 예산</text>
+<polyline points="330,385 330,425 320,425" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-requirements-classification)"/>
+<rect x="339.5" y="396.0" width="41.0" height="18" fill="#FFFFFF"/>
+<text x="360" y="409.5" font-size="11" text-anchor="middle" fill="#6B7280">아니오</text>
+<text x="730" y="452" font-size="11" text-anchor="middle" fill="#6B7280">성능 요구·KPI를 기능 요구로 고르면 오답</text>
+</svg>

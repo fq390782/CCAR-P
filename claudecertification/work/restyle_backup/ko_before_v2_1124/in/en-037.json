@@ -1,0 +1,520 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0398",
+  "question": "A payment pipeline takes a chat request. The pipeline validates the request. The pipeline checks the ledger. The ledger is the system of record. The pipeline runs a fraud model. The pipeline executes the transfer. You can manipulate chat input. The ledger is a trusted system. Which TWO are trust boundaries? Select TWO.",
+  "choices": {
+   "A": "Between chat input and validation.",
+   "B": "Between the fraud model and the transfer execution.",
+   "C": "Between the ledger read and the fraud model.",
+   "D": "Between two internal services with mutual TLS in one VPC.",
+   "E": "Between the log writer and disk."
+  },
+  "explanation": "Decisive phrase: \"Chat input may be manipulated... runs a fraud model, and executes the transfer.\" Why: untrusted chat crosses into validation (screen it). The transfer is the side effect, so the model-to-transfer crossing needs authorization in code. C, D, and E are internal trusted crossings. Counterfactual: D wins if the services sit in different trust zones."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0399",
+  "question": "A newsroom drafts market summaries. The steps are fixed. First, fetch prices. Second, compute changes. Third, draft. Fourth, an editor checks. Fifth, publish. About 10% of drafts need judgment for ambiguous events. Which pattern fits?",
+  "choices": {
+   "A": "Pure agent loop for everything.",
+   "B": "Deterministic workflow for the fixed steps with an agent call routed in for the ambiguous 10%, then back to the workflow for publish.",
+   "C": "Augmented single call with no tools.",
+   "D": "Manual only."
+  },
+  "explanation": "The decisive phrase is: \"Steps are fixed... 10% need judgment on ambiguous events.\" Fixed steps need the workflow. The ambiguous 10% needs runtime judgment. The hybrid joins them. A wins when you cannot fix the event list in advance."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0400",
+  "question": "A support bot answers from a knowledge base. One retrieval plus one judgment resolves 95% of chats. Which pattern fits?",
+  "choices": {
+   "A": "Autonomous loop with 10 steps.",
+   "B": "Augmented single call: retrieve, then judge once.",
+   "C": "Multi-agent coordinator.",
+   "D": "Deterministic workflow with 12 steps."
+  },
+  "explanation": "Decisive phrase: \"One retrieval plus one judgment resolves 95% of chats.\" Why: one judgment with tool context is the augmented call's exact shape. A loop adds iterations with no planning to do. Counterfactual: A wins when the next step depends on the previous tool result."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0401",
+  "question": "A code review uses three workers: lint, tests, security scan. They run in parallel and merge. The merge disagrees often because no rule says which finding wins. What gap exists?",
+  "choices": {
+   "A": "More workers.",
+   "B": "The disagree rule in the handoff contract: severity order or an arbiter, applied at merge and logged.",
+   "C": "A bigger model.",
+   "D": "A longer timeout."
+  },
+  "explanation": "Decisive phrase: \"no rule says which finding wins.\" Why: V2-D1.4 requires the disagree rule in the contract. Parallel work without a merge rule is just parallel arguments. Counterfactual: A wins when the work splits into more independent pieces."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0402",
+  "question": "A product launch needs: market scan, pricing check, and channel plan. The three share no state and use different tools. The launch brief must merge them. Which decomposition fits?",
+  "choices": {
+   "A": "One sequential chain.",
+   "B": "Fan-out to three parallel specialists, fan-in to a merge step with a disagree rule.",
+   "C": "One agent improvising.",
+   "D": "Skip the merge."
+  },
+  "explanation": "Decisive phrase: \"share no state and use different tools... must merge them.\" Why: independence plus different tools is the multi-agent win condition. The fan-in needs the merge and disagree rule. Counterfactual: A wins when the pieces share state."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0403",
+  "question": "A quarterly business review needs: sales numbers, support ticket themes, and churn analysis. Each comes from a different system. The numbers must reconcile before the review. Which TWO patterns fit? Select TWO.",
+  "choices": {
+   "A": "Fan-out/fan-in: three parallel extractions merged into one brief.",
+   "B": "Validation pattern: a checker reconciles the numbers against source systems before the review.",
+   "C": "Chaining where churn depends on sales which depends on tickets.",
+   "D": "One call with no tools.",
+   "E": "Skipping the support themes."
+  },
+  "explanation": "Decisive phrase: \"different system... numbers must reconcile before the review.\" Why: independent extractions fan out. Reconciliation is the validation pattern. C invents a false dependency. Counterfactual: C wins when churn truly derives from the sales output."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0404",
+  "question": "A clinic automates appointment reminders. Staff spent 2 hours per day on calls. The automated design costs $60 per month. The no-show rate does not change. Which number decides the value?",
+  "choices": {
+   "A": "The model's accuracy.",
+   "B": "Net monthly value: (2 hours x 30 x hourly labor cost) - $60.",
+   "C": "The p95 latency.",
+   "D": "The number of lines of code."
+  },
+  "explanation": "Decisive phrase: \"Staff spent 2 hours per day... costs $60 per month.\" Why: V2-D1.6 compares baseline labor against full cost. Time saved times labor rate, minus run cost, is the net. Counterfactual: C wins when an SLA names latency with a penalty."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0405",
+  "question": "A team proposes cutting model cost 50% on a fraud detector. The detector currently stops $200,000 per month in fraud. The cut risks 2% more missed fraud. What decides?",
+  "choices": {
+   "A": "The 50% cost cut alone.",
+   "B": "Net value: cost saved vs expected fraud missed (2% of $200,000 = $4,000 per month) plus quality floor effects.",
+   "C": "The tier name.",
+   "D": "The team's enthusiasm."
+  },
+  "explanation": "Decisive phrase: \"stops $200,000 per month... risks 2% more missed fraud.\" Why: the cut's savings must beat $4,000 per month in new losses. Business value decides. The percentage cut does not. Counterfactual: A wins when misses cost nothing."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0406",
+  "question": "A travel bot handles 20,000 chats per day. About 94% are booking lookups. About 6% are complex multi-city itineraries where an error strands a traveler. Which tier strategy fits?",
+  "choices": {
+   "A": "Most capable tier for everything.",
+   "B": "Fast tier for lookups, stronger tier for itineraries, with a quality floor on the stranding-risk answers.",
+   "C": "Fast tier for everything.",
+   "D": "Stronger tier for lookups, Fast tier for itineraries."
+  },
+  "explanation": "Decisive phrase: \"an error strands a traveler.\" Why: error cost sets the tier per class. D is backwards. Counterfactual: A wins when lookups also strand travelers."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0407",
+  "question": "A team routes simple questions to the Fast tier and hard\nones to the Balanced tier. The router is a keyword list.\n\nWhat is the risk?",
+  "choices": {
+   "A": "No risk. Keywords are perfect.",
+   "B": "Router misclassification: hard questions landing on the cheap tier\n(quality risk) and easy questions on the expensive tier (cost risk).\nThe router needs evals like any component.",
+   "C": "The tiers are too fast.",
+   "D": "Keywords cost too much."
+  },
+  "explanation": "Decisive phrase: \"The router is a keyword list.\" Why: the\nrouter is a component with failure modes in both directions. It needs\nits own evals. Counterfactual: A wins never. No router is perfect."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0408",
+  "question": "A recruiting bot must never reveal other candidates'\nnames. Candidate data sits in the retrieval index.\n\nWhat is the correct control?",
+  "choices": {
+   "A": "A system prompt line forbidding it.",
+   "B": "A retrieval filter excluding other candidates' records plus an\noutput check in code blocking names before display.",
+   "C": "A longer prompt.",
+   "D": "Hope."
+  },
+  "explanation": "Decisive phrase: \"must never reveal other candidates'\nnames.\" Why: \"never\" is a control in code, at retrieval and output.\nA and C are guidance. Counterfactual: A wins for tone, never for\nconfidentiality."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0409",
+  "question": "A pricing bot must enforce: discounts need manager\napproval, and list prices are public.\n\nWhich TWO placements are correct? Select TWO.",
+  "choices": {
+   "A": "The discount approval gate in code before the discount tool runs.",
+   "B": "List prices served from the public catalog (no gate needed).",
+   "C": "The discount rule in the system prompt only.",
+   "D": "The approval in the model's judgment.",
+   "E": "No controls at all."
+  },
+  "explanation": "Decisive phrase: \"discounts need manager approval, and\nlist prices are public.\" Why: the approval is a side-effect gate in\ncode. Public prices need no gate. C and D trust the model with money.\nCounterfactual: none.\n\nMoney gates live in code."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0410",
+  "question": "A resume parser extracts skills. It fails on unusual job\ntitles and lists them as skills incorrectly.\n\nWhich technique fits first?",
+  "choices": {
+   "A": "Few-shot examples including unusual titles as rejection examples,\nplus a structured output schema.",
+   "B": "Zero-shot.",
+   "C": "A bigger model.",
+   "D": "Removing the parser."
+  },
+  "explanation": "Decisive phrase: \"fails on unusual job titles.\" Why:\nrejection examples teach the boundary. The schema fixes the format.\nV2-D2.3: simplest technique that passes evals. Counterfactual: C wins\nwhen good examples still fail."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0411",
+  "question": "A legal assistant loads 40 prior cases into every call.\nThe bill doubled. The model cites the wrong case for the current\nmatter.\n\nWhat is the first fix?",
+  "choices": {
+   "A": "A larger window.",
+   "B": "Just-in-time retrieval of relevant cases plus compaction, instead\nof loading all 40 every call.",
+   "C": "A stronger tier.",
+   "D": "A longer prompt."
+  },
+  "explanation": "The decisive phrase is: \"loads 40 prior cases into every call... cites the wrong case.\" This shows growth plus dilution. Retrieval loads what matters. Compaction shrinks the rest. A wins when all 40 cases are necessary for every call and the budget allows."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0412",
+  "question": "A shopping assistant's context holds: the full catalog\n(50,000 tokens), the user's last 200 messages, and the same shipping\npolicy pasted 4 times.\n\nWhich TWO faults are present? Select TWO.",
+  "choices": {
+   "A": "Growth: the full catalog loads every call.",
+   "B": "Duplication: the shipping policy appears 4 times.",
+   "C": "Loss: old turns vanish.",
+   "D": "Exhaustion: the window errors.",
+   "E": "Perfect context."
+  },
+  "explanation": "Decisive phrase: \"full catalog (50,000 tokens)... pasted\n4 times.\" Why: the catalog load is growth. The 4x policy is\nduplication. C and D have no evidence. Counterfactual: D wins when the\ncall errors on window size."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0413",
+  "question": "A code assistant shares a 10,000-token style guide prefix\nacross 8,000 calls per day. Questions vary. Prefix edits happen weekly.\n\nWhat should the team check before claiming savings?",
+  "choices": {
+   "A": "The measured hit rate against the break-even point, accounting for\nweekly prefix resets.",
+   "B": "The total call count.",
+   "C": "The model's mood.",
+   "D": "Nothing. Caching always pays."
+  },
+  "explanation": "Decisive phrase: \"Prefix edits happen weekly.\" Why: edits\nreset the cache and re-pay the write cost. Only the measured hit rate\nvs break-even decides. Counterfactual: D wins never. Measurement\ndecides."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0414",
+  "question": "A support agent has refund_order and issue_refund\ntools. Both do the same thing. The team keeps both \"for safety.\"\n\nWhat is correct?",
+  "choices": {
+   "A": "Keep both for safety.",
+   "B": "Remove one. Overlapping descriptions confuse tool selection. One\nrefund tool with a clear schema is safer.",
+   "C": "Add a third refund tool.",
+   "D": "Rename both weekly."
+  },
+  "explanation": "Decisive phrase: \"Both do the same thing.\" Why: overlap is\nthe V2-D3.1 bloat signal. Two names for one action doubles the\nwrong-tool surface. Counterfactual: A wins never for identical tools."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0415",
+  "question": "An HR agent carries: read_policy (used daily),\nwrite_policy (never used), delete_employee (never used), and\ndraft_email (used daily).\n\nWhich TWO tools must you remove? Select TWO.",
+  "choices": {
+   "A": "write_policy.",
+   "B": "delete_employee.",
+   "C": "read_policy.",
+   "D": "draft_email.",
+   "E": "The audit log."
+  },
+  "explanation": "Decisive phrase: \"write_policy (never used),\ndelete_employee (never used).\" Why: unneeded tools are pure attack\nsurface, and these two are dangerous. Teams use C and D daily. E kills\nobservability. Counterfactual: none. Used tools stay."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0416",
+  "question": "A finance bot serves two subsidiaries. Subsidiary A's\nnumbers must never reach subsidiary B. The design filters by a\nsubsidiary field the user selects in a dropdown.\n\nWhat is wrong?",
+  "choices": {
+   "A": "Nothing. The dropdown filters.",
+   "B": "The dropdown value is user input, not an authorization decision. The\nfilter must use the authenticated user's subsidiary in code.",
+   "C": "The bot needs a bigger model.",
+   "D": "Dropdowns are too slow."
+  },
+  "explanation": "Decisive phrase: \"filters by a subsidiary field the user\nselects.\" Why: user-selected means user-claimed. One dropdown change\nreads the other subsidiary's numbers. The verified identity decides.\nCounterfactual: A wins when the dropdown is bound to the verified\nsession."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0417",
+  "question": "An agent calls a vendor API with a shared API key. Three\nteams share the key. An incident needs attribution: which team made the\ncall.\nWhat is the correct design?",
+  "choices": {
+   "A": "Keep the shared key. Attribution does not matter.",
+   "B": "Per-team credentials (or per-team tokens), so each call carries its\ncaller's identity. No shared credentials when attribution matters.",
+   "C": "A bigger model.",
+   "D": "Delete the logs."
+  },
+  "explanation": "Decisive phrase: \"needs attribution: which team made the\ncall.\" Why: V2-D3.2 forbids shared credentials when attribution\nmatters. Per-team credentials make each call attributable.\nCounterfactual: A wins for a read-only internal dashboard with no\nattribution need."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0418",
+  "question": "A document pipeline measures p95: OCR 2.5 s, chunking 0.2\ns, embedding 0.8 s, model 1.0 s. Total 4.5 s. The SLA is 3.0 s.\nWhich stage must you optimize first?",
+  "choices": {
+   "A": "Chunking.",
+   "B": "OCR: it holds over half the total.",
+   "C": "Embedding.",
+   "D": "Add a spell-check stage."
+  },
+  "explanation": "Decisive phrase: \"OCR 2.5 s... Total 4.5 s. The SLA is 3.0\ns.\" Why: OCR is 56% of the budget. The 1.5 s cut must come mostly from\nit.\nA saves 0.2 s at best. Counterfactual: C wins when embedding\ndominates."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0419",
+  "question": "A booking agent spans a web service, a queue, and a worker.\nA booking vanishes. Each hop logs, but the queue drops the correlation\nid.\nWhat is the fix?",
+  "choices": {
+   "A": "More logs in the web service.",
+   "B": "Propagate the run id through the queue: the queue must accept and\nforward it, so the run reconstructs end to end.",
+   "C": "A bigger model.",
+   "D": "A second queue."
+  },
+  "explanation": "Decisive phrase: \"the queue drops the correlation id.\"\nWhy: the queue is the broken link in trace propagation. Every hop must\nforward the id. Counterfactual: A wins when the web service logs\nnothing."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0420",
+  "question": "The team builds a RAG pipeline for engineering docs. The\nteam lists stages.\nWhich TWO stages belong after generation? Select TWO.",
+  "choices": {
+   "A": "Grounding checks: verify claims against source chunks.",
+   "B": "Citation checks: verify cited spans support the claims.",
+   "C": "Ingestion.",
+   "D": "Chunking.",
+   "E": "Indexing."
+  },
+  "explanation": "Decisive phrase: \"stages... after generation.\" Why: the\ncanonical pipeline ends generation, grounding/citation checks. C, D,\nand E are pre-retrieval stages. Counterfactual: none. Order is\ndefinitional."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0421",
+  "question": "A support RAG chunks 200-page manuals into fixed\n500-token pieces. Answers miss content that spans chunk boundaries.\nWhat is the fix?",
+  "choices": {
+   "A": "Bigger fixed chunks.",
+   "B": "Structure-aware chunking: split by manual section so each chunk is a\ncomplete unit, with overlap or metadata at boundaries.",
+   "C": "More documents.",
+   "D": "A stronger model."
+  },
+  "explanation": "Decisive phrase: \"miss content that spans chunk\nboundaries.\" Why: fixed cuts split meaning. Structure-aware chunks keep\nunits whole. A makes bigger broken pieces. Counterfactual: A wins when\nchunks are simply too small for the query unit."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0422",
+  "question": "A flight-status bot answers \"where is my flight.\" Flight\npositions update every 30 seconds. The design caches positions for one\nhour.\nWhat is wrong?",
+  "choices": {
+   "A": "Nothing. Caching is good.",
+   "B": "Live state behind a stale cache: positions change every 30 seconds,\nso an hour-old position is wrong. Put live positions behind a tool\ncall.",
+   "C": "The bot needs a bigger model.",
+   "D": "Flights should stop moving."
+  },
+  "explanation": "Decisive phrase: \"update every 30 seconds... caches\npositions for one hour.\" Why: V2-D3.6 puts live transactional state\nbehind a tool call. An hour-old position during operations is a wrong\nanswer served fast. Counterfactual: A wins for slow-changing data like\nairport addresses."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0423",
+  "question": "One Python service calls one internal geocoding API. The\nteam debates building an MCP server.\nWhat is correct?",
+  "choices": {
+   "A": "Build the MCP server. It is the modern choice.",
+   "B": "Use the direct API. One consumer and one language means no reuse\ngain to pay the protocol tax.",
+   "C": "Wrap the CLI.",
+   "D": "Reimplement geocoding."
+  },
+  "explanation": "Decisive phrase: \"One Python service calls one internal\ngeocoding API.\" Why: V2-D3.7: direct API wins on one pair. MCP's tax\nbuys nothing without reuse. Counterfactual: A wins when four more\nteams need the capability."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0424",
+  "question": "A team picks integration mechanisms for: (1) a shared\ntranslation capability needed by six teams, (2) a one-off script that\ncalls a vendor CLI.\nWhich TWO are correct? Select TWO.",
+  "choices": {
+   "A": "MCP server for the shared translation capability.",
+   "B": "CLI wrapper for the one-off vendor script (capability exists only\nas CLI).",
+   "C": "MCP server for the one-off script.",
+   "D": "Direct API reimplemented six times for translation.",
+   "E": "Email the text to the vendor."
+  },
+  "explanation": "Decisive phrase: \"six teams... one-off script... vendor\nCLI.\" Why: six consumers justify MCP's protocol tax. The CLI-only\ncapability takes the CLI wrapper. C pays tax for one use. D duplicates\nsix times.\nCounterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0425",
+  "question": "A chat agent uses 6 tools. The SLA is 800 ms. Token budget\nis comfortable.\nWhich context strategy fits?",
+  "choices": {
+   "A": "Progressive discovery.",
+   "B": "Monolithic context: load all 6 schemas up front. No discovery round\ntrips under the tight SLA.",
+   "C": "Remove the tools.",
+   "D": "Discovery with three round trips."
+  },
+  "explanation": "Decisive phrase: \"6 tools... SLA is 800 ms.\" Why: tiny\nsurface plus tight SLA favors monolithic. Discovery's round trips\nthreaten 800 ms for no token gain. Counterfactual: A wins at 60 tools\nwith a loose SLA."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0426",
+  "question": "A code-review bot must catch security bugs. The team\ndebates metrics.\nWhich metric is primary?",
+  "choices": {
+   "A": "Lines reviewed per minute.",
+   "B": "Recall on known vulnerability classes: the share of real bugs\ncaught.",
+   "C": "Token cost.",
+   "D": "Uptime."
+  },
+  "explanation": "Decisive phrase: \"must catch security bugs.\" Why: the\nobjective is to catch bugs. Recall on the bug classes measures exactly\nthat. A measures speed, C cost, D availability. Counterfactual: C wins\nwhen the budget binds and recall is already met."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0427",
+  "question": "A translation bot's requirement is \"good translations.\"\nThe team must turn it into an acceptance threshold.\nWhat is the correct conversion?",
+  "choices": {
+   "A": "The team feels good about it.",
+   "B": "A measured threshold. For example, human-rated adequacy is 4/5 or more.\nThe sample size and rater agreement are clear.",
+   "C": "A bigger model.",
+   "D": "More languages."
+  },
+  "explanation": "Decisive phrase: \"'good translations.'\" Why: V2-D4.1 turns\nvague requirements into acceptance thresholds. B names the metric, the\nline, and the measurement method. Counterfactual: A wins never as a\nthreshold."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0428",
+  "question": "A judge model grades support answers. The team never\nchecked the judge against human grades.\nWhat is necessary?",
+  "choices": {
+   "A": "Trust the judge.",
+   "B": "Calibrate the judge against human labels on a sampled set before\ntrusting its grades.",
+   "C": "A bigger judge.",
+   "D": "More answers."
+  },
+  "explanation": "The decisive phrase is \"never checked the judge against human grades.\"\nThe grading ladder puts code first.\nThen the grading ladder puts the judge.\nThen the grading ladder puts the human.\nYou calibrate judges against human labels.\n\nAn uncalibrated judge is an unverified grader.\nA wins never for grading."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0429",
+  "question": "An eval set for a medical triage bot has only textbook\ncases.\nWhich TWO drawers are absent? Select TWO.",
+  "choices": {
+   "A": "Edge cases: atypical but valid presentations.",
+   "B": "Adversarial cases: inputs crafted to fool the triage.",
+   "C": "More textbook cases.",
+   "D": "The training set again.",
+   "E": "Blank pages."
+  },
+  "explanation": "Decisive phrase: \"only textbook cases.\" Why: the\nrepresentative drawer is full. Edge and adversarial are empty. For\ntriage, both are safety-critical. Counterfactual: E wins as the\nmalformed drawer, a third addition."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0430",
+  "question": "A team A/B tests a new greeting. Assignment is random per\npage load, so one user sees both greetings across visits.\nWhat is wrong?",
+  "choices": {
+   "A": "Do nothing. Random is random.",
+   "B": "The assignment is inconsistent. The same user gets both variants. This corrupts the measurement and the experience.\nAssign consistently per user.",
+   "C": "You cannot test greetings.",
+   "D": "The test needs more greetings."
+  },
+  "explanation": "Decisive phrase: \"one user sees both greetings across\nvisits.\" Why: V2-D4.3 requires consistent assignment. Flip-flopping\nexposure corrupts both measurement and user experience.\nCounterfactual: A wins never with per-load assignment."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0431",
+  "question": "A RAG bot's answers degrade. The trace shows the right\nchunks arriving, but the new prompt removed the \"cite your source\"\ninstruction and answers now drift from the chunks.\nWhich layer failed?",
+  "choices": {
+   "A": "Retrieval.",
+   "B": "The prompt layer: the removed instruction changed answer behavior.\nRestore it and re-test.",
+   "C": "The index.",
+   "D": "The GPUs."
+  },
+  "explanation": "Decisive phrase: \"right chunks arriving... removed the\n'cite your source' instruction.\" Why: the trace clears retrieval. The\nchange log names the prompt edit. Fix the failing component.\nCounterfactual: A wins when chunks never arrive."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0432",
+  "question": "A classifier's accuracy drops. Investigation shows: the\ninput feed started sending truncated text last Tuesday, and the drop\nbegan last Tuesday.\nWhich TWO facts point at the data layer? Select TWO.",
+  "choices": {
+   "A": "The feed sends truncated text.",
+   "B": "The timing matches the drop onset.",
+   "C": "The model version does not change.",
+   "D": "Latency is fine.",
+   "E": "The office moved."
+  },
+  "explanation": "Decisive phrase: \"truncated text last Tuesday... drop\nbegan last Tuesday.\" Why: the cause and the onset align at the data\nfeed. C clears the model. D and E are neutral. Counterfactual: C wins\nthe argument for a model fault if the version changed that day."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0433",
+  "question": "A support bot sends the full 30-page policy on every\ncall: 25,000 tokens. Questions need one section.\nWhich optimization fits first?",
+  "choices": {
+   "A": "A bigger model.",
+   "B": "Retrieve the relevant section just in time instead of sending all\n30 pages.",
+   "C": "A longer system prompt.",
+   "D": "More policies."
+  },
+  "explanation": "Decisive phrase: \"Questions need one section... 25,000\ntokens.\" Why: oversized context is the V2-D4.5 first cut. Retrieval\nreplaces the dump. Counterfactual: A wins when the trace shows the\nmodel failing with the right section present."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0434",
+  "question": "A batch job processes 100,000 documents nightly. Cost is\n$400 per night. The team wants $250.\nWhich lever fits best?",
+  "choices": {
+   "A": "Tier routing: classify documents by difficulty, route easy ones to\nthe Fast tier, keep hard ones where they are, and hold the quality\nfloor.",
+   "B": "Delete half the documents.",
+   "C": "Turn off evals.",
+   "D": "Hope."
+  },
+  "explanation": "The decisive phrase is \"100,000 documents nightly... hold the quality floor.\"\nRouting cuts unit cost when difficulty allows. The savings increase at volume. The floor stays.\nB destroys the job.\n\nC destroys the measurement.\nB does not win for a real workload."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0435",
+  "question": "A recommendation bot's click-through drifts down over two\nmonths. The eval drawers are a year old.\nWhat is the likely cause of the blind spot?",
+  "choices": {
+   "A": "The model is too small.",
+   "B": "Stale eval data: the drawers no longer represent live traffic, so\nregression suites pass while users suffer. Refresh the drawers with\nrepresentative recent data.",
+   "C": "The dashboard color.",
+   "D": "The users."
+  },
+  "explanation": "Decisive phrase: \"eval drawers are a year old.\" Why:\nV2-D4.6 needs representative eval data. Stale drawers measure a past\nreality. Green suites on stale data are theater. Counterfactual: A\nwins when the trace shows model failures on fresh data."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0436",
+  "question": "An email assistant can send mail as the user. A draft\nlooks right but the recipient list is ambiguous.\nWhich control fits?",
+  "choices": {
+   "A": "Send it. The draft looks right.",
+   "B": "Fail closed: on ambiguous recipients, block the send and ask the\nuser to confirm the list. The send gate defaults to deny.",
+   "C": "Log the send and hope.",
+   "D": "Send to everyone to be safe."
+  },
+  "explanation": "Decisive phrase: \"the recipient list is ambiguous.\" Why:\nsending as the user is irreversible and attributable. Ambiguity must\ndeny, not guess. Counterfactual: A wins never for ambiguous\nrecipients."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0437",
+  "question": "A document agent processes uploads from the internet.\n\nWhich TWO controls fit? Select TWO.",
+  "choices": {
+   "A": "Input screening: scan uploads for malicious content before the model reads them.",
+   "B": "Sandboxing: process uploads isolated from secrets and the network.",
+   "C": "A friendly system prompt.",
+   "D": "Auto-forwarding uploads to all staff.",
+   "E": "Disabling all logging."
+  },
+  "explanation": "Decisive phrase: \"uploads from the internet.\" Why: untrusted uploads need screening before model exposure and sandboxing before execution. C is guidance. D spreads the risk. E blinds the team. Counterfactual: none."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0438",
+  "question": "An agent's tool list includes a run_sql tool with full database write access. Its task is read-only reporting.\n\nWhat is the risk, and what is the fix?",
+  "choices": {
+   "A": "No risk. The task is read-only.",
+   "B": "Excessive agency plus data exposure: the tool can write and delete though the task never needs it. Fix: scope the tool to read-only or remove it.",
+   "C": "The risk is slow queries.",
+   "D": "The fix is a bigger model."
+  },
+  "explanation": "Decisive phrase: \"full database write access... task is read-only reporting.\" Why: the permission exceeds the task: least privilege fails. Prompt injection or error can steer it to a write. Counterfactual: A wins never when permissions exceed the task."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0439",
+  "question": "A travel agent books flights and hotels with the user's credit card. It reads confirmation emails to track trips.\n\nWhich TWO risks are present? Select TWO.",
+  "choices": {
+   "A": "Indirect injection: confirmation emails can carry instructions.",
+   "B": "Excessive agency: bookings move money with no human gate.",
+   "C": "Slow email reading.",
+   "D": "Ugly itineraries.",
+   "E": "Loud notifications."
+  },
+  "explanation": "The decisive phrase is \"books flights... with the user's credit card... reads confirmation emails.\" Emails are untrusted content. Tool access is near. Bookings move money without a gate. Both are V2-D5.2 risks. Cosmetics are not risks."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0440",
+  "question": "A content bot publishes blog posts. A wrong post embarrasses the brand but is reversible in minutes.\n\nWhich review shape fits?",
+  "choices": {
+   "A": "Pre-action approval on every post.",
+   "B": "Post-action sampled review plus audit logging: reversible and low-stakes, so detect and correct beats gating everything.",
+   "C": "No logging.",
+   "D": "Board approval per post."
+  },
+  "explanation": "Decisive phrase: \"reversible in minutes.\" Why: V2-D5.3 keys review to reversibility. Reversible plus low-stakes takes post-action sampled review. A is theater at volume. Counterfactual: A wins for regulated or irreversible posts."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0441",
+  "question": "A medical triage bot's recommendation sends patients to the ER. A wrong recommendation delays care.\n\nWhich review shape fits?",
+  "choices": {
+   "A": "Post-action sampled review.",
+   "B": "Pre-action approval by qualified staff for high-risk recommendations, with the full clinical context shown.",
+   "C": "No review. The bot is fast.",
+   "D": "Annual review."
+  },
+  "explanation": "Decisive phrase: \"A wrong recommendation delays care.\" Why: high consequence plus low reversibility (delayed care cannot be undone). The reviewer needs the real decision context. Counterfactual: A wins for low-risk informational answers."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0442",
+  "question": "A fintech bot stores transaction records. The regulator requires proof of access controls.\n\nWhat satisfies the regulator?",
+  "choices": {
+   "A": "\"We have access controls.\"",
+   "B": "The evidence chain: the requirement, the control, the named owner, the stored evidence (logs, configs), and the review cadence.",
+   "C": "A new logo.",
+   "D": "A longer password."
+  },
+  "explanation": "Decisive phrase: \"requires proof of access controls.\" Why: V2-D5.4 is requirement to control to owner to evidence to cadence. Proof is the chain, not the claim. Counterfactual: A wins never for a regulator."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0443",
+  "question": "A children's app collects voice clips. Two regulations apply: parental consent and data minimization.\n\nWhich TWO controls fit? Select TWO.",
+  "choices": {
+   "A": "Consent gate in code: no collection without verified parental consent.",
+   "B": "Minimization: keep only the clips needed, auto-delete the rest on a schedule, with an owner and evidence.",
+   "C": "Collect everything forever.",
+   "D": "A cartoon mascot.",
+   "E": "A bigger model."
+  },
+  "explanation": "Decisive phrase: \"parental consent and data minimization.\" Why: each regulation maps to a control with an owner and evidence. C violates both. Counterfactual: none."
+ }
+]

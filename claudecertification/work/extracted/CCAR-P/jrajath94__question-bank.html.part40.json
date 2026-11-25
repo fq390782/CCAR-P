@@ -1,0 +1,155 @@
+[
+  {
+    "number": "M3-Q40",
+    "heading": "M3-Q40 (V2-D4.5)",
+    "question": "A chat service's p99 latency is 14 s. The team optimizes\nthe median from 1.2 s to 0.9 s. Users still complain.\n\nWhat is wrong?",
+    "choices": {
+      "A": "Nothing. The median improved.",
+      "B": "The tail is the problem: p99 at 14 s means 1% of users wait\nterribly. Optimize the tail (timeouts, retries, slow stages), not the\nmedian.",
+      "C": "The model is too small.",
+      "D": "Users complain too much."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"p99 latency is 14 s.\" V2-D4.5 targets p95/p99 for interactive systems. Median work ignores the suffering tail. A wins when the SLA is on the median. A wins when users are happy.",
+    "source_section": "V2-D4.5"
+  },
+  {
+    "number": "M3-Q41",
+    "heading": "M3-Q41 (V2-D4.6)",
+    "question": "A pricing bot's conversion rate drops after a competitor's\nsale. No alert fires because no watch tracks conversion.\n\nWhat gap exists?",
+    "choices": {
+      "A": "A bigger model.",
+      "B": "The business-outcome watch: conversion is the outcome the system\nexists for, so it needs a line, a window, an owner, and an alert.",
+      "C": "More logs.",
+      "D": "A new competitor."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"no watch tracks conversion.\" Why: V2-D4.6\nwatches include business outcomes, not just system metrics. The outcome\nthe system exists for is the first watch. Counterfactual: A wins never\nfor a missing watch.",
+    "source_section": "V2-D4.6"
+  },
+  {
+    "number": "M3-Q42",
+    "heading": "M3-Q42 (V2-D5.1)",
+    "question": "A data agent may delete old records. A deletion is\nirreversible. The task sometimes misidentifies \"old.\"\n\nWhich control fits?",
+    "choices": {
+      "A": "Let it delete. Storage is cheap to refill.",
+      "B": "Pre-action approval for deletions plus a fail-closed age check in\ncode: ambiguous records are never deleted without a human.",
+      "C": "Log deletions after they happen.",
+      "D": "A bigger model."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"deletion is irreversible... sometimes\nmisidentifies 'old.'\" Why: irreversible plus uncertain equals\npre-action approval with a fail-closed check. C logs the loss.\nCounterfactual: C wins as a complement, never alone.",
+    "source_section": "V2-D5.1"
+  },
+  {
+    "number": "M3-Q43",
+    "heading": "M3-Q43 (V2-D5.1), Select TWO",
+    "question": "A browser agent visits arbitrary URLs to research.\n\nWhich TWO controls fit? Select TWO.",
+    "choices": {
+      "A": "Sandboxing: isolate browsing from secrets and internal networks.",
+      "B": "An allow-list or screening for high-risk sites and downloads.",
+      "C": "Full access to the corporate VPN.",
+      "D": "Auto-downloading every file.",
+      "E": "Disabling logs."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"visits arbitrary URLs.\" Arbitrary URLs are not trusted. Sandboxing limits the blast radius. Screening limits exposure. C connects the threat to the crown jewels.\n\nCounterfactual: none.",
+    "source_section": "V2-D5.1"
+  },
+  {
+    "number": "M3-Q44",
+    "heading": "M3-Q44 (V2-D5.2)",
+    "question": "A support agent's tool list grows to 35 tools, many\noverlapping. Wrong-tool picks cause wrong refunds.\n\nWhat is the risk, and what is the fix?",
+    "choices": {
+      "A": "No risk. More tools are better.",
+      "B": "Capability bloat leading to tool abuse by mis-selection: prune to\nleast privilege, remove overlaps, and consider progressive discovery.",
+      "C": "The risk is slow typing.",
+      "D": "The fix is a bigger model."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"35 tools, many overlapping. Wrong-tool\npicks cause wrong refunds.\" Why: V2-D5.2 names tool abuse. 2-D3.1\nnames the bloat fix. The wrong pick is the failure mode realized.\n\nCounterfactual: A wins never past the bloat threshold.",
+    "source_section": "V2-D5.2"
+  },
+  {
+    "number": "M3-Q45",
+    "heading": "M3-Q45 (V2-D5.2), Select TWO",
+    "question": "An agent runs with the CEO's credentials to \"get things\ndone faster.\"\n\nWhich TWO risks are present? Select TWO.",
+    "choices": {
+      "A": "Excessive agency: the agent acts with the CEO's full authority.",
+      "B": "Data exposure: the credential grants broad data access.",
+      "C": "Slow execution.",
+      "D": "Poor grammar.",
+      "E": "High electricity use."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"runs with the CEO's credentials.\" Maximum authority plus maximum data is the maximum blast radius. Least privilege is not present. Counterfactual: none. This design is never acceptable.",
+    "source_section": "V2-D5.2"
+  },
+  {
+    "number": "M3-Q46",
+    "heading": "M3-Q46 (V2-D5.3)",
+    "question": "A marketing bot schedules social posts. A wrong post causes embarrassment. You can delete the post in seconds.\n\nWhich review shape fits?",
+    "choices": {
+      "A": "Pre-action approval on every post.",
+      "B": "Post-action sampled review plus audit logging.",
+      "C": "No logging.",
+      "D": "Legal review per post."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"deletable in seconds.\" Why:\nreversibility sets the shape. Post-action sampled review fits\nreversible low-stakes output. Counterfactual: A wins for regulated\nclaims.",
+    "source_section": "V2-D5.3"
+  },
+  {
+    "number": "M3-Q47",
+    "heading": "M3-Q47 (V2-D5.3)",
+    "question": "An HR bot drafts termination letters. A wrong letter\ncreates legal liability.\n\nWhich review shape fits?",
+    "choices": {
+      "A": "Post-action sampled review.",
+      "B": "Pre-action approval by HR with the full letter and employee record\nshown before anything sends.",
+      "C": "No review. The bot is fast.",
+      "D": "Annual review."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"creates legal liability.\" Why: consequence plus regulation equals pre-action approval with full\ncontext. A reviews after the liability lands. Counterfactual: A wins\nfor informational HR FAQs.",
+    "source_section": "V2-D5.3"
+  },
+  {
+    "number": "M3-Q48",
+    "heading": "M3-Q48 (V2-D5.4)",
+    "question": "A bank chatbot logs all conversations. The logs contain\naccount numbers. The log store has no retention policy.\n\nWhat gap exists?",
+    "choices": {
+      "A": "More logs.",
+      "B": "The compliance chain for the logs: retention rule, access control,\nnamed owner, evidence of enforcement, and review cadence. Account\nnumbers in logs are sensitive data needing the full chain.",
+      "C": "A bigger model.",
+      "D": "Louder alerts."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"contain account numbers... no retention policy.\"\nWhy: logs with sensitive data are artifacts. Regulations control these artifacts.\nThe chain covers retention, access, owner, evidence, and cadence.\nA never wins for sensitive logs.",
+    "source_section": "V2-D5.4"
+  },
+  {
+    "number": "M3-Q49",
+    "heading": "M3-Q49 (V2-D5.4), Select TWO",
+    "question": "A telehealth bot serves patients across states with\ndifferent consent rules.\n\nWhich TWO controls fit? Select TWO.",
+    "choices": {
+      "A": "Per-state consent handling in code: the bot follows the patient's\nstate rule, verified from the authenticated record.",
+      "B": "The compliance evidence chain per requirement: control, owner,\nevidence, cadence.",
+      "C": "One rule for all states, guessed.",
+      "D": "No consent handling.",
+      "E": "A bigger model."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"different consent rules.\" Why: the\nrules vary, so the code must branch per state. Each requirement still\nneeds the evidence chain. C guesses at law. Counterfactual: none.",
+    "source_section": "V2-D5.4"
+  }
+]

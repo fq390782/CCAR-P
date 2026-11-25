@@ -1,0 +1,12 @@
+# 4장 topic 목록 (문항당 1개, 가장 핵심인 것)
+- eval-set: eval set 구성·대표성·edge case·golden set·크기·stratified 표본
+- grader: grader 선택(code·LLM-as-judge·human)·rubric·judge 보정·judge 편향
+- metrics: 지표 선택·precision/recall·정확도 vs 비즈니스 지표·임계값·통계적 유의성
+- regression: regression suite·변경 전후 비교·CI에 eval 통합·prompt 변경 검증
+- model-upgrade: 모델 업그레이드·마이그레이션 검증·shadow·canary
+- ab-test: A/B 테스트·온라인 실험·점진 롤아웃
+- observability: logging·tracing·monitoring·drift 감지·dashboard·알림
+- debugging: 결함 위치 찾기(localize)·trace 분석·root cause·재현
+- optimization: 비용·latency 최적화를 eval과 함께 검증·trade-off 측정
+- human-review: 사람 검토 표본·라벨링·피드백 루프
+- other: 위에 안 맞음(짧은 이유를 note에)

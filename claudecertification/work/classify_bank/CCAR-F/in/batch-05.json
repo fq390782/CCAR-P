@@ -1,0 +1,352 @@
+[
+ {
+  "id": "CCAR-F-MyPractice-0052",
+  "question": "프로덕션 지표는 복잡한 billing 분쟁이나 다중 주문 반품을 해결할 때, 해결이 기술적으로는 맞더라도 고객 만족도 점수가 단순 케이스보다 15% 낮다는 것을 보여줍니다. 근본 원인 분석에 따르면 Agent는 정확한 해결책을 제공하지만 근거 설명이 일관되지 않습니다. 때로는 관련 정책 세부사항을 빠뜨리고, 때로는 일정 정보나 다음 단계를 놓칩니다. 구체적인 context 공백은 케이스마다 다릅니다. 사람의 감독을 추가하지 않고 솔루션 품질을 개선하고 싶습니다. 가장 효과적인 접근 방법은 무엇인가요?\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "Agent가 초안 응답의 완전성을 평가하는 자기 비판 단계를 추가한다. 고객 이슈를 해결하는지, 관련 context를 포함하는지, 후속 질문을 예상하는지 확인한다.",
+   "B": "종료 전에 Agent가 \"이것이 문제를 완전히 해결하나요?\"라고 묻는 확인 단계를 추가해, 고객이 필요한 추가 정보를 요청할 수 있게 한다.",
+   "C": "미리 정의한 복잡도 지표로 복잡한 케이스를 routing해 모델을 Haiku에서 Sonnet으로 업그레이드한다.",
+   "D": "정책 context, 일정, 다음 단계를 포함하는 방법을 보여주는 다섯 가지 일반 복잡 케이스에 대한 완전한 설명 few-shot 예시를 system prompt에 구현한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "자기 비판 단계(evaluator-optimizer 패턴)는 정책 context, 일정, 다음 단계 같은 구체 기준에 대해 Agent가 자신의 초안을 평가하도록 강제해 설명 완성도가 들쭉날쭉한 문제를 직접 줄입니다. 이는 사람의 감독 없이 케이스별 공백을 잡아냅니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0053",
+  "question": "프로덕션 지표는 Agent가 해결당 평균 4회 이상의 API 루프를 사용함을 보여줍니다. 분석 결과 Claude는 처음부터 둘 다 필요한 경우에도 `get_customer`와 `lookup_order`를 별도 순차 턴으로 요청하는 경우가 많습니다. 루프 수를 가장 효과적으로 줄이려면 어떻게 해야 하나요?\n\n루프를 줄이는 가장 효과적인 방법은 무엇인가요?",
+  "choices": {
+   "A": "요청된 tool과 병렬로 필요할 가능성이 있는 tool을 자동 호출하고 Claude가 요청했는지와 관계없이 모든 결과를 반환하는 speculative execution을 구현한다.",
+   "B": "Claude가 계획할 공간을 더 많이 갖고 자연스럽게 tool 요청을 결합하도록 `max_tokens`를 늘린다.",
+   "C": "일반 조회 조합을 단일 호출로 묶는 `get_customer_with_orders` 같은 복합 tool을 만든다.",
+   "D": "prompt에서 Claude에게 관련 tool 요청을 한 턴에 묶고 다음 API 호출 전에 모든 결과를 함께 반환하라고 지시한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "Claude에게 관련 tool 요청을 단일 턴에 묶도록 prompt하면 한 번에 여러 tool을 요청하는 Claude의 기본 능력을 활용할 수 있습니다. 이는 최소한의 architecture 변경으로 순차 호출 패턴을 줄입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0054",
+  "question": "프로덕션 로그는 고객이 특정 금액을 언급하지만(예: \"제가 말한 15% 할인\") Agent가 잘못된 값으로 응답하는 패턴을 보여줍니다. 조사 결과 이러한 세부사항은 20턴 이상 전에 언급되었고 \"프로모션 가격이 논의됨\" 같은 모호한 summary로 압축되었습니다. 가장 효과적인 수정안은 무엇인가요?\n\n가장 효과적인 수정안은 무엇인가요?",
+  "choices": {
+   "A": "summary가 트리거되기 전 대화에 더 많은 공간을 주도록 summary 임계값을 70%에서 85%로 높인다.",
+   "B": "전체 대화 기록을 외부 저장소에 저장하고 Agent가 \"앞서 말했듯이\" 같은 참조를 감지하면 검색을 구현한다.",
+   "C": "거래 관련 사실(금액, 날짜, 주문 번호)을 summary 기록 밖에 있는 지속적 \"case facts\" 블록으로 extraction해 모든 prompt에 포함한다.",
+   "D": "모든 숫자, 백분율, 날짜, 고객이 말한 기대사항을 원문 그대로 보존하도록 summary prompt를 수정한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "summary는 본질적으로 정확한 세부사항을 잃습니다. 거래 관련 사실을 summary 기록 밖의 구조화된 \"case facts\" 블록으로 extraction하면 몇 턴이 summary되었는지와 관계없이 중요한 정보가 모든 prompt에서 안정적으로 사용 가능합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0055",
+  "question": "`get_customer` tool은 이름으로 검색할 때 모든 일치 항목을 반환합니다. 현재 여러 결과가 있으면 Claude가 가장 최근 주문이 있는 고객을 선택하지만, 프로덕션 데이터는 모호한 일치에서 이 방식이 15%의 경우 잘못된 계정을 선택함을 보여줍니다. 이를 어떻게 해결해야 하나요?\n\n어떻게 해결해야 하나요?",
+  "choices": {
+   "A": "85% 이상 confidence에서는 자율적으로 행동하고 그 아래에서는 clarification을 요청하는 confidence 점수 시스템을 구현한다.",
+   "B": "`get_customer`가 여러 일치 항목을 반환하면 고객별 동작을 하기 전에 추가 식별자(email, phone, order number)를 요청하도록 Claude에 지시한다.",
+   "C": "`get_customer`를 수정해 ranking 알고리즘 기반으로 가장 가능성 높은 단일 일치만 반환하게 하여 모호성을 제거한다.",
+   "D": "모호한 일치에 대한 올바른 추론과 tool 순서를 보여주는 few-shot 예시를 prompt에 추가한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "추가 식별자를 사용자에게 요청하는 것이 모호성을 해결하는 가장 신뢰할 수 있는 방법입니다. 사용자는 자신의 신원에 대한 확정적 지식을 가지고 있기 때문입니다. 잘못된 계정을 선택해 생기는 15% 오류율을 제거하기 위해 대화 한 턴을 추가하는 것은 작은 비용입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0056",
+  "question": "프로덕션 로그는 일관된 패턴을 보여줍니다. 고객이 메시지에 \"account\"라는 단어를 포함하면(예: \"I want to check my account for an order I made yesterday\") Agent가 78%의 경우 `get_customer`를 먼저 호출합니다. 고객이 유사한 요청을 \"account\" 없이 표현하면(예: \"I want to check an order I made yesterday\") 93%의 경우 `lookup_order`를 먼저 호출합니다. tool 설명은 명확하고 모호하지 않습니다. 이 불일치의 가장 가능성이 높은 근본 원인은 무엇인가요?\n\n가장 가능성이 높은 근본 원인은 무엇인가요?",
+  "choices": {
+   "A": "system prompt에 \"account\" 같은 용어를 기준으로 동작을 유도하는 키워드 민감 지시사항이 있어 의도치 않은 tool 선택 패턴을 만든다.",
+   "B": "모델의 기본 학습이 \"account\" 용어와 고객 관련 작업 사이의 연관을 만들어 tool 설명을 덮어쓴다.",
+   "C": "모델에는 다중 개념 메시지에 대한 더 많은 학습 데이터가 필요하며 account와 order 용어가 모두 포함된 예시로 fine-tuning해야 한다.",
+   "D": "이 키워드 유발 혼동을 막기 위해 각 tool을 언제 사용하지 말아야 하는지 지정하는 부정 예시를 tool 설명에 추가해야 한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "체계적인 키워드 기반 패턴(78% vs 93%)은 system prompt의 명시적 routing 로직이 \"account\"라는 단어에 반응해 Agent를 고객 관련 tool로 유도하고 있음을 강하게 시사합니다. tool 설명이 이미 명확하므로, 불일치는 의도치 않은 행동 유도를 만드는 prompt 수준 지시를 가리킵니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0057",
+  "question": "프로덕션 로그는 사용자가 주문에 대해 물을 때(예: \"check my order #12345\") `lookup_order` 대신 `get_customer`를 호출하는 경우가 많음을 보여줍니다. 두 tool은 최소한의 설명(\"Gets customer information\" / \"Gets order details\")만 가지고 있고 유사해 보이는 식별자 형식을 받습니다. tool 선택 신뢰성을 개선하기 위한 가장 효과적인 첫 단계는 무엇인가요?\n\n가장 효과적인 첫 단계는 무엇인가요?",
+  "choices": {
+   "A": "각 턴 전에 사용자 입력을 분석하고 감지된 키워드와 ID 패턴을 기반으로 올바른 tool을 사전 선택하는 routing 계층을 구현한다.",
+   "B": "두 tool을 모든 식별자를 받고 내부적으로 어떤 backend를 조회할지 결정하는 단일 `lookup_entity`로 결합한다.",
+   "C": "주문 관련 쿼리를 `lookup_order`로 routing하는 5-8개 예시와 함께 올바른 tool 선택 패턴을 보여주는 few-shot 예시를 system prompt에 추가한다.",
+   "D": "각 tool 설명을 입력 형식, 예시 쿼리, 엣지 케이스, 유사 tool 대비 사용 시점을 설명하는 경계까지 포함하도록 확장한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "입력 형식, 예시 쿼리, 엣지 케이스, 명확한 경계를 포함해 tool 설명을 확장하면 LLM이 유사한 tool을 구분할 만큼 충분한 정보를 받지 못하는 문제를 해결합니다. 이는 LLM이 tool 선택에 사용하는 기본 메커니즘을 개선하는 저노력, 고효과의 첫 단계입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0058",
+  "question": "지원 Agent를 위한 Agent 루프를 구현하고 있습니다. 각 Claude API 호출 후 루프를 계속할지(요청된 tool을 실행하고 Claude를 다시 호출) 또는 중지할지(최종 답변을 고객에게 제시) 결정해야 합니다. 이 결정을 무엇을 기준으로 판단해야 하나요?\n\n이 결정을 무엇을 기준으로 판단해야 하나요?",
+  "choices": {
+   "A": "Claude 응답의 `stop_reason` 필드를 확인한다. `tool_use`이면 계속하고 `end_turn`이면 중지한다.",
+   "B": "\"I'm done\" 또는 \"Can I help with anything else?\" 같은 문구를 Claude 텍스트에서 parsing한다. 자연어 신호가 작업 완료를 나타낸다.",
+   "C": "최대 반복 횟수(예: 10회 호출)를 설정하고 Claude가 더 필요하다고 나타내는지와 관계없이 도달하면 중지한다.",
+   "D": "응답에 assistant 텍스트 콘텐츠가 포함되어 있는지 확인한다. Claude가 설명 텍스트를 생성했다면 루프는 종료되어야 한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "`stop_reason`은 루프 제어를 위한 Claude의 명시적 structured 신호입니다. `tool_use`는 Claude가 tool을 실행하고 결과를 돌려받고 싶다는 뜻이고, `end_turn`은 Claude가 응답을 완료했으며 루프가 끝나야 함을 뜻합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0059",
+  "question": "프로덕션 로그는 Agent가 MCP tool 출력을 잘못 해석한다는 것을 보여줍니다. `get_customer`의 Unix timestamp, `lookup_order`의 ISO 8601 날짜, 숫자 상태 코드(1=pending, 2=shipped)가 혼재합니다. 일부 tool은 수정할 수 없는 third-party MCP 서버입니다. 데이터 형식 normalization에 가장 유지보수하기 좋은 접근은 무엇인가요?\n\n가장 유지보수하기 좋은 접근은 무엇인가요?",
+  "choices": {
+   "A": "PostToolUse hook을 사용해 Agent가 처리하기 전에 tool 출력을 가로채고 형식 변환을 적용한다.",
+   "B": "제어 가능한 tool을 사람이 읽기 쉬운 형식을 반환하도록 수정하고 third-party tool용 wrapper를 만든다.",
+   "C": "모든 데이터 조회 후 Agent가 값을 변환하기 위해 호출하는 `normalize_data` tool을 만든다.",
+   "D": "각 tool의 데이터 규칙을 설명하는 상세 형식 문서를 system prompt에 추가한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "PostToolUse hook은 third-party MCP 서버 데이터를 포함한 모든 tool 출력을 Agent가 처리하기 전에 가로채 normalization할 수 있는 중앙화되고 결정적인 지점을 제공합니다. 변환이 코드에 존재하고 균일하게 적용되므로 LLM 해석에 의존하는 것보다 유지보수하기 좋습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0060",
+  "question": "프로덕션 로그는 특히 \"최근 구매 건을 도와주세요\" 같은 모호한 쿼리에서 Agent가 `lookup_order`가 더 적절한데도 때때로 `get_customer`를 선택함을 보여줍니다. tool 선택을 개선하기 위해 system prompt에 few-shot 예시를 추가하기로 했습니다. 어떤 접근이 문제를 가장 효과적으로 다루나요?\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "모호한 사례를 포함해 각 tool 설명에 명시적 \"use when\"과 \"don't use when\" 지침을 추가한다.",
+   "B": "tool별로 예시를 그룹화한다. 모든 `get_customer` 시나리오를 모은 뒤 모든 `lookup_order` 시나리오를 모은다.",
+   "C": "모호한 시나리오를 겨냥한 4-6개 예시를 추가하고, 각 예시에 왜 한 tool이 가능한 대안보다 선택되었는지 근거를 포함한다.",
+   "D": "각 tool의 일반적 시나리오에 대한 올바른 tool 선택을 보여주는 명확하고 모호하지 않은 요청 예시 10-15개를 추가한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "오류가 발생하는 특정 모호한 시나리오를 겨냥하고, 왜 한 tool이 대안보다 나은지 명시적 근거를 포함한 few-shot 예시는 엣지 케이스에 필요한 비교 판단 과정을 모델에 가르칩니다. 일반 예시나 선언적 규칙보다 이 상황에 더 잘 맞습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0061",
+  "question": "`remove_team_member` tool은 실행 전 영향을 미리 보기 위해 `dry_run: boolean` 매개변수를 사용합니다. 프로덕션 모니터링은 Agent가 `dry_run=false`로 직접 호출해 미리보기 단계를 우회한다는 것을 보여줍니다. 모든 제거 작업이 사용자가 명시적으로 확인한 미리보기 이후에만 수행되도록 해야 합니다.\n\n가장 신뢰할 수 있는 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "동일한 매개변수의 `dry_run=true` 호출이 지난 60초 내에 있었을 때만 `dry_run=false`를 허용하는 서버 측 validation을 추가한다.",
+   "B": "tool에 confirmation 필요 표시를 하고, annotated tool 호출을 전달하기 전에 사용자 승인을 요청하도록 orchestration 계층을 구성한다.",
+   "C": "tool 설명에 Agent가 항상 먼저 `dry_run=true`로 호출하고 사용자 확인을 기다린 뒤 다시 호출해야 한다는 상세 지시와 few-shot 예시를 추가한다.",
+   "D": "두 tool로 교체한다. `preview_remove_member`는 영향 세부사항과 1회용 confirmation token을 반환하고, `execute_remove_member`는 그 token을 요구해 실행을 미리보기에 바인딩한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "두 tool로 나누고 token-binding을 적용하면 사전 미리보기 없이 실행하는 경로가 architecture상 사라집니다. 실행 tool이 미리보기 tool에서만 발급되는 token을 반드시 요구하기 때문입니다. 따라서 LLM이 지시를 잘 따르는지(C), 시간 간격 heuristic이 맞는지(A), orchestration 계층이 제대로 동작하는지(B)에 기대지 않고 코드 수준에서 제약을 강제할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0062",
+  "question": "프로덕션 모니터링에 따르면 `search_catalog` tool이 12% 실패합니다. 8%는 retry하면 성공하는 네트워크 타임아웃이고, 4%는 retry해도 절대 성공하지 않는 쿼리 구문 오류입니다. 현재 두 오류 유형이 동일하게 반환되어 불필요한 retry를 유발합니다.\n\ntool의 오류 처리를 어떻게 수정해야 하나요?",
+  "choices": {
+   "A": "네트워크 오류와 구문 오류를 구분하는 방법을 보여주는 few-shot 예시를 system prompt에 추가한다.",
+   "B": "모든 오류에 지수 백오프 retry 로직을 균일하게 적용한다.",
+   "C": "네트워크 타임아웃에는 tool 내부에서 backoff 자동 retry를 구현하고, 구문 오류는 매개변수 validation 세부사항과 함께 즉시 반환한다.",
+   "D": "모든 오류를 `retryable` boolean 플래그와 오류 유형 세부사항과 함께 반환한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "일시적 오류에 대한 retry를 tool 수준에서 처리하는 것이 올바른 추상화 경계입니다. tool은 오류 유형을 확정적으로 알고 있으며, Agent가 플래그(D)를 해석하거나 prompt 지시(A)를 따르는 것에 의존하지 않고 결정적 retry 로직을 구현할 수 있습니다. 균일한 backoff(B)는 절대 성공하지 않을 구문 오류에 시간을 낭비합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0063",
+  "question": "투자 전략을 여러 턴에 걸쳐 논의하는 동안 사용자는 \"위험 허용도가 매우 낮다\"고 말했고, 나중에는 \"수익을 극대화하고 싶다\"고 말했습니다. 이제 \"무엇에 투자해야 하나요?\"라고 묻습니다.\n\n추천이 사용자의 실제 우선순위에 맞도록 가장 잘 보장하는 접근은 무엇인가요?",
+  "choices": {
+   "A": "모순을 드러내고 무엇이 더 중요한지 사용자에게 명확히 해 달라고 요청한다.",
+   "B": "두 시나리오에 대해 별도 추천을 제공한다.",
+   "C": "가장 최근에 말한 선호로 진행한다.",
+   "D": "충돌을 다루지 않고 균형 잡힌 포트폴리오를 추천한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "사용자 선호가 직접 모순될 때 충돌을 드러내고 clarification을 요청하는 것이 추천이 사용자의 진짜 의도에 맞도록 보장하는 유일한 방법입니다. 다른 접근은 틀릴 수 있는 가정을 포함합니다. 수익 극대화와 낮은 위험 허용도는 근본적으로 양립하기 어려운 목표이며 사람의 결정이 필요합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0064",
+  "question": "사용자는 여러 대화 턴에 걸쳐 플레이리스트 선호를 다듬습니다. 사용자가 \"재즈를 좋아해\"라고 말한 두 메시지 뒤에 Claude가 \"어떤 장르를 좋아하나요?\"라고 묻습니다.\n\n가장 가능성이 높은 원인은 무엇인가요?",
+  "choices": {
+   "A": "Claude는 대화 memory를 유지하려면 vector database 연결이 필요하다.",
+   "B": "모델의 context window가 초과되었다.",
+   "C": "Claude API에는 `session_id` 매개변수가 필요하다.",
+   "D": "애플리케이션이 이전 메시지를 `messages` 배열에 포함하지 않고 있다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "Claude에는 서버 측 memory가 없습니다. 모든 API 호출은 stateless입니다. 각 요청의 `messages` 배열에 전체 대화 기록을 포함하지 않으면 Claude는 이전 턴을 알 수 없습니다. Vector database(A)와 `session_id`(C)는 Claude architecture의 일부가 아니며, 두 메시지 교환에서 context window 초과(B)는 불가능합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0065",
+  "question": "40분 요리 session 후 대화가 78,000token에 도달했습니다. 기록에는 알레르기, 레시피 배율 조정, clarification된 요리 용어, 일반 논의가 포함됩니다. 중요한 정보를 보존하면서 token을 줄여야 합니다.\n\n보존과 token 감소의 균형을 가장 잘 맞추는 접근은 무엇인가요?",
+  "choices": {
+   "A": "전체 대화 기록을 summary한다.",
+   "B": "가장 최근 20,000token만 유지한다.",
+   "C": "중요한 structured data(알레르기, 수량, 선호)를 extraction하고, 일반 논의는 summary로 압축하고, 최근 교환은 원문 그대로 유지한다.",
+   "D": "전체 대화를 외부에 저장하고 semantic search로 관련 부분을 검색한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "하이브리드 방식은 가치가 큰 정보를 낮은 비용으로 유지합니다. 알레르기와 레시피 수량 같은 중요 사실은 압축된 structured 블록으로 extraction해 summary 중 발생하는 정밀도 손실을 방지하고, 일반 논의는 summary로 압축하고, 최근 교환은 대화 일관성을 위해 원문 그대로 유지합니다. A와 B는 중요한 식이 정보를 잃을 위험이 있고, D는 단일 요리 session에는 architecture상 과합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0066",
+  "question": "사용자는 긴 대화 중 assistant가 이전 주제와 선호를 놓친다고 보고합니다. 현재 구현은 마지막 25개 메시지 쌍만 유지합니다.\n\n가장 효과적인 해결책은 무엇인가요?",
+  "choices": {
+   "A": "하이브리드 접근: 오래된 메시지는 summary하고 최근 메시지는 원문 그대로 유지한다.",
+   "B": "전체 대화 기록에 대한 vector similarity search.",
+   "C": "window를 50개 메시지 쌍으로 늘린다.",
+   "D": "매 턴 삭제된 메시지를 summary하고 running summary를 앞에 붙인다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "하이브리드 방식은 문제의 두 차원을 모두 다룹니다. 대화 일관성에 중요한 정확한 최근 context를 유지하면서, 쌍이 삭제될 때 전체 손실을 막기 위해 이전 선호의 압축 표현을 유지합니다. window 확대(C)는 같은 문제를 지연할 뿐입니다. Vector search(B)는 현재 쿼리와 의미적으로 유사하지 않은 중요한 context를 놓칠 수 있습니다. 매 턴 전체 summary(D)은 overhead를 추가하고 summary 오류를 누적합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0067",
+  "question": "사용자는 대화가 50턴을 넘으면 지연 시간이 증가하고 비용이 오른다고 보고합니다.\n\n주요 원인은 무엇인가요?",
+  "choices": {
+   "A": "전체 대화 기록이 각 API 요청에 포함된다.",
+   "B": "모델이 점점 더 긴 응답을 생성한다.",
+   "C": "기록이 커지면서 데이터베이스 작업이 느려진다.",
+   "D": "모델이 내부 사용자 프로필을 구축해 더 많은 처리가 필요하다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "Claude API는 완전히 stateless입니다. 모든 요청은 `messages` 배열에 완전한 대화 기록을 포함해야 합니다. 대화가 커질수록 각 요청이 더 많은 token을 운반하므로 처리 지연과 비용이 직접 증가합니다. 모델은 호출 사이에 내부 상태를 유지하지 않으며(D는 거짓), 응답 길이가 대화 길이와 본질적으로 연결된 것은 아닙니다(B)."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0068",
+  "question": "3개월간의 주간 session 후 대화 기록이 85,000token으로 커졌습니다. 사용자가 \"고립이라는 주제에 대해 우리가 어떤 결론을 냈지?\"라고 묻자 assistant는 이전 논의를 참조하지 않고 일반적인 답변을 합니다.\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "Rolling window truncation.",
+   "B": "핵심 결론을 포착하는 점진적 summary.",
+   "C": "관련 교환을 검색하는 semantic embeddings.",
+   "D": "논의 결론을 표시하는 structured XML 태그 추가."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "대화 기록에 대한 semantic search는 3개월간의 논의로 확장되면서도 필요한 특정 관련 교환을 on-demand로 표면화할 수 있는 유일한 접근입니다. Rolling window(A)는 대부분의 기록을 버립니다. 점진적 summary(B)은 논의를 추상화로 압축해 사용자가 묻는 구체적 결론을 잃습니다. XML 태그(D)는 모든 과거 콘텐츠 재구성을 요구하며 이 규모의 검색 문제를 해결하지 못합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0069",
+  "question": "QA 테스트 중 Claude는 처음 10-15턴 동안 system prompt 지침을 따르지만 이후 응답은 벗어납니다. 대화는 여전히 token 한도 내에 있습니다.\n\n가장 좋은 해결책은 무엇인가요?",
+  "choices": {
+   "A": "행동 지침을 첫 번째 사용자 메시지로 옮긴다.",
+   "B": "20턴 후 새 대화를 시작한다.",
+   "C": "대화 분기점에 지침을 강화하는 user-role 메시지를 삽입한다.",
+   "D": "응답 후 validation을 사용해 비준수 응답을 재생성한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "행동 reminder를 주기적으로 주입하면 대화 기록이 누적될 때 정기적으로 제약을 재확립해 instruction drift에 직접 대응합니다. 지침을 첫 사용자 메시지로 옮기면(A) 권위가 낮아집니다. 새 대화를 시작하면(B) context가 사라집니다. 응답 후 validation(D)은 예방이 아니라 교정이며 상당한 지연을 추가합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0070",
+  "question": "AI 튜터에는 교수 방법론과 적응 규칙을 정의하는 2,800token system prompt가 있습니다. 12턴 후 assistant가 숙련도 수준을 무시하기 시작합니다.\n\n가장 효과적인 수정안은 무엇인가요?",
+  "choices": {
+   "A": "4-5턴마다 reminder를 주입한다.",
+   "B": "장황한 규칙을 숙련도 수준 적응을 보여주는 few-shot 예시로 교체한다.",
+   "C": "중요한 규칙을 system prompt 끝에 batch한다.",
+   "D": "응답을 평가하고 난이도 수준이 맞지 않으면 재생성한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "선언적 규칙이 있는 2,800token system prompt는 모델이 매 턴 이를 추론해야 하므로 drift에 취약합니다. 장황한 규칙을 올바른 숙련도 수준 적응을 보여주는 구체적인 few-shot 예시로 바꾸면 모델이 맞출 명확한 행동 패턴을 제공합니다. 이는 여러 턴에 걸쳐 추상 지시보다 더 안정적으로 따릅니다. Reminder 주입(A)은 도움이 되지만 증상을 다루고, 끝 batch(C)는 초기에는 도움이 되지만 턴 수준 drift에는 부족하며, 재생성(D)은 수정 비용이 큽니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0071",
+  "question": "assistant는 열정적인 톤을 유지하고, 자신의 추론을 설명하며, clarification 질문을 해야 합니다. 이러한 행동 지침은 어디에 정의해야 하나요?\n\n이 행동 지침은 어디에 정의해야 하나요?",
+  "choices": {
+   "A": "각 사용자 메시지 앞에 붙인다.",
+   "B": "system prompt에 둔다.",
+   "C": "첫 번째 assistant 메시지에 둔다.",
+   "D": "환경 변수에 둔다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "system prompt는 전체 대화에 적용되는 지속적 행동 제약과 지침을 위해 특별히 설계되었습니다. 각 사용자 메시지에 붙이는 방식(A)은 불필요한 overhead를 만듭니다. 첫 번째 assistant 메시지(C)는 모델이 자신의 이전 진술에서 벗어날 수 있어 신뢰할 수 없습니다. 환경 변수(D)는 모델 동작에 영향을 주지 않습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0072",
+  "question": "사용자는 \"Certainly!\"나 \"I'd be happy to help!\" 같은 반복적인 응답 시작을 보고합니다.\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "직접적인 응답 시작으로 partial assistant message를 덧붙인다.",
+   "B": "temperature 설정을 낮춘다.",
+   "C": "후처리로 인사말을 제거한다.",
+   "D": "system prompt에 해당 문구를 피하라는 지시를 추가한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "assistant 응답을 직접 답변의 시작으로 prefill하면 생성 수준에서 인사 패턴을 방지합니다. 모델은 새 시작 문구를 생성하는 대신 prefill에서 이어서 생성합니다. system prompt 지시(D)는 도움이 될 수 있지만 모델이 여전히 변형을 생성할 수 있어 덜 신뢰할 수 있습니다. 후처리(C)는 취약한 우회입니다. Temperature(B)는 무작위성을 제어하지 특정 문구 패턴을 제어하지 않습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0073",
+  "question": "사용자가 활발히 채팅하는 동안 webhook이 사용자의 패키지가 배송되었다고 시스템에 알립니다. assistant가 이를 다음 응답에 자연스럽게 반영하길 원합니다.\n\n가장 좋은 접근은 무엇인가요?",
+  "choices": {
+   "A": "배송 상태를 system prompt에 추가한다.",
+   "B": "즉시 합성 사용자 메시지를 보낸다.",
+   "C": "매 턴 상태 tool을 호출하도록 assistant를 강제한다.",
+   "D": "다음 사용자 메시지의 prefix로 상태 업데이트를 덧붙인다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "다음 사용자 메시지에 상태 업데이트를 prefix로 주입하면 대화 흐름을 방해하지 않고 자연스러운 대화 경계에서 실시간 context를 주입할 수 있습니다. system prompt 수정(A)은 session 재구성이 필요하거나 architecture상 번거롭습니다. 합성 사용자 메시지(B)는 자연스러운 대화 흐름을 깨고 attribution을 혼란스럽게 할 수 있습니다. 매 턴 tool 호출 강제(C)는 이벤트가 드문 경우 낭비입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0074",
+  "question": "사용자가 \"파티 장소를 예약해줘\" 같은 요청을 자주 보냅니다. assistant는 4개 이상의 clarification 질문을 하며, 이로 인해 35% 이탈이 발생합니다.\n\ntrade-off를 가장 잘 개선하는 접근은 무엇인가요?",
+  "choices": {
+   "A": "숨겨진 기본값으로 진행한다.",
+   "B": "모든 clarification 질문을 하나의 복합 메시지로 묻는다.",
+   "C": "가정을 명시적으로 밝히고 진행하되 수정을 초대한다.",
+   "D": "구조화된 intake form을 사용한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "가정을 명시적으로 밝히고 진행하면 사용자는 즉시 유용한 응답을 받으면서도 잘못된 가정을 수정할 수 있습니다. 숨겨진 기본값(A)은 사용자가 무엇이 가정되었는지 알 수 없게 합니다. 복합 질문 목록(B)은 여전히 사용자에게 선행 노력을 요구합니다. structured 양식(D)은 더 많은 마찰을 추가해 이탈 감소 목표와 반대입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0075",
+  "question": "assistant는 contractor persona system prompt를 사용합니다. 초기 턴은 규칙을 따르지만 7턴째에는 일반적인 조언을 제공합니다. 대화 길이는 2,500token에 불과합니다.\n\n가장 가능성이 높은 원인은 무엇인가요?",
+  "choices": {
+   "A": "system prompt는 초기 동작만 설정한다.",
+   "B": "턴이 누적되면서 모델 주의가 약해진다.",
+   "C": "누적된 assistant 응답이 system prompt 영향을 희석한다.",
+   "D": "system prompt가 한 번만 전송된다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "assistant 응답이 대화 기록에 누적되면서 system prompt의 행동 제약을 반영하는 텍스트 비율이 증가하는 assistant 생성 콘텐츠에 비해 줄어듭니다. 모델은 system prompt보다 자신의 이전 출력에 점점 더 패턴 매칭하면서 짧은 token 길이에서도 drift가 누적됩니다. system prompt는 모든 API 호출에 포함되며(D는 단독 설명으로 거짓), 모델 주의 저하(B)는 2,500token에서 작동하는 설명이 아닙니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0076",
+  "question": "사용자가 \"보고서 좀 도와줄 수 있어?\" 같은 모호한 요청을 합니다. assistant는 여러 질문(어떤 보고서? 어떤 도움? 마감일?)으로 응답하며, 이로 인해 40% 이탈이 발생합니다.\n\n가장 좋은 해결책은 무엇인가요?",
+  "choices": {
+   "A": "합리적인 가정을 하고, 이를 명시적으로 밝히며, 조정할 수 있다고 제안한다.",
+   "B": "응답 전에 작은 모델로 모호성을 classification한다.",
+   "C": "가정을 밝히지 않고 사전 정의된 해석을 사용한다.",
+   "D": "assistant를 턴당 하나의 clarification 질문으로 제한한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "합리적인 명시적 가정으로 진행하면 사용자가 정보를 알고 통제권을 유지하면서도 왕복을 완전히 제거할 수 있습니다. 조용한 사전 정의 해석(C)은 응답이 의도와 맞지 않을 때 사용자를 혼란스럽게 합니다. 한 질문 제한(D)은 여전히 여러 턴의 왕복을 요구합니다. 작은 classification 모델(B)은 핵심 UX 문제를 해결하지 못하면서 지연과 인프라 복잡성을 추가합니다."
+ }
+]

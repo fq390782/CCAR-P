@@ -1,0 +1,387 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0585",
+  "question": "A finance owner wants a hard monthly stop on the spend of one team. The team's API keys currently sit in the Default Workspace. Which change meets the constraint?",
+  "choices": {
+   "A": "Set a spend limit on the Default Workspace that holds the team's keys.",
+   "B": "Raise the rate limits for the team's model, which also caps its monthly spend.",
+   "C": "Turn on usage reports, which stop requests when spend passes the budget.",
+   "D": "Create a workspace for the team, create new keys there, and set its spend limit."
+  },
+  "explanation": "The Default Workspace cannot have a spend limit. A separate workspace with its own spend limit stops that team's requests at the limit. Rate limits control requests per minute, not monthly spend. Trap. Usage reports look like budget control, but a report alone does not stop usage."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0586",
+  "question": "A team runs two Claude Haiku 5.5 workloads. Nightly reports can wait up to 24 hours, and a live chat feature needs answers at once. The team must forecast each workload at its correct rate. Which two statements meet the constraint?",
+  "choices": {
+   "A": "Price both workloads at the batch rate, which keeps one simple forecast.",
+   "B": "Price the nightly reports at the batch rate, which is 50 percent below the base price.",
+   "C": "Price the live chat at the cache hit rate, because chat prompts repeat.",
+   "D": "Price the live chat at the base input and output rates per million tokens."
+  },
+  "explanation": "Batch pricing is 50 percent off and applies to work that can wait. Live chat needs answers at once, so it stays on the standard base rates. Trap. Cache hit pricing looks like a discount for repeated chat prompts, but it applies only to the cached tokens, not the whole workload."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0587",
+  "question": "A team must answer questions about one 600,000-token report in a single request. The team uses Claude Opus 5.5 and expects an answer of about 8,000 tokens. Which design meets the constraint?",
+  "choices": {
+   "A": "Split the report into chunks and send one request for each chunk.",
+   "B": "Send the full report in one request and set max_tokens to 8,000.",
+   "C": "Send the full report in one request with server-side compaction enabled on every turn.",
+   "D": "Set max_tokens to 1,000,000 so the window holds the full report."
+  },
+  "explanation": "The context window holds the input and the new output of a turn. Opus 5.5 has a 1M-token window, so the report fits, and max_tokens caps only the output at 8,000. Trap. Setting max_tokens to 1,000,000 looks like a window fix, but max_tokens caps only the output of a response."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0588",
+  "question": "A team deploys Claude Haiku 5.5 on Claude Platform on AWS. The application must send the model ID that this platform uses. Which choice meets the constraint?",
+  "choices": {
+   "A": "The ID claude-haiku-5-5, the same ID that the Claude API uses.",
+   "B": "A custom alias that a config service resolves to a model ID on each request.",
+   "C": "The Foundry deployment name, which this platform uses in place of a model ID.",
+   "D": "The Bedrock-style ID anthropic.claude-haiku-5-5 in the model field."
+  },
+  "explanation": "This platform reuses the first-party model IDs, with no Bedrock-style prefix. Claude Haiku 5.5 therefore uses claude-haiku-5-5 here. Trap. The Bedrock-style ID looks right for Haiku 5.5, but this platform omits the anthropic prefix."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0589",
+  "question": "A support app lets Claude look up order status through a tool. The app must run each lookup in its own code behind its permission checks. Which two options meet the constraint?",
+  "choices": {
+   "A": "Return each result as a tool_result block with the next request.",
+   "B": "Let the model call the order API directly with its own network access.",
+   "C": "Set stop_reason to tool_result so the loop continues.",
+   "D": "Repeat the request while stop_reason is tool_use, and exit on end_turn."
+  },
+  "explanation": "The app runs each tool and returns its output as a tool_result block. The loop repeats while stop_reason is tool_use and exits on the other documented stop reasons. Trap. Setting stop_reason to tool_result looks like a loop control, but tool_result is a block type that the app sends, not a stop reason."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0590",
+  "question": "A batch job receives HTTP 429 with a retry-after header of 30 seconds. The request is valid. The job must honor the server wait time and send the same request. Which action meets the constraint?",
+  "choices": {
+   "A": "Resend the same request at once in a loop with no delay.",
+   "B": "Ask the model in the prompt to wait 30 seconds and send the request again.",
+   "C": "Move the job to a new queue service with priority lanes before each retry.",
+   "D": "Wait 30 seconds, then resend the same request."
+  },
+  "explanation": "A 429 response with a retry-after header tells the caller how long to wait. Wait that long, then resend the same valid request, which meets the constraint. Trap. A prompt that says retry looks like a retry policy, but your app must resend the request, not the model."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0591",
+  "question": "A report tool sends a Messages request without streaming. Each report can run for 15 minutes, and the user reads the text as it arrives. Which change meets the constraint?",
+  "choices": {
+   "A": "Stream the Messages response and read each event as it arrives.",
+   "B": "Create a Message Batch for each report and poll until processing ends.",
+   "C": "Keep the request without streaming, and write the full response to a database table when it ends.",
+   "D": "Set the client timeout to 24 hours, because idle connections never drop."
+  },
+  "explanation": "Streaming sends server-sent events as the model writes, so the user reads text before the response ends. A batch returns results only after processing, so it fails the constraint. Trap. Setting the client timeout to 24 hours looks like the fix for long calls, but some networks drop idle connections whatever the timeout."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0592",
+  "question": "A chat app streams Claude Opus 5.5 responses to users. Some streams end with an error event after partial text. The app must not show partial text as a final answer. Which two actions meet the constraint?",
+  "choices": {
+   "A": "Treat the stream as complete once the HTTP status is 200.",
+   "B": "Handle error events in the same loop that handles content events.",
+   "C": "Show streamed text as a draft until the final message arrives.",
+   "D": "Set a resume flag on the Messages request to continue a cut stream."
+  },
+  "explanation": "An error can arrive after the 200 status, so the loop must handle error events as well as content events. Streamed text stays provisional until the final message arrives. Trap. Resume looks like the fix for a cut stream, but the docs describe a continuation message on newer models, not a request flag."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0593",
+  "question": "A CI pipeline calls the Claude API for nightly evals. The CI platform issues a signed identity token for each job. The constraint: no static API key may be stored in CI. Which design meets the constraint?",
+  "choices": {
+   "A": "Store a workspace API key in the CI secrets manager with a 30-day expiry.",
+   "B": "Build a token broker that holds the key in a vault and issues short tokens to each job.",
+   "C": "Register the CI identity provider as a federation issuer and create a federation rule for the pipeline.",
+   "D": "Use a Bedrock short-term bearer token, which lasts up to 12 hours, for the Claude API calls."
+  },
+  "explanation": "Federation lets the workload exchange its signed identity token for a short-lived Anthropic token. No static key sits in CI, and the federation rule sets the scope and lifetime. Trap. A key with a 30-day expiry looks short-lived, but it is still a static API key stored in CI."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0594",
+  "question": "A nightly job reads usage by workspace and also sends Messages requests for the product. The constraint: each call must use the key type that the API accepts for it. Which key plan meets the constraint?",
+  "choices": {
+   "A": "Use one workspace API key for both the usage reads and the Messages requests.",
+   "B": "Use an Admin API key for the usage reads and a workspace API key for the Messages requests.",
+   "C": "Create a separate organization with its own Admin API key, and a second key for requests.",
+   "D": "Use the Default Workspace key for the usage reads, because it is an Admin API key."
+  },
+  "explanation": "An Admin API key authenticates the Usage and Cost API. A workspace API key covers the Messages requests, so each key does one job. Trap. One workspace key for both calls looks simpler, but a workspace key cannot authenticate the Usage and Cost API."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0595",
+  "question": "A health tech team sends regulated prompts through the Messages API. The contract forbids saving prompts and responses at rest. Which two actions meet the constraint?",
+  "choices": {
+   "A": "Ask the account team to enable ZDR for the organization.",
+   "B": "Keep the regulated prompts in the Console playground, since ZDR covers the Console.",
+   "C": "Turn on platform activity logs, which keep prompts out of storage at rest.",
+   "D": "Check that each feature in use is eligible for zero data retention before launch."
+  },
+  "explanation": "ZDR is enabled for each organization by the account team, and Anthropic does not store prompts or responses at rest under ZDR. Eligibility depends on the feature, so the team checks each feature before launch. Trap. Platform activity logs look like a data control, but logs do not enable zero data retention."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0596",
+  "question": "A claims team extracts fixed fields from forms that share one layout. The team must cut model cost and return the same output for the same input. Which design meets the constraint?",
+  "choices": {
+   "A": "Read the fixed fields with code rules and skip the model call.",
+   "B": "Send each form to Claude Haiku 5.5 at temperature 0, which returns the same output for the same input.",
+   "C": "Send each form to Claude Opus 5.5 for field extraction, since the largest tier is the most accurate.",
+   "D": "Send each form to Claude Haiku 5.5, where cache hits make repeated field reads free."
+  },
+  "explanation": "Fixed layouts map to fixed outputs, so code rules return the same result with no per-token cost. Only open input needs a model call (Inference). Trap. Cache hits look like free reads, but cache hits still cost a small amount per million tokens."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0597",
+  "question": "A product owner wants summaries that read well. The team must decide whether a model change can ship, and the decision needs a result that passes or fails. Which success criterion meets the constraint?",
+  "choices": {
+   "A": "Summaries read well to the support team.",
+   "B": "A rating from the model itself looks like a metric, so the team ships when the rating is high.",
+   "C": "Summaries score at least 4 out of 5 on a rubric for a fixed test set, signed by the support lead.",
+   "D": "Summaries score well on a rubric, reviewed live on a dashboard after release."
+  },
+  "explanation": "A success criterion needs a metric, a threshold, and a named owner (Inference). A rubric score on a fixed test set gives a pass or fail result that the owner can sign. Trap. A rating from the model itself looks like a metric, but the same model then grades its own output."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0598",
+  "question": "A team scores 50,000 nightly support tickets for a report due next morning. Live chat answers must arrive within seconds. The team must keep token cost low for the nightly work. Which two options meet the constraint?",
+  "choices": {
+   "A": "Send the live chat through the Message Batches API to lower its token cost.",
+   "B": "Send the nightly tickets through the Message Batches API at the batch rate.",
+   "C": "Read each nightly result as the model writes it, before the batch ends.",
+   "D": "Keep live chat on the synchronous Messages API for answers at once."
+  },
+  "explanation": "Batches cost 50 percent less, and most batches finish within 1 hour, so overnight work fits. Live chat needs answers at once, so it stays on the synchronous API. Trap. The batch rate looks like a saving for live chat too. But batch results arrive only when the batch ends, so chat answers would not arrive within seconds."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0599",
+  "question": "A support chatbot answers each message on its own, so follow-up answers ignore earlier turns. The model must stay the same. Which change meets the constraint?",
+  "choices": {
+   "A": "Assume the Messages API keeps earlier turns and reuses them on each call.",
+   "B": "Switch to a larger model tier, which keeps earlier turns in memory.",
+   "C": "Store turns in a graph database with embeddings, and send only the newest message with each call.",
+   "D": "Store the conversation history in the app and send the full history with each request."
+  },
+  "explanation": "The Messages API is stateless, so the app sends the full conversation history with each request. The model stays the same, and each answer can use the earlier turns. Trap. Server-side memory looks like the simplest fix, but the Messages API keeps no turns between calls."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0600",
+  "question": "A benefits app sends a claim draft to a claims system that needs a fixed object shape. Each claim value must match the source record. The check must run in code and add no model call. Which design meets the constraint?",
+  "choices": {
+   "A": "Ask the model in the prompt to check its own draft before it returns.",
+   "B": "Request structured outputs, then compare each claim with the source record in code.",
+   "C": "Enable strict tool use so the claim values match the source records.",
+   "D": "Request structured outputs, then send each draft back to the model to compare with the source record."
+  },
+  "explanation": "Structured outputs constrain the response to the schema. A code check then compares each value with its source record, and no model call runs in the check. Trap. Strict tool use looks like a value check, but it validates only tool names and inputs against the schema."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0601",
+  "question": "A pipeline returns wrong totals for some reports. No log shows which stage produces the wrong value. The team must find the stage that breaks before it changes the model. Which two actions meet the constraint?",
+  "choices": {
+   "A": "Log the stage name and the token counts for each model call.",
+   "B": "Switch to a larger model tier and compare the totals on the next run.",
+   "C": "Log each stop reason with a count for each request.",
+   "D": "Enable prompt caching, which records the stage that produced each wrong total."
+  },
+  "explanation": "A log line with the stage name ties each model call to its stage (Inference). Stop reasons show how each call ended, such as a stop at max_tokens. Together they locate the stage that breaks before any model change. Trap. A larger model tier looks like a quick fix, but it hides the stage that breaks and raises cost."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0602",
+  "question": "A finance app reads one invoice, classifies it, and posts one record. The steps are fixed, and one model judgment is needed for the class. The app must keep control of the write. Which pattern meets the constraint?",
+  "choices": {
+   "A": "Run an agent loop with a session budget, and let the agent post each record through the MCP connector.",
+   "B": "Send the invoice to Claude with network access, and let the model post the record.",
+   "C": "Run the fixed steps in app code, with one model call for the classification, then post in app code.",
+   "D": "Use a server-executed tool to post the record, so the app runs no code."
+  },
+  "explanation": "The steps are fixed, so app code runs them in order. The model makes only the classification judgment, and the app keeps control of the write. Trap. An agent loop looks thorough for an invoice, but its planned steps add cost and variation that fixed code does not need."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0603",
+  "question": "A research job searches the web, and each result decides the next search. The steps are unknown until the run starts. The team must stop spend at a fixed cap for each session. Which pattern meets the constraint?",
+  "choices": {
+   "A": "Hard-code the search steps in code, with one model call for each step.",
+   "B": "Run an agent with six subagents and a merge step, with no session budget.",
+   "C": "Set effort to low, which stops new model requests at the cap.",
+   "D": "Run an agent loop with a session budget that pauses the session at the cap."
+  },
+  "explanation": "An agent loop chooses each step from the results so far, which fits steps that are unknown. A session budget stops new model requests when list cost reaches the cap. Trap. Setting effort to low looks like a spend control, but only a session budget stops new requests at the cap."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0604",
+  "question": "A checker reads one file, runs one fixed test command, and writes a report. The steps are known, and the app must keep the order of the steps. Which two options meet the constraint?",
+  "choices": {
+   "A": "Call each step from application code in a fixed order, with a model call only for the report text.",
+   "B": "Let the model choose the next step from a tool list after each result.",
+   "C": "Run each step from application code, and check each result before the next step starts.",
+   "D": "Enable a server-executed web search tool to run the test command on your machine."
+  },
+  "explanation": "Application code keeps the step order, and the model writes only the report text. Each result is checked before the next step runs, so a failure stops the chain early. Trap. A model that picks the next tool looks flexible, but the order then depends on the model rather than on your code."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0605",
+  "question": "A lead agent reviews three separate code areas. Each area needs its own system prompt and tools. The team needs one merged report that one agent owns. Which design meets the constraint?",
+  "choices": {
+   "A": "The lead agent delegates each area to a subagent with its own prompt and tools, then merges the subagent reports.",
+   "B": "Three peer agents write separate reports to a shared folder, and the user merges them by hand.",
+   "C": "The subagents share one conversation history, so the lead reads every turn of each subagent.",
+   "D": "One agent reviews all three areas with one system prompt and one tool set."
+  },
+  "explanation": "Each subagent works with its own prompt, tools, and conversation history. The lead agent receives the subagent's final report and owns the merge. Trap. Shared history looks like a way to give the lead full context, but each subagent keeps its own conversation history."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0606",
+  "question": "A team must review 900 repositories in parallel and show progress while the work runs. The lead must not send follow-up messages to each worker during the run. Which design meets the constraint?",
+  "choices": {
+   "A": "Chat with each subagent in turn, and send follow-up messages until each one finishes.",
+   "B": "Start one workflow run that reads the repositories in parallel, with one session budget for the whole session.",
+   "C": "Start a workflow run for each repository, each with a session budget of its own.",
+   "D": "Start one workflow run, and have the lead send each worker a follow-up message about its progress."
+  },
+  "explanation": "A workflow run reads the items in parallel and combines the findings. Runs count toward the session budget, so one session budget covers all runs. Trap. Separate budgets for each run look like tighter control, but runs count toward one session budget."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0607",
+  "question": "Three steps edit one shared report. Each step needs the result of the step before it. The team wants one coherent report. Which two options meet the constraint?",
+  "choices": {
+   "A": "Run the three steps as parallel subagents, each with the full report in its prompt.",
+   "B": "Keep the three steps in one agent, so each step sees the earlier result.",
+   "C": "Enable the shared sandbox so each subagent sees the earlier conversation history.",
+   "D": "Run the steps in order in one thread, and check each step result before the next one starts."
+  },
+  "explanation": "One thread keeps each earlier result in its history, so later steps see it. The fixed order and the check after each step keep one coherent report. Trap. A shared sandbox looks like shared context, but each subagent still keeps its own conversation history."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0608",
+  "question": "A team must score 150,000 document requests overnight with batch pricing. No request needs an answer at once, and each request is under 1 KB. Each batch must stay within the documented limits. Which plan meets the constraint?",
+  "choices": {
+   "A": "Send all 150,000 requests in one batch, since a batch can hold them all.",
+   "B": "Send the 150,000 requests one at a time through the synchronous Messages API overnight.",
+   "C": "Split the job into two batches, each under 100,000 requests, and collect both result sets.",
+   "D": "Set the batch expiry to 29 days so all 150,000 requests finish in time."
+  },
+  "explanation": "A batch holds up to 100,000 requests or 256 MB, whichever limit comes first. Two batches of 75,000 requests of 1 KB each stay under both limits and keep batch pricing. Trap. One batch for everything looks simplest, but a batch holds at most 100,000 requests or 256 MB."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0609",
+  "question": "A contract pipeline extracts party names first, then computes the fee from those names. A wrong name in step one would change the fee in step two. The team must stop a wrong name before step two runs. Which design meets the constraint?",
+  "choices": {
+   "A": "Run the name step and the fee step in parallel, so both finish sooner.",
+   "B": "Check the party names in code after the fee step, and route each fee to a reviewer.",
+   "C": "Turn on compaction, which removes wrong party names from earlier turns.",
+   "D": "Check the party names in code before the fee step, and stop the chain at a failed check."
+  },
+  "explanation": "The fee step depends on the name step, so a code check between the steps catches a wrong name at its source. A stop at the failed check keeps the wrong name out of step two. Trap. Compaction looks like a cleanup step, but it writes a summary of older turns and does not validate values."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0610",
+  "question": "A team has 80,000 review texts for overnight scoring. A live widget scores one text while a user types. The team must keep each path on the right API. Which two options meet the constraint?",
+  "choices": {
+   "A": "Send the live widget requests through a batch, so each score costs less.",
+   "B": "Split the overnight texts into batches of 256 requests, since a batch holds 256 requests.",
+   "C": "Send the overnight texts as one Message Batch, since the batch holds up to 100,000 requests.",
+   "D": "Send the live widget requests through the synchronous Messages API, one call per text."
+  },
+  "explanation": "A batch holds up to 100,000 requests or 256 MB, and its results come after processing. A live widget needs each answer while the user types, so it uses the synchronous API. Trap. The number 256 looks like a request count, but it is the 256 MB size limit of a batch."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0611",
+  "question": "A summary request on Claude Haiku 5.5 uses 3,000 input tokens and 800 output tokens. The prompt is under 100,000 tokens. The team needs the cost per request from published prices. Which method meets the constraint?",
+  "choices": {
+   "A": "Multiply all 3,800 tokens by the input price per million tokens.",
+   "B": "Multiply each token count by its own rate, divide by one million, and add the two results.",
+   "C": "Multiply each token count by its own rate, then write each result to a cost ledger with a dashboard.",
+   "D": "Price all input tokens at the cache hit rate, because the prompt is reused."
+  },
+  "explanation": "Haiku 5.5 has separate base rates for input and output, both per million tokens. Here the input costs 0.0003 dollars and the output costs 0.0004 dollars, for 0.0007 dollars in total. Trap. A cache hit rate looks like a cheap input price, but it applies only to tokens that the cache actually returns."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0612",
+  "question": "A team wants to book savings from a cheaper model tier. The cheaper tier passes 91 percent of the eval set, and the agreed threshold is 95 percent. The constraint: keep a value claim only while the quality threshold holds. Which action meets the constraint?",
+  "choices": {
+   "A": "Book the savings now, and tune the threshold after the next quarter.",
+   "B": "Set a session budget on the cheaper tier, which proves the savings hold.",
+   "C": "Hold the savings claim until the cheaper tier passes the threshold on the same eval set.",
+   "D": "Book the savings now, and rebuild the eval set with 10,000 cases before any re-test."
+  },
+  "explanation": "The claim needs the cheaper tier to pass the agreed threshold on the same eval set. A session budget caps spend, but it does not measure quality. Trap. The early savings claim looks like progress, but the cheaper tier fails the agreed threshold today."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0613",
+  "question": "A long agent run follows fixed steps, and no user waits for it. Finance caps the spend for the run. The team needs a budget that stops new requests at the cap and shows spend during the run. Which two options meet the constraint?",
+  "choices": {
+   "A": "Set a session budget when the session is created, so new requests stop at the cap.",
+   "B": "Set the budget after the bill arrives, so the total can be corrected.",
+   "C": "Set a workspace spend limit of the same amount on the Default Workspace.",
+   "D": "Read usage.list_cost on the session object, which holds the list cost to date."
+  },
+  "explanation": "A session budget is set when the session is created, and it stops new model requests at the cap. The platform prices the session continuously, and usage.list_cost on the session object holds that total to date. Trap. A workspace spend limit looks like the same control, but the Default Workspace cannot have a spend limit."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0614",
+  "question": "A ticket router classifies five million tickets each month. Claude Haiku 5.5 clears the measured quality floor on the team's test set. The constraint: use the lowest-cost tier that clears the floor. Which choice meets the constraint?",
+  "choices": {
+   "A": "Route every ticket to claude-haiku-5-5, the lowest tier that clears the floor.",
+   "B": "Route every ticket to Claude Haiku 4.5, which costs less per million tokens than Haiku 5.5.",
+   "C": "Route every ticket to Claude Fable 5.1, the top tier, for the highest safety margin.",
+   "D": "Set effort to max on Claude Haiku 5.5, which moves its price to the Sonnet tier."
+  },
+  "explanation": "The lowest tier that clears the measured floor has the lowest price for the work. Haiku 5.5 costs 0.10 dollars per million input tokens for prompts up to 100,000 tokens. Trap. Fable 5.1 for every ticket looks safest, but it adds cost that the measured floor does not require."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0615",
+  "question": "A code assistant runs on Claude Haiku 5.5. It misses the quality floor on about 8 percent of requests at the default effort. The team must keep the same model and raise quality with the least change. Which change meets the constraint?",
+  "choices": {
+   "A": "Move all traffic to Claude Fable 5.1, which clears the floor on every request.",
+   "B": "Raise effort to high only for the requests that miss the floor, and keep the medium default for the rest.",
+   "C": "Set a thinking budget_tokens value of 20,000 on Haiku 5.5 to raise thinking depth.",
+   "D": "Set effort to xhigh on every request and rebuild the eval set with extra checks."
+  },
+  "explanation": "Effort is set per request on the same model, so only the requests that miss the floor get more effort. Haiku 5.5 supports high effort, and its default is medium. Trap. A thinking budget looks like a direct depth control, but budget_tokens returns a 400 error on Haiku 5.5."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0616",
+  "question": "A team runs one extraction task on Claude Haiku 5.5. Most requests clear the quality floor at the default effort. The constraint: keep cost and latency low while the quality floor holds. Which two options meet the constraint?",
+  "choices": {
+   "A": "Send all traffic to Claude Opus 5.5, so every request clears the floor.",
+   "B": "Keep Haiku 5.5 for all traffic, and set low effort for simple requests.",
+   "C": "Set a thinking budget_tokens value on Haiku 5.5 to cut output tokens.",
+   "D": "Escalate only the requests that miss the floor to Claude Sonnet 5.5."
+  },
+  "explanation": "Haiku 5.5 is the lowest-priced current model in this set and handles most requests. Low effort reduces thinking on simple requests, and escalation sends only the misses to a higher tier. Trap. Opus 5.5 for all traffic looks like a safe floor, but it raises cost for requests that Haiku 5.5 already clears."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0617",
+  "question": "A support assistant must never show one customer's order data to another customer. The rule must hold for every user input. Which change meets the constraint?",
+  "choices": {
+   "A": "Add a stricter rule to the system prompt that forbids cross-customer data.",
+   "B": "Filter order records in code by the signed-in customer ID before each call.",
+   "C": "Send all order records, and ask the model to show only the signed-in customer's records.",
+   "D": "Set an output schema that lists only the customer ID field."
+  },
+  "explanation": "Code checks ownership for every input before the model receives any record. A system prompt is guidance, so it cannot enforce access alone (Inference). Trap. A stricter system prompt rule looks like access control, but it is guidance that code must enforce (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0618",
+  "question": "A billing service parses each model reply into database fields. The team needs one fixed JSON shape, with no retry loop for shape errors. Which change meets the constraint?",
+  "choices": {
+   "A": "Ask in the prompt for JSON only, then parse the text with a pattern match.",
+   "B": "Let the model write prose, then split each paragraph into fields in code.",
+   "C": "Send a JSON schema in output_config format, then check the stop reason before parsing.",
+   "D": "Send a JSON schema in the prompt text, then retry the call when the shape fails to parse."
+  },
+  "explanation": "The schema in output_config format constrains the reply shape, so a retry loop is not needed in most cases. Code still checks the stop reason before it parses the text. Trap. A prompt that asks for JSON only looks equal to a schema, but nothing constrains the text."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0619",
+  "question": "A shared assistant sends one system prompt with every request, and the cache must keep its stable text. The team must also tie each saved answer to one prompt version. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Insert the tenant name into the system prompt on each request.",
+   "B": "Keep the stable instructions in one system block, stored in version control.",
+   "C": "Turn on automatic prompt version history in the Claude Console.",
+   "D": "Log the prompt version with each saved answer."
+  },
+  "explanation": "One stable system block keeps the cached prefix identical across requests. A version label on each saved answer ties it to one prompt (Inference). Trap. A tenant name in the system prompt looks like personalization, but a change to the system content invalidates the system and messages caches."
+ }
+]

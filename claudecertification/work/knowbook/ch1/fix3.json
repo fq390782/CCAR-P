@@ -1,0 +1,8 @@
+{"add": {
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-F-Udemy04-0014", "CCAR-F-Udemy05-0045", "CCAR-F-Udemy06-0023", "CCAR-F-preporato-0009"],
+ "## 3. 자주 나오는 오답 함정": ["CCAR-F-Amey-Thakur-0013", "CCAR-F-Udemy06-0050", "CCAR-F-Udemy04-0053"],
+ "## 4. 암기 목록": ["CCAR-F-Udemy04-0053"],
+ "### 1.17 프로그램 강제 vs prompt 지시": ["CCAR-F-Amey-Thakur-0014"]},
+ "rep": [
+ ["| 모델 판단 2개 · 결정론적 · 사람 점검 없음 |", "| 모델 판단 2개 · 결정론적 점검 ✗ · 사람 점검 ✗ |"]
+]}

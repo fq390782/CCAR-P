@@ -1,0 +1,272 @@
+[
+ {
+  "id": "CCAR-F-Udemy04-0003",
+  "question": "A development team at an automotive parts manufacturer has built Claude Code into its continuous integration pipeline. For in-vehicle ECU firmware, there is a step in which, immediately after Claude generates code, the pipeline instructs Claude in the same session to 「今のコードをレビューして」.\n\nHowever, hard-to-find defects, such as overflows at boundary values and race conditions in interrupt handling, keep turning up later during integration testing.\n\nWhich changes would appropriately improve the effectiveness of the review? (Select two.)",
+  "choices": {
+   "A": "Enable extended thinking in the same session and have Claude spend more time reviewing the code it generated.",
+   "B": "Give the reviewer only the diff and the requirements specification, and do not pass along the explanations or reasoning from the generation step.",
+   "C": "Pass the conversation record from generation to the reviewer so that it can verify the code after understanding the design intent.",
+   "D": "Launch a separate Claude instance from the one that generated the code and have that instance perform the review."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0004",
+  "question": "A development team at a real estate company is trying to integrate Claude Code into its development workflow. They want Claude to be able to work with the following three systems.\n\nGitHub issues and pull requests\n\nSlack channels\n\nThe internal property management database (which has a proprietary internal workflow that approves price revisions in two stages)\n\nThe person in charge plans to build custom MCP servers for all three.\n\nWhich revisions to this plan are appropriate? (Select two.)",
+  "choices": {
+    "A": "Build a custom MCP server only for the property management database's approval workflow.",
+    "B": "Do not use MCP; instead, write procedures for calling each API with curl in CLAUDE.md and have Claude run them with Bash.",
+    "C": "Use existing community-built or official MCP servers for GitHub and Slack.",
+    "D": "Combine the three integrations into a single custom MCP server so that there is only one thing to maintain."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0005",
+  "question": "A shared research facility at a research institution is building a customer support resolution agent with the Claude Agent SDK to answer inquiries from external researchers. For process_refund, which refunds equipment usage fees, the team implemented a prerequisite gate that \"rejects the call until get_customer has been called in the same session.\"\n\nHowever, an audit found that even in a conversation where get_customer returned the result 「該当する利用者が2名います」, the subsequent process_refund was executed and the refund went to a different researcher's account.\n\nWhich is the most likely cause?",
+  "choices": {
+    "A": "The description of process_refund is short, so the agent cannot judge when it should be used.",
+    "B": "tool_choice is still \"auto\", so calling get_customer is not forced.",
+    "C": "The system prompt does not include an instruction to verify the customer's identity before issuing a refund.",
+    "D": "The gate only checks whether get_customer was called and does not check for a verified ID."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0006",
+  "question": "A development team at an advertising company is building a structured data extraction system with Claude. From contracts with advertisers, it extracts the contract start date, contract end date, monthly fee, and whether the contract auto-renews, and registers them in the billing system. The extraction schema makes all four fields required.\n\nHowever, about 30% of the contracts are auto-renewing and do not state an end date. Even in those cases, the system was outputting end dates that do not appear in the contract, such as 「2099-12-31」 or 「契約開始日の1年後」.\n\nWhich is the most appropriate fix?",
+  "choices": {
+    "A": "Make the contract end date an optional, nullable field and have Claude return null when it is not stated.",
+    "B": "Set strict: true in the tool definition so that Claude returns values that conform to the schema.",
+    "C": "In post-processing, replace end dates in 2099 with one year after the contract start date before registering them.",
+    "D": "Add \"Do not guess dates that are not written in the contract\" to the prompt."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0007",
+  "question": "A development team at an insurance company is developing a policy management system with Claude Code. The CLAUDE.md at the repository root is shared by the team and committed, but recently members have begun adding content meant only for themselves. For example, lines like the following.\n\n「検証環境には自分用のsbx-tanakaサーバーを使う」\n\n「テストには自分が担当する契約番号P-20871を使う」\n\nAs a result, other members' Claude instances try to connect to someone else's test environment, and editing these lines causes merge conflicts.\n\nWhich restructurings of CLAUDE.md are appropriate? (Select two.)",
+  "choices": {
+   "A": "Keep only content common to the whole team, such as build procedures and conventions, in the committed CLAUDE.md.",
+   "B": "Create a personal file in .claude/rules/ for each member and specify the directories they are responsible for with paths.",
+   "C": "Move each member's personal content to CLAUDE.local.md at the project root and add it to .gitignore.",
+   "D": "Move each member's personal content to ~/.claude/CLAUDE.md in their own home directory."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0008",
+  "question": "A development team at a SaaS company is building a developer productivity tool with the Claude Agent SDK. The tool has the following two features.\n\nA routine check run on every pull request that verifies three items: the license header, the changelog entry, and public API compatibility\n\nAn open-ended investigation request such as 「レガシーの課金サービスがなぜ遅いのか調べて」\n\nCurrently the same general-purpose agent handles both, and in the routine check the items verified are sometimes missed or added from run to run.\n\nWhich are appropriate task decomposition designs? (Select two.)",
+  "choices": {
+   "A": "Handle the investigation request with dynamic decomposition, adding subtasks as findings emerge along the way.",
+   "B": "For the investigation request, first have the agent read the files under src, then identify the cause in a single prompt.",
+   "C": "Keep both features in one agent and lower the iteration limit to reduce variation in responses.",
+   "D": "Make the routine check a prompt chain that performs the three checks in a fixed order."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0009",
+  "question": "A development team at a publishing company is building a multi-agent research system with the Claude Agent SDK. The quality standard set by the editorial department states 「市場規模や利用者数などの数値は、2つ以上の独立した出典で裏付ける」.\n\nWhen researching 「国内の電子書籍市場の動向」, the synthesis subagent's draft contained 14 claims that included numerical values, and 3 of them had only a single source. The current coordinator passes the synthesis subagent's draft directly to the report generation subagent without checking it.\n\nWhich is the most appropriate improvement?",
+  "choices": {
+    "A": "Check the draft against the quality standard, re-delegate only the 3 insufficiently supported claims, and then redo the synthesis.",
+    "B": "Send the draft to the editorial department, and have the person in charge finish checking it against the quality standard before instructing a rerun.",
+    "C": "Have the single-source claims annotated with \"supported by one source\" and proceed to report generation as is.",
+    "D": "Rerun all of search, analysis, and synthesis from the beginning and replace the draft with the new draft obtained."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0010",
+  "question": "A development team at an international cooperation NGO uses Claude Code to improve development productivity. One engineer wants to use a translation MCP server that they are trying out personally whenever they work in any of the five repositories they are responsible for. The server is still at the prototype stage, and they do not want to share it with the other members of the team.\n\nWhich is the most appropriate way to configure this MCP server?",
+  "choices": {
+   "A": "Add it once as local scope in the first repository they work in.",
+   "B": "Add it to the .mcp.json of each of the five repositories, commit it, and share it with the team.",
+   "C": "Add it at user scope so that it is stored in ~/.claude.json.",
+   "D": "Add it to the .mcp.json of each repository and exclude .mcp.json from being committed via .gitignore."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0011",
+  "question": "A development team at a market research company for the food service industry is building a multi-agent research system with the Claude Agent SDK. A coordinator delegates work to web search, document analysis, synthesis, and report generation subagents.\n\nWhen researching 「国内フードデリバリー市場の規模」, the two industry association reports read by the document analysis subagent disagreed on the market size: 1.8 trillion yen (2025 edition) and 2.4 trillion yen (2026 edition). The current subagent stops its analysis as soon as it finds a contradiction and returns only the error 「データ不整合」.\n\nWhich are appropriate ways to handle this discrepancy? (Select two.)",
+  "choices": {
+   "A": "Leave the decision of which value to adopt to the coordinator, and have the subagent return with the materials needed to make that decision.",
+   "B": "Keep both values along with their source information, explicitly flag the contradiction, and complete the analysis to the end.",
+   "C": "Instruct the subagent to adopt the value from the 2026 edition, which has the newer publication date, as correct and to remove the 2025 edition value from its output.",
+   "D": "Calculate 2.1 trillion yen, the average of the two values, as the market size, and pass it to the synthesis subagent with the two sources listed together."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0012",
+  "question": "A development team at a music streaming company is building a developer productivity tool with the Claude Agent SDK. The agent has the built-in Read, Grep, and Glob enabled.\n\nWhen a newly assigned engineer asked, \"I want to understand the flow that calculates the payout to rights holders from track play counts,\" the agent began reading roughly 900 files under src one by one from the beginning with Read, and ran out of context partway through. Note that it is known that a function named calculateRoyalty is responsible for calculating the payout.\n\nWhich is the most appropriate first step?",
+  "choices": {
+    "A": "Concatenate the files under src with Bash cat and read them all at once in a single tool call.",
+    "B": "Use Grep to find the definition and call sites of calculateRoyalty, then follow the imports from there with Read.",
+    "C": "Use Write to create an explanation of the payout calculation flow based on guesses, and then verify it file by file.",
+    "D": "Use Glob to list **/*.ts, then Read all of them in order, starting with those whose file names contain \"royalty\"."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0013",
+  "question": "A development team at a securities company uses Claude Code in its CI pipeline to review pull requests file by file. Since switching to analyzing each file individually, the quality and consistency of findings within each file have improved.\n\nHowever, the following defect passed review and caused a production incident. The order service renamed the order_qty field to quantity, but the payment service that receives it still used the old name.\n\nWhich is the most appropriate way to improve the review?",
+  "choices": {
+    "A": "Stop the per-file reviews and return to reviewing all changed files together in a single pass.",
+    "B": "Lower the severity threshold in the file-level review to increase the number of reported findings.",
+    "C": "In addition to the file-level passes, add an integration pass that examines the data passed between files.",
+    "D": "Attach the full text of the other files in the repository as reference to each file's review."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0014",
+  "question": "A development team at an e-commerce logistics company has implemented part of its customer support resolution agent's processing with its own loop that calls the Messages API directly. The current loop ends on either of the following conditions.\n\nThe response text contains the phrase 「以上で対応は完了です」\n\nThe iteration count reaches 10\n\nThe logs show the following cases.\n\nThe loop ended on a response that contained both text and tool_use, and the conversation was closed without the refund being processed\n\nThe loop was cut off at the 10th iteration even though the investigation was still in progress\n\nWhich are appropriate improvements to the loop's termination logic? (Select two.)",
+  "choices": {
+   "A": "Treat the work as complete as soon as the response contains a text block.",
+   "B": "Continue while stop_reason is \"tool_use\" and end when it becomes \"end_turn\".",
+   "C": "Set the iteration limit to a sufficiently large value and keep it only as a safeguard in case the loop does not stop.",
+   "D": "Add more candidate termination phrases so that expressions such as 「対応しました」 also match."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0015",
+  "question": "A development team at an energy company is building a multi-agent research system with the Claude Agent SDK. When researching 「各国の洋上風力発電の規制動向」, the coordinator launches a search subagent in parallel for each of 12 countries and regions.\n\nIn last week's run, the subagent for one region timed out waiting for a response from the regulator's website. The exception propagated to the top level and the entire workflow terminated. The results for the 11 regions that had completed were also discarded, incurring the cost of rerunning everything the next day.\n\nWhich is the most appropriate improvement?",
+  "choices": {
+   "A": "Extend the timeout from 30 seconds to 10 minutes so that the system waits for results even from slow-responding sites.",
+   "B": "Return the failure as a structured error and have the coordinator decide whether to continue or retry.",
+   "C": "Add a wrapper at the top level that automatically reruns the entire workflow up to 3 times.",
+   "D": "Treat the failed region as an empty result and complete the report using only the results from the remaining 11 regions."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0016",
+  "question": "A development team at a shipping company is building a customer support resolution agent with the Claude Agent SDK. The change_delivery_address tool, which changes a shipment's delivery destination at a shipper's request, is supposed to be called only after identity verification is complete, and the system prompt states this explicitly.\n\nHowever, the logs for the past month show that 2.3% of delivery address changes were executed without identity verification. The team is considering emphasizing the prompt instruction even more.\n\nWhich responses are appropriate? (Select two.)",
+  "choices": {
+   "A": "Detect changes executed without identity verification in the logs and have staff cancel them after the fact.",
+   "B": "Add the condition \"use only in conversations where identity verification has been completed\" to the description of change_delivery_address.",
+   "C": "Verify in code that identity verification succeeded, and reject change_delivery_address if it has not been verified.",
+   "D": "Return the reason for the rejection (identity verification is required first) to the agent as the tool result."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0017",
+  "question": "A development team at a travel company has created a fare comparison skill, fare-diff, with Claude Code. The skill takes two inputs, a route code and a departure date, and displays the price difference between the old and new fare tables.\n\nHowever, developers often run /fare-diff without arguments, and each time one of the following happens.\n\nClaude guesses the route and performs the calculation\n\nClaude stops because it cannot tell what \"the specified route\" in the SKILL.md procedure refers to\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "List the route code and departure date in allowed-tools so that they are treated as arguments.",
+   "B": "Use $0 and $1 in the body of SKILL.md to embed the passed route code and departure date into the procedure.",
+   "C": "Set argument-hint: [route-code] [date] so that the required arguments are displayed.",
+   "D": "Set context: fork so that, when no arguments are given, the route is guessed in a separate context."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0018",
+  "question": "A development team at a SaaS company is building a multi-agent research system with the Claude Agent SDK. There are the following two tools, and the description of both is 「コンテンツを分析して要点を返す」.\n\nanalyze_content (analyzes pages retrieved by the web search subagent)\n\nanalyze_document (analyzes PDFs uploaded by users)\n\nThe logs show that about 40% of uploaded PDFs were sent to analyze_content, and metadata such as page numbers was lost.\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "When the wrong tool is called, use a PostToolUse hook to discard its result and have the call rerun.",
+   "B": "State in the description of analyze_document that it handles uploaded PDFs and returns metadata such as page numbers.",
+   "C": "When a PDF is uploaded, use tool_choice to force the selection of analyze_document every time.",
+   "D": "Rename analyze_content to extract_web_results and rewrite its description to be web-specific."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0019",
+  "question": "A development team at a sports data analytics company is building a multi-agent research system with the Claude Agent SDK. The synthesis subagent is given the same web_search tool as the web search subagent.\n\nIn recent reports, as a result of the synthesis subagent running additional searches on its own, figures from personal blogs that have not been verified by the document analysis subagent have started to appear among the sources. Situations that require additional searches account for about 10% of the synthesis work overall.\n\nWhich is the most appropriate improvement?",
+  "choices": {
+   "A": "Also give the synthesis subagent the document analysis tools and have it verify the materials it searches for by itself.",
+   "B": "Remove web_search from the synthesis subagent and send additional research back to the coordinator.",
+   "C": "Write \"Do not use web_search\" in the synthesis subagent's system prompt.",
+   "D": "Have the synthesis subagent attach source reliability to the information it obtains through search as well, so that it can be distinguished."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0020",
+  "question": "A development team at a railway company is developing an operations management system with Claude Code. The conventions for the *.schedule.yaml files that define timetables are compiled in .claude/rules/schedule.md, with paths: [\"lines/**/*.schedule.yaml\"] specified in its frontmatter.\n\nWhen asked to modify an existing timetable definition file, Claude produces content that follows the conventions. However, when asked to modify the conversion script tools/convert_timetable.py, which outputs timetable definition files from data in the legacy system, the format of the output files violated the conventions.\n\nThe log of the InstructionsLoaded hook, which records the instruction files that were loaded, shows that schedule.md was never loaded in this session.\n\nWhich is the most likely root cause?",
+  "choices": {
+   "A": "/compact was run partway through the session, and the conventions that had been loaded were lost.",
+   "B": "The work targeted only the conversion script, and Claude did not read or write any file matching paths.",
+   "C": "The Python conventions written in the root CLAUDE.md take precedence over the conventions in schedule.md.",
+   "D": "The glob pattern in paths does not match files at deep levels under lines/."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0021",
+  "question": "A development team at a manufacturing company is building a developer productivity tool with the Claude Agent SDK. In addition to the built-in tools, the agent can use the query_plant_telemetry tool of an internal MCP server that handles factory equipment data. The current configuration is as follows.\n\nquery_plant_telemetry returns aggregated uptime and anomaly flags per equipment ID, but its description is a single sentence: 「テレメトリを照会する」\n\nThe system prompt says 「不具合の調査では、まずログを検索すること」\n\nThe logs show that, even for questions about equipment anomalies, the agent searches several GB of raw logs with Grep and rarely uses the MCP tool.\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "Disable Grep so that the agent can obtain equipment data only from the MCP tool.",
+   "B": "State in the MCP tool's description the contents of the aggregated values and anomaly flags it returns, and the situations in which it is better suited than searching raw logs.",
+   "C": "Move the registration of the MCP server from the project's .mcp.json to user scope in ~/.claude.json.",
+   "D": "Reword the sentence \"search the logs first\" in the system prompt into an expression that limits its scope."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0022",
+  "question": "A development team at a game company has built Claude Code into its continuous integration pipeline and generates test cases in nightly jobs.\n\nThis time, when it assigned the task 「ゲームサーバーのレガシーコードに包括的なテストを追加する」, Claude began processing files in alphabetical order of directory names. As a result, most of the overnight run's budget was spent on tests for simple functions in a common utility module. Not a single test was added to the billing module and the matchmaking module, which have many failures.\n\nWhich are appropriate ways to decompose this open-ended task? (Select two.)",
+  "choices": {
+   "A": "First have Claude understand the module structure and dependencies, then identify high-impact areas from failure history and change frequency.",
+   "B": "Have Claude create a plan ordered starting from the highest-impact areas, and update the plan each time a new dependency is discovered.",
+   "C": "Raise the limits on the number of files and turns that can be processed in a single run, and have Claude generate tests for all files.",
+   "D": "Split all modules in advance into subtasks of the same granularity and make a prompt chain that processes them one at a time in the predetermined order."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0023",
+  "question": "A development team at a bank is building a multi-agent research system with the Claude Agent SDK. Loan officers investigate the financial condition and industry trends of client companies through dozens of turns of interaction with the coordinator. As the conversation grows longer, the coordinator progressively summarizes older turns.\n\nHowever, the figures confirmed early on, \"existing loan interest rate 3.25%, repayment deadline March 2027, collateral appraisal value 420 million yen,\" were replaced later by the summary 「低金利の長期融資があり、担保も十分」, and the figures in the final comparison table were wrong. The comparison table is created by the coordinator itself from the content of the conversation.\n\nWhich is the most likely root cause of the incorrect figures?",
+  "choices": {
+   "A": "Because of the \"lost in the middle\" effect, figures in the middle of a long input are being overlooked.",
+   "B": "The loan officer's statements and tool results are mixed together, so the coordinator cannot tell which figures are confirmed.",
+   "C": "Facts such as the interest rate and deadline exist only in the conversation history that gets summarized.",
+   "D": "The conversation exceeded the context window limit, and the early turns were truncated."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0024",
+  "question": "A development team at a pharmaceutical company is building a multi-agent research system with the Claude Agent SDK. The document analysis subagent returns findings obtained from clinical trial papers as sentences with the source embedded in the text, such as 「〜という結果が報告されている（Smith et al., 2024, p.12）」.\n\nIn the process of the synthesis subagent paraphrasing and consolidating these, the pairings of findings and sources drifted, and in about 15% of the citations in the final report, the conclusion of a different paper was attached.\n\nWhich is the most appropriate improvement?",
+  "choices": {
+   "A": "State \"keep sources accurate\" in the synthesis subagent's prompt and have it refrain from paraphrasing.",
+   "B": "Pass the full text of the papers directly to the synthesis subagent without summarizing the document analysis subagent's output.",
+   "C": "Have it return the body of each finding separately from metadata such as the URL and page number.",
+   "D": "After the report is completed, use a separate agent to search for the source of each claim again and reattach the citations."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0025",
+  "question": "A development team at a telecommunications company is building a developer productivity tool with the Claude Agent SDK. The agent splits the investigation of an unfamiliar codebase into phases, such as phase 1 (identifying the dependencies of the billing batch) and phase 2 (identifying the places to modify), and launches a new subagent for each phase.\n\nChecking the logs showed that the phase 2 subagent re-read with Read the 38 files that phase 1 had already finished examining, and about half of the token usage went to this duplication. The delegation prompt for phase 2 contains only the request 「改修箇所を特定してください」.\n\nWhich is the most likely root cause?",
+  "choices": {
+   "A": "Grep is not permitted for the phase 2 subagent, so its only means of investigating is to open files one at a time with Read.",
+   "B": "The phase 2 subagent's max_turns is small, and each time it reaches the limit it restarts the investigation from the beginning.",
+   "C": "The coordinator's context window is nearing its limit, and the phase 1 investigation results are being automatically compressed.",
+   "D": "The key findings from phase 1 were not summarized and are not included in the phase 2 subagent's initial context."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0026",
+  "question": "A development team at a chemical manufacturer created two project skills with Claude Code.\n\nOne is sds-check, which verifies the format of Safety Data Sheet (SDS) YAML files. They want it to be used every time an SDS file is edited, but because its description is only 「SDS用」, Claude almost never uses it automatically.\n\nThe other is release-lot, which records shipment release decisions for manufacturing lots and registers them in an internal system. They want it to run only when a person explicitly invokes it, but Claude has invoked it automatically in a related conversation.\n\nWhich are appropriate configurations? (Select two.)",
+  "choices": {
+   "A": "Set disable-model-invocation: true in the frontmatter of release-lot.",
+   "B": "Move the contents of both skills to CLAUDE.md so that they are always loaded in every conversation.",
+   "C": "Set argument-hint on release-lot to prompt for a lot number input and thereby prevent automatic execution.",
+   "D": "Write in the description of sds-check what it verifies and when it should be used."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0027",
+  "question": "A development team at a consumer finance company is building a customer support resolution agent with the Claude Agent SDK. For refund requests that exceed the per-transaction refund limit (100,000 yen), the process_refund tool returns only isError: true and the string 「Operation failed」.\n\nThe logs show that, for every refund request over the limit, the agent repeated the same call 4 to 5 times and then gave the customer the incorrect message 「現在システム障害が発生しています」.\n\nWhich are appropriate improvements to process_refund's error response? (Select two.)",
+  "choices": {
+   "A": "Classify the error as a transient error so that the agent retries with exponential backoff at spaced intervals.",
+   "B": "Include a customer-facing explanation: \"The per-transaction refund limit is 100,000 yen, and amounts above it require review by the responsible department.\"",
+   "C": "Return isRetryable: false along with a category indicating a business rule violation.",
+   "D": "Instead of returning an error, return an empty success result so that the agent can proceed to the next step."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0028",
+  "question": "A development team at an education services company is building a developer productivity tool with the Claude API. In the current implementation, when a question is received, the app-side code executes the following sequence in a fixed order, calling Claude after each step.\n\nFind files with Glob\n\nSearch with Grep\n\nRead the top 5 files with Read\n\nAnswer\n\nFor questions that cannot be answered without checking test execution results, or questions that require reading more than 5 files, off-target answers are returned.\n\nWhich are appropriate revisions to this implementation? (Select two.)",
+  "choices": {
+   "A": "Define the tools and pass them to a loop, and let Claude, after seeing the results, decide which tool to call next.",
+   "B": "Fix the iteration limit at 5 and have Claude answer once the fifth tool execution finishes.",
+   "C": "Write in each tool's description its purpose and when to use it rather than the other tools.",
+   "D": "Add more branches for each question type, and add a fixed procedure for questions that require running tests."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0029",
+  "question": "A development team in the information policy division of a local government is building a multi-agent research system with the Claude Agent SDK. When investigating the measures of other municipalities, the document analysis subagent uses only a general-purpose analyze_document tool and handles the following three uses with this single tool.\n\nExtracting data\n\nSummarizing\n\nChecking claims against their sources\n\nAs a result, the output format differs each time even for the same request, and dozens of times a week the coordinator is unable to parse the results.\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "Write the procedures for each of the three uses into the description of analyze_document and have the one tool handle all of them.",
+   "B": "Split it into purpose-specific tools for each use, such as extract_data_points.",
+   "C": "Define the arguments each tool accepts and the fields it returns, and write the input and output specification in its description.",
+   "D": "Have it return analysis results as free-form text and let the coordinator interpret them according to the use."
+  }
+ }
+]

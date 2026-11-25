@@ -1,0 +1,668 @@
+[
+ {
+  "id": "CCDV-F-Amey-Thakur-0006",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "A production feature pins no model version and broke overnight after a model release changed refusal behavior on an edge case. What prevents a recurrence?",
+  "choices": {
+   "A": "Prompt the model to behave like the previous version",
+   "B": "Retry failed requests against a different provider",
+   "C": "Pin the model version in production and treat upgrades as evaluated, deliberate changes",
+   "D": "Catch the errors and return empty responses"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** Version pinning makes model behavior a controlled dependency; upgrades then pass through evaluation like any other change. Prompting for old behavior (A) is not a contract, failover (B) trades one behavior change for another, and empty responses (D) institutionalize the failure.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "6",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0086",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0019",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "A high-volume classification task is currently handled by the largest available model with near-perfect accuracy. What should be evaluated?",
+  "choices": {
+   "A": "Nothing, since accuracy is the only goal",
+   "B": "Whether the prompt can be lengthened to improve accuracy further",
+   "C": "Whether the task can be run less frequently",
+   "D": "Whether a smaller model reaches the accuracy the task actually requires at lower cost"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Model selection is a fit-to-requirement decision, and a simple, repetitive task is where a smaller model most often suffices. Treating accuracy as unbounded (A) ignores cost, a longer prompt (B) adds expense for no stated need, and reducing frequency (C) changes the requirement rather than meeting it.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "19",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0099",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0020",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "Which task most clearly justifies the most capable model available?",
+  "choices": {
+   "A": "Deciding a multi-step migration plan across several interacting systems",
+   "B": "Extracting a date from a short, well-formed string",
+   "C": "Converting a list into title case",
+   "D": "Detecting whether a message is in English"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** Deep, multi-step reasoning over interacting constraints is where capability differences show. The other three are mechanical or single-signal tasks that a small model handles at a fraction of the cost.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "20",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0100",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0021",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "Cost has risen sharply while request volume is flat. What should be inspected first?",
+  "choices": {
+   "A": "The model's published price",
+   "B": "Token usage per request, including how much context is resent each call",
+   "C": "The number of API keys in use",
+   "D": "The average response time"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** With volume flat, cost per request must have grown, and context sent per call is the usual driver. Published price (A) would be a known change, key count (C) does not affect cost, and latency (D) is not billed.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "21",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0101",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0022",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/practice-questions.md",
+  "question": "What is the correct way to decide between two models for a specific task?",
+  "choices": {
+   "A": "Choose the one with the better published benchmark scores",
+   "B": "Choose the newer model, since it supersedes the older one",
+   "C": "Measure both against a representative sample of the real task and its quality bar",
+   "D": "Choose the larger model and reduce cost elsewhere"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** Model choice is empirical and task-specific, which is what a representative evaluation establishes. Benchmarks (A) may not reflect the task, recency (B) is not a measurement, and defaulting to size (D) decides before evidence.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "22",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0102",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0043",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-1.md",
+  "question": "Your team pins model versions in production. What is the primary reason?",
+  "choices": {
+   "A": "Pinned models are cheaper",
+   "B": "Pinning increases the context window",
+   "C": "Pinning is required by the API",
+   "D": "Model updates can change behavior, so upgrades become deliberate, evaluated changes rather than surprises"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Pinning makes model behavior a controlled dependency so upgrades pass through evaluation",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0123",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0056",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-2.md",
+  "question": "A workload runs nightly over 50,000 records with no interactive requirement. Which choice reduces cost most?",
+  "choices": {
+   "A": "Streaming each request",
+   "B": "Using the largest model for accuracy",
+   "C": "Increasing concurrency against the standard endpoint",
+   "D": "Submitting the work as a batch"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Large, uniform, latency-tolerant work is exactly the batch case, and it is materially cheaper. Streaming (A) serves interactive use, the largest model (B) raises cost, and concurrency (C) does not change unit price",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "6",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0136",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0057",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-2.md",
+  "question": "Accuracy on a simple extraction task is identical between a small and a large model. What should be deployed?",
+  "choices": {
+   "A": "The small model, since it meets the requirement at lower cost",
+   "B": "The large model, in case inputs change",
+   "C": "Both, alternating between them",
+   "D": "The newest model available"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Where the requirement is met, the cheaper option is correct, and changing inputs are handled by re-evaluating. Insurance against hypothetical change (B), alternation (C), and recency (D) all spend without benefit",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0137",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0058",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-2.md",
+  "question": "A task requires the model to plan across many interacting constraints and revise as it goes. What does this argue for?",
+  "choices": {
+   "A": "The smallest model, to keep cost down",
+   "B": "Splitting the task across several small models",
+   "C": "A more capable model, since the work is reasoning-heavy",
+   "D": "A longer prompt with the same model"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Multi-step reasoning under interacting constraints is where capability differences show. A small model (A) and splitting (B) both fragment the reasoning, and prompt length (D) does not add capability",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "8",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0138",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0071",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-3.md",
+  "question": "What is the practical consequence of choosing a model with a much larger context window than the task needs?",
+  "choices": {
+   "A": "Better accuracy on every task",
+   "B": "Fewer rate limit errors",
+   "C": "More reliable structured output",
+   "D": "Cost and latency that the task does not require"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Unused capacity is paid for in cost and time. A larger window does not itself improve accuracy (A), reduce rate limiting (B), or make structure more reliable (C)",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "6",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0151",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-Amey-Thakur-0072",
+  "exam": "CCDV-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "developer-foundations/mock-exam-3.md",
+  "question": "How should a team decide when to move a task to a smaller model?",
+  "choices": {
+   "A": "When measurement shows the smaller model meets the task's stated quality bar",
+   "B": "When the budget is exceeded",
+   "C": "When the task becomes high volume",
+   "D": "When latency becomes a complaint"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "The decision is evidence-led against a defined bar. Budget (B), volume (C), and latency (D) create pressure to look, but they do not establish that quality holds",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": null,
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-Amey-Thakur-0152",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0003",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/anthropic/claude-certified-developer-foundations/scenarios.md",
+  "question": "You want to cache a 30K-token system prompt. Where do you put `cache_control`?",
+  "choices": {
+   "A": "On the top-level request body.",
+   "B": "On the last content block of the system prompt array.",
+   "C": "On every user message.",
+   "D": "On the model parameter."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "`cache_control` is set on individual content blocks. Place it on the final block of the cache-eligible region (typically the last system content block) so the entire prefix becomes the cache key.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "medium",
+  "source_number": "3",
+  "source_heading": "Scenario 3 - Cache Breakpoint",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0008",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/anthropic/claude-certified-developer-foundations/scenarios.md",
+  "question": "Your workload sees 5-10 requests within the same minute that share a 20K-token prefix, then nothing for hours. Which caching choice is best?",
+  "choices": {
+   "A": "No caching - the prefix changes too often.",
+   "B": "5-minute ephemeral cache.",
+   "C": "1-hour extended cache.",
+   "D": "Permanent cache."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "The traffic clusters within minutes, so the 5-minute TTL captures the hits. The 1-hour tier costs more on writes and offers no extra hits given the traffic pattern. There is no permanent cache option.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "medium",
+  "source_number": "8",
+  "source_heading": "Scenario 8 - Cache TTL",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0011",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/anthropic/claude-certified-developer-foundations/scenarios.md",
+  "question": "A support product classifies incoming tickets (easy, high volume) and drafts detailed replies for escalated cases (hard, low volume). Cost is a concern. What is the best model strategy?",
+  "choices": {
+   "A": "Use the most capable model for everything to maximize quality.",
+   "B": "Use the cheapest model for everything to minimize cost.",
+   "C": "Route: a small fast model (Haiku tier) for classification, a more capable model (Sonnet or Opus tier) for escalated drafting.",
+   "D": "Use the Batch API for the escalated drafts."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Model routing sends each request to the cheapest model that can handle it. Classification is a Haiku-tier task; escalated drafting justifies a stronger model. A single model either overpays on the easy path or underdelivers on the hard one, and escalated replies are interactive, so batching does not fit.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "high",
+  "source_number": "11",
+  "source_heading": "Scenario 11 - Model Routing",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0019",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "A product runs high-volume entity extraction on short messages with a tight per-request latency budget, plus a low-volume \"deep analysis\" report feature with no latency pressure. How should models be assigned?",
+  "choices": {
+   "A": "The most capable model for every request, to keep quality consistent across the whole product and avoid maintaining two configurations",
+   "B": "The smallest, fastest tier for extraction and a stronger tier for deep analysis",
+   "C": "The smallest model for every request, to minimize cost, and accept lower quality on the deep analysis report",
+   "D": "Whichever model the SDK or the quickstart example uses by default, applied to both features without review"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Model selection weighs capability need, latency budget, and cost per token. Extraction is a small-model task where speed and price dominate; deep analysis justifies a stronger tier. Using one model for everything either overpays on the easy path or underdelivers on the hard one. Verify quality per tier with an eval set rather than guessing, and check current model IDs in the docs since lineups change.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "high",
+  "source_number": "5",
+  "source_heading": "Question 5",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0020",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "Prompt caching is enabled but `cache_read_input_tokens` is always zero across identical-looking requests.",
+  "choices": {
+   "A": "The cache TTL is too long",
+   "B": "Something in the prefix changes every request: a timestamp, a UUID, or a varying tool set",
+   "C": "Caching is broken",
+   "D": "The model does not support caching, so the cache fields are always zero and the feature must be turned off"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Caching is a prefix match on exact bytes, so one changed character invalidates everything after it. The render order is tools, then system, then messages, so a per-request value injected into the system prompt destroys the whole cache. Move volatile content after the last breakpoint.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "medium",
+  "source_number": "6",
+  "source_heading": "Question 6",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0021",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "Where should a `cache_control` breakpoint go when many requests share a long preamble but differ in the final question?",
+  "choices": {
+   "A": "On the last block of the shared preamble, leaving the varying question uncached",
+   "B": "On every block",
+   "C": "On the first block only, so that all later blocks are treated as part of that cache entry on every request",
+   "D": "On the last block of the whole prompt, so the entire request including the varying question is cached together"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "A breakpoint after the varying part writes a distinct cache entry per request and is never read. Placing it at the end of the shared portion is what produces hits. A request allows at most four breakpoints.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "medium",
+  "source_number": "7",
+  "source_heading": "Question 7",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0029",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "A cost estimate is needed before sending a large prompt.",
+  "choices": {
+   "A": "Send the full request and read the token counts from the response usage afterwards",
+   "B": "Call the token counting endpoint with the same model",
+   "C": "Estimate with a character count divided by four, which is accurate for English text and code alike",
+   "D": "Use a third-party tokenizer library that matches the vocabulary of other providers' models"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Counting must use the model you will actually call, because tokenizers differ between model generations. Third-party tokenizers built for other providers materially undercount Claude tokens, particularly on code and non-English text.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "medium",
+  "source_number": "15",
+  "source_heading": "Question 15",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-PatrickWiloak-0037",
+  "exam": "CCDV-F",
+  "source_repo": "PatrickWiloak/ai-zero-to-hero",
+  "source_file": "certifications/practice-questions/anthropic-claude-developer-foundations.md",
+  "question": "An orchestrator agent plans a research task and hands out 200 small, well-defined lookup subtasks. The team wants good plans and low cost per subtask.",
+  "choices": {
+   "A": "Run the orchestrator and every subtask on the largest model, since quality matters everywhere",
+   "B": "A capable model for the orchestrator, a smaller, faster one for workers",
+   "C": "Use the smallest model for the orchestrator and the largest for the workers",
+   "D": "Use one model for everything and lower `max_tokens` until the bill drops"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Match the model to the job: planning benefits from the strongest reasoning, while narrow, repeated lookups run well on a cheaper, faster model. All-large pays premium prices for easy work. Option C puts the weakest model on the hardest step. Cutting `max_tokens` truncates answers rather than lowering the price of the work itself.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "high",
+  "source_number": "23",
+  "source_heading": "Question 23",
+  "source_section": null
+ },
+ {
+  "id": "CCDV-F-preporato-0011",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "A team's monthly API bill doubled, and evals show quality is fine. Which TWO levers should they try before downgrading the model tier? (Select TWO)",
+  "choices": {
+   "A": "Move all traffic to the fast tier today",
+   "B": "Trim context: drop stale tool outputs and history the model no longer needs",
+   "C": "Cache the stable prefix (tools and system prompt)",
+   "D": "Send all traffic, live chat included, through the Batch API",
+   "E": "Raise `max_tokens` so fewer responses get cut off"
+  },
+  "answer": [
+   "B",
+   "C"
+  ],
+  "select_count": 2,
+  "explanation": "Trimming (B) and caching (C) cut cost without touching the model, so they come before a tier change, which should only happen with eval evidence (A). Batch (D) fits only work nobody is waiting for. A higher `max_tokens` (E) can raise spend.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": "Question 11",
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0041",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0012",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "A coding agent on a model that supports the effort parameter works well but runs slowly and uses many tokens on routine refactors. Evals show quality holds at a lower effort level for those tasks. What should change?",
+  "choices": {
+   "A": "Switch to a smaller model without testing it",
+   "B": "Set `max_tokens` to 512 for every request",
+   "C": "Lower `output_config.effort` for routine refactors and keep a higher level for hard tasks",
+   "D": "Turn on extended thinking with a large budget"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Effort controls how many tokens Claude spends across the whole response, thinking and tool calls included, without changing models, and the evals already show the lower level holds (C). A skips the evidence step. A hard cap (B) truncates work midway. More thinking (D) adds tokens and latency, the opposite of the goal.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": "Question 12",
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0042",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0013",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "A team enabled extended thinking on every request, including one-line greetings in their chatbot. Latency and cost rose, with no measurable quality gain on those replies. What is the best response?",
+  "choices": {
+   "A": "Raise the thinking budget further",
+   "B": "Decide per workload: keep deeper reasoning where evals show gains on multi-step problems, and reduce it for simple turns",
+   "C": "Turn thinking off everywhere",
+   "D": "Move to the most capable model"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Thinking buys accuracy on multi-step problems and costs output tokens and latency everywhere else, so it's a per-workload choice backed by evals (B). C gives up the gains where they exist. A and D spend more on replies that didn't need it.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "13",
+  "source_heading": "Question 13",
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0043",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0014",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "Your test suite checks that the model's summary exactly equals a stored 'golden' string, and the tests keep flaking. What is a better approach?",
+  "choices": {
+   "A": "Assert on structure and key facts (schema validity, required fields, the figures that must appear) or grade against a rubric",
+   "B": "Retry each test until it matches",
+   "C": "Delete the flaky tests",
+   "D": "Set temperature to 0 and keep exact string matching, since that makes outputs fully deterministic"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Sampled outputs vary between runs, so tests should check what matters about an output instead of its exact wording (A). A temperature of 0 (D) reduces variation and still doesn't guarantee identical text. Retrying until a pass (B) hides real regressions, and deleting tests (C) removes the safety net.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "14",
+  "source_heading": "Question 14",
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0044",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCDV-F-preporato-0015",
+  "exam": "CCDV-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "ccdv-f/practice-questions.md",
+  "question": "An autocomplete feature must return short suggestions within a few hundred milliseconds, and the quality bar is modest. Which setup fits?",
+  "choices": {
+   "A": "A top-tier model with extended thinking",
+   "B": "A balanced-tier model with `max_tokens` of 32,000",
+   "C": "The Batch API",
+   "D": "A fast-tier (Haiku-class) model with streaming and a small `max_tokens`"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Latency-critical, high-volume, bounded tasks are the fast tier's case (D). A adds the most latency of all the options. Batch (C) is asynchronous. B misses the latency target, and a huge output budget is pointless for short suggestions.",
+  "domain": "5. Model Selection and Optimization",
+  "domain_confidence": "source",
+  "source_number": "15",
+  "source_heading": "Question 15",
+  "source_section": "Model Selection and Optimization",
+  "also_in": [
+   {
+    "id": "CCDV-F-preporato-0045",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/ccdv-f.json"
+   }
+  ]
+ }
+]

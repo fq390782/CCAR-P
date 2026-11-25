@@ -1,0 +1,22 @@
+[
+ {
+  "id": "CCAR-F-Udemy06-0059",
+  "question": "A bank's system development team is using Claude Code to investigate the interest calculation module of a loan underwriting system. In yesterday's session, Claude read about 30 files in the calculation module and put together an analysis of the cause of a rounding bug.\n\nBy this morning, another team member has merged a large-scale refactoring of the calculation module, and 20 of the files read yesterday have changed. The team leader decided that, rather than resuming yesterday's session with --resume, it would be better to summarize yesterday's conclusions in a structured summary and start a new session.\n\nWhich of the following are correct reasons for this decision? (Select two.)",
+  "choices": {
+   "A": "Continuing the investigation in the resumed session would overwrite yesterday's session record, making it impossible to return to the original analysis.",
+   "B": "The resumed session still contains the results of reading the pre-change files, and Claude might treat them as the current code.",
+   "C": "A summary can carry over only the verified conclusions, avoiding bringing in observations that the changes have invalidated.",
+   "D": "Resuming with --resume automatically compresses the conversation history, losing the fine details of the files read yesterday."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0060",
+  "question": "A research institute's data analysis team uses Claude Code in a repository that manages code for a joint research project. The team leader has Claude follow a rule that scripts handling pre-anonymization data must always use a specific encryption library, and Claude Code in the leader's environment generates code that follows this rule.\n\nHowever, in the environment of a researcher who joined the team last month, code that ignored this rule was being generated. Investigation showed that the rule was written in the leader's ~/.claude/CLAUDE.md and not in the repository's CLAUDE.md.\n\nWhich response is most appropriate?",
+  "choices": {
+   "A": "Move the rule to a CLAUDE.local.md placed at the repository root, and distribute that file to each person's environment.",
+   "B": "Have the new researcher copy the leader's ~/.claude/CLAUDE.md and place it in their own home directory.",
+   "C": "Move the rule to the project's CLAUDE.md and commit it, sharing it with the whole team through version control.",
+   "D": "Instruct the new researcher to add this rule to the prompt every time they have code generated."
+  }
+ }
+]

@@ -1,0 +1,9 @@
+{
+ "bad": {
+  "en-005": [
+   "CCAR-F-preporato-0009: 한글 부족",
+   "CCAR-F-preporato-0009: 인라인 코드 누락 ['` The API is stateless, so each request must carry the whole exchange: the assistant message with the `', '` block comes first, then the user message with the matching `', '` (B). Without it, the `']"
+  ]
+ },
+ "missing": []
+}

@@ -1,0 +1,170 @@
+[
+ {
+  "file": "1_Agents_and_Workflows.md",
+  "kind": "changed",
+  "orig_text": "`stop_reason`이 `tool_use`가 아니면 loop를 빠져나간다. `max_tokens` 같은 값은 별도로 처리해야 한다. ... ⚠️ 공식 문서에는 server tool 사용 중에 `pause_turn`도 온다. ... \"`tool_use`가 아니면 무조건 종료\"는 지나치게 단순화한 규칙이다. [Patrick-0038]",
+  "new_text": "| `tool_use` 아님 | loop 탈출 (`pause_turn` 제외) |",
+  "fix": "1.4の表の`tool_use` 아님の行から「(`pause_turn` 제외)」を削除し、「loop 탈출」だけにする。原文では出典(Patrick-0038)の基本ルールが無条件で書かれており、pause_turnは別の⚠️注記で「単純化しすぎ」と補足する構成になっている。例外の扱いは、直下の⚠️ `pause_turn`の行にすでにあるので、それに任せる。"
+ },
+ {
+  "file": "1_Agents_and_Workflows.md",
+  "kind": "added",
+  "orig_text": "| loop를 언제 멈출지 묻는다 | success condition(또는 `tool_use`가 아님) + 최대 반복 cap | Amey-0060, Patrick-0038 |",
+  "new_text": "| loop 종료 시점 | success condition<br>(또는 `tool_use` 아님 · `pause_turn` 제외)<br>+ step ceiling(최대 반복 cap) |",
+  "fix": "2章Loop · state表の「loop 종료 시점」の行から「 · `pause_turn` 제외」を削除し、「(또는 `tool_use` 아님)」に戻す。原文のこの判断ルールにpause_turnの記述はない。"
+ },
+ {
+  "file": "1_Agents_and_Workflows.md",
+  "kind": "changed",
+  "orig_text": "| 같은 작업을 여러 관점으로 돌려 확신도를 높이고 싶다 | parallelization (voting) | Udemy-0006 |",
+  "new_text": "| 같은 작업 여러 번 실행 → 다수결 · 확신도 향상 | parallelization (voting) |",
+  "fix": "2章パターン選択表のvotingの行の状況欄を「같은 작업을 여러 관점으로 돌려 확신도 향상」にする。原文の「여러 관점으로」を復元し、原文のこの行にない「다수결」は削除する(다수결は1.2と4章に残っている)。"
+ },
+ {
+  "file": "1_Agents_and_Workflows.md",
+  "kind": "changed",
+  "orig_text": "step limit을 두는 주된 이유는 agent가 수렴하지 못할 때 피해와 비용을 묶어 두는 것이다.",
+  "new_text": "| step ceiling 목적 | agent 비수렴 시 피해 · 비용 제한 |",
+  "fix": "1.5の表の行ラベルを「step ceiling 주된 목적」にする。修飾語「주된(主な)」が落ちたため、唯一の目的のように読める。"
+ },
+ {
+  "file": "1_Agents_and_Workflows.md",
+  "kind": "added",
+  "orig_text": "부모에서 subagent로 가는 것은 Agent tool의 prompt 문자열과 subagent 자신의 정의(`AgentDefinition`의 `prompt`)뿐이다.",
+  "new_text": "**위임 prompt에 명시한 것만 전달 · 요약만 반환**",
+  "fix": "1.3の冒頭要約行を「**위임 prompt + subagent 정의에 적은 것만 전달 · 요약만 반환**」に変える。現状の「위임 prompt에 명시한 것만」は、AgentDefinitionのpromptも渡るという本文(전달 경로の行)と食い違っている。"
+ },
+ {
+  "file": "2_Applications_and_Integration.md",
+  "kind": "changed",
+  "orig_text": "tool이 필요 없는 큰 payload(예: 50,000토큰 JSON)를 돌려주면 tool이 작업에 필요한 필드만 돌려주도록 고칩니다. window를 늘리면 문제를 미룰 뿐이고, 두 번째 호출로 요약하면 비용과 실패 지점이 늘어납니다.",
+  "new_text": "| payload 대안: window 확대 | 문제 지연 | ✗ |",
+  "fix": "RESTYLED 1.12 の表、346行目「payload 대안: window 확대」行の理由列「문제 지연」を「문제를 미룰 뿐(근본 해결 ✗)」に置き換える。「지연」は遅延（latency）とも読めるため、ORIGINAL の「問題を先送りするだけ」という意味が確実に伝わる表現にする。"
+ },
+ {
+  "file": "3_Claude_Code.md",
+  "kind": "changed",
+  "orig_text": "판단 축은 두 가지입니다. \"누구에게 적용할지\"(팀, 개인 전체, 이 프로젝트의 개인)와 \"강제할지, 알려 주기만 할지\"(settings 또는 CLAUDE.md).",
+  "new_text": "| 강제 여부 | 강제 = settings · 알림 = `CLAUDE.md` |",
+  "fix": "섹션 1 '판단 축' 표의 '강제 여부' 행에서 '알림 = `CLAUDE.md`'를 '알려 주기만(지시) = `CLAUDE.md`'로 바꾸세요. '알림'만 쓰면 hook의 '알림(notification)' 용도와 헷갈릴 수 있습니다."
+ },
+ {
+  "file": "4_Eval_Testing_and_Debugging.md",
+  "kind": "changed",
+  "orig_text": "429 `rate_limit_error`, 500 `api_error`, 529 `overloaded_error`는 일시적인 error다 ... 400, 401, 403, 404 같은 client error는 ... 요청을 고친다. / ⚠️ 해설은 \"429를 뺀 4xx는 모두 retry 불가\"로 일반화하지만, 공식 SDK는 408, 409도 기본으로 retry한다.",
+  "new_text": "**일시적 error만 retry · 4xx는 요청·tool name 수정**",
+  "fix": "1-8 굵은 제목 줄(156행)의 '4xx는 요청·tool name 수정'은 429(4xx인데 retry 대상)와 408·409(SDK 기본 retry)와 모순된다. '**일시적 error(429·5xx·connection error)만 retry · 400·401·403·404는 요청·tool name 수정**'으로 바꾼다."
+ },
+ {
+  "file": "4_Eval_Testing_and_Debugging.md",
+  "kind": "changed",
+  "orig_text": "400, 401, 403, 404 같은 client error는 요청 자체가 잘못된 것이라 retry해도 매번 같은 이유로 실패한다.",
+  "new_text": "| 400·401·403·404 (client error) | 요청 자체 오류 → 매번 같은 이유로 실패<br>→ 요청 수정 |",
+  "fix": "1-8 첫 표 161행: '같은'(예시라는 뜻)이 빠져 client error 전체 목록처럼 읽힌다. 첫 칸을 '400·401·403·404 등 client error'로 바꾼다."
+ },
+ {
+  "file": "4_Eval_Testing_and_Debugging.md",
+  "kind": "changed",
+  "orig_text": "잘못된 retry policy는 느린 응답과 비용 증가로 나타난다.",
+  "new_text": "| 잘못된 retry policy | 느린 응답·비용 증가 |  (\"오답 | 이유\" 표 안)",
+  "fix": "원문은 오답 선택지가 아니라 증상(느린 응답과 비용 증가로 나타남)이다. 1-8 '오답' 표의 171행을 지우고, 161행 client error 행의 조치 칸에 '<br>잘못된 retry policy의 증상: 느린 응답·비용 증가'를 덧붙인다."
+ },
+ {
+  "file": "4_Eval_Testing_and_Debugging.md",
+  "kind": "changed",
+  "orig_text": "\"더 큰 모델로 바꾼다\" → 잘못된 입력이나 잘못된 request(400)는 모델을 바꿔도 해결되지 않는다. 실패 빈도를 지켜보는 것만으로는 원인 layer를 알 수 없다.",
+  "new_text": "| \"실패 빈도만 관찰\" | 원인 layer 파악 ✗ |",
+  "fix": "원문은 '더 큰 모델로 바꾼다'를 설명하는 같은 bullet의 근거 문장이고, 따옴표로 인용된 오답 선택지가 아니다. 3장 214행을 지우고 213행 이유 칸에 '<br>실패 빈도만 지켜봐서는 원인 layer 파악 ✗'를 덧붙인다. 별도 행을 유지한다면 따옴표를 빼서 원문의 선택지 문구처럼 보이지 않게 한다."
+ },
+ {
+  "file": "4_Eval_Testing_and_Debugging.md",
+  "kind": "added",
+  "orig_text": "깨지면 안 되는 것을 계속 테스트해서 잡는다. 이 점이 일회성 eval과 다르다.",
+  "new_text": "| 일회성 eval과 차이 | 깨지면 안 되는 것을 계속 테스트해 포착<br>(한 번 돌리고 끝나는 일회성 eval과 다른 점) |",
+  "fix": "1-3 표 48행의 '(한 번 돌리고 끝나는 일회성 eval과 다른 점)'에서 '한 번 돌리고 끝나는'이라는 정의는 원문에 없다. 괄호 내용을 '(이 점이 일회성 eval과 다름)'으로 바꾼다."
+ },
+ {
+  "file": "5_Model_Selection_and_Optimization.md",
+  "kind": "changed",
+  "orig_text": "Adaptive thinking은 요청마다 생각을 할지, 얼마나 깊이 할지를 Claude가 정하고, effort(low부터 max까지)로 그 경향을 조정하는 방식입니다. effort를 높이면 더 적극적이고 깊게 생각합니다.",
+  "new_text": "| Adaptive thinking | 요청마다 생각 여부 · 깊이를 Claude가 결정 |\n| effort 범위 | low ~ max로 경향 조정<br>높을수록 더 적극적 · 깊은 사고 |",
+  "fix": "1-4 표의 'Adaptive thinking' 행이 원문의 정의 절반만 담고 있고, 'effort 범위' 행에는 무엇의 경향인지가 빠져 있습니다. 'Adaptive thinking' 행 내용을 '요청마다 생각 여부 · 깊이를 Claude가 결정<br>그 경향을 effort(low ~ max)로 조정'으로 바꾸거나, 'effort 범위' 행을 'low ~ max로 adaptive thinking의 경향 조정'으로 바꾸세요."
+ },
+ {
+  "file": "5_Model_Selection_and_Optimization.md",
+  "kind": "added",
+  "orig_text": "⚠️ 해설에 따르면 4.6 세대부터는 날짜 없는 ID(예: `claude-sonnet-5`) 자체가 고정 snapshot이고, 그 이전 세대에서는 날짜 붙은 ID(`claude-haiku-4-5-20251001`)가 snapshot, 날짜 없는 이름(`claude-haiku-4-5`)이 alias입니다.",
+  "new_text": "| 4.6 세대부터 | 날짜 없는 ID<br>(예: `claude-sonnet-5`) | — |",
+  "fix": "1-8 세대 표에서 '4.6 세대부터' 행의 alias ID 칸이 '—'로 되어 있어 'alias가 없다'로 읽힐 수 있습니다. 원문은 4.6 세대 이후의 alias에 대해 아무 말도 하지 않습니다. '—'를 '(해설 언급 없음)'으로 바꾸세요."
+ },
+ {
+  "file": "6_Prompt_and_Context_Engineering.md",
+  "kind": "changed",
+  "orig_text": "창의 상한에 들어가는 것과 정확도가 유지되는 것은 별개다.",
+  "new_text": "| 창 상한 vs 정확도 | 창에 들어감 → 정확도 유지 ✗ |",
+  "fix": "1.7 표의 '창 상한 vs 정확도' 행 내용을 '창에 들어감 ≠ 정확도 유지 (별개)'로 바꿉니다. 지금 표현은 '창에 들어가면 정확도가 유지되지 않는다'로 읽혀 원본보다 강한 주장이 됩니다. 원본은 '창에 들어간다고 정확도가 보장되지는 않는다'는 뜻입니다."
+ },
+ {
+  "file": "6_Prompt_and_Context_Engineering.md",
+  "kind": "changed",
+  "orig_text": "Agent의 tool output이 커지는 문제는 2단계로 다룬다. ① 입구 ... ② 누적 ... / 쓰지 않는 tool을 빼면 tool 정의가 차지하는 token은 줄지만, 핵심 기능의 tool을 끊으면 목적 자체가 무너진다. 문제는 tool의 존재가 아니라 가공 없이 쌓이는 결과다.",
+  "new_text": "**tool output 증가 대응** 표(열 제목 '단계'): 입구 / 누적 / 미사용 tool 제거",
+  "fix": "1.8의 소제목을 '**tool output 증가 대응 (2단계)**'로 바꾸고, '미사용 tool 제거' 행은 '단계' 표에서 빼서 표 아래 별도 줄로 옮깁니다(예: '미사용 tool 제거: tool 정의 token 감소, 단 핵심 기능 tool 제거 ✗ → 목적 붕괴. 원인 = 가공 없이 쌓이는 결과 · tool 존재 ✗'). 지금 구성은 3번째 단계처럼 읽힙니다."
+ },
+ {
+  "file": "6_Prompt_and_Context_Engineering.md",
+  "kind": "changed",
+  "orig_text": "`max_tokens`는 한 번 응답의 출력 상한이다(응답이 잘려 `stop_reason`이 `max_tokens`일 때 올림). context window 용량을 늘리지 않는다. 올려도 줄여도 bloat의 해법이 아니다.",
+  "new_text": "| `max_tokens` 조정 ✗ | context window 용량 확장 ✗<br>올려도 줄여도 bloat 해법 ✗ |",
+  "fix": "1.8 표의 행 제목 '`max_tokens` 조정 ✗'를 'bloat 대응으로 `max_tokens` 조정 ✗'로 바꿉니다. 지금 제목은 조정 자체가 틀렸다는 뜻이 되어, 바로 위 행의 '응답이 잘리면 상향'과 충돌해 보입니다."
+ },
+ {
+  "file": "6_Prompt_and_Context_Engineering.md",
+  "kind": "changed",
+  "orig_text": "tool을 하나 정의해 그 `input_schema`를 원하는 JSON 형태로 두고 `tool_choice`로 그 tool을 강제하면 Claude가 반드시 그 tool을 호출하고, `input`이 구조화된 객체가 된다.",
+  "new_text": "| forced tool choice | tool 1개, `input_schema` = 원하는 JSON 형태<br>`tool_choice`로 강제 → 그 tool 호출<br>`input` = 구조화 객체 |",
+  "fix": "1.5 표의 forced tool choice 행에서 '`tool_choice`로 강제 → 그 tool 호출'을 '`tool_choice`로 강제 → 반드시 그 tool 호출'로 바꿉니다. 빠진 '반드시'를 되살리는 것으로, '호출은 보장되지만 스키마 준수는 보장되지 않는다'는 ⚠️ 메모의 구분과 맞추기 위함입니다."
+ },
+ {
+  "file": "7_Security_and_Safety.md",
+  "kind": "changed",
+  "orig_text": "1.5: 출력 검사(다른 모델로 이름이 있는지 확인)는 보조 수단일 뿐 authorization을 대신하지 못한다.",
+  "new_text": "| 출력 검사만으로 대체<br>(다른 모델로 이름 확인) | ✗ | 보조 수단·authorization 대체 ✗<br>권한 밖 데이터는 이미 모델이 읽은 상태 |",
+  "fix": "1.5 표의 해당 행 이유 칸 첫 줄 '보조 수단·authorization 대체 ✗'는 ✗가 '보조 수단'에도 걸리는 것처럼 읽혀, 보조 수단으로서의 가치까지 부정하는 뜻이 될 수 있다. '보조 수단일 뿐<br>authorization 대체 ✗'로 바꾼다."
+ },
+ {
+  "file": "7_Security_and_Safety.md",
+  "kind": "changed",
+  "orig_text": "5. 체크리스트: - [ ] injection 방어 = 데이터/지시 분리 + least privilege + 모델 바깥의 enforcement",
+  "new_text": "- [ ] injection 방어 = 분리 + least privilege\n- [ ] injection enforcement는 모델 바깥",
+  "fix": "첫 줄은 공식의 세 번째 요소가 빠져 두 요소만으로 완결된 정의처럼 읽히고, '분리'의 대상(데이터/지시)도 사라졌다. 첫 줄을 '- [ ] injection 방어 = 데이터/지시 분리 + least privilege + 모델 바깥 enforcement'로 바꾸고, 두 번째 줄은 지우거나 그대로 둔다."
+ },
+ {
+  "file": "7_Security_and_Safety.md",
+  "kind": "changed",
+  "orig_text": "1.8: web page에 렌더링하기 전에 반드시 **escape / sanitize**한다. 출처와 상관없다.",
+  "new_text": "| 모델 출력 → web page 렌더링 전 escape·sanitize | ✓ | untrusted (입력의 영향 가능)<br>출처 무관 |",
+  "fix": "한정어 '반드시'가 빠졌다. 1.8 표 첫 행 방법 칸을 '모델 출력 → web page 렌더링 전 반드시 escape·sanitize'로 바꾼다."
+ },
+ {
+  "file": "7_Security_and_Safety.md",
+  "kind": "added",
+  "orig_text": "1.2 참고: XML tag로 분리하는 것은 지시와 입력의 경계 설계다. 그 위에 least privilege와 모델 바깥의 enforcement를 겹친다(1.1과 상충하지 않음).",
+  "new_text": "| + least privilege·모델 바깥 enforcement | ✓ | 다층 방어<br>(1.1의 구조적 방어와 상충 ✗) |",
+  "fix": "원문 1.2에는 '다층 방어'라는 이름이 없다. 이 이름은 원문 1.9 guardrail 다층 방어(defense in depth)의 용어라서 두 개념이 섞여 보일 수 있다. 이유 칸을 '경계 설계 위에 겹침<br>(1.1과 상충 ✗)'로 바꾼다."
+ },
+ {
+  "file": "8_Tools_and_MCPs.md",
+  "kind": "changed",
+  "orig_text": "MCP 서버를 추가한 뒤 성공률이 떨어지면 먼저 새 tool이 기존 tool과 겹치는지, description이 구별되는지를 확인합니다. uptime·latency 문제는 에러나 지연으로 드러나고, 모델은 바뀌지 않았습니다. [Amey-0078]",
+  "new_text": "| uptime·latency | 성공률 하락 원인 ✗<br>(장애는 에러·지연으로 드러남 · 모델은 불변) |",
+  "fix": "1-6 の「요인 | 영향」表の uptime·latency 行（RESTYLED 121行目）を修正する。原文は「成功率が落ちたらまず重複と description を確認する。uptime・latency の問題はエラーや遅延として表に出る」という優先順位の話であり、「原因ではない」とは断定していない。また原文の『모델은 바뀌지 않았습니다』は「この場面でモデル自体は変わっていない」という意味。セルを次のように置き換える: `| MCP 서버 추가 후 uptime·latency 의심 | 먼저 볼 원인 ✗<br>(uptime·latency 문제는 에러·지연으로 드러남 · 모델은 바뀌지 않음) |`"
+ },
+ {
+  "file": "8_Tools_and_MCPs.md",
+  "kind": "dropped",
+  "orig_text": "- [ ] 필수 순서는 앱 측 state machine으로 tool을 걸러 강제한다 (프롬프트로는 보장 불가)",
+  "new_text": "- [ ] 필수 순서 = 앱 측 state machine으로 강제",
+  "fix": "セクション5のチェックリスト（RESTYLED 405行目）に、強制の仕組みである「tool を絞る（gating）」を戻す: `- [ ] 필수 순서 = 앱 측 state machine으로 tool을 걸러 강제`"
+ }
+]

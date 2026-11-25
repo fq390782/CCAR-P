@@ -1,0 +1,674 @@
+[
+ {
+  "name": "en-001",
+  "kind": "en",
+  "count": 51,
+  "in": "work/translate/ko/in/en-001.json",
+  "out": "work/translate/ko/out/en-001.json"
+ },
+ {
+  "name": "en-002",
+  "kind": "en",
+  "count": 41,
+  "in": "work/translate/ko/in/en-002.json",
+  "out": "work/translate/ko/out/en-002.json"
+ },
+ {
+  "name": "en-003",
+  "kind": "en",
+  "count": 24,
+  "in": "work/translate/ko/in/en-003.json",
+  "out": "work/translate/ko/out/en-003.json"
+ },
+ {
+  "name": "en-004",
+  "kind": "en",
+  "count": 24,
+  "in": "work/translate/ko/in/en-004.json",
+  "out": "work/translate/ko/out/en-004.json"
+ },
+ {
+  "name": "en-005",
+  "kind": "en",
+  "count": 29,
+  "in": "work/translate/ko/in/en-005.json",
+  "out": "work/translate/ko/out/en-005.json"
+ },
+ {
+  "name": "en-006",
+  "kind": "en",
+  "count": 48,
+  "in": "work/translate/ko/in/en-006.json",
+  "out": "work/translate/ko/out/en-006.json"
+ },
+ {
+  "name": "en-007",
+  "kind": "en",
+  "count": 41,
+  "in": "work/translate/ko/in/en-007.json",
+  "out": "work/translate/ko/out/en-007.json"
+ },
+ {
+  "name": "en-008",
+  "kind": "en",
+  "count": 20,
+  "in": "work/translate/ko/in/en-008.json",
+  "out": "work/translate/ko/out/en-008.json"
+ },
+ {
+  "name": "en-009",
+  "kind": "en",
+  "count": 21,
+  "in": "work/translate/ko/in/en-009.json",
+  "out": "work/translate/ko/out/en-009.json"
+ },
+ {
+  "name": "en-010",
+  "kind": "en",
+  "count": 20,
+  "in": "work/translate/ko/in/en-010.json",
+  "out": "work/translate/ko/out/en-010.json"
+ },
+ {
+  "name": "en-011",
+  "kind": "en",
+  "count": 21,
+  "in": "work/translate/ko/in/en-011.json",
+  "out": "work/translate/ko/out/en-011.json"
+ },
+ {
+  "name": "en-012",
+  "kind": "en",
+  "count": 18,
+  "in": "work/translate/ko/in/en-012.json",
+  "out": "work/translate/ko/out/en-012.json"
+ },
+ {
+  "name": "en-013",
+  "kind": "en",
+  "count": 9,
+  "in": "work/translate/ko/in/en-013.json",
+  "out": "work/translate/ko/out/en-013.json"
+ },
+ {
+  "name": "en-014",
+  "kind": "en",
+  "count": 9,
+  "in": "work/translate/ko/in/en-014.json",
+  "out": "work/translate/ko/out/en-014.json"
+ },
+ {
+  "name": "en-015",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-015.json",
+  "out": "work/translate/ko/out/en-015.json"
+ },
+ {
+  "name": "en-016",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-016.json",
+  "out": "work/translate/ko/out/en-016.json"
+ },
+ {
+  "name": "en-017",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-017.json",
+  "out": "work/translate/ko/out/en-017.json"
+ },
+ {
+  "name": "en-018",
+  "kind": "en",
+  "count": 9,
+  "in": "work/translate/ko/in/en-018.json",
+  "out": "work/translate/ko/out/en-018.json"
+ },
+ {
+  "name": "en-019",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-019.json",
+  "out": "work/translate/ko/out/en-019.json"
+ },
+ {
+  "name": "en-020",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-020.json",
+  "out": "work/translate/ko/out/en-020.json"
+ },
+ {
+  "name": "en-021",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-021.json",
+  "out": "work/translate/ko/out/en-021.json"
+ },
+ {
+  "name": "en-022",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-022.json",
+  "out": "work/translate/ko/out/en-022.json"
+ },
+ {
+  "name": "en-023",
+  "kind": "en",
+  "count": 9,
+  "in": "work/translate/ko/in/en-023.json",
+  "out": "work/translate/ko/out/en-023.json"
+ },
+ {
+  "name": "en-024",
+  "kind": "en",
+  "count": 9,
+  "in": "work/translate/ko/in/en-024.json",
+  "out": "work/translate/ko/out/en-024.json"
+ },
+ {
+  "name": "en-025",
+  "kind": "en",
+  "count": 9,
+  "in": "work/translate/ko/in/en-025.json",
+  "out": "work/translate/ko/out/en-025.json"
+ },
+ {
+  "name": "en-026",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-026.json",
+  "out": "work/translate/ko/out/en-026.json"
+ },
+ {
+  "name": "en-027",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-027.json",
+  "out": "work/translate/ko/out/en-027.json"
+ },
+ {
+  "name": "en-028",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-028.json",
+  "out": "work/translate/ko/out/en-028.json"
+ },
+ {
+  "name": "en-029",
+  "kind": "en",
+  "count": 11,
+  "in": "work/translate/ko/in/en-029.json",
+  "out": "work/translate/ko/out/en-029.json"
+ },
+ {
+  "name": "en-030",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-030.json",
+  "out": "work/translate/ko/out/en-030.json"
+ },
+ {
+  "name": "en-031",
+  "kind": "en",
+  "count": 10,
+  "in": "work/translate/ko/in/en-031.json",
+  "out": "work/translate/ko/out/en-031.json"
+ },
+ {
+  "name": "en-032",
+  "kind": "en",
+  "count": 11,
+  "in": "work/translate/ko/in/en-032.json",
+  "out": "work/translate/ko/out/en-032.json"
+ },
+ {
+  "name": "en-033",
+  "kind": "en",
+  "count": 11,
+  "in": "work/translate/ko/in/en-033.json",
+  "out": "work/translate/ko/out/en-033.json"
+ },
+ {
+  "name": "en-034",
+  "kind": "en",
+  "count": 11,
+  "in": "work/translate/ko/in/en-034.json",
+  "out": "work/translate/ko/out/en-034.json"
+ },
+ {
+  "name": "en-035",
+  "kind": "en",
+  "count": 27,
+  "in": "work/translate/ko/in/en-035.json",
+  "out": "work/translate/ko/out/en-035.json"
+ },
+ {
+  "name": "en-036",
+  "kind": "en",
+  "count": 44,
+  "in": "work/translate/ko/in/en-036.json",
+  "out": "work/translate/ko/out/en-036.json"
+ },
+ {
+  "name": "en-037",
+  "kind": "en",
+  "count": 46,
+  "in": "work/translate/ko/in/en-037.json",
+  "out": "work/translate/ko/out/en-037.json"
+ },
+ {
+  "name": "en-038",
+  "kind": "en",
+  "count": 46,
+  "in": "work/translate/ko/in/en-038.json",
+  "out": "work/translate/ko/out/en-038.json"
+ },
+ {
+  "name": "en-039",
+  "kind": "en",
+  "count": 46,
+  "in": "work/translate/ko/in/en-039.json",
+  "out": "work/translate/ko/out/en-039.json"
+ },
+ {
+  "name": "en-040",
+  "kind": "en",
+  "count": 49,
+  "in": "work/translate/ko/in/en-040.json",
+  "out": "work/translate/ko/out/en-040.json"
+ },
+ {
+  "name": "en-041",
+  "kind": "en",
+  "count": 35,
+  "in": "work/translate/ko/in/en-041.json",
+  "out": "work/translate/ko/out/en-041.json"
+ },
+ {
+  "name": "en-042",
+  "kind": "en",
+  "count": 37,
+  "in": "work/translate/ko/in/en-042.json",
+  "out": "work/translate/ko/out/en-042.json"
+ },
+ {
+  "name": "en-043",
+  "kind": "en",
+  "count": 34,
+  "in": "work/translate/ko/in/en-043.json",
+  "out": "work/translate/ko/out/en-043.json"
+ },
+ {
+  "name": "en-044",
+  "kind": "en",
+  "count": 36,
+  "in": "work/translate/ko/in/en-044.json",
+  "out": "work/translate/ko/out/en-044.json"
+ },
+ {
+  "name": "en-045",
+  "kind": "en",
+  "count": 13,
+  "in": "work/translate/ko/in/en-045.json",
+  "out": "work/translate/ko/out/en-045.json"
+ },
+ {
+  "name": "ja-001",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-001.json",
+  "out": "work/translate/ko/out/ja-001.json"
+ },
+ {
+  "name": "ja-002",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-002.json",
+  "out": "work/translate/ko/out/ja-002.json"
+ },
+ {
+  "name": "ja-003",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-003.json",
+  "out": "work/translate/ko/out/ja-003.json"
+ },
+ {
+  "name": "ja-004",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-004.json",
+  "out": "work/translate/ko/out/ja-004.json"
+ },
+ {
+  "name": "ja-005",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-005.json",
+  "out": "work/translate/ko/out/ja-005.json"
+ },
+ {
+  "name": "ja-006",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-006.json",
+  "out": "work/translate/ko/out/ja-006.json"
+ },
+ {
+  "name": "ja-007",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-007.json",
+  "out": "work/translate/ko/out/ja-007.json"
+ },
+ {
+  "name": "ja-008",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-008.json",
+  "out": "work/translate/ko/out/ja-008.json"
+ },
+ {
+  "name": "ja-009",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-009.json",
+  "out": "work/translate/ko/out/ja-009.json"
+ },
+ {
+  "name": "ja-010",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-010.json",
+  "out": "work/translate/ko/out/ja-010.json"
+ },
+ {
+  "name": "ja-011",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-011.json",
+  "out": "work/translate/ko/out/ja-011.json"
+ },
+ {
+  "name": "ja-012",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-012.json",
+  "out": "work/translate/ko/out/ja-012.json"
+ },
+ {
+  "name": "ja-013",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-013.json",
+  "out": "work/translate/ko/out/ja-013.json"
+ },
+ {
+  "name": "ja-014",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-014.json",
+  "out": "work/translate/ko/out/ja-014.json"
+ },
+ {
+  "name": "ja-015",
+  "kind": "ja",
+  "count": 8,
+  "in": "work/translate/ko/in/ja-015.json",
+  "out": "work/translate/ko/out/ja-015.json"
+ },
+ {
+  "name": "ja-016",
+  "kind": "ja",
+  "count": 8,
+  "in": "work/translate/ko/in/ja-016.json",
+  "out": "work/translate/ko/out/ja-016.json"
+ },
+ {
+  "name": "ja-017",
+  "kind": "ja",
+  "count": 8,
+  "in": "work/translate/ko/in/ja-017.json",
+  "out": "work/translate/ko/out/ja-017.json"
+ },
+ {
+  "name": "ja-018",
+  "kind": "ja",
+  "count": 8,
+  "in": "work/translate/ko/in/ja-018.json",
+  "out": "work/translate/ko/out/ja-018.json"
+ },
+ {
+  "name": "ja-019",
+  "kind": "ja",
+  "count": 8,
+  "in": "work/translate/ko/in/ja-019.json",
+  "out": "work/translate/ko/out/ja-019.json"
+ },
+ {
+  "name": "ja-020",
+  "kind": "ja",
+  "count": 8,
+  "in": "work/translate/ko/in/ja-020.json",
+  "out": "work/translate/ko/out/ja-020.json"
+ },
+ {
+  "name": "ja-021",
+  "kind": "ja",
+  "count": 8,
+  "in": "work/translate/ko/in/ja-021.json",
+  "out": "work/translate/ko/out/ja-021.json"
+ },
+ {
+  "name": "ja-022",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-022.json",
+  "out": "work/translate/ko/out/ja-022.json"
+ },
+ {
+  "name": "ja-023",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-023.json",
+  "out": "work/translate/ko/out/ja-023.json"
+ },
+ {
+  "name": "ja-024",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-024.json",
+  "out": "work/translate/ko/out/ja-024.json"
+ },
+ {
+  "name": "ja-025",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-025.json",
+  "out": "work/translate/ko/out/ja-025.json"
+ },
+ {
+  "name": "ja-026",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-026.json",
+  "out": "work/translate/ko/out/ja-026.json"
+ },
+ {
+  "name": "ja-027",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-027.json",
+  "out": "work/translate/ko/out/ja-027.json"
+ },
+ {
+  "name": "ja-028",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-028.json",
+  "out": "work/translate/ko/out/ja-028.json"
+ },
+ {
+  "name": "ja-029",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-029.json",
+  "out": "work/translate/ko/out/ja-029.json"
+ },
+ {
+  "name": "ja-030",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-030.json",
+  "out": "work/translate/ko/out/ja-030.json"
+ },
+ {
+  "name": "ja-031",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-031.json",
+  "out": "work/translate/ko/out/ja-031.json"
+ },
+ {
+  "name": "ja-032",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-032.json",
+  "out": "work/translate/ko/out/ja-032.json"
+ },
+ {
+  "name": "ja-033",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-033.json",
+  "out": "work/translate/ko/out/ja-033.json"
+ },
+ {
+  "name": "ja-034",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-034.json",
+  "out": "work/translate/ko/out/ja-034.json"
+ },
+ {
+  "name": "ja-035",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-035.json",
+  "out": "work/translate/ko/out/ja-035.json"
+ },
+ {
+  "name": "ja-036",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-036.json",
+  "out": "work/translate/ko/out/ja-036.json"
+ },
+ {
+  "name": "ja-037",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-037.json",
+  "out": "work/translate/ko/out/ja-037.json"
+ },
+ {
+  "name": "ja-038",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-038.json",
+  "out": "work/translate/ko/out/ja-038.json"
+ },
+ {
+  "name": "ja-039",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-039.json",
+  "out": "work/translate/ko/out/ja-039.json"
+ },
+ {
+  "name": "ja-040",
+  "kind": "ja",
+  "count": 9,
+  "in": "work/translate/ko/in/ja-040.json",
+  "out": "work/translate/ko/out/ja-040.json"
+ },
+ {
+  "name": "ja-041",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-041.json",
+  "out": "work/translate/ko/out/ja-041.json"
+ },
+ {
+  "name": "ja-042",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-042.json",
+  "out": "work/translate/ko/out/ja-042.json"
+ },
+ {
+  "name": "ja-043",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-043.json",
+  "out": "work/translate/ko/out/ja-043.json"
+ },
+ {
+  "name": "ja-044",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-044.json",
+  "out": "work/translate/ko/out/ja-044.json"
+ },
+ {
+  "name": "ja-045",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-045.json",
+  "out": "work/translate/ko/out/ja-045.json"
+ },
+ {
+  "name": "ja-046",
+  "kind": "ja",
+  "count": 10,
+  "in": "work/translate/ko/in/ja-046.json",
+  "out": "work/translate/ko/out/ja-046.json"
+ },
+ {
+  "name": "ja-047",
+  "kind": "ja",
+  "count": 11,
+  "in": "work/translate/ko/in/ja-047.json",
+  "out": "work/translate/ko/out/ja-047.json"
+ },
+ {
+  "name": "ja-048",
+  "kind": "ja",
+  "count": 11,
+  "in": "work/translate/ko/in/ja-048.json",
+  "out": "work/translate/ko/out/ja-048.json"
+ },
+ {
+  "name": "ja-049",
+  "kind": "ja",
+  "count": 11,
+  "in": "work/translate/ko/in/ja-049.json",
+  "out": "work/translate/ko/out/ja-049.json"
+ },
+ {
+  "name": "ja-050",
+  "kind": "ja",
+  "count": 11,
+  "in": "work/translate/ko/in/ja-050.json",
+  "out": "work/translate/ko/out/ja-050.json"
+ },
+ {
+  "name": "ja-051",
+  "kind": "ja",
+  "count": 6,
+  "in": "work/translate/ko/in/ja-051.json",
+  "out": "work/translate/ko/out/ja-051.json"
+ }
+]

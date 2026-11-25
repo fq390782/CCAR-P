@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="440" viewBox="0 0 880 440" role="img" aria-label="CLAUDE.md는 모델이 참고하는 문맥이라 확률적으로 지켜지고, settings.json의 permissions와 hooks는 모델 판단 없이 매번 강제된다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>CLAUDE.md(지시)와 settings.json(강제) 비교</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-cvs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="440" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">같은 규칙도 어디에 두느냐에 따라 지시(문맥)가 되거나 강제(권한)가 된다</text>
+
+  <text x="220" y="62" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">지시: 알려 주기만 함</text>
+  <text x="660" y="62" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">강제: 매번 적용</text>
+
+  <!-- left column -->
+  <rect x="40" y="76" width="360" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="220" y="100" text-anchor="middle" font-size="13" fill="#1F2937">CLAUDE.md · .claude/rules/</text>
+  <text x="220" y="119" text-anchor="middle" font-size="11" fill="#6B7280">git에 커밋하면 팀 전체가 공유</text>
+  <line x1="220" y1="132" x2="220" y2="174" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cvs)"/>
+  <text x="230" y="158" font-size="11" fill="#6B7280">세션 시작 시 전체 로드</text>
+  <rect x="40" y="176" width="360" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="220" y="200" text-anchor="middle" font-size="13" fill="#1F2937">모델 컨텍스트 (참고용 문맥)</text>
+  <text x="220" y="219" text-anchor="middle" font-size="11" fill="#6B7280">강제 장치 없음</text>
+  <line x1="220" y1="232" x2="220" y2="274" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cvs)"/>
+  <text x="230" y="258" font-size="11" fill="#6B7280">모델 판단을 거침</text>
+  <rect x="40" y="276" width="360" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="220" y="300" text-anchor="middle" font-size="13" fill="#1F2937">따를 수도, 놓칠 수도 있음 (확률적)</text>
+  <text x="220" y="319" text-anchor="middle" font-size="11" fill="#6B7280">"반드시 매번" 규칙에는 부적합</text>
+  <text x="220" y="354" text-anchor="middle" font-size="11" fill="#6B7280">적합: 빌드 명령, 코딩 규약, "migrations는 건드리지 말 것"</text>
+
+  <!-- right column -->
+  <rect x="480" y="76" width="360" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="660" y="100" text-anchor="middle" font-size="13" fill="#1F2937">.claude/settings.json</text>
+  <text x="660" y="119" text-anchor="middle" font-size="11" fill="#6B7280">permissions · hooks</text>
+  <line x1="660" y1="132" x2="660" y2="174" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cvs)"/>
+  <text x="670" y="158" font-size="11" fill="#6B7280">Claude Code가 적용</text>
+  <rect x="480" y="176" width="360" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="660" y="200" text-anchor="middle" font-size="13" fill="#1F2937">권한 체크 · hook 실행</text>
+  <text x="660" y="219" text-anchor="middle" font-size="11" fill="#6B7280">모델 판단을 거치지 않음</text>
+  <line x1="660" y1="232" x2="660" y2="274" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cvs)"/>
+  <text x="670" y="258" font-size="11" fill="#6B7280">매번</text>
+  <rect x="480" y="276" width="360" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="660" y="300" text-anchor="middle" font-size="13" fill="#1F2937">강제 적용 (결정론적)</text>
+  <text x="660" y="319" text-anchor="middle" font-size="11" fill="#6B7280">권한 체크와 hook이 그대로 반영됨</text>
+  <text x="660" y="354" text-anchor="middle" font-size="11" fill="#6B7280">적합: 권한, "반드시 매번" 지켜야 하는 규칙</text>
+
+  <!-- trap -->
+  <rect x="40" y="374" width="800" height="48" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="440" y="394" text-anchor="middle" font-size="13" fill="#1F2937">함정: CLAUDE.md에 권한이나 "CI에서는 확인 없이 실행"을 적음</text>
+  <text x="440" y="412" text-anchor="middle" font-size="11" fill="#6B7280">문맥일 뿐이라 권한 체크에 반영되지 않는다</text>
+</svg>

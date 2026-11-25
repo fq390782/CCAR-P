@@ -1,0 +1,15 @@
+# 3장 topic 목록 (문항당 1개, 가장 핵심인 것)
+- claudemd: CLAUDE.md 계층(user·project·subdirectory)·@import·내용 설계·/memory·/init
+- rules: .claude/rules/ path-specific rules(paths glob)·조건부 로드
+- settings: settings.json 범위·우선순위·permissions(allow/deny/ask)·permission mode·managed settings
+- commands-skills: slash command·custom command·skill(SKILL.md·frontmatter·allowed-tools·context: fork)·$ARGUMENTS
+- subagents: Claude Code subagent(.claude/agents)·Task/Agent tool·context 격리·병렬 탐색
+- hooks: hook 이벤트·matcher·exit code·차단·자동 포맷/검증
+- plan-mode: plan mode·Explore·탐색 후 구현·대규모 변경 계획
+- headless-ci: claude -p·--output-format·--json-schema·CI/CD·PR 리뷰 자동화·GitHub Actions
+- mcp-in-cc: Claude Code에서 MCP 서버 설정(.mcp.json·scope·env 변수 확장)
+- session-context: /compact·/clear·--resume·fork·세션 관리·context 관리
+- workflow: 반복 개선(iterative refinement)·테스트 주도·예시 입력/출력 제공·인터뷰 기법·git·worktree·일반 개발 워크플로
+- plugins: plugin·marketplace·팀 배포
+- dev-productivity: 개발 생산성·팀 운영·도입 전략·operational enablement(CCAR-P D7)
+- other: 위에 안 맞음(짧은 이유를 note에)

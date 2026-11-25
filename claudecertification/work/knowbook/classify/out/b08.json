@@ -1,0 +1,22 @@
+[
+ {"id": "CCAR-F-MyPractice-0012", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0013", "chapter": 6, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0014", "chapter": 6, "confidence": "low"},
+ {"id": "CCAR-F-MyPractice-0028", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0045", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0049", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0050", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0054", "chapter": 6, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0055", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0063", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0064", "chapter": 6, "confidence": "low"},
+ {"id": "CCAR-F-MyPractice-0065", "chapter": 6, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0066", "chapter": 6, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0067", "chapter": 6, "confidence": "low"},
+ {"id": "CCAR-F-MyPractice-0068", "chapter": 6, "confidence": "low"},
+ {"id": "CCAR-F-MyPractice-0069", "chapter": 6, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0073", "chapter": 6, "confidence": "low"},
+ {"id": "CCAR-F-MyPractice-0074", "chapter": 10, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0075", "chapter": 6, "confidence": "high"},
+ {"id": "CCAR-F-MyPractice-0076", "chapter": 10, "confidence": "high"}
+]

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="710" viewBox="0 0 900 710" role="img" aria-label="RAG 실패 진단 흐름: 변경된 계층 확인, trace로 chunk 도착 여부 판정, 상류 먼저">
+<title>RAG 실패 진단 흐름: 변경된 계층 확인, trace로 chunk 도착 여부 판정, 상류 먼저</title>
+<defs><marker id="arr-rag-failure-diagnosis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">품질 악화는 변경된 계층부터: chunk가 틀리면 상류, chunk가 맞으면 generation</text>
+<rect x="180" y="44" width="300" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="330" y="65.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">품질 악화 · 갱신 후 자신 있게 틀림</text>
+<polyline points="330,78 330,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<rect x="130" y="100" width="400" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="330" y="120.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">실패가 시작된 날짜의 변경 계층 확인</text>
+<text x="330" y="136.2" font-size="11" fill="#1F2937" text-anchor="middle">변경 로그 필요 · 그 계층 = 첫 용의자</text>
+<polyline points="330,148 330,172" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<polygon points="330,172 500,222 330,272 160,222" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="330" y="217.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">trace: 올바른 chunk가</text>
+<text x="330" y="234.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">retrieval에서 도착했나?</text>
+<polyline points="500,222 640,222" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<text x="570" y="216" font-size="11" fill="#1F2937" text-anchor="middle">예 (retrieval 무죄)</text>
+<rect x="640" y="188" width="240" height="68" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760" y="211.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">generation 계층</text>
+<text x="760" y="226.7" font-size="11" fill="#1F2937" text-anchor="middle">프롬프트 · 모델 선택 수정</text>
+<text x="760" y="241.7" font-size="11" fill="#1F2937" text-anchor="middle">또는 grounding gate 추가</text>
+<rect x="640" y="268" width="240" height="38" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="760" y="283.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">retrieval 수정 ✗</text>
+<text x="760" y="299.2" font-size="11" fill="#1F2937" text-anchor="middle">chunk 양호 → trace상 retrieval 무죄</text>
+<polyline points="330,272 330,326" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<text x="338" y="302" font-size="11" fill="#1F2937" text-anchor="start">아니오 (chunk가 틀림)</text>
+<rect x="20" y="326" width="860" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450" y="347.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">상류 먼저: ingestion · parsing · chunking · indexing · embedding 중 지목</text>
+<rect x="20" y="382" width="380" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="210" y="403.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">재수집 후 chunk 2배 길이 · 문단 중간 분할</text>
+<text x="210" y="419.2" font-size="11" fill="#1F2937" text-anchor="middle">recall 88% → 71%</text>
+<polyline points="400,407 480,407" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<text x="440" y="401" font-size="11" fill="#1F2937" text-anchor="middle">chunking</text>
+<rect x="480" y="382" width="400" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680" y="403.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">chunker 롤백 또는 구조 경계 복원</text>
+<text x="680" y="419.2" font-size="11" fill="#1F2937" text-anchor="middle">이전 chunker 설정 버전 관리 필요</text>
+<rect x="20" y="444" width="380" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="210" y="465.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">표 숫자 오류</text>
+<text x="210" y="481.2" font-size="11" fill="#1F2937" text-anchor="middle">행 중간 분할</text>
+<polyline points="400,469 480,469" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<text x="440" y="463" font-size="11" fill="#1F2937" text-anchor="middle">chunking</text>
+<rect x="480" y="444" width="400" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680" y="465.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">구조 경계 re-chunk + eval 재실행</text>
+<text x="680" y="481.2" font-size="11" fill="#1F2937" text-anchor="middle">eval에 표 질문 포함 필요</text>
+<rect x="20" y="506" width="380" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="210" y="535.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">존재하지 않는 페이지 번호 인용</text>
+<polyline points="400,531 480,531" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<text x="440" y="525" font-size="11" fill="#1F2937" text-anchor="middle">parsing</text>
+<rect x="480" y="506" width="400" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680" y="527.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">페이지 메타데이터 점검</text>
+<text x="680" y="543.2" font-size="11" fill="#1F2937" text-anchor="middle">파서 페이지 추적 수정</text>
+<rect x="20" y="568" width="380" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="210" y="589.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">embedding만 바뀜</text>
+<text x="210" y="605.2" font-size="11" fill="#1F2937" text-anchor="middle">chunk 불변 + paraphrase 질의 누락</text>
+<polyline points="400,593 480,593" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-failure-diagnosis)"/>
+<text x="440" y="587" font-size="11" fill="#1F2937" text-anchor="middle">embedding</text>
+<rect x="480" y="568" width="400" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680" y="589.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">embedding 단계가 용의자</text>
+<text x="680" y="605.2" font-size="11" fill="#1F2937" text-anchor="middle">recall = embedding 결함</text>
+<rect x="20" y="634" width="860" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450" y="651.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: 깨진 chunk 위에 더 큰 embedding · embedding fine-tune · rerank · top-k 증가</text>
+<text x="450" y="666.7" font-size="11" fill="#1F2937" text-anchor="middle">깨진 chunk 위의 벡터는 깨진 chunk를 검색 · rerank는 분할된 문단 복구 ✗ · 더 많은 깨진 조각만 검색</text>
+<text x="450" y="681.7" font-size="11" fill="#1F2937" text-anchor="middle">모델 · 프롬프트 · temperature 점검도 갱신과 상관 없음</text>
+</g>
+</svg>

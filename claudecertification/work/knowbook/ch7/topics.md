@@ -1,0 +1,12 @@
+# 7장 topic 목록 (문항당 1개, 가장 핵심인 것)
+- injection: prompt injection·untrusted 입력·간접 injection·문서/웹 내용 속 지시
+- least-privilege: 최소 권한·tool 권한 축소·scope 제한·읽기 전용
+- approval: human-in-the-loop 승인 gate·고위험 행동 사전 승인·확인 단계
+- authz: 인증·인가 전파·사용자 권한 상속·tenant 격리
+- data-protection: PII·데이터 최소화·마스킹·redaction·보존 기간·삭제
+- compliance: 규제(GDPR·HIPAA·FedRAMP·SOC2 등)·data residency·감사 요구
+- audit: 감사 로그·추적성·누가 무엇을 승인했나 기록
+- output-safety: 출력 처리·출력 필터·유해 출력 방지·guardrail·defense in depth
+- ethics: bias·fairness·투명성·AI 고지·이의 신청
+- risk: 위험 평가·위험 등급별 통제·incident 대응·kill switch
+- other: 위에 안 맞음(짧은 이유를 note에)

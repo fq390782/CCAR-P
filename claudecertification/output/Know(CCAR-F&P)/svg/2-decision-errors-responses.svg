@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="810" viewBox="0 0 940 810" role="img" aria-label="오류·응답 처리·운영 상황별 판단 트리" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>오류·응답 처리·운영 상황별 판단 트리</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-decision-errors-responses" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="470" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">오류·응답 처리·운영: 오류 종류와 stop_reason을 먼저 구분한다</text>
+<rect x="20" y="46" width="200" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="120.0" y="70.5" font-size="13" text-anchor="middle" fill="#1F2937">오류·응답·운영 문제</text>
+<text x="425" y="100" font-size="11" text-anchor="middle" fill="#6B7280">상황</text>
+<text x="757" y="100" font-size="11" text-anchor="middle" fill="#6B7280">정답 방향</text>
+<polygon points="150,226.0 250.0,262.0 150,298.0 50.0,262.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="258.0" font-size="12" text-anchor="middle" fill="#1F2937">요청이 오류로</text>
+<text x="150" y="275.0" font-size="12" text-anchor="middle" fill="#1F2937">실패?</text>
+<polyline points="40,262.0 50,262.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<polyline points="250,262.0 265,262.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,132 265,392" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,132 285,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="110" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="136.5" font-size="12" text-anchor="middle" fill="#1F2937">429 / 529 / 5xx</text>
+<polyline points="565,132 595,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="110" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="128.0" font-size="12" text-anchor="middle" fill="#1F2937">jitter exponential backoff + 횟수 상한</text>
+<text x="757.5" y="145.0" font-size="12" text-anchor="middle" fill="#1F2937">+ retry-after 준수</text>
+<polyline points="265,184 285,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="162" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="188.5" font-size="12" text-anchor="middle" fill="#1F2937">400 / 잘못된 파라미터 / 401</text>
+<polyline points="565,184 595,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="162" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="188.5" font-size="12" text-anchor="middle" fill="#1F2937">retry하지 않고 요청이나 credential 수정</text>
+<polyline points="265,236 285,236" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="214" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="240.5" font-size="12" text-anchor="middle" fill="#1F2937">결과를 모르는 POST를 다시 보내야 함</text>
+<polyline points="565,236 595,236" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="214" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="240.5" font-size="12" text-anchor="middle" fill="#1F2937">idempotency key 또는 등록 여부 확인 후 재전송</text>
+<polyline points="265,288 285,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="266" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="292.5" font-size="12" text-anchor="middle" fill="#1F2937">messages에 role: "system" → 오류</text>
+<polyline points="565,288 595,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="266" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="292.5" font-size="12" text-anchor="middle" fill="#1F2937">최상위 system 파라미터 사용</text>
+<polyline points="265,340 285,340" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="318" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="344.5" font-size="12" text-anchor="middle" fill="#1F2937">thinking + 특정 tool 강제에서 400</text>
+<polyline points="565,340 595,340" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="318" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="344.5" font-size="12" text-anchor="middle" fill="#1F2937">수동 thinking은 tool_choice auto/none만</text>
+<polyline points="265,392 285,392" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="370" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="396.5" font-size="12" text-anchor="middle" fill="#1F2937">budget_tokens ≥ max_tokens로 거부</text>
+<polyline points="565,392 595,392" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="370" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="396.5" font-size="12" text-anchor="middle" fill="#1F2937">max_tokens를 budget_tokens보다 크게</text>
+<polygon points="150,482.0 250.0,518.0 150,554.0 50.0,518.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="514.0" font-size="12" text-anchor="middle" fill="#1F2937">응답은 왔는데</text>
+<text x="150" y="531.0" font-size="12" text-anchor="middle" fill="#1F2937">stop_reason은?</text>
+<polyline points="40,518.0 50,518.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<polyline points="250,518.0 265,518.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,466 265,570" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,466 285,466" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="444" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="470.5" font-size="12" text-anchor="middle" fill="#1F2937">응답이 문장 중간에서 끊김</text>
+<polyline points="565,466 595,466" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="444" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="470.5" font-size="12" text-anchor="middle" fill="#1F2937">stop_reason: max_tokens → limit 올리기</text>
+<polyline points="265,518 285,518" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="496" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="522.5" font-size="12" text-anchor="middle" fill="#1F2937">model window 한계에서 멈춤</text>
+<polyline points="565,518 595,518" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="496" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="522.5" font-size="12" text-anchor="middle" fill="#1F2937">model_context_window_exceeded (미완성)</text>
+<polyline points="265,570 285,570" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="548" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="574.5" font-size="12" text-anchor="middle" fill="#1F2937">stop_reason: tool_use</text>
+<polyline points="565,570 595,570" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="548" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="574.5" font-size="12" text-anchor="middle" fill="#1F2937">tool 실행 → tool_result를 돌려주고 루프 계속</text>
+<polygon points="150,660.0 250.0,696.0 150,732.0 50.0,696.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="692.0" font-size="12" text-anchor="middle" fill="#1F2937">운영·통합</text>
+<text x="150" y="709.0" font-size="12" text-anchor="middle" fill="#1F2937">문제?</text>
+<polyline points="40,696.0 50,696.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<polyline points="250,696.0 265,696.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,644 265,748" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,644 285,644" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="622" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="648.5" font-size="12" text-anchor="middle" fill="#1F2937">AWS IAM 인증이 필요</text>
+<polyline points="565,644 595,644" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="622" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="648.5" font-size="12" text-anchor="middle" fill="#1F2937">AnthropicBedrock() (Messages 인터페이스 유지)</text>
+<polyline points="265,696 285,696" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="674" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="700.5" font-size="12" text-anchor="middle" fill="#1F2937">모델 출력 형식이 하룻밤 사이에 바뀜</text>
+<polyline points="565,696 595,696" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="674" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="700.5" font-size="12" text-anchor="middle" fill="#1F2937">model version pin + prompt 버전 관리 + eval</text>
+<polyline points="265,748 285,748" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="285" y="726" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="752.5" font-size="12" text-anchor="middle" fill="#1F2937">형식은 맞는데 의미가 틀림</text>
+<polyline points="565,748 595,748" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-errors-responses)"/>
+<rect x="595" y="726" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="752.5" font-size="12" text-anchor="middle" fill="#1F2937">해당 입력에 들어간 prompt와 context부터 조사</text>
+<polyline points="40,86 40,696.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+</svg>

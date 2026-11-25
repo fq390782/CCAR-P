@@ -1,0 +1,11 @@
+{"add": {
+ "### 1-1. 모델 선택 원칙": ["CCAR-P-jrajath94-0290", "CCAR-P-jrajath94-0343", "CCAR-P-jrajath94-0406", "CCAR-P-jrajath94-0469", "CCAR-P-jrajath94-0532"],
+ "### 1-7. Prompt caching": ["CCAR-P-jrajath94-0153"],
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-P-jrajath94-0413", "CCAR-P-jrajath94-0476", "CCAR-P-jrajath94-0350", "CCAR-P-jrajath94-0294", "CCAR-P-jrajath94-0539"],
+ "## 3. 자주 나오는 오답 함정": ["CCAR-P-jrajath94-0152", "CCAR-P-jrajath94-0350"],
+ "## 4. 암기 목록": ["CCAR-P-jrajath94-0470"],
+ "## 5. 시험 직전 체크리스트": ["CCAR-P-jrajath94-0344"]},
+ "rep": [
+ ["- [ ] tier 변경 · 버전 교체 = regression suite + canary 먼저", "- [ ] tier 하향 = holdout regression + canary 먼저\n- [ ] 같은 tier 새 버전 · deprecated 대체 = regression suite + baseline 비교"],
+ ["| 블록 크기 | 결함 원인 = 순서 · 크기 ✗ |", "| 블록 크기 | 결함 원인 = 순서 ✓ · 크기 ✗ |"]
+]}

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="690" viewBox="0 0 900 690" role="img" aria-label="escalation 사유와 직접 처리 대상을 가르는 판단 흐름">
+<title>escalation 사유와 직접 처리 대상을 가르는 판단 흐름</title>
+<defs><marker id="arr-escalation-triggers" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">escalate_to_human은 사유가 있을 때만: 감정 · confidence · 복잡도는 기준이 아님</text>
+<rect x="330" y="46" width="240" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450" y="69.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">고객 요청 접수</text>
+<polyline points="450,84 450,104" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-escalation-triggers)"/>
+<text x="458" y="98" font-size="11" fill="#1F2937" text-anchor="start">조회부터</text>
+<rect x="270" y="106" width="360" height="42" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450" y="131.4" font-size="13" fill="#1F2937" text-anchor="middle">선행: get_customer · lookup_order 조회 완료</text>
+<polyline points="450,148 450,172" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-escalation-triggers)"/>
+<text x="458" y="166" font-size="11" fill="#1F2937" text-anchor="start">조회 후</text>
+<polygon points="450,172 620,222 450,272 280,222" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="450" y="218" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">아래 사유 중</text>
+<text x="450" y="234.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">하나에 해당?</text>
+<polyline points="280,222 210,222 210,300" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-escalation-triggers)"/>
+<text x="245" y="214" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="620,222 690,222 690,300" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-escalation-triggers)"/>
+<text x="655" y="214" font-size="11" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="20" y="302" width="380" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210" y="326.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">escalate_to_human</text>
+<rect x="20" y="352" width="380" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210" y="377.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">고객이 사람 담당자 요청</text>
+<text x="210" y="392.2" font-size="11" fill="#1F2937" text-anchor="middle">명시적 요청 = 언제든 사유</text>
+<rect x="20" y="416" width="380" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210" y="441.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">정책 예외 · 정책 공백</text>
+<text x="210" y="456.2" font-size="11" fill="#1F2937" text-anchor="middle">예: 경쟁사 가격 맞춤 · 타사 선박 구간 지연 보상</text>
+<rect x="20" y="480" width="380" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210" y="505.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">정해 둔 횟수 시도 후 진전 없음</text>
+<text x="210" y="520.2" font-size="11" fill="#1F2937" text-anchor="middle">예: 같은 안내 4회 · 40분 지속</text>
+<rect x="20" y="544" width="380" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210" y="569.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">정책상 사람 승인 필수</text>
+<text x="210" y="584.2" font-size="11" fill="#1F2937" text-anchor="middle">예: $400 환불 &gt; 승인 기준 $250</text>
+<rect x="20" y="608" width="380" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210" y="633.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">규정이 담당 부서를 지정한 안건</text>
+<text x="210" y="648.2" font-size="11" fill="#1F2937" text-anchor="middle">예: 적응외 사용 상담 · 부작용 보고</text>
+<rect x="500" y="302" width="380" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="690" y="326.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">agent가 직접 처리 (escalation 사유 ✗)</text>
+<rect x="500" y="352" width="380" height="72" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="690" y="385.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">고객 격앙 + 정책상 환불 가능한 $90</text>
+<text x="690" y="400.2" font-size="11" fill="#1F2937" text-anchor="middle">공감하며 agent가 직접 처리</text>
+<rect x="500" y="432" width="380" height="72" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="690" y="456.8" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">도구 호출 3회 · 5 turn 초과 · 주문 30일 경과 · 지원</text>
+<text x="690" y="473.7" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">언어</text>
+<text x="690" y="488.6" font-size="11" fill="#1F2937" text-anchor="middle">기준 아님: 복잡도 감당 = agent 몫</text>
+<rect x="500" y="512" width="380" height="72" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="690" y="536.8" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">배송 후 마음 변경 우려 · 상반 증거 제시의 관계 부담 ·</text>
+<text x="690" y="553.7" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">복수 이슈 조율</text>
+<text x="690" y="568.6" font-size="11" fill="#1F2937" text-anchor="middle">정책 공백 아님</text>
+<rect x="500" y="592" width="380" height="72" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="690" y="625.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">감정 · 자기 보고 confidence</text>
+<text x="690" y="640.2" font-size="11" fill="#1F2937" text-anchor="middle">복잡도 지표 ✗</text>
+</g>
+</svg>

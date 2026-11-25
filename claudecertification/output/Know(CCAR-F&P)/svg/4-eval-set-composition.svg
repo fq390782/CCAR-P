@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="production 분포를 반영한 층화 표본으로 eval set을 만들고, 5개 drawer로 빠진 곳을 점검한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Eval set 구성</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-eval-set-composition" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Eval set: production 분포를 닮은 층화 표본 + 5개 drawer로 빠진 곳 점검</text>
+<rect x="20" y="56" width="240" height="116" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="140.0" y="90.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">production traffic</text>
+<text x="140.0" y="105.3" font-size="11" fill="#6B7280" text-anchor="middle">지저분한 입력 15%</text>
+<text x="140.0" y="119.3" font-size="11" fill="#6B7280" text-anchor="middle">(오타 · stack trace · 대문자)</text>
+<text x="140.0" y="133.3" font-size="11" fill="#6B7280" text-anchor="middle">모호 · 저context query 20%</text>
+<text x="140.0" y="147.3" font-size="11" fill="#6B7280" text-anchor="middle">새 제품 line 등장</text>
+<path d="M260,114 L350,114" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-eval-set-composition)"/>
+<rect x="269.2" y="94" width="71.6" height="17" fill="#FFFFFF"/>
+<text x="305" y="106" font-size="12" fill="#1F2937" text-anchor="middle">비율 그대로</text>
+<rect x="350" y="56" width="290" height="116" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="495.0" y="97.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">층화(stratified) 표본</text>
+<text x="495.0" y="112.3" font-size="11" fill="#6B7280" text-anchor="middle">유형별 최소 개수 · 희귀 유형 · edge case</text>
+<text x="495.0" y="126.3" font-size="11" fill="#6B7280" text-anchor="middle">어려운 tail 오버샘플링</text>
+<text x="495.0" y="140.3" font-size="11" fill="#6B7280" text-anchor="middle">production 구성으로 가중한 층별 비율 보고</text>
+<rect x="670" y="56" width="210" height="116" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="775.0" y="90.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">대표성이 아닌 것 ✗</text>
+<text x="775.0" y="105.3" font-size="11" fill="#6B7280" text-anchor="middle">이미 잘 처리하는 사례만</text>
+<text x="775.0" y="119.3" font-size="11" fill="#6B7280" text-anchor="middle">최근 티켓 50개 (희귀 유형 빠짐)</text>
+<text x="775.0" y="133.3" font-size="11" fill="#6B7280" text-anchor="middle">깨끗한 입력 1,000개</text>
+<text x="775.0" y="147.3" font-size="11" fill="#6B7280" text-anchor="middle">합성 예시 (생성 모델 편향)</text>
+<path d="M495,172 L495,206" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-eval-set-composition)"/>
+<rect x="506.0" y="182" width="111.9" height="17" fill="#FFFFFF"/>
+<text x="510" y="194" font-size="12" fill="#1F2937" text-anchor="start">5개 drawer로 구성</text>
+<rect x="20" y="206" width="860" height="170" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="32" y="228" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">Eval set = 5개 drawer (비어 있는 서랍이 사각지대)</text>
+<rect x="30" y="240" width="158" height="124" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="109.0" y="292.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">representative</text>
+<text x="109.0" y="307.4" font-size="11" fill="#6B7280" text-anchor="middle">실제 traffic 구성</text>
+<text x="109.0" y="321.4" font-size="11" fill="#6B7280" text-anchor="middle">지원하는 모든 언어 · 유형</text>
+<rect x="198" y="240" width="158" height="124" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="277.0" y="285.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">edge</text>
+<text x="277.0" y="300.4" font-size="11" fill="#6B7280" text-anchor="middle">드물지만 유효한 입력</text>
+<text x="277.0" y="314.4" font-size="11" fill="#6B7280" text-anchor="middle">흔치 않은 소득 유형 ·</text>
+<text x="277.0" y="328.4" font-size="11" fill="#6B7280" text-anchor="middle">비전형 증상</text>
+<rect x="366" y="240" width="158" height="124" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="445.0" y="278.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">adversarial</text>
+<text x="445.0" y="293.4" font-size="11" fill="#6B7280" text-anchor="middle">시스템을 속이도록</text>
+<text x="445.0" y="307.4" font-size="11" fill="#6B7280" text-anchor="middle">만든 입력 (위장 피싱 ·</text>
+<text x="445.0" y="321.4" font-size="11" fill="#6B7280" text-anchor="middle">편향 · unsafe code 유도)</text>
+<text x="445.0" y="335.4" font-size="11" fill="#6B7280" text-anchor="middle">공격이 바뀌면 갱신</text>
+<rect x="534" y="240" width="158" height="124" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="613.0" y="285.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">malformed</text>
+<text x="613.0" y="300.4" font-size="11" fill="#6B7280" text-anchor="middle">깨짐 · 일부만</text>
+<text x="613.0" y="314.4" font-size="11" fill="#6B7280" text-anchor="middle">오타 · 빈 입력</text>
+<text x="613.0" y="328.4" font-size="11" fill="#6B7280" text-anchor="middle">실제 traffic은 지저분</text>
+<rect x="702" y="240" width="158" height="124" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="781.0" y="285.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">regression</text>
+<text x="781.0" y="300.4" font-size="11" fill="#6B7280" text-anchor="middle">과거 bug case</text>
+<text x="781.0" y="314.4" font-size="11" fill="#6B7280" text-anchor="middle">변경마다 실행</text>
+<text x="781.0" y="328.4" font-size="11" fill="#6B7280" text-anchor="middle">수정됨 = 방어됨</text>
+<path d="M450,376 L450,410" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-eval-set-composition)"/>
+<rect x="458.0" y="386" width="156.8" height="17" fill="#FFFFFF"/>
+<text x="462" y="398" font-size="12" fill="#1F2937" text-anchor="start">production 구성이 바뀌면</text>
+<rect x="250" y="410" width="400" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="432.6" font-size="13" fill="#1F2937" text-anchor="middle">eval 새로고침 · 현재 구성에 맞춤</text>
+<text x="450.0" y="446.9" font-size="11" fill="#6B7280" text-anchor="middle">새 세트로 점수 재baseline</text>
+<path d="M20,484 L56,484" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="64" y="488" font-size="11" fill="#6B7280" text-anchor="start">점선: production 구성이 바뀔 때만 일어나는 갱신</text>
+</svg>

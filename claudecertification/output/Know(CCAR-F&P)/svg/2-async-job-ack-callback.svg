@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="560" viewBox="0 0 940 560" role="img" aria-label="즉시 ack 후 polling 또는 webhook으로 결과 전달" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>즉시 ack 후 polling 또는 webhook으로 결과 전달</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-async-job-ack-callback" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="470" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">처리가 SLA보다 길면 수락과 완료를 분리: 즉시 ack, 결과는 polling 또는 webhook</text>
+<rect x="20" y="170" width="130" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="85.0" y="209.5" font-size="13" text-anchor="middle" fill="#1F2937">클라이언트</text>
+<rect x="250" y="170" width="150" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="201.0" font-size="13" text-anchor="middle" fill="#1F2937">API endpoint</text>
+<text x="325.0" y="218.0" font-size="11" text-anchor="middle" fill="#6B7280">수락만 담당</text>
+<rect x="480" y="170" width="140" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="550.0" y="201.0" font-size="13" text-anchor="middle" fill="#1F2937">queue</text>
+<text x="550.0" y="218.0" font-size="11" text-anchor="middle" fill="#6B7280">burst 흡수</text>
+<rect x="690" y="170" width="110" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="745.0" y="209.5" font-size="13" text-anchor="middle" fill="#1F2937">worker</text>
+<rect x="840" y="170" width="80" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="880.0" y="209.5" font-size="13" text-anchor="middle" fill="#1F2937">Claude</text>
+<polyline points="150,190 250,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-async-job-ack-callback)"/>
+<rect x="179.9" y="169.0" width="40.2" height="18" fill="#FFFFFF"/>
+<text x="200" y="182.5" font-size="11" text-anchor="middle" fill="#6B7280">① 요청</text>
+<polyline points="250,222 150,222" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-async-job-ack-callback)"/>
+<rect x="168.5" y="234.0" width="63.0" height="32" fill="#FFFFFF"/>
+<text x="200" y="247.5" font-size="11" text-anchor="middle" fill="#6B7280">② 즉시 ack</text>
+<text x="200" y="261.5" font-size="11" text-anchor="middle" fill="#6B7280">+ job id</text>
+<polyline points="400,205 480,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-async-job-ack-callback)"/>
+<rect x="408.7" y="183.0" width="62.6" height="18" fill="#FFFFFF"/>
+<text x="440" y="196.5" font-size="11" text-anchor="middle" fill="#6B7280">③ enqueue</text>
+<polyline points="620,205 690,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-async-job-ack-callback)"/>
+<rect x="619.3" y="236.0" width="71.5" height="32" fill="#FFFFFF"/>
+<text x="655" y="249.5" font-size="11" text-anchor="middle" fill="#6B7280">④ rate limit</text>
+<text x="655" y="263.5" font-size="11" text-anchor="middle" fill="#6B7280">안에서 꺼냄</text>
+<polyline points="800,205 840,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-async-job-ack-callback)"/>
+<text x="820" y="262" font-size="11" text-anchor="middle" fill="#6B7280">⑤ 호출</text>
+<text x="820" y="276" font-size="11" text-anchor="middle" fill="#6B7280">+ retry</text>
+<polyline points="745,170 745,120 85,120 85,170" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-async-job-ack-callback)"/>
+<rect x="328.1" y="111.0" width="173.8" height="18" fill="#FFFFFF"/>
+<text x="415" y="124.5" font-size="11" text-anchor="middle" fill="#6B7280">⑥b webhook: 완료 즉시 callback</text>
+<rect x="250" y="300" width="150" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="332.5" font-size="13" text-anchor="middle" fill="#1F2937">상태 조회 API</text>
+<polyline points="60,240 60,328 250,328" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-async-job-ack-callback)"/>
+<rect x="119.3" y="307.0" width="61.3" height="18" fill="#FFFFFF"/>
+<text x="150" y="320.5" font-size="11" text-anchor="middle" fill="#6B7280">⑥a polling</text>
+<polyline points="745,240 745,328 400,328" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-async-job-ack-callback)"/>
+<rect x="542.1" y="307.0" width="55.8" height="18" fill="#FFFFFF"/>
+<text x="570" y="320.5" font-size="11" text-anchor="middle" fill="#6B7280">결과 기록</text>
+<polyline points="20,382 50,382" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<text x="56" y="386" font-size="11" text-anchor="start" fill="#6B7280">처리 흐름</text>
+<polyline points="113.8076923076923,382 143.80769230769232,382" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="149.80769230769232" y="386" font-size="11" text-anchor="start" fill="#6B7280">완료 통지 (둘 중 선택)</text>
+<rect x="20" y="405" width="430" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="235.0" y="436.0" font-size="13" text-anchor="middle" fill="#1F2937">polling: 클라이언트만으로 완결, 단순</text>
+<text x="235.0" y="453.0" font-size="11" text-anchor="middle" fill="#6B7280">간격에 따라 감지 지연 · 불필요한 요청 증가</text>
+<rect x="480" y="405" width="440" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="700.0" y="427.5" font-size="13" text-anchor="middle" fill="#1F2937">webhook: 즉시 통지</text>
+<text x="700.0" y="444.5" font-size="11" text-anchor="middle" fill="#6B7280">수신 endpoint 공개 · 서명 검증 · idempotent 처리(재전송·중복)</text>
+<text x="700.0" y="461.5" font-size="11" text-anchor="middle" fill="#6B7280">놓친 알림 대비 상태 조회 API 필요</text>
+<rect x="20" y="490" width="900" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="470.0" y="519.5" font-size="12" text-anchor="middle" fill="#1F2937">몇 시간짜리 작업을 동기 HTTP 연결로 붙잡기 → idle timeout·연결 끊김 위험   ·   queue가 retry를 대체한다 → 아님, retry는 여전히 필요</text>
+</svg>

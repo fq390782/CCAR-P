@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="380" viewBox="0 0 880 380" role="img" aria-label="기준 측정, prompt 변경, 같은 eval set으로 재측정, 기준 충족 시 ship. 손으로 고른 example, self-assessment, 일부 traffic 배포는 측정을 대신하지 못한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>eval 기반 변경 사이클</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-eval-cycle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-eval-cycle-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">변경은 측정한 뒤 ship: eval 기반 변경 사이클</text>
+<rect x="20" y="90" width="180" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="110.0" y="110.9" text-anchor="middle"><tspan x="110.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">① 기준 측정</tspan><tspan x="110.0" dy="16" font-size="13" fill="#1F2937">held-out eval set +</tspan><tspan x="110.0" dy="16" font-size="13" fill="#1F2937">defined criteria</tspan></text>
+<rect x="240" y="90" width="170" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="325.0" y="119.9" text-anchor="middle"><tspan x="325.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">② prompt 변경</tspan><tspan x="325.0" dy="14" font-size="11" fill="#6B7280">후보 작성</tspan></text>
+<rect x="450" y="90" width="180" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="540.0" y="118.9" text-anchor="middle"><tspan x="540.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">③ 재측정</tspan><tspan x="540.0" dy="16" font-size="13" fill="#1F2937">같은 eval set·기준</tspan></text>
+<polygon points="720,82.0 795.0,122 720,162.0 645.0,122" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="720" y="118.5" text-anchor="middle"><tspan x="720" dy="0" font-size="13" fill="#1F2937">기준 대비</tspan><tspan x="720" dy="16" font-size="13" fill="#1F2937">개선?</tspan></text>
+<rect x="650" y="210" width="140" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="720.0" y="236.9" text-anchor="middle"><tspan x="720.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">ship</tspan></text>
+<path d="M200,122 L240,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-eval-cycle)"/>
+<path d="M410,122 L450,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-eval-cycle)"/>
+<path d="M630,122 L645,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-eval-cycle)"/>
+<path d="M720,82 L720,68 L325,68 L325,90" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-eval-cycle)"/>
+<rect x="463.6" y="61" width="112.9" height="17" fill="#FFFFFF"/>
+<text x="520" y="73" font-size="12" fill="#1F2937" text-anchor="middle">아니오: 다시 변경</text>
+<path d="M720,162 L720,210" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-eval-cycle)"/>
+<rect x="724.0" y="178" width="88.9" height="17" fill="#FFFFFF"/>
+<text x="728" y="190" font-size="12" fill="#1F2937" text-anchor="start">예: 기준 충족</text>
+<text x="20" y="290" font-size="14" font-weight="bold" fill="#DC2626" text-anchor="start">③을 대신할 수 없는 것 (오답)</text>
+<rect x="20" y="300" width="270" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="155.0" y="327.6" text-anchor="middle"><tspan x="155.0" dy="0" font-size="13" fill="#1F2937">✗ 손으로 고른 3~5개 example</tspan><tspan x="155.0" dy="14" font-size="11" fill="#6B7280">noise와 구분 불가, 재현 불가</tspan></text>
+<rect x="305" y="300" width="270" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="440.0" y="327.6" text-anchor="middle"><tspan x="440.0" dy="0" font-size="13" fill="#1F2937">✗ 모델에게 어느 prompt가 나은지 묻기</tspan><tspan x="440.0" dy="14" font-size="11" fill="#6B7280">self-assessment는 측정이 아님</tspan></text>
+<rect x="590" y="300" width="270" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="725.0" y="327.6" text-anchor="middle"><tspan x="725.0" dy="0" font-size="13" fill="#1F2937">✗ flag·일부 traffic으로 먼저 배포</tspan><tspan x="725.0" dy="14" font-size="11" fill="#6B7280">사용자를 test set으로 쓰는 셈</tspan></text>
+<path d="M540,300 L540,154" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-eval-cycle-red)"/>
+<rect x="442.1" y="218" width="93.9" height="17" fill="#FFFFFF"/>
+<text x="532" y="230" font-size="12" fill="#DC2626" text-anchor="end">측정 대체 불가</text>
+</svg>

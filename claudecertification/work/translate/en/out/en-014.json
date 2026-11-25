@@ -1,0 +1,242 @@
+[
+ {
+  "id": "CCAR-F-Udemy05-0046",
+  "question": "The research team at an e-commerce logistics company is investigating the causes of shipping delays with a multi-agent research system. The search subagent is implemented by calling the Messages API directly, and it is given the following two tool definitions.\n\nquery_tracking_events (description: \"Retrieves tracking events\", parameter: q)\n\nsearch_carrier_notices (description: \"Searches notices\")\n\nA tracking number is \"JP\" followed by 11 digits.\n\nThe logs revealed the following errors.\n\nIn 34% of the query_tracking_events calls, free-form text such as \"delays in the Sendai area\" was passed in q, causing a validation error\n\nThere were 120 calls per week that tried to look up the status of an individual package using search_carrier_notices\n\nWhich changes are appropriate to reduce tool selection and input errors? (Select two.)",
+  "choices": {
+   "A": "Add a few input_examples of valid tracking numbers to query_tracking_events.",
+   "B": "Add to each tool's description the input format it accepts, what it returns, and when the other tool should be used instead.",
+   "C": "Keep the tool descriptions at their current length and only rename the parameter from q to query.",
+   "D": "Merge the two tools into a single tool called search_logistics and route requests on the server side based on the input."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0047",
+  "question": "The development team at a telecommunications carrier uses Claude Code to generate code for a base station management system. The root CLAUDE.md is about 1,300 lines long, and a warning that the file is too long is displayed at startup. About 900 of those lines are conventions that are needed only when working with specific file types, such as the following.\n\nYANG models (*.yang)\n\nTerraform (*.tf)\n\nSQL migrations (*.sql)\n\nEven for work unrelated to these, such as a UI overhaul, all of these conventions are loaded into the context. The team wants to load the conventions only when they are needed and reduce context consumption for other work.\n\nWhich changes are appropriate? (Select two.)",
+  "choices": {
+   "A": "Split those conventions into separate files in .claude/rules/, do not specify paths, and organize them in topic-based folders.",
+   "B": "Split the conventions for specific file types into .claude/rules/ and specify a glob in the paths of each file.",
+   "C": "Split those conventions into separate Markdown files and load them from the root CLAUDE.md with @import.",
+   "D": "Remove those conventions from the root CLAUDE.md and leave only the conventions that are common to everything."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0048",
+  "question": "The development team at a gas company uses Claude Code to fix defects in a billing calculation module. The following four problems were found in testing.\n\nIn the daily proration of the base charge, the way fractions are rounded differs from the specification\n\nIn the usage charge calculation, rounding is performed before the daily proration calculation\n\nIn the invoice CSV export, the column order differs from the specification\n\nThere is a typo in an error message on the admin screen\n\nInvestigation showed that items 1 and 2 are related in such a way that which one is fixed changes the expected values of the other. Items 3 and 4 are independent of the other problems.\n\nWhich are appropriate ways to proceed with the requests to Claude Code? (Select two.)",
+  "choices": {
+   "A": "Have items 1 and 2 fixed one at a time in separate sessions, and reconcile the results at the end.",
+   "B": "Handle items 3 and 4 separately from 1 and 2, requesting them one at a time in sequence and fixing them while verifying each.",
+   "C": "Request items 1 and 2 in a single detailed message that includes their relationship to each other and the expected results.",
+   "D": "Combine all four items into a single message and have them fixed in one request."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0049",
+  "question": "The development team at a securities firm uses the Claude Agent SDK to build a developer productivity tool that handles development requests from engineers. Their policy is to switch, depending on the content of the request, between setting permission_mode to \"plan\" so that a plan is presented first, and implementing directly.\n\nFour requests, listed as the choices, arrived this week.\n\nWhich requests should have a plan presented first? (Select two.)",
+  "choices": {
+   "A": "Decide whether to adopt the company's internal single sign-on or OAuth as the customer authentication method, and implement it.",
+   "B": "Move the order management synchronization process to an asynchronous approach using a message queue, changing about 50 files.",
+   "C": "Fix typos in the messages output to the execution notification log in three places.",
+   "D": "Add a missing null check to a single function, where the offending line has already been identified from the stack trace."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0050",
+  "question": "The development team at a construction company runs a CI job that generates tests with Claude Code for each pull request to a project scheduling system. The job runs claude -p at the repository root, without --bare.\n\nReviewing the generated tests revealed the following.\n\nMore than half of the tests only checked the return value of a getter, or mocked every dependency and verified nothing\n\nThe tests did not use the BuildingFactory and ScheduleFactory provided in tests/factories/, and built building and schedule data from scratch in every test\n\nWhich responses are appropriate to improve the quality of test generation? (Select two.)",
+  "choices": {
+   "A": "Write criteria for valuable tests, such as construction period boundaries and material limits, in the project's CLAUDE.md.",
+   "B": "Write the test criteria and how to use fixtures in ~/.claude/CLAUDE.md of the user used by the CI runner.",
+   "C": "Document the purpose and usage of each factory in tests/factories/ in the project's CLAUDE.md.",
+   "D": "Add the sentence \"Write high-quality, meaningful tests\" to the CI prompt."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0051",
+  "question": "The headquarters of a restaurant chain operates a structured data extraction system. The system extracts item names, allergens, countries of origin, and unit prices from specifications and delivery slips (PDF or fax images) received from suppliers and converts them to JSON. The model also outputs a field-level confidence score. Currently, fields with a confidence of 0.9 or higher are registered automatically, and those below that are sent to human review.\n\nAn audit revealed the following.\n\nAbout 6% of the automatically registered allergen fields contained errors, and most of them had a confidence of 0.9 or higher\n\nThe item name field was almost always correct, even when its confidence was in the 0.7 range\n\nReviewers can check up to 200 items per day.\n\nWhich responses are appropriate to improve how items are routed to review? (Select two.)",
+  "choices": {
+   "A": "Raise the automatic registration threshold uniformly to 0.97 for all fields, and send everything below it to review.",
+   "B": "Give priority for human review to extractions with low confidence and to extractions where the source document is ambiguous or contradictory.",
+   "C": "Measure the per-field confidence and actual accuracy on a labeled validation set, and set the thresholds individually.",
+   "D": "Add \"output a low confidence when you are not sure\" to the prompt, and keep operating with the threshold at 0.9."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0052",
+  "question": "The development team at a machine tool manufacturer uses the Claude Agent SDK to build a developer productivity tool, integrating it with an MCP server that handles factory equipment data. The server has the following two tools.\n\nget_line_status (description: \"Gets the status\", parameter: id)\n\nget_machine_status (description: \"Gets the status\", parameter: id)\n\nProduction line IDs are in the form \"L-12\", and individual machine IDs are in the form \"M-0457\".\n\nChecking the logs showed that mistakes occurred in 37% of all calls, such as get_machine_status being called for the question \"What is the operating status of line 3?\", or a machine ID being passed to get_line_status.\n\nWhich changes are appropriate to reduce incorrect routing? (Select two.)",
+  "choices": {
+   "A": "Write in each tool's description whether it targets an entire production line or an individual machine, and when the other tool should be used.",
+   "B": "Rename the parameters to line_id and machine_id, and write the accepted ID format in the description.",
+   "C": "Shorten the descriptions of the two tools to a single line each to reduce the tokens consumed by the tool definitions.",
+   "D": "Add a rule to the system prompt: \"If the word 'line' appears, use get_line_status.\""
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0053",
+  "question": "A hotel chain operates, with the Message Batches API, a structured data extraction system that extracts facilities, types of complaints, and requests from the free-text responses in guest surveys and converts them to JSON. Under the agreements with each hotel, the extraction results must be delivered to each hotel within 36 hours of receiving the survey. The number of surveys received varies from 300 to 5,000 per day depending on the season.\n\nThe processing flow is as follows.\n\nReceived surveys are accumulated until the next batch submission\n\nImmediately before submission, 2 hours of preprocessing are performed\n\nThe batch is submitted\n\nAfter the results are received, 2 hours of validation and delivery are performed\n\nDocuments that fail validation are reprocessed individually using the synchronous API within the 2 hours of validation and delivery.\n\nWhich are appropriate ways to decide the batch submission frequency? (Select two.)",
+  "choices": {
+   "A": "Submit a batch every 8 hours, grouping the surveys received during that time.",
+   "B": "Calculate the submission interval based on the maximum processing time of 24 hours, not the usual processing time.",
+   "C": "Submit a batch every 12 hours, grouping the surveys received during that time.",
+   "D": "Submit a batch each time 1,000 received surveys have accumulated."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0054",
+  "question": "The development team at a real estate management company uses the Claude Agent SDK to build a developer productivity tool. When the agent modifies the module that calculates rental contract renewal fees, the tool branches the generation session with fork_session and asks the branched session to \"review this change.\" The team believed that because the session ID differs from the generation session's, the review would be independent.\n\nThe results for the most recent 40 modifications were as follows.\n\nThe review raised a total of 2 findings, and the wording often presupposed decisions made during generation, such as \"as considered during the modification, rounding down fractions is fine\"\n\nAcceptance testing found 9 defects, such as errors in the daily proration calculation when a contract is canceled mid-month\n\nWhich changes to the review mechanism are appropriate? (Select two.)",
+  "choices": {
+   "A": "Add to the request to the branched session an instruction to question the decisions made during generation and check them critically.",
+   "B": "Start a new session without resuming the generation session, and run the review in it.",
+   "C": "Define a review subagent that is given only the modified files and the calculation rules.",
+   "D": "Specify a higher-tier model than the one used for generation, and run the review in the branched session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0055",
+  "question": "The connected services development team at an automobile manufacturer uses Claude Code to modify a vehicle data ingestion API. The production error logs showed that an exception occurs in the validate_vin function because the number of digits in the received vehicle identification number (VIN) is not checked.\n\nThe offending line has already been identified from the stack trace, and one failing test that reproduces this defect has been prepared. The fix is expected to require only adding a single check to the validate_vin function for whether the VIN is 17 characters.\n\nWhich is the most appropriate way to proceed with this fix?",
+  "choices": {
+   "A": "Use direct execution to have it make the fix as is, and have it confirm that the prepared failing test and the existing tests pass.",
+   "B": "Use the interview pattern to have it gather the requirements for VIN validation from the developer, and then implement.",
+   "C": "Use an Explore subagent to have it identify everything in the repository that deals with VINs, and then make the fix.",
+   "D": "Enter plan mode, have it investigate the impact on the entire vehicle data processing, and then have it present a plan for the fix."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0056",
+  "question": "The system development team at an electric power company uses Claude Code to generate code for a billing calculation system. SQL files are scattered across multiple directories, such as services/billing/db/queries/ and tools/reports/, in addition to schema.sql at the root.\n\nThe team put the SQL conventions together in .claude/rules/sql.md and specified paths: [\"*.sql\"] in the frontmatter. They do not want these conventions loaded into the context during non-SQL work.\n\nHowever, the conventions are applied when the root schema.sql is edited, but not when SQL files under services/billing/db/queries/ are edited.\n\nWhich is the most appropriate fix?",
+  "choices": {
+   "A": "Change the paths value to \"**/*.sql\" so that it matches SQL files at any level of the hierarchy.",
+   "B": "Remove paths from sql.md so that the conventions are loaded at startup in every session.",
+   "C": "Move sql.md to .claude/rules/db/ and align the placement of the rule file with the structure of the SQL files.",
+   "D": "Place a CLAUDE.md in each directory that contains SQL files and write the same content as sql.md in each."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0057",
+  "question": "The development team at a digital advertising company automatically reviews pull requests for an ad delivery SDK with Claude Code. Findings are output in the JSON format defined with --json-schema and posted as inline comments on the PR. Over the last three months, the proportion of findings that developers \"dismissed\" rose from 29% to 46%.\n\nThe team wants to investigate the tendencies of frequently dismissed findings. However, the wording of the findings differs every time, as in \"Exceptions in asynchronous processing are being swallowed\" and \"Nothing is done inside the catch,\" so they cannot aggregate which findings concern the same kind of code.\n\nWhich is the most appropriate response to make it possible to systematically analyze dismissal tendencies?",
+  "choices": {
+   "A": "Have it output a confidence for each finding, and do not post findings with a confidence below 0.7 as inline comments.",
+   "B": "Add detected_pattern to the schema and have it record the code structure that gave rise to each finding.",
+   "C": "Each time a finding is dismissed, ask the developer to enter the reason for dismissal as free text, and aggregate that text.",
+   "D": "Aggregate the dismissal rate for each PR, and prompt the authors of PRs with high dismissal rates to review the findings."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0058",
+  "question": "The embedded software team at a semiconductor manufacturer uses Claude Code to generate firmware code. Instructions on how to write code are written in multiple CLAUDE.md files, as follows.\n\nThe CLAUDE.md at the repository root says \"Indent with 4 spaces\"\n\nThe CLAUDE.md in the firmware/ directory says \"Comply with MISRA C and indent with 2 spaces\"\n\nThe ~/.claude/CLAUDE.md of some members says \"Use tabs for indentation\"\n\nExamining the C code generated under firmware/ showed that the indentation was inconsistent, varying between tabs, 4 spaces, and 2 spaces depending on the session and the member.\n\nWhich is the most appropriate way to handle this?",
+  "choices": {
+   "A": "Write \"takes precedence over the higher-level CLAUDE.md\" at the top of the firmware/ CLAUDE.md, and leave the other entries as they are.",
+   "B": "Limit the indentation convention in the root CLAUDE.md to everything other than firmware/, and remove the indentation instruction from the personal CLAUDE.md files.",
+   "C": "Delete the root CLAUDE.md and manage the project's conventions with only the CLAUDE.md in each directory.",
+   "D": "Ask each member to also write the firmware/ conventions in their own ~/.claude/CLAUDE.md so that everyone's settings are aligned."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0059",
+  "question": "The development team at a professional sports club runs a CI pipeline that automatically reviews pull requests for a ticketing app with Claude Code. The review prompt has three few-shot examples that point out N+1 queries, and all of them are code written in the same way, referencing a related table inside a for loop.\n\nIn a retrospective of the last three months, the review had missed 7 of the 9 N+1 queries found in production. The 7 that were missed were written differently from the examples, such as references inside comprehensions or references via serializers.\n\nWhich review of the few-shot examples is most effective for enabling the review to extend its judgment to problems in forms different from the examples?",
+  "choices": {
+   "A": "Remove the few-shot examples and write a detailed definition of N+1 queries and detection conditions in the system prompt.",
+   "B": "Show in the prompt examples of N+1 written in different ways and examples of acceptable bulk fetching, with the reasoning for each judgment.",
+   "C": "Keep the existing examples and add the instruction \"Report similar patterns without omission.\"",
+   "D": "Add the code of the 7 missed cases as is as few-shot examples."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0060",
+  "question": "The development team at a hotel reservation site has Claude Code fix pricing calculation defects in a CI pipeline, and in the same session asks it to \"review your own changes and point out any problems.\" Extended thinking is also enabled to improve review accuracy.\n\nAcross the past 30 PRs, this self-review flagged 0 problems. However, 4 defects were found after release, including one where the order of the multi-night discount and the consumption tax rounding was reversed.\n\nWhich improvements to the review mechanism are appropriate? (Select two.)",
+  "choices": {
+   "A": "Give the reviewer only the diff and the specification and review criteria, and do not give it the explanations or reasoning from when the fix was made.",
+   "B": "Raise the effort of the session that generates the fix so that it thinks more deeply before reviewing.",
+   "C": "Stay in the same session, give it a checklist, and instruct it to review again \"more strictly.\"",
+   "D": "Run the review in an independent instance separate from the session that generated the fix."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0001",
+  "question": "The development team at an agricultural machinery manufacturer uses Claude Code in a repository of microservices that handle field sensor data. They wrote conventions for writing Protocol Buffers definition files (*.proto) in .claude/rules/proto.md and specified paths: [\"proto/*.proto\"] in the frontmatter.\n\nHowever, they found that these conventions are not loaded when editing definition files under each service, such as services/irrigation/api/v1/schedule.proto.\n\nWhich is the most appropriate fix to apply these conventions to all definition files regardless of location?",
+  "choices": {
+   "A": "Change the paths value to [\"*.proto\"] so that definition files are matched by extension alone.",
+   "B": "Delete the paths line from the frontmatter so that the rule is loaded unconditionally.",
+   "C": "Place a CLAUDE.md in each service's directory and copy the same conventions into each.",
+   "D": "Change the paths value to [\"**/*.proto\"] so that it matches definition files at any level of the hierarchy."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0002",
+  "question": "The research division of an international cooperation NGO uses the Claude Agent SDK to build a multi-agent research system that investigates health and education data for the regions it supports. The coordinator's options were set as follows.\n\nTwo AgentDefinitions, web-researcher and document-analyst, are defined in the agents parameter\n\nRead, Grep, and WebSearch are specified in allowedTools\n\nHowever, the execution logs show that the subagents were never invoked, and the coordinator itself did all of the web searching and document reading. Also, both descriptions consisted of only a single sentence: \"Helps with research.\"\n\nWhich changes are appropriate to get the coordinator to delegate work to the subagents? (Select two.)",
+  "choices": {
+   "A": "Add to each subagent's prompt the instruction \"Refer to the coordinator's conversation history.\"",
+   "B": "Copy the procedures of the two subagents into the coordinator's system prompt and have a single agent handle everything.",
+   "C": "Write in each description, specifically, for what kinds of requests that subagent should be used.",
+   "D": "Add the Agent tool (formerly the Task tool), which launches subagents, to allowedTools."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0003",
+  "question": "The information infrastructure team at a research institution is planning to introduce MCP servers so that researchers can operate their day-to-day systems from Claude Code. The targets are the following three.\n\nGitLab, which manages source code\n\nSlack, used for communication\n\nThe institution's own laboratory equipment reservation system\n\nThe reservation system has its own procedure in which a reservation is confirmed only after checking eligibility to use each piece of equipment and verifying safety training attendance records. Only one person is available for development, and they want to minimize the maintenance burden.\n\nWhich are appropriate ways to choose MCP servers? (Select two.)",
+  "choices": {
+   "A": "Do not introduce MCP servers, and write in CLAUDE.md a procedure for having Claude call each system's API directly with curl.",
+   "B": "Adopt existing publicly available MCP servers for GitLab and Slack.",
+   "C": "For the laboratory equipment reservation system, build a custom MCP server that implements its own reservation procedure.",
+   "D": "Build a single custom MCP server that handles all three systems together, and implement the GitLab and Slack APIs in-house as well."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0004",
+  "question": "A railway company uses the Claude Agent SDK to operate a customer support resolution agent that handles inquiries about ticket refunds and changes. The lookup_reservation tool, which looks up a reservation, returns about 45 fields in a single call, including the seat map, route details, fare breakdown, and points history. However, only five are used to decide on a refund: reservation number, travel date, section, amount paid, and refund eligibility.\n\nIn long conversations about multiple reservations, lookup results pile up in the context, and in the later part of the conversation, cases have been seen in which the agent confuses an amount paid that it confirmed early on.\n\nWhich is the most effective measure that directly addresses the cause of this problem?",
+  "choices": {
+   "A": "Before lookup results enter the context, trim them down to only the five fields relevant to refunds.",
+   "B": "Each time a lookup is made, delete all previous tool results from the conversation history before making the next lookup.",
+   "C": "Switch to a model with a larger context window and keep the lookup results as they are.",
+   "D": "When the conversation gets long, progressively summarize the exchanges so far and replace old messages with the summary."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0005",
+  "question": "An accounting firm uses Claude to extract structured data from PDFs of financial statements received from client companies. Processing has the following two stages.\n\nUse extract_metadata to extract the client name, fiscal period, and document type\n\nUse those results to query the client's general ledger with lookup_client_ledger and supplement the data\n\nIn the initial request, tool_choice is set to {\"type\": \"any\"}. However, checking the logs shows that in about 12% of cases lookup_client_ledger is called first, and the ledger is queried with a guessed client name rather than the official name read from the document.\n\nWhich change is most appropriate to ensure that extraction runs first?",
+  "choices": {
+   "A": "Allow the lookup_client_ledger call in the initial request, and start over from extraction if the result is empty.",
+   "B": "In the initial request, specify extract_metadata in tool_choice to force the extraction tool.",
+   "C": "State explicitly in the description of lookup_client_ledger that it should be called only after receiving the result of extract_metadata.",
+   "D": "Return the tool_choice of the initial request to auto, and instruct in the system prompt that extraction be performed first."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0006",
+  "question": "The development team at a real estate brokerage uses Claude Code to modify a property search service. The skill /compare-designs shared by the team lists about five design proposals for a new feature, weighs the pros and cons of each, and presents a recommended proposal.\n\nHowever, when this skill is run in the main conversation, a large amount of detailed discussion of the proposals that were not adopted remains in the conversation. As a result, in the later implementation phase, Claude sometimes mixed the thinking behind the rejected proposals into the code.\n\nWhich changes are appropriate to make it possible to use this skill without polluting the main conversation? (Select two.)",
+  "choices": {
+   "A": "Add context: fork to the frontmatter of SKILL.md.",
+   "B": "Run /clear every time after running the skill, resetting the conversation before moving on to implementation.",
+   "C": "In the body of the skill, write an instruction to return, at the end, only a summary of the recommended proposal, its rationale, and a comparison table.",
+   "D": "Move the contents of the skill to the project's CLAUDE.md, making design deliberation a procedure that is always loaded."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0007",
+  "question": "The development team at an advertising agency uses the Claude Agent SDK to build a developer productivity tool that engineers use to investigate ad delivery system code and related materials.\n\nIn addition to built-in tools, the agent has search_assets (description: \"Searches assets\") and search_creatives (description: \"Searches creatives\"), provided by an internal MCP server. The former searches repositories of code and infrastructure configuration, and the latter searches the ad creative management system.\n\nAnalyzing the logs showed that search_assets was called for 41% of the questions about ad creatives. Also, the system prompt contained the sentence \"When the user says 'search', use search_assets first.\"\n\nWhich changes are appropriate to reduce incorrect routing? (Select two.)",
+  "choices": {
+   "A": "Rename search_assets to search_code_and_infra, and write the search targets and how to choose between them in both tools' descriptions.",
+   "B": "Force search_creatives with tool_choice so that this tool is always called for questions about creatives.",
+   "C": "Rewrite the sentence that decides the tool based on the word \"search\" so that the tool is chosen according to what the question is about.",
+   "D": "If the results of search_assets contain no creatives, have the loop re-run by calling search_creatives next."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0008",
+  "question": "The development team at a pharmaceutical company uses Claude Code (configured with built-in tools enabled, including Read, Grep, and Glob) to modify the code of a clinical trial data management system.\n\nA newly joined engineer asked, \"Explain which modules the export feature that writes case data to CSV goes through to produce its output.\" Claude then began reading about 400 files in the repository one after another with Read, and used up most of its context partway through.\n\nWhich is the most appropriate way for Claude to proceed with exploration, in order to build understanding of the codebase incrementally for a request like this?",
+  "choices": {
+   "A": "Have it first read only the README and the design documents under docs/ with Read, and explain the processing flow based on what they say.",
+   "B": "Use Glob to list the files matching **/*export*.py, and have it read all of the files found with Read.",
+   "C": "Split the 400 files into groups of 10, and have it repeat the work of reading each group with Read and summarizing it, in order, until all files are done.",
+   "D": "Use Grep to find the command name that is the entry point of the processing, and have it follow the imports from there, reading with Read."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0009",
+  "question": "An accounting firm uses the Claude Agent SDK to operate a multi-agent research system that investigates client industry trends and financial materials. The document analysis subagent retrieves materials with the MCP tool fetch_client_document of the firm's internal document management system. Under the firm's independence policy, the tax materials of a client for which the firm is conducting an audit cannot be used in advisory division research.\n\nFor requests that fall under this policy, the tool currently returns only \"Access denied.\" The subagent tried the same retrieval many times, changing the document name and search terms, and in the end wrote only \"Some materials could not be retrieved\" in the report.\n\nWhich change to the tool is most appropriate to improve this situation?",
+  "choices": {
+   "A": "Return isError: true with a classification of denial due to the policy and a flag indicating that retrying is not allowed.",
+   "B": "Exclude the relevant materials from the search results and return an empty result as if they did not exist.",
+   "C": "Return only the HTTP status code 403 and leave the decision of how to respond to the subagent.",
+   "D": "Return an error message that includes the instruction \"Retry up to 3 times.\""
+  }
+ }
+]

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="680" viewBox="0 0 920 680" role="img" aria-label="구현 수단 선택 decision tree" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>구현 수단 선택 decision tree</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-implementation-choice-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-implementation-choice-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-implementation-choice-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-implementation-choice-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">구현 수단 선택 — 요구를 만족하는 가장 단순한 것</text>
+<polygon points="210,53.0 390.0,95 210,137.0 30.0,95" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="89.1" font-size="13" fill="#1F2937" text-anchor="middle">실시간성이 필요 없는</text>
+<text x="210" y="107.1" font-size="13" fill="#1F2937" text-anchor="middle">대량 일괄 처리인가?</text>
+<rect x="430" y="63" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="90.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Message Batches API</text>
+<text x="665.0" y="106.7" font-size="11" fill="#6B7280" text-anchor="middle">비동기·저렴한 대량 처리 · agent loop나 세션 저장소가 아님</text>
+<path d="M390,95 L430,95" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="401.5" y="88" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="99" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,137 L210,163" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="215.0" y="144" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="155" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,163.0 390.0,205 210,247.0 30.0,205" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="199.1" font-size="13" fill="#1F2937" text-anchor="middle">장시간 stateful agent에</text>
+<text x="210" y="217.1" font-size="13" fill="#1F2937" text-anchor="middle">durable execution 필요?</text>
+<rect x="430" y="173" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="192.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">LangGraph 같은 orchestration 프레임워크</text>
+<text x="665.0" y="208.7" font-size="11" fill="#6B7280" text-anchor="middle">durable execution·human-in-the-loop·state 영속화 제공</text>
+<text x="665.0" y="224.7" font-size="11" fill="#6B7280" text-anchor="middle">graph로 control flow 설계 · 비용 절감 도구 아님</text>
+<path d="M390,205 L430,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="401.5" y="198" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="209" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,247 L210,273" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="215.0" y="254" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="265" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,273.0 390.0,315 210,357.0 30.0,315" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="309.1" font-size="13" fill="#1F2937" text-anchor="middle">실행·세션 로그를 모두</text>
+<text x="210" y="327.1" font-size="13" fill="#1F2937" text-anchor="middle">자사 인프라에 둬야 하나?</text>
+<rect x="430" y="283" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="310.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Agent SDK를 자사 프로세스에서 실행 (self-hosted)</text>
+<text x="665.0" y="326.7" font-size="11" fill="#6B7280" text-anchor="middle">tool·데이터·세션 로그(JSONL / SessionStore)가 자사 쪽</text>
+<path d="M390,315 L430,315" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="401.5" y="308" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="319" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,357 L210,383" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="215.0" y="364" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="375" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,383.0 390.0,425 210,467.0 30.0,425" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="419.1" font-size="13" fill="#1F2937" text-anchor="middle">인프라 운영 없이 가장</text>
+<text x="210" y="437.1" font-size="13" fill="#1F2937" text-anchor="middle">빨리 production에?</text>
+<rect x="430" y="393" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="412.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Managed Agents</text>
+<text x="665.0" y="428.7" font-size="11" fill="#6B7280" text-anchor="middle">Anthropic이 agent loop와 sandbox를 호스팅</text>
+<text x="665.0" y="444.7" font-size="11" fill="#6B7280" text-anchor="middle">sandbox를 self-hosted로 해도 session·event log는 Anthropic 측</text>
+<path d="M390,425 L430,425" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="401.5" y="418" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="429" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,467 L210,493" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="215.0" y="474" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="485" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,493.0 390.0,535 210,577.0 30.0,535" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="529.1" font-size="13" fill="#1F2937" text-anchor="middle">loop·tool·hooks를</text>
+<text x="210" y="547.1" font-size="13" fill="#1F2937" text-anchor="middle">직접 만들기 싫은가?</text>
+<rect x="430" y="503" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="522.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Claude Agent SDK</text>
+<text x="665.0" y="538.7" font-size="11" fill="#6B7280" text-anchor="middle">loop + Read/Edit/Bash/검색 + context + hooks/permissions</text>
+<text x="665.0" y="554.7" font-size="11" fill="#6B7280" text-anchor="middle">자사 프로세스 · API key 인증 · vector DB·fine-tuning·designer 없음</text>
+<path d="M390,535 L430,535" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="401.5" y="528" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="539" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,577 L210,600" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-implementation-choice-k)"/>
+<rect x="215.0" y="584" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="595" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<rect x="40" y="600" width="340" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="210.0" y="619.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Client SDK (Messages API 직접)</text>
+<text x="210.0" y="635.7" font-size="11" fill="#6B7280" text-anchor="middle">loop·tool을 직접 구현 (beta tool runner 가능)</text>
+<text x="210.0" y="651.7" font-size="11" fill="#6B7280" text-anchor="middle">streaming·tool use는 여기서도 가능</text>
+</svg>

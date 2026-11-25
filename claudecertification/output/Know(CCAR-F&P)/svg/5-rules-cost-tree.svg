@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="644" viewBox="0 0 920 644" role="img" aria-label="판단 규칙 ②: 비용 · 처리 방식 · 사고량 증상별 정답">
+<title>판단 규칙 ②: 비용 · 처리 방식 · 사고량 증상별 정답</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-rules-cost-tree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-rules-cost-tree-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="460" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">판단 규칙 ②: 비용 · 처리 방식 · 사고량 증상별 정답</text>
+<text x="370" y="70" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">이런 상황이면</text>
+<text x="740" y="70" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">정답 방향</text>
+<rect x="20" y="318.0" width="150" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="95" y="343.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">비용 · latency ·</text>
+<text x="95" y="361.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">사고량 문제</text>
+<polyline points="170,348.0 200,348.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="200,108 200,588" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="200,108 218,108" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="84" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="112.55" font-size="13" text-anchor="middle" fill="#1F2937">호출량 그대로, 비용 급증</text>
+<polyline points="520,108 578,108" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="91" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="102" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="84" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="112.55" font-size="13" text-anchor="middle" fill="#1F2937">요청당 token · 다시 보내는 context 확인</text>
+<polyline points="200,168 218,168" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="144" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="172.55" font-size="13" text-anchor="middle" fill="#1F2937">품질은 괜찮은데 비용 증가</text>
+<polyline points="520,168 578,168" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="151" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="162" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="144" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="164.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">context trimming + prefix caching</text>
+<text x="740" y="180.85" font-size="11" text-anchor="middle" fill="#6B7280">tier 변경보다 먼저</text>
+<polyline points="200,228 218,228" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="204" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="232.55" font-size="13" text-anchor="middle" fill="#1F2937">사용자 상호작용 없는 대량 야간 처리</text>
+<polyline points="520,228 578,228" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="211" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="222" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="204" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="232.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Batch API</text>
+<polyline points="200,288 218,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="264" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="292.55" font-size="13" text-anchor="middle" fill="#1F2937">사용자가 기다리는 interactive 요청</text>
+<polyline points="520,288 578,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="271" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="282" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="264" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="284.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">stream 또는 동기 호출</text>
+<text x="740" y="300.85" font-size="11" text-anchor="middle" fill="#6B7280">Batch는 쓰지 않음</text>
+<polyline points="200,348 218,348" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="324" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="352.55" font-size="13" text-anchor="middle" fill="#1F2937">수백 ms 안의 짧은 autocomplete</text>
+<polyline points="520,348 578,348" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="331" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="342" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="324" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="352.55" font-size="13" text-anchor="middle" fill="#1F2937">Haiku + streaming + 작은 max_tokens</text>
+<polyline points="200,408 218,408" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="384" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="404.55" font-size="13" text-anchor="middle" fill="#1F2937">일상 작업이 느리고 token 과다</text>
+<text x="370" y="420.85" font-size="11" text-anchor="middle" fill="#6B7280">eval로 품질 유지 확인됨</text>
+<polyline points="520,408 578,408" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="391" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="402" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="384" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="412.55" font-size="13" text-anchor="middle" fill="#1F2937">그 작업만 output_config.effort 낮춤</text>
+<polyline points="200,468 218,468" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="444" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="472.55" font-size="13" text-anchor="middle" fill="#1F2937">모든 요청에 thinking → 단순 응답도 느림</text>
+<polyline points="520,468 578,468" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="451" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="462" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="444" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="464.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">workload별 결정</text>
+<text x="740" y="480.85" font-size="11" text-anchor="middle" fill="#6B7280">필요한 곳에만 깊은 추론</text>
+<polyline points="200,528 218,528" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="504" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="532.55" font-size="13" text-anchor="middle" fill="#1F2937">분류와 복잡한 계획 작업이 섞임</text>
+<polyline points="520,528 578,528" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="511" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="522" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="504" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="532.55" font-size="13" text-anchor="middle" fill="#1F2937">분류 = few-shot · 계획 = effort ↑</text>
+<polyline points="200,588 218,588" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="220" y="564" width="300" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="370" y="592.55" font-size="13" text-anchor="middle" fill="#1F2937">큰 prompt를 보내기 전 비용 추정</text>
+<polyline points="520,588 578,588" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-cost-tree)"/>
+<rect x="535" y="571" width="28" height="15" fill="#FFFFFF"/>
+<text x="549" y="582" font-size="11" text-anchor="middle" fill="#1F2937">정답</text>
+<rect x="580" y="564" width="320" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="740" y="592.55" font-size="13" text-anchor="middle" fill="#1F2937">같은 모델로 token counting endpoint</text>
+</g>
+</svg>

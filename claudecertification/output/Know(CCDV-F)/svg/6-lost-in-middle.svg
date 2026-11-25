@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="230" viewBox="0 0 760 230" role="img" aria-label="긴 프롬프트 한가운데는 놓치기 쉽다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>긴 프롬프트 한가운데는 놓치기 쉽다</title>
+<defs><marker id="arr-lost-in-middle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="40" y="36" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">긴 프롬프트</text>
+<rect x="40" y="50" width="180" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="130.0" y="78.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">앞: 잘 반영</text>
+<rect x="220" y="50" width="320" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="380.0" y="79.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">가운데: 놓치기 쉬움</text>
+<rect x="540" y="50" width="180" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="630.0" y="78.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">끝: 잘 반영</text>
+<polyline points="330,100 330,140 130,140 130,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lost-in-middle)"/>
+<rect x="195.3" y="131" width="69.4" height="16" fill="#FFFFFF"/>
+<text x="230" y="143.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">앞으로 이동</text>
+<polyline points="430,100 430,140 630,140 630,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-lost-in-middle)"/>
+<rect x="495.3" y="131" width="69.4" height="16" fill="#FFFFFF"/>
+<text x="530" y="143.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">끝으로 이동</text>
+<text x="380" y="180" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">가장 중요한 지시는 가장자리(앞이나 끝)에 둔다</text>
+<text x="380" y="202" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">위치는 중립이 아니다 · 가운데라고 더 잘 지켜지지 않는다 · 오류가 나지도 않는다</text>
+</svg>

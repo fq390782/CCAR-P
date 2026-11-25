@@ -1,0 +1,8 @@
+{"add": {
+ "## 4. 암기 목록": ["CCAR-F-Udemy01-0037", "CCAR-F-Udemy04-0010", "CCAR-P-jrajath94-0012", "CCAR-P-jrajath94-0361"],
+ "## 5. 시험 직전 체크리스트": ["CCAR-F-Udemy04-0010", "CCAR-P-jrajath94-0353", "CCAR-P-jrajath94-0416"],
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-P-jrajath94-0002"]},
+ "rep": [
+ ["| 대화형 session 첫 사용 시 승인 요구 | `claude mcp reset-project-choices` |", "| 대화형 session 첫 사용 시 승인 요구 | `claude mcp reset-project-choices`<br>⚠️ 문항에선 오답 보기로만 등장 · 용도는 공식 문서 확인 |"],
+ ["| `ENABLE_TOOL_SEARCH=false` | 전 정의 미리 로드 · 임계값 동작 ✗ |", "| `ENABLE_TOOL_SEARCH=false` | 임계값 규칙 충족 ✗ (오답 보기) |"]
+]}

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="712" viewBox="0 0 960 712" role="img" aria-label="reliability 상황을 사람 · 사용자 확인, 실행 실패, 검토 설계, 출처 · 근거 네 갈래로 나눈 decision tree">
+<title>reliability 상황을 사람 · 사용자 확인, 실행 실패, 검토 설계, 출처 · 근거 네 갈래로 나눈 decision tree</title>
+<defs><marker id="arr-decision-reliability" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="480" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">상황별 reliability 판단: 4갈래 decision tree</text>
+<polygon points="480,44 630,88 480,132 330,88" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="480" y="92.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">상황의 종류는?</text>
+<polyline points="480,132 480,158" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="127.5,158 832.5,158" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="127.5,158 127.5,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="133.5" y="177" font-size="11" fill="#1F2937" text-anchor="start">사람 · 사용자</text>
+<rect x="20" y="186" width="215" height="44" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="127.5" y="212.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">누구에게 넘기거나 물을까?</text>
+<polyline points="127.5,230 127.5,252" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="133.5" y="246" font-size="11" fill="#1F2937" text-anchor="start">상황 → 정답</text>
+<rect x="20" y="254" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="127.5" y="275.8" font-size="11" fill="#1F2937" text-anchor="middle">고객 요청 · 정책 공백 · 진전 없음 ·</text>
+<text x="127.5" y="290.1" font-size="11" fill="#1F2937" text-anchor="middle">승인 필수</text>
+<text x="127.5" y="305.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">escalate_to_human</text>
+<rect x="20" y="328" width="215" height="66" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="127.5" y="356.9" font-size="11" fill="#1F2937" text-anchor="middle">감정 격앙 · 낮은 confidence · 긴 대화</text>
+<text x="127.5" y="372.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">escalation 사유 ✗ · 직접 처리</text>
+<rect x="20" y="402" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="127.5" y="430.9" font-size="11" fill="#1F2937" text-anchor="middle">escalation 시 담당자가 대화를 재독</text>
+<text x="127.5" y="446.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">구조화 handoff 요약</text>
+<rect x="20" y="476" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="127.5" y="504.9" font-size="11" fill="#1F2937" text-anchor="middle">이름 검색이 다건 일치</text>
+<text x="127.5" y="520.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">추가 식별자를 사용자에게 요청</text>
+<rect x="20" y="550" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="127.5" y="578.9" font-size="11" fill="#1F2937" text-anchor="middle">사용자 선호가 직접 모순</text>
+<text x="127.5" y="594.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">충돌을 드러내고 확인 질문</text>
+<rect x="20" y="624" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="127.5" y="652.9" font-size="11" fill="#1F2937" text-anchor="middle">모호한 요청 + 질문 과다로 이탈</text>
+<text x="127.5" y="668.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">가정 명시 · 진행 · 수정 초대</text>
+<polyline points="362.5,158 362.5,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="368.5" y="177" font-size="11" fill="#1F2937" text-anchor="start">실행 실패 · 중단</text>
+<rect x="255" y="186" width="215" height="44" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="362.5" y="212.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">어디서 · 어떻게 복구할까?</text>
+<polyline points="362.5,230 362.5,252" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="368.5" y="246" font-size="11" fill="#1F2937" text-anchor="start">상황 → 정답</text>
+<rect x="255" y="254" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="362.5" y="282.9" font-size="11" fill="#1F2937" text-anchor="middle">일시 실패</text>
+<text x="362.5" y="298.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">subagent 안에서 retry</text>
+<rect x="255" y="328" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="362.5" y="349.1" font-size="11" fill="#1F2937" text-anchor="middle">해결 불가한 subagent 실패</text>
+<text x="362.5" y="364.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">structured error context</text>
+<text x="362.5" y="380" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">전달</text>
+<rect x="255" y="402" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="362.5" y="430.9" font-size="11" fill="#1F2937" text-anchor="middle">timeout vs 0 results</text>
+<text x="362.5" y="446.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">접근 실패 ↔ 유효한 빈 결과 구분</text>
+<rect x="255" y="476" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="362.5" y="497.1" font-size="11" fill="#1F2937" text-anchor="middle">병렬 tool 호출 일부 실패</text>
+<text x="362.5" y="512.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">성공 + is_error: true 함께</text>
+<text x="362.5" y="528" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">반환</text>
+<rect x="255" y="550" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="362.5" y="571.1" font-size="11" fill="#1F2937" text-anchor="middle">일부 출처 · 지역 실패</text>
+<text x="362.5" y="586.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">성공분 보존 + coverage</text>
+<text x="362.5" y="602" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">annotation</text>
+<rect x="255" y="624" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="362.5" y="645.1" font-size="11" fill="#1F2937" text-anchor="middle">실행 중단 후 재개</text>
+<text x="362.5" y="660.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">manifest checkpoint +</text>
+<text x="362.5" y="676" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">idempotent</text>
+<polyline points="597.5,158 597.5,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="603.5" y="177" font-size="11" fill="#1F2937" text-anchor="start">검토 · 신뢰도</text>
+<rect x="490" y="186" width="215" height="44" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="597.5" y="212.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">누가 · 언제 검토할까?</text>
+<polyline points="597.5,230 597.5,252" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="603.5" y="246" font-size="11" fill="#1F2937" text-anchor="start">상황 → 정답</text>
+<rect x="490" y="254" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="597.5" y="275.1" font-size="11" fill="#1F2937" text-anchor="middle">되돌림 가능 · 저위험 · 대량</text>
+<text x="597.5" y="290.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">post-action 표본 + audit</text>
+<text x="597.5" y="306" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">logging</text>
+<rect x="490" y="328" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="597.5" y="356.9" font-size="11" fill="#1F2937" text-anchor="middle">결과 중대 · 법적 책임 · 되돌림 불가</text>
+<text x="597.5" y="372.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">pre-action 승인</text>
+<rect x="490" y="402" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="597.5" y="430.9" font-size="11" fill="#1F2937" text-anchor="middle">대량 + 위험도 이질</text>
+<text x="597.5" y="446.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">위험도 routing · 일상은 표본 QA</text>
+<rect x="490" y="476" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="597.5" y="497.1" font-size="11" fill="#1F2937" text-anchor="middle">결정 불가한 안전 게이트</text>
+<text x="597.5" y="512.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">fail closed → 자격 있는</text>
+<text x="597.5" y="528" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">사람에게 이관</text>
+<rect x="490" y="550" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="597.5" y="578.9" font-size="11" fill="#1F2937" text-anchor="middle">중대 결과 + 확신하며 틀릴 가능성</text>
+<text x="597.5" y="594.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">모델과 독립적인 검증</text>
+<rect x="490" y="624" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="597.5" y="645.1" font-size="11" fill="#1F2937" text-anchor="middle">리뷰 용량 한정</text>
+<text x="597.5" y="660.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">필드별 confidence 보정 + 우선</text>
+<text x="597.5" y="676" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">리뷰</text>
+<polyline points="832.5,158 832.5,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="838.5" y="177" font-size="11" fill="#1F2937" text-anchor="start">출처 · 근거</text>
+<rect x="725" y="186" width="215" height="44" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="832.5" y="212.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">근거를 어떻게 남길까?</text>
+<polyline points="832.5,230 832.5,252" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-reliability)"/>
+<text x="838.5" y="246" font-size="11" fill="#1F2937" text-anchor="start">상황 → 정답</text>
+<rect x="725" y="254" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="832.5" y="275.1" font-size="11" fill="#1F2937" text-anchor="middle">주장의 출처 · 날짜 소실</text>
+<text x="832.5" y="290.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">claim · source · date 구조화</text>
+<text x="832.5" y="306" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">handoff</text>
+<rect x="725" y="328" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="832.5" y="356.9" font-size="11" fill="#1F2937" text-anchor="middle">근거가 본문에 없는 추출 필드</text>
+<text x="832.5" y="372.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">unknown + 증거 부족 주석</text>
+<rect x="725" y="402" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="832.5" y="423.1" font-size="11" fill="#1F2937" text-anchor="middle">신뢰할 출처 간 값 충돌</text>
+<text x="832.5" y="438.4" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">두 값 + 출처 + 날짜 ·</text>
+<text x="832.5" y="454" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">coordinator 정합</text>
+<rect x="725" y="476" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="832.5" y="504.9" font-size="11" fill="#1F2937" text-anchor="middle">고신뢰 구간의 새 오류 조기 검출</text>
+<text x="832.5" y="520.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">층화 무작위 추출 + 층별 오류율</text>
+<rect x="725" y="550" width="215" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="832.5" y="578.9" font-size="11" fill="#1F2937" text-anchor="middle">자동화 확대 전 정확도 검증</text>
+<text x="832.5" y="594.2" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">문서 유형 · 필드별 측정</text>
+</g>
+</svg>

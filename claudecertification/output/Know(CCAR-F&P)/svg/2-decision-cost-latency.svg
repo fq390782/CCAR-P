@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="884" viewBox="0 0 940 884" role="img" aria-label="비용·지연·처리량 상황별 판단 트리" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>비용·지연·처리량 상황별 판단 트리</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-decision-cost-latency" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="470" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">비용·지연·처리량 문제: 원인에 맞는 수단을 고른다</text>
+<rect x="20" y="46" width="200" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="120.0" y="70.5" font-size="13" text-anchor="middle" fill="#1F2937">비용·지연·처리량 문제</text>
+<text x="425" y="100" font-size="11" text-anchor="middle" fill="#6B7280">상황</text>
+<text x="757" y="100" font-size="11" text-anchor="middle" fill="#6B7280">정답 방향</text>
+<polygon points="150,200.0 250.0,236.0 150,272.0 50.0,236.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="232.0" font-size="12" text-anchor="middle" fill="#1F2937">같은 큰 prefix를</text>
+<text x="150" y="249.0" font-size="12" text-anchor="middle" fill="#1F2937">반복 전송?</text>
+<polyline points="40,236.0 50,236.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<polyline points="250,236.0 265,236.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,132 265,340" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,132 285,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="110" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="136.5" font-size="12" text-anchor="middle" fill="#1F2937">큰 system prompt·문서로 비용·지연 큼</text>
+<polyline points="565,132 595,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="110" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="136.5" font-size="12" text-anchor="middle" fill="#1F2937">안정적인 내용을 앞에 두고 prompt caching</text>
+<polyline points="265,184 285,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="162" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="188.5" font-size="12" text-anchor="middle" fill="#1F2937">시스템 프롬프트는 같은데 cache hit ≈ 0</text>
+<polyline points="565,184 595,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="162" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="180.0" font-size="12" text-anchor="middle" fill="#1F2937">tool 목록·순서 고정,</text>
+<text x="757.5" y="197.0" font-size="12" text-anchor="middle" fill="#1F2937">바뀌는 내용 뒤에 breakpoint 두지 않기</text>
+<polyline points="265,236 285,236" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="214" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="232.0" font-size="12" text-anchor="middle" fill="#1F2937">cache_control을 붙였는데</text>
+<text x="425.0" y="249.0" font-size="12" text-anchor="middle" fill="#1F2937">cache 토큰 0, 오류도 없음</text>
+<polyline points="565,236 595,236" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="214" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="240.5" font-size="12" text-anchor="middle" fill="#1F2937">minimum cacheable length 미달</text>
+<polyline points="265,288 285,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="266" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="292.5" font-size="12" text-anchor="middle" fill="#1F2937">요청이 계속 들어오는 서비스</text>
+<polyline points="565,288 595,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="266" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="292.5" font-size="12" text-anchor="middle" fill="#1F2937">5분 TTL (쓸 때마다 무료 연장)</text>
+<polyline points="265,340 285,340" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="318" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="344.5" font-size="12" text-anchor="middle" fill="#1F2937">재사용 간격 &gt; 5분, 또는 batch</text>
+<polyline points="565,340 595,340" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="318" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="344.5" font-size="12" text-anchor="middle" fill="#1F2937">1시간 TTL</text>
+<polygon points="150,404.0 250.0,440.0 150,476.0 50.0,440.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="436.0" font-size="12" text-anchor="middle" fill="#1F2937">사용자가</text>
+<text x="150" y="453.0" font-size="12" text-anchor="middle" fill="#1F2937">기다리지 않음?</text>
+<polyline points="40,440.0 50,440.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<polyline points="250,440.0 265,440.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,414 265,466" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,414 285,414" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="392" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="410.0" font-size="12" text-anchor="middle" fill="#1F2937">대량 처리, 다음 날까지만</text>
+<text x="425.0" y="427.0" font-size="12" text-anchor="middle" fill="#1F2937">끝나면 됨, 비용 우선</text>
+<polyline points="565,414 595,414" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="392" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="410.0" font-size="12" text-anchor="middle" fill="#1F2937">Message Batches API (50%)</text>
+<text x="757.5" y="427.0" font-size="12" text-anchor="middle" fill="#1F2937">+ 공통 prompt caching</text>
+<polyline points="265,466 285,466" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="444" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="470.5" font-size="12" text-anchor="middle" fill="#1F2937">batch 결과가 다른 레코드에 섞임</text>
+<polyline points="565,466 595,466" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="444" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="470.5" font-size="12" text-anchor="middle" fill="#1F2937">순서가 아니라 custom_id로 매칭</text>
+<polygon points="150,556.0 250.0,592.0 150,628.0 50.0,592.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="588.0" font-size="12" text-anchor="middle" fill="#1F2937">사용자가 화면</text>
+<text x="150" y="605.0" font-size="12" text-anchor="middle" fill="#1F2937">앞에서 기다림?</text>
+<polyline points="40,592.0 50,592.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<polyline points="250,592.0 265,592.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,540 265,644" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,540 285,540" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="518" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="544.5" font-size="12" text-anchor="middle" fill="#1F2937">여러 독립 호출이 직렬이라 느림</text>
+<polyline points="565,540 595,540" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="518" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="544.5" font-size="12" text-anchor="middle" fill="#1F2937">AsyncAnthropic 병렬 + Semaphore로 동시 수 제한</text>
+<polyline points="265,592 285,592" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="570" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="588.0" font-size="12" text-anchor="middle" fill="#1F2937">첫 출력이 늦음 /</text>
+<text x="425.0" y="605.0" font-size="12" text-anchor="middle" fill="#1F2937">max_tokens가 큰 요청이 timeout</text>
+<polyline points="565,592 595,592" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="570" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="596.5" font-size="12" text-anchor="middle" fill="#1F2937">streaming (stream: true, SSE)</text>
+<polyline points="265,644 285,644" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="622" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="648.5" font-size="12" text-anchor="middle" fill="#1F2937">실시간 + 대규모 동시 사용</text>
+<polyline points="565,644 595,644" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="622" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="648.5" font-size="12" text-anchor="middle" fill="#1F2937">streaming + RPM/ITPM/OTPM 용량 확보(상향 신청)</text>
+<polygon points="150,734.0 250.0,770.0 150,806.0 50.0,770.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="766.0" font-size="12" text-anchor="middle" fill="#1F2937">처리 시간·트래픽</text>
+<text x="150" y="783.0" font-size="12" text-anchor="middle" fill="#1F2937">형태가 문제?</text>
+<polyline points="40,770.0 50,770.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<polyline points="250,770.0 265,770.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,718 265,822" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,718 285,718" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="696" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="722.5" font-size="12" text-anchor="middle" fill="#1F2937">트래픽 burst</text>
+<polyline points="565,718 595,718" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="696" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="722.5" font-size="12" text-anchor="middle" fill="#1F2937">앞단에 queue 배치 (retry는 여전히 필요)</text>
+<polyline points="265,770 285,770" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="748" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="774.5" font-size="12" text-anchor="middle" fill="#1F2937">endpoint 지연 SLA보다 모델 처리가 김</text>
+<polyline points="565,770 595,770" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="748" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="774.5" font-size="12" text-anchor="middle" fill="#1F2937">즉시 ack + callback 또는 poll</text>
+<polyline points="265,822 285,822" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="285" y="800" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="826.5" font-size="12" text-anchor="middle" fill="#1F2937">몇 시간 걸리는 job의 완료 통지</text>
+<polyline points="565,822 595,822" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-cost-latency)"/>
+<rect x="595" y="800" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="818.0" font-size="12" text-anchor="middle" fill="#1F2937">비동기 job + polling 또는 webhook</text>
+<text x="757.5" y="835.0" font-size="12" text-anchor="middle" fill="#1F2937">(서명 검증, idempotent 처리)</text>
+<polyline points="40,86 40,770.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="580" viewBox="0 0 940 580" role="img" aria-label="비용 증가: 요청당 token을 먼저 진단하고, 원인에 맞는 수단을 쓴다">
+<title>비용 증가: 요청당 token을 먼저 진단하고, 원인에 맞는 수단을 쓴다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-cost-diagnosis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-cost-diagnosis-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="470" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">비용 증가: 요청당 token을 먼저 진단하고, 원인에 맞는 수단을 쓴다</text>
+<rect x="15" y="50" width="400" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="215" y="74.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">호출량은 그대로인데 비용 증가</text>
+<polyline points="215,90 215,118" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="247" y="97" width="53.3846" height="15" fill="#FFFFFF"/>
+<text x="250" y="108" font-size="11" text-anchor="start" fill="#1F2937">먼저 확인</text>
+<rect x="15" y="120" width="400" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="215" y="141.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">요청 1건당 token 측정</text>
+<text x="215" y="157.85" font-size="11" text-anchor="middle" fill="#6B7280">특히 매 호출마다 다시 보내는 context</text>
+<polyline points="35,170 35,484" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<text x="730" y="194" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">절감 수단</text>
+<polyline points="35,234 53,234" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="55" y="210" width="345" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="227.5" y="238.55" font-size="13" text-anchor="middle" fill="#1F2937">불필요한 tool output · 지난 history</text>
+<polyline points="400,234 558,234" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="440.25" y="217" width="77.5" height="15" fill="#FFFFFF"/>
+<text x="479" y="228" font-size="11" text-anchor="middle" fill="#1F2937">입력 token ↓</text>
+<rect x="560" y="210" width="340" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730" y="238.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">context trimming</text>
+<polyline points="35,299 53,299" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="55" y="275" width="345" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="227.5" y="303.55" font-size="13" text-anchor="middle" fill="#1F2937">매 요청 같은 prefix (tools, system prompt)</text>
+<polyline points="400,299 558,299" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="427.558" y="282" width="102.885" height="15" fill="#FFFFFF"/>
+<text x="479" y="293" font-size="11" text-anchor="middle" fill="#1F2937">cache read 재사용</text>
+<rect x="560" y="275" width="340" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730" y="303.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">stable prefix caching</text>
+<polyline points="35,364 53,364" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="55" y="340" width="345" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="227.5" y="368.55" font-size="13" text-anchor="middle" fill="#1F2937">기다려도 되는 대량 · 균일 작업</text>
+<polyline points="400,364 558,364" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="452.308" y="347" width="53.3846" height="15" fill="#FFFFFF"/>
+<text x="479" y="358" font-size="11" text-anchor="middle" fill="#1F2937">가장 저렴</text>
+<rect x="560" y="340" width="340" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730" y="368.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Batch API (비동기)</text>
+<polyline points="35,429 53,429" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="55" y="405" width="345" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="227.5" y="433.55" font-size="13" text-anchor="middle" fill="#1F2937">일상 작업이 느리고 token 과다</text>
+<polyline points="400,429 558,429" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="452.942" y="412" width="52.1154" height="15" fill="#FFFFFF"/>
+<text x="479" y="423" font-size="11" text-anchor="middle" fill="#1F2937">token ↓</text>
+<rect x="560" y="405" width="340" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730" y="425.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">output_config.effort 낮춤</text>
+<text x="730" y="441.85" font-size="11" text-anchor="middle" fill="#6B7280">eval로 품질 유지 확인 후</text>
+<polyline points="35,494 53,494" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="55" y="470" width="345" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="227.5" y="498.55" font-size="13" text-anchor="middle" fill="#1F2937">작은 모델이 quality bar 충족 (eval)</text>
+<polyline points="400,494 558,494" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cost-diagnosis)"/>
+<rect x="457.808" y="477" width="42.3846" height="15" fill="#FFFFFF"/>
+<text x="479" y="488" font-size="11" text-anchor="middle" fill="#1F2937">단가 ↓</text>
+<rect x="560" y="470" width="340" height="48" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730" y="490.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">모델 tier 하향</text>
+<text x="730" y="506.85" font-size="11" text-anchor="middle" fill="#6B7280">trimming · caching 다음, eval 근거 시</text>
+<rect x="460" y="50" width="460" height="120" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="690" y="82.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">✗ 비용을 줄이지 못하는 것</text>
+<text x="690" y="98.85" font-size="11" text-anchor="middle" fill="#6B7280">max_tokens 낮춤 → 답이 잘림, 작업 단가는 그대로</text>
+<text x="690" y="114.85" font-size="11" text-anchor="middle" fill="#6B7280">streaming · concurrency → 단가 그대로</text>
+<text x="690" y="130.85" font-size="11" text-anchor="middle" fill="#6B7280">필요 이상 큰 context window 모델 → cost · latency만 ↑</text>
+<text x="690" y="146.85" font-size="11" text-anchor="middle" fill="#6B7280">latency · API key 개수 → 과금과 무관</text>
+<text x="470" y="556" font-size="11" text-anchor="middle" fill="#6B7280">사전 견적: 실제로 호출할 모델로 token counting endpoint 호출 (다른 tokenizer · 글자 수 ÷ 4는 적게 셈)</text>
+</g>
+</svg>

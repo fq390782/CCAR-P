@@ -1,0 +1,394 @@
+[
+ {
+  "id": "CCAR-F-MyPractice-0024",
+  "question": "자동 리뷰가 각 PR에 대해 테스트 케이스 제안을 생성합니다. 강의 완료 추적을 추가하는 PR을 리뷰할 때 Claude는 테스트 케이스 10개를 제안했지만, 개발자 피드백에 따르면 6개는 기존 테스트 스위트가 이미 다루는 중복 시나리오였습니다. 어떤 변경이 중복 제안을 가장 효과적으로 줄이나요?\n\n가장 효과적인 변경 사항은 무엇인가요?",
+  "choices": {
+   "A": "Claude가 이미 다뤄진 시나리오를 판단할 수 있도록 기존 테스트 파일을 context에 포함한다.",
+   "B": "Claude가 가장 가치 있는 케이스를 먼저 우선순위화한다고 가정하고 제안 개수를 10개에서 5개로 줄인다.",
+   "C": "성공 경로가 아니라 엣지 케이스와 오류 조건에만 집중하라는 지시를 추가한다.",
+   "D": "설명이 키워드 겹침으로 기존 테스트 이름과 일치하는 제안을 필터링하는 후처리를 구현한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "기존 테스트 파일을 포함하면 중복의 근본 원인을 해결합니다. Claude는 어떤 테스트가 이미 존재하는지 알아야만 이미 커버된 시나리오 제안을 피할 수 있습니다. 이를 통해 Claude는 실제로 새롭고 가치 있는 테스트를 제안하는 데 필요한 정보를 얻습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0025",
+  "question": "초기 자동 리뷰가 12개 발견 사항을 식별한 뒤 개발자가 이슈를 해결하기 위해 새 커밋을 푸시합니다. 리뷰를 다시 실행하면 8개 발견 사항이 나오지만, 개발자들은 새 커밋에서 이미 수정된 코드에 대한 이전 댓글 5개가 중복된다고 보고합니다. 리뷰의 철저함은 유지하면서 이 중복 피드백을 제거하는 가장 효과적인 방법은 무엇인가요?\n\n중복 피드백을 제거하는 가장 효과적인 방법은 무엇인가요?",
+  "choices": {
+   "A": "중간 커밋 리뷰를 건너뛰고 PR 생성 시점과 최종 병합 전 상태에서만 리뷰를 실행한다.",
+   "B": "게시 전에 파일 경로와 이슈 설명으로 이전 발견 사항과 일치하는 항목을 제거하는 후처리 필터를 추가한다.",
+   "C": "리뷰 범위를 가장 최근 push에서 변경된 파일로 제한하고 이전 커밋의 파일은 제외한다.",
+   "D": "이전 리뷰 발견 사항을 context에 포함하고 Claude에게 새 이슈나 아직 해결되지 않은 이슈만 보고하도록 지시한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "이전 리뷰 발견 사항을 context에 포함하면 Claude가 새 문제와 최근 커밋에서 이미 해결된 문제를 구분할 수 있습니다. 이렇게 하면 리뷰의 철저함은 유지하면서도 Claude가 새 이슈와 해결된 이슈를 구분해, 수정된 코드에 대한 중복 피드백을 피할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0026",
+  "question": "pipeline 스크립트가 `claude \"Analyze this pull request for security issues\"`를 실행하지만 작업이 끝나지 않고 멈춰 있습니다. 로그는 Claude Code가 대화형 입력을 기다리는 상태입니다. 자동화 pipeline에서 Claude Code를 실행하는 올바른 접근 방식은 무엇인가요?\n\n올바른 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "`--batch` 플래그 추가: `claude --batch \"Analyze this pull request for security issues\"`.",
+   "B": "`-p` 플래그 추가: `claude -p \"Analyze this pull request for security issues\"`.",
+   "C": "stdin을 `/dev/null`에서 리디렉션: `claude \"Analyze this pull request for security issues\" < /dev/null`.",
+   "D": "명령 실행 전에 환경 변수 `CLAUDE_HEADLESS=true` 설정."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "`-p`(또는 `--print`) 플래그는 Claude Code를 비대화형으로 실행하는 문서화된 방법입니다. prompt를 처리하고 결과를 stdout에 출력한 뒤 사용자 입력을 기다리지 않고 종료합니다. CI/CD pipeline에 적합합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0027",
+  "question": "풀 리퀘스트가 재고 추적 module의 14개 파일을 변경합니다. 모든 파일을 함께 분석하는 단일 패스 리뷰는 일부 파일에는 자세한 피드백을 주지만 다른 파일에는 얕은 댓글을 달고, 명백한 버그를 놓치며, 한 파일에서는 패턴을 문제로 표시하지만 같은 PR의 동일 코드에서는 승인하는 모순된 피드백을 생성합니다. 리뷰를 어떻게 재구성해야 하나요?\n\n리뷰를 어떻게 재구성해야 하나요?",
+  "choices": {
+   "A": "전체 PR 리뷰 패스를 세 번 독립적으로 실행하고 세 번 중 최소 두 번 나타나는 이슈만 표시한다.",
+   "B": "집중된 패스로 분할한다. 각 파일을 개별적으로 로컬 이슈에 대해 리뷰한 뒤, 파일 간 데이터 흐름을 검토하는 별도 통합 지향 패스를 실행한다.",
+   "C": "자동 리뷰를 실행하기 전에 개발자에게 큰 PR을 3-4개 파일의 더 작은 제출로 나누도록 요구한다.",
+   "D": "더 큰 context window가 있는 큰 모델로 전환해 14개 파일 모두에 한 번에 충분히 주의를 기울일 수 있게 한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "집중된 파일별 패스는 주의 분산이라는 근본 원인을 다루어 파일마다 비슷한 깊이로 리뷰할 수 있고 로컬 이슈도 더 안정적으로 찾을 수 있습니다. 이후 별도 통합 지향 패스가 의존성과 데이터 흐름 상호작용 같은 파일 간 문제를 다룹니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0028",
+  "question": "자동 코드 리뷰는 풀 리퀘스트당 평균 15개 발견 사항을 생성하며, 개발자는 40% false positive 비율을 보고합니다. 병목은 조사 시간입니다. 개발자는 수정할지 무시할지 결정하기 전에 각 발견 사항을 클릭해 Claude의 근거를 읽어야 합니다. CLAUDE.md에는 이미 허용 가능한 패턴에 대한 포괄적 규칙이 포함되어 있고, 이해관계자들은 개발자가 보기 전에 발견 사항을 필터링하는 모든 접근을 거부했습니다. 조사 시간을 가장 잘 줄이는 변경은 무엇인가요?\n\n조사 시간을 가장 잘 줄이는 변경은 무엇인가요?",
+  "choices": {
+   "A": "Claude가 각 발견 사항에 근거와 confidence 추정치를 직접 포함하도록 요구한다.",
+   "B": "발견 패턴을 분석하고 과거 false positive 시그니처와 일치하는 항목을 자동 억제하는 후처리기를 추가한다.",
+   "C": "발견 사항을 \"차단 이슈\"와 \"제안\"으로 classification하고 수준별로 다른 리뷰 요구사항을 둔다.",
+   "D": "Claude가 높은 confidence 발견만 보여주도록 구성해 개발자가 보기 전에 불확실한 플래그를 필터링한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "각 발견 사항에 근거와 confidence를 직접 포함하면 개발자가 각 항목을 따로 열어보지 않고도 빠르게 triage할 수 있어 조사 시간이 줄어듭니다. 모든 발견 사항은 계속 보이므로 발견 사항을 숨기지 않는다는 제약도 지키면서 개발자 의사결정을 빠르게 합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0029",
+  "question": "자동 코드 리뷰 분석 결과 발견 범주별 false positive 비율 차이가 큽니다. 보안/정확성 발견은 false positive 8%, 성능 발견은 18%, 스타일/명명 발견은 52%, 문서화 발견은 48%입니다. 개발자 설문에서도 신뢰가 떨어졌다는 결과가 나왔습니다. 많은 개발자가 \"절반은 틀렸다\"고 느끼며 발견 사항을 읽지 않고 무시하기 시작합니다. false positive 비율이 높은 범주는 정확한 범주에 대한 신뢰까지 훼손합니다. 개발자 신뢰를 회복하면서 시스템을 개선하는 가장 좋은 접근은 무엇인가요?\n\n개발자 신뢰를 가장 잘 회복하는 접근은 무엇인가요?",
+  "choices": {
+   "A": "false positive 비율이 높은 범주(스타일, 명명, 문서화)를 일시적으로 비활성화하고, prompt를 개선하는 동안 정확도가 높은 범주만 유지한다.",
+   "B": "모든 범주를 활성화하되 각 발견 사항에 confidence 점수를 표시해 개발자가 조사할 대상을 결정하게 한다.",
+   "C": "모든 범주를 활성화한 채 다음 몇 주 동안 각 범주의 accuracy 개선을 위해 few-shot 예시를 추가한다.",
+   "D": "전체 false positive 비율을 낮추기 위해 모든 범주에 균일한 엄격도 완화를 적용한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "false positive 비율이 높은 범주를 일시적으로 비활성화하면 개발자가 모든 것을 무시하게 만드는 노이즈를 제거해 신뢰 하락을 즉시 멈출 수 있습니다. 동시에 보안과 정확성 같은 정확도가 높은 범주의 가치를 유지합니다. 또한 문제 범주를 다시 활성화하기 전에 prompt를 개선할 여지를 만듭니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0030",
+  "question": "팀은 자동 분석 API 비용을 줄이고 싶어 합니다. 현재 동기 Claude 호출은 두 workflow를 지원합니다. (1) 개발자가 병합하기 전에 반드시 완료되어야 하는 차단형 병합 전 검사, (2) 다음 날 아침에 검토할 수 있도록 밤새 생성되는 기술 부채 보고서. 관리자는 50% 절감을 위해 둘 다 Message Batches API로 옮기자고 제안합니다. 이 제안을 어떻게 평가해야 하나요?\n\n이 제안을 어떻게 평가해야 하나요?",
+  "choices": {
+   "A": "둘 다 batch 처리로 옮기고, batch가 너무 오래 걸리면 동기 호출로 fallback한다.",
+   "B": "두 workflow 모두 batch 처리로 옮기고 완료 확인을 위해 상태를 polling한다.",
+   "C": "기술 부채 보고서에만 batch 처리를 사용하고, 병합 전 검사는 동기 호출을 유지한다.",
+   "D": "batch 결과 순서 문제를 피하기 위해 두 workflow 모두 동기 호출을 유지한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "Message Batches API 처리는 최대 24시간 걸릴 수 있고 지연 시간 SLA가 없어, 야간 기술 부채 보고서에는 허용 가능하지만 개발자가 기다리는 차단형 병합 전 검사에는 허용되지 않습니다. 핵심은 각 workflow의 지연 허용 범위에 맞는 API를 고르는 것입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0031",
+  "question": "Claude Code에 API 응답을 내부 normalization 형식으로 변환하는 함수를 구현해 달라고 요청했습니다. 두 번의 반복 후에도 출력 구조가 기대와 맞지 않습니다. 일부 필드는 다르게 중첩되고 타임스탬프 형식도 잘못되어 있습니다. 요구사항은 산문으로 설명했지만 Claude가 매번 다르게 해석합니다.\n\n다음 반복에 가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "기대 출력 구조를 설명하는 JSON schema를 작성하고 각 반복 후 Claude의 출력을 validation한다.",
+   "B": "대표 API 응답에 대해 기대 변환을 보여주는 구체적인 입력-출력 예시 2-3개를 제공한다.",
+   "C": "정확한 필드 매핑, 중첩 규칙, 타임스탬프 형식 문자열을 지정해 요구사항을 더 기술적으로 정확하게 다시 작성한다.",
+   "D": "해석이 갈라지는 지점을 파악하기 위해 Claude에게 현재 요구사항 이해를 설명하게 한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "구체적인 입력-출력 예시는 Claude에게 정확히 기대되는 변환 결과를 보여줌으로써 글로만 설명했을 때 생기는 모호함을 줄입니다. 이는 필드 중첩과 타임스탬프 형식에 대한 명확한 패턴을 제공하므로, 산문 요구사항을 다르게 해석하는 문제를 줄입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0032",
+  "question": "새 알림 채널로 Slack을 추가해야 합니다. 기존 코드베이스에는 email, SMS, push 채널에 대한 명확한 기존 패턴이 있습니다. 하지만 Slack API는 근본적으로 다른 통합 접근을 제공합니다. incoming webhook(단순, 단방향), bot token(전달 확인과 프로그래밍 제어 지원), Slack App(양방향 이벤트, 워크스페이스 승인 필요)입니다. 작업은 고급 기능(전달 추적 등) 요구 없이 \"Slack 지원 추가\"라고만 말합니다.\n\n이 작업에 어떻게 접근해야 하나요?",
+  "choices": {
+   "A": "기존 단방향 알림 패턴에 맞게 incoming webhook을 사용해 직접 실행 모드로 시작한다.",
+   "B": "계획 모드로 전환해 통합 옵션과 architecture 함의를 탐색한 뒤 구현 전 권장안을 제시한다.",
+   "C": "기존 패턴을 사용해 Slack 채널 클래스를 스캐폴딩하는 직접 실행 모드로 시작하고 통합 방식 결정은 미룬다.",
+   "D": "전달 확인이 가능하도록 bot-token 접근 방식으로 직접 실행 모드를 시작한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "Slack 통합에는 architecture에 미치는 영향이 서로 다른 여러 선택지가 있고 요구사항도 모호합니다. 계획 모드에서는 webhook, bot token, Slack App 사이의 trade-off를 먼저 평가하고 구현 전에 방향을 맞출 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0033",
+  "question": "CLAUDE.md 파일이 400줄 이상으로 커져 코딩 표준, 테스트 규칙, 상세 PR 리뷰 체크리스트, 배포 지시사항, 데이터베이스 migration 절차가 포함되어 있습니다.\n\nClaude가 코딩 표준과 테스트 규칙은 항상 따르되, PR 리뷰, 배포, migration 지침은 해당 작업을 할 때만 적용하기를 원합니다.\n\n가장 효과적인 재구성 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "모든 지침을 workflow 유형별 별도 Skills 파일로 옮기고 CLAUDE.md에는 간단한 프로젝트 설명만 남긴다.",
+   "B": "모든 것을 CLAUDE.md에 유지하되 `@import` 문법을 사용해 범주별로 별도 관리 파일로 구성한다.",
+   "C": "CLAUDE.md를 `.claude/rules/` 아래 파일로 나누고 path-bound glob 패턴을 사용해 관련 파일 유형에만 각 규칙을 로드한다.",
+   "D": "범용 표준은 CLAUDE.md에 유지하고, workflow별 지침(PR 리뷰, 배포, migration)은 트리거 키워드가 있는 Skills로 만든다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "CLAUDE.md 내용은 모든 session에 로드되어 코딩 표준과 테스트 규칙이 항상 적용되게 합니다. 반면 Skills는 Claude가 트리거 키워드를 감지할 때 on-demand로 호출되므로 PR 리뷰, 배포, migration 같은 workflow별 지침을 넣기에 적합합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0034",
+  "question": "팀의 모놀리식 애플리케이션을 마이크로서비스로 재구성하는 작업을 맡았습니다. 이는 수십 개 파일에 걸친 변경에 영향을 주며 서비스 경계와 module 의존성에 대한 결정이 필요합니다.\n\n어떤 접근 방식을 선택해야 하나요?",
+  "choices": {
+   "A": "변경하기 전에 계획 모드로 전환해 코드베이스를 탐색하고, 의존성을 이해하며, 구현 접근 방식을 설계한다.",
+   "B": "직접 실행 모드로 시작하고 구현 중 예상치 못한 복잡성을 만나면 그때 계획으로 전환한다.",
+   "C": "직접 실행 모드로 시작해 점진적으로 변경하며 구현 과정에서 자연스러운 서비스 경계가 드러나게 한다.",
+   "D": "각 서비스 구조를 지정하는 상세한 사전 지시와 함께 직접 실행을 사용한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "계획 모드는 모놀리스 분리 같은 복잡한 architecture 재구성에 적합한 전략입니다. 많은 파일에 걸친 비용이 큰 변경을 확정하기 전에 안전하게 탐색하고 경계를 근거 있게 판단할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0035",
+  "question": "팀이 깊은 코드 분석(의존성 스캔, 테스트 커버리지 수, 코드 품질 지표)을 수행하는 `/analyze-codebase` Skill을 만들었습니다. 명령 실행 후 팀원들은 Claude가 session에서 덜 반응하고 원래 작업의 context를 잃는다고 보고합니다.\n\n전체 분석 기능을 유지하면서 이를 가장 효과적으로 고치려면 어떻게 해야 하나요?",
+  "choices": {
+   "A": "Skill frontmatter에 `context: fork`를 추가해 격리된 subagent context에서 분석을 실행한다.",
+   "B": "분석에 더 빠르고 저렴한 모델을 사용하기 위해 frontmatter에 `model: haiku`를 추가한다.",
+   "C": "Skill을 출력이 적은 세 개의 작은 Skill로 나눈다.",
+   "D": "표시 전에 모든 결과를 짧은 summary로 압축하라는 지시를 Skill에 추가한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "`context: fork`는 분석을 격리된 subagent context에서 실행해 큰 출력이 메인 session context window를 불필요하게 채우지 않게 하고 Claude가 원래 작업의 context를 잃지 않게 합니다. 전체 분석 기능을 보존하면서 메인 session의 반응성을 유지합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0036",
+  "question": "팀은 `.claude/skills/commit/SKILL.md`의 `/commit` Skill을 사용합니다. 한 개발자가 팀원에게 영향을 주지 않고 개인 workflow(다른 커밋 메시지 형식, 추가 검사)에 맞게 이를 사용자 지정하고 싶어 합니다.\n\n무엇을 권장하나요?",
+  "choices": {
+   "A": "`~/.claude/skills/` 아래 `/my-commit` 같은 다른 이름으로 개인 버전을 만든다.",
+   "B": "프로젝트 Skill frontmatter에 사용자 이름 기반 조건부 로직을 추가한다.",
+   "C": "같은 이름으로 `~/.claude/skills/commit/SKILL.md`에 개인 버전을 만든다.",
+   "D": "개인 Skill frontmatter에 `override: true`를 설정해 프로젝트 버전보다 우선하게 한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "Skill 해석은 위치에 따라 결정됩니다. 엔터프라이즈가 개인을 덮어쓰고, 개인이 프로젝트를 덮어씁니다. 따라서 `~/.claude/skills/commit/SKILL.md`에 둔 개인 Skill은 그 개발자에게만 팀의 `.claude/skills/commit/SKILL.md`를 가립니다. 저장소에는 아무 변경도 생기지 않으므로 팀원들은 계속 프로젝트 버전을 실행하고, 다른 모두에게 `/commit`은 그대로 동작합니다. A는 동작 자체는 하지만 더 약한 권장안입니다. 프로젝트의 `/commit`이 `/my-commit`과 함께 계속 활성 상태로 남고, `description`이 거의 같은 Skill이 둘이면 Claude의 자동 Skill 선택이 예측하기 어려워지며, `/commit`을 실행하도록 안내하는 팀 문서와 몸에 익은 습관도 깨집니다. B는 Skill frontmatter에 조건부 로직이나 사용자 이름 기능이 없고, 시나리오가 배제한 공유 프로젝트 파일을 수정해야 하므로 맞지 않습니다. D는 `override` 필드 자체가 없기 때문에 틀립니다. 우선순위는 선언이 아니라 위치에서 나옵니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0037",
+  "question": "팀은 몇 달 동안 Claude Code를 사용해 왔습니다. 최근 세 명의 개발자는 Claude가 \"항상 포괄적인 오류 처리를 포함하라\"는 지침을 따른다고 보고하지만, 새로 합류한 네 번째 개발자는 Claude가 이를 따르지 않는다고 말합니다. 네 명 모두 같은 저장소에서 최신 코드를 사용합니다.\n\n가장 가능성 높은 원인과 수정은 무엇인가요?",
+  "choices": {
+   "A": "지침이 프로젝트 `.claude/CLAUDE.md`가 아니라 기존 개발자들의 사용자 수준 `~/.claude/CLAUDE.md` 파일에 있다. 모든 팀원이 받도록 지시를 프로젝트 수준 파일로 옮긴다.",
+   "B": "새 개발자의 `~/.claude/CLAUDE.md`에 프로젝트 설정을 override하는 충돌 지시가 있으며, 충돌 섹션을 삭제해야 한다.",
+   "C": "Claude Code는 사용자별 선호를 시간이 지나며 학습하므로, 새 개발자는 Claude가 \"기억\"할 때까지 요구사항을 반복해야 한다.",
+   "D": "Claude Code는 처음 읽은 뒤 CLAUDE.md를 cache하며 기존 개발자들은 cache된 버전을 사용한다. 모두 Claude Code cache를 지워야 한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "지침이 프로젝트 수준 `.claude/CLAUDE.md`가 아니라 기존 개발자들의 사용자 수준 구성에만 추가되었다면 새 팀원은 이를 받지 못합니다. 프로젝트 수준 구성으로 옮기면 현재와 미래의 모든 팀원이 자동으로 해당 지침을 받습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0038",
+  "question": "새 API endpoint를 생성할 때 context로 전체 endpoint 구현 예시 2-3개를 포함하면 일관성이 크게 향상된다는 것을 발견했습니다. 하지만 이 context는 새 endpoint를 만들 때만 유용하며, API 디렉터리에서 디버깅, 코드 리뷰, 기타 작업을 할 때는 유용하지 않습니다.\n\n가장 효과적인 구성 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "endpoint 예시와 패턴 문서를 프로젝트 CLAUDE.md에 추가해 항상 사용할 수 있게 한다.",
+   "B": "모든 생성 요청마다 코드를 prompt에 복사해 endpoint 예시를 수동 참조한다.",
+   "C": "API 디렉터리에서 작업할 때 활성화되는 `.claude/rules/api/`의 경로별 규칙에 endpoint 예시를 포함한다.",
+   "D": "endpoint 예시를 참조하고 패턴 준수 지시를 포함하는 Skill을 만들고, 슬래시 명령으로 on-demand 호출한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "on-demand로 호출되는 Skill은 새 endpoint를 생성할 때만 예시 context를 로드하고 디버깅이나 리뷰 같은 무관한 작업 중에는 로드하지 않습니다. 이렇게 하면 메인 context는 깔끔하게 유지하고, 새 endpoint 생성에 필요한 예시 context만 필요한 순간에 로드할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0039",
+  "question": "팀이 데이터베이스 migration 파일을 생성하는 `/migration` Skill을 만들었습니다. 이 Skill은 `$ARGUMENTS`로 migration 이름을 받습니다. 프로덕션에서 세 가지 문제가 관찰됩니다. (1) 개발자가 종종 인수 없이 Skill을 실행해 파일 이름이 부적절해짐, (2) Skill이 때때로 관련 없는 이전 대화의 데이터베이스 schema 세부사항을 사용함, (3) Skill이 넓은 tool 접근 권한을 가져 개발자가 실수로 파괴적 테스트 정리를 실행함.\n\n세 문제를 모두 해결하는 구성 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "`$ARGUMENTS` 대신 위치 매개변수 `$1`과 `$2`를 사용해 특정 입력을 강제하고, context 제어를 위해 `@` 문법으로 명시적 schema 파일 참조를 포함하며, frontmatter description에 파괴적 작업 경고를 추가한다.",
+   "B": "frontmatter에 `argument-hint`를 추가해 필수 매개변수를 요청하고, `context: fork`로 실행을 격리하며, `allowed-tools`를 파일 쓰기 작업으로 제한한다.",
+   "C": "`/migration-create`와 `/migration-apply` Skill로 나누고, migration 이름이 누락되면 요청하는 validation 지시를 추가하며, 각각 다른 `allowed-tools` 범위를 사용한다.",
+   "D": "`$ARGUMENTS`가 유효한 이름인지 확인하는 validation 지시를 SKILL.md에 추가하고, 이전 대화 context를 무시하라는 prompt를 추가하며, 피해야 할 금지 작업을 나열한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "세 가지 별도 구성 기능으로 각 문제를 다룹니다. `argument-hint`는 인수 입력을 개선해 누락 인수를 줄이고, `context: fork`는 이전 대화의 context 누수를 방지하며, `allowed-tools`는 Skill을 안전한 파일 쓰기 작업으로 제한해 파괴적 동작을 막습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0040",
+  "question": "코드베이스에는 서로 다른 코딩 규칙을 가진 영역이 있습니다. React 컴포넌트는 hooks가 있는 함수형 스타일을 사용하고, API handler는 특정 오류 처리와 함께 async/await를 사용하며, 데이터베이스 모델은 repository 패턴을 따릅니다. 테스트 파일은 테스트 대상 코드 옆에 코드베이스 전반에 분산되어 있습니다(예: `Button.tsx` 옆의 `Button.test.tsx`). 모든 테스트가 위치와 관계없이 같은 규칙을 따르기를 원합니다.\n\nClaude가 코드 생성 시 올바른 규칙을 자동 적용하도록 보장하는 가장 지원되는 방법은 무엇인가요?",
+  "choices": {
+   "A": "모든 규칙을 루트 CLAUDE.md에 영역별 제목 아래 넣고 Claude가 적용할 섹션을 추론하도록 의존한다.",
+   "B": "각 코드 유형에 대해 `.claude/skills/`에 Skill을 만들고 각 SKILL.md에 규칙을 포함한다.",
+   "C": "해당 영역의 규칙을 포함하는 별도 CLAUDE.md 파일을 각 하위 디렉터리에 둔다.",
+   "D": "파일 경로를 기반으로 규칙을 조건부 적용하도록 glob 패턴을 지정하는 YAML frontmatter가 있는 규칙 파일을 `.claude/rules/` 아래 만든다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "`.claude/rules/` 파일과 YAML frontmatter, glob 패턴(예: `**/*.test.tsx`, `src/api/**/*.ts`)을 쓰면 디렉터리 구조와 관계없이 파일 경로에 맞는 규칙을 결정적으로 적용할 수 있습니다. 분산된 테스트 파일처럼 여러 디렉터리에 걸친 패턴에는 이 방식이 가장 적합합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0041",
+  "question": "팀의 표준 코드 리뷰 체크리스트를 실행하는 사용자 지정 슬래시 명령 `/review`를 만들고 싶습니다. 저장소를 클론하거나 업데이트하는 모든 개발자가 사용할 수 있어야 합니다.\n\n명령 파일을 어디에 만들어야 하나요?",
+  "choices": {
+   "A": "각 개발자 홈 디렉터리의 `~/.claude/commands/`.",
+   "B": "프로젝트 저장소의 `.claude/commands/`.",
+   "C": "`.claude/config.json`의 commands 배열.",
+   "D": "루트 프로젝트 CLAUDE.md."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "프로젝트 저장소 안의 `.claude/commands/` 아래에 사용자 지정 슬래시 명령을 두면 버전 관리되며 저장소를 클론하거나 업데이트하는 모든 개발자가 자동으로 사용할 수 있습니다. Claude Code에서 프로젝트 수준 사용자 지정 명령은 이 위치에 두는 것이 맞습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0042",
+  "question": "팀의 CLAUDE.md가 500줄을 넘어 TypeScript 규칙, 테스트 지침, API 패턴, 배포 절차가 섞여 있습니다. 개발자들은 올바른 섹션을 찾고 업데이트하기 어렵다고 느낍니다.\n\nClaude Code가 프로젝트 수준 지시사항을 집중된 주제별 module로 구성하기 위해 지원하는 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "파일 패턴을 CLAUDE.md 내부 특정 섹션에 매핑하는 `.claude/config.yaml`을 정의한다.",
+   "B": "`.claude/rules/`에 각 주제를 다루는 별도 Markdown 파일을 만든다(예: `testing.md`, `api-conventions.md`).",
+   "C": "관련 하위 디렉터리의 README.md 파일로 지시사항을 나누면 Claude가 자동으로 지시사항으로 로드한다.",
+   "D": "디렉터리 트리의 여러 수준에 CLAUDE.md라는 이름의 파일을 여러 개 만들어 각각 부모 지시사항을 override하게 한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "Claude Code는 `.claude/rules/` 디렉터리를 지원하며, 여기에 주제별 지침(예: `testing.md`, `api-conventions.md`)을 위한 별도 Markdown 파일을 만들 수 있습니다. 이를 통해 팀은 큰 지시사항 세트를 집중되고 유지보수 가능한 module로 구성할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0043",
+  "question": "팀이 구현 접근 방식을 선택하기 전에 brainstorming하고 평가하는 사용자 지정 Skill `/explore-alternatives`를 만들었습니다. 개발자들은 Skill 실행 후 후속 Claude 응답이 대안 논의의 영향을 받는다고 보고합니다. 때로는 거부된 접근을 언급하거나 실제 구현에 방해가 되는 탐색 context를 유지합니다.\n\n이 Skill을 가장 효과적으로 어떻게 구성해야 하나요?",
+  "choices": {
+   "A": "Skill에서 `!` 접두사를 사용해 탐색 로직을 bash subprocess로 실행한다.",
+   "B": "Skill frontmatter에 `context: fork`를 추가한다.",
+   "C": "탐색 context를 버려야 하는 경계를 표시하기 위해 `/explore-start`와 `/explore-end` 두 Skill로 나눈다.",
+   "D": "`.claude/skills/` 대신 `~/.claude/skills/`에 Skill을 만든다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "`context: fork`는 Skill을 격리된 subagent context에서 실행해 탐색 논의가 메인 대화 기록을 불필요하게 채우지 않게 합니다. 이를 통해 거부된 접근과 brainstorming context가 후속 구현 작업에 영향을 주는 것을 방지합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0044",
+  "question": "팀은 Claude Code를 통해 PR 검색과 CI 상태 확인을 할 수 있도록 GitHub MCP 서버를 추가하고 싶어 합니다. 여섯 명의 개발자는 각자 개인 GitHub 액세스 token을 가지고 있습니다. 자격 증명을 버전 관리에 커밋하지 않으면서 팀 전체에 일관된 tool을 제공하고 싶습니다.\n\n가장 효과적인 구성 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "각 개발자가 `claude mcp add --scope user`로 사용자 범위에 서버를 추가하게 한다.",
+   "B": "`.env` 파일에서 token을 읽고 GitHub API 호출을 프록시하는 MCP 서버 래퍼를 만든 뒤, 그 래퍼를 프로젝트 `.mcp.json`에 추가한다.",
+   "C": "인증에 환경 변수 치환(`${GITHUB_TOKEN}`)을 사용해 프로젝트 `.mcp.json`에 서버를 추가하고, 필요한 환경 변수를 프로젝트 README에 문서화한다.",
+   "D": "placeholder token으로 프로젝트 범위에 서버를 구성한 뒤, 개발자에게 로컬 구성에서 이를 override하라고 말한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "환경 변수 치환을 사용하는 프로젝트 `.mcp.json`은 관용적입니다. MCP 구성에 대한 버전 관리되는 단일 기준을 제공하면서 각 개발자가 환경 변수로 자격 증명을 제공할 수 있습니다. 변수를 문서화하면 비밀을 커밋하지 않고 온보딩도 쉬워집니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0045",
+  "question": "120개 파일 코드베이스 전반의 외부 API 호출 주변에 오류 처리 wrapper를 추가하고 있습니다. 작업은 세 단계입니다. (1) 모든 호출 지점과 패턴 발견, (2) 오류 처리 접근 방식 공동 설계, (3) wrapper를 일관되게 구현. 1단계에서 Claude는 수백 개 호출 지점과 context를 나열하는 큰 출력을 생성해, 발견이 끝나기 전에 context window가 빠르게 차오릅니다.\n\n구현 일관성을 유지하면서 작업을 완료하는 가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "1단계에는 Explore subagent를 사용해 상세 발견 출력을 격리하고 summary를 반환하게 한 뒤, 2-3단계는 메인 대화에서 계속한다.",
+   "B": "모든 단계를 메인 대화에서 수행하고 파일을 진행하면서 주기적으로 `/compact`를 사용해 context 사용량을 줄인다.",
+   "C": "`--continue`와 함께 headless 모드로 전환하고, 연속성을 유지하기 위해 batch 호출 사이에 명시적 context summary를 전달한다.",
+   "D": "오류 처리 패턴을 CLAUDE.md에 정의한 뒤, 일관성을 위해 공유 memory 파일에 의존하며 여러 session에서 파일을 batch로 처리한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "Explore subagent는 상세한 발견 출력을 별도 context에 격리하고 메인 대화에는 간결한 summary만 반환합니다. 이는 context가 특히 중요한 공동 설계와 일관된 구현 단계에 메인 context window를 아껴 둘 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0046",
+  "question": "테스트 중 사용자가 주문 상태를 물을 때 `lookup_order`가 더 적절함에도 Agent가 `get_customer`를 자주 호출하는 것을 확인했습니다. 이 문제를 해결하기 위해 먼저 무엇을 확인해야 하나요?\n\n먼저 무엇을 확인해야 하나요?",
+  "choices": {
+   "A": "주문 관련 요청을 감지해 `lookup_order`로 직접 routing하는 전처리 classifier를 구현한다.",
+   "B": "선택을 단순화하기 위해 Agent가 사용할 수 있는 tool 수를 줄인다.",
+   "C": "tool 선택을 개선하기 위해 가능한 모든 주문 요청 패턴을 다루는 few-shot 예시를 system prompt에 추가한다.",
+   "D": "tool 설명이 각 tool의 목적을 명확히 구분하는지 확인한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "tool 설명은 모델이 어떤 tool을 호출할지 결정하는 데 사용하는 기본 입력입니다. Agent가 지속적으로 잘못된 tool을 선택할 때 첫 진단 단계는 tool 설명이 각 tool의 목적과 사용 경계를 명확히 분리하는지 확인하는 것입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0047",
+  "question": "Agent는 단일 이슈 요청(예: \"주문 #1234 환불이 필요합니다\")을 94% accuracy로 처리합니다. 하지만 고객이 한 메시지에 여러 이슈를 포함하면(예: \"주문 #1234 환불이 필요하고 주문 #5678의 배송 주소도 업데이트하고 싶습니다\") tool 선택 accuracy가 58%로 떨어집니다. Agent는 보통 하나의 이슈만 해결하거나 요청 간 매개변수를 섞습니다. 다중 이슈 요청의 안정성을 가장 효과적으로 개선하는 접근은 무엇인가요?\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "별도 모델 호출을 사용해 다중 이슈 메시지를 별도 요청으로 분해하고, 각 요청을 독립적으로 처리한 뒤 결과를 병합하는 전처리 계층을 구현한다.",
+   "B": "관련 tool을 더 적은 범용 tool로 결합한다.",
+   "C": "다중 이슈 요청에 대한 올바른 추론과 tool 순서를 보여주는 few-shot 예시를 prompt에 추가한다.",
+   "D": "불완전한 답변을 감지하고 누락된 이슈를 해결하도록 Agent에 자동으로 다시 prompt하는 응답 validation을 구현한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "Agent가 단일 이슈에서는 이미 잘 수행하므로, 필요한 것은 여러 이슈를 분해하고 routing하며 매개변수를 분리해 유지하는 패턴에 대한 지침입니다. 이를 보여주는 few-shot 예시가 가장 효과적입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0048",
+  "question": "프로덕션 로그에 따르면 \"주문 #1234 환불\" 같은 단순 요청은 Agent가 3-4회 tool 호출로 91% 성공률을 보입니다. 하지만 \"이중 청구되었고, 할인이 적용되지 않았으며, 취소하고 싶습니다\" 같은 복잡한 요청은 평균 12회 이상의 tool 호출과 54% 성공률을 보입니다. Agent는 종종 이슈를 순차적으로 조사하고 각 이슈마다 중복으로 고객 데이터를 가져옵니다. 복잡한 요청 처리를 가장 효과적으로 개선하는 변경은 무엇인가요?\n\n가장 효과적인 변경 사항은 무엇인가요?",
+  "choices": {
+   "A": "단계 사이에 명시적 validation 체크포인트를 추가해, 각 이슈 해결 후 다음으로 넘어가기 전에 진행 상황을 기록하게 한다.",
+   "B": "`get_customer`, `lookup_order`, billing 관련 tool을 하나의 `investigate_issue` tool로 결합해 tool 수를 줄인다.",
+   "C": "요청을 별도 이슈로 분해한 뒤 공유 고객 context를 사용해 각 이슈를 병렬 조사하고 최종 해결책을 종합한다.",
+   "D": "다양한 다면적 billing 시나리오에 대한 이상적인 tool 호출 순서를 보여주는 few-shot 예시를 system prompt에 추가한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "별도 이슈로 분해하고 공유 고객 context로 병렬 조사하면 두 핵심 문제가 모두 해결됩니다. 이슈 간 공유 context를 재사용해 중복 데이터 조회를 없애고, 단일 해결책을 종합하기 전에 조사를 병렬화해 총 tool 호출 루프를 줄입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0049",
+  "question": "Agent의 첫 문의 해결률은 목표 80%보다 훨씬 낮은 55%입니다. 로그는 Agent가 단순한 케이스(사진 증거가 있는 손상 상품의 표준 교체)는 escalation하면서, 정책 예외가 필요한 복잡한 상황은 자율적으로 처리하려 한다는 것을 보여줍니다. escalation calibration을 개선하는 가장 효과적인 방법은 무엇인가요?\n\nescalation calibration을 개선하는 가장 효과적인 방법은 무엇인가요?",
+  "choices": {
+   "A": "각 응답 전에 Agent가 confidence를 1-10 척도로 자체 평가하게 하고, confidence가 임계값 아래로 떨어지면 자동으로 사람 리뷰로 routing한다.",
+   "B": "메인 Agent가 처리를 시작하기 전에 어떤 요청이 escalation이 필요한지 예측하도록 과거 티켓으로 학습한 별도 classifier 모델을 배포한다.",
+   "C": "system prompt에 escalation할 때와 자율 해결할 때를 보여주는 few-shot 예시와 함께 명시적 escalation 기준을 추가한다.",
+   "D": "고객 불만 수준을 판단하는 감정 분석을 구현하고 부정 감정 임계값을 넘으면 자동으로 escalation한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "few-shot 예시가 포함된 명시적 escalation 기준은 단순 케이스와 복잡한 케이스 사이의 불명확한 결정 경계라는 근본 원인을 직접 해결합니다. 추가 인프라 없이 Agent에게 언제 escalation하고 언제 자율 해결할지 가르치는 가장 현실적이고 효과적인 첫 수정입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0050",
+  "question": "`get_customer`와 `lookup_order`를 호출한 후 Agent는 사용 가능한 시스템 데이터는 모두 조회했지만 여전히 판단이 애매한 상황입니다. 어떤 상황이 `escalate_to_human` 호출을 가장 정당화할 수 있나요?\n\n어떤 상황이 escalation에 가장 정당한가요?",
+  "choices": {
+   "A": "고객이 어제 배송되어 내일 도착 예정인 주문을 취소하려 한다. 고객이 패키지를 받은 후 마음을 바꿀 수 있으므로 escalation해야 한다.",
+   "B": "고객은 주문을 받지 못했다고 주장하지만 추적 정보는 3일 전 고객 주소에서 배송 완료 및 서명 수령을 보여준다. 모순 증거를 제시하면 고객 관계를 해칠 수 있으므로 escalation해야 한다.",
+   "C": "고객이 경쟁사 가격 매칭을 요청한다. 정책은 자사 사이트의 14일 내 가격 인하에 대한 가격 조정은 허용하지만 경쟁사 가격에 대해서는 언급하지 않는다. 정책 해석을 위해 escalation해야 한다.",
+   "D": "고객 메시지에 billing 질문과 제품 반품이 모두 포함되어 있다. 사람이 한 상호작용에서 두 이슈를 조정할 수 있도록 escalation해야 한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "이는 실제 정책 공백입니다. 회사 규칙은 자사 사이트의 가격 인하는 다루지만 경쟁사 가격 매칭은 다루지 않습니다. Agent는 정책을 지어내면 안 되므로, 기존 규칙을 어떻게 해석하거나 확장할지는 사람에게 escalation해야 합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0051",
+  "question": "프로덕션 로그에 따르면 12%의 경우 Agent가 `get_customer`를 건너뛰고 고객이 제공한 이름만으로 `lookup_order`를 직접 호출해, 때로는 잘못된 계정을 식별하고 잘못된 환불을 유발합니다. 이 안정성 문제를 가장 효과적으로 해결하는 변경은 무엇인가요?\n\n가장 효과적인 변경 사항은 무엇인가요?",
+  "choices": {
+   "A": "고객이 자발적으로 주문 세부사항을 제공하더라도 Agent가 항상 `get_customer`를 먼저 호출하는 few-shot 예시를 추가한다.",
+   "B": "각 요청을 분석하고 해당 요청 유형에 적절한 일부 tool만 활성화하는 routing classifier를 구현한다.",
+   "C": "`get_customer`가 validated 고객 식별자를 반환할 때까지 `lookup_order`와 `process_refund`를 차단하는 코드 수준의 사전조건을 추가한다.",
+   "D": "주문 작업 전 `get_customer`를 통한 고객 validation이 필수라고 system prompt를 더 강하게 작성한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "코드 수준의 사전조건은 필요한 순서가 지켜진다는 결정적 보장을 제공합니다. LLM 동작과 관계없이 validation을 건너뛸 가능성을 제거하므로 가장 효과적인 접근입니다."
+ }
+]

@@ -1,0 +1,13 @@
+# 6장 topic 목록 (문항당 1개, 가장 핵심인 것)
+- system-prompt: system prompt 역할·지시 작성·명시적 기준(모호한 지시 → 구체 기준)·false positive 줄이기
+- few-shot: few-shot 예시 선택·다양성·경계 사례·예시 개수
+- output-format: 출력 형식·XML 태그·JSON 형식 지정
+- structured-output: structured outputs·tool_use 강제로 schema 보장·nullable/enum/"other" 필드 설계·schema 설계
+- validation-retry: 출력 검증·validation 실패 시 오류 피드백 후 재요청·semantic validation·self-correction
+- multi-pass: multi-pass review·독립 리뷰 인스턴스·파일별 + 통합 pass·자기 리뷰 한계
+- long-context: 긴 문서 배치·문서 앞 배치·quote 추출·lost in the middle
+- context-budget: context window 예산·context rot·tool 결과 trim·필요 필드만 유지
+- context-hygiene: compaction·요약 시 손실·case facts 블록·핵심 사실 보존·prune·isolate
+- prompt-ops: prompt 버전 관리·변경 관리·prompt drift·prompt 테스트(실무 운영)
+- batch-cost: Batch API·prompt caching을 prompt 설계 관점에서 쓰는 문항
+- other: 위에 안 맞음(짧은 이유를 note에)

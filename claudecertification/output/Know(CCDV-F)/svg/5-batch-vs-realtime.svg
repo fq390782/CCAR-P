@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="410" viewBox="0 0 880 410" role="img" aria-label="Batch는 기다려도 되는 대량 작업 전용, 사람이 기다리면 동기 호출">
+<title>Batch는 기다려도 되는 대량 작업 전용, 사람이 기다리면 동기 호출</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-batch-vs-realtime" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-batch-vs-realtime-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="440" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">Batch는 기다려도 되는 대량 작업 전용, 사람이 기다리면 동기 호출</text>
+<rect x="20" y="150" width="130" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="85" y="176.55" font-size="13" text-anchor="middle" fill="#1F2937">요청 유형</text>
+<polyline points="150,172 178,172" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-vs-realtime)"/>
+<polygon points="280,122.0 380.0,172 280,222.0 180.0,172" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="280" y="167.55" font-size="13" text-anchor="middle" fill="#1F2937">사람이 응답을</text>
+<text x="280" y="185.55" font-size="13" text-anchor="middle" fill="#1F2937">기다리나?</text>
+<polyline points="280,122 280,80 418,80" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-vs-realtime)"/>
+<rect x="291.5" y="61" width="17" height="15" fill="#FFFFFF"/>
+<text x="300" y="72" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<polygon points="530,30.0 640.0,80 530,130.0 420.0,80" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="530" y="75.55" font-size="13" text-anchor="middle" fill="#1F2937">수백 ms 안의</text>
+<text x="530" y="93.55" font-size="13" text-anchor="middle" fill="#1F2937">짧은 autocomplete?</text>
+<polyline points="640,80 678,80" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-vs-realtime)"/>
+<rect x="650.5" y="61" width="17" height="15" fill="#FFFFFF"/>
+<text x="659" y="72" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="680" y="52" width="190" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="775" y="75.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Haiku + streaming</text>
+<text x="775" y="93.55" font-size="13" text-anchor="middle" fill="#1F2937">+ 작은 max_tokens</text>
+<polyline points="530,130 530,168 678,168" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-vs-realtime)"/>
+<rect x="580.5" y="149" width="39" height="15" fill="#FFFFFF"/>
+<text x="600" y="160" font-size="11" text-anchor="middle" fill="#1F2937">아니오</text>
+<rect x="680" y="140" width="190" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="775" y="164.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">동기 호출 / streaming</text>
+<text x="775" y="180.85" font-size="11" text-anchor="middle" fill="#6B7280">live chat · escalated reply</text>
+<polyline points="280,222 280,288 428,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-vs-realtime)"/>
+<rect x="293.404" y="269" width="123.192" height="15" fill="#FFFFFF"/>
+<text x="355" y="280" font-size="11" text-anchor="middle" fill="#1F2937">아니오 (예: 야간 처리)</text>
+<rect x="430" y="260" width="300" height="56" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="580" y="284.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Batch API (비동기)</text>
+<text x="580" y="300.85" font-size="11" text-anchor="middle" fill="#6B7280">대량 · 균일 · 기다려도 됨 → 가장 저렴</text>
+<rect x="20" y="345" width="840" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="440" y="371.55" font-size="13" text-anchor="middle" fill="#1F2937">✗ live chat까지 모두 Batch (interactive에 부적합)        ✗ streaming · concurrency로 비용 절감 (단가 동일)</text>
+</g>
+</svg>

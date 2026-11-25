@@ -1,0 +1,33 @@
+{
+ "add": {
+  "## 4. 암기 목록": [
+   "CCAR-P-jrajath94-0416",
+   "CCAR-P-jrajath94-0542"
+  ],
+  "## 5. 시험 직전 체크리스트": [
+   "CCAR-P-jrajath94-0416"
+  ]
+ },
+ "rep": [
+  [
+   "어떤 작업도 안 쓰는 delete · write · wire tool",
+   "어떤 작업도 안 쓰는 delete · write tool"
+  ],
+  [
+   "| 미사용 destructive tool<br>(`drop_table` · `delete_*`<br>· `wire_transfer`) |",
+   "| 미사용 write · destructive tool<br>(`drop_table` · `delete_employee`<br>· `write_policy`) |"
+  ],
+  [
+   "| 부서별 credential | 부서 ≠ 사람 → 감사에서 사람 특정 ✗ |",
+   "| 부서별 credential<br>(사람 단위 귀속이 필요할 때) | 부서 ≠ 사람 → 감사에서 사람 특정 ✗<br>부서 단위 귀속만 필요하면 충분 |"
+  ],
+  [
+   "| 위험 tool 앞 확인 대화상자 · 업무 시간 제한만 추가 | 존재해서는 안 되는 권한의 보완 통제<br>시간 제한 = 노출 시간대만 축소 |",
+   "| 역할에 불필요한 위험 tool에<br>확인 대화상자 · 업무 시간 제한만 추가 | 존재해서는 안 되는 권한의 보완 통제<br>시간 제한 = 노출 시간대만 축소<br>필요한 tool이면 승인 gate (1.4) |"
+  ],
+  [
+   "- [ ] 귀속 필요 → 공유 credential ✗, 사용자별 위임 token",
+   "- [ ] 귀속 필요 → 공유 credential ✗, 귀속 단위(사람 · 팀)별 credential · 위임 token"
+  ]
+ ]
+}

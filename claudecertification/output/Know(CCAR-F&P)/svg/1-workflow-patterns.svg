@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="830" viewBox="0 0 920 830" role="img" aria-label="Workflow 패턴 5가지의 흐름 비교" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Workflow 패턴 5가지의 흐름 비교</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-workflow-patterns-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-workflow-patterns-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-workflow-patterns-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-workflow-patterns-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Workflow 패턴 — 분해 내용을 누가, 언제 정하나</text>
+<rect x="10" y="45" width="900" height="90" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="24" y="67" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">prompt chaining</text>
+<text x="24" y="89" font-size="11" fill="#6B7280" text-anchor="start">순서를 앱 코드가 고정</text>
+<text x="24" y="104" font-size="11" fill="#6B7280" text-anchor="start">단계 사이 gate 가능</text>
+<rect x="10" y="145" width="900" height="160" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="24" y="167" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">routing</text>
+<text x="24" y="189" font-size="11" fill="#6B7280" text-anchor="start">분류해 전용 처리로 보내고 끝</text>
+<text x="24" y="204" font-size="11" fill="#6B7280" text-anchor="start">분해·통합 없음</text>
+<rect x="10" y="315" width="900" height="160" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="24" y="337" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">parallelization (voting)</text>
+<text x="24" y="359" font-size="11" fill="#6B7280" text-anchor="start">같은 작업을 여러 번 실행</text>
+<text x="24" y="374" font-size="11" fill="#6B7280" text-anchor="start">작업 분해가 아님</text>
+<rect x="10" y="485" width="900" height="170" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="24" y="507" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">orchestrator-workers</text>
+<text x="24" y="529" font-size="11" fill="#6B7280" text-anchor="start">subtask를 실행 중에 결정</text>
+<text x="24" y="544" font-size="11" fill="#6B7280" text-anchor="start">입력마다 분해가 달라짐</text>
+<rect x="10" y="665" width="900" height="150" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="24" y="687" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">evaluator-optimizer</text>
+<text x="24" y="709" font-size="11" fill="#6B7280" text-anchor="start">명확한 기준으로 채점</text>
+<text x="24" y="724" font-size="11" fill="#6B7280" text-anchor="start">통과할 때까지 하나의 출력 개선</text>
+<rect x="230" y="72" width="60" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="260.0" y="95.1" font-size="13" fill="#1F2937" text-anchor="middle">입력</text>
+<rect x="320" y="72" width="100" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="370.0" y="95.1" font-size="13" fill="#1F2937" text-anchor="middle">LLM 단계 1</text>
+<rect x="450" y="72" width="110" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="505.0" y="87.1" font-size="13" fill="#1F2937" text-anchor="middle">gate</text>
+<text x="505.0" y="103.7" font-size="11" fill="#6B7280" text-anchor="middle">schema 검증</text>
+<rect x="590" y="72" width="100" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="640.0" y="95.1" font-size="13" fill="#1F2937" text-anchor="middle">LLM 단계 2</text>
+<rect x="720" y="72" width="90" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="765.0" y="95.1" font-size="13" fill="#1F2937" text-anchor="middle">gate</text>
+<rect x="840" y="72" width="55" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="867.5" y="95.1" font-size="13" fill="#1F2937" text-anchor="middle">출력</text>
+<path d="M290,92 L320,92" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M420,92 L450,92" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M560,92 L590,92" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M690,92 L720,92" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M810,92 L840,92" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<text x="560" y="128" font-size="11" fill="#6B7280" text-anchor="middle">각 단계는 앞 단계 출력을 받는다</text>
+<rect x="230" y="205" width="60" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="260.0" y="228.1" font-size="13" fill="#1F2937" text-anchor="middle">입력</text>
+<rect x="320" y="200" width="110" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="375.0" y="228.1" font-size="13" fill="#1F2937" text-anchor="middle">분류 LLM</text>
+<path d="M290,225 L320,225" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="520" y="160" width="150" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="595.0" y="183.1" font-size="13" fill="#1F2937" text-anchor="middle">전용 처리 A</text>
+<rect x="710" y="160" width="70" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="745.0" y="183.1" font-size="13" fill="#1F2937" text-anchor="middle">완료</text>
+<path d="M430,225 L470,225 L470,180 L520,180" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="474.6" y="173" width="40.8" height="15" fill="#FFFFFF"/>
+<text x="495" y="184" font-size="11" fill="#1F2937" text-anchor="middle">유형 A</text>
+<path d="M670,180 L710,180" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="520" y="205" width="150" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="595.0" y="228.1" font-size="13" fill="#1F2937" text-anchor="middle">전용 처리 B</text>
+<rect x="710" y="205" width="70" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="745.0" y="228.1" font-size="13" fill="#1F2937" text-anchor="middle">완료</text>
+<path d="M430,225 L470,225 L470,225 L520,225" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="474.6" y="218" width="40.8" height="15" fill="#FFFFFF"/>
+<text x="495" y="229" font-size="11" fill="#1F2937" text-anchor="middle">유형 B</text>
+<path d="M670,225 L710,225" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="520" y="250" width="150" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="595.0" y="273.1" font-size="13" fill="#1F2937" text-anchor="middle">전용 처리 C</text>
+<rect x="710" y="250" width="70" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="745.0" y="273.1" font-size="13" fill="#1F2937" text-anchor="middle">완료</text>
+<path d="M430,225 L470,225 L470,270 L520,270" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="474.6" y="263" width="40.8" height="15" fill="#FFFFFF"/>
+<text x="495" y="274" font-size="11" fill="#1F2937" text-anchor="middle">유형 C</text>
+<path d="M670,270 L710,270" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<text x="800" y="229" font-size="11" fill="#6B7280" text-anchor="start">통합 단계 없음</text>
+<rect x="230" y="375" width="60" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="260.0" y="398.1" font-size="13" fill="#1F2937" text-anchor="middle">입력</text>
+<path d="M290,395 L315,395" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="340" y="330" width="150" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="415.0" y="353.1" font-size="13" fill="#1F2937" text-anchor="middle">같은 작업 #1</text>
+<path d="M315,395 L315,350 L340,350" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M490,350 L525,350 L525,395" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="340" y="375" width="150" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="415.0" y="398.1" font-size="13" fill="#1F2937" text-anchor="middle">같은 작업 #2</text>
+<path d="M315,395 L315,395 L340,395" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="340" y="420" width="150" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="415.0" y="443.1" font-size="13" fill="#1F2937" text-anchor="middle">같은 작업 #3</text>
+<path d="M315,395 L315,440 L340,440" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M490,440 L525,440 L525,395" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M490,395 L560,395" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="560" y="370" width="110" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="615.0" y="398.1" font-size="13" fill="#1F2937" text-anchor="middle">다수결</text>
+<rect x="740" y="375" width="70" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="775.0" y="398.1" font-size="13" fill="#1F2937" text-anchor="middle">출력</text>
+<path d="M670,395 L740,395" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="680.0" y="388" width="50.0" height="15" fill="#FFFFFF"/>
+<text x="705" y="399" font-size="11" fill="#1F2937" text-anchor="middle">확신도↑</text>
+<rect x="230" y="550" width="60" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="260.0" y="573.1" font-size="13" fill="#1F2937" text-anchor="middle">입력</text>
+<rect x="320" y="535" width="150" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="395.0" y="565.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Orchestrator LLM</text>
+<text x="395.0" y="581.7" font-size="11" fill="#6B7280" text-anchor="middle">입력 보고 subtask 결정</text>
+<path d="M290,570 L320,570" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M470,570 L515,570" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="560" y="500" width="130" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="625.0" y="523.1" font-size="13" fill="#1F2937" text-anchor="middle">worker 1</text>
+<path d="M515,570 L515,520 L560,520" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M690,520 L712,520 L712,570" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="560" y="550" width="130" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="625.0" y="573.1" font-size="13" fill="#1F2937" text-anchor="middle">worker 2</text>
+<path d="M515,570 L515,570 L560,570" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="523.0" y="563" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="537" y="574" font-size="11" fill="#1F2937" text-anchor="middle">위임</text>
+<path d="M690,570 L712,570 L712,570 L735,570" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="560" y="600" width="130" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="625.0" y="623.1" font-size="13" fill="#1F2937" text-anchor="middle">worker n</text>
+<path d="M515,570 L515,620 L560,620" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M690,620 L712,620 L712,570" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="735" y="545" width="140" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="805.0" y="565.1" font-size="13" fill="#1F2937" text-anchor="middle">결과 통합</text>
+<text x="805.0" y="581.7" font-size="11" fill="#6B7280" text-anchor="middle">(orchestrator)</text>
+<text x="625" y="652" font-size="11" fill="#6B7280" text-anchor="middle">worker 수와 내용은 입력마다 다르다</text>
+<rect x="230" y="715" width="60" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="260.0" y="738.1" font-size="13" fill="#1F2937" text-anchor="middle">입력</text>
+<rect x="320" y="710" width="120" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="380.0" y="738.1" font-size="13" fill="#1F2937" text-anchor="middle">생성 LLM</text>
+<rect x="480" y="710" width="130" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="545.0" y="730.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">평가 LLM</text>
+<text x="545.0" y="746.7" font-size="11" fill="#6B7280" text-anchor="middle">기준으로 채점</text>
+<polygon points="720,695.0 795.0,735 720,775.0 645.0,735" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="720" y="738.1" font-size="13" fill="#1F2937" text-anchor="middle">기준 통과?</text>
+<rect x="830" y="715" width="65" height="40" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="862.5" y="738.1" font-size="13" fill="#1F2937" text-anchor="middle">출력</text>
+<path d="M290,735 L320,735" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M440,735 L480,735" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="446.0" y="728" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="460" y="739" font-size="11" fill="#1F2937" text-anchor="middle">초안</text>
+<path d="M610,735 L645,735" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<path d="M795,735 L830,735" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="803.5" y="728" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="812" y="739" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M720,775 L720,798 L380,798 L380,760" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-workflow-patterns-k)"/>
+<rect x="484.7" y="791" width="130.5" height="15" fill="#FFFFFF"/>
+<text x="550" y="802" font-size="11" fill="#1F2937" text-anchor="middle">아니오: 피드백 → 수정</text>
+</svg>

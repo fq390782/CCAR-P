@@ -1,0 +1,148 @@
+[
+ {
+  "id": "CCAR-P-preporato-0018",
+  "question": "A team wants to ship a new prompt, new retrieval settings and a tier change together, because 'it felt better in 15 spot checks.' What is the correct approach?",
+  "choices": {
+   "A": "Run 15 more spot checks",
+   "B": "Ask the stakeholders which version they prefer",
+   "C": "Test one variable at a time with a success metric and sample size set in advance, then ship each change only on a significant result",
+   "D": "Ship all three, since the spot checks were positive"
+  },
+  "explanation": "**C.** A clean experiment changes one variable and decides on a metric chosen in advance (C). With three changes at once (D), a win or a loss can't be attributed to anything. Preference (B) and more spot checks (A) are still the feels-better method."
+ },
+ {
+  "id": "CCAR-P-preporato-0019",
+  "question": "Traces show the correct policy passages are retrieved, yet answers still state the wrong refund window. Where is the failure, and what is the first fix?",
+  "choices": {
+   "A": "Raise the number of retrieved passages",
+   "B": "The index is stale: rebuild it",
+   "C": "Retrieval failure: re-chunk and re-embed the corpus",
+   "D": "Generation is poorly grounded: tighten the instructions to answer only from the retrieved passages and cite them, and evaluate faithfulness"
+  },
+  "explanation": "**D.** When the right documents arrive and the answer is still wrong, the failure sits in generation and grounding (D). C and B fix retrieval, which the traces show is working. A adds noise to a context that already contains the answer."
+ },
+ {
+  "id": "CCAR-P-preporato-0020",
+  "question": "Answers about leave policies leave out exceptions. Traces show the retrieved chunks contain the rule sentence, while the exception sits in the next paragraph, which isn't retrieved. What is the best fix?",
+  "choices": {
+   "A": "Retrieve 30 chunks instead of 5",
+   "B": "Move to a more capable model",
+   "C": "Tell the model to remember that policies have exceptions",
+   "D": "Re-chunk along the document's structure (whole sections) with some overlap, so rules and their exceptions stay together"
+  },
+  "explanation": "**D.** Chunks smaller than the unit of meaning split rules from their qualifiers, so structure-aware chunking fixes the retrieval unit (D). More chunks (A) might catch the exception along with plenty of noise. No model (B) can use a paragraph it never receives, and an instruction (C) can't supply the missing text."
+ },
+ {
+  "id": "CCAR-P-preporato-0021",
+  "question": "An agent reads inbound customer emails and can issue refunds. Which TWO controls are deterministic, as opposed to prompt-based? (Select TWO)",
+  "choices": {
+   "A": "An output filter that blocks any reply containing a full account number",
+   "B": "Few-shot examples of the agent declining suspicious requests",
+   "C": "A system-prompt rule: 'Never issue large refunds'",
+   "D": "A persona instruction: 'You are a careful agent'",
+   "E": "Tool permissions that cap a refund at \\$100 per call and send larger amounts for human approval"
+  },
+  "explanation": "**A and E.** Permission limits (E) and output filtering (A) are enforced in code, whatever the model decides. C, D and B shape behavior probabilistically, and a cleverly written email can talk the model past them."
+ },
+ {
+  "id": "CCAR-P-preporato-0022",
+  "question": "A moderation pipeline handles 500,000 low-risk comments a day and occasionally receives legal threats. Which human-in-the-loop design fits?",
+  "choices": {
+   "A": "Have a human review every comment",
+   "B": "Automate routine decisions with sampled QA, and route legal threats and cases below system-set thresholds to human reviewers",
+   "C": "Remove humans entirely",
+   "D": "Let the model escalate whenever its self-reported confidence is low"
+  },
+  "explanation": "**B.** Humans go where the risk is high, and sampling covers the routine volume (B). Reviewing everything (A) destroys the efficiency case. C leaves legal threats unhandled. Self-reported confidence (D) is poorly calibrated, so the thresholds have to be set by the system."
+ },
+ {
+  "id": "CCAR-P-preporato-0023",
+  "question": "A US telehealth company with patients in the US and Germany plans to use Claude to summarize clinical notes. Which TWO frameworks apply? (Select TWO)",
+  "choices": {
+   "A": "FedRAMP",
+   "B": "HIPAA, for US patients' health information",
+   "C": "GDPR, for the personal data of patients in the EU",
+   "D": "None, since Claude is a third-party service",
+   "E": "Only HIPAA, since the company is based in the US"
+  },
+  "explanation": "**B and C.** The framework follows the data type and the jurisdiction: US health data brings HIPAA (B), and processing EU residents' personal data brings GDPR wherever the company is based (C). FedRAMP (A) covers cloud services for US federal agencies. E ignores the German patients, and D confuses using a vendor with being exempt."
+ },
+ {
+  "id": "CCAR-P-preporato-0024",
+  "question": "Your observability stack stores full prompts and responses, including customer personal data, in a log platform that 300 engineers can read. What is the risk, and what is the fix?",
+  "choices": {
+   "A": "Data leakage through logs: redact personal data before logging, restrict access to the people who need it, and set a retention limit",
+   "B": "Ask the model to leave personal data out of its responses",
+   "C": "Encrypt the stored logs and leave access as it is",
+   "D": "No risk, because the logs are internal"
+  },
+  "explanation": "**A.** Logs and traces are a leakage channel, so the fix minimizes what's stored and who can see it (A). Internal access (D) still exposes customer data to hundreds of people. Encryption with unchanged access (C) protects the storage while every reader still sees the data. B leaves the personal data in the prompts, and the model can't be relied on to keep it out of responses."
+ },
+ {
+  "id": "CCAR-P-preporato-0025",
+  "question": "A vice president asks you to 'make customer support better with AI.' What should you produce first?",
+  "choices": {
+   "A": "A comparison of model benchmark scores",
+   "B": "A working prototype to show next week",
+   "C": "Discovery outputs: a measurable success criterion, a constraint inventory, a data and access map, a stakeholder map with decision owners, and a baseline of the current process",
+   "D": "A signed vendor contract"
+  },
+  "explanation": "**C.** Professional engagements start with discovery, because every later design choice depends on what success means and which constraints apply (C). A prototype (B) built without discovery answers a question nobody has defined. Benchmarks (A) and contracts (D) come after the requirements are known."
+ },
+ {
+  "id": "CCAR-P-preporato-0026",
+  "question": "Stakeholders ask for a guarantee that the assistant 'never gives a wrong answer.' What is the appropriate response?",
+  "choices": {
+   "A": "Commit only to 99.9% uptime",
+   "B": "Promise 100% accuracy to secure approval",
+   "C": "Refuse to set any accuracy target",
+   "D": "Commit to measured targets, such as at least 96% accuracy per slice on a held-out set with an error budget, escalation paths and a remediation plan, and explain that LLM outputs have a measurable error rate"
+  },
+  "explanation": "**D.** Probabilistic systems get SLAs built on measured rates, error budgets and remediation (D). B sets up a broken promise. C leaves stakeholders nothing to hold the system to. Uptime (A) says nothing about answer quality."
+ },
+ {
+  "id": "CCAR-P-preporato-0027",
+  "question": "Which statement best communicates a model-tier recommendation to business stakeholders?",
+  "choices": {
+   "A": "'We chose the newest model available.'",
+   "B": "'The top tier scores higher on industry benchmarks.'",
+   "C": "'The balanced tier resolves 91% of tickets at \\$0.02 each, and the top tier resolves 93% at \\$0.08. At a million tickets a month, the extra two points cost about \\$60,000 a month, so we recommend the balanced tier with escalation for complex tickets.'",
+   "D": "'The balanced tier is fine.'"
+  },
+  "explanation": "**C.** Architect-level communication puts the trade-off in business terms: outcome, cost, and the recommendation that follows from them (C). B is engineering language with no business meaning. D gives no basis for the decision, and A offers novelty as a reason."
+ },
+ {
+  "id": "CCAR-P-preporato-0028",
+  "question": "Which TWO artifacts belong in the handoff to the team that will operate the system? (Select TWO)",
+  "choices": {
+   "A": "The architect's personal working notes",
+   "B": "The kickoff slide deck",
+   "C": "A raw export of the project chat channel",
+   "D": "Runbooks covering escalation paths and known failure modes",
+   "E": "Eval baselines and an inventory of prompts and their versions"
+  },
+  "explanation": "**D and E.** Operators need to know how to respond to problems (D) and what normal looks like, along with what is deployed (E). Personal notes (A), kickoff slides (B) and raw chat (C) aren't operational documentation."
+ },
+ {
+  "id": "CCAR-P-preporato-0029",
+  "question": "Claude Code runs in your CI pipeline, and the team agrees it must never run git push or curl anywhere the repository is used. Where should this restriction live?",
+  "choices": {
+   "A": "Each developer's `~/.claude/settings.json`",
+   "B": "Deny rules in the committed project settings, such as `Bash(git push *)` and `Bash(curl *)`, which the client enforces",
+   "C": "A wiki page",
+   "D": "A `CLAUDE.md` instruction"
+  },
+  "explanation": "**B.** Permission rules in version-controlled project settings apply everywhere the repository runs, CI included, and the client enforces them (B). User settings (A) don't reach CI or other developers. `CLAUDE.md` (D) is guidance the model weighs. A wiki (C) is invisible to the tooling."
+ },
+ {
+  "id": "CCAR-P-preporato-0030",
+  "question": "A platform team built a code-review subagent and a release-notes skill that every repository in the company should use, in the same version. What is the best way to distribute them?",
+  "choices": {
+   "A": "Package them as a plugin (or deploy them through managed settings), so every developer gets the same versioned definitions",
+   "B": "Post the prompt text in a chat channel for developers to copy",
+   "C": "Ask each developer to copy the files into `~/.claude/`",
+   "D": "Paste both into every repository's `CLAUDE.md`"
+  },
+  "explanation": "**A.** Plugins bundle skills and subagents for distribution, and managed settings can push them to the whole organization, which keeps one maintained version (A). Copy-and-paste distribution (B, C) drifts as soon as the originals change. `CLAUDE.md` (D) holds always-on instructions and can't define a subagent or an on-demand skill."
+ }
+]

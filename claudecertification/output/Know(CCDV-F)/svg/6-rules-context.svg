@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="732" viewBox="0 0 900 732" role="img" aria-label="판단 규칙 ③: 긴 문서 · context 관리" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>판단 규칙 ③: 긴 문서 · context 관리</title>
+<defs><marker id="arr-rules-context" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">판단 규칙 ③: 긴 문서 · context 관리</text>
+<polygon points="36,50 404,50 420,80.0 404,110 36,110 20,80.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="75.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">긴 계약서 · 보고서에서 답이</text>
+<text x="220.0" y="92.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">관련 조항을 놓침?</text>
+<rect x="480" y="50" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="68.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">문서를 태그로 감싸 위에, 지시 · 질문은 끝</text>
+<text x="680.0" y="85.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">+ 관련 조항을 먼저 인용</text>
+<text x="680.0" y="100.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: effort ↑, cache_control, 사전 요약</text>
+<polyline points="420,80.0 480,80.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="60.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="72.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,110 220.0,134" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="224.0" y="113" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="125.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,134 404,134 420,164.0 404,194 36,194 20,164.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="159.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">여러 긴 문서를 구분 없이 이어 붙이고</text>
+<text x="220.0" y="176.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">질문은 앞?</text>
+<rect x="480" y="134" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="152.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">문서를 앞으로, 질문은 끝</text>
+<text x="680.0" y="169.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">문서별 &lt;document&gt; + &lt;source&gt; 태그</text>
+<text x="680.0" y="184.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 문서를 질문 앞뒤로 두 번</text>
+<polyline points="420,164.0 480,164.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="144.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="156.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,194 220.0,218" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="224.0" y="197" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="209.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,218 404,218 420,248.0 404,278 36,278 20,248.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="243.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">가장 중요한 지시가</text>
+<text x="220.0" y="260.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">긴 프롬프트 한가운데?</text>
+<rect x="480" y="218" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="244.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">놓치기 쉬움 → 앞이나 끝으로 이동</text>
+<text x="680.0" y="260.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 위치는 상관없다 / 오류가 난다</text>
+<polyline points="420,248.0 480,248.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="228.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="240.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,278 220.0,302" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="224.0" y="281" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="293.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,302 404,302 420,332.0 404,362 36,362 20,332.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="335.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">"혹시 몰라" 배경 자료를 많이 넣음?</text>
+<rect x="480" y="302" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="328.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">관련 자료만 (정확도도 떨어짐)</text>
+<text x="680.0" y="344.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 모델이 무관한 것은 무시한다</text>
+<polyline points="420,332.0 480,332.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="312.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="324.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,362 220.0,386" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="224.0" y="365" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="377.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,386 404,386 420,416.0 404,446 36,446 20,416.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="411.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">장시간 assistant가 반복 · 혼동 · 지시 망각,</text>
+<text x="220.0" y="428.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">tool output으로 가득?</text>
+<rect x="480" y="386" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="412.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">prune · 요약 / compact / subagent로 isolate</text>
+<text x="680.0" y="428.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 1M 창, system prompt 반복, max_tokens</text>
+<polyline points="420,416.0 480,416.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="396.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="408.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,446 220.0,470" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="224.0" y="449" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="461.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,470 404,470 420,500.0 404,530 36,530 20,500.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="495.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">수백 턴 support chat이</text>
+<text x="220.0" y="512.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">창 상한에 닿음?</text>
+<rect x="480" y="470" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="496.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">오래된 턴 요약 · compaction, 최근 턴 원문 유지</text>
+<text x="680.0" y="512.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: 새 대화 시작, system prompt 제거</text>
+<polyline points="420,500.0 480,500.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="480.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="492.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,530 220.0,554" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="224.0" y="533" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="545.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,554 404,554 420,584.0 404,614 36,614 20,584.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="587.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">장시간 고객 대화의 session 설계?</text>
+<rect x="480" y="554" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="580.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">용건별 세션 분리 + 오래된 부분 요약 · 제거</text>
+<text x="680.0" y="596.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: server에 상태 두고 최신 메시지만 전송</text>
+<polyline points="420,584.0 480,584.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="564.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="576.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+<polyline points="220.0,614 220.0,638" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="224.0" y="617" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="228.0" y="629.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="36,638 404,638 420,668.0 404,698 36,698 20,668.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="220.0" y="663.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">Agent tool이 원시 데이터를 대량 반환해</text>
+<text x="220.0" y="680.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">품질 · 비용 · latency 악화?</text>
+<rect x="480" y="638" width="400" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="680.0" y="656.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">tool 결과를 필요한 항목으로 축소</text>
+<text x="680.0" y="673.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">+ 오래된 대화 요약</text>
+<text x="680.0" y="688.8" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">오답: tool 등록 해제</text>
+<polyline points="420,668.0 480,668.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-context)"/>
+<rect x="440.5" y="648.0" width="19.0" height="16" fill="#FFFFFF"/>
+<text x="450.0" y="660.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">예</text>
+</svg>

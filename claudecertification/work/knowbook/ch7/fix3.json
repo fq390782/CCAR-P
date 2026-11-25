@@ -1,0 +1,9 @@
+{"add": {
+ "### 1.22 규제 프레임워크 매핑 (GDPR · HIPAA · FedRAMP)": ["CCAR-P-jrajath94-0038", "CCAR-P-jrajath94-0040", "CCAR-P-jrajath94-0226", "CCAR-P-jrajath94-0318"],
+ "### 1.25 Data residency": ["CCAR-P-jrajath94-0224"],
+ "### 1.27 컴플라이언스 증거 체인과 감사 로그": ["CCAR-P-jrajath94-0040"],
+ "### 1.21 보존(retention)·삭제 설계": ["CCAR-P-jrajath94-0318"]},
+ "rep": [
+ ["account team이 조직별로 활성화<br>(설정 토글 ✗) |", "account team이 조직별로 활성화 |"],
+ ["침해 표면 24배 증가 |", "침해 표면 24배 증가<br>⚠️ 해설 수치 · 90일→2년은 약 8배 |"]
+]}

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="500" viewBox="0 0 940 500" role="img" aria-label="Message Batches API 생명주기와 custom_id 매칭" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Message Batches API 생명주기와 custom_id 매칭</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-batch-lifecycle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="470" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">Batch: 제출 → processing_status polling → ended → results_url → custom_id로 매칭</text>
+<rect x="20" y="60" width="170" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="105.0" y="87.5" font-size="13" text-anchor="middle" fill="#1F2937">requests 준비</text>
+<text x="105.0" y="104.5" font-size="11" text-anchor="middle" fill="#6B7280">각 request에 custom_id</text>
+<text x="105.0" y="121.5" font-size="11" text-anchor="middle" fill="#6B7280">≤ 100,000건 / 256 MB</text>
+<rect x="240" y="60" width="150" height="80" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="315.0" y="96.0" font-size="13" text-anchor="middle" fill="#1F2937">batch 제출</text>
+<text x="315.0" y="113.0" font-size="11" text-anchor="middle" fill="#6B7280">입력·출력 50% 할인</text>
+<polygon points="510,50.0 600.0,100 510,150.0 420.0,100" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="510" y="96.0" font-size="13" text-anchor="middle" fill="#1F2937">processing_status</text>
+<text x="510" y="113.0" font-size="13" text-anchor="middle" fill="#1F2937">= ended?</text>
+<rect x="660" y="60" width="260" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="790.0" y="87.5" font-size="13" text-anchor="middle" fill="#1F2937">results_url에서 .jsonl 받기</text>
+<text x="790.0" y="104.5" font-size="11" text-anchor="middle" fill="#6B7280">(stream으로 받아도 됨)</text>
+<text x="790.0" y="121.5" font-size="11" text-anchor="middle" fill="#6B7280">결과 29일 보관</text>
+<polyline points="190,100 240,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-lifecycle)"/>
+<polyline points="390,100 420,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-lifecycle)"/>
+<polyline points="600,100 660,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-batch-lifecycle)"/>
+<rect x="620.5" y="79.0" width="19.0" height="18" fill="#FFFFFF"/>
+<text x="630" y="92.5" font-size="11" text-anchor="middle" fill="#6B7280">예</text>
+<polyline points="510,150 510,185 440,185 440,120" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-batch-lifecycle)"/>
+<text x="560" y="200" font-size="11" text-anchor="middle" fill="#6B7280">아니오 → 기다렸다가 다시 poll</text>
+<text x="560" y="215" font-size="11" text-anchor="middle" fill="#6B7280">(대부분 1시간, 최대 24시간)</text>
+<rect x="240" y="170" width="170" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="325.0" y="191.0" font-size="12" text-anchor="middle" fill="#1F2937">24시간 내 미처리</text>
+<text x="325.0" y="208.0" font-size="12" text-anchor="middle" fill="#1F2937">→ expired (과금 없음)</text>
+<polyline points="315,140 315,170" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-batch-lifecycle)"/>
+<polyline points="20,236 50,236" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<text x="56" y="240" font-size="11" text-anchor="start" fill="#6B7280">기본 흐름</text>
+<polyline points="113.8076923076923,236 143.80769230769232,236" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="149.80769230769232" y="240" font-size="11" text-anchor="start" fill="#6B7280">반복·예외 흐름</text>
+<text x="470" y="268" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">결과 순서 ≠ 제출 순서 → 위치가 아니라 custom_id로 매칭</text>
+<text x="110" y="296" font-size="11" text-anchor="middle" fill="#6B7280">제출 순서</text>
+<text x="470" y="296" font-size="11" text-anchor="middle" fill="#6B7280">결과 .jsonl 순서</text>
+<rect x="30" y="308" width="160" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="110.0" y="331.5" font-size="12" text-anchor="middle" fill="#1F2937">custom_id: rec-A</text>
+<rect x="30" y="358" width="160" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="110.0" y="381.5" font-size="12" text-anchor="middle" fill="#1F2937">custom_id: rec-B</text>
+<rect x="30" y="408" width="160" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="110.0" y="431.5" font-size="12" text-anchor="middle" fill="#1F2937">custom_id: rec-C</text>
+<rect x="390" y="308" width="160" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="470.0" y="331.5" font-size="12" text-anchor="middle" fill="#1F2937">rec-C 결과</text>
+<rect x="390" y="358" width="160" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="470.0" y="381.5" font-size="12" text-anchor="middle" fill="#1F2937">rec-A 결과</text>
+<rect x="390" y="408" width="160" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="470.0" y="431.5" font-size="12" text-anchor="middle" fill="#1F2937">rec-B 결과</text>
+<polyline points="190,327 390,377" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-batch-lifecycle)"/>
+<polyline points="190,377 390,427" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-batch-lifecycle)"/>
+<polyline points="190,427 390,327" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-batch-lifecycle)"/>
+<rect x="600" y="308" width="320" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="760.0" y="334.0" font-size="13" text-anchor="middle" fill="#1F2937">custom_id로 매칭 → 각 레코드에 맞는 결과</text>
+<text x="760.0" y="351.0" font-size="11" text-anchor="middle" fill="#6B7280">권장</text>
+<rect x="600" y="388" width="320" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="760.0" y="414.0" font-size="13" text-anchor="middle" fill="#1F2937">위치(순서)로 매칭 → A에 C 결과가 붙는 등</text>
+<text x="760.0" y="431.0" font-size="13" text-anchor="middle" fill="#1F2937">레코드끼리 결과가 뒤바뀜</text>
+<text x="470" y="482" font-size="11" text-anchor="middle" fill="#6B7280">batch 안에서는 stream·multi-turn tool calling 불가 · 개별 응답 속도 보장 없음 → 실시간 화면 대기에는 부적합</text>
+</svg>

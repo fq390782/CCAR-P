@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="470" viewBox="0 0 960 470" role="img" aria-label="Agentic loop의 stop_reason 분기" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Agentic loop의 stop_reason 분기</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-agentic-loop-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-agentic-loop-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-agentic-loop-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-agentic-loop-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Agentic loop — stop_reason별 분기</text>
+<rect x="115" y="50" width="170" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="200.0" y="78.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">Messages API 호출</text>
+<rect x="335" y="50" width="170" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="420.0" y="70.1" font-size="13" fill="#1F2937" text-anchor="middle">응답 수신</text>
+<text x="420.0" y="86.7" font-size="11" fill="#6B7280" text-anchor="middle">content blocks</text>
+<polygon points="640,35.0 735.0,75 640,115.0 545.0,75" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="640" y="78.1" font-size="13" fill="#1F2937" text-anchor="middle">stop_reason?</text>
+<path d="M285,75 L335,75" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<path d="M505,75 L545,75" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<path d="M640,115 L640,150" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M200,150 L860,150" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M200,150 L200,200" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<rect x="203.0" y="169" width="57.0" height="15" fill="#FFFFFF"/>
+<text x="206" y="180" font-size="11" fill="#1F2937" text-anchor="start">tool_use</text>
+<path d="M420,150 L420,200" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<rect x="423.0" y="169" width="69.8" height="15" fill="#FFFFFF"/>
+<text x="426" y="180" font-size="11" fill="#1F2937" text-anchor="start">pause_turn</text>
+<path d="M640,150 L640,200" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<rect x="643.0" y="169" width="57.0" height="15" fill="#FFFFFF"/>
+<text x="646" y="180" font-size="11" fill="#1F2937" text-anchor="start">end_turn</text>
+<path d="M860,150 L860,200" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<rect x="863.0" y="169" width="69.8" height="15" fill="#FFFFFF"/>
+<text x="866" y="180" font-size="11" fill="#1F2937" text-anchor="start">max_tokens</text>
+<rect x="115" y="200" width="170" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="200.0" y="225.1" font-size="13" fill="#1F2937" text-anchor="middle">요청된 tool 실행</text>
+<path d="M200,244 L200,262" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<rect x="115" y="262" width="170" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="200.0" y="281.1" font-size="13" fill="#1F2937" text-anchor="middle">tool_result를</text>
+<text x="200.0" y="299.1" font-size="13" fill="#1F2937" text-anchor="middle">대화에 추가</text>
+<rect x="335" y="200" width="170" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="420.0" y="214.7" font-size="11" fill="#6B7280" text-anchor="middle">server tool 사용 중</text>
+<text x="420.0" y="232.1" font-size="13" fill="#1F2937" text-anchor="middle">응답 그대로 재전송</text>
+<text x="420.0" y="250.1" font-size="13" fill="#1F2937" text-anchor="middle">(종료 아님)</text>
+<path d="M420,260 L420,345 L200,345" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M200,312 L200,345 L60,345 L60,75 L115,75" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-agentic-loop-k)"/>
+<rect x="241.2" y="338" width="137.6" height="15" fill="#FFFFFF"/>
+<text x="310" y="349" font-size="11" fill="#1F2937" text-anchor="middle">API 재호출 (loop 계속)</text>
+<rect x="555" y="200" width="170" height="50" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="640.0" y="219.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">턴 완료</text>
+<text x="640.0" y="237.1" font-size="13" fill="#1F2937" text-anchor="middle">content 반환</text>
+<text x="640" y="270" font-size="11" fill="#6B7280" text-anchor="middle">tool_use block이 없을 때</text>
+<rect x="775" y="200" width="170" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="860.0" y="219.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">출력 상한 도달</text>
+<text x="860.0" y="237.1" font-size="13" fill="#1F2937" text-anchor="middle">별도 처리</text>
+<text x="860" y="270" font-size="11" fill="#6B7280" text-anchor="middle">max_tokens = 출력 제한</text>
+<text x="860" y="285" font-size="11" fill="#6B7280" text-anchor="middle">입력 컨텍스트와 무관</text>
+<text x="20" y="393" font-size="13" fill="#1F2937" text-anchor="start" font-weight="bold">자주 나오는 오답</text>
+<rect x="20" y="405" width="300" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="170.0" y="425.1" font-size="13" fill="#1F2937" text-anchor="middle">tool_use인데 같은 요청 재전송·턴 종료</text>
+<text x="170.0" y="441.7" font-size="11" fill="#6B7280" text-anchor="middle">모델은 tool 결과를 기다리는 중</text>
+<rect x="330" y="405" width="300" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="480.0" y="425.1" font-size="13" fill="#1F2937" text-anchor="middle">end_turn인데 tool 재실행·빈 tool_result</text>
+<text x="480.0" y="441.7" font-size="11" fill="#6B7280" text-anchor="middle">이미 완료된 턴</text>
+<rect x="640" y="405" width="300" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="790.0" y="425.1" font-size="13" fill="#1F2937" text-anchor="middle">text block이 있으면 종료</text>
+<text x="790.0" y="441.7" font-size="11" fill="#6B7280" text-anchor="middle">text와 tool 호출은 함께 올 수 있음</text>
+</svg>

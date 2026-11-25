@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="고지 · 인용 · 이의 신청을 trace에서 생성하는 투명성 흐름">
+<title>고지 · 인용 · 이의 신청을 trace에서 생성하는 투명성 흐름</title>
+<defs><marker id="arr-transparency-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="400.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">고지 · 검증 · 구제를 모두 갖춘 투명성: 설명은 trace에서 생성</text>
+<rect x="20" y="46" width="230" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="135.0" y="69.2" font-size="13" fill="#1F2937" text-anchor="middle">사용자가 AI임을 앎</text>
+<polyline points="135,84 135,104" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="143" y="98" font-size="11" fill="#1F2937" text-anchor="start">대응</text>
+<rect x="20" y="106" width="230" height="38" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="135.0" y="129.2" font-size="13" fill="#1F2937" text-anchor="middle">사전 고지</text>
+<rect x="285" y="46" width="230" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="400.0" y="69.2" font-size="13" fill="#1F2937" text-anchor="middle">답변 주장을 검증</text>
+<polyline points="400,84 400,104" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="408" y="98" font-size="11" fill="#1F2937" text-anchor="start">대응</text>
+<rect x="285" y="106" width="230" height="38" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="400.0" y="129.2" font-size="13" fill="#1F2937" text-anchor="middle">주장별 인용</text>
+<rect x="550" y="46" width="230" height="38" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="665.0" y="69.2" font-size="13" fill="#1F2937" text-anchor="middle">틀린 답변에 구제</text>
+<polyline points="665,84 665,104" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="673" y="98" font-size="11" fill="#1F2937" text-anchor="start">대응</text>
+<rect x="550" y="106" width="230" height="38" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="129.2" font-size="13" fill="#1F2937" text-anchor="middle">이의 신청 경로</text>
+<text x="20" y="186" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">설명 · 고지 생성과 검사</text>
+<rect x="20" y="198" width="150" height="66" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="95.0" y="220.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">결정 trace</text>
+<text x="95.0" y="235.8" font-size="11" fill="#1F2937" text-anchor="middle">입력 · 요인 · 버전</text>
+<text x="95.0" y="250.8" font-size="11" fill="#1F2937" text-anchor="middle">기록</text>
+<polyline points="170,231 206,231" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="188" y="223" font-size="11" fill="#1F2937" text-anchor="middle">생성</text>
+<rect x="208" y="198" width="170" height="66" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="293.0" y="220.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">고지 · 설명</text>
+<text x="293.0" y="235.8" font-size="11" fill="#1F2937" text-anchor="middle">trace가 뒷받침하는</text>
+<text x="293.0" y="250.8" font-size="11" fill="#1F2937" text-anchor="middle">이유만 진술</text>
+<polyline points="378,231 412,231" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="395" y="223" font-size="11" fill="#1F2937" text-anchor="middle">검사</text>
+<polygon points="482,189.0 552.0,231 482,273.0 412.0,231" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="482" y="226.8" font-size="13" fill="#1F2937" text-anchor="middle">설명마다</text>
+<text x="482" y="243.8" font-size="13" fill="#1F2937" text-anchor="middle">trace 연결?</text>
+<polyline points="552,231 592,231" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="572" y="223" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="594" y="198" width="186" height="66" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="687.0" y="220.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">신청자에게 제공</text>
+<text x="687.0" y="235.8" font-size="11" fill="#1F2937" text-anchor="middle">결정 + 실제 요인</text>
+<text x="687.0" y="250.8" font-size="11" fill="#1F2937" text-anchor="middle">+ 버전 + 참조</text>
+<polyline points="482,273 482,310" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="490" y="296" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<rect x="360" y="312" width="250" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="485.0" y="329.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">출시 차단</text>
+<text x="485.0" y="344.8" font-size="11" fill="#1F2937" text-anchor="middle">인용 규칙으로 텍스트를 trace에 묶음</text>
+<text x="485.0" y="359.8" font-size="11" fill="#1F2937" text-anchor="middle">일회성 감사 ✗ · 모든 설명에 검사</text>
+<polyline points="687,264 687,310" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-transparency-flow)"/>
+<text x="695" y="292" font-size="11" fill="#1F2937" text-anchor="start">구제 요청</text>
+<rect x="640" y="312" width="140" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="710.0" y="336.8" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">이의 신청 경로</text>
+<text x="710.0" y="352.2" font-size="11" fill="#1F2937" text-anchor="middle">틀린 답변에 구제</text>
+<rect x="20" y="312" width="320" height="100" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="180.0" y="336.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답</text>
+<text x="180.0" y="351.8" font-size="11" fill="#1F2937" text-anchor="middle">고지를 trace와 별개로 생성</text>
+<text x="180.0" y="366.8" font-size="11" fill="#1F2937" text-anchor="middle">trace 밖 이유 = 이유 ✗</text>
+<text x="180.0" y="381.8" font-size="11" fill="#1F2937" text-anchor="middle">지어낸 설명 (입력에 없는 수치 인용)</text>
+<text x="180.0" y="396.8" font-size="11" fill="#1F2937" text-anchor="middle">→ 없는 것보다 나쁨</text>
+<rect x="20" y="432" width="760" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="400.0" y="453.2" font-size="11" fill="#1F2937" text-anchor="middle">한계: 검사 = 설명당 비용 추가 · 신청자가 요인을 해석 못 하면 오해 → 쉬운 언어 필요</text>
+<text x="400.0" y="468.2" font-size="11" fill="#1F2937" text-anchor="middle">짧은 참인 이유가 긴 허구보다 우위</text>
+</g>
+</svg>

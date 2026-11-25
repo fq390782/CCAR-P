@@ -1,0 +1,222 @@
+[
+ {
+  "id": "CCAR-F-Udemy01-0001",
+  "question": "A consumer goods manufacturer is building a multi-agent market research system using the Claude Agent SDK. A coordinator delegates work to specialized subagents responsible for market research, document analysis, synthesis, and report generation.\n\nThe team added a long checklist for producing competitive pricing analysis reports to the root memory file. The checklist is a step-by-step procedure covering source selection, price-tier grouping, citation formatting, and final report assembly. However, this procedure is relevant to only a small subset of research tasks.\n\nThe developers noticed that even unrelated Claude Code sessions are loading this specialized procedure as context.\n\nWhich action should the team take?",
+  "choices": {
+   "A": "Replace the checklist with a PreToolUse hook that blocks report generation until each item is completed.",
+   "B": "Move the entire procedure, including the citation and source management rules, into a skill, and leave CLAUDE.md empty.",
+   "C": "Move the competitive pricing analysis procedure into a skill defined in SKILL.md, and leave only the conventions common to all tasks in CLAUDE.md.",
+   "D": "Keep the entire competitive pricing analysis procedure in CLAUDE.md and add a note telling Claude to ignore it when it is not relevant."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0002",
+  "question": "A team is building an engineering assistant agent based on the Claude Agent SDK to automate internal codebase investigation and routine refactoring. In addition to the built-in tools (Read, Write, Bash, Grep, Glob), the agent integrates with several MCP servers.\n\nDuring trial operation, when an engineer made a vague cleanup request such as \"tidy up the whole workspace,\" the agent sometimes executed Bash commands that modified paths outside the workspace.\n\nNot crossing the workspace boundary is an absolute, non-negotiable rule. The team must satisfy the following two requirements:\n\nAlways stop commands that target paths outside the workspace before they are executed\n\nReturn feedback about the violation to Claude\n\nWhich change should the team make?",
+  "choices": {
+   "A": "Add a PreToolUse command hook that only logs commands outside the workspace without blocking them.",
+   "B": "Add a PreToolUse hook that validates the target paths and blocks commands outside the workspace, with a stated reason.",
+   "C": "Strengthen the system prompt instructions so that Claude checks each Bash command one by one and avoids paths outside the workspace.",
+   "D": "Add a PostToolUse command hook that detects Bash changes and asks Claude to revert them."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0003",
+  "question": "A climate research consortium is using Claude to build a structured data extraction system that extracts information from lengthy observation reports. The system must extract information from unstructured documents, validate its output using a JSON schema, and maintain high accuracy. It must also handle edge cases appropriately and integrate with downstream systems.\n\nThe research team splits long documents and has multiple extraction subagents process them. During validation, the synthesis agent combined several extracted statistics into a single trend. A reviewer later noticed that two of the values had actually been obtained under conditions that were not comparable.\n\nThe logs show that each extraction subagent returned a concise prose summary of the relevant findings.\n\nWhich changes most directly improve the reliability of synthesis? (Select two.)",
+  "choices": {
+   "A": "Send the full extracted text from all documents to the synthesis agent and have it reconstruct provenance information on its own.",
+   "B": "Run each extraction subagent as a fork so that it inherits the parent conversation before returning its summary.",
+   "C": "Before combining values, verify that each subagent's record includes the observation period and measurement method.",
+   "D": "Have each subagent return a structured evidence record that includes the claim, the source location, and the acquisition conditions."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0004",
+  "question": "A team modernizing an airline's crew scheduling system is using Claude Code for an investigation that spans several hours. Early on, Claude Code correctly identified several legacy scheduling dependencies.\n\nHowever, after many file reads, searches, and compaction (compression of the conversation history), later answers began to omit any mention of those dependencies. It now gives generic, common-pattern answers instead of the specific findings.\n\nWhich change is most effective for preserving the state of the investigation in preparation for later questions?",
+  "choices": {
+    "A": "Switch the modernization work to plan mode and rely on the plan to retain the details of the earlier file analysis.",
+    "B": "Have Claude record the confirmed dependencies in investigation-notes.md and read it before later questions.",
+    "C": "Pass focus instructions to /compact to preserve the dependencies, so that the summary includes the investigation findings.",
+    "D": "Lengthen the instructions at the start of the session and tell Claude to remember every identified dependency."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0005",
+  "question": "A team is using the Claude Agent SDK to build a multi-agent market research system that orchestrates multiple subagents. The coordinator agent delegates work to specialized subagents (web search, document analysis, findings synthesis, and report generation). The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring evaluation, the web search subagent sometimes encounters a transient network error after finding several useful sources. When this happens, the coordinator receives only a generic failure message, and it either halts report generation or omits that section.\n\nWhich change most improves resilience while preserving subagent isolation?",
+  "choices": {
+   "A": "Have the coordinator inspect the search subagent's intermediate tool calls and decide whether to retry or continue with partial sources.",
+   "B": "Have the search subagent return an empty success result whenever a search fails, and have the synthesis agent infer the coverage gaps.",
+   "C": "Have the search subagent retry transient failures internally and, if they remain unresolved, return the error details along with the sources already retrieved.",
+   "D": "Have the search subagent inherit the parent's tools and substitute a different tool whenever the primary search path fails."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0006",
+  "question": "You are building an automated invoice processing system using Claude. The system extracts information from unstructured scanned documents, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases appropriately and integrate with downstream systems.\n\nClaude returned \"tool_use\" as the stop_reason, with two validate_invoice tool calls (tool_use blocks) in the same assistant turn. Your wrapper ran both validators and then started a new request containing only a plain-text user message summarizing the results.\n\nWhat should the wrapper do instead so that Claude can correctly reason about the next extraction action?",
+  "choices": {
+   "A": "Keep the assistant response containing the tool_use blocks in the history, and return the two tool_result blocks, matched by tool_use_id, in a single user message.",
+   "B": "Before sending the tool_result blocks, add a new user text message summarizing the validator output, and then continue.",
+   "C": "Add the outputs of both validators as tool_result blocks, matched by tool_use_id, in a single assistant message.",
+   "D": "Send two subsequent user messages, each containing one corresponding tool_result block."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0007",
+  "question": "You are using Claude Code to accelerate maintenance work on a data pipeline. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow using custom slash commands and CLAUDE.md configuration, and to understand how to choose between plan mode and direct execution.\n\nA custom /resolve-incident command uses an MCP tool for incident search before editing code and generating a commit message. In testing, when an incident title search returns several similar incidents, Claude Code sometimes simply takes the most recent incident and implements the wrong thing.\n\nWhich changes should the team make to improve reliability? (Select two.)",
+  "choices": {
+   "A": "Update CLAUDE.md to prioritize title similarity when multiple incidents match.",
+   "B": "Update the search tool's description so that Claude is made to ask for confirmation before working when multiple candidate incidents are returned.",
+   "C": "Update the command to select the most recent of the matching incidents before modifying any project files.",
+   "D": "Have the search tool return all candidate incidents together with identifying information such as IDs."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0008",
+  "question": "The platform team at a securities firm uses Claude Code across roughly 150 internal repositories. The security department wants to ensure that Claude Code cannot read .env files, regardless of which repository a developer is working in.\n\nThis restriction has the following requirements:\n\nIt cannot be loosened by developers changing their own settings files, in-repository settings, or startup options\n\nIt also applies to repositories created in the future, with no additional work\n\nWhich approach is most appropriate?",
+  "choices": {
+   "A": "Write a deny rule that blocks reading .env in a managed-settings.json distributed via MDM.",
+   "B": "Write a deny rule that blocks reading .env in each repository's .claude/settings.json and commit it.",
+   "C": "Ask each developer to add a deny rule that blocks reading .env to their own ~/.claude/settings.json.",
+   "D": "Distribute a launcher script that passes a deny rule blocking reading .env via --settings, and have developers start Claude Code with it."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0009",
+  "question": "A team is using the Claude Agent SDK to build a multi-agent due diligence support system that investigates investment candidates. The coordinator agent delegates work to specialized subagents (web search, document analysis, findings synthesis, and report generation). The system researches a target company and produces a comprehensive report with cited sources.\n\nIn evaluation, the synthesis agent receives a very long prompt in which the outputs of the subagents are concatenated in chronological order. The state of the final report is as follows:\n\nFindings from the earliest web search results are reflected consistently every time\n\nThe most recent report-writing instructions placed at the end are also reflected consistently every time\n\nSome document analysis findings buried in the middle of the aggregated input are omitted\n\nWhich change most directly improves the completeness of the report without redoing the research?",
+  "choices": {
+   "A": "Replace the middle findings with uncited topic summaries before passing them to the synthesis agent to write the report.",
+   "B": "Place a concise list of findings and sources at the beginning of the synthesis prompt, and keep the detailed evidence in labeled sections.",
+   "C": "Add a final checklist to the end of the synthesis prompt asking the agent to consider all of the findings provided.",
+   "D": "Raise the response length limit so that the synthesis agent can include more findings and sources in the final report."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0010",
+  "question": "You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include ones that perform web search, analyze documents, synthesize findings, and generate reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nA legal research team plans to process 60,000 case law topics overnight. Each topic will be an independent Messages API report generation request, submitted through the Message Batches API.\n\nA pilot sample revealed the following problems:\n\nThe report generation prompt sometimes omits required report sections\n\nIt sometimes outputs JSON metadata that the downstream parser rejects\n\nWhich is the most appropriate next step before submitting everything?",
+  "choices": {
+   "A": "Templatize the prompt, iterate on improvements using edge-case evaluations in the same request format as production, and submit the batch after a successful synchronous dry run.",
+   "B": "Have Claude rewrite the report generation prompt, and submit the batch with that version without changing the grading rubric or the test set.",
+   "C": "Submit everything as a batch first, identify validation and quality failures from the completed results, and resubmit only the affected case law topics with a fixed version.",
+   "D": "Tighten the report generation schema and force tool use, and leave completeness and citation quality issues to schema validation."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0011",
+  "question": "You are building a developer productivity tool using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers.\n\nDuring a long investigation of a retail chain's inventory management system, the main conversation repeatedly fills up with file listings, search results, and test logs. The lead developer wants to prevent verbose investigation output from displacing important context, while keeping the main agent in a coordinating role so that it continues to maintain an understanding of the architecture.\n\nWhich changes are best suited to this problem? (Select two.)",
+  "choices": {
+   "A": "Have a general-purpose subagent perform the exploration and return only a summary with paths and line numbers to the main conversation.",
+   "B": "Create a fork for each branch being investigated, have it inherit the entire parent conversation, and have it return its results to the main conversation.",
+   "C": "Run Grep, Glob, Read, and Bash directly in the main conversation, and compact the conversation each time a large exploration finishes.",
+   "D": "Delegate code search and file exploration to an Explore subagent, and have it return only concise findings to the main conversation."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0012",
+  "question": "Your team wants to use the Message Batches API to run reviews of Infrastructure as Code change pull requests every night.\n\nIn each review, Claude may need the client tool run_infra_checks, which is executed on the application side, before writing its final feedback. This tool runs terraform plan and policy checks locally.\n\nWhich design handles this workflow most appropriately?",
+  "choices": {
+   "A": "Submit the review prompt as a batch item, set tool_choice to run_infra_checks, and assume that the batch worker will run the client tool before returning the final feedback.",
+   "B": "Combine the prompt, a predicted tool_result block, and the final review instructions into a single batch item so that Claude can complete the loop in one request.",
+   "C": "Submit the review prompt as a batch item, retrieve the tool_use results by custom_id, run the requested client tool, and then send a follow-up request containing the tool_result block.",
+   "D": "Submit the review prompt as a batch item and use web_search instead of run_infra_checks, substituting the server tool's execution results for validation of the local repository."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0013",
+  "question": "You are building a payroll data extraction system using Claude. The system extracts information from unstructured documents such as timesheets, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases appropriately and integrate with the downstream payroll system.\n\nDuring validation, an MCP tool detected the following two problems:\n\nAn extracted work date is a date that does not exist\n\nThe reported total hours worked does not match the sum of the extracted breakdown\n\nThe tool currently returns a normal result containing the text \"Validation failed.\" As a result, Claude sometimes repeats the same call, and the downstream system sometimes treats the extraction as successful.\n\nWhich change is most effective at improving recovery behavior?",
+  "choices": {
+   "A": "Return a JSON-RPC error response to the tools/call request, reporting the validation failure as a protocol-level error.",
+   "B": "Return a CallToolResult treated as successful, with the extraction result left empty and text in the body explaining why the document could not be validated.",
+   "C": "Add the date and total value formats to the tool description to prevent Claude from sending invalid arguments.",
+   "D": "Set isError to true in the CallToolResult, and return the error type and a hint for correcting it in structuredContent."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0014",
+  "question": "A bank is carrying out a large-scale refactoring of its core banking platform. The team wants Claude Code to run a database migration review, an API compatibility review, and a test coverage review in parallel. They also want a single place where conflicting findings are resolved and where the decision on which follow-up work to perform is made.\n\nWhich orchestration design best matches Claude Code's subagent model?",
+  "choices": {
+   "A": "Have the reviewer subagents exchange messages directly with one another and submit a final plan coordinated on a shared task list.",
+   "B": "Have the main agent launch each reviewer through Agent, passing it the information it needs, and make decisions centrally based on the summaries returned.",
+   "C": "Remove Agent from the main agent's tools, and have Claude implicitly select reviewers based on reviewer instructions written in CLAUDE.md.",
+   "D": "Launch each reviewer as an independent subagent that inherits the main history, and merge the findings without a triage stage."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0015",
+  "question": "You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases appropriately and integrate with downstream systems.\n\nThe team is using Claude Code to update the extraction repository.\n\nWhich tasks are best suited to using plan mode before implementation, rather than having Claude make changes directly in default mode? (Select two.)",
+  "choices": {
+   "A": "Have Claude open a known schema file, fix a misspelled field label, and apply the obvious one-line fix.",
+   "B": "Have Claude open an already identified validation function, add one line of failure logging, and save that small change.",
+   "C": "Have Claude investigate how validation and repair interact across the entire pipeline, and propose how to handle partially valid documents.",
+   "D": "Have Claude investigate the existing insurance claim extraction flow and propose a migration plan for changing how ambiguous claim amount expressions are handled."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0016",
+  "question": "The customer support department of a telecommunications carrier is reviewing its customer support resolution agent. During the review, they found that escalated support tickets often contain only vague notes such as \"The customer is dissatisfied with the billing amount.\"\n\nThe human agents who receive these tickets do not have access to the original chat history. In addition, the downstream support management tool expects consistent handoff data.\n\nWhich implementation changes are best suited to this problem? (Select two.)",
+  "choices": {
+   "A": "List the required fields for handoff notes as bullet points in the system prompt, and have Claude output them as free-form text.",
+   "B": "Instruct in the system prompt that Claude should call the escalation tool when it concludes handling by handing off to a human.",
+   "C": "Define an escalate_to_human tool whose input_schema makes the customer ID, root cause, and recommended action required fields.",
+   "D": "Force a call to process_refund with tool_choice so that the refund arguments are validated before the ticket is created."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0017",
+  "question": "You are building a multi-agent competitive product research system using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include ones that perform web search, analyze documents, synthesize findings, and generate reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nThe coordinator completed its research yesterday and saved a session containing the web search outputs, the document analysis tool results, the synthesis notes, and the report generation draft. Since then, the following changes have occurred:\n\nThe document corpus was reindexed\n\nSeveral source documents were updated\n\nA reviewer corrected which of the earlier research findings remain valid\n\nThe team wants the next run to carry over only the valid analytical conclusions and not to carry over yesterday's stale tool observations.\n\nWhat should the coordinator do next? (Select two.)",
+  "choices": {
+   "A": "Fork the saved session and have the coordinator consider the revised report within that fork.",
+   "B": "Resume the saved session by ID and instruct the coordinator to ignore yesterday's stale tool results.",
+   "C": "Re-run the web search and document analysis subagents against the corpus after reindexing.",
+   "D": "Start a new session and pass it a structured summary of the verified results and conclusions and of the sources to be rechecked."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0018",
+  "question": "An e-commerce company is using the Claude Agent SDK to build a multi-agent product research system. A coordinator delegates work to specialized subagents responsible for market research, document analysis, synthesis, and report generation, and produces a detailed, evidence-based report.\n\nIn testing, the early research steps return findings rich in sources to the coordinator. Even so, the synthesis subagent frequently produces summaries that do not cite sources. The message delegating the synthesis work reads: \"Using the research findings collected so far, create a report with citations.\"\n\nWhich changes should the team make? (Select two.)",
+  "choices": {
+   "A": "Allow the synthesis subagent to invoke Agent from its own tool configuration to launch other subagents.",
+   "B": "Pass the relevant research findings and source metadata directly in the synthesis task message.",
+   "C": "Invoke the synthesis subagent with an @-mention each time the final report is created.",
+   "D": "Write the collected research findings and source metadata to a file, and pass the file path in the synthesis task message."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0019",
+  "question": "You are building a multi-agent due diligence research system using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include ones that perform web search, analyze documents, synthesize findings, and generate reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nIn runs involving regulated topics, the report generation subagent sometimes calls an MCP tool that publishes the draft before the coordinator has finished verifying the citation manifest for every major claim.\n\nThe team wants deterministic control so that the publishing tool does not execute unless a citation manifest is present.\n\nWhich changes should be made? (Select two.)",
+  "choices": {
+   "A": "Configure a PreToolUse hook on the publishing tool that blocks calls that are missing the required citation manifest.",
+   "B": "Remove the publishing MCP tool from the report generation subagent's allowed tools so that only the coordinator can call it.",
+   "C": "Add instructions directed at each subagent to the coordinator's prompt telling them to verify the citation manifest before publishing.",
+   "D": "Configure a PostToolUse hook on the publishing tool that rejects output missing the required citation manifest by inspecting it after execution."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0020",
+  "question": "A nonprofit organization is using the Claude Agent SDK to build a multi-agent policy research system. A coordinator delegates work to specialized subagents responsible for web research, document analysis, synthesis, and report generation, and produces a comprehensive report with cited sources.\n\nThe coordinator sometimes delegates to the report generation subagent before the document analysis subagent has returned evidence excerpts and source metadata. As a result, the report is well written but contains claims that cannot be traced back to their original sources.\n\nWhich change most effectively prevents this failure?",
+  "choices": {
+   "A": "Increase the coordinator's iteration limit to give it more opportunities to re-request missing evidence.",
+   "B": "Force the report generation tool with tool_choice so that Claude always selects the designated report-writing step.",
+   "C": "Strengthen the instructions to the coordinator so that report generation takes place only after all of the evidence metadata is available.",
+   "D": "Add a prerequisite in the orchestration layer that refuses to delegate to report generation until the required results and source mappings are in place."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0021",
+  "question": "You are building a multi-agent legal contract review system using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include ones that search case law, parse contracts, synthesize findings, and produce opinion letters with citations.\n\nYou need to add the following two evaluation workflows to this system:\n\nA blocking citation quality gate that must return pass/fail before a pull request is merged\n\nA weekly audit of 40,000 completed opinion letters (the results are reviewed the next morning)\n\nWhich API usage best fits these requirements?",
+  "choices": {
+   "A": "Use streaming Messages API calls for both workflows, and run the weekly audit as many concurrent streaming requests.",
+   "B": "Use POST /v1/messages for the merge gate, and send the weekly audit to the Message Batches API with a custom_id.",
+   "C": "Submit both workflows through the Message Batches API, and poll the batch status until each pass/fail result is available.",
+   "D": "Use the Message Batches API for the merge gate, and use POST /v1/messages for the weekly audit in order to preserve output ordering."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy01-0022",
+  "question": "You are building a structured data extraction system using Claude that extracts information from real estate lease agreements. The system extracts information from unstructured documents, validates its output using a JSON schema, and maintains high accuracy. It must handle edge cases appropriately and integrate with downstream systems.\n\nThe latest evaluation reported an overall extraction accuracy of 97.4% across the validation set. Stakeholders want to reduce human review based on this result.\n\nWhat should the team do before changing the review policy? (Select two.)",
+  "choices": {
+   "A": "Re-run the prompt comparison on the same validation set, and adopt the prompt with the higher average score in production.",
+   "B": "Switch the extraction checks uniformly to exact-match scoring, and use that aggregate result as the basis for approval.",
+   "C": "Expand the validation set so that accuracy by document type and by field can be measured with reliable sample sizes.",
+   "D": "Define in advance the per-segment accuracy targets that must be met as the condition under which review may be reduced."
+  }
+ }
+]

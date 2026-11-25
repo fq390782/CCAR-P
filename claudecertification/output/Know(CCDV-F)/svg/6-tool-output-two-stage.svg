@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="270" viewBox="0 0 900 270" role="img" aria-label="agent tool output을 두 단계로 줄인다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>agent tool output을 두 단계로 줄인다</title>
+<defs><marker id="arr-tool-output-two-stage" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<rect x="20" y="50" width="140" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="90.0" y="78.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">tool</text>
+<text x="90.0" y="94.3" font-size="11" font-weight="normal" fill="#6B7280" text-anchor="middle">예: 센서 데이터</text>
+<rect x="230" y="50" width="220" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="340.0" y="77.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">① 입구</text>
+<text x="340.0" y="94.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">다음 판단에 필요한 항목만 반환</text>
+<rect x="520" y="50" width="130" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="585.0" y="86.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">agent context</text>
+<rect x="700" y="50" width="180" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="790.0" y="69.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">② 누적</text>
+<text x="790.0" y="86.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">compaction /</text>
+<text x="790.0" y="103.2" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">context editing</text>
+<polyline points="160,82 230,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-tool-output-two-stage)"/>
+<rect x="164.1" y="57" width="61.9" height="16" fill="#FFFFFF"/>
+<text x="195" y="69.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">tool 결과</text>
+<polyline points="450,82 520,82" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-tool-output-two-stage)"/>
+<rect x="450.3" y="57" width="69.4" height="16" fill="#FFFFFF"/>
+<text x="485" y="69.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">축소된 결과</text>
+<polyline points="650,70 700,70" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-tool-output-two-stage)"/>
+<rect x="654.5" y="49" width="41.0" height="16" fill="#FFFFFF"/>
+<text x="675" y="61.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">쌓이면</text>
+<polyline points="700,96 650,96" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-tool-output-two-stage)"/>
+<rect x="660.0" y="100" width="30.0" height="16" fill="#FFFFFF"/>
+<text x="675" y="112.5" font-size="11" font-weight="normal" fill="#1F2937" text-anchor="middle">정리</text>
+<text x="20" y="158" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">오답</text>
+<rect x="20" y="170" width="420" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="230.0" y="200.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">원시 데이터를 가공 없이 계속 쌓음</text>
+<text x="230.0" y="217.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">품질 · 비용 · latency 악화 (1M 창에 유지해도 동일)</text>
+<rect x="460" y="170" width="420" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="670.0" y="200.5" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">tool 등록 해제</text>
+<text x="670.0" y="217.7" font-size="13" font-weight="normal" fill="#1F2937" text-anchor="middle">핵심 기능이 무너짐 — 문제는 tool의 존재가 아님</text>
+</svg>

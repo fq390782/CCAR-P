@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="350" viewBox="0 0 900 350" role="img" aria-label="trace에서 모델이 받은 입력 기준으로는 올바르게 추론하지만 입력 문서가 틀렸다면 결함은 retrieval/integration layer에 있고, 모델 upgrade나 prompt 강화로는 고칠 수 없다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>trace로 결함 layer 찾기</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-trace-retrieval" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-trace-retrieval-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">추론은 맞는데 입력 문서가 틀리면: 결함은 retrieval layer</text>
+<text x="290" y="88" font-size="11" font-weight="bold" fill="#DC2626" text-anchor="middle">결함 위치</text>
+<text x="705" y="88" font-size="11" fill="#6B7280" text-anchor="middle">trace: 받은 입력 기준 추론은 정상</text>
+<rect x="20" y="100" width="120" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="80.0" y="136.6" text-anchor="middle"><tspan x="80.0" dy="0" font-size="13" fill="#1F2937">사용자 질문</tspan></text>
+<rect x="180" y="100" width="220" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="290.0" y="128.9" text-anchor="middle"><tspan x="290.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">retrieval/integration</tspan><tspan x="290.0" dy="16" font-size="13" fill="#1F2937">search · indexing</tspan></text>
+<rect x="440" y="100" width="140" height="64" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="510.0" y="136.6" text-anchor="middle"><tspan x="510.0" dy="0" font-size="13" fill="#1F2937">틀린 입력 문서</tspan></text>
+<rect x="640" y="100" width="130" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="705.0" y="129.9" text-anchor="middle"><tspan x="705.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">모델 추론</tspan><tspan x="705.0" dy="14" font-size="11" fill="#6B7280">입력 기준 정상</tspan></text>
+<rect x="800" y="100" width="80" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="840.0" y="136.6" text-anchor="middle"><tspan x="840.0" dy="0" font-size="13" fill="#1F2937">틀린 답</tspan></text>
+<path d="M140,132 L180,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-trace-retrieval)"/>
+<path d="M400,132 L440,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-trace-retrieval)"/>
+<path d="M580,132 L640,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-trace-retrieval)"/>
+<rect x="581.6" y="112" width="56.7" height="17" fill="#FFFFFF"/>
+<text x="610" y="124" font-size="12" fill="#1F2937" text-anchor="middle">context</text>
+<path d="M770,132 L800,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-trace-retrieval)"/>
+<rect x="180" y="250" width="220" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="290.0" y="279.6" text-anchor="middle"><tspan x="290.0" dy="0" font-size="13" fill="#1F2937">✓ search·indexing 수정</tspan></text>
+<path d="M290,250 L290,164" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-trace-retrieval)"/>
+<rect x="294.0" y="200" width="87.0" height="17" fill="#FFFFFF"/>
+<text x="298" y="212" font-size="12" fill="#1F2937" text-anchor="start">여기를 고친다</text>
+<rect x="480" y="250" width="170" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="565.0" y="279.6" text-anchor="middle"><tspan x="565.0" dy="0" font-size="13" fill="#1F2937">✗ 모델 upgrade</tspan></text>
+<rect x="670" y="250" width="210" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="775.0" y="279.6" text-anchor="middle"><tspan x="775.0" dy="0" font-size="13" fill="#1F2937">✗ prompt에 정확성 강조 문구</tspan></text>
+<path d="M565,250 L680,164" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-trace-retrieval-red)"/>
+<path d="M775,250 L735,164" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-trace-retrieval-red)"/>
+<text x="680" y="324" font-size="11" fill="#DC2626" text-anchor="middle">모델·prompt를 바꿔도 잘못된 입력은 고칠 수 없다</text>
+</svg>

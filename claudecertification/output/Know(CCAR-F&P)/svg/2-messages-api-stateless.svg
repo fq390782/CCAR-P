@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-label="Messages API stateless 요청과 응답 구조" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Messages API stateless 요청과 응답 구조</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-messages-api-stateless" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="450" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">Messages API는 stateless: 매 요청에 system과 전체 이력을 다시 보낸다</text>
+<rect x="30" y="50" width="300" height="300" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180" y="72" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">요청 body</text>
+<rect x="45" y="86" width="270" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="180.0" y="110.5" font-size="13" text-anchor="middle" fill="#1F2937">system: 최상위 파라미터</text>
+<rect x="45" y="134" width="270" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180.0" y="155.5" font-size="13" text-anchor="middle" fill="#1F2937">tools: tool 정의</text>
+<rect x="45" y="176" width="270" height="112" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180" y="196" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">messages: 대화 이력 전체</text>
+<rect x="60" y="206" width="240" height="22" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180.0" y="221.5" font-size="11" text-anchor="middle" fill="#1F2937">user: 질문 1</text>
+<rect x="60" y="232" width="240" height="22" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180.0" y="247.5" font-size="11" text-anchor="middle" fill="#1F2937">assistant: 답 1</text>
+<rect x="60" y="258" width="240" height="22" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180.0" y="273.5" font-size="11" text-anchor="middle" fill="#1F2937">user: 질문 2 (이번 턴 입력)</text>
+<rect x="45" y="296" width="270" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="180.0" y="320.5" font-size="13" text-anchor="middle" fill="#1F2937">max_tokens: 출력 길이 상한</text>
+<rect x="390" y="150" width="180" height="90" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="480.0" y="182.5" font-size="13" text-anchor="middle" fill="#1F2937">Messages API</text>
+<text x="480.0" y="199.5" font-size="11" text-anchor="middle" fill="#6B7280">서버에 대화 상태 없음</text>
+<text x="480.0" y="216.5" font-size="11" text-anchor="middle" fill="#6B7280">session ID 없음</text>
+<polyline points="330,195 390,195" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-messages-api-stateless)"/>
+<rect x="345.0" y="159.0" width="30.0" height="32" fill="#FFFFFF"/>
+<text x="360" y="172.5" font-size="11" text-anchor="middle" fill="#6B7280">전체</text>
+<text x="360" y="186.5" font-size="11" text-anchor="middle" fill="#6B7280">이력</text>
+<rect x="630" y="50" width="240" height="230" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="750" y="72" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">응답</text>
+<rect x="645" y="86" width="210" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="750.0" y="108.0" font-size="13" text-anchor="middle" fill="#1F2937">content</text>
+<text x="750.0" y="125.0" font-size="11" text-anchor="middle" fill="#6B7280">text / tool_use 블록</text>
+<rect x="645" y="146" width="210" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="750.0" y="168.0" font-size="13" text-anchor="middle" fill="#1F2937">stop_reason</text>
+<text x="750.0" y="185.0" font-size="11" text-anchor="middle" fill="#6B7280">왜 멈췄는지</text>
+<rect x="645" y="206" width="210" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="750.0" y="223.5" font-size="13" text-anchor="middle" fill="#1F2937">usage</text>
+<text x="750.0" y="240.5" font-size="11" text-anchor="middle" fill="#6B7280">input_tokens · output_tokens</text>
+<text x="750.0" y="257.5" font-size="11" text-anchor="middle" fill="#6B7280">실제 사용량 확인</text>
+<polyline points="570,195 630,195" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-messages-api-stateless)"/>
+<rect x="585.0" y="171.0" width="30.0" height="18" fill="#FFFFFF"/>
+<text x="600" y="184.5" font-size="11" text-anchor="middle" fill="#6B7280">응답</text>
+<polyline points="750,280 750,395 180,395 180,350" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-messages-api-stateless)"/>
+<rect x="237.4" y="386.0" width="455.2" height="18" fill="#FFFFFF"/>
+<text x="465" y="399.5" font-size="11" text-anchor="middle" fill="#6B7280">assistant 응답을 messages 끝에 추가 → 다음 턴에 전체를 다시 전송 (첫 메시지는 user)</text>
+<rect x="370" y="268" width="220" height="58" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="480.0" y="293.0" font-size="13" text-anchor="middle" fill="#1F2937">messages 안에 role: "system"</text>
+<text x="480.0" y="310.0" font-size="13" text-anchor="middle" fill="#1F2937">→ 오류</text>
+<text x="450" y="422" font-size="11" text-anchor="middle" fill="#6B7280">이력이 길어질수록 input 토큰(비용)이 늘어남 → 반복 전송 비용은 prompt caching으로 줄임</text>
+</svg>

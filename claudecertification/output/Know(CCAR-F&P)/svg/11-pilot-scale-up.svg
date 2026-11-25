@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="610" viewBox="0 0 900 610" role="img" aria-label="결과 지표, 대표 표본, 평가 범위를 차례로 확인하고 통과해야 단계적 롤아웃으로 가는 decision tree">
+<title>파일럿 결과를 확대하기 전에 세 가지를 확인하는 판단 흐름</title>
+<defs><marker id="arr-pilot-scale-up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">확대는 느낌이 아니라 결과 지표 · 대표 표본 · 평가 범위로 판단</text>
+<rect x="130" y="44" width="240" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="250.0" y="65.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">파일럿 결과 → 확대 요청</text>
+<polyline points="250,78 250,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-pilot-scale-up)"/>
+<text x="258" y="94" font-size="11" fill="#1F2937" text-anchor="start">확대 전</text>
+<polygon points="250,100.0 400.0,142 250,184.0 100.0,142" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="250" y="138.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">결과 지표가</text>
+<text x="250" y="154.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">움직였나?</text>
+<polyline points="250,184 250,230" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-pilot-scale-up)"/>
+<text x="258" y="212" font-size="11" fill="#1F2937" text-anchor="start">예</text>
+<polyline points="400,142 500,142" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-pilot-scale-up)"/>
+<text x="450" y="134" font-size="11" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="500" y="98" width="380" height="88" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="690.0" y="125.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">확대 보류 · 원인 조사</text>
+<text x="690.0" y="139.7" font-size="11" fill="#1F2937" text-anchor="middle">별 5개 호평 + 수락 초안 비율 61% 불변</text>
+<text x="690.0" y="153.7" font-size="11" fill="#1F2937" text-anchor="middle">호감이 수락으로 안 이어진 이유 조사</text>
+<text x="690.0" y="167.7" font-size="11" fill="#1F2937" text-anchor="middle">결과 지표가 움직일 때만 확대</text>
+<polygon points="250,230.0 400.0,272 250,314.0 100.0,272" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="250" y="268.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">표본이 실제 트래픽을</text>
+<text x="250" y="284.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">대표하는가?</text>
+<polyline points="250,314 250,360" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-pilot-scale-up)"/>
+<text x="258" y="342" font-size="11" fill="#1F2937" text-anchor="start">예</text>
+<polyline points="400,272 500,272" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-pilot-scale-up)"/>
+<text x="450" y="264" font-size="11" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="500" y="228" width="380" height="88" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="690.0" y="255.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">표본 한계 명시 + 실제 표본 재실행</text>
+<text x="690.0" y="269.7" font-size="11" fill="#1F2937" text-anchor="middle">직접 고른 50건 만족도 90% = 실제보다 좋게 보임</text>
+<text x="690.0" y="283.7" font-size="11" fill="#1F2937" text-anchor="middle">날짜 있는 클래스별 품질 보고</text>
+<text x="690.0" y="297.7" font-size="11" fill="#1F2937" text-anchor="middle">수치 공표 · 표본 재선정 · 파일럿 삭제 ✗</text>
+<polygon points="250,360.0 400.0,402 250,444.0 100.0,402" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="250" y="398.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">평가 범위가 출시</text>
+<text x="250" y="414.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">범위를 덮는가?</text>
+<polyline points="250,444 250,490" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-pilot-scale-up)"/>
+<text x="258" y="472" font-size="11" fill="#1F2937" text-anchor="start">예</text>
+<polyline points="400,402 500,402" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-pilot-scale-up)"/>
+<text x="450" y="394" font-size="11" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="500" y="358" width="380" height="88" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="690.0" y="385.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">평가 결과 그대로 제시</text>
+<text x="690.0" y="399.7" font-size="11" fill="#1F2937" text-anchor="middle">데모 5건 완벽 · 평가는 12개 유형 88%</text>
+<text x="690.0" y="413.7" font-size="11" fill="#1F2937" text-anchor="middle">12개 유형만 검증 · 나머지 미검증</text>
+<text x="690.0" y="427.7" font-size="11" fill="#1F2937" text-anchor="middle">평가 범위 기준 단계적 롤아웃</text>
+<rect x="40" y="490" width="420" height="96" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="250.0" y="514.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">단계적 롤아웃</text>
+<text x="250.0" y="528.7" font-size="11" fill="#1F2937" text-anchor="middle">파일럿 집단 → 측정 품질 gate</text>
+<text x="250.0" y="542.7" font-size="11" fill="#1F2937" text-anchor="middle">롤아웃 전에 검토 트리거 · 롤백 기준 정의</text>
+<text x="250.0" y="556.7" font-size="11" fill="#1F2937" text-anchor="middle">10명 → 2천 명 확대: 깨질 가정부터 확인</text>
+<text x="250.0" y="570.7" font-size="11" fill="#1F2937" text-anchor="middle">(입력 · 지원 · 엣지 케이스)</text>
+<rect x="500" y="490" width="380" height="96" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="690.0" y="521.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">실패 사례</text>
+<text x="690.0" y="535.7" font-size="11" fill="#1F2937" text-anchor="middle">파일럿 없이 사용자 1만 명 롤아웃</text>
+<text x="690.0" y="549.7" font-size="11" fill="#1F2937" text-anchor="middle">첫날 전체 배포 · 측정 생략 · eval set 삭제</text>
+<text x="690.0" y="563.7" font-size="11" fill="#1F2937" text-anchor="middle">월요일 전체 출시 = 예정된 놀라움</text>
+</g>
+</svg>

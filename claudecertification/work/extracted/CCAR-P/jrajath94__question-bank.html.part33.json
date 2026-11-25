@@ -1,0 +1,154 @@
+[
+  {
+    "number": "M2-Q33",
+    "heading": "M2-Q33 (V2-D4.1)",
+    "question": "A translation bot's requirement is \"good translations.\"\nThe team must turn it into an acceptance threshold.\nWhat is the correct conversion?",
+    "choices": {
+      "A": "The team feels good about it.",
+      "B": "A measured threshold. For example, human-rated adequacy is 4/5 or more.\nThe sample size and rater agreement are clear.",
+      "C": "A bigger model.",
+      "D": "More languages."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"'good translations.'\" Why: V2-D4.1 turns\nvague requirements into acceptance thresholds. B names the metric, the\nline, and the measurement method. Counterfactual: A wins never as a\nthreshold.",
+    "source_section": "V2-D4.1"
+  },
+  {
+    "number": "M2-Q34",
+    "heading": "M2-Q34 (V2-D4.2)",
+    "question": "A judge model grades support answers. The team never\nchecked the judge against human grades.\nWhat is necessary?",
+    "choices": {
+      "A": "Trust the judge.",
+      "B": "Calibrate the judge against human labels on a sampled set before\ntrusting its grades.",
+      "C": "A bigger judge.",
+      "D": "More answers."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"never checked the judge against human grades.\"\nThe grading ladder puts code first.\nThen the grading ladder puts the judge.\nThen the grading ladder puts the human.\nYou calibrate judges against human labels.\n\nAn uncalibrated judge is an unverified grader.\nA wins never for grading.",
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "M2-Q35",
+    "heading": "M2-Q35 (V2-D4.2), Select TWO",
+    "question": "An eval set for a medical triage bot has only textbook\ncases.\nWhich TWO drawers are absent? Select TWO.",
+    "choices": {
+      "A": "Edge cases: atypical but valid presentations.",
+      "B": "Adversarial cases: inputs crafted to fool the triage.",
+      "C": "More textbook cases.",
+      "D": "The training set again.",
+      "E": "Blank pages."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"only textbook cases.\" Why: the\nrepresentative drawer is full. Edge and adversarial are empty. For\ntriage, both are safety-critical. Counterfactual: E wins as the\nmalformed drawer, a third addition.",
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "M2-Q36",
+    "heading": "M2-Q36 (V2-D4.3)",
+    "question": "A team A/B tests a new greeting. Assignment is random per\npage load, so one user sees both greetings across visits.\nWhat is wrong?",
+    "choices": {
+      "A": "Do nothing. Random is random.",
+      "B": "The assignment is inconsistent. The same user gets both variants. This corrupts the measurement and the experience.\nAssign consistently per user.",
+      "C": "You cannot test greetings.",
+      "D": "The test needs more greetings."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"one user sees both greetings across\nvisits.\" Why: V2-D4.3 requires consistent assignment. Flip-flopping\nexposure corrupts both measurement and user experience.\nCounterfactual: A wins never with per-load assignment.",
+    "source_section": "V2-D4.3"
+  },
+  {
+    "number": "M2-Q37",
+    "heading": "M2-Q37 (V2-D4.4)",
+    "question": "A RAG bot's answers degrade. The trace shows the right\nchunks arriving, but the new prompt removed the \"cite your source\"\ninstruction and answers now drift from the chunks.\nWhich layer failed?",
+    "choices": {
+      "A": "Retrieval.",
+      "B": "The prompt layer: the removed instruction changed answer behavior.\nRestore it and re-test.",
+      "C": "The index.",
+      "D": "The GPUs."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"right chunks arriving... removed the\n'cite your source' instruction.\" Why: the trace clears retrieval. The\nchange log names the prompt edit. Fix the failing component.\nCounterfactual: A wins when chunks never arrive.",
+    "source_section": "V2-D4.4"
+  },
+  {
+    "number": "M2-Q38",
+    "heading": "M2-Q38 (V2-D4.4), Select TWO",
+    "question": "A classifier's accuracy drops. Investigation shows: the\ninput feed started sending truncated text last Tuesday, and the drop\nbegan last Tuesday.\nWhich TWO facts point at the data layer? Select TWO.",
+    "choices": {
+      "A": "The feed sends truncated text.",
+      "B": "The timing matches the drop onset.",
+      "C": "The model version does not change.",
+      "D": "Latency is fine.",
+      "E": "The office moved."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"truncated text last Tuesday... drop\nbegan last Tuesday.\" Why: the cause and the onset align at the data\nfeed. C clears the model. D and E are neutral. Counterfactual: C wins\nthe argument for a model fault if the version changed that day.",
+    "source_section": "V2-D4.4"
+  },
+  {
+    "number": "M2-Q39",
+    "heading": "M2-Q39 (V2-D4.5)",
+    "question": "A support bot sends the full 30-page policy on every\ncall: 25,000 tokens. Questions need one section.\nWhich optimization fits first?",
+    "choices": {
+      "A": "A bigger model.",
+      "B": "Retrieve the relevant section just in time instead of sending all\n30 pages.",
+      "C": "A longer system prompt.",
+      "D": "More policies."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Questions need one section... 25,000\ntokens.\" Why: oversized context is the V2-D4.5 first cut. Retrieval\nreplaces the dump. Counterfactual: A wins when the trace shows the\nmodel failing with the right section present.",
+    "source_section": "V2-D4.5"
+  },
+  {
+    "number": "M2-Q40",
+    "heading": "M2-Q40 (V2-D4.5)",
+    "question": "A batch job processes 100,000 documents nightly. Cost is\n$400 per night. The team wants $250.\nWhich lever fits best?",
+    "choices": {
+      "A": "Tier routing: classify documents by difficulty, route easy ones to\nthe Fast tier, keep hard ones where they are, and hold the quality\nfloor.",
+      "B": "Delete half the documents.",
+      "C": "Turn off evals.",
+      "D": "Hope."
+    },
+    "answer": ["A"],
+    "select_count": 1,
+    "explanation": "The decisive phrase is \"100,000 documents nightly... hold the quality floor.\"\nRouting cuts unit cost when difficulty allows. The savings increase at volume. The floor stays.\nB destroys the job.\n\nC destroys the measurement.\nB does not win for a real workload.",
+    "source_section": "V2-D4.5"
+  },
+  {
+    "number": "M2-Q41",
+    "heading": "M2-Q41 (V2-D4.6)",
+    "question": "A recommendation bot's click-through drifts down over two\nmonths. The eval drawers are a year old.\nWhat is the likely cause of the blind spot?",
+    "choices": {
+      "A": "The model is too small.",
+      "B": "Stale eval data: the drawers no longer represent live traffic, so\nregression suites pass while users suffer. Refresh the drawers with\nrepresentative recent data.",
+      "C": "The dashboard color.",
+      "D": "The users."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"eval drawers are a year old.\" Why:\nV2-D4.6 needs representative eval data. Stale drawers measure a past\nreality. Green suites on stale data are theater. Counterfactual: A\nwins when the trace shows model failures on fresh data.",
+    "source_section": "V2-D4.6"
+  },
+  {
+    "number": "M2-Q42",
+    "heading": "M2-Q42 (V2-D5.1)",
+    "question": "An email assistant can send mail as the user. A draft\nlooks right but the recipient list is ambiguous.\nWhich control fits?",
+    "choices": {
+      "A": "Send it. The draft looks right.",
+      "B": "Fail closed: on ambiguous recipients, block the send and ask the\nuser to confirm the list. The send gate defaults to deny.",
+      "C": "Log the send and hope.",
+      "D": "Send to everyone to be safe."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"the recipient list is ambiguous.\" Why:\nsending as the user is irreversible and attributable. Ambiguity must\ndeny, not guess. Counterfactual: A wins never for ambiguous\nrecipients.",
+    "source_section": "V2-D5.1"
+  }
+]

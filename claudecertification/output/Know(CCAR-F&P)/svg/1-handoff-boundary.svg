@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="475" viewBox="0 0 900 475" role="img" aria-label="위임 경계: 부모 이력은 넘어가지 않고 위임 prompt만 넘어가며 요약만 돌아온다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>위임 경계: 부모 이력은 넘어가지 않고 위임 prompt만 넘어가며 요약만 돌아온다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-handoff-boundary-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-handoff-boundary-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-handoff-boundary-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-handoff-boundary-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">위임 경계 — 무엇이 넘어가고 무엇이 넘어가지 않나</text>
+<rect x="20" y="50" width="300" height="350" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="34" y="72" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Coordinator (부모) context</text>
+<rect x="40" y="90" width="260" height="34" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="170.0" y="110.1" font-size="13" fill="#1F2937" text-anchor="middle">부모 대화 이력</text>
+<rect x="40" y="134" width="260" height="34" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="170.0" y="154.1" font-size="13" fill="#1F2937" text-anchor="middle">부모 tool 결과</text>
+<rect x="40" y="178" width="260" height="34" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="170.0" y="198.1" font-size="13" fill="#1F2937" text-anchor="middle">부모 system prompt</text>
+<rect x="40" y="240" width="260" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="170.0" y="261.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">위임 prompt (Agent tool)</text>
+<text x="170.0" y="277.7" font-size="11" fill="#6B7280" text-anchor="middle">file path · 판단 근거 · 이전 결정</text>
+<rect x="40" y="346" width="260" height="36" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="170.0" y="367.1" font-size="13" fill="#1F2937" text-anchor="middle">subagent 요약 수신</text>
+<path d="M450,56 L450,400" stroke="#9CA3AF" stroke-width="2"/>
+<text x="450" y="48" font-size="11" fill="#6B7280" text-anchor="middle">Agent tool 경계</text>
+<rect x="580" y="50" width="300" height="350" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="594" y="72" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">Subagent context</text>
+<text x="594" y="90" font-size="11" fill="#6B7280" text-anchor="start">빈 컨텍스트에서 시작</text>
+<rect x="600" y="100" width="260" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="730.0" y="117.1" font-size="13" fill="#1F2937" text-anchor="middle">AgentDefinition의 prompt</text>
+<text x="730.0" y="133.7" font-size="11" fill="#6B7280" text-anchor="middle">subagent 자신의 system prompt</text>
+<rect x="600" y="154" width="260" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="730.0" y="174.1" font-size="13" fill="#1F2937" text-anchor="middle">CLAUDE.md (설정에 따라 로드)</text>
+<rect x="600" y="240" width="260" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="261.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">위임 prompt 문자열</text>
+<text x="730.0" y="277.7" font-size="11" fill="#6B7280" text-anchor="middle">명시적으로 적은 컨텍스트만</text>
+<rect x="600" y="300" width="260" height="34" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="730.0" y="320.1" font-size="13" fill="#1F2937" text-anchor="middle">원문 자료 · 중간 tool 출력</text>
+<rect x="600" y="346" width="260" height="36" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="367.1" font-size="13" fill="#1F2937" text-anchor="middle">최종 메시지 = 요약</text>
+<path d="M300,107 L442,107" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-handoff-boundary-r)"/>
+<path d="M300,151 L442,151" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-handoff-boundary-r)"/>
+<rect x="305.6" y="144" width="128.8" height="15" fill="#FFFFFF"/>
+<text x="370" y="155" font-size="11" fill="#DC2626" text-anchor="middle">자동으로 넘어가지 않음</text>
+<path d="M300,195 L442,195" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-handoff-boundary-r)"/>
+<path d="M300,266 L600,266" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-d1-handoff-boundary-b)"/>
+<rect x="461.1" y="259" width="117.8" height="15" fill="#FFFFFF"/>
+<text x="520" y="270" font-size="11" fill="#2563EB" text-anchor="middle">명시적으로 적은 것만</text>
+<path d="M600,317 L458,317" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-d1-handoff-boundary-r)"/>
+<rect x="480.8" y="310" width="78.4" height="15" fill="#FFFFFF"/>
+<text x="520" y="321" font-size="11" fill="#DC2626" text-anchor="middle">돌려주지 않음</text>
+<path d="M600,364 L300,364" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-d1-handoff-boundary-b)"/>
+<rect x="486.3" y="357" width="67.4" height="15" fill="#FFFFFF"/>
+<text x="520" y="368" font-size="11" fill="#2563EB" text-anchor="middle">요약만 반환</text>
+<rect x="20" y="415" width="420" height="46" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="230.0" y="441.1" font-size="13" fill="#1F2937" text-anchor="middle">예외: fork형 subagent만 부모 이력을 이어받는다</text>
+<rect x="460" y="415" width="420" height="46" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="670.0" y="433.1" font-size="13" fill="#1F2937" text-anchor="middle">품질 저하 → 빠진 handoff 컨텍스트를 보강</text>
+<text x="670.0" y="449.7" font-size="11" fill="#6B7280" text-anchor="middle">더 큰 모델이나 subagent 추가로는 해결되지 않음</text>
+</svg>

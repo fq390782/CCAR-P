@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="870" height="432" viewBox="0 0 870 432" role="img" aria-label="Skill과 command의 저장 위치별 범위와 우선순위 enterprise, personal, project, 개인 skill이 같은 이름이면 본인만 대체되고 팀 업데이트를 받지 못한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>skill과 command 위치, 같은 이름 우선순위</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-skillp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="435" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">같은 이름이면 위치가 이긴다: enterprise &gt; personal &gt; project</text>
+
+  <rect x="20" y="48" width="380" height="48" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="210" y="69" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">enterprise</text>
+  <text x="210" y="86" text-anchor="middle" font-size="11" fill="#6B7280">우선순위 1</text>
+  <text x="210" y="111" text-anchor="middle" font-size="11" fill="#6B7280">↓ 같은 이름이면 위가 이김 (위치로 결정 · override 필드 ✗)</text>
+  <rect x="20" y="118" width="380" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="210" y="139" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">personal (우선순위 2)</text>
+  <text x="210" y="158" text-anchor="middle" font-size="11" fill="#6B7280">~/.claude/skills/&lt;이름&gt;/SKILL.md · ~/.claude/commands/</text>
+  <text x="210" y="175" text-anchor="middle" font-size="11" fill="#6B7280">본인 전 프로젝트 · 팀원 ✗</text>
+  <text x="210" y="203" text-anchor="middle" font-size="11" fill="#6B7280">↓ 같은 이름이면 위가 이김 (username 조건 로직 없음)</text>
+  <rect x="20" y="210" width="380" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="210" y="231" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">project (우선순위 3)</text>
+  <text x="210" y="250" text-anchor="middle" font-size="11" fill="#6B7280">.claude/skills/&lt;이름&gt;/SKILL.md · .claude/commands/</text>
+  <text x="210" y="267" text-anchor="middle" font-size="11" fill="#6B7280">commit → 팀 공유 · clone · update한 모두 자동 사용</text>
+
+  <line x1="400" y1="153" x2="448" y2="153" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-skillp)"/>
+  <text x="424" y="145" text-anchor="middle" font-size="11" fill="#6B7280">개인</text>
+  <polygon points="545,113 640,153 545,193 450,153" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="545" y="150" text-anchor="middle" font-size="13" fill="#1F2937">개인 · 프로젝트</text>
+  <text x="545" y="167" text-anchor="middle" font-size="13" fill="#1F2937">이름이 같은가?</text>
+  <polyline points="545,113 545,95 678,95" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-skillp)"/>
+  <text x="556" y="89" font-size="11" fill="#6B7280">같음</text>
+  <polyline points="545,193 545,240 678,240" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-skillp)"/>
+  <text x="556" y="234" font-size="11" fill="#6B7280">다름</text>
+
+  <rect x="680" y="48" width="170" height="104" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="765" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">본인에게만 대체</text>
+  <text x="765" y="90" text-anchor="middle" font-size="11" fill="#6B7280">저장소 변경 ✗</text>
+  <text x="765" y="106" text-anchor="middle" font-size="11" fill="#6B7280">팀원 영향 ✗</text>
+  <text x="765" y="126" text-anchor="middle" font-size="11" fill="#6B7280">부작용: 팀 업데이트 미수신</text>
+  <text x="765" y="142" text-anchor="middle" font-size="11" fill="#6B7280">(옛 절차로 계속 실행)</text>
+  <rect x="680" y="190" width="170" height="104" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="765" y="212" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">공존 · 가리지 않음</text>
+  <text x="765" y="232" text-anchor="middle" font-size="11" fill="#6B7280">팀 업데이트 계속 수신</text>
+  <text x="765" y="252" text-anchor="middle" font-size="11" fill="#6B7280">약점: 비슷한 description</text>
+  <text x="765" y="268" text-anchor="middle" font-size="11" fill="#6B7280">→ 자동 선택 예측 어려움</text>
+  <text x="765" y="284" text-anchor="middle" font-size="11" fill="#6B7280">팀 문서 /commit 안내 깨짐</text>
+
+  <rect x="20" y="312" width="830" height="34" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="435" y="334" text-anchor="middle" font-size="13" fill="#1F2937">운영 방침: 팀 skill 이름 목록 관리 · 개인 skill = 접미사 명명 약속</text>
+  <rect x="20" y="358" width="830" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="435" y="378" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">skill · command로 로드 ✗</text>
+  <text x="435" y="396" text-anchor="middle" font-size="11" fill="#6B7280">.claude/skills/&lt;이름&gt;.md 단일 파일 (폴더 + SKILL.md 필요) · CLAUDE.md 기재 (명령으로 호출 ✗)</text>
+  <text x="435" y="411" text-anchor="middle" font-size="11" fill="#6B7280">.claude/config.json commands 배열 (command 위치 ✗)</text>
+</svg>

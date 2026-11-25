@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="570" viewBox="0 0 920 570" role="img" aria-label="캐싱 유지는 측정 적중률로 판단: 미만이면 prefix를 먼저 고치고 재측정">
+<title>캐싱 유지는 측정 적중률로 판단: 미만이면 prefix를 먼저 고치고 재측정</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-cache-economics" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="460" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">캐싱 유지는 측정 적중률로 판단: 미만이면 prefix를 먼저 고치고 재측정</text>
+<rect x="20" y="65" width="230" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="135" y="89.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">실제 적중률 측정</text>
+<text x="135" y="104.85" font-size="11" text-anchor="middle" fill="#6B7280">적중 횟수 × read 할인</text>
+<text x="135" y="119.85" font-size="11" text-anchor="middle" fill="#6B7280">vs write 할증 비교</text>
+<polyline points="250,100 310,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cache-economics)"/>
+<rect x="266.0" y="83" width="28.0" height="15" fill="#FFFFFF"/>
+<text x="280" y="94" font-size="11" text-anchor="middle" fill="#1F2937">비교</text>
+<polygon points="400,55 490,100 400,145 310,100" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="400" y="96.05" font-size="13" text-anchor="middle" fill="#1F2937">적중률 &gt;</text>
+<text x="400" y="113.05" font-size="13" text-anchor="middle" fill="#1F2937">손익분기?</text>
+<polyline points="490,100 560,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cache-economics)"/>
+<rect x="516.5" y="83" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="525" y="94" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="560" y="60" width="340" height="80" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="730" y="89.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">캐싱 유지</text>
+<text x="730" y="104.85" font-size="11" text-anchor="middle" fill="#6B7280">불변 prefix + 손익분기 훌쩍 넘는 적중률 (예: 92%)</text>
+<text x="730" y="119.85" font-size="11" text-anchor="middle" fill="#6B7280">작은 prefix · 캐싱 복잡성 = 중단 근거 ✗</text>
+<polyline points="400,145 400,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cache-economics)"/>
+<rect x="407.0" y="170" width="110.7" height="15" fill="#FFFFFF"/>
+<text x="410" y="181" font-size="11" text-anchor="start" fill="#1F2937">아니오 (예: 3% vs 5%)</text>
+<rect x="260" y="205" width="260" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="390" y="234.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">prefix 먼저 고침</text>
+<text x="390" y="249.85" font-size="11" text-anchor="middle" fill="#6B7280">안정 블록 앞 · 가변 블록 뒤</text>
+<text x="390" y="264.85" font-size="11" text-anchor="middle" fill="#6B7280">→ 적중률 재측정</text>
+<polyline points="520,245 570,245" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cache-economics)"/>
+<rect x="525.5" y="228" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="545" y="239" font-size="11" text-anchor="middle" fill="#1F2937">재측정</text>
+<polygon points="670,200 770,245 670,290 570,245" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="670" y="241.05" font-size="13" text-anchor="middle" fill="#1F2937">재측정 후에도</text>
+<text x="670" y="258.05" font-size="13" text-anchor="middle" fill="#1F2937">미만?</text>
+<polyline points="670,200 670,140" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cache-economics)"/>
+<rect x="677.0" y="164" width="68.7" height="15" fill="#FFFFFF"/>
+<text x="680" y="175" font-size="11" text-anchor="start" fill="#1F2937">아니오: 충족</text>
+<polyline points="670,290 670,340" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cache-economics)"/>
+<rect x="677.0" y="308" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="680" y="319" font-size="11" text-anchor="start" fill="#1F2937">예</text>
+<rect x="570" y="340" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="670" y="362.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">캐싱 포기</text>
+<text x="670" y="377.35" font-size="11" text-anchor="middle" fill="#6B7280">고침 후에도 미만일 때만</text>
+<polyline points="390,285 390,335" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-cache-economics)"/>
+<rect x="397.0" y="303" width="53.3" height="15" fill="#FFFFFF"/>
+<text x="400" y="314" font-size="11" text-anchor="start" fill="#1F2937">원인 확인</text>
+<rect x="20" y="335" width="520" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="280" y="367.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">cache miss 진단: cache read token 0 · 모델은 그대로</text>
+<text x="280" y="382.35" font-size="11" text-anchor="middle" fill="#6B7280">1. 응답의 cache_miss_reason 읽기 (가장 이른 분기 지점 + 사유 유형만)</text>
+<text x="280" y="397.35" font-size="11" text-anchor="middle" fill="#6B7280">2. 가장 먼저 분기한 block부터 수정 → 사유 재확인</text>
+<text x="280" y="412.35" font-size="11" text-anchor="middle" fill="#6B7280">3. 다음 요청의 cache read token 수로 수정 확인</text>
+<rect x="20" y="455" width="880" height="100" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="460" y="484.05" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">✗ 오답</text>
+<text x="460" y="501.05" font-size="13" text-anchor="middle" fill="#1F2937">TTL 1시간 연장: 변경된 prefix는 어떤 TTL에서도 miss · prefix가 매번 바뀌면 hit ✗</text>
+<text x="460" y="518.05" font-size="13" text-anchor="middle" fill="#1F2937">가변 꼬리 cache · 가변 token 추가 · 시도 전 포기 · 템플릿 전체 재작성</text>
+<text x="460" y="535.05" font-size="13" text-anchor="middle" fill="#1F2937">usage export에서 사유 찾기 · 호출량 · 모델 tier · 질문 길이만으로 판단</text>
+</g>
+</svg>

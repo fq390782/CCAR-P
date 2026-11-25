@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330" role="img" aria-label="model version pin과 eval 후 업그레이드 흐름" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>model version pin과 eval 후 업그레이드 흐름</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-model-pin-upgrade" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="450" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">production 출력이 조용히 바뀌지 않게: version pin → eval → 의도적 업그레이드</text>
+<rect x="20" y="70" width="200" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="120.0" y="92.5" font-size="13" text-anchor="middle" fill="#1F2937">production</text>
+<text x="120.0" y="109.5" font-size="11" text-anchor="middle" fill="#6B7280">특정 model version pin</text>
+<text x="120.0" y="126.5" font-size="11" text-anchor="middle" fill="#6B7280">prompt는 version control</text>
+<rect x="270" y="70" width="170" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="355.0" y="101.0" font-size="13" text-anchor="middle" fill="#1F2937">새 model 또는</text>
+<text x="355.0" y="118.0" font-size="13" text-anchor="middle" fill="#1F2937">prompt 변경 후보</text>
+<rect x="490" y="70" width="120" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="550.0" y="109.5" font-size="13" text-anchor="middle" fill="#1F2937">eval 실행</text>
+<polygon points="720,55.0 805.0,105 720,155.0 635.0,105" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="720" y="109.5" font-size="13" text-anchor="middle" fill="#1F2937">eval 통과?</text>
+<polyline points="220,105 270,105" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-pin-upgrade)"/>
+<polyline points="440,105 490,105" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-pin-upgrade)"/>
+<polyline points="610,105 635,105" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-pin-upgrade)"/>
+<rect x="640" y="190" width="160" height="50" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="720.0" y="219.5" font-size="12" text-anchor="middle" fill="#1F2937">의도적으로 업그레이드</text>
+<polyline points="720,155 720,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-pin-upgrade)"/>
+<rect x="725.5" y="163.0" width="19.0" height="18" fill="#FFFFFF"/>
+<text x="735" y="176.5" font-size="11" text-anchor="middle" fill="#6B7280">예</text>
+<polyline points="805,105 840,105 840,50 120,50 120,70" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-model-pin-upgrade)"/>
+<rect x="418.5" y="41.0" width="123.1" height="18" fill="#FFFFFF"/>
+<text x="480" y="54.5" font-size="11" text-anchor="middle" fill="#6B7280">아니오 → 현재 pin 유지</text>
+<rect x="20" y="260" width="860" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="289.5" font-size="12" text-anchor="middle" fill="#1F2937">floating alias(최신 model alias) · production에서 prompt 직접 수정 → 코드를 안 바꿔도 출력 형식이 하룻밤 사이에 바뀜</text>
+</svg>

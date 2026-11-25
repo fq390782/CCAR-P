@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="360" viewBox="0 0 880 360" role="img" aria-label="characterization test로 현재 동작을 고정한 뒤 작은 단위로 바꾸고 매번 test와 review를 통과시키며, 실패하면 바로 전 단계로 되돌린다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>안전한 refactoring 절차</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-safe-refactoring" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-safe-refactoring-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">안전한 refactoring: 동작을 고정하고 작은 단계로</text>
+<rect x="20" y="90" width="200" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="120.0" y="119.9" text-anchor="middle"><tspan x="120.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">characterization test</tspan><tspan x="120.0" dy="14" font-size="11" fill="#6B7280">현재 동작을 먼저 고정</tspan></text>
+<rect x="260" y="90" width="180" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="350.0" y="119.9" text-anchor="middle"><tspan x="350.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">작은 단위로 변경</tspan><tspan x="350.0" dy="14" font-size="11" fill="#6B7280">외부 동작은 유지</tspan></text>
+<rect x="480" y="90" width="170" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="565.0" y="126.9" text-anchor="middle"><tspan x="565.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">test + review</tspan></text>
+<polygon points="740,82.0 810.0,122 740,162.0 670.0,122" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="740" y="126.5" text-anchor="middle"><tspan x="740" dy="0" font-size="13" fill="#1F2937">통과?</tspan></text>
+<rect x="660" y="210" width="160" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="740.0" y="231.6" text-anchor="middle"><tspan x="740.0" dy="0" font-size="13" fill="#1F2937">바로 전 단계로</tspan><tspan x="740.0" dy="16" font-size="13" fill="#1F2937">되돌림</tspan></text>
+<path d="M220,122 L260,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-safe-refactoring)"/>
+<path d="M440,122 L480,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-safe-refactoring)"/>
+<path d="M650,122 L670,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-safe-refactoring)"/>
+<path d="M740,82 L740,72 L350,72 L350,90" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-safe-refactoring)"/>
+<rect x="485.1" y="65" width="119.8" height="17" fill="#FFFFFF"/>
+<text x="545" y="77" font-size="12" fill="#1F2937" text-anchor="middle">예: 다음 작은 단계</text>
+<path d="M740,162 L740,210" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-safe-refactoring)"/>
+<rect x="744.0" y="178" width="44.0" height="17" fill="#FFFFFF"/>
+<text x="748" y="190" font-size="12" fill="#1F2937" text-anchor="start">아니오</text>
+<path d="M660,235 L350,235 L350,154" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-safe-refactoring)"/>
+<rect x="440.0" y="217" width="129.9" height="17" fill="#FFFFFF"/>
+<text x="505" y="229" font-size="12" fill="#1F2937" text-anchor="middle">되돌린 지점에서 다시</text>
+<text x="20" y="290" font-size="14" font-weight="bold" fill="#DC2626" text-anchor="start">원인을 가를 수 없는 방식 (오답)</text>
+<rect x="20" y="300" width="410" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="225.0" y="322.6" text-anchor="middle"><tspan x="225.0" dy="0" font-size="13" fill="#1F2937">✗ 기능 추가·bug fix를 같은 변경에 섞기</tspan><tspan x="225.0" dy="14" font-size="11" fill="#6B7280">동작이 바뀐 원인을 가를 수 없음</tspan></text>
+<rect x="450" y="300" width="410" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="655.0" y="322.6" text-anchor="middle"><tspan x="655.0" dy="0" font-size="13" fill="#1F2937">✗ big-bang rewrite / 수동 화면 확인만</tspan><tspan x="655.0" dy="14" font-size="11" fill="#6B7280">되돌릴 수 없고 안전성이 보장되지 않음</tspan></text>
+</svg>

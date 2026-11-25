@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="870" height="384" viewBox="0 0 870 384" role="img" aria-label="판단 트리: diff를 한 문장으로 설명할 수 있으면 direct execution, 없으면 plan mode로 조사하고 계획 승인 후 direct로 구현" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>plan mode와 direct execution 판단 트리</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-plandir" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="435" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">diff를 한 문장으로 설명하면 direct, 못 하면 plan mode로 조사부터</text>
+
+  <polygon points="210,52 360,100 210,148 60,100" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="210" y="96" text-anchor="middle" font-size="13" fill="#1F2937">diff를 한 문장으로</text>
+  <text x="210" y="113" text-anchor="middle" font-size="13" fill="#1F2937">설명할 수 있는가?</text>
+  <line x1="210" y1="148" x2="210" y2="194" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plandir)"/>
+  <text x="220" y="176" font-size="11" fill="#6B7280">예 → 계획 생략</text>
+  <rect x="60" y="196" width="300" height="94" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="210" y="218" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">direct execution</text>
+  <text x="210" y="238" text-anchor="middle" font-size="11" fill="#6B7280">함수 1개 guard clause · 오타 · 로그 추가</text>
+  <text x="210" y="256" text-anchor="middle" font-size="11" fill="#6B7280">원인 행 특정 + 실패 test 보유</text>
+  <text x="210" y="274" text-anchor="middle" font-size="11" fill="#6B7280">→ 수정 후 test 실행</text>
+
+  <line x1="360" y1="100" x2="418" y2="100" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plandir)"/>
+  <text x="389" y="92" text-anchor="middle" font-size="11" fill="#6B7280">아니오</text>
+  <rect x="420" y="46" width="430" height="110" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="635" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">plan mode 신호</text>
+  <text x="635" y="88" text-anchor="middle" font-size="11" fill="#6B7280">대규모 · 여러 파일 (40~60개 이상) 마이그레이션</text>
+  <text x="635" y="105" text-anchor="middle" font-size="11" fill="#6B7280">타당한 방법 2개 이상 · 방침 미정</text>
+  <text x="635" y="122" text-anchor="middle" font-size="11" fill="#6B7280">낯선 코드 · 의존 관계 불명확 · 아키텍처 경계 결정</text>
+  <text x="635" y="139" text-anchor="middle" font-size="11" fill="#6B7280">고칠 때마다 다른 곳이 깨짐</text>
+
+  <line x1="525" y1="156" x2="525" y2="194" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plandir)"/>
+  <text x="535" y="180" font-size="11" fill="#6B7280">조사부터</text>
+  <rect x="420" y="196" width="210" height="94" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="525" y="218" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">plan mode</text>
+  <text x="525" y="238" text-anchor="middle" font-size="11" fill="#6B7280">읽기 · 조사 → 계획 제시</text>
+  <text x="525" y="256" text-anchor="middle" font-size="11" fill="#6B7280">승인 전 소스 편집 ✗</text>
+  <text x="525" y="274" text-anchor="middle" font-size="11" fill="#6B7280">Ctrl+G로 계획 수정</text>
+  <line x1="630" y1="243" x2="668" y2="243" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-plandir)"/>
+  <text x="649" y="235" text-anchor="middle" font-size="11" fill="#6B7280">승인</text>
+  <rect x="670" y="196" width="180" height="94" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="760" y="218" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">direct로 구현</text>
+  <text x="760" y="238" text-anchor="middle" font-size="11" fill="#6B7280">조사 = plan</text>
+  <text x="760" y="256" text-anchor="middle" font-size="11" fill="#6B7280">구현 = direct</text>
+  <text x="760" y="274" text-anchor="middle" font-size="11" fill="#6B7280">인수 test로 완료 판정</text>
+
+  <rect x="420" y="312" width="430" height="58" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="635" y="334" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">접근 비교를 direct로 의뢰 ✗</text>
+  <text x="635" y="354" text-anchor="middle" font-size="11" fill="#6B7280">→ 편집 시작 → 되돌림 · 탐색 · 설계와 편집을 분리해야 함</text>
+</svg>

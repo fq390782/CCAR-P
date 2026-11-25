@@ -1,0 +1,11 @@
+{"add": {
+ "### 1.9 Handoff 데이터 형식 — 출처 · 근거 보존": ["CCAR-F-Udemy03-0037"],
+ "## 4. 암기 목록": ["CCAR-F-Udemy01-0003", "CCAR-F-Udemy01-0060", "CCAR-F-Udemy01-0036"],
+ "## 2. 상황별 정답 판단 규칙": ["CCAR-F-Udemy04-0024"],
+ "## 5. 시험 직전 체크리스트": ["CCAR-F-Udemy04-0024"]},
+ "rep": [
+ ["| 반환 schema에 근거 항목 없음 |", "| 반환 schema에 근거 항목 없음 · 중계 중 요약 압축 |"],
+ ["coordinator 경유 = 대기 시간 단점<br>", "동기 실행 = 대기 시간 단점<br>"],
+ ["읽기 전용 subagent(`Explore` · 범용)에 위임<br>", "`Explore`(읽기 전용) 또는 범용 subagent에 위임<br>"],
+ ["| checkpoint | 각 handoff 저장 → 실패 시 재개 · 사람 피드백 지점 |", "| checkpoint | 각 handoff 저장 → 실패 시 재개<br>판단 망설임 지점 = 사람 피드백 |"]
+]}

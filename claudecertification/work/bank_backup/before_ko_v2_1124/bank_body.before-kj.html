@@ -1,0 +1,216 @@
+<body>
+<div class="app">
+  <div class="mbar"><button id="mb" aria-controls="dw" aria-expanded="false">☰ 시험</button><span id="mlabel"></span></div>
+  <div class="bd" id="bd"></div>
+  <aside class="dw" id="dw"><nav class="rail" id="tabs"></nav></aside>
+  <main class="main">
+    <h1>Claude Certification Question Bank</h1>
+    <div class="sub">Claude Certification 통합 연습문제 · 진행 상황은 이 브라우저에 자동 저장됩니다</div>
+
+    <details class="fp" id="fp" open>
+      <summary>필터<small>분야 · 출처 · 언어 · 상태</small></summary>
+      <div class="frow">
+        <input type="search" id="q" placeholder="키워드 검색 (문제·선택지·해설)">
+        <select id="dom"></select>
+        <button id="shuf">문제 순서 섞기</button>
+        <button id="ord">원래 순서</button>
+        <button id="rst">기록 초기화</button>
+      </div>
+      <div class="fcols">
+        <div><div class="sec">출처</div><div class="chips" id="src"></div></div>
+        <div><div class="sec">언어</div><div class="radio" id="lang"></div></div>
+        <div><div class="sec">상태</div><div class="chips" id="st"></div></div>
+      </div>
+    </details>
+
+    <div class="panel">
+      <div class="stats" id="stats"></div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+
+    <div id="list"></div>
+    <div class="pager" id="pager"></div>
+  </main>
+</div>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById('data').textContent);
+const BY = new Map(DATA.map(d => [d.id, d]));
+const ORDER = ['CCAO-F', 'CCDV-F', 'CCDV-P', 'CCAR-F', 'CCAR-P'];   // 공식 시험 순서 (CCDV-P 는 데이터가 생기면 자동으로 활성)
+const NAME = {'CCAO-F': ['Claude Certified Associate', 'Foundations'], 'CCDV-F': ['Claude Certified Developer', 'Foundations'], 'CCDV-P': ['Claude Certified Developer', 'Professional'], 'CCAR-F': ['Claude Certified Architect', 'Foundations'], 'CCAR-P': ['Claude Certified Architect', 'Professional']};
+const EXAMS = [...ORDER, ...[...new Set(DATA.map(d => d.exam))].filter(x => !ORDER.includes(x)).sort()];
+const PER = 20, KEY = 'ccdvf_bank_v1';   // KEY 는 기존 CCDV-F 풀이 기록을 이어 쓰기 위해 유지
+const ALL = '전체';
+const LANGS = [['ko', '한국어 + 영어', 'en'], ['ja', '일본어 + 영어', 'ja']];   // [값, 라벨, 문제 원문 언어]
+const $ = id => document.getElementById(id);
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} };
+let srcSel = '', stSel = 'all', srcOpts = [], rstT = 0, state = {}, order = DATA.map((_, i) => i), page = 1;
+try { state = JSON.parse(store(KEY) || '{}'); } catch (e) {}
+const save = () => store(KEY, JSON.stringify(state));
+let exam = store('bank_exam'); if (exam !== ALL && !DATA.some(d => d.exam === exam)) exam = ALL;
+let lang = store('bank_lang') === 'ja' ? 'ja' : 'ko', cur = lang;   // lang=사용자 선택, cur=이 시험에서 실제 적용되는 언어
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function md(s) {
+  const parts = String(s).split(/```[a-z]*\n?/);
+  return parts.map((p, i) => i % 2 ? '<pre><code>' + esc(p.replace(/\n$/, '')) + '</code></pre>'
+    : esc(p).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>')
+  ).join('');
+}
+const inExam = d => exam === ALL || d.exam === exam;
+const scoped = () => DATA.filter(inExam);
+
+// 문제·보기: 원문(또는 한국어 번역) + 영어 병기. 문제 본문은 문단 수가 같으면 문단마다 원문 → 영어 순으로 끼워 넣는다
+function tx(d, k) {
+  const p = k ? d.ch[k] : d.q, e = d.en && (k ? d.en.ch[k] : d.en.q);
+  if (!k && e) {
+    const a = p.split(/\n\n+/), b = e.split(/\n\n+/);
+    if (a.length > 1 && a.length === b.length && ![...a, ...b].some(x => (x.match(/```/g) || []).length % 2))
+      return a.map((x, i) => `<div class="pp">${md(x)}<div class="en">${md(b[i])}</div></div>`).join('');
+  }
+  return md(p) + (e ? '<div class="en">' + md(e) + '</div>' : '');
+}
+// 해설: 한국어. 번역이 없으면 원문 + 대기 표시
+const expl = d => md(d.ex)
+  + (d.ce ? '<div class="ce">' + Object.keys(d.ce).map(k => `<div><b>${k}.</b> ${md(d.ce[k])}</div>`).join('') + '</div>' : '')
+  + (d.ref ? `<div class="ref"><a href="${esc(d.ref)}" target="_blank" rel="noopener">참고 문서</a></div>` : '')
+  + (d.px ? '<div class="pend">해설 한국어 번역 대기 — 원문 표시 중</div>' : '');
+
+function status(d) { const s = state[d.id]; return !s || !s.g ? 'un' : s.ok ? 'ok' : 'ng'; }
+
+// 시험 탭 / 시험별 필터 선택지
+function buildTabs() {
+  const n = x => (x === ALL ? DATA : DATA.filter(d => d.exam === x)).length;
+  $('tabs').innerHTML = [ALL, ...EXAMS].map(x => {
+    const c = n(x), nm = NAME[x], soon = x !== ALL && !c;
+    return `<button class="e ${x === exam ? 'on' : ''} ${soon ? 'soon' : ''}" ${x === exam ? 'aria-current="true"' : ''} data-exam="${esc(x)}" title="${esc(x)}" ${soon ? 'disabled' : ''}><span>${nm ? `<b>${esc(nm[0])}</b><span class="pill">${esc(nm[1])}</span>` : `<b>${esc(x)}</b>`}</span><span class="n">${soon ? '준비 중' : c}</span></button>`;
+  }).join('');
+}
+// 출처·상태 알약
+function paintChips() {
+  $('src').innerHTML = srcOpts.map(([v, label]) => `<button class="chip ${v === srcSel ? 'on' : ''}" aria-pressed="${v === srcSel}" data-src="${esc(v)}">${esc(label)}</button>`).join('');
+  $('st').innerHTML = [['all', '전체'], ['un', '미풀이'], ['ng', '오답'], ['ok', '정답']].map(([v, label]) => `<button class="chip ${v === stSel ? 'on' : ''}" aria-pressed="${v === stSel}" data-st="${v}">${label}</button>`).join('');
+}
+let doms = [];
+function buildFilters() {
+  const S = scoped();
+  const cnt = (arr, f) => { const m = new Map(); arr.forEach(d => m.set(f(d), (m.get(f(d)) || 0) + 1)); return m; };
+  // 언어: 이 시험에 문제가 있는 쪽만 선택 가능. 선택한 쪽이 비어 있으면 임시로 다른 쪽(저장된 선택은 유지)
+  const lc = cnt(S, d => d.origin);
+  cur = lc.get(LANGS.find(l => l[0] === lang)[2]) ? lang : (lang === 'ko' ? 'ja' : 'ko');
+  $('lang').innerHTML = LANGS.map(([v, label, o]) => `<label><input type="radio" name="lang" value="${v}" ${v === cur ? 'checked' : ''} ${lc.get(o) ? '' : 'disabled'}> ${label} <small>(${lc.get(o) || 0})</small></label>`).join('');
+  // 분야·출처 개수는 현재 시험 + 현재 언어 그룹 기준 (목록과 일치)
+  const G = S.filter(d => d.origin === originOf());
+  const dm = cnt(G, d => d.domain);
+  doms = exam === ALL ? [] : [...dm.keys()].sort();   // 시험마다 분야가 달라 '전체' 탭에서는 비활성
+  $('dom').style.display = exam === ALL ? 'none' : '';   // 전체 탭에서는 분야 필터 숨김
+  $('dom').innerHTML = exam === ALL ? ''
+    : `<option value="">전체 분야 (${G.length})</option>` + doms.map((x, i) => `<option value="${i}">${esc(x)} (${dm.get(x)})</option>`).join('');
+  const sm = cnt(G, d => d.source), srcs = [...sm.keys()].sort();
+  srcOpts = [['', '전체 출처'], ...srcs.map(x => [x, `${x} (${sm.get(x)})`])]; srcSel = '';
+  paintChips();
+}
+const originOf = () => LANGS.find(l => l[0] === cur)[2];
+
+function filtered() {
+  const kw = $('q').value.trim().toLowerCase();
+  const dv = $('dom').value === '' ? '' : doms[+$('dom').value];
+  const sv = srcSel, st = stSel, og = originOf();
+  return order.map(i => DATA[i]).filter(d =>
+    inExam(d) && d.origin === og && (!dv || d.domain === dv) && (!sv || d.source === sv) && (st === 'all' || status(d) === st) &&
+    (!kw || (d.q + Object.values(d.ch).join(' ') + d.ex + (d.en ? d.en.q + Object.values(d.en.ch).join(' ') : '')).toLowerCase().includes(kw)));
+}
+
+function grade(d) {
+  const s = state[d.id] || (state[d.id] = {sel: []});
+  const a = [...d.answer].sort().join(), b = [...s.sel].sort().join();
+  s.g = 1; s.ok = a === b; save(); render();
+}
+function pick(d, k) {
+  const s = state[d.id] || (state[d.id] = {sel: []});
+  if (s.g) { if (s.sel.includes(k)) { delete state[d.id]; save(); render(); } return; }   // 채점 후 고른 보기를 한 번 더 누르면 이 문제 초기화
+  if (d.select_count === 1) { s.sel = [k]; grade(d); return; }
+  s.sel = s.sel.includes(k) ? s.sel.filter(x => x !== k) : [...s.sel, k];
+  save(); render();
+}
+
+function card(d) {
+  const s = state[d.id] || {sel: []}, g = !!s.g;
+  const ch = Object.keys(d.ch).map(k => {
+    let c = 'ch';
+    if (g) { if (d.answer.includes(k)) c += s.sel.includes(k) ? ' right' : ' missed'; else if (s.sel.includes(k)) c += ' wrong'; }
+    else if (s.sel.includes(k)) c += ' sel';
+    return `<button class="${c}" ${g && s.sel.includes(k) ? 'title="한 번 더 누르면 이 문제가 초기화됩니다"' : ''} data-id="${esc(d.id)}" data-k="${k}"><span class="k">${k}.</span><span>${tx(d, k)}</span></button>`;
+  }).join('');
+  const multi = d.select_count > 1 ? `<span class="tag">${d.select_count}개 선택</span>` : '';
+  const pend = (d.origin === 'en' && d.pq ? '<span class="tag pend">한국어 번역 대기</span>' : '') + (d.origin === 'ja' && !d.en ? '<span class="tag pend">영어 번역 대기</span>' : '');
+  const res = g ? `<div class="res ${s.ok ? 'ok' : 'ng'}">${s.shown ? '정답 확인 (오답으로 집계)' : s.ok ? '정답입니다' : '오답입니다'} — 정답: ${d.answer.join(', ')}</div><div class="exp">${expl(d)}</div>` : '';
+  const acts = g ? `<button data-retry="${esc(d.id)}">다시 풀기</button>`
+    : (d.select_count > 1 ? `<button class="primary" data-grade="${esc(d.id)}" ${s.sel.length ? '' : 'disabled'}>채점</button>` : '') + `<button data-show="${esc(d.id)}">정답 보기</button>`;
+  return `<div class="q"><div class="meta">${exam === ALL ? `<span class="tag ex">${esc(d.exam)}</span>` : ''}<span class="tag">${esc(d.id)}</span><span class="tag">${esc(d.domain)}</span>${multi}${pend}</div>
+  <div class="qt">${tx(d)}</div>${ch}${res}<div class="acts">${acts}</div></div>`;
+}
+
+function render() {
+  const list = filtered(), pages = Math.max(1, Math.ceil(list.length / PER));
+  if (page > pages) page = pages;
+  const shown = list.slice((page - 1) * PER, page * PER);
+  $('list').innerHTML = shown.length ? shown.map(card).join('') : '<div class="empty">조건에 맞는 문제가 없습니다.</div>';
+  let p = '';
+  for (let i = 1; i <= pages; i++) p += `<button class="${i === page ? 'on' : ''}" data-p="${i}">${i}</button>`;
+  $('pager').innerHTML = pages > 1 ? p : '';
+  const S = scoped(), all = S.map(status), done = all.filter(x => x !== 'un').length, ok = all.filter(x => x === 'ok').length;
+  $('stats').innerHTML = `<span>${esc(exam)} ${S.length}문항</span><span>표시 ${list.length}문항</span><span>풀이 ${done}</span><span style="color:var(--ok)">정답 ${ok}</span><span style="color:var(--ng)">오답 ${done - ok}</span><span>정답률 ${done ? Math.round(ok / done * 100) : 0}%</span>`;
+  $('bar').style.width = (S.length ? done / S.length * 100 : 0) + '%';
+  const nm = NAME[exam]; $('mlabel').textContent = (nm ? nm[0].replace('Claude Certified ', '') + ' · ' + nm[1] : '전체') + ' · ' + LANGS.find(l => l[0] === cur)[1];
+  if (!rstT) $('rst').textContent = exam === ALL ? '기록 초기화 (전체)' : `기록 초기화 (${exam})`;
+}
+function setExam(x) { clearTimeout(rstT); rstT = 0; exam = x; store('bank_exam', x); page = 1; $('q').value = ''; closeDw(true); buildTabs(); buildFilters(); render(); }
+
+// innerHTML 로 다시 그린 뒤 키보드 포커스를 같은 컨트롤로 되돌린다
+function keepFocus(fn) {
+  const a = document.activeElement; let q = '';
+  if (a && a.dataset) for (const k of ['exam', 'src', 'st', 'grade', 'show', 'retry', 'p']) if (k in a.dataset) { q = `[data-${k}="${CSS.escape(a.dataset[k])}"]`; break; }
+  if (!q && a && a.dataset && a.dataset.k) q = `[data-id="${CSS.escape(a.dataset.id)}"][data-k="${a.dataset.k}"]`;
+  if (!q && a && a.type === 'radio') q = `#lang input[value="${a.value}"]`;
+  fn();
+  const n = q && document.querySelector(q); if (n && !n.disabled) n.focus({preventScroll: true});
+}
+document.addEventListener('click', e => keepFocus(() => onClick(e)));
+function onClick(e) {
+  const t = e.target.closest('button'); if (!t || t.disabled) return;
+  if (t.dataset.exam) setExam(t.dataset.exam);
+  else if ('src' in t.dataset) { srcSel = t.dataset.src; page = 1; paintChips(); render(); }
+  else if ('st' in t.dataset) { stSel = t.dataset.st; page = 1; paintChips(); render(); }
+  else if (t.dataset.k) pick(BY.get(t.dataset.id), t.dataset.k);
+  else if (t.dataset.grade) grade(BY.get(t.dataset.grade));
+  else if (t.dataset.show) { const d = BY.get(t.dataset.show); state[d.id] = {sel: [...d.answer], g: 1, ok: false, shown: 1}; save(); render(); }
+  else if (t.dataset.retry) { delete state[t.dataset.retry]; save(); render(); }
+  else if (t.dataset.p) { page = +t.dataset.p; render(); scrollTo(0, 0); }
+}
+$('lang').addEventListener('change', e => keepFocus(() => { lang = e.target.value; store('bank_lang', lang); page = 1; buildFilters(); render(); }));
+['q', 'dom'].forEach(id => $(id).addEventListener('input', () => { page = 1; render(); }));
+$('shuf').onclick = () => { for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; } page = 1; render(); };
+$('ord').onclick = () => { order = DATA.map((_, i) => i); page = 1; render(); };
+$('rst').onclick = () => {
+  const b = $('rst');
+  if (!rstT) { b.textContent = '한 번 더 누르면 기록 삭제'; rstT = setTimeout(() => { rstT = 0; render(); }, 3000); return; }
+  clearTimeout(rstT); rstT = 0; scoped().forEach(d => delete state[d.id]); save(); render();
+};
+// 좁은 화면: 시험 목록은 서랍, 필터 카드는 접어 둔다
+const closeDw = (back) => {
+  if (!$('dw').classList.contains('open')) return;
+  $('dw').classList.remove('open'); $('bd').classList.remove('open'); $('mb').setAttribute('aria-expanded', 'false'); document.body.style.overflow = '';
+  if (back) $('mb').focus();
+};
+$('mb').onclick = () => {
+  $('dw').classList.add('open'); $('bd').classList.add('open'); $('mb').setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden';
+  const f = $('dw').querySelector('.e.on') || $('dw').querySelector('.e:not([disabled])'); if (f) setTimeout(() => f.focus(), 0);
+};
+$('bd').onclick = () => closeDw(true);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDw(true); });
+if (!matchMedia('(min-width:901px)').matches) $('fp').removeAttribute('open');
+buildTabs(); buildFilters(); render();
+</script>
+</body>
+</html>

@@ -1,0 +1,1147 @@
+<h3 id="bank-mixed-h7">Q-M-06 (V2-D1.6)</h3>
+
+<p id="sec-bank-mixed-p56" data-kind="prose"><strong>Scenario.</strong> A dental supply distributor processes 2,000 orders per day. Workers process these orders manually. The labor cost is $1.10 per order. An automated design costs $0.18 per order. It also costs $400 per month in fixed cost.</p>
+
+<p id="sec-bank-mixed-p57" data-kind="prose">The error rate does not change.</p>
+
+<p id="sec-bank-mixed-p58" data-kind="prose"><strong>Question.</strong> Which number decides ship or no-ship?</p>
+
+<p id="sec-bank-mixed-p59" data-kind="prose"><strong>Options.</strong>
+A) The per-order cost difference alone.
+B) Net monthly value: (2,000 x 30 x ($1.10 - $0.18)) - $400.
+C) The model's accuracy score on the order set.
+D) The p95 latency of the new system.</p>
+
+<p id="sec-bank-mixed-p60" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p61" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: business value decision.
+2. Lifecycle stage: design to build decision.
+3.</p>
+
+<p id="sec-bank-mixed-p62" data-kind="prose">Objective: decide whether the automation is worth building.
+4. Hard constraints: error rate unchanged, so quality is not the
+decider.
+5. System layer: value chain (V2-D1.6).
+6.</p>
+
+<p id="sec-bank-mixed-p63" data-kind="prose">Eliminate infeasible: all four are computable.
+7. Eliminate constraint-violating: none violate a hard rule. The test is
+which number answers the question.
+8. Compare on objective: only B runs the full baseline to net value
+chain.</p>
+
+<p id="sec-bank-mixed-p64" data-kind="prose">9. Hidden dependencies: the math assumes volume stays at 2,000 per day.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p65" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "manually at $1.10 per order in labor...
+$0.18 per order plus $400 per month in fixed cost."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Counts the fixed cost</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Compares against the baseline</td>
+<td>Partial</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Answers in net dollars</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: it runs the V2-D1.6 chain end to
+end. Gross monthly saving: 60,000 orders x $0.92 = $55,200. Net: $55,200</li>
+
+<li>$400 = $54,800 per month. Positive by a wide margin.</li>
+
+<li>Why B best meets the objective: ship or no-ship is a net value
+question. Only B computes net value. The rest measure parts of the
+system.</li>
+
+<li>Every rejected choice explained: A ignores the $400 fixed cost and the
+volume math. A per-unit delta is not a decision. C measures quality,
+which the scenario holds constant. D measures speed, which no
+requirement names.</li>
+
+<li>Exact limitation or tradeoff: the math assumes steady volume and no
+transition cost. A volume drop or a painful cutover changes the answer.</li>
+
+<li>Relevant evidence (with date): baseline to improvement to cost to net
+value from lesson-7-4A (§4), Oct 6 2026.</li>
+
+<li>Each plausible alternative wins in a counterfactual. A wins when the fixed cost is zero. A wins when the volume is fixed. C wins when the error rate differs between options. D wins when an SLA names latency with a penalty.</li>
+
+<li>Misconception tested: "cheaper per unit means ship it." Net value
+decides, and net includes fixed cost and volume.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h8">Q-M-07 (V2-D1.2)</h3>
+
+<p id="sec-bank-mixed-p66" data-kind="prose"><strong>Scenario.</strong> A food truck fleet tracks stock. Vendors self-report
+inventory by text message. The POS records every sale. Stockouts lose
+sales. Overstock spoils by evening.</p>
+
+<p id="sec-bank-mixed-p67" data-kind="prose"><strong>Question.</strong> What is the system of record for stock levels?</p>
+
+<p id="sec-bank-mixed-p68" data-kind="prose"><strong>Options.</strong>
+A) The vendor texts the inventory.
+B) The POS sales ledger shows sales. The POS sales ledger shows deliveries. The code reconciles the ledger. Vendor texts are untrusted input.</p>
+
+<p id="sec-bank-mixed-p69" data-kind="prose">C) The model blends the estimate from both sources.
+D) The most recent source reports.</p>
+
+<p id="sec-bank-mixed-p70" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p71" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is system-of-record identification.
+2. The lifecycle stage is design.
+3.</p>
+
+<p id="sec-bank-mixed-p72" data-kind="prose">The objective is to name the trustworthy source for stock truth.
+4. Stockouts lose sales. Overstock spoils. The number must be right.
+5.</p>
+
+<p id="sec-bank-mixed-p73" data-kind="prose">The system layer is trust boundaries and state (V2-D1.2).
+6. All four options are feasible to build.
+7. A trusts self-reports. C lets the model invent stock.</p>
+
+<p id="sec-bank-mixed-p74" data-kind="prose">D is recency without trust. These options violate constraints.
+8. Only B derives stock from the verified ledger.
+9. Record deliveries as reliably as sales.</p>
+
+<p id="sec-bank-mixed-p75" data-kind="prose">10. Only B verifies. This is a single select question.</p>
+
+<p id="sec-bank-mixed-p76" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;Vendors self-report inventory by text
+message. The POS records every sale.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p77" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Source is verified</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Crosses no trust boundary unchecked</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Reproducible in code</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the POS ledger is machine
+recorded and auditable. Deliveries minus sales reconciled in code gives
+a computed stock with a provenance chain. Vendor texts stay outside the
+trust boundary as untrusted input.</li>
+
+<li>Why B best meets the objective: V2-D1.2 requires naming the system of
+record and the trust boundaries. The ledger is the record. The texts are
+the boundary crossing.</li>
+
+<li>Every rejected choice explained: A makes self-reports the truth. A
+vendor's typo becomes the stock. C asks the model to blend sources, and
+the blend is unverifiable. D picks by recency. A fresh lie beats an old
+truth.</li>
+
+<li>Exact limitation or tradeoff: B needs delivery records as reliable as
+POS data. Theft, waste, and comps need their own entries or the ledger
+drifts.</li>
+
+<li>Relevant evidence (with date): trust boundaries and system of record
+from lesson-D1-2 (§4), Oct 6 2026.</li>
+
+<li>Each plausible alternative wins in a counterfactual. A wins when vendors scan barcodes into a verified app. The report is then trusted input. C never wins for a system of record. D wins for a &quot;latest news&quot; feed. D does not win for stock.</li>
+
+<li>Misconception tested: "newest data is truest data." Trust decides
+truth, not recency.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h9">Q-M-08 (V2-D1.5), Select TWO</h3>
+
+<p id="sec-bank-mixed-p78" data-kind="prose"><strong>Scenario.</strong> A wind farm inspects 120 turbines per quarter. Each turbine
+gets an independent inspection report. Report quality varies widely by
+inspector.</p>
+
+<p id="sec-bank-mixed-p79" data-kind="prose"><strong>Question.</strong> Which TWO decomposition patterns fit? Select TWO.</p>
+
+<p id="sec-bank-mixed-p80" data-kind="prose"><strong>Options.</strong>
+A) Fan-out/fan-in: one inspection task per turbine, merged into a fleet
+report.
+B) Critique pattern: a reviewer agent checks each report against the
+inspection checklist.
+C) Single sequential pass with no review.
+D) Chaining where each turbine's report depends on the previous one.
+E) One augmented call covering all 120 turbines.</p>
+
+<p id="sec-bank-mixed-p81" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mixed-p82" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: decomposition pattern selection (multi).
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-mixed-p83" data-kind="prose">Objective: cover 120 independent inspections with consistent quality.
+4. Hard constraints: turbines are independent, quality varies by
+inspector.
+5. System layer: decomposition patterns (V2-D1.5).
+6.</p>
+
+<p id="sec-bank-mixed-p84" data-kind="prose">Eliminate infeasible: all five are feasible to attempt.
+7. Eliminate constraint-violating: D invents a false dependency, E
+exceeds any context window.
+8. Compare on objective: independence calls for fan-out, quality
+variance calls for critique.
+9.</p>
+
+<p id="sec-bank-mixed-p85" data-kind="prose">Hidden dependencies: the merge needs a common report schema. The
+critique needs the checklist.
+10. Verify: A and B together. C covers neither constraint.</p>
+
+<p id="sec-bank-mixed-p86" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: &quot;Each turbine gets an independent inspection
+report. Report quality varies widely by inspector.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p87" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Uses independence</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Fixes quality variance</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Scales to 120 turbines</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Slow</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why A and B satisfy all hard constraints: fan-out/fan-in runs the 120
+independent inspections in parallel and merges them. The critique
+pattern checks each report against the checklist before merge.</li>
+
+<li>Why A and B best meet the objective: V2-D1.5 maps independence to
+fan-out and quality variance to a validation pattern. The two patterns
+compose: critique inside each fan-out branch, merge at the fan-in.</li>
+
+<li>Every rejected choice explained: C is slow (120 sequential reports)
+and has no quality gate. D chains independent tasks, which adds delay
+for zero benefit. E stuffs 120 reports into one call: context overflow
+and no per-report check.</li>
+
+<li>Exact limitation or tradeoff: the critique step doubles per-report
+cost, and the merge needs a strict schema or the fleet report is mush.</li>
+
+<li>Relevant evidence (with date): decomposition patterns from
+lesson-D1-patterns (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins when one
+inspector does all 120 and quality is uniform. D wins when turbines
+share a fault that propagates down the row. E wins never at this scale.</li>
+
+<li>Misconception tested: "one pattern per design." Independent scale
+and quality variance are two problems. They take two patterns.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h10">Q-M-09 (V2-D2.1)</h3>
+
+<p id="sec-bank-mixed-p88" data-kind="prose"><strong>Scenario.</strong> A microbrewery chatbot handles 3,000 chats per day. About
+90% are FAQs: hours, location, tour booking. About 10% are recipe
+troubleshooting: stuck fermentation, off flavors. A wrong recipe answer
+ruins a customer's batch.</p>
+
+<p id="sec-bank-mixed-p89" data-kind="prose"><strong>Question.</strong> Which tier strategy fits best?</p>
+
+<p id="sec-bank-mixed-p90" data-kind="prose"><strong>Options.</strong>
+A) Most capable tier for every chat.
+B) Fast tier for FAQs, stronger tier for recipe troubleshooting, with a
+quality floor: recipe answers must cite the brewing guide.
+C) Fast tier for everything.
+D) Stronger tier for FAQs, Fast tier for troubleshooting.</p>
+
+<p id="sec-bank-mixed-p91" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p92" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: model tier routing.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-mixed-p93" data-kind="prose">Objective: cut cost without risking ruined batches.
+4. Hard constraints: wrong recipe advice ruins a batch, 3,000 chats per
+day.
+5. System layer: model selection and routing (V2-D2.1).
+6.</p>
+
+<p id="sec-bank-mixed-p94" data-kind="prose">Eliminate infeasible: all four are feasible.
+7. Eliminate constraint-violating: C risks batch-ruining answers on the
+hard 10%, D routes backwards.
+8. Compare on objective: B matches tier strength to error cost per
+class.
+9.</p>
+
+<p id="sec-bank-mixed-p95" data-kind="prose">Hidden dependencies: the router must classify FAQ vs troubleshooting
+reliably.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p96" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;90% are FAQs... 10% are recipe
+troubleshooting.</p>
+
+<p id="sec-bank-mixed-p97" data-kind="prose">A wrong recipe answer ruins a customer&#x27;s batch.&quot;
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>FAQs stay cheap</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Hard cases get strength</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Quality floor on risky answers</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: FAQs ride the cheap tier,
+troubleshooting gets the stronger tier, and the citation floor grounds
+the risky answers.</li>
+
+<li>Why B best meets the objective: V2-D2.1 routes on the
+capability-cost-latency trade-off with quality floors. Error cost, not
+volume, sets the tier per class.</li>
+
+<li>Every rejected choice explained: A is safe but wasteful: top tier on
+3,000 chats with 90% FAQs. C saves money and risks ruined batches on
+the hard 10%. D is backwards: it spends strength where the task is
+trivial and starves the risky class.</li>
+
+<li>Exact limitation or tradeoff: the router is a new failure point. A
+misclassified troubleshooting chat lands on the cheap tier.</li>
+
+<li>Relevant evidence (with date): tier routing and quality floors from
+lesson-D2-1 (§4), Oct 6 2026, tier pricing from S10-S12, Oct 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when the
+FAQ answers also carry high error cost. C wins when evals prove the
+Fast tier clears the recipe floor. D wins never. It is backwards.</li>
+
+<li>Misconception tested: "one tier for the whole product." The exam
+rewards routing by error cost per class.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h11">Q-M-10 (V2-D2.2)</h3>
+
+<p id="sec-bank-mixed-p98" data-kind="prose"><strong>Scenario.</strong> An aquarium kiosk answers visitor questions. The animal
+medical records must never reach visitors. A vendor proposes a system
+prompt line: "Never reveal animal medical records."</p>
+
+<p id="sec-bank-mixed-p99" data-kind="prose"><strong>Question.</strong> What is the correct control?</p>
+
+<p id="sec-bank-mixed-p100" data-kind="prose"><strong>Options.</strong>
+A) The system prompt line is enough. The model will comply.
+B) A code filter: medical records stay out of the retrieval set, and an
+output check blocks any medical content before display.
+C) A longer system prompt with the rule repeated three times.
+D) Fine-tune the model to dislike medical topics.</p>
+
+<p id="sec-bank-mixed-p101" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p102" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is control placement for a confidentiality rule.
+2. The lifecycle stage is design.
+3.</p>
+
+<p id="sec-bank-mixed-p103" data-kind="prose">The objective is to guarantee that medical records never reach visitors.
+4. Hard constraints:
+    The system must not disclose the records.
+    Visitors are untrusted.
+5. The system layer is guardrails and enforcement (V2-D2.2, V2-D5.1).</p>
+
+<p id="sec-bank-mixed-p104" data-kind="prose">6. Eliminate infeasible options: all four options are feasible to attempt.
+7. Eliminate constraint-violating options:
+    A, C, and D use model behavior.
+    Model behavior is not a guarantee.
+8.</p>
+
+<p id="sec-bank-mixed-p105" data-kind="prose">Compare options on objective: only B enforces in code at two points.
+9. Hidden dependencies:
+    The retrieval index must tag medical records.
+    The filter can then find the medical records.
+10. Verify: B is the only option.</p>
+
+<p id="sec-bank-mixed-p106" data-kind="prose">This is a single select question.</p>
+
+<p id="sec-bank-mixed-p107" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "must never reach visitors."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Guarantee, not guidance</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Blocks at retrieval</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Blocks at output</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. The filter removes medical records. It removes them before the model sees them. The output check catches anything the filter missed. There are two code gates. There is zero reliance on model obedience.</li>
+
+<li>Why B best meets the objective: V2-D2.2 is explicit: prompts are not
+authorization, and structural enforcement gives the hard guarantee. A
+"never" rule is a control, and controls live in code.</li>
+
+<li>
+<div>Explain every rejected choice. A is the exam&#x27;s favorite trap. A prompt is guidance. The model may ignore it under pressure. The model may ignore it under injection. C is the same trap with repetition.</div>
+
+<div>Three signs are still signs. D changes model tendencies. D proves nothing per request. No one can audit D.</div>
+</li>
+
+<li>Exact limitation or tradeoff: B needs the medical tag maintained on
+every record. An untagged record slips past the filter to the output
+check.</li>
+
+<li>Relevant evidence (with date): "prompts are not authorization" from
+lesson-D2-2 (§4), Oct 6 2026, structural enforcement from lesson-D5-1,
+Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins for tone
+guidance ("be friendly"), never for confidentiality. C wins never as a
+control. D wins for stable style needs, not for data protection.</li>
+
+<li>Misconception tested: "a strong instruction equals a control." It
+does not. The exam rewards the answer that puts the rule in code.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h12">Q-M-11 (V2-D2.3), Select TWO</h3>
+
+<p id="sec-bank-mixed-p108" data-kind="prose"><strong>Scenario.</strong> A piano restoration shop builds a cost estimator. Customers
+describe damage in free text. The shop wants fixed-format estimates and
+wants the model to refuse jobs outside its craft (e.g., car repair).</p>
+
+<p id="sec-bank-mixed-p109" data-kind="prose"><strong>Question.</strong> Which TWO prompt techniques fit? Select TWO.</p>
+
+<p id="sec-bank-mixed-p110" data-kind="prose"><strong>Options.</strong>
+A) Few-shot examples including rejection examples (car repair refused).
+B) Structured output schema for the estimate.
+C) Zero-shot with no examples and no schema.
+D) Asking the model to "try its best" on any topic.
+E) A longer model with no technique changes.</p>
+
+<p id="sec-bank-mixed-p111" data-kind="prose"><strong>Answer.</strong> A, B</p>
+
+<p id="sec-bank-mixed-p112" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is prompt technique selection (multi).
+2. The lifecycle stage is design.
+3.</p>
+
+<p id="sec-bank-mixed-p113" data-kind="prose">The objective is fixed-format estimates. The objective is reliable refusals.
+4. Estimates need a fixed format. Refuse out-of-craft jobs.
+5.</p>
+
+<p id="sec-bank-mixed-p114" data-kind="prose">The system layer is prompt techniques (V2-D2.3).
+6. All five options are feasible to attempt.
+7. C and D leave format and refusal to chance. E changes no technique.</p>
+
+<p id="sec-bank-mixed-p115" data-kind="prose">These options violate constraints.
+8. A teaches the refusal boundary. B enforces the format.
+9. The rejection examples must cover near-miss cases.</p>
+
+<p id="sec-bank-mixed-p116" data-kind="prose">For example, furniture repair versus piano repair.
+10. A and B together verify. No third option fits.</p>
+
+<p id="sec-bank-mixed-p117" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B.
+2. Decisive scenario phrase: "fixed-format estimates... refuse jobs
+outside its craft."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Teaches the refusal boundary</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Enforces the output format</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>A and B satisfy all hard constraints. Rejection examples show the model the craft boundary. The structured schema makes the format a contract. It is not a hope.</li>
+
+<li>A and B meet the objective best. V2-D2.3 gives the simplest technique. This technique passes evaluations. It uses few-shot with rejection examples for the boundary. It uses structured outputs for the format. Each technique meets one requirement.</li>
+
+<li>Every rejected choice explained: C leaves both format and refusal to
+chance. D is an anti-technique: "try its best" invites out-of-craft
+answers. E spends money on a bigger model while the missing pieces are
+technique, not capacity.</li>
+
+<li>Exact limitation or tradeoff: the example set needs maintenance as
+new edge cases arrive, and the schema needs versioning with the
+estimate format.</li>
+
+<li>Relevant evidence (with date): few-shot with rejection examples and
+structured outputs from lesson-D2-3 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: C wins for a
+low-stakes internal draft with no format needs. D wins never. E wins
+when evals show the task exceeds the current tier's capacity.</li>
+
+<li>Misconception tested: "a bigger model replaces technique." Format
+and refusal boundaries are technique problems first.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h13">Q-M-12 (V2-D2.4)</h3>
+
+<p id="sec-bank-mixed-p118" data-kind="prose"><strong>Scenario.</strong> An elevator maintenance assistant keeps six months of
+service history in context on every call. Token bills tripled. Techs
+report the model now confuses last month's fix with this month's fault.
+Duplicate sensor readings appear three times per call.</p>
+
+<p id="sec-bank-mixed-p119" data-kind="prose"><strong>Question.</strong> What is the first fix?</p>
+
+<p id="sec-bank-mixed-p120" data-kind="prose"><strong>Options.</strong>
+A) Move to a larger context window.
+B) Just-in-time retrieval of relevant history plus compaction of the
+conversation, with dedupe of sensor readings.
+C) A stronger model tier.
+D) Longer system prompt explaining the timeline.</p>
+
+<p id="sec-bank-mixed-p121" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p122" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: context diagnosis and fix.
+2. Lifecycle stage: operate and optimize.
+3.</p>
+
+<p id="sec-bank-mixed-p123" data-kind="prose">Objective: cut tokens and fix the confusion.
+4. Hard constraints: bills tripled, confusion between months, duplicate
+readings.
+5. System layer: context management (V2-D2.4).
+6.</p>
+
+<p id="sec-bank-mixed-p124" data-kind="prose">Eliminate infeasible: all four are feasible.
+7. Eliminate constraint-violating: A feeds the growth, C buys strength
+for a context problem, D adds tokens to a token problem.
+8. Compare on objective: B attacks growth, duplication, and dilution at
+once.
+9.</p>
+
+<p id="sec-bank-mixed-p125" data-kind="prose">Hidden dependencies: retrieval needs the history indexed by elevator
+and date.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p126" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;six months of service history in context
+on every call... confuses last month&#x27;s fix with this month&#x27;s fault...
+Duplicate sensor readings appear three times.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p127" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Cuts token growth</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Removes duplication</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Fixes dilution/confusion</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: just-in-time retrieval loads
+only the relevant history, compaction keeps the active context small,
+and dedupe removes the triple readings. All three diagnosed faults
+(growth, duplication, dilution) get a fix.</li>
+
+<li>B meets the objective best. V2-D2.4 finds context faults. These faults are growth, duplication, loss, exhaustion, and dilution. It matches each fault to active context, retrieval, or compaction. B is the only option that follows the diagnosis.</li>
+
+<li>Every rejected choice explained: A is the classic error: a bigger
+window holds more duplicates and more dilution. C upgrades the reader
+while the text stays bloated. D adds prompt tokens to a bill driven by
+history tokens.</li>
+
+<li>Exact limitation or tradeoff: retrieval can miss a relevant old fix.
+The index quality bounds the answer quality.</li>
+
+<li>Relevant evidence (with date): context fault taxonomy from
+lesson-D2-4 (§4), Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when the
+task genuinely needs the full six months every call and the budget
+allows it. C wins when the trace shows the chunk present and the answer
+still wrong (model layer). D wins never for a token problem.</li>
+
+<li>Misconception tested: "bigger window fixes context problems." It
+feeds them. Diagnose first: growth, duplication, dilution.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h14">Q-M-13 (V2-D2.5)</h3>
+
+<p id="sec-bank-mixed-p128" data-kind="prose"><strong>Scenario.</strong> A sports league rulebook assistant serves 20,000 calls per
+day. Every call starts with the same 8,000-token rulebook prefix.
+Questions vary. The team considers prompt caching.</p>
+
+<p id="sec-bank-mixed-p129" data-kind="prose"><strong>Question.</strong> What decides whether caching pays?</p>
+
+<p id="sec-bank-mixed-p130" data-kind="prose"><strong>Options.</strong>
+A) The total daily call count alone.
+B) Whether the 8,000-token prefix is stable across calls and the hit
+rate clears the break-even point.
+C) The model tier chosen.
+D) The length of the user questions.</p>
+
+<p id="sec-bank-mixed-p131" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p132" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: caching economics.
+2. Lifecycle stage: design to optimize.
+3.</p>
+
+<p id="sec-bank-mixed-p133" data-kind="prose">Objective: decide if prompt caching pays.
+4. Hard constraints: 8,000-token stable prefix, varied questions.
+5. System layer: prompt reuse (V2-D2.5).
+6.</p>
+
+<p id="sec-bank-mixed-p134" data-kind="prose">Eliminate infeasible: all four are answerable.
+7. Eliminate constraint-violating: none violate. The test is which factor
+decides.
+8. Compare on objective: caching economics rest on prefix stability and
+hit rate vs break-even.</p>
+
+<p id="sec-bank-mixed-p135" data-kind="prose">9. Hidden dependencies: prefix edits reset the cache. The TTL bounds the
+write cost.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p136" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;the same 8,000-token rulebook prefix.
+Questions vary.&quot;
+3.</p>
+
+<p id="sec-bank-mixed-p137" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Names the reuse unit</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Names the break-even test</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: prompt caching reuses the
+stable input prefix across calls with different suffixes. The scenario
+matches exactly: stable prefix, varied questions. The break-even test
+(on the lesson toy, about 4% hit rate) decides the money.</li>
+
+<li>Why B best meets the objective: V2-D2.5 defines the mechanism
+(prefix rules, TTL, costs, break-even). B is the only option that names
+both the mechanism's precondition and its economic test.</li>
+
+<li>Every rejected choice explained: A counts calls but not reuse: 20,000
+calls with a shifting prefix cache nothing. C sets the per-token price
+but not whether caching applies. D is irrelevant: the suffix varies by
+design under prompt caching.</li>
+
+<li>Exact limitation or tradeoff: prefix edits (rulebook updates) reset
+the cache and re-pay the write cost. Measure the real hit rate before
+claiming savings.</li>
+
+<li>Relevant evidence (with date): prompt caching prefix rules and
+break-even toy from lesson-D2-5 (§4), Oct 6 2026, pricing from S10-S12,
+Oct 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins never
+alone. C wins when comparing tiers, not caching. D wins for response
+caching, where identical whole prompts are the precondition.</li>
+
+<li>Misconception tested: "high volume means caching always pays."
+Stability plus hit rate decide, not volume.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h15">Q-M-14 (V2-D2.1)</h3>
+
+<p id="sec-bank-mixed-p138" data-kind="prose"><strong>Scenario.</strong> A library catalog agent runs on the Balanced tier. The
+provider releases a new version of the same tier. The team wants the
+new version live by Friday.</p>
+
+<p id="sec-bank-mixed-p139" data-kind="prose"><strong>Question.</strong> What is the required first step?</p>
+
+<p id="sec-bank-mixed-p140" data-kind="prose"><strong>Options.</strong>
+A) Swap the model ID on Friday. Same tier means same behavior.
+B) Run the regression suite against the new version and compare with the
+pinned baseline before any traffic moves.
+C) Ask the model if it feels ready for the new version.
+D) Route 100% of traffic on Friday and watch the dashboards.</p>
+
+<p id="sec-bank-mixed-p141" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-mixed-p142" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: model change management.
+2. Lifecycle stage: operate.
+3.</p>
+
+<p id="sec-bank-mixed-p143" data-kind="prose">Objective: ship the upgrade without silent behavior change.
+4. Hard constraints: catalog answers must stay correct. No untested
+change reaches users.
+5. System layer: model selection lifecycle (V2-D2.1).</p>
+
+<p id="sec-bank-mixed-p144" data-kind="prose">6. Eliminate infeasible: all four are feasible actions.
+7. Eliminate constraint-violating: A assumes sameness, C is nonsense, D
+tests in production.
+8. Compare on objective: only B measures the new version before exposure.</p>
+
+<p id="sec-bank-mixed-p145" data-kind="prose">9. Hidden dependencies: the regression suite must cover the catalog&#x27;s
+edge cases, not only happy paths.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-mixed-p146" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "The provider releases a new version of the
+same tier."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Treats the upgrade as a production change</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Measures before exposure</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: V2-D2.1 treats every model
+change as a production change. The regression suite compares the new
+version against the pinned baseline on representative, edge, and
+adversarial cases before any user sees it.</li>
+
+<li>Why B best meets the objective: behavior drifts between versions even
+inside a tier. Only measurement catches the drift. B is the only option
+that measures first.</li>
+
+<li>Every rejected choice explained: A assumes the tier name guarantees
+behavior. It does not. C anthropomorphizes the model. The model has no
+say in the change process. D is production testing: users become the
+regression suite.</li>
+
+<li>Exact limitation or tradeoff: the suite takes time to run, so Friday
+may slip. A rushed swap is worse than a late swap.</li>
+
+<li>Relevant evidence (with date): "upgrades are production changes" from
+lesson-D2-1 (§4), Oct 6 2026, regression suites from lesson-D4-2, Oct 6
+2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins never
+for a version change. C wins never. D wins for a shadow deploy where
+the new version gets copied traffic with no user impact.</li>
+
+<li>Misconception tested: "same tier means same model." Version changes
+behavior. Test the version, not the name.</li>
+
+</ol>
+
+
+<h3 id="bank-mixed-h16">Q-M-15 (V2-D2.4), Select THREE</h3>
+
+<p id="sec-bank-mixed-p147" data-kind="prose"><strong>Scenario.</strong> A vineyard sensor assistant answers irrigation questions.
+Each call loads the full season of sensor readings: 60,000 tokens.
+Duplicate readings from overlapping sensors appear twice. The model
+sometimes answers from March data for a July question.</p>
+
+<p id="sec-bank-mixed-p148" data-kind="prose"><strong>Question.</strong> Which THREE context faults are present? Select THREE.</p>
+
+<p id="sec-bank-mixed-p149" data-kind="prose"><strong>Options.</strong>
+A) Context growth: the full season loads on every call.
+B) Duplication: overlapping sensors repeat readings.
+C) Dilution: March data answers July questions.
+D) Context exhaustion: the window overflows.
+E) Conversation loss: old turns vanish.</p>
+
+<p id="sec-bank-mixed-p150" data-kind="prose"><strong>Answer.</strong> A, B, C</p>
+
+<p id="sec-bank-mixed-p151" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. The question type is context fault diagnosis (multi).
+2. The lifecycle stage is operate and optimize.
+3.</p>
+
+<p id="sec-bank-mixed-p152" data-kind="prose">The objective is to name the faults that the evidence shows.
+4. Hard constraints are 60,000 tokens per call, duplicates, and wrong-month answers.
+5. The system layer is context fault taxonomy (V2-D2.4).
+6.</p>
+
+<p id="sec-bank-mixed-p153" data-kind="prose">Eliminate infeasible options. All five options are real fault names.
+7. Eliminate constraint-violating options. D needs an overflow. The text states no overflow.</p>
+
+<p id="sec-bank-mixed-p154" data-kind="prose">E needs lost turns. The text states no lost turns.
+8. Compare options on objective. The evidence names growth and duplication directly. The March-for-July answers show dilution.</p>
+
+<p id="sec-bank-mixed-p155" data-kind="prose">The model attends to the wrong span of the bloated context.
+9. Hidden dependencies exist. Each fault needs its own fix. Retrieval fixes growth. Deduplication fixes duplication.</p>
+
+<p id="sec-bank-mixed-p156" data-kind="prose">Fewer, better-placed chunks fix dilution.
+10. Verify the answers. A, B, and C are correct. D and E lack evidence. Select THREE.</p>
+
+<p id="sec-bank-mixed-p157" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: A, B, C.
+2. Decisive scenario phrase: &quot;the full season of sensor readings:
+60,000 tokens. Duplicate readings from overlapping sensors appear
+twice.</p>
+
+<p id="sec-bank-mixed-p158" data-kind="prose">The model sometimes answers from March data for a July
+question.&quot;
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>60,000 tokens per call</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Readings appear twice</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Wrong-month answers from a bloated context</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Window overflow stated</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>A, B, and C satisfy the diagnosis. The full-season load on every call is context growth. The doubled readings are duplication. The March-for-July answers are dilution. The model attends to the wrong span of an oversized context. The V2-D2.4 taxonomy names all three faults.</li>
+
+<li>Why A, B, and C best meet the objective: V2-D2.4 names growth,
+duplication, and dilution as distinct faults with distinct fixes
+(retrieval for growth, dedupe for duplication, fewer better-placed
+chunks for dilution). Naming all three points at all three fixes.</li>
+
+<li>Every rejected choice explained: D needs an overflow error, which
+the scenario never states. E needs vanishing turns, which never
+appear.</li>
+
+<li>Exact limitation or tradeoff: fixing all three still leaves index
+quality as the bound for the retrieval that replaces the full-season
+load.</li>
+
+<li>Relevant evidence (with date): context fault taxonomy (growth,
+duplication, loss, exhaustion, dilution) from lesson-D2-4 (§4), Oct 6
+2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: D wins when
+the call errors on window size. E wins when old turns vanish after
+compaction.</li>
+
+<li>Misconception tested: "growth alone explains every context
+failure." Each named fault needs its own fix. Name every fault the
+evidence shows.</li>
+
+</ol>
+

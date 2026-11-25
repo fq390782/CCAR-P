@@ -1,0 +1,408 @@
+[
+ {
+  "id": "CCAR-F-Udemy02-0001",
+  "question": "The platform team at a cloud infrastructure company is using Claude Code to accelerate software development. They use it for code generation, refactoring, debugging, and documentation, and integrate it into their development workflow using custom slash commands and CLAUDE.md configuration. They also need to understand how to choose between plan mode and direct execution.\n\nThe /upgrade-plan command that the team created on its own parses a repository's upgrade guide and converts it into JSON for downstream automation.\n\nEvaluation produces valid JSON, but required fields such as rollback_command and compatibility_note are returned as null when the source information is written in forms like the following:\n\nFenced shell blocks\n\nMarkdown checklists\n\nProse paragraphs\n\nThe information itself is present in the source material. In addition, the current prompt already enumerates the schema and instructs the model not to omit required fields.\n\nWhich changes most directly address this extraction failure? (Select two.)",
+  "choices": {
+   "A": "Move the schema description into CLAUDE.md so that it is loaded every time this command runs.",
+   "B": "Raise the temperature so that it interprets a wider range of upgrade guide formats.",
+   "C": "Add 3 to 5 structured examples that map diverse guide formats to the expected JSON fields.",
+   "D": "For each required field, describe where in the source material and in what form (shell block, checklist, etc.) it appears."
+  },
+  "answer": [
+   "C",
+   "D"
+  ],
+  "explanation": "구조화 추출에서 \"정보는 원본 자료에 있는데 null이 반환되는\" 경우, 문제는 스키마의 유무가 아니라 원본 자료의 다양한 표현을 각 필드에 대응시키는 단서의 부족입니다. 이 문제의 prompt는 이미 스키마를 열거하고 생략하지 않도록 지시하고 있으므로, 같은 지시를 강화하거나 위치를 옮겨도 개선되지 않습니다.\n\n효과가 있는 것은 필드별로 \"원본 자료의 어디에 어떤 형태로 나타나는가\"를 설명하는 것과, 다양한 형식에서 기대하는 JSON으로의 변환 예를 3~5개 제시하는 두 가지이며, 공식 가이드도 구체적인 지시와 다양한 예의 병용을 권장합니다.\n\ntemperature를 높이는 것은 일관성을 낮추는 방향의 조정이고, CLAUDE.md로의 이동은 정보를 늘리지 않습니다.\n\n추출 실패를 보면, 모델에게 부족한 것이 \"무엇을 출력할지\"의 정의인지 \"어디에서 가져올지\"의 단서인지를 가려내는 것이 해결의 지름길입니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0002",
+  "question": "A law firm is using the Claude Agent SDK to build a multi-agent system for case law research. A coordinator agent delegates work to specialized subagents. The subagents include ones that search case law databases, ones that analyze case documents, ones that synthesize legal arguments, and ones that generate legal memos. The system researches a topic and produces a comprehensive memo with citations.\n\nThe document analysis subagent uses a client-side tool to read documents from a licensed case law database and extract supporting statements. When a document is unavailable, the tool returns a tool_result with is_error: true. However, its content is always the fixed text \"操作に失敗しました\", regardless of causes such as the following:\n\nExpired license\n\nTransient timeout\n\nUnsupported file format\n\nA valid search result with no matching passages\n\nAs a result, the coordinator chooses unpredictably among retrying, discarding that source, and escalating.\n\nWhich changes can best improve recovery behavior? (Select two.)",
+  "choices": {
+   "A": "Return a failed document read as an empty result set and let the synthesis process continue as is.",
+   "B": "Make it retry only errors indicated as retryable, and route the others to switching sources or escalation.",
+   "C": "Return a tool_result error that includes the classification of the cause and whether a retry is possible.",
+   "D": "Expand the document tool's description to steer Claude toward avoiding the use of tools that might fail."
+  },
+  "answer": [
+   "B",
+   "C"
+  ],
+  "explanation": "에이전트의 복구 동작이 예측 불가능해지는 전형적인 원인은, 도구가 모든 실패를 같은 고정 문구로 반환해 판단 재료가 없다는 점입니다. 공식 문서는 is_error를 true로 한 tool_result에 무슨 일이 일어났고 다음에 무엇을 시도해야 하는지를 구체적으로 쓰도록 권장합니다.\n\n이 문제에서는 실패 원인의 분류와 재시도 가능 여부를 반환하는 것과, 그 재시도 가능 여부에 따라 재시도할지 전환·에스컬레이션할지를 고르는 방침을 코디네이터에게 주는 것, 이 두 가지가 갖춰져야 비로소 복구가 일관됩니다.\n\n빈 결과로의 변환은 \"해당 없음\"과 \"실패\"를 혼동하게 만들고, 도구의 회피는 핵심 기능을 해칩니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0003",
+  "question": "The live operations team at a game studio has integrated Claude Code into its CI/CD pipeline. The system runs automated code reviews, generates test cases, and returns feedback on pull requests. They need to design prompts that return specific, actionable feedback and minimize false positives.\n\nThree months after launch, the system has begun attaching high confidence scores to the majority of its structured review findings and generated test suggestions.\n\nThe human review process is scheduled to be scaled back. The team still needs to continue doing the following:\n\nMeasure the error rate in the production environment\n\nCatch rare failure modes in areas such as migrations, security-related changes, and language-specific conventions\n\nWhich monitoring approaches are best suited to this purpose? (Select two.)",
+  "choices": {
+   "A": "Even after raising the confidence cutoff, continue to review at least a certain number of samples of high-confidence outputs.",
+   "B": "Sample high-confidence findings stratified by change type, language, and finding category, and label errors and novel failure types separately.",
+   "C": "Sample high-confidence findings uniformly across all repositories, and publish a single aggregate error rate for the entire pipeline.",
+   "D": "Prioritize reviewing low-confidence findings, and for the high-confidence band, check only the overall monthly accuracy."
+  },
+  "answer": [
+   "A",
+   "B"
+  ],
+  "explanation": "자동화 비율을 높일수록, 사람이 리뷰하지 않는 출력의 품질을 어떻게 모니터링할지가 중요해집니다. 모델이 부여하는 확신도는 정확성의 보증이 아니므로, 높은 확신도 구간을 완전히 무심사로 두면 자신 있게 틀리는 케이스를 검출할 수 없게 됩니다.\n\n이 문제의 요건은 \"프로덕션 오류율을 측정한다\"와 \"드문 영역의 실패 모드를 포착한다\"의 두 가지로, 높은 확신도 구간에서의 지속적인 샘플링이 전자를, 층화 샘플링과 오류·신종 패턴의 라벨 구분이 후자를 충족합니다.\n\n높은 확신도 구간을 월간 전체 정확도만으로 보는 방법은 드문 오류를 평균 속에 묻어 버리고, 균일 샘플링은 건수가 적은 영역을 희석시킵니다.\n\n공식 평가 설계 가이드도 엣지 케이스를 포함한 구체적이고 측정 가능한 기준으로 평가하도록 권장합니다. 건수가 적은 영역일수록 균일한 샘플링으로는 보이기 어려워진다는 성질은 품질 모니터링 전반에서 짚어 두어야 할 점입니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0004",
+  "question": "You are using Claude Code to accelerate software development. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You integrate it into your development workflow using custom slash commands and CLAUDE.md configuration, and you need to understand how to choose between plan mode and direct execution.\n\nA team at an electronic medical records platform is about to migrate a shared authentication library used in more than 50 files. There are two feasible migration approaches, each with different infrastructure requirements. The maintainer wants Claude Code to investigate the codebase and propose an approach before starting implementation.\n\nWhich workflow is the most appropriate to take first?",
+  "choices": {
+   "A": "Enter plan mode, have Claude investigate the scope of impact, and review the proposed plan before choosing an execution mode.",
+   "B": "Start with bypassPermissions, let Claude run commands freely, and check for regressions with tests afterward.",
+   "C": "Start with acceptEdits, let Claude apply the migration, and review the diff after the changes are complete.",
+   "D": "Start with a prompt that directs direct implementation, let Claude choose the approach, and refine the design while editing."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "Claude Code의 권한 모드는 작업 단계에 맞춰 Claude에게 어디까지 맡길지 선택하기 위한 장치입니다. 플랜 모드는 읽기와 조사만 수행하고 계획을 제시하게 하는 모드이고, acceptEdits는 파일 편집 확인을 생략하며, bypassPermissions는 모든 확인을 생략합니다(격리된 환경 전용).\n\n이 문제는 영향 범위가 큰 공유 라이브러리의 마이그레이션이며, 인프라 요건이 다른 2가지 안을 구현 전에 비교하고 싶은 상황이므로, 먼저 플랜 모드에서 조사와 제안을 하게 하고 계획을 검토한 뒤 실행 모드를 선택하는 것이 정답입니다.\n\n직접 구현, acceptEdits, bypassPermissions는 모두 변경이 먼저 진행되고 검토가 사후에 이루어집니다. 영향이 큰 변경일수록 계획 검토를 끼워 넣는 수고에 걸맞은 효과가 있습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0005",
+  "question": "The internal help desk at a logistics company is using the Claude Agent SDK to build an agent that resolves ambiguous inquiries such as shipping delays, return handling, and account permission issues. The agent accesses internal systems through custom Model Context Protocol (MCP) tools (get_employee, lookup_ticket, issue_replacement, escalate_to_manager). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team invokes Claude Code in nightly pull request checks to inspect changes to the replacement handling and escalation logic. However, the CI environment has no terminal user to respond to follow-up confirmation prompts. As a result, the job displays a prompt and keeps waiting until the runner times out.\n\nWhich changes are most appropriate to prevent this failure? (Select two.)",
+  "choices": {
+   "A": "Create a shared slash command in .claude/commands/ and invoke that command from the CI job.",
+   "B": "Run Claude Code with the -p (--print) flag and pass the review prompt non-interactively.",
+   "C": "Pre-approve the tools needed for the review in the CI job's permission settings.",
+   "D": "Run Claude Code in plan mode and have the job automatically approve the generated plan."
+  },
+  "answer": [
+   "B",
+   "C"
+  ],
+  "explanation": "Claude Code를 CI 같은 무인 환경에서 실행하려면 \"대화를 전제로 하지 않는 실행 모드\"와 \"사람의 승인을 전제로 하지 않는 권한 설정\"의 2가지가 필요합니다. 공식 문서는 -p(--print)로 비대화형으로 실행하고, --allowedTools 등으로 필요한 도구를 자동 승인하는 방법을 제시합니다.\n\n이 문제의 잡은 후속 확인 프롬프트에 응답할 사람이 없어서 멈춰 있으므로, -p로 프롬프트를 비대화형으로 전달하는 것과 리뷰에 필요한 도구를 권한 설정으로 사전 승인하는 것의 2가지가 정답입니다.\n\n공유 슬래시 커맨드는 실행 모드를 바꾸지 않으며, 플랜 모드는 계획 승인이라는 또 다른 대화를 만들어 냅니다.\n\n무인 실행에서는 실행 모드와 권한의 2곳에 사람의 입력을 기다리는 지점이 남기 쉽다는 점을 기억해 두면 설정 누락을 막을 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0006",
+  "question": "A startup in supply chain analytics is using the Claude Agent SDK to build a multi-agent research report system. A coordinator agent delegates work to specialized subagents. The subagents include one that collects supplier data, one that analyzes shipment risk, one that synthesizes findings, and one that writes executive reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nIn one evaluation run, the coordinator's first Messages API response contained a short text block and two tool_use blocks for Task. However, when you review the run history, no tool_result message was ever sent before the report was generated. The report is always based only on the coordinator's initial text.\n\nWhich changes should be made to the coordinator's loop? (Select two.)",
+  "choices": {
+   "A": "Send each subagent's output as a tool_result block in a user turn, keyed by the tool_use id.",
+   "B": "Forward the coordinator's text block as-is to the synthesis step, skip executing the Task calls, and end the turn at that point if there is text.",
+   "C": "Limit the coordinator to three iterations, summarize partial findings, and stop when the limit is reached.",
+   "D": "Execute each requested Task and return a tool_result, and keep calling until stop_reason is end_turn."
+  },
+  "answer": [
+   "A",
+   "D"
+  ],
+  "explanation": "도구를 사용하는 에이전트는 모델의 tool_use 요청을 실행해 결과를 돌려주고 다시 모델을 호출하는 왕복을 반복해야 비로소 기능합니다. 공식 문서에 따르면 tool_result 블록은 대응하는 tool_use 바로 다음의 user 메시지에 넣고 content 배열의 맨 앞에 두어야 합니다.\n\n이 문제의 실행 이력에서는 코디네이터가 2개의 Task를 요청했는데도 tool_result가 한 번도 전송되지 않아, 보고서가 최초 텍스트만을 근거로 하게 되었습니다. 정답은 요청된 Task를 실행해 tool_result를 돌려주고 stop_reason이 end_turn이 될 때까지 호출을 계속하는 것과, 결과를 tool_use의 id별로 user 턴의 tool_result로 보내는 것의 2가지이며, 루프의 지속과 결과를 돌려주는 방식이 함께 갖춰져야 위임이 기능합니다.\n\n반복 횟수 제한이나 Task 생략은 결과가 돌아가지 않았다는 원인을 다루지 않습니다.\n\nstop_reason별로 다음에 무엇을 해야 하는지(tool_use면 실행해서 결과를 돌려주고, end_turn이면 종료)를 정리해 두면 루프의 결함을 빠르게 알아볼 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0007",
+  "question": "A telecom carrier is using the Claude Agent SDK to build a customer-facing agent. The agent handles ambiguous requests such as billing inquiries, SIM swaps, and device warranties. It accesses internal systems through custom Model Context Protocol (MCP) tools (get_subscriber, lookup_invoice, process_credit, escalate_to_tier2). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nReviewing production traces, you find that every incoming request is routed sequentially through the following separate subagents:\n\nIdentity verification\n\nBilling details\n\nCredit policy\n\nEscalation summary\n\nLatency is high even for questions that only need a simple billing status check, and some answers even include irrelevant credit policy disclaimers.\n\nWhich changes would most improve the design while keeping the specialized workers available for the cases that truly need them? (Select two.)",
+  "choices": {
+   "A": "Give all subagents the same backend tools and instruct each worker to skip them on its own when they are not needed.",
+   "B": "Answer simple billing status checks directly, and delegate to subagents only for cases that need specialized handling.",
+   "C": "Merge the identity verification and billing subagents into one to reduce the number of hops.",
+   "D": "Add a coordinator step that inspects the case, invokes only the subagents that are needed, and passes each a self-contained task summary."
+  },
+  "answer": [
+   "B",
+   "D"
+  ],
+  "explanation": "멀티 에이전트 구성은 강력하지만, 모든 입력을 전 워커에 순서대로 통과시키면 레이턴시와 비용이 부풀고 무관한 처리의 출력이 답변에 섞입니다. Anthropic의 에이전트 설계 가이드는 입력을 분류해 적절한 후속 처리로 보내는 routing을 소개하며, 복잡성은 필요할 때만 더해야 한다고 말합니다.\n\n이 문제의 정답은 케이스를 검사해 필요한 서브에이전트만 호출하는 코디네이터 공정과, 단순한 확인은 직접 답변하고 위임을 전문적인 케이스로 한정하는 것의 2가지이며, 둘 다 \"필요할 때만 위임한다\"는 같은 원칙에 서 있습니다.\n\n워커 스스로의 스킵 판단은 기동의 낭비를 남기고, 일부 서브에이전트의 통합은 전 건을 순서대로 통과시키는 구조를 남깁니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0008",
+  "question": "The platform team at a fintech company is using Claude Code to accelerate software development. They use it for code generation, refactoring, debugging, and documentation, and integrate it into their development workflow using custom slash commands and CLAUDE.md configuration. They also need to understand how to choose between plan mode and direct execution.\n\nThe team wants to add its own MCP server and client-side integration to handle engineering reference materials (design documents, runbooks, database schemas, and architecture notes). The developers' requirements are as follows:\n\nHave the host display a browsable list of these reference materials\n\nAttach the selected content to Claude's context only when needed\n\nAvoid having Claude spend turns on exploratory function calls just to find out what exists\n\nWhich design best matches the MCP control model?",
+  "choices": {
+   "A": "Add a list_reference_material tool and have Claude call it first, then retrieve the chosen documents with additional tool calls.",
+   "B": "Copy the material catalog into CLAUDE.md, update it every time the repository is updated, and have Claude ask the developer for document names.",
+   "C": "Declare the resources capability, present the list via resources/list, and have the content read via resources/read.",
+   "D": "Expose each reference material as a prompt, and have developers run it with a slash command to inject the document body."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "MCP 서버가 공개하는 주요 기능은 3종류이며, 각각 누가 주도해서 사용하는지가 다릅니다. tools는 모델이 판단해 호출하는 것, prompts는 사용자가 명시적으로 실행하는 템플릿, resources는 호스트 애플리케이션이 목록 제시나 첨부를 제어하는 데이터입니다.\n\n이 문제의 요건은 \"호스트에서 목록을 브라우즈할 수 있고, 필요할 때만 선택한 내용을 컨텍스트에 첨부하며, Claude의 탐색적인 호출은 피한다\"이므로, resources 기능과 resources/list·resources/read의 조합이 제어 모델에 합치합니다.\n\n도구로 목록을 가져오면 모델의 탐색 턴이 생기고, prompts는 사용자가 기동하는 템플릿이며, CLAUDE.md에 복사하면 상시 로딩이 됩니다.\n\nMCP 기능을 선택할 때는 \"누가 언제 사용할지를 정하는가\"를 문제문에서 읽어 내면 tools·prompts·resources 중 어느 것에 대응하는지 알 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0009",
+  "question": "You are on a team responsible for maintaining legacy systems, using Claude Code to streamline your development workflow. You integrate it into your development workflow using custom slash commands and CLAUDE.md configuration, and you need to understand how to choose between plan mode and direct execution.\n\nThe team needs a reusable workflow for adding comprehensive tests to an unfamiliar legacy billing calculation module. The work usually starts with reading the module, but the steps after that vary depending on the following:\n\nThe dependencies found\n\nThe existing test patterns\n\nWhether code seams exist\n\nThe team cares more about producing useful coverage than about minimizing latency.\n\nWhich orchestration choice is most appropriate?",
+  "choices": {
+   "A": "Use one broad slash command that gives Claude the full set of files and requirements in a single unconstrained request.",
+   "B": "Use dynamic decomposition: have Claude investigate the module, create subtasks from what it discovers, and consolidate them into a test plan.",
+   "C": "Use a fixed prompt chain that has Claude analyze the files, write tests, run tests, and fix failures, in that order, every time.",
+   "D": "Use direct execution: have Claude start writing tests immediately and deal with missing context only after failures appear."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "오케스트레이션의 유형은 \"절차를 사전에 정할 수 있는가\"로 고릅니다. Anthropic의 에이전트 설계 가이드는 고정된 서브태스크로 분해할 수 있다면 prompt chaining, 필요한 서브태스크를 사전에 예측할 수 없는 복잡한 태스크라면 중심의 LLM이 그 자리에서 분해·위임·통합하는 orchestrator-workers가 적합하다고 설명합니다.\n\n이 문제는 \"처음에 모듈을 읽는다\" 이외의 절차가 발견된 의존 관계, 기존 테스트 패턴, 이음매(seam)의 유무에 따라 달라지고, 레이턴시보다 커버리지를 중시하므로, 조사 결과로부터 서브태스크를 만들어 통합하는 동적 분해가 정답입니다.\n\n단일한 넓은 요청은 구조가 없고, 고정 체인은 발견을 반영할 수 없으며, 직접 실행은 상황 파악보다 먼저 손을 움직이게 됩니다.\n\n문제문의 \"그 후의 절차는 ~에 따라 달라진다\"라는 한 문장이 동적 분해를 고르는 근거가 됩니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0010",
+  "question": "You are using the Claude Agent SDK to build a customer support resolution agent for a telecom carrier. The agent handles highly ambiguous requests such as refunds, billing disputes, and account issues. It can access backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nA customer support platform uses a client-side tool-use loop with the Messages API. During the beta period, the policy requires human review for refunds over $500.\n\nIn several emotionally charged billing dispute cases, after lookup_order the agent issued a process_refund tool_use request with an amount above the threshold, and the application executed that request as-is.\n\nWhich changes would most effectively enforce this workflow requirement? (Select two.)",
+  "choices": {
+   "A": "Block process_refund calls above the threshold on the application side and route them to escalate_to_human.",
+   "B": "Use tool_choice to force a call to escalate_to_human every time for billing disputes involving refunds.",
+   "C": "State explicitly in the system prompt that refunds above the threshold must be sent to escalate_to_human.",
+   "D": "Validate the requested amount in the process_refund implementation and reject requests above the threshold there."
+  },
+  "answer": [
+   "A",
+   "D"
+  ],
+  "explanation": "금액 임계값처럼 명확하고 예외를 인정하지 않는 업무 규칙은 모델에 대한 지시에만 의존하지 않고 코드로 결정적으로 강제하는 것이 원칙입니다. Messages API의 클라이언트 측 도구에서 Claude가 내놓는 것은 도구 호출 요청이며, 실제로 실행할지 여부를 최종적으로 정하는 것은 애플리케이션입니다.\n\n이 문제에서는 애플리케이션 측 가드로 임계값을 초과하는 process_refund를 막아 escalate_to_human으로 돌리는 것과, process_refund의 구현 자체에서 금액을 검증해 거부하는 것의 2가지가, 모두 모델의 판단에 의존하지 않는 강제 수단으로서 정답입니다.\n\n시스템 프롬프트는 확률적인 대책에 그치고, tool_choice에 의한 일률적인 강제는 소액의 정당한 환불까지 막아 해결률을 떨어뜨립니다.\n\n금액이나 건수처럼 기계적으로 판정할 수 있는 규칙일수록 코드 측에서 강제할 가치가 높아집니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0011",
+  "question": "An investment research desk is using the Claude Agent SDK to build a multi-agent equity research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches financial news and filings, one that analyzes brokerage analyst PDF reports, one that synthesizes findings, and one that generates reports.\n\nThe team has added a prompt-based quality gate that classifies findings in draft reports before publication.\n\nOne of its categories, \"unsupported market trend claims,\" has started producing many false positives on synthesized paragraphs that are well sourced. Other categories, such as missing citations and contradictions between sources, are working well. As a result, engineers have started ignoring the entire quality report.\n\nWhat should the team do next?",
+  "choices": {
+   "A": "Leave the noisy category enabled, add a note that false positives are possible, and ask engineers to ignore them manually.",
+   "B": "Temporarily remove only the noisy category, and rebuild it with real examples and definitions, evaluated with precision and recall.",
+   "C": "Have the quality gate return strict JSON and reject malformed output, and use schema conformance as the main trust metric.",
+   "D": "Pause the entire quality gate for one release cycle, fix the prompt, and then re-enable all categories."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "품질 게이트의 일부가 오탐을 연발하면 사용자는 올바른 지적까지 포함해 보고서 전체를 신뢰하지 않게 됩니다. 대처의 원칙은 문제의 범위만 분리하고, 기능하고 있는 부분의 가치를 지키면서, 문제가 있는 부분을 평가에 기반해 다시 만드는 것입니다. 공식 평가 설계 가이드도 구체적이고 측정 가능한 성공 기준과 테스트 케이스를 마련해 개선을 확인할 것을 권장합니다.\n\n이 문제에서는 \"근거 없는 시장 동향 주장\" 카테고리만 일시적으로 제외하고, 정의·실례·정밀도와 재현율 평가로 재구축하는 방법이 이에 해당합니다.\n\n주의 문구는 신뢰 저하를 방치하고, 전면 중지는 양호한 시그널까지 잃으며, 스키마 준수는 형식과 내용을 혼동하고 있습니다. 국소적인 문제에는 국소적인 대처를, 이것이 품질 게이트 운용의 기본입니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0012",
+  "question": "An education SaaS company is integrating Claude Code into its automated code review pipeline. The system runs an automated review on each pull request, generates test cases, and returns specific, actionable feedback. You need to design prompts that minimize false positives.\n\nA coordinator delegates the review of a pull request to specialized subagents responsible for security, test coverage, and maintainability. Each subagent returns useful findings to the coordinator, but the final review summary often omits the following information that the coordinator should already have received:\n\nSpecific file paths\n\nNames of failed tests\n\nSupporting code snippets\n\nWhich changes would most effectively address this reliability problem? (Select two.)",
+  "choices": {
+   "A": "Save the security and test coverage instructions in CLAUDE.md so that subsequent CI runs load them.",
+   "B": "Have the coordinator summarize each specialized subagent's results before passing them to the synthesis subagent, to keep the input small.",
+   "C": "Pass the structured data returned by each subagent as-is, without summarizing, into the synthesis subagent's prompt.",
+   "D": "Have each specialized subagent return results in a fixed schema that requires per-finding evidence (file paths, test names, and code excerpts)."
+  },
+  "answer": [
+   "C",
+   "D"
+  ],
+  "explanation": "멀티 에이전트 구성에서는 서브에이전트의 결과가 코디네이터를 거쳐 다음 공정으로 전달될 때마다 정보가 압축되어, 구체적인 증거가 빠지기 쉽습니다. Anthropic의 멀티 에이전트 리서치 시스템 해설에서도, 위임 시에 출력 형식을 명시하는 것과 결과를 말 전달 게임처럼 중계시키지 않는 것이 중요하다고 합니다.\n\n이 문제의 정답은 돌려주는 쪽(고정 스키마로 필수 항목을 반환하게 함)과 넘기는 쪽(구조화 데이터를 요약하지 않고 통합에 전달함)을 모두 정비하는 2가지입니다.\n\n요약한 뒤에 넘기는 안은 세부 정보가 빠지는 지점을 오히려 늘리고, CLAUDE.md에 저장하는 것은 향후 실행용이어서 이번 전달의 누락을 다루지 않습니다.\n\n세부 정보가 공정의 어디에서 빠지고 있는지 추적하여, 그 지점을 직접 고치는 선택지를 고르는 것이 요점입니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0013",
+  "question": "The platform team at a mobile app company is integrating Claude Code into its CI/CD pipeline. The system runs automated code reviews, generates test cases, and returns feedback on pull requests. You need to design prompts that return specific, actionable feedback and minimize false positives.\n\nThe team's CI review job needs a project-scoped HTTP MCP server that handles pull request metadata. The server requires a bearer token in the Authorization header. The team has two requirements:\n\nShare the MCP configuration across all checkouts\n\nDo not commit credentials\n\nWhich implementation best meets these requirements?",
+  "choices": {
+   "A": "Register the MCP server, including the Authorization token, only in ~/.claude.json, and document manual setup steps for everyone.",
+   "B": "Commit a .mcp.json that references Bearer ${PR_API_TOKEN} in headers, and set the value in each environment.",
+   "C": "Commit a .mcp.json that references Bearer $PR_API_TOKEN (without braces) in headers, and rely on expansion at connection time.",
+   "D": "Commit a .mcp.json with the bearer token written directly in headers, and limit repository access to approved maintainers."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "팀에서 공유하는 설정과 개인의 비밀 정보를 분리하는 것은 MCP 구성에서도 기본입니다. Claude Code에서는 프로젝트 스코프 MCP 서버를 .mcp.json에 작성해 커밋하면 모든 사람에게 공유할 수 있고, 그 headers 등에서는 ${VAR} 형식의 환경 변수 확장(기본값을 붙이는 형태 포함)을 사용할 수 있습니다.\n\n이 문제는 \"설정은 모든 체크아웃에서 공유\"와 \"인증 정보는 커밋하지 않음\"이라는 2가지 조건이 있으므로, .mcp.json에서는 변수를 참조하기만 하고 값은 각 환경에서 설정하는 방법이 정답입니다.\n\n사용자 스코프인 ~/.claude.json은 공유되지 않고, 중괄호 없는 표기는 문서화된 확장 구문이 아니며, 직접 삽입은 접근 제한 여부와 관계없이 유출로 이어집니다.\n\n또한 Claude Code나 일부 알려진 인증 정보의 변수 이름은 원격 서버의 url이나 headers에서 의도적으로 빈 값으로 취급되므로, 자체 변수 이름을 사용하는 것이 안전합니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0014",
+  "question": "An environmental policy think tank is using the Claude Agent SDK to build a policy research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring evaluation, you find that although the final report cites its sources, it sometimes treats the following kinds of evidence as equivalent for the same claim:\n\nPeer-reviewed academic research\n\nVendor-published benchmarks\n\nInternal survey research\n\nThe search subagent and the document analysis subagent currently return only a concise summary of findings and a generic list of the sources they consulted.\n\nWhich changes are most appropriate for making downstream synthesis accurate? (Select two.)",
+  "choices": {
+   "A": "Have each subagent return structured claim records that include the source's location, publication date, and an excerpt of the evidence.",
+   "B": "In the synthesis step, weight the evidence according to the type of source.",
+   "C": "Have the coordinator keep the subagents' complete conversation transcripts, and have the synthesis agent infer source provenance from them.",
+   "D": "Give each subagent broader tool access so that it can investigate all available sources before writing its summary."
+  },
+  "answer": [
+   "A",
+   "B"
+  ],
+  "explanation": "출처가 달린 리포트라도 근거의 \"질\"이 구분되지 않으면, 동료 심사를 거친 연구와 벤더의 벤치마크가 같은 비중으로 다뤄지게 됩니다. 이를 방지하려면 근거의 성격을 후속 단계가 참조할 수 있는 형태로 넘겨주는 것과, 그것을 사용해 취급을 구분하는 것이 모두 필요합니다. Anthropic의 멀티 에이전트 리서치 시스템 해설에서도, 서브에이전트에 위임할 때 출력 형식을 명확히 지시하는 것과 정보원의 질을 가려내도록 유도하는 것이 중요하다고 합니다.\n\n이 문제의 정답은 출처의 위치·발행일·근거 발췌를 포함한 구조화된 주장 레코드를 반환하게 하는 것과, 통합 단계에서 출처의 종류에 따라 근거에 가중치를 두는 것, 이 2가지입니다.\n\n도구 접근 권한 확대는 출력의 형태를 바꾸지 않고, 트랜스크립트에서의 추측은 불확실합니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0015",
+  "question": "A company in the solar equipment leasing business is using the Claude Agent SDK to build a customer-facing agent. The agent handles ambiguous requests such as billing disputes, equipment malfunctions, and account issues. It accesses internal systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team wants to provide a Claude Code workflow named case-review that support engineers can run on demand. The requirements are as follows:\n\nRun outside the main conversation context in order to produce long investigation notes\n\nClaude can read and search project files without repeatedly showing permission prompts\n\nShow the expected case ID when a developer invokes it\n\nWhich configuration best matches these requirements?",
+  "choices": {
+   "A": "Set up .claude/skills/case-review/SKILL.md with context: fork, allowed-tools as an exclusive allowlist, and argument-hint as a validator.",
+   "B": "Create .claude/skills/case-review.md with context: fork, allowed-tools of Read and Grep, and argument-hint: [case-id].",
+   "C": "Create .claude/skills/case-review/SKILL.md with context: main, allowed-tools of Read and Grep, and argument-hint: [case-id].",
+   "D": "Create .claude/skills/case-review/SKILL.md with context: fork, allowed-tools of Read and Grep, and argument-hint: [case-id]."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "Claude Code의 스킬은 .claude/skills/<스킬 이름>/SKILL.md에 절차와 프런트매터를 작성해 정의합니다. 공식 문서에 따르면 context의 fork는 agent로 지정한 종류의 새 서브에이전트를 기동하여, 대화 이력이 없는 독립된 컨텍스트에서 스킬을 실행시키는 지정입니다(이름과 달리 이력을 이어받는 /fork 같은 대화의 fork가 아닙니다). allowed-tools는 스킬을 호출한 턴 동안 나열한 도구를 확인 없이 사용할 수 있게 하는 사전 승인(도구를 제한하는 것이 아님)이고, argument-hint는 자동 완성 시 기대되는 인수를 보여 주는 힌트입니다.\n\n이 문제의 3가지 요건(메인 대화 밖에서 실행, Read와 Grep을 확인 없이 사용, 케이스 ID 표시)은 이 항목들을 그대로 조합한 선택지로 충족할 수 있습니다.\n\ncontext를 main으로 한 구성은 메인 대화에서 실행되고, 단일 파일 배치는 스킬로 로드되지 않으며, allowed-tools와 argument-hint를 제한이나 검증 기능으로 보는 구성은 각 항목의 의미를 오해한 것입니다. 배치 경로와 프런트매터 중 하나라도 틀리면 워크플로는 요건대로 동작하지 않습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0016",
+  "question": "An investment research desk is using the Claude Agent SDK to build a multi-agent equity research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches financial news and filings, one that analyzes brokerage analyst PDF reports, one that synthesizes findings, and one that generates reports.\n\nThe synthesis phase is given the following two client tools:\n\nanalyze_content (analyzes web search excerpts)\n\nanalyze_content_docs (analyzes uploaded PDFs)\n\nDuring evaluation, the model frequently makes mistakes such as calling the PDF tool on search results and calling the web tool on PDF excerpts. The descriptions of both tools are nearly identical and say only \"Analyzes content and returns key findings.\"\n\nThe team needs to continue exposing separate analysis tools for web excerpts and for PDFs, because it manages output specifications and audit logs separately.\n\nWhich change would most effectively reduce incorrect tool calls?",
+  "choices": {
+   "A": "Rename the tools to indicate their sources, and write in each description the boundaries of when to use and when not to use it.",
+   "B": "Leave the tool names as they are, add examples to the synthesis phase prompt, and ask Claude to choose carefully.",
+   "C": "Merge the two analysis tools into one general-purpose tool, and let the tool decide internally how to handle each source.",
+   "D": "Use tool_choice to force the document analysis tool first, and call the web analysis tool only when the results are insufficient."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "이름도 설명문도 거의 같은 도구가 나란히 있으면 모델은 구분할 단서가 없어 호출을 혼동합니다. 공식 도구 정의 가이드는 도구가 무엇을 하고, 언제 사용해야 하며, 언제 사용하지 말아야 하는지를 자세히 쓴 설명문을 가장 중요하게 보고, 의미가 드러나는 이름 짓기도 권장합니다.\n\n이 문제는 출력 사양과 감사 로그의 사정 때문에 2개의 도구를 분리한 채 운영해야 하므로, 도구는 그대로 두고 소스를 나타내는 이름과 사용하는 경우와 사용하지 않는 경우를 명기한 설명문으로 고치고 디스패처를 따라가게 하는 방법이 정답입니다.\n\n통합은 요건에 반하고, 프롬프트 쪽 예시는 정의의 모호함을 남기며, tool_choice 고정은 입력에 따른 선택을 포기하는 것입니다.\n\n도구 선택의 오류를 보면 먼저 도구 정의 자체가 구분 가능한 형태인지를 의심하는 것이 지름길입니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0017",
+  "question": "You are using the Claude Agent SDK to build a member-facing agent for a health insurer. The agent handles highly ambiguous requests such as claim appeals, premium billing, and coverage verification. It can access backend systems through custom Model Context Protocol (MCP) tools (get_member, lookup_claim, process_reimbursement, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe support automation team at an insurance company finds that MCP tool calls succeed, but the return value formats are inconsistent. Two kinds of responses are mixed together:\n\nResponses that use Unix timestamps and numeric status codes\n\nResponses that use ISO 8601 dates and string status values\n\nClaude sometimes confuses these fields when deciding whether a claim is eligible for reimbursement.\n\nWhat should the team implement to give Claude a normalized representation before it uses successful tool results for reasoning? (Select two.)",
+  "choices": {
+   "A": "Normalize the date and status fields in the MCP tool implementation so that it returns normalized values.",
+   "B": "Add a PostToolUse hook that reads tool_response and returns hookSpecificOutput.updatedToolOutput containing the normalized fields.",
+   "C": "Add a PostToolUse hook that returns hookSpecificOutput.additionalContext containing a mapping for the inconsistent fields.",
+   "D": "Add a PostToolUse hook that returns decision: \"block\" when a tool response uses non-normalized fields."
+  },
+  "answer": [
+   "A",
+   "B"
+  ],
+  "explanation": "도구의 반환 형식이 들쭉날쭉하면 모델은 같은 의미의 값을 별개로 취급해 판단을 그르치기 쉽습니다. 대책은 Claude가 추론에 사용하기 전에 값 자체를 정규 표현으로 맞추는 것이며, 방법은 발생원(MCP 도구의 구현)에서 고치거나 받은 직후에 교체하는 2가지입니다.\n\nAgent SDK의 훅에서는 PostToolUse가 updatedToolOutput을 반환하면 Claude가 보기 전에 도구의 출력을 교체할 수 있고, additionalContext는 도구 결과에 정보를 덧붙일 뿐이라고 공식 문서는 설명합니다. decision을 \"block\"으로 해도 이유가 첨부될 뿐, Claude는 원래의 출력을 계속 봅니다.\n\n따라서 updatedToolOutput에 의한 교체와 MCP 도구 측에서의 정규화, 이 2가지가 정답입니다.\n\n훅 출력 관련 문제에서는 그 필드가 \"교체한다\", \"덧붙인다\", \"멈춘다\" 중 어느 것에 해당하는지를 구분하면 정오가 가려집니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0018",
+  "question": "You work at a fintech company and are using the Messages API to embed Claude as an automated review agent in your release pipeline. The agent runs static analysis on each pull request and generates test case suggestions and review feedback.\n\nDuring the review of one PR, Claude called the submit_review_findings tool. The argument JSON was syntactically correct and fully conformed to the schema. However, the internal CI validation logic rejected this run because it contained the following findings:\n\nFindings that reference files that were not changed\n\nFindings that violate the internal review policy\n\nWhich actions should the integration take next to make it easier for Claude to correct its review output? (Select two.)",
+  "choices": {
+   "A": "Send the next request while keeping the rejected tool_use and its error result in the conversation history.",
+   "B": "Publish only the findings that passed validation, discard the rejected findings, and complete the run.",
+   "C": "Return a tool_result with is_error: true for that tool_use_id, stating the reason for rejection for each finding.",
+   "D": "Add the general instruction \"Review findings must satisfy internal policy\" to the system prompt and rerun."
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "explanation": "도구 호출이 스키마상 올바르더라도 애플리케이션 측의 업무 규칙에 의해 거부되는 일은 드물지 않습니다. 이 경우의 정석은 실패를, is_error를 true로 한 tool_result로 구체적인 이유와 함께 Claude에게 반환하고, 그 주고받음을 대화 이력에 남긴 채 다음 요청을 보내는 것입니다. 공식 문서도 \"failed\" 같은 범용적인 메시지가 아니라, 무슨 일이 일어났고 다음에 무엇을 시도해야 하는지를 적은 오류 메시지를 반환하도록 권장합니다.\n\n2가지 정답은 \"무엇을 반환하는가\"와 \"어디에 남기는가\"의 조합이며, 둘 중 하나라도 빠지면 수정의 재료가 Claude에게 전달되지 않습니다.\n\n오답 2가지는 실패를 조용히 지우는 안과 개별 실패를 일반적인 지시로 대체하는 안으로, 어느 쪽도 이번 오류를 Claude에게 알리는 경로가 없습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0019",
+  "question": "The live operations team at a game studio is integrating Claude Code into its CI/CD pipeline. The system runs automated code reviews, generates test cases, and returns feedback on pull requests. You need to design prompts that return specific, actionable feedback and minimize false positives.\n\nThe team is designing a new automated review feature that detects flaky test risks. However, the following product and workflow questions about the desired behavior remain unresolved:\n\nWhich comments are actionable, and which are noise\n\nWhat should be verified to prove that the implementation is correct\n\nWhat should the team do first, before asking Claude Code to implement it?",
+  "choices": {
+   "A": "Periodically run an autonomous Claude Code job that infers the missing requirements from recent pull request discussions.",
+   "B": "Have a subagent delegated through the Agent tool ask questions with AskUserQuestion, and pass the record to the implementing session.",
+   "C": "Include a detailed review checklist in the prompt, run it directly, and adjust after seeing the first CI failures.",
+   "D": "Have Claude ask questions with AskUserQuestion while compiling a SPEC.md, and then implement in a new session."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "미결 요건이 남은 채로 구현을 의뢰하면 Claude는 그럴듯한 전제로 빈틈을 메워 진행하기 때문에, 나중에 큰 재작업이 발생하기 쉽습니다. Claude Code의 베스트 프랙티스는 큰 기능일수록 먼저 Claude에게 인터뷰하게 하여 사양을 굳히는 진행 방식을 권장하며, AskUserQuestion으로 질문을 거듭해 SPEC.md를 작성하게 하고, 사양이 완성되면 새 세션에서 구현에 들어가는 절차를 제시합니다.\n\n이 문제의 \"어떤 코멘트가 대응 가능한가\", \"무엇을 검증하면 올바르다고 할 수 있는가\"는 바로 사람이 결정해야 할 논점이므로, 이 대화형 계획이 정답입니다.\n\n서브에이전트는 AskUserQuestion을 사용할 수 없고, 직접 실행은 의문을 남긴 채 진행하며, 자율 job은 판단을 추측으로 대체합니다.\n\n문제문에 \"의문이 미해결\", \"구현을 의뢰하기 전에\"라고 되어 있다면, 사람과의 합의를 문서로 남기는 단계를 가진 선택지가 유력합니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0020",
+  "question": "You are using the Claude Agent SDK to build a claims handling agent for insurance. The agent handles highly ambiguous inquiries such as payment adjustments, coverage questions, and payout eligibility. It accesses backend systems through custom MCP tools (get_policyholder, lookup_claim, issue_payout, escalate_to_adjuster). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe engineering team at an insurance company is building this agent using the Claude Agent SDK and these MCP tools. Looking at the agent's traces during testing, Claude requests lookup_claim via MCP, but the results of the claim lookup are never observed. The session ends without producing a final response to the customer.\n\nWhich implementation change should the team make?",
+  "choices": {
+   "A": "Run all the support MCP tools before startup and have Claude summarize their outputs in one turn.",
+   "B": "Detect phrases indicating completion in the assistant's text, and end the workflow when it says the issue is resolved.",
+   "C": "Add to the system instructions that Claude itself must execute each MCP backend operation before responding.",
+   "D": "Run in the SDK's agent loop, returning the results of tool calls and continuing processing until the final response."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "도구를 사용하는 에이전트는 \"모델이 도구를 요청한다\", \"애플리케이션이 그것을 실행해 결과를 반환한다\", \"모델이 이어서 생각한다\"는 왕복을 반복해야 비로소 기능합니다. Agent SDK의 에이전트 루프는 이 왕복을 자동으로 돌리며, 도구를 사용하지 않는 최종 응답이 반환될 때까지 처리를 계속합니다.\n\n이 문제의 트레이스에서는 lookup_claim의 요청은 나와 있는데 결과가 관측되지 않고 최종 답변도 없으므로, 도구 호출의 실행과 결과 반환이 빠져 있다고 판단할 수 있습니다.\n\n시스템 지시의 추가는 모델이 수행할 수 없는 역할을 요구하는 것이고, 완료 문구 검출은 원인과 무관하며, 도구의 사전 일괄 실행은 대화에 따른 도구 선택을 버리는 것입니다.\n\n트레이스에 \"요청은 있는데 결과가 없다\"고 보이면, 먼저 루프의 구현을 의심하는 것이 정석입니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0021",
+  "question": "A renewable energy company is using the Claude Agent SDK to build a grid interconnection feasibility study system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes technical documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring evaluation, you find that when the synthesis subagent receives a long text made by concatenating the subagents' outputs, it tends to do the following:\n\nIt repeatedly omits well-supported findings located in the middle of the bundle\n\nFindings near the beginning and end are retained\n\nWhich change would most effectively reduce this failure while keeping the synthesis step grounded in the original evidence?",
+  "choices": {
+   "A": "Replace the detailed evidence with progressively shorter summaries, and pass only the latest summary to the synthesis agent.",
+   "B": "Prepend a concise findings map before the aggregated output, and group the detailed evidence under explicit headings by source and topic.",
+   "C": "Move all source URLs to an appendix at the end, and keep the descriptive evidence together in a single continuous section.",
+   "D": "Concatenate the subagent outputs in order of completion, and have the synthesis agent infer the main themes from the whole bundle."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "긴 컨텍스트에서는 입력의 처음과 끝에 있는 정보에 비해 중간에 있는 정보가 모델의 주의에서 빠지기 쉽다고 알려져 있습니다. 공식 프롬프트 가이드는 긴 문서를 다루는 요령으로, 여러 문서를 <document> 등의 태그와 출처 메타데이터로 구조화하는 것, 작업 전에 관련 부분을 인용하게 하는 것 등을 권장합니다.\n\n이 문제의 통합 단계는 연결된 긴 출력의 중간에 있는 근거를 빠뜨리고 있으므로, 앞부분에 지식 맵을 두어 전체상을 보여 주고 상세 근거를 출처와 주제 제목으로 구조화하는 방법이, 근거를 잃지 않으면서 누락을 줄이는 정답입니다.\n\n요약으로의 교체는 원래의 근거를 잃고, 완료 순 연결은 현재 그대로이며, URL 이동은 근거의 구조를 바꾸지 않습니다. 요건에 \"원래의 근거에 기반하게 한 채\"라고 있는 이상, 정보를 깎는 선택지는 그 시점에서 후보에서 제외됩니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0022",
+  "question": "An investment research desk is using the Claude Agent SDK to build a multi-agent equity research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches financial news and filings, one that analyzes brokerage analyst PDF reports, one that synthesizes findings, and one that generates reports.\n\nBefore finalizing a refactoring plan, the team uses a named subagent that examines dependency impact to investigate the packages to be changed.\n\nHowever, after the subagent identifies several affected files, the local test command intermittently times out. Only the result \"impact analysis failed\" is returned to the parent conversation, so useful findings are dropped from the plan.\n\nWhich change would best preserve resilience to failures without flooding the parent conversation with raw investigation output?",
+  "choices": {
+   "A": "Have the parent inspect the subagent's intermediate Bash calls and re-run only the failed commands before planning.",
+   "B": "Leave tools and disallowedTools unset, and use the inherited access to suppress Bash retries.",
+   "C": "Have the subagent retry transient failures internally and include the findings it obtained and any unresolved errors in its final result.",
+   "D": "Move the dependency impact investigation back into the parent conversation, and keep the command logs as material for creating the plan."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "서브에이전트에 조사를 위임하는 이점은 중간 탐색과 도구 출력을 서브에이전트 안에 가두고 부모에게는 핵심만 돌려줄 수 있다는 것입니다. 공식 문서도 서브에이전트의 중간 도구 호출과 결과는 서브에이전트 내부에 머물며, 부모에게 반환되는 것은 최종 메시지뿐이라고 설명합니다. 따라서 일시적인 실패에 대한 내성도 서브에이전트 쪽에서 완결하는 것이 자연스러운 설계입니다.\n\n이 문제에서는 서브에이전트 안에서 재시도하고, 그래도 남은 실패와 부분적인 발견 사항을 최종 결과에 포함해 반환하는 방법이 실패에 대한 내성과 부모의 컨텍스트 효율을 모두 만족합니다.\n\n부모가 중간 호출을 검사하는 안은 구조상 불가능하고, 권한 설정을 그대로 두는 안은 논점과 무관하며, 조사를 부모로 되돌리는 안은 위임의 이점을 잃습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0023",
+  "question": "You are using the Claude Agent SDK to build a customer support resolution agent for a video streaming service. The agent handles highly ambiguous requests such as cancellations, billing disputes, and account issues. It can access backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team wants to move its low-urgency post-resolution quality checks to the Message Batches API. The conditions are as follows:\n\nCases arrive continuously\n\nFor audit triage, each check must have the batch's final result within 30 hours of the case's arrival\n\nAssume that a batch may use the entire 24-hour processing window stated in the documentation before it yields results or expires\n\nWhich submission interval should the team use?",
+  "choices": {
+   "A": "Submit the accumulated requests once a day, matching each case's result by custom_id.",
+   "B": "Submit the accumulated requests every 8 hours, matching each case's result by custom_id.",
+   "C": "Submit the accumulated requests every 12 hours, matching each case's result by custom_id.",
+   "D": "Submit the accumulated requests every 4 hours, matching each case's result by custom_id."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "Message Batches API는 대량의 요청을 저비용으로 비동기 처리할 수 있으며 대부분의 배치는 1시간 이내에 완료되지만, 24시간 이내에 처리가 끝나지 않으면 만료되는 사양이므로 최대 24시간의 처리 시간을 감안해야 합니다.\n\n계속 도착하는 케이스를 일정 간격으로 모아서 보내는 경우, 최악의 지연은 「다음 전송까지의 대기 시간(최대 전송 간격) + 배치의 처리 시간(최대 24시간)」입니다. 이를 30시간 이내로 맞추려면 전송 간격을 6시간 이하로 해야 하며, 보기 중에서는 4시간마다만 해당합니다(4+24=28시간).\n\n1일, 12시간, 8시간마다는 각각 최악의 경우 48, 36, 32시간이 되어 요건을 초과합니다. custom_id로 결과를 대조하는 것은 모든 보기에 공통이어서 차이를 만들지 않으므로, 판단은 전송 간격 계산만으로 결정됩니다.\n\n평균이 아니라 최악의 경우로 대기 시간과 처리 시간을 합산하는 것이 시간 요건 추정의 기본입니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0024",
+  "question": "A research team at a consulting firm is using the Claude Agent SDK to build a multi-agent research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nWhen you run a benchmark on a broad topic, processing is slow and coverage is uneven. Looking at the logs, the coordinator processed things in the following order:\n\nHave one specialized subagent investigate all aspects in sequence\n\nPass a compressed text summary to the next specialized subagent\n\nOnly after that, request the final report\n\nThe relevant aspects were already known at the start, and they have no dependencies on each other.\n\nWhich design changes would be most effective for improving latency and coverage while maintaining a consistent final report? (Select two.)",
+  "choices": {
+   "A": "Have each specialized subagent hand off its unfinished aspects to another specialized subagent, merge each other's private context, and return the merged answer to the coordinator.",
+   "B": "Have the coordinator disable parallel tool use and handle each aspect in a separate turn, appending all raw results as it goes, and synthesize after the last subtask.",
+   "C": "Have the coordinator split the request into per-aspect subtasks, invoke independent specialized subagents together with shared constraints attached, and then consolidate their findings.",
+   "D": "Have the coordinator give each specialized subagent a self-contained brief so that no specialized subagent has to wait for another subagent's summary."
+  },
+  "answer": [
+   "C",
+   "D"
+  ],
+  "explanation": "독립된 여러 관점을 조사하는 태스크는 병렬화로 지연 시간과 커버리지를 모두 개선할 수 있는 전형적인 예입니다. Anthropic의 에이전트 설계 가이드는 이를 parallelization의 sectioning(독립된 서브태스크로 분할하여 동시에 실행)으로 소개하고 있으며, 멀티 에이전트 리서치 시스템 해설에서도 서브에이전트를 병렬로 기동함으로써 복잡한 조사의 소요 시간이 크게 단축되었다고 보고합니다.\n\n이 문제의 정답은 관점별 서브태스크로 분할하여 동시에 호출하고 통합하는 것과, 각 전문 서브에이전트에 자기완결적인 브리프를 전달하여 대기를 없애는 것의 2가지입니다.\n\n순차 인계도 병렬 도구 비활성화도 순차 처리라는 원인을 그대로 남겨 둡니다.\n\n문제문에 「시작 시점에 판명」「서로 의존하지 않는다」라고 있으면, 병렬화를 방해하는 의존성을 제거하는 보기가 정답 후보가 됩니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0025",
+  "question": "A company that provides a health insurance claims processing system is using the Claude Agent SDK to build an agent that resolves ambiguous member inquiries (claim appeals, eligibility verification, account issues, and so on). The agent accesses internal systems through custom Model Context Protocol (MCP) tools (get_member, lookup_claim, process_adjustment, escalate_to_specialist). The goal is to achieve a first-contact resolution rate of 80% or higher while escalating to a specialist when necessary.\n\nThe team manages changes to claim adjustment and escalation policies in GitHub, and requests managed Claude Code Review only during scheduled review batches.\n\nA reviewer commented @claude review once, and after a fix was pushed, commented @claude review once again. As a result, several findings that should have been resolved were repeated as new inline comments.\n\nFor the next manual re-review, the team wants to make sure that unresolved issues found in the first review are reliably surfaced, without undermining reviewer trust.\n\nWhich change should they make?",
+  "choices": {
+   "A": "Add guidance to REVIEW.md so that, on re-reviews, Claude takes past findings into account and reports only new or unresolved issues.",
+   "B": "Change the manual command to @claude review always so that the pull request is reviewed on every push from now on.",
+   "C": "Leave the review instructions unchanged, and have a maintainer manually close the duplicate inline threads after each re-review.",
+   "D": "Re-run the review from the GitHub Checks tab and have Claude Code update its comments for the new commit."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "Claude Code의 매니지드 코드 리뷰(Code Review)는 PR에 대한 「@claude review」 계열의 코멘트나, 리포지토리 설정에 따른 푸시 시 자동 실행으로 기동되며, CLAUDE.md와 REVIEW.md로 리뷰 방침을 조정할 수 있습니다. REVIEW.md는 리뷰에만 사용되는 지시로, 심각도 정의, 지적 건수 상한, 스킵 규칙에 더해 이미 리뷰된 PR에서의 동작(재리뷰의 수렴)도 지정할 수 있습니다.\n\n이 문제는 수동 스케줄 운용을 유지하면서 재리뷰에서 해소된 지적이 반복되는 것을 막고, 미해소 문제는 확실히 남기고 싶은 상황이므로, REVIEW.md에 과거의 지적을 고려하여 새로운 또는 미해소 문제만 보고한다는 방침을 쓰는 것이 정답입니다.\n\n「@claude review always」로의 전환은 수동 운용의 전제를 무너뜨리고, Checks 탭에서의 재실행은 같은 방침의 리뷰를 다시 할 뿐이며, 수작업 클로즈는 근본 원인을 건드리지 않습니다. 기동 방법을 바꾸는 보기는 모두 리뷰의 내용에는 손을 대지 않는다는 점에서 공통됩니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0026",
+  "question": "You are using the Claude Agent SDK to build a customer support resolution agent for an interior design and furniture e-commerce business. The agent handles highly ambiguous requests such as returns, billing disputes, and account issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to maintain a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nDuring pilot testing, the refund proposal step now always produces parseable structured data. All required fields are present and the numeric types are correct. Two defects remain:\n\nProduct credits are being placed in the shipping_refund field\n\nThe sum of the per-line-item adjustment amounts does not match the requested total refund amount\n\nWhich change should the team make next?",
+  "choices": {
+   "A": "Switch to plain JSON instructions and remove the tool schema from the extraction step.",
+   "B": "Make the refund fields in the schema required and reject nullable values during extraction.",
+   "C": "Set strict: true in the tool definition so that refund proposal inputs match the schema exactly.",
+   "D": "Add business-rule validation before the refund is executed, and send the specific violations back to be corrected."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "구조화 출력에서 「파싱 가능하고, 필수 필드가 갖춰져 있으며, 타입도 올바른」 상태가 되더라도, 그것은 형식의 올바름이지 업무상의 올바름이 아닙니다. 공식 문서도 structured outputs나 strict tool use는 스키마 적합을 보장하는 것이라고 설명하며, 값의 의미나 항목 간의 정합성은 애플리케이션 측에서 검증해야 합니다.\n\n이 문제에 남아 있는 불일치는 상품 크레딧이 잘못된 필드에 저장되는 것과, 명세 합계와 환불 총액의 불일치이며, 둘 다 업무 규칙의 문제입니다. 따라서 환불 실행 전에 업무 규칙 검증을 수행하고, 위반 내용을 구체적으로 되돌려 수정하게 하는 것이 다음 수순입니다.\n\n스키마 제거, strict 설정, 필수화는 모두 형식 측면의 조작이어서 남은 문제에 닿지 않습니다.\n\n실패가 「형식의 오류」인지 「의미의 오류」인지를 가려내는 것이 대책을 고르는 출발점이 됩니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0027",
+  "question": "An in-house development team at an insurance company is integrating Claude Code into an automated code review pipeline. The system runs an automated review on every pull request and returns specific, actionable feedback.\n\nThe team's review prompt asks Claude to detect possible policy violations and requires every finding to include a policy_section and a supporting_quote (a quote serving as evidence).\n\nOne pull request added retention logic for customer support call records (transcripts). However, the policy excerpts given to Claude covered only application logs and analytics events, and did not include any policy about transcripts. The validator rejected Claude's finding because the supporting_quote was empty.\n\nWhat should the pipeline do? (Select two.)",
+  "choices": {
+   "A": "If a quote cannot be provided, return the finding as insufficient information and do not post it until a quote is attached.",
+   "B": "Raise max_tokens and have Claude fill in the missing policy evidence in a continuation of the response.",
+   "C": "Make supporting_quote a required field in the structured output schema to force the output.",
+   "D": "Additionally pass the policy excerpts on call transcript retention to the review prompt."
+  },
+  "answer": [
+   "A",
+   "D"
+  ],
+  "explanation": "근거를 포함한 구조화 출력에서는 「근거를 붙이게 하는 것」과 「근거가 없을 때 어떻게 동작하게 할 것인가」를 나누어 설계합니다.\n\n이 문제의 밸리데이터가 지적을 기각한 것은 올바른 동작이며, 문제는 트랜스크립트 정책이라는 근거가 입력에 존재하지 않는다는 데 있습니다. 따라서 부족한 근거를 공급하는 것과, 근거가 없을 때는 정보 부족으로 게시를 보류하는 것의 2가지가 정답입니다. 공식 환각 저감 가이드도 불확실할 때 「모른다」고 말하게 하는 것, 인용으로 뒷받침되지 않는 주장을 철회하게 하는 것을 권장합니다.\n\nmax_tokens 상향이나 스키마에서의 필수화는 출력의 길이나 형태를 바꿀 뿐이며, 존재하지 않는 근거를 보충할 수 없습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0028",
+  "question": "A pharmaceutical company is using the Claude Agent SDK to build a competitive intelligence research system. A coordinator agent delegates work to specialized subagents. The subagents include one that searches regulatory submission documents, one that analyzes clinical trial documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nDuring evaluation, the team found that although the final reports are well written, the following problems sometimes occur:\n\nUnsupported claims are included\n\nContradictions between sections are missed\n\nIn the current design, the report generation agent reviews its own draft before publication.\n\nWhich architectural changes would most effectively improve the reliability of the review? (Select two.)",
+  "choices": {
+   "A": "Verify each claim-source pair with an independent reviewer, and then run a synthesis pass that checks for contradictions and gaps.",
+   "B": "Delegate verification to a subagent, and pass it the claims to verify together with the source excerpts they should be checked against.",
+   "C": "Have the report generation agent perform an extended self-review immediately after the draft, using the existing conversation history as is.",
+   "D": "Have the synthesis agent consolidate all subagent outputs at once and flag unsupported claims before publication."
+  },
+  "answer": [
+   "A",
+   "B"
+  ],
+  "explanation": "생성한 에이전트 자신에 의한 리뷰는 같은 전제와 맥락을 공유하므로 오류를 놓치기 쉬우며, 품질 보증에는 독립된 검증 장치가 필요합니다. Anthropic의 에이전트 설계 가이드는 한 LLM이 생성하고 다른 LLM이 평가하여 피드백하는 evaluator-optimizer나, 독립된 서브태스크를 병렬로 처리하는 parallelization을 소개하고 있습니다.\n\n이 문제의 정답은 주장과 출처의 쌍마다 독립된 리뷰어로 검증한 뒤 통합 패스에서 모순과 누락을 확인하는 것과, 검증을 위임할 때 주장과 대조해야 할 출처 발췌를 함께 전달하는 것의 2가지입니다.\n\n기존 이력에서의 셀프 리뷰는 현재 설계 그대로이며, 한 번만 통합하고 검사까지 겸하게 하면 놓치는 부분이 생깁니다. 독립성과 재료가 모두 갖춰져야 비로소 리뷰는 생성과는 다른 관점으로 기능합니다."
+ }
+]

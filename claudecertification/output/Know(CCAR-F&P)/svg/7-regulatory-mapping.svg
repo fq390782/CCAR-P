@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="데이터 유형과 관할권에서 프레임워크, 설계 요구, Claude 쪽 선택으로 이어지는 매핑">
+<title>데이터 유형과 관할권에서 프레임워크, 설계 요구, Claude 쪽 선택으로 이어지는 매핑</title>
+<defs><marker id="arr-regulatory-mapping" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="400.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">프레임워크는 데이터 유형 · 관할권이 결정</text>
+<rect x="20" y="48" width="230" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="135.0" y="70.8" font-size="13" fill="#1F2937" text-anchor="middle">EU 거주자 개인 데이터</text>
+<text x="135.0" y="86.2" font-size="11" fill="#1F2937" text-anchor="middle">회사 소재지 무관</text>
+<rect x="285" y="48" width="230" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="400.0" y="78.2" font-size="13" fill="#1F2937" text-anchor="middle">미국 건강 정보 (PHI)</text>
+<rect x="550" y="48" width="230" height="52" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="665.0" y="70.8" font-size="13" fill="#1F2937" text-anchor="middle">미국 연방 기관용</text>
+<text x="665.0" y="86.2" font-size="11" fill="#1F2937" text-anchor="middle">클라우드 서비스</text>
+<polyline points="135.0,100 135.0,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="143.0" y="115" font-size="11" fill="#1F2937" text-anchor="start">적용</text>
+<polyline points="400.0,100 400.0,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="408.0" y="115" font-size="11" fill="#1F2937" text-anchor="start">적용</text>
+<polyline points="665.0,100 665.0,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="673.0" y="115" font-size="11" fill="#1F2937" text-anchor="start">적용</text>
+<rect x="20" y="124" width="230" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="135.0" y="145.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">GDPR</text>
+<rect x="285" y="124" width="230" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="400.0" y="145.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">HIPAA</text>
+<rect x="550" y="124" width="230" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="145.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">FedRAMP</text>
+<polyline points="135.0,158 135.0,182" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="143.0" y="175" font-size="11" fill="#1F2937" text-anchor="start">설계 요구</text>
+<polyline points="400.0,158 400.0,182" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="408.0" y="175" font-size="11" fill="#1F2937" text-anchor="start">설계 요구</text>
+<polyline points="665.0,158 665.0,182" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="673.0" y="175" font-size="11" fill="#1F2937" text-anchor="start">설계 요구</text>
+<rect x="20" y="184" width="230" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="135.0" y="208.2" font-size="13" fill="#1F2937" text-anchor="middle">데이터 최소화 · 목적 제한</text>
+<text x="135.0" y="223.8" font-size="11" fill="#1F2937" text-anchor="middle">요청 시 삭제 능력</text>
+<text x="135.0" y="238.8" font-size="11" fill="#1F2937" text-anchor="middle">처리자 DPA · EU residency</text>
+<rect x="285" y="184" width="230" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="400.0" y="208.2" font-size="13" fill="#1F2937" text-anchor="middle">BAA · 적격 구성</text>
+<text x="400.0" y="223.8" font-size="11" fill="#1F2937" text-anchor="middle">minimum-necessary</text>
+<text x="400.0" y="238.8" font-size="11" fill="#1F2937" text-anchor="middle">PHI 접근 audit logging</text>
+<rect x="550" y="184" width="230" height="70" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="208.2" font-size="13" fill="#1F2937" text-anchor="middle">인가 환경 · 경계 문서화</text>
+<text x="665.0" y="223.8" font-size="11" fill="#1F2937" text-anchor="middle">audit logging</text>
+<text x="665.0" y="238.8" font-size="11" fill="#1F2937" text-anchor="middle">미국 연방 기관용 서비스만 대상</text>
+<polyline points="135.0,254 135.0,278" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="143.0" y="271" font-size="11" fill="#1F2937" text-anchor="start">Claude 쪽 선택</text>
+<polyline points="400.0,254 400.0,278" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="408.0" y="271" font-size="11" fill="#1F2937" text-anchor="start">Claude 쪽 선택</text>
+<polyline points="665.0,254 665.0,278" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-regulatory-mapping)"/>
+<text x="673.0" y="271" font-size="11" fill="#1F2937" text-anchor="start">Claude 쪽 선택</text>
+<rect x="20" y="280" width="230" height="104" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="135.0" y="305.8" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">삭제권 + 비학습 = DPA + ZDR</text>
+<text x="135.0" y="320.8" font-size="11" fill="#1F2937" text-anchor="middle">(또는 문서화된 비학습)</text>
+<text x="135.0" y="335.8" font-size="11" fill="#1F2937" text-anchor="middle">residency: workspace에</text>
+<text x="135.0" y="350.8" font-size="11" fill="#1F2937" text-anchor="middle">default_inference_geo +</text>
+<text x="135.0" y="365.8" font-size="11" fill="#1F2937" text-anchor="middle">allowed_inference_geos</text>
+<rect x="285" y="280" width="230" height="104" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="400.0" y="305.8" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">Enterprise 또는 서명된 BAA가</text>
+<text x="400.0" y="320.8" font-size="11" fill="#1F2937" text-anchor="middle">있는 first-party API</text>
+<text x="400.0" y="335.8" font-size="11" fill="#1F2937" text-anchor="middle">BAA 범위 = Anthropic 처리만</text>
+<text x="400.0" y="350.8" font-size="11" fill="#1F2937" text-anchor="middle">서드파티 connector는</text>
+<text x="400.0" y="365.8" font-size="11" fill="#1F2937" text-anchor="middle">별도 BAA 또는 PHI 제외</text>
+<rect x="550" y="280" width="230" height="104" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="665.0" y="305.8" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">인가 경로 = 인가 상속</text>
+<text x="665.0" y="320.8" font-size="11" fill="#1F2937" text-anchor="middle">Claude for Government</text>
+<text x="665.0" y="335.8" font-size="11" fill="#1F2937" text-anchor="middle">AWS Bedrock GovCloud</text>
+<text x="665.0" y="350.8" font-size="11" fill="#1F2937" text-anchor="middle">Vertex AI Assured Workloads</text>
+<text x="665.0" y="365.8" font-size="11" fill="#1F2937" text-anchor="middle">상용 직접 API = 인가 ✗</text>
+<rect x="20" y="408" width="760" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="400.0" y="424.8" font-size="13" fill="#1F2937" text-anchor="middle">복수 프레임워크 동시 적용: 미국 원격 의료 + 독일 환자 → HIPAA + GDPR</text>
+<text x="400.0" y="440.2" font-size="11" fill="#1F2937" text-anchor="middle">'벤더 이용 ≠ 면제' · '미국 회사라 HIPAA만' ✗</text>
+<rect x="20" y="460" width="760" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="400.0" y="481.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">'저장 안 함' 요구 → ZDR</text>
+<text x="400.0" y="496.8" font-size="11" fill="#1F2937" text-anchor="middle">account team이 조직별 활성화 · 기능마다 적격 여부 확인 · Console(playground 포함) 제외</text>
+<text x="400.0" y="511.8" font-size="11" fill="#1F2937" text-anchor="middle">HIPAA readiness ≠ ZDR (보호 장치 추가일 뿐 각 응답 후 삭제 요구 ✗)</text>
+</g>
+</svg>

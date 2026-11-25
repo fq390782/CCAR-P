@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-label="보존 규칙 한 행에서 예약 삭제와 삭제 요청 이행으로 이어지는 흐름">
+<title>보존 규칙 한 행에서 예약 삭제와 삭제 요청 이행으로 이어지는 흐름</title>
+<defs><marker id="arr-retention-deletion" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="400.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">보존 = 기본값이 아닌 설계: 기간 · 담당자 · 삭제 경로를 함께 정함</text>
+<rect x="20" y="48" width="190" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="115.0" y="69.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">무기한 저장 제안</text>
+<text x="115.0" y="84.8" font-size="11" fill="#1F2937" text-anchor="middle">'보관은 항상 더 안전' ✗</text>
+<text x="115.0" y="99.8" font-size="11" fill="#1F2937" text-anchor="middle">왜 필요 · 얼마나 오래 · 의무?</text>
+<polyline points="210,80 256,80" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retention-deletion)"/>
+<text x="233" y="72" font-size="11" fill="#1F2937" text-anchor="middle">전환</text>
+<rect x="258" y="48" width="290" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="403.0" y="69.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">보존 규칙 한 행</text>
+<text x="403.0" y="84.8" font-size="11" fill="#1F2937" text-anchor="middle">요구사항에 연결한 기간 + 담당자</text>
+<text x="403.0" y="99.8" font-size="11" fill="#1F2937" text-anchor="middle">시행 증거 · 검토 주기 · 요청 시 삭제 경로</text>
+<polyline points="330,112 330,134 205,134 205,156" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retention-deletion)"/>
+<text x="268" y="129" font-size="11" fill="#1F2937" text-anchor="middle">기간 경과</text>
+<polyline points="476,112 476,134 595,134 595,156" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retention-deletion)"/>
+<text x="536" y="129" font-size="11" fill="#1F2937" text-anchor="middle">삭제 요청</text>
+<rect x="40" y="158" width="330" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="205.0" y="182.8" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">예약 삭제</text>
+<text x="205.0" y="198.2" font-size="11" fill="#1F2937" text-anchor="middle">기간 경과 시 자동 삭제 (예: 티켓 3년 후)</text>
+<rect x="430" y="158" width="330" height="40" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="595.0" y="182.2" font-size="13" fill="#1F2937" text-anchor="middle">고객 삭제 요청 (삭제권)</text>
+<polyline points="595,198 595,222" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retention-deletion)"/>
+<text x="603" y="215" font-size="11" fill="#1F2937" text-anchor="start">모든 사본 탐색</text>
+<rect x="430" y="224" width="330" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="595.0" y="248.8" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">삭제 pipeline</text>
+<text x="595.0" y="264.2" font-size="11" fill="#1F2937" text-anchor="middle">로그 · 평가 샘플 · 백업까지 탐색</text>
+<rect x="250" y="332" width="300" height="52" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="400.0" y="354.8" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">삭제 로그 기록 = 감사 증거</text>
+<text x="400.0" y="370.2" font-size="11" fill="#1F2937" text-anchor="middle">삭제 이행 증거로 남김</text>
+<polyline points="205,214 205,358 248,358" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retention-deletion)"/>
+<text x="213" y="300" font-size="11" fill="#1F2937" text-anchor="start">삭제 실행</text>
+<polyline points="595,280 595,358 552,358" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retention-deletion)"/>
+<text x="603" y="320" font-size="11" fill="#1F2937" text-anchor="start">법정 기한 내 삭제</text>
+<rect x="40" y="414" width="330" height="76" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="205.0" y="441.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">삭제 vs 디버깅 충돌</text>
+<text x="205.0" y="456.8" font-size="11" fill="#1F2937" text-anchor="middle">규칙 유지 (예: 90일 후 삭제 + 삭제 로그)</text>
+<text x="205.0" y="471.8" font-size="11" fill="#1F2937" text-anchor="middle">디버깅 = 마스킹된 · 짧은 기간 재현 데이터</text>
+<rect x="430" y="414" width="330" height="92" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="595.0" y="434.2" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답</text>
+<text x="595.0" y="449.8" font-size="11" fill="#1F2937" text-anchor="middle">보존 기간 2년 연장 (침해 표면 24배)</text>
+<text x="595.0" y="464.8" font-size="11" fill="#1F2937" text-anchor="middle">다음 인시던트까지 삭제 중단 (영구화)</text>
+<text x="595.0" y="479.8" font-size="11" fill="#1F2937" text-anchor="middle">사본이 남은 상태의 삭제 이행</text>
+<text x="595.0" y="494.8" font-size="11" fill="#1F2937" text-anchor="middle">(백업 · 평가 샘플에 남으면 삭제 무의미)</text>
+</g>
+</svg>

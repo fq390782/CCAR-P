@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="630" viewBox="0 0 920 630" role="img" aria-label="판단 규칙 ①: 작업 특성으로 후보를 고르고, 측정으로 확정한다">
+<title>판단 규칙 ①: 작업 특성으로 후보를 고르고, 측정으로 확정한다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-rules-model-tree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-rules-model-tree-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="460" y="30" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">판단 규칙 ①: 작업 특성으로 후보를 고르고, 측정으로 확정한다</text>
+<rect x="90" y="50" width="160" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170" y="74.55" font-size="13" text-anchor="middle" fill="#1F2937">모델을 정해야 함</text>
+<polyline points="170,90 170,98" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<polygon points="170,100.0 290.0,150 170,200.0 50.0,150" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="145.55" font-size="13" text-anchor="middle" fill="#1F2937">작업마다 난이도가</text>
+<text x="170" y="163.55" font-size="13" text-anchor="middle" fill="#1F2937">다른가?</text>
+<polyline points="290,150 328,150" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="300.5" y="133" width="17" height="15" fill="#FFFFFF"/>
+<text x="309" y="144" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="330" y="122" width="320" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="490" y="146.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Routing: 작업별 tier 분리</text>
+<text x="490" y="162.85" font-size="11" text-anchor="middle" fill="#6B7280">orchestrator = capable · worker = small · fast</text>
+<polyline points="170,200 170,228" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="179" y="207" width="39" height="15" fill="#FFFFFF"/>
+<text x="182" y="218" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<polygon points="170,230.0 290.0,280 170,330.0 50.0,280" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="275.55" font-size="13" text-anchor="middle" fill="#1F2937">대량 단순 작업 ·</text>
+<text x="170" y="293.55" font-size="13" text-anchor="middle" fill="#1F2937">빠듯한 latency?</text>
+<polyline points="290,280 328,280" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="300.5" y="263" width="17" height="15" fill="#FFFFFF"/>
+<text x="309" y="274" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="330" y="252" width="320" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="490" y="276.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Haiku (fast tier)</text>
+<text x="490" y="292.85" font-size="11" text-anchor="middle" fill="#6B7280">autocomplete면 + streaming + 작은 max_tokens</text>
+<polyline points="170,330 170,353" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="179" y="335" width="39" height="15" fill="#FFFFFF"/>
+<text x="182" y="346" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<polygon points="170,355.0 300.0,410 170,465.0 40.0,410" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="405.55" font-size="13" text-anchor="middle" fill="#1F2937">다중 제약 multi-step</text>
+<text x="170" y="423.55" font-size="13" text-anchor="middle" fill="#1F2937">계획 · migration?</text>
+<polyline points="300,410 328,410" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="305.5" y="393" width="17" height="15" fill="#FFFFFF"/>
+<text x="314" y="404" font-size="11" text-anchor="middle" fill="#1F2937">예</text>
+<rect x="330" y="382" width="320" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="490" y="406.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Opus (가장 capable)</text>
+<text x="490" y="422.85" font-size="11" text-anchor="middle" fill="#6B7280">prompt로는 능력 차이를 못 메움</text>
+<polyline points="170,465 170,488" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="179" y="469" width="39" height="15" fill="#FFFFFF"/>
+<text x="182" y="480" font-size="11" text-anchor="start" fill="#1F2937">아니오</text>
+<rect x="80" y="490" width="180" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="170" y="516.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">Sonnet (balanced)</text>
+<rect x="700" y="122" width="200" height="412" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="800" y="233.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">측정으로 확정</text>
+<text x="800" y="251.55" font-size="13" text-anchor="middle" fill="#1F2937"></text>
+<text x="800" y="269.55" font-size="13" text-anchor="middle" fill="#1F2937">두 후보 모두</text>
+<text x="800" y="287.55" font-size="13" text-anchor="middle" fill="#1F2937">대표 sample +</text>
+<text x="800" y="305.55" font-size="13" text-anchor="middle" fill="#1F2937">quality bar로 eval</text>
+<text x="800" y="323.55" font-size="13" text-anchor="middle" fill="#1F2937"></text>
+<text x="800" y="341.55" font-size="13" text-anchor="middle" fill="#1F2937">정확도가 같으면</text>
+<text x="800" y="359.55" font-size="13" text-anchor="middle" fill="#1F2937" font-weight="bold">작은 모델 배포</text>
+<text x="800" y="377.55" font-size="13" text-anchor="middle" fill="#1F2937"></text>
+<text x="800" y="395.55" font-size="13" text-anchor="middle" fill="#1F2937">큰 모델이 거의 완벽해도</text>
+<text x="800" y="413.55" font-size="13" text-anchor="middle" fill="#1F2937">작은 모델이 요구 정확도를</text>
+<text x="800" y="431.55" font-size="13" text-anchor="middle" fill="#1F2937">충족하는지 평가</text>
+<polyline points="650,150 698,150" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="660" y="133" width="28" height="15" fill="#FFFFFF"/>
+<text x="674" y="144" font-size="11" text-anchor="middle" fill="#1F2937">후보</text>
+<polyline points="650,280 698,280" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="660" y="263" width="28" height="15" fill="#FFFFFF"/>
+<text x="674" y="274" font-size="11" text-anchor="middle" fill="#1F2937">후보</text>
+<polyline points="650,410 698,410" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="660" y="393" width="28" height="15" fill="#FFFFFF"/>
+<text x="674" y="404" font-size="11" text-anchor="middle" fill="#1F2937">후보</text>
+<polyline points="260,512 698,512" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rules-model-tree)"/>
+<rect x="466" y="495" width="28" height="15" fill="#FFFFFF"/>
+<text x="480" y="506" font-size="11" text-anchor="middle" fill="#1F2937">후보</text>
+<rect x="20" y="560" width="880" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="460" y="586.55" font-size="13" text-anchor="middle" fill="#1F2937">✗ benchmark 점수 · 최신 · 더 큰 모델이라서 선택        ✗ 추론 작업을 작은 모델 여러 개로 분할</text>
+</g>
+</svg>

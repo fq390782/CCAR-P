@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="progressive discovery와 monolithic context 비교: 스키마 로드 시점과 왕복 비용">
+<title>progressive discovery와 monolithic context 비교: 스키마 로드 시점과 왕복 비용</title>
+<defs><marker id="arr-rag-discovery-vs-monolithic" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">표면 크기 · SLA · 토큰 예산으로 판정: discovery는 스키마 토큰을 왕복 한 번과 맞바꿈</text>
+<text x="230" y="62" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">monolithic context</text>
+<text x="670" y="62" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">progressive discovery</text>
+<rect x="20" y="74" width="420" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="230" y="98.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">전체 도구 스키마 사전 로드</text>
+<text x="230" y="114.2" font-size="11" fill="#1F2937" text-anchor="middle">처음부터 모든 스키마가 context에 존재</text>
+<polyline points="230,130 230,154" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-discovery-vs-monolithic)"/>
+<text x="238" y="146" font-size="11" fill="#1F2937" text-anchor="start">호출 시</text>
+<rect x="20" y="154" width="420" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="230" y="178.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">모델이 도구 선택 · 호출</text>
+<text x="230" y="194.2" font-size="11" fill="#1F2937" text-anchor="middle">왕복 없음 → 빡빡한 SLA에 유리</text>
+<polyline points="230,210 230,234" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-discovery-vs-monolithic)"/>
+<text x="238" y="226" font-size="11" fill="#1F2937" text-anchor="start">대가</text>
+<rect x="20" y="234" width="420" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="230" y="258.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">스키마 토큰 · 선택 집합 = 전체</text>
+<text x="230" y="274.2" font-size="11" fill="#1F2937" text-anchor="middle">도구 다수 + 토큰 빠듯하면 불리</text>
+<polyline points="230,290 230,314" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-discovery-vs-monolithic)"/>
+<text x="238" y="306" font-size="11" fill="#1F2937" text-anchor="start">정답 조건</text>
+<rect x="20" y="314" width="420" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="230" y="341.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">도구 소수 · 빡빡한 SLA</text>
+<text x="230" y="356.7" font-size="11" fill="#1F2937" text-anchor="middle">도구 3~12개 · SLA 800ms~1초 · 토큰 넉넉</text>
+<text x="230" y="371.7" font-size="11" fill="#1F2937" text-anchor="middle">모든 호출이 전 도구 사용</text>
+<rect x="460" y="74" width="420" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="670" y="98.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">도구 이름(+목적)만 노출</text>
+<text x="670" y="114.2" font-size="11" fill="#1F2937" text-anchor="middle">스키마는 필요할 때 fetch</text>
+<polyline points="670,130 670,154" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-discovery-vs-monolithic)"/>
+<text x="678" y="146" font-size="11" fill="#1F2937" text-anchor="start">필요한 도구 결정</text>
+<rect x="460" y="154" width="420" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="670" y="178.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">필요한 도구의 스키마 fetch</text>
+<text x="670" y="194.2" font-size="11" fill="#1F2937" text-anchor="middle">비용: 호출마다 왕복 추가 → 빡빡한 SLA에서 불리</text>
+<polyline points="670,210 670,234" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-discovery-vs-monolithic)"/>
+<text x="678" y="226" font-size="11" fill="#1F2937" text-anchor="start">효과</text>
+<rect x="460" y="234" width="420" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="670" y="258.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">호출당 스키마 토큰 ↓</text>
+<text x="670" y="274.2" font-size="11" fill="#1F2937" text-anchor="middle">보이는 선택 집합 ↓ → 오선택 ↓</text>
+<polyline points="670,290 670,314" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-discovery-vs-monolithic)"/>
+<text x="678" y="306" font-size="11" fill="#1F2937" text-anchor="start">정답 조건</text>
+<rect x="460" y="314" width="420" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="670" y="341.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">도구 다수 · 토큰 빠듯</text>
+<text x="670" y="356.7" font-size="11" fill="#1F2937" text-anchor="middle">도구 40~200개 · 작업이 호출마다 다름</text>
+<text x="670" y="371.7" font-size="11" fill="#1F2937" text-anchor="middle">느슨한 SLA(10~15초) · 오선택 증가</text>
+<text x="20" y="410" font-size="11" font-weight="bold" fill="#6B7280" text-anchor="start">도구 많고 작업을 사전에 아는 경우</text>
+<text x="460" y="410" font-size="11" font-weight="bold" fill="#6B7280" text-anchor="start">흔한 오답</text>
+<rect x="20" y="416" width="420" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="230" y="443.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">정적 작업별 부분집합</text>
+<text x="230" y="458.7" font-size="11" fill="#1F2937" text-anchor="middle">도구 200개라도 팀별 작업을 사전에 알면 작업별로 좁힘</text>
+<text x="230" y="473.7" font-size="11" fill="#1F2937" text-anchor="middle">작업 분류 체계 유지 · 새 작업 유형마다 설계</text>
+<rect x="460" y="416" width="420" height="76" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="670" y="443.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: 도구 개수 단일 규칙</text>
+<text x="670" y="458.7" font-size="11" fill="#1F2937" text-anchor="middle">"도구 10개 초과 = discovery 필수" ✗</text>
+<text x="670" y="473.7" font-size="11" fill="#1F2937" text-anchor="middle">트리거 = 표면 크기 · 고정 토큰 · 오선택 · 지연</text>
+<text x="450" y="520" font-size="11" fill="#6B7280" text-anchor="middle">한계: discovery 조회 단계의 지연을 절약된 스키마 토큰과 비교해 측정</text>
+<text x="450" y="538" font-size="11" fill="#6B7280" text-anchor="middle">전제: 탐색 색인의 도구 이름 · 목적이 정확하고 첫 fetch가 올바른 schema 반환</text>
+</g>
+</svg>

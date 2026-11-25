@@ -1,0 +1,1777 @@
+# 1. Agents and Workflows — 반드시 알아야 할 지식
+> 시험 비중 15% · 약 4문항 · 근거 문항 27개
+
+> 커버: CCDV-F D1 · CCAR-F D1 · CCAR-P D1
+
+## 1. 핵심 개념
+
+### 1.1 Workflow vs Agent — 다음 단계를 누가 정하나
+**구분 기준 = 다음 단계 결정 주체 (코드 vs 모델)**
+
+| 구분 | 정의 |
+|---|---|
+| Workflow | LLM · tool을 predefined code path로 엮은 시스템 |
+| Workflow 흐름 | control flow = 설계 시점 고정 |
+| Workflow 모델 호출 | 정해진 지점에서만 호출 |
+| Agent | 모델이 실행 중 다음 단계 · tool 사용법 결정 |
+
+| 오답 | 이유 |
+|---|---|
+| 길이 · tool 개수 · structured output 필요 여부로 구분 | 구분 기준 아님 |
+| "workflow는 모델 못 부름" · "agent는 tool 못 씀" | workflow도 모델 호출 · agent도 tool 사용 |
+
+| 상황 | 판단 |
+|---|---|
+| 중간 결과를 보기 전엔 필요한 단계를 모름<br>(= 경로를 실행 중 발견) | agent 필요 (유일한 신호) |
+| 경로 고정 | 결정론적 orchestration → 저렴 · 빠름<br>테스트 · 감사 · 디버깅 용이 |
+| 경로 고정 시 agent의 대가 | 비용 · 지연 · 비결정성 · 오류 연쇄 위험만 증가 |
+
+**판단 순서**
+1. 복잡도 · 경로 고정 여부 · 코드로 싼 오류 방지 가능 여부 확인
+2. 요구를 만족하는 **가장 단순한 구성** 선택
+
+| 상황 | 가장 단순한 구성 |
+|---|---|
+| 매핑 고정 변환 | deterministic script (agent loop ✗) |
+| 해석 필요 필드 존재 | schema 둔 단일 모델 호출 |
+
+| 상황 | 판단 |
+|---|---|
+| 절차를 사전에 확정 가능한 업무 | 고정 경로 orchestration 적합 |
+| 같은 유형 요청도 필요한 대응이 건마다 다름<br>(설명만 · 주문 조회 · escalation 선행) | 고정 경로 ✗ → agent loop |
+| `tool_choice` `auto` (기본값) | tool 사용 · 직접 답변을 매 turn Claude가 판단 |
+| 앱 상태로 다음 tool 강제<br>· 분류기로 정형 체인에 분기 | 판단을 앱 코드로 되돌림<br>→ 가변 요청에 부적합 |
+
+**작업 형태별 패턴 선택**
+
+| 작업 형태 | 패턴 |
+|---|---|
+| 순서 고정 · 규칙 알려짐 · 입력 형식 일정 | deterministic workflow<br>모델 호출 = 모호한 부분에만 |
+| 고정 경로 + 열린 단계 1개<br>(리뷰 코멘트 작성 등) | augmented LLM = 도구 가진 workflow<br>agentic ✗ |
+| 검색 1회 + 판단 1회로 해결 | augmented single call<br>loop · multi-agent ✗ |
+| 단계를 실행 전엔 나열 불가<br>발견이 다음 검색을 결정 | agentic loop<br>+ step 상한 · 중지 규칙 |
+| 같은 순서 · 같은 trace 요구<br>(고정 체크리스트 검토 등) | deterministic workflow<br>agent = 실행마다 계획이 달라짐 |
+| 고정 형식 파싱 (EDI 등) | parser · 결정론적 코드<br>모델 · 최상위 tier ✗ |
+| 맞춤 답장 작성<br>(판단 1회 + 도구) | augmented single call<br>발송 전 어조 · 사실 확인 |
+| 원인 모르는 장애 조사 | step budget 둔 agentic loop |
+
+**이름이 통제를 결정**
+
+| 구분 | 내용 |
+|---|---|
+| 판단 기준 | tool 사용 여부 ✗<br>단계를 누가 정하나 |
+| 고정 경로 | validation gate 필요<br>loop 통제(반복 제한 · escalation) 불필요 |
+| 진짜 agentic loop | 반복 제한 · 중지 조건 필요 |
+| 오분류 | 고정 pipeline에 loop 통제 적용<br>→ 복잡성만 증가 |
+
+**고정 순서 pipeline이 실패하는 경우**
+
+| 증상 | 조치 |
+|---|---|
+| 질문마다 필요한 절차가 다름<br>(테스트 실행 필요 · 파일 5개 초과) | tool 정의 후 loop에 위임<br>다음 tool = 결과를 본 Claude가 결정 |
+| tool 선택 근거 부족 | 각 tool `description`에 용도 · 다른 tool과의 구분 기재<br>= tool 성능에 가장 큰 영향 |
+
+**아키텍처 리뷰에서 workflow를 고르는 근거**
+
+| 구분 | 내용 |
+|---|---|
+| 올바른 근거 | 경로가 사전에 확정<br>→ 결정론적 orchestration이 저렴<br>· 테스트 가능 · 감사 가능 · 신뢰 |
+| 판단 틀 | 구조적 적합성<br>경로 알려짐 = 결정론 · 경로 열림 = agent |
+| 자율성 정당화 | 모델이 경로를 골라야 하는 곳에서만 |
+
+
+
+![Workflow와 agent를 다음 단계 결정 주체로 비교한 흐름도](svg/1-workflow-vs-agent.svg)
+*그림: 중간 결과를 봐야 다음 단계를 알 수 있을 때만 agent이고, 경로가 고정이면 코드가 순서를 정하는 workflow가 맞다*
+
+<sub>근거: Amey-0004, Amey-0023, Amey-0024, Amey-0040, Amey-0074, CCAR-F-Amey-Thakur-0011, CCAR-F-Amey-Thakur-0016, CCAR-F-Amey-Thakur-0051, CCAR-F-Udemy03-0060, CCAR-F-Udemy04-0028, CCAR-P-Amey-Thakur-0005, CCAR-P-Amey-Thakur-0045, CCAR-P-jrajath94-0013, CCAR-P-jrajath94-0018, CCAR-P-jrajath94-0117, CCAR-P-jrajath94-0118, CCAR-P-jrajath94-0337, CCAR-P-jrajath94-0400, CCAR-P-jrajath94-0463, Patrick-0012, Patrick-0022, Preporato-0016, Udemy-0014, Udemy-0053</sub>
+
+### 1.2 Workflow 패턴 구분
+**패턴 차이 = 분해를 누가 · 언제 정하나**
+
+| 패턴 | 동작 | 특징 |
+|---|---|---|
+| prompt chaining | 고정 subtask 순차 호출<br>각 단계가 앞 단계 출력 수신<br>호출 순서 = 앱 코드 | 단계 사이 programmatic gate 삽입 가능<br>(schema 검증 · 필수 항목 검사)<br>지연 소폭 증가 → 정확도 · 예측 가능성 향상 |
+| routing | 입력 분류 → 전용 후속 처리로 보내고 끝 | 분해 · 결과 통합 ✗ |
+| parallelization (voting) | 같은 작업 여러 번 실행<br>→ 다수결 등으로 확신도 향상 | 작업 분해 ✗ |
+| orchestrator-workers | 중심 LLM이 입력 보고 즉석에서 subtask 결정<br>→ worker LLM 위임 → 결과 통합 | 결정적 차이 = subtask 사전 정의 ✗<br>입력마다 분해가 달라지는 작업용 |
+| evaluator-optimizer | 평가자 LLM 채점<br>→ 기준 넘을 때까지 생성 · 수정 반복 | 명확한 평가 기준 + 하나의 출력 다듬기<br>(번역 퇴고 등)<br>서로 다른 단계 순차 처리 ✗ |
+
+- 단계 사이 checkpoint 필요 시 거대 prompt 1개 ✗ → 검증 지점 소실
+
+**Chaining · routing 보강**
+
+| 구분 | 내용 |
+|---|---|
+| chaining 분리 신호 | "중간 산출물을 로그로 남김" = 단계 분리 힌트<br>한 prompt에 전 파일 · 전 추출 결과 ✗<br>→ 파일별 오류 누락 · 합계 모순 |
+| chaining 구성 | 파일별 검토 호출 → 중간 산출물 로그<br>→ 마지막 통합 호출로 전체 합계 도출 |
+| chaining 대체안 ✗ | 1회 자기 비평 · 동일 prompt 반복 · 더 큰 prompt<br>→ 거대 context 의존 그대로 |
+| chaining 적합 조건 | 앞 단계 출력 = 다음 단계 입력 (진짜 순서 의존)<br>독립 조각의 chain = 지연만 가산 |
+| chaining 누적 결함 | 단계마다 초안 재작성 → 오류 누적<br>총 지연 = 전 호출 합산 |
+| chaining 개선 | 독립 조각 병렬 fan-out · 재작성 제거<br>확실한 하위 작업 = deterministic code<br>병합에 validation gate 추가 |
+| 개선의 한계 | 조각별 독립성 검증 필요<br>독립성 오판 → 병합 충돌 · 병합 계약 사전 작성 |
+| routing 시점 | 유형별 처리가 다름 → route 단계가 먼저 분류<br>→ 유형별 경로로 분기 |
+| routing 경로 | 경로마다 맞는 도구 · 방식 부착<br>(고정 조회 선행 경로 · tool 판단 경로 등) |
+| chain ≠ routing | 모든 입력을 모든 단계에 통과 ✗<br>chain 길이를 늘려도 분기가 아님 |
+| routing 전제 | 분류 체계(taxonomy) 필요<br>오분류 = 엉뚱한 경로 → fallback · 라우터 자체 평가 |
+| 질의 형태 혼재 | 형태별로 분해<br>현재값 = 도구 호출 · 독립 문서 다수 = fan-out |
+| multi-agent 호출 범위 | 요청마다 전 전문 agent 호출 ✗<br>→ 결과가 정확해도 무관 정보 혼입 · context 낭비 |
+| triage | 복잡도 판정 → 투입 agent 수 · 호출 수 조정<br>단순 사실 확인 = agent 1개 · tool 3~10회 수준 |
+| 호출 원칙 | 필요할 때만 위임<br>단순 확인 = 직접 답변 · 전문 케이스만 위임<br>coordinator가 케이스 검사 → 필요한 subagent만 호출 |
+
+**Parallelization · critique 보강**
+
+| 구분 | 내용 |
+|---|---|
+| sectioning | 독립 서브태스크로 분할 → 동시 실행<br>→ 프로그램으로 결과 집계<br>속도 · 정확도 동시 향상 |
+| voting 오용 | 순차 대화에 voting → 비용 증가 · 컨텍스트 분절 |
+| sectioning 이점 | 항목마다 별도 호출 → 집중 확보<br>긴 섹션이 다른 항목을 밀어내는 누락 방지<br>호출마다 관련 섹션만 전달 |
+| 병렬 근거 | "서로 의존 없음" 명시 = 병렬화 근거<br>(예: 최종 schema 검증 전까지 독립) |
+| fan-out / fan-in | 독립 조각 병렬 → 병합 → validation gate |
+| 병합 계약 | 공통 스키마 · 인용 형식 사전 작성<br>병합이 출처 · 인용 누락 → 검사 통과해도 내용 빈약 |
+| fan-in 충돌 | 결과가 어긋날 때 처리할 disagree rule 필요 |
+| 병합 검증 | 합계 · 수치 = 결정론적 코드 검사<br>(인용된 표와 대조)<br>서로 다른 시스템 수치 = 병합 전 대조(validation) |
+| 인용 시점 | 숫자 생성 시점에 출처 부착<br>초안 후 인용 추가 · 기억 기반 인용 ✗ → 신뢰 불가 |
+| 대규모 병렬 번역 | 병렬 fan-out → 기한 충족<br>공통 용어집을 모든 호출에 주입 → 용어 일관<br>계층적 병합 → 섹션 간 drift 포착 |
+| critique | 점검자 · 기준 문서 · 수정 loop 명시<br>품질 편차 대응 · 배포 전 모든 초안 대조 |
+| critique 결합 | fan-out 분기마다 critique → fan-in 병합<br>독립 규모 + 품질 편차 = 서로 다른 두 문제<br>→ 패턴 두 개 결합 |
+| critique 비용 | 점검 호출 추가 → 산출물당 비용 약 2배<br>체크리스트 필요 · 병합에 엄격한 스키마 필요 |
+
+| 상황 | 정답 |
+|---|---|
+| 단계 · 순서 고정<br>(파일 읽기 → 테스트 실행 → 보고) | 앱 코드가 순서 유지<br>모델 = 보고서 텍스트 작성에만 사용 |
+| 다음 단계 시작 전 결과 확인 필요 | 앱 코드가 각 결과 검증<br>실패 시 체인 조기 중단 |
+| 단계 B가 단계 A 출력에 의존<br>(이름 추출 → 수수료 계산) | A 직후 · B 직전에 코드 검사<br>실패 시 체인 중단 → 잘못된 값 B 유입 차단 |
+
+| 오답 | 이유 |
+|---|---|
+| 결과마다 모델이 tool 목록에서 다음 단계 선택 | 유연해 보여도 순서가 코드 아닌 모델에 의존 |
+| 의존 단계를 병렬 실행 | 속도 이득 있어도 선행 값 검증 불가 |
+| B 이후에 코드로 확인 · 검토자 전달 | B 실행 전 차단 요구 → 이미 유입 |
+| compaction으로 잘못된 값 제거 | 이전 턴 요약 작성일 뿐 · 값 검증 ✗ |
+
+
+
+![5가지 workflow 패턴의 흐름 비교](svg/1-workflow-patterns.svg)
+*그림: 패턴은 분해를 코드가 미리 정하는지(chaining, routing, voting), 실행 중에 LLM이 정하는지(orchestrator-workers), 기준 통과까지 반복하는지(evaluator-optimizer)로 갈린다*
+
+<sub>근거: Amey-0023, CCAR-F-Udemy01-0055, CCAR-F-Udemy02-0007, CCAR-F-Udemy02-0024, CCAR-F-Udemy03-0003, CCAR-F-Udemy03-0016, CCAR-P-jrajath94-0021, CCAR-P-jrajath94-0066, CCAR-P-jrajath94-0116, CCAR-P-jrajath94-0123, CCAR-P-jrajath94-0124, CCAR-P-jrajath94-0125, CCAR-P-jrajath94-0289, CCAR-P-jrajath94-0340, CCAR-P-jrajath94-0402, CCAR-P-jrajath94-0403, CCAR-P-jrajath94-0529, CCAR-P-jrajath94-0604, CCAR-P-jrajath94-0609, Patrick-0012, Patrick-0022, Udemy-0006, Udemy-0053</sub>
+
+### 1.3 Coordinator(orchestrator) 1개 + Subagent n개 구조
+**위임 prompt + subagent 정의에 적은 것만 전달 · 요약만 반환**
+
+**Coordinator 역할**
+
+| 역할 | 내용 |
+|---|---|
+| 작업 분해 | 입력에 맞춰 subtask 결정 |
+| 위임 | 독립 · 자기완결 subtask를 subagent에 전달<br>독립이면 병렬 실행 |
+| 결과 통합 | subagent의 compact 요약 수집<br>→ 최종 결과 (비교 · 계획 등)<br>실패 격리 |
+
+**Subagent 역할**
+
+| 역할 | 내용 |
+|---|---|
+| 격리된 컨텍스트 | 부모와 별도 대화 컨텍스트에서 실행<br>자료 읽기 · 중간 tool 호출 · 결과는 subagent 안에만 |
+| 좁은 범위 | 자기완결 subtask 하나만<br>(PDF 한 개 요약, 검사 항목 하나 등) |
+| 요약 반환 | 최종 메시지만 Agent tool 결과로 부모에 반환<br>→ 부모 context window가 장황한 중간 결과로 안 참<br>= subagent의 주된 구조적 가치 |
+
+**Coordinator → Subagent 전달 범위**
+
+| 구분 | 내용 |
+|---|---|
+| 넘길 것 | 위임 prompt에 subtask용 컨텍스트 명시<br>(file path, 판단 근거, 이전 결정 등) |
+| 전달 경로 | Agent tool의 prompt 문자열<br>+ subagent 자신의 정의<br>(`AgentDefinition`의 `prompt`)뿐 |
+| 안 넘어감 | 부모 대화 이력 · tool 결과 · 부모 system prompt<br>일반 subagent = 빈 컨텍스트에서 시작 |
+| 예외 | fork형 subagent(현재 대화 분기)만 부모 이력 상속 |
+| 공통 방침 | 각 subagent 정의<br>또는 설정에 따라 로드되는 프로젝트 `CLAUDE.md`에 기재 |
+| 품질 저하 원인 | 최유력 = handoff 컨텍스트 누락 |
+| 위임의 성격 | 컨텍스트를 내주고 격리를 얻는 거래 |
+| 품질 저하 대책 | 큰 모델 · subagent 추가로 해결 ✗ |
+
+**Subagent → Coordinator 반환 범위**
+
+| 구분 | 내용 |
+|---|---|
+| 돌려줄 것 | compact 요약 · 결론 |
+| 돌려주지 말 것 | 원문 자료 · 중간 tool 출력<br>→ 그대로 반환 시 격리 의미 소실 |
+
+**구조상 주의점**
+
+| 상황 | 판단 |
+|---|---|
+| 컨텍스트 격리 | 총 토큰 감소 ✗<br>subagent마다 자료 별도 읽기 · API 별도 호출<br>→ 증가 가능 |
+| 비용 절감 | 별도 수단 필요<br>예: subagent별 `model`에 가벼운 모델 지정 |
+| subagent 수 증가 | handoff 결함도 비례 증가 |
+
+| 오답 | 이유 |
+|---|---|
+| subagent끼리 직접 결과 교환 | 결과 통합 · 실패 격리하는 coordinator 소실 |
+| 합의용 같은 prompt 2회 실행 · rate limit 우회<br>메인 모델 장애 대비 fallback | subagent의 올바른 용도 아님 |
+
+**단일 agent · workflow가 나은 경우**
+
+| 상황 | 판단 |
+|---|---|
+| 단계 고정 | subagent · orchestrator 모두 ✗<br>→ 동적 분해 대상 없음 |
+| supervision hierarchy | 위임이 필요한 문제 전용 · 고정된 몇 단계엔 ✗ |
+
+**Subagent 분리 · 분해 판단**
+
+| 구분 | 내용 |
+|---|---|
+| 분리 근거 | 흐름마다 자기 context 필요<br>섞이면 양쪽 품질 저하 (= context 오염) |
+| 근거 아님 | 단계 수 · 길이 · 출력 조립 · 속도<br>도구 차이 단독 · 병렬 가능성<br>→ 한 context · workflow로 처리 가능 |
+| 위임 비용 | 명시 안 한 부모 context 손실<br>지연 = 보통 감소 ✗ · 증가 |
+| 분해 정당 | 독립 하위 작업 + 서로 다른 도구 · 출처<br>→ 범위 한정 subagent 병렬 → synthesis 단계 |
+| 영역별 위임 | 영역마다 고유 prompt · tool 필요<br>→ lead가 subagent에 위임 → 보고서 병합<br>subagent별 대화 기록 따로 유지 |
+| 단일 agent 한계 | tool 전부 부여 = capability bloat<br>순차 수행 = 병렬 포기 · context 혼합 |
+| 단일 agent 우위 | 작업이 얽혀 하나의 진화하는 context 공유 |
+| 병렬 + 중앙 판단 | 메인이 Agent로 기동 → 요약 수신<br>모순 해소 · 후속 결정 = 한 곳 |
+
+**Hub-and-spoke 통신**
+
+| 구분 | 내용 |
+|---|---|
+| 흐름 | 결과 · 후속 위임 모두 coordinator 경유<br>subagent = 구조화 최종 결과 반환 |
+| 이점 | 모든 상호작용 관찰<br>error 일관 처리<br>subagent별 전달 정보 통제 |
+| 결과 통합 | 두 결과를 synthesis agent에 전달<br>→ 한곳에서 통합 · 제어 유지 |
+| 직접 통신 증상 | 실패 간과 · 중복 요청 · 흐름 추적 불가<br>원인 = 전체를 관리하는 주체 없는 구성 |
+| 속도 vs 통제 | 동기 실행 = 대기 시간 단점<br>비동기 = 조정 · 상태 일관성 · error 전파 곤란 |
+
+**위임 prompt 작성**
+
+| 구분 | 내용 |
+|---|---|
+| 포함 항목 | 목적 · 출력 형식<br>도구 · 정보원 지침 · 작업 경계 |
+| 지시 방식 | 목표 · 품질 기준 전달 → 방법은 subagent 판단<br>(예: 단위 · 2020년 이후 · 1차 자료)<br>단계별 절차서 ✗ → 예상 밖 상황 대응 불가 |
+| 정보원 | 범위 = 조건으로 제시<br>탐색 순서 = subagent에 위임 |
+| 필요 사실 | 판단에 필요한 최소 사실만 명시<br>(order id · 총액 · 구매일 · 고객 사유) |
+| 선행 결과 | 결과 · 출처 metadata를 prompt에 직접 삽입<br>양 많으면 파일 저장 → 경로 + 요점 전달 |
+| 기준 미달 시 | "기준 충족 정보 없음"을 결과에 명기<br>→ coordinator가 coverage 부족 판단 |
+
+**위임 누락 진단**
+
+| 증상 | 원인 | 조치 |
+|---|---|---|
+| 일반론만 · 수치 · 출처 없음<br>"앞서 언급한 조사" 표현 | 지시가 참조뿐<br>데이터 미전달 | 결과 · 출처를<br>prompt에 삽입 |
+| 짧은 지시 후 인용 약함 | 출처가 통합 쪽에 미도달 | 데이터 삽입<br>+ 주장별 인용 요구 |
+| PR 고유 증거 없는 일반 지적 | 일반 subagent = 빈 context | diff 발췌 · 실패 test 출력<br>· 리뷰 기준 삽입 |
+| 상류 subagent 정상 · 통합만 실패 | 고장 지점 = 통합으로의 전달 | 로그에서 위임 prompt 확인 |
+
+**Context 공유 방식 비교**
+
+| 방식 | context | 적합 · 부적합 |
+|---|---|---|
+| 일반 subagent | 빈 context + 위임 prompt | 격리 · 좁은 작업 |
+| fork (subagent) | 부모 대화 전체 상속 | 상속 필요 시 적합 (PR 증거 등)<br>격리 · 부모 보호 목적 ✗<br>(분기마다 이력 부담) |
+| `fork_session`<br>(Agent SDK) | 이력 사본으로 시작<br>고유 session ID | 같은 분석에서 다른 방침 시도<br>독립 리뷰 ✗ (생성 시 추론 상속) |
+| 새 session<br>· reviewer subagent | 생성 시 이력 없음 | 독립 리뷰<br>(diff · 사양 · 리뷰 기준만 전달) |
+| agent team | 여러 session<br>공유 task list · peer 직접 메시지 | 판단 분산형<br>⚠️ 공식: 실험적 · 기본 비활성 → 시점에 따라 변동 |
+
+**탐색 · 조사 위임**
+
+| 구분 | 내용 |
+|---|---|
+| 대상 | 파일 목록 · 검색 결과 · test log로<br>메인이 반복해서 차는 긴 조사 |
+| 방법 | `Explore`(읽기 전용) 또는 범용 subagent에 위임<br>→ 경로 · 줄번호 요약만 반환 |
+| 효과 | 탐색 수만 token → 요약 1,000~2,000 token<br>(해설 인용 규모)<br>메인 = 조정 담당 유지 |
+| 조사 vs 수정 | 초점 좁은 읽기 전용 조사 먼저 → 요약으로 판단<br>원인 특정 전 변경 ✗ |
+
+**병렬 worker 충돌 방지**
+
+| 구분 | 내용 |
+|---|---|
+| 증상 | 결과 덮어쓰기 · 같은 대상 중복 조사 |
+| 해법 | orchestrator가 겹치지 않는 범위 할당<br>결과 = 고유 키 달린 공유 구조화 저장소<br>orchestrator가 마지막에 병합 |
+| 효과 | 범위 분리 → 중복 ✗ · 키 → 덮어쓰기 ✗<br>orchestrator 전체 가시성 유지 |
+
+**호출 범위 · 도구 범위**
+
+| 구분 | 내용 |
+|---|---|
+| 호출 | 고정 순서 지시 폐기<br>질문 요구 분석 → 필요한 subagent만 |
+| 근거 | subagent 설명에 담당 작업 + 호출 조건 명시 |
+| 작업량 | 단순 사실 확인 = agent 1개 + 소수 tool 호출<br>비교 · 복잡 조사 = subagent 증가 |
+| 도구 | 역할 경계 = subagent별 `tools` 한정 |
+| 경미한 확인 | 좁은 목적 tool(예: `verify_fact`) 부여<br>범위 넘는 조사 = coordinator로 반환 |
+
+**Multi-agent 적합 · 부적합 판단**
+
+| 상황 | 판단 |
+|---|---|
+| 하위 작업 독립 · 상태 비공유<br>· 도구 상이 · 결과 병합 필요 | multi-agent 유리<br>fan-in에 병합 · disagree rule |
+| 조각이 상태 공유 | 단일 agent · 순차 chain |
+| 순차 대화<br>(각 응답이 이전 내용에 의존) | fan-out ✗ → 단일 agent<br>병렬 agent = 작업 분할 아닌 작업 중복 |
+| 병렬성이 실제로 있는 부분 | 그 부분만 병렬 유지 |
+| 라운드마다 이전 결과 · 전체 이력 필요<br>(다회 협상) | 단일 agent loop 유지<br>이력 · 라운드 로그를 한 컨텍스트에 보유 |
+| supervisor + worker로 분할 | handoff마다 전체 이력 운반<br>→ 병렬 이득 없이 조율 비용만 |
+| 라운드마다 handoff 내용 변동 | handoff 계약이 낡음 |
+| 단일 agent 컨텍스트 증가 | 집중 희석 점검 · 라운드 사이 compact |
+| 단계별 공유 문서 편집<br>(각 단계가 직전 결과 필요) | 하나의 thread + 고정 순서<br>단계마다 확인 → 일관된 문서 유지 |
+| 공유 sandbox | 공유 컨텍스트 ✗<br>subagent는 각자 대화 기록 별도 유지 |
+
+**과분해(over-decomposition)**
+
+| 상황 | 판단 |
+|---|---|
+| 작은 작업 · 한 영역 · context 하나에 수용 | subagent 분해 ✗<br>격리 이득 없이 orchestration 비용만 증가 |
+| 개선 방향 | 단일 모델 호출<br>+ 필요 시 가벼운 검증 단계 |
+| 각 단계가 앞 단계 출력을 필요로 하는 chain | 병렬 실행 부적합 |
+| 지연 · 비용의 원인 | 설계 자체<br>→ 큰 모델 교체 · 출력 cache로 해소 ✗ |
+
+**Super-agent 분해 · 소유권**
+
+| 구분 | 내용 |
+|---|---|
+| 문제 | 단일 loop + 공유 memory<br>→ 실패 원인 귀속 · 독립 평가 · 독립 배포 불가 |
+| 분해 | 경계 있는 agent(RAG · search · analytics)<br>+ 명시적 입력/출력 계약 |
+| orchestrator | 얇게 유지<br>(또 하나의 super-agent ✗) |
+| 소유권 | 팀별로 agent + eval 세트 소유<br>실패 = 계약을 위반한 agent에 귀속 |
+| 독립 배포 | 계약을 별도 버전 관리<br>+ agent별 eval 스위트로 릴리스 gate<br>→ 한 팀 변경이 다른 팀 부분을 조용히 파손 ✗ |
+
+
+
+![Coordinator 1개와 subagent 3개의 위임과 반환 흐름](svg/1-coordinator-subagents.svg)
+*그림: coordinator는 위임 prompt를 내려보내고, 자료와 중간 tool 결과는 각 subagent 안에 남으며 요약만 올라온다*
+
+![Agent tool 경계를 넘는 것과 넘지 않는 것](svg/1-handoff-boundary.svg)
+*그림: 부모 이력·tool 결과·system prompt는 넘어가지 않고 위임 prompt에 명시한 것만 넘어가며, 돌아오는 것은 요약뿐이다*
+
+<sub>근거: Amey-0004, Amey-0023, Amey-0025, Amey-0041, CCAR-F-Amey-Thakur-0012, CCAR-F-Amey-Thakur-0052, CCAR-F-Amey-Thakur-0067, CCAR-F-MyPractice-0002, CCAR-F-MyPractice-0008, CCAR-F-Udemy01-0011, CCAR-F-Udemy01-0014, CCAR-F-Udemy01-0018, CCAR-F-Udemy01-0036, CCAR-F-Udemy01-0048, CCAR-F-Udemy02-0060, CCAR-F-Udemy03-0024, CCAR-F-Udemy03-0037, CCAR-F-Udemy04-0043, CCAR-F-Udemy04-0048, CCAR-F-Udemy05-0024, CCAR-F-Udemy05-0036, CCAR-F-Udemy05-0054, CCAR-F-Udemy06-0011, CCAR-F-paullarionov-0002, CCAR-F-paullarionov-0008, CCAR-F-preporato-0001, CCAR-F-preporato-0011, CCAR-P-jrajath94-0016, CCAR-P-jrajath94-0066, CCAR-P-jrajath94-0070, CCAR-P-jrajath94-0119, CCAR-P-jrajath94-0120, CCAR-P-jrajath94-0402, CCAR-P-jrajath94-0605, CCAR-P-jrajath94-0607, CCAR-P-preporato-0004, Patrick-0012, Preporato-0019, Udemy-0004, Udemy-0006</sub>
+
+### 1.4 Agentic loop (Messages API 직접 사용 시)
+**`tool_use` → 재호출 · `end_turn` → 반환**
+
+| `stop_reason` | 처리 |
+|---|---|
+| `"tool_use"` | 요청 tool 실행 → `tool_result` 추가 → API 재호출<br>모델 = tool 결과 대기 중 |
+| `"end_turn"` + `tool_use` block 없음 | 턴 종료 → content를 호출자에 반환 |
+| `tool_use` 아님 | loop 탈출 |
+| `max_tokens` 등 | 별도 처리 필요 |
+| ⚠️ `pause_turn` | 공식 문서: server tool 사용 중 발생<br>종료 ✗ → 응답 그대로 다시 보내 이어감<br>→ "`tool_use` 아니면 무조건 종료" = 지나친 단순화 |
+
+| 오해 | 사실 |
+|---|---|
+| text block = 종료 신호 ✗ | text · tool 호출 공존 가능 |
+| `max_tokens` 상향 = 컨텍스트 부족 해결 ✗ | `max_tokens` = 출력 제한<br>tool dispatch · 입력 컨텍스트와 무관 |
+
+**loop 판정 — 안티패턴 3종**
+
+| 구분 | 내용 |
+|---|---|
+| 판정 근거 | `stop_reason` = Claude가 주는 구조화된 신호<br>`tool_use` → 계속 · `end_turn` → 종료 |
+| 안티패턴 1 | 자연어 문구 파싱<br>("끝났습니다" · "더 도와드릴까요" · "조사 완료") |
+| 안티패턴 2 | 반복 횟수 상한을 주된 중지 메커니즘으로 사용 |
+| 안티패턴 3 | assistant text 유무 = 완료 판정 |
+| 안티패턴 증상 | text + `tool_use` 응답에서 loop 종료<br>→ 미실행 tool 호출 잔류 · 불완전한 결과 반환 |
+| 흔한 상황 | Claude는 tool 호출 전 설명 text를 자주 씀<br>("먼저 파일을 검색합니다") |
+
+| 오답 수정 | 이유 |
+|---|---|
+| 종료 문구 후보 추가 · 키워드 판정 | 안티패턴 형태만 바뀜 |
+| `tool_choice` `any`로 매 응답 tool 호출 강제 | 판정 메커니즘 수정 ✗ · 모델 출력에 맞춘 우회 |
+| system prompt로 "tool 호출 시 설명 text 금지" | 판정 메커니즘 수정 ✗ · 우회 |
+| 첫 요청만 `max_tokens` 상향 | 우회 · 판정 결함과 무관 |
+
+**대화 이력 구조 — `tool_use` ↔ `tool_result`**
+
+| 구분 | 내용 |
+|---|---|
+| API | stateless → 요청마다 대화 전체 전송 |
+| 순서 | assistant 메시지(`tool_use` block)<br>→ 바로 다음 user 메시지에 대응 `tool_result` |
+| 연결 | `tool_use_id`로 짝 · 사이에 다른 메시지 ✗ |
+| user 메시지 내부 | `tool_result`를 text보다 앞(content 배열 맨 앞)<br>text 먼저 = API 오류 |
+| 결과 위치 | user turn 안<br>system prompt ✗ · assistant text ✗ |
+| 새 `tool_use_id` 발급 | ✗ (원래 id 사용) |
+| 증상 1 | assistant turn 누락<br>→ 후속 요청 400 오류 (`tool_use_id`가 가리킬 대상 없음) |
+| 증상 2 | 결과가 tool 결과 형식이 아님<br>→ Claude가 같은 tool 반복 요청 |
+
+**위임(Task) 결과 · loop 결함 진단**
+
+| 상황 | 정답 |
+|---|---|
+| coordinator가 Task `tool_use` 요청 | 각 Task 실행<br>→ `tool_use` id별 `tool_result`를 user turn으로 반환<br>`end_turn`까지 호출 지속 |
+| `tool_result` 미전송 증상 | 최종 결과가 최초 text만 근거 |
+| trace에 tool 요청만 있고<br>결과 · 최종 답 없음 | loop 구현 결함 의심 (실행 · 결과 반환 누락)<br>→ SDK agent loop 사용 |
+
+| 오답 | 이유 |
+|---|---|
+| 반복 3회 제한 · Task 생략 | 결과가 안 돌아간 원인 미해결 |
+| system prompt에 "Claude가 직접 backend 실행" | 모델이 수행할 수 없는 역할 요구 |
+| 완료 문구 검출 | 원인과 무관 |
+| 사전 일괄 tool 실행 후 1 turn 요약 | 대화에 따른 tool 선택 포기 |
+
+**`pause_turn` 세부**
+
+| 구분 | 내용 |
+|---|---|
+| 의미 | server-side tool loop가 작업 도중 반복 한도 도달 |
+| 처리 | 응답을 최근 assistant turn으로 포함해 후속 요청<br>→ Claude가 멈춘 지점부터 이어감 |
+| 오답 1 | `end_turn`과 동일 취급 → 반쯤 한 결과 반환 |
+| 오답 2 | `max_tokens` 올려 원요청 재전송 → 처음부터 · 비용 2회 |
+| 오답 3 | 로컬 실행 후 `tool_result` 반환<br>→ server tool은 응답할 `tool_use` 없음 |
+
+
+
+![stop_reason별 agentic loop 분기](svg/1-agentic-loop.svg)
+*그림: tool_use와 pause_turn은 다시 API를 호출해 loop를 잇고, end_turn은 반환, max_tokens는 별도 처리한다*
+
+<sub>근거: Amey-0005, Amey-0036, CCAR-F-MyPractice-0058, CCAR-F-Udemy02-0006, CCAR-F-Udemy02-0020, CCAR-F-Udemy03-0008, CCAR-F-Udemy03-0019, CCAR-F-Udemy04-0014, CCAR-F-Udemy05-0017, CCAR-F-Udemy06-0023, CCAR-F-paullarionov-0058, CCAR-F-preporato-0009, CCAR-F-preporato-0010, Patrick-0038, Preporato-0019, Udemy-0019</sub>
+
+### 1.5 Loop 종료, 안전장치, 상태
+**종료 = success condition + ceiling · 결정은 명시적 state**
+
+| 구분 | 내용 |
+|---|---|
+| 정상 종료 | 명시적 success condition |
+| 안전망 | step ceiling (hard 상한) |
+| step ceiling 주된 목적 | agent 비수렴 시 피해 · 비용 제한 |
+| 목적 아님 | 성공한 실행의 비용 절감 · 속도 · prompt 단순화 |
+| 오답 종료 조건 | 고정 반복 횟수 · wall-clock timeout만 사용<br>컨텍스트 소진 (= 실패) |
+| ⚠️ `end_turn` 종료 | 공식 loop 예제 = `end_turn`(모델 판단)으로 종료<br>문항 해설(Amey 0060번) = 모델 판단만으론 보장 ✗<br>→ 앱 수준 success condition 강조 |
+| 시험 대응 | "success condition + ceiling" 선택<br>`end_turn` 처리도 숙지 |
+
+**장기 실행 결정 유지**
+
+| 구분 | 내용 |
+|---|---|
+| 기록 위치 | compaction과 무관하게 전달되는 명시적 state |
+| 이유 | context window 유한 · compaction = 정보 손실 |
+
+**종료 장치 설계**
+
+| 상황 | 정답 |
+|---|---|
+| 같은 tool 반복 호출 · 두 tool 왕복<br>· 결론 불가 | 명시적 종료 장치 설계<br>= 반복 횟수 예산 · 반복 호출 감지 · escalation 경로 |
+| 종료 + 유용한 산출물 보장 | hard 반복 예산 + 명시적 stop condition<br>+ 산출물 체크리스트(= 완료 정의)<br>+ 예산 소진 시 부분 결과와 함께 사람 escalation |
+| 소프트 통제 | "효율적으로 · 신속히" prompt = 요청일 뿐<br>비슷한 지시가 있어도 loop 발생 |
+
+| 오답 | 이유 |
+|---|---|
+| `max_tokens` · context window · 모델 크기 상향 | 수렴 보장 ✗ · 증상만 지연 |
+| 필요한 tool 제거 (검색 tool 등) | 작업 자체 불가 · agent 존재 이유 상실 |
+| `temperature` 하향 · 0 | 반복 횟수 제한 ✗<br>결정적 agent는 같은 호출을 결정적으로 반복 |
+| 상한 숫자만 증가 (3 → 10 · 8 → 30) | 구조 동일 · 상한 도달 응답을 최종 답으로 취급 ✗ |
+
+**반복 상한의 위치**
+
+| 구분 | 내용 |
+|---|---|
+| 정상 종료 판정 | `stop_reason` (`end_turn`) |
+| tool 호출 횟수 | 모델이 context 기반으로 판단 |
+| 상한 설정 | 충분히 크게 · 안전장치로만 유지 |
+| 상한이 주된 중단일 때 | 4회 이상 필요한 건만 중간 절단<br>단순 건은 1회 완료 → 복잡도와 무관하게 작동 |
+| 상한 도달 시 | 로그 기록 · 이상으로 취급<br>미완료로 기록 (완료 처리 ✗) · 사람 escalation |
+| 모니터링 지표 | 상한 도달 횟수 · 예기치 않은 `stop_reason` 값 |
+
+**token · 비용 예산**
+
+| 구분 | 내용 |
+|---|---|
+| 원칙 | token 예산 = 모델 밖에서 강제 |
+| 측정 | loop 안에서 각 응답의 `usage` 필드로<br>입력 · 출력 token 누적 추적 |
+| 대응 | 예산 도달 → 코드가 loop 중단<br>예산 약 80% → 마무리 지시 주입 (약한 경고) |
+| 오답 1 | Claude에게 사용량 질문 = 추정 · 측정 ✗ |
+| 오답 2 | system prompt "50,000 token 이하" = 확률적 |
+| 오답 3 | `max_tokens` 50 = 모든 응답 잘림 |
+
+**Agent SDK 상한 · 재개**
+
+| 구분 | 내용 |
+|---|---|
+| 기본값 | agent loop = turn · 비용 한도 없음<br>범위 넓은 prompt → 실행 장기화 |
+| 한도 설정 | `max_turns` · `max_budget_usd`<br>production agent의 기본 선택 |
+| 한도 도달 구분 | `ResultMessage`의 `subtype`으로 성공과 구별<br>(`error_max_turns` 등) |
+| 이어하기 | `session_id` 저장 → `resume` |
+| 단발 `query()` | error result 반환 후 예외 발생<br>→ try로 감싸 다음 요청 진행 |
+| 평가 포인트 | "어디서 멈추나" + "멈춘 뒤 어떻게 다루나" 둘 다 필요 |
+| 오답 1 | `effort` `"low"` = turn당 소비만 변경 · 상한 ✗ |
+| 오답 2 | Stop hook = loop 끝날 때까지 발화 ✗ → 중도 차단 불가 |
+
+**`session budget` (Managed Agents)**
+
+| 구분 | 내용 |
+|---|---|
+| 동작 | list cost가 상한 도달 → 새 모델 요청 중단<br>세션 일시 중지 |
+| 적합 상황 | 단계 미정 agent loop + 세션별 고정 지출 상한 |
+| ⚠️ 기능 상태 | 공식 문서상 Managed Agents beta 기능<br>→ 이름 · 동작 변경 가능성 |
+| workflow run 여러 개 | 모두 하나의 `session budget`에 포함<br>→ 전체 세션에 budget 1개 |
+| 병렬 읽기 + 진행 표시<br>(lead 후속 메시지 금지) | workflow run 1개 + `session budget` 1개 |
+
+| 오답 | 이유 |
+|---|---|
+| `effort` low | 지출 통제처럼 보여도 상한에서 요청 중단 ✗ |
+| session budget 없이 subagent 6개 + 병합 | 폭주 지출 상한 부재 |
+| 검색 단계를 코드에 하드코딩 | 단계 미정 작업에 부적합 |
+| run마다 별도 budget | run은 하나의 budget에 포함 → 이중 설정 |
+| subagent별 후속 메시지 · lead → worker 후속 메시지 | 제약 위반 (후속 메시지 금지) |
+
+**상태 설계 진단 · 복구**
+
+| 상황 | 판단 |
+|---|---|
+| 같은 인자로 비싼 tool 반복 호출 | 결과 보관 · 재사용 실패 = 상태 설계 문제<br>정상 재시도 ✗ |
+| crash 후 worker가 확인된 사실 · 판단 소실<br>(filesystem 비공유 · 로컬 JSONL 보존 불확실) | 사실 · 판단을 JSON state manifest로 영속화<br>→ 재시작 시 prompt에 주입 |
+| host를 넘어 session 재개 | 공유 스토리지로 mirror 필요<br>(`SessionStore` adapter) |
+| 복구 수단의 기준 | 실행 환경에 의존하지 않는 앱 정의 state |
+
+**Loop 제어 책임**
+
+| 구분 | 내용 |
+|---|---|
+| loop 담당 | Agent SDK = SDK<br>Messages API 직접 구현 = 개발자 |
+| 반복 상한 | 폭주 방지 안전장치 · 충분히 큰 값<br>주된 중지 조건으로 사용 = 안티패턴 |
+
+
+
+![success condition과 hard step ceiling으로 이루어진 loop 종료 흐름](svg/1-loop-termination.svg)
+*그림: loop는 success condition으로 정상 종료하고, 수렴하지 못하면 hard ceiling이 안전망으로 끊는다*
+
+![context window와 명시적 state의 결정 유지 비교](svg/1-explicit-state.svg)
+*그림: context window에만 둔 결정은 compaction과 재시작으로 사라지고, 명시적 state에 둔 결정은 유지된다*
+
+<sub>근거: Amey-0026, Amey-0036, Amey-0060, Amey-0073, CCAR-F-Amey-Thakur-0001, CCAR-F-Amey-Thakur-0013, CCAR-F-Amey-Thakur-0066, CCAR-F-Udemy01-0045, CCAR-F-Udemy02-0036, CCAR-F-Udemy04-0014, CCAR-F-Udemy04-0028, CCAR-F-Udemy05-0045, CCAR-F-Udemy06-0023, CCAR-F-preporato-0013, CCAR-P-jrajath94-0023, CCAR-P-jrajath94-0603, CCAR-P-jrajath94-0606, Patrick-0038</sub>
+
+### 1.6 Tool 설계
+**목적 겹치는 tool → 잘못된 tool 선택 증가**
+
+| 구분 | 내용 |
+|---|---|
+| 겹치는 tool | 선택 모호 → 잘못된 tool 선택 빈발 |
+| 속도 · 비용 · 오류 처리 | 이득 ✗ |
+
+<sub>근거: Amey-0059</sub>
+
+### 1.7 구현 수단 비교
+**직접 = Client SDK**
+**라이브러리 = Agent SDK**
+**호스팅 = Managed Agents**
+
+| 수단 | 동작 | 비고 |
+|---|---|---|
+| Client SDK<br>(Messages API 직접) | `tool_use` 수신 → tool 실행<br>→ `tool_result` 전송 loop<br>loop · tool 구현 = 개발자 몫 | loop는 beta tool runner 위임 가능<br>`messages.stream()` · `stream: true` 지원<br>streaming · tool use = Agent SDK만의 장점 ✗ |
+| Claude Agent SDK | Claude Code 동일 harness<br>Python · TypeScript 라이브러리 | loop · tool 직접 만들기 싫을 때 |
+| Managed Agents | Anthropic이 agent loop · sandbox 호스팅<br>sandbox 선택: Anthropic cloud · self-hosted<br>session · event log = 항상 Anthropic 쪽 저장 | 실행 기반 없이 빠른 production<br>장시간 비동기 작업 |
+| Message Batches API | 즉시성 불필요 대량 요청<br>→ 비동기 · 저렴 | agent loop · 세션 저장소 ✗ |
+| LangGraph 등<br>orchestration 프레임워크 | 장시간 stateful agent용 저수준 프레임워크<br>control flow = graph(node · edge)로 명시 설계 | 아래 LangGraph 표 |
+
+| 오답 | 이유 |
+|---|---|
+| token counting endpoint로 계획 수립 | 크기 추정만 · 계획 수립 ✗ |
+| prompt에 tool 설명만 | 실행 ✗ |
+
+| Agent SDK 항목 | 내용 |
+|---|---|
+| 포함 | agent loop · context management<br>built-in tool(Read · Edit · Bash · 검색) |
+| 포함 (제어 · 확장) | hooks · permissions(결정론적 제어)<br>subagents · MCP · sessions |
+| 미제공 | hosted vector DB · 자동 fine-tuning<br>시각적 drag-and-drop designer<br>Anthropic 인프라 호스팅 |
+| 실행 위치 | 사용자 운영 프로세스 안<br>→ tool이 자사 인프라 파일 · 명령 직접 처리 |
+| 세션 | 실행 머신 디스크에 JSONL 저장<br>`SessionStore` adapter → 자사 스토리지 가능 |
+| 인증 | API key<br>제3자 제품에 claude.ai 로그인 제공 ✗<br>(사전 승인 없이 · rate limit 포함) |
+
+| LangGraph 항목 | 내용 |
+|---|---|
+| 제공 | durable execution(장애 후 재개)<br>human-in-the-loop · state 영속화<br>→ 직접 구현 불필요 |
+| 한계 | prompt · 아키텍처 추상화 ✗ · 비용 절감 도구 ✗ |
+| 사용 조건 | 요구가 위 기능과 일치<br>+ 내부 동작 이해 가능할 때만 |
+| 단순 agent | API 직접 사용이 나음<br>(Anthropic 권장: 단순 구현부터) |
+
+**동기 Messages API vs Message Batches API**
+
+| 상황 | 정답 |
+|---|---|
+| 결과를 바로 받아야 하는 blocking 판정<br>(PR merge 전 pass/fail gate) | 동기 `POST /v1/messages` |
+| 즉시성 불필요 대량 감사<br>(주간 40,000건 · 다음 날 검토) | Message Batches API + 요청별 `custom_id` |
+| 야간 재처리 + 대화형 검증 혼재 | 재처리 = Batches<br>대화형 검증 = 동기 Messages API |
+| 반복되는 공통 prefix<br>(추출 지시 · JSON schema) | prompt caching → 읽기분 입력 요금 절감 |
+
+| 항목 | 내용 |
+|---|---|
+| 판단 순서 | 워크로드별 대기 허용도 먼저 확인<br>→ 반복 입력 유무 확인 |
+| ⚠️ 요금 · 시간 | 일반 요금의 50% · 대부분 1시간 이내 · 최대 24시간<br>→ 시점 따라 변동 가능 |
+| 결과 조회 | 전체 처리 완료 또는 24시간 경과 시점 |
+| 결과 순서 | 투입 순서 보장 ✗ → `custom_id`로 대조 |
+| prompt caching 병행 | batch에서도 사용 가능 · 할인 중첩 가능 |
+
+| 오답 | 이유 |
+|---|---|
+| 둘 다 Batches (+ 상태 polling) | blocking 판정을 비동기로 만듦 |
+| 배정 반대 (검증 = Batches · 감사 = 동기) | 대기 불가 처리를 비동기로 만듦 |
+| streaming 동시 요청으로 대량 감사 | 대기 시간 차이를 잘못 파악 |
+| 대화형 검증이 1시간 내 끝나길 기대 | 최대 24시간 걸릴 수 있음 |
+
+
+
+![구현 수단 선택 decision tree](svg/1-implementation-choice.svg)
+*그림: 요구 조건을 위에서부터 확인해 Batches, LangGraph, self-hosted Agent SDK, Managed Agents, Agent SDK, Client SDK 중 가장 단순한 것을 고른다*
+
+<sub>근거: CCAR-F-Udemy01-0021, CCAR-F-Udemy03-0047, Patrick-0039, Preporato-0016, Preporato-0017, Preporato-0018, Udemy-0014, Udemy-0019, Udemy-0051</sub>
+
+### 1.8 Deployment 선택 — 3축 확인
+**loop · tool · state 위치 3축 확인**
+
+| 축 | 확인 항목 |
+|---|---|
+| loop | loop 실행 주체 |
+| tool | tool 실행 위치 |
+| state | 대화 로그 저장 위치 |
+
+| 상황 | 정답 |
+|---|---|
+| data residency<br>(실행 · 데이터 · 세션 로그까지 자사 네트워크) | self-hosted (Agent SDK) |
+| production 출시 속도 우선 | Managed Agents |
+
+![loop, tool 실행, state 위치로 본 deployment 비교](svg/1-deployment-axes.svg)
+*그림: Managed Agents는 sandbox를 자사에 두어도 session과 event log가 Anthropic에 남으므로 residency 요구에는 self-hosted Agent SDK다*
+
+<sub>근거: Preporato-0018, Udemy-0051</sub>
+
+### 1.9 Handoff 데이터 형식 — 출처 · 근거 보존
+**본문과 metadata를 분리한 구조화 레코드로 전달**
+
+| 구분 | 내용 |
+|---|---|
+| 증상 | 각 단계는 정상인데 최종 인용이 주장과 불일치<br>(provenance 소실 · 다른 논문 결론과 연결) |
+| 원인 | 출처가 문장에 섞임<br>요약 압축 · 말 전달 게임식 중계 |
+| 형식 | 본문 + metadata(URL · 문서명 · page 번호) 분리<br>근거 레코드 = 주장 · 출처 위치 · 취득 조건 |
+| 이유 | 본문을 고쳐 써도 대응 관계가 데이터로 유지 |
+| 확장 | 발견마다 고유 ID<br>보고서 주장 → ID 연결 → 사후 검증 가능 |
+
+| 구간 | 조치 |
+|---|---|
+| subagent 반환 | 고정 schema로 필수 근거 반환<br>(file path · test 이름 · code 발췌) |
+| coordinator → 통합 | 구조화 데이터를 요약 없이 그대로 전달<br>(요약 = 세부 소실 지점 증가) |
+| 통합 전 | record에 비교용 metadata 있는지 검증<br>(관측 기간 · 측정 방법) |
+| 통합 요청 | 주장마다 근거 인용 요구를 prompt에 명시 |
+
+| 증상 | 원인 |
+|---|---|
+| 조건 다른 통계값이 한 경향으로 묶임 | 문장 요약 반환 → 비교용 metadata 누락 |
+| 인용이 다른 문서와 연결 | 출처가 문장 속 → 통합 중 다시 쓰다 대응 붕괴 |
+| 요약에서 파일 경로 · test명 · 코드 누락 | 반환 schema에 근거 항목 없음 · 중계 중 요약 압축 |
+
+![Handoff 데이터 형식: 문장 요약 반환과 구조화 레코드 반환에서 출처 대응이 유지되는지 비교](svg/1-handoff-record.svg)
+*그림: 본문과 metadata를 분리한 레코드로 넘기면 통합을 거쳐도 주장과 출처의 대응이 유지된다*
+
+<sub>근거: CCAR-F-Amey-Thakur-0003, CCAR-F-Udemy01-0003, CCAR-F-Udemy02-0012, CCAR-F-Udemy03-0037, CCAR-F-Udemy04-0024</sub>
+
+### 1.10 Coordinator 평가 · 재위임 · 실패 처리
+**coordinator가 평가 → 부족분만 재위임 · 실패는 subagent 안에서 흡수**
+
+| 구분 | 내용 |
+|---|---|
+| 평가 | 통합 출력을 품질 기준과 대조<br>(예: 숫자 주장 = 독립 출처 2개 이상 · 필수 관점 6개) |
+| 재위임 | 부족한 부분만 범위 좁힌 query로<br>검색 · 분석 subagent에 재위임 → 통합 재호출 |
+| 반복 | coverage 충족까지 반복<br>반복 상한 설정 |
+| 상한 도달 | 미해결 항목에 주석(coverage 표기) → 보고서 진행 |
+| 기준 위치 | 품질 기준 = coordinator prompt에 명기 |
+| 누락 증상 | 통합 출력을 그대로 최종 보고서로 사용<br>→ 빠진 관점 · 근거 1개 주장 방치 |
+
+| 구분 | 내용 |
+|---|---|
+| 일시 오류 | subagent 안에서 재시도 |
+| 해결 안 될 때 | 오류 내용 · 시도 내용 · 확보한 정보원을 구조화 반환<br>→ coordinator가 내부를 안 보고 다음 수 결정 |
+| 원칙 | 내부 실패 처리 = 내부<br>밖으로는 판단용 요약만 |
+| 설계 방침 | 실패를 어디서 흡수하고 무엇을 위로 올릴지 설계<br>tool 실패를 agent에 알려 적응<br>+ 재시도 같은 확정적 안전장치 조합 |
+
+![coordinator의 평가, 부족분 재위임, 반복 상한, subagent 내부 실패 흡수 흐름](svg/1-coordinator-eval-loop.svg)
+*그림: coordinator는 품질 기준과 대조해 부족분만 재위임하고, 실패는 subagent 안에서 흡수해 판단용 요약만 올린다*
+
+<sub>근거: CCAR-F-Udemy01-0005, CCAR-F-Udemy04-0009, CCAR-F-Udemy06-0022</sub>
+
+### 1.11 Handoff contract와 불일치(disagree) 규칙
+**contract = 입력 · 출력 · 병합 · 불일치 규칙**
+
+| 요소 | 내용 |
+|---|---|
+| 입력 | worker별 입력 문서 (작업 한정) |
+| 출력 | worker별 출력 형식 |
+| 병합 규칙 | coordinator가 조각을 하나로 결합하는 방식<br>병합 규칙 없음 → 좋은 검토 3개가 한 보고서 ✗ |
+| 불일치 규칙 | 충돌 시 우선 근거 또는 arbiter<br>coordinator가 적용 · 결정 기록 |
+| checkpoint | 각 handoff 저장 → worker 실패 시 재개 |
+| 비요소 | 문체 · 모델 등급 · 근무 시간<br>→ 비일관성 방지 못함 |
+| ⚠️ 용어 | 해설 자체 용어 · 공식 문서에서 동일 정의 미확인<br>→ 구성 항목은 해설 기준 |
+
+| 상황 | 해결 |
+|---|---|
+| worker 평가 충돌 + 규칙 없음 | 명명된 불일치 규칙<br>→ critic 단계 (원문 + 두 근거로 재검토)<br>→ 증거로 해결 불가 시 사람 escalation |
+| 전문가 간 의견 충돌<br>(전사 vs 번역 12%) | contract가 중재자(arbiter) 지정<br>coordinator 적용 · 결정 기록<br>중재자 = 두 출력 + 원본 필요 |
+| finding 우선순위 충돌 | 심각도 순서 또는 arbiter를 병합 시 적용 · 기록 |
+| 반려 30% · 사유 없음 | 반려 사유 코드 + 재작업 경로 명시 |
+| 매번 한쪽 worker 선택 | 암묵적 기본값 ✗<br>분쟁마다 우선 증거 · 이유 기록<br>log가 규칙 적용을 증명 |
+| 병렬 독립 검토 + 마감 + 병합 | coordinator + 전문가 worker<br>contract(입력 · 출력 · 병합 규칙) + checkpoint |
+
+| 구분 | 내용 |
+|---|---|
+| 한계 | critic = "해결 불가" 정의 없으면 전부 escalation<br>arbiter = 병목 · 중재 품질이 전체 품질 제한<br>나쁜 병합 규칙 = 일관되지만 틀린 결과 |
+| 증설이 맞는 경우 | 문제가 충돌이 아닌 처리량<br>또는 작업이 독립 조각으로 더 나뉨 |
+| 대안이 맞는 경우 | 평균 = 저위험 수치 추정<br>다수결 = 독립 다수 투표자 + 명확한 라벨 분류 |
+
+<sub>근거: CCAR-P-jrajath94-0119, CCAR-P-jrajath94-0121, CCAR-P-jrajath94-0122, CCAR-P-jrajath94-0285, CCAR-P-jrajath94-0338, CCAR-P-jrajath94-0401, CCAR-P-jrajath94-0464, CCAR-P-jrajath94-0527</sub>
+
+### 1.12 사람에게 handoff (escalation)
+**검증 불가 · 명시적 요구는 사람에게 → 구조화 요약과 함께**
+
+| 상황 | 처리 |
+|---|---|
+| 결과를 검증할 수 없는 단계 | 드러내기 → 행동 전 사람 확인 |
+| 명시적 사람 요구 | 난이도 무관 즉시 사람 review |
+| 단순 수정 요청<br>(원문에 명확한 근거) | 자동 복구 제공<br>복구 후 검증 실패 시 escalation |
+| 판단이 망설여지는 지점 | 처리 중단 → checkpoint에서 사람 피드백 |
+
+| 항목 | 내용 |
+|---|---|
+| 수신자 조건 | 대화 기록 접근 불가<br>(별도 ticket 시스템에서 작업) |
+| 사실 | 검증된 customer ID · 근본 원인 분석<br>시도한 대처 · 사안별 항목(환불 금액 등) |
+| 판단 | 권장 다음 조치 + 근거 |
+| 기준 | 담당자가 되묻지 않고 대응 시작 가능한가 |
+| 운영 | `escalate_to_human` 입력 schema에서 항목 필수화<br>→ 품질 편차 방지 |
+
+<sub>근거: CCAR-F-Amey-Thakur-0015, CCAR-F-Udemy01-0060, CCAR-F-Udemy05-0010</sub>
+
+### 1.13 분해 방식 선택 — 고정 chain vs 동적 분해
+**절차를 사전에 정할 수 있나로 선택**
+
+| 작업 성격 | 분해 | 근거 |
+|---|---|---|
+| 정형 · 반복 점검<br>(PR 체크 · 템플릿 검수) | 고정 순차 chain | 확인 항목 · 순서 고정<br>→ 일관성 · 검증 용이 |
+| 범위 미정 조사 · 원인 탐색 | 동적 분해 | 발견에 따라 다음 단계 변동 |
+| 한 도구에 두 유형 공존 | 의뢰 유형 판정 → 분기 | 정형 = chain<br>조사 = 동적 분해 |
+
+| 판단 단서 | 선택 |
+|---|---|
+| "이후 절차는 발견 결과에 따라 달라짐" | 동적 분해<br>(orchestrator가 분해 · 위임 · 통합) |
+| 확인 항목 목록이 사전 확정 | 고정 chain |
+| 실행마다 확인 항목이 빠지거나 늘어남 | 정형 작업을 범용 agent에 맡긴 결과<br>→ 항목 고정 chain 필요 |
+| 다음 확인 대상이 이전 확인 결과로 결정 | 열린 조사 → 동적 분해 |
+| 재사용 workflow 중 일부 절차만 가변 | 읽기 단계 고정<br>이후 = 조사 결과로 서브태스크 생성 · 통합 |
+| 커버리지 > 지연 시간 | 동적 분해 허용 |
+| 동적 분해 도입 | 비용 증가 · 탈선 위험<br>→ 모델 바깥에서 강제하는 한도 병행 |
+
+<sub>근거: CCAR-F-Udemy02-0009, CCAR-F-Udemy04-0008, CCAR-F-Udemy06-0029, CCAR-F-preporato-0012</sub>
+
+### 1.14 동적 분해 절차 — 탐색 · 우선순위 · 계획 갱신
+**먼저 훑고 · 우선순위 정하고 · 발견으로 갱신**
+
+1. 짧고 넓은 탐색으로 구조 · 중요 영역 파악
+2. 영향 큰 영역 식별
+3. 우선순위 서브태스크 계획 작성 · 산출물로 기록
+4. 의존 관계 발견 시 계획 갱신 · 변경 이유 기록
+5. 결과 통합 후 공백 확인 → 공백에만 2차 할당
+
+| 증상 | 원인 | 조치 |
+|---|---|---|
+| 중요 모듈 테스트 0건<br>단순 함수에 예산 소진<br>(알파벳 순 처리) | 순서에 중요도 미반영<br>(처리량 부족 ✗) | 구조 파악 → 영향 큰 영역 우선 계획 |
+| 대규모 수정을 디렉터리 순 진행<br>→ 대부분 재작업 | 모듈 의존 관계 미파악 | 의존 파악 · 우선순위 계획 · 갱신 |
+| 시작 시점 문구로 서브태스크 고정<br>→ 중간 단서 누락 | 계획 고정 | 발견 따라 서브태스크 추가 · 우선순위 재검토 |
+| subagent는 할당 완수<br>낯선 주제 포괄성 낮음 | 할당 생성 방식 | 사전 탐색으로 할당 생성<br>공백에만 2차 할당 |
+| 문장은 좋으나 범위 불균형<br>지엽 조사에 노력 소진 | coordinator가 조사 대상을 파악 못함 | 탐색 조사 → 우선순위 할당<br>목차는 조사 후 확정 |
+
+| 구분 | 내용 |
+|---|---|
+| 큰 종합 작업<br>(출처 200개 → 장문 보고서) | 구조 계획 → 섹션별 근거 병렬 수집 → 종합<br>단계마다 다룰 수 있는 context |
+| 포괄성 진단 | 실행 문제 vs 할당 문제 구분<br>할당 완수인데 누락 = 할당 방식이 원인 |
+| 공백 보완 | 추가 조사 후 반영<br>통합 단계 임의 보완 ✗ |
+| 할당 수 증가 | 전 주제 일률 증가 ✗ · 공백에만 추가 |
+| 기록 | 분해 결과 · 변경 이유 기록<br>→ 결론 도달 경위 설명 · 다음 실행이 이어받음 |
+
+![고정 chain과 동적 분해의 선택 기준과 동적 분해 절차](svg/1-decomposition-choice.svg)
+*그림: 절차를 사전에 확정할 수 있으면 고정 chain, 발견에 따라 달라지면 탐색 · 우선순위 · 계획 갱신으로 동적 분해한다*
+
+<sub>근거: CCAR-F-Udemy02-0045, CCAR-F-Udemy03-0050, CCAR-F-Udemy04-0022, CCAR-F-Udemy05-0019, CCAR-F-Udemy06-0038, CCAR-P-jrajath94-0015</sub>
+
+### 1.15 분해 품질 결함 — 누락 · 중복 · 축 오류
+**subagent 정상이면 원인은 coordinator 분해**
+
+| 증상 | 원인 | 조치 |
+|---|---|---|
+| 전 subagent 정상 완료<br>보고서가 일부 영역만 다룸 | 분해가 좁음<br>(하위 작업이 한 영역에 집중) | 넓은 주제 전체 영역을 덮는 분해 |
+| agent 간 결과 중복<br>token 2~3배 · 폭 불변 | 작업 경계 불명 · 같은 지시 | 위임 전 조사 영역 명시 분할 |
+| 정보원별 분해인데 영역 누락 | 축 오류<br>= 어디(정보원)만 할당<br>무엇(주제 영역) 미할당 | 주제 영역별 분해 · 담당 할당 |
+| 같은 지시 받은 subagent들이<br>같은 소견 반환 | 병렬 효과 ✗ · 통합 부담만 증가 | 문서 그룹 · 추출 관점으로 비중복 분할 |
+
+| 구분 | 내용 |
+|---|---|
+| subagent 컨텍스트 | 분리 → 서로의 작업 모름<br>같은 지시 = 같은 검색 |
+| 중복 방지 책임 | 작업을 분해 · 위임하는 coordinator |
+| 분할 축 | 하위 주제 · 정보원 종류<br>문서 그룹 · 추출 관점 |
+| 분할 점검 | 담당 범위가 겹치지 않는지<br>통합 측으로 가는 분량이 억제됐는지 |
+| 반환 | 간결한 소견만 → 통합 context 비대화 방지 |
+
+**위임 prompt 구성 요소**
+
+| 요소 | 내용 |
+|---|---|
+| 목적 | 무엇을 위한 조사인지 |
+| 출력 형식 | 반환 형식 지정 |
+| 도구 · 정보원 지침 | 사용할 도구 · 출처 범위 |
+| 작업 경계 | 담당 범위 + 비담당 범위 모두 명시<br>상세 기술 없음 → 중복 · 공백 |
+| 필요 context | 분할된 담당에 필요한 정보 전달 |
+
+**진단 순서**
+
+| 단계 | 확인 |
+|---|---|
+| 로그 확인 | coordinator 분해 목록에 영역 이름이 있는지<br>없음 → 분해 축 결함 |
+| 통합 전 점검 | 분해 결과 · 영역별 담당 출력<br>→ 파악 영역 전부 조사됐는지 확인 |
+| 선택지 판별 | 분해 단위를 바꾸는 안인지 확인<br>키워드 · 정보원 · 검색 건수 추가 = 양만 조정 |
+
+<sub>근거: CCAR-F-MyPractice-0004, CCAR-F-MyPractice-0011, CCAR-F-Udemy03-0043, CCAR-F-Udemy05-0025, CCAR-F-Udemy06-0026, CCAR-F-paullarionov-0004, CCAR-F-paullarionov-0011</sub>
+
+### 1.16 의존성 기반 병렬 · 순차 결정
+**독립은 병렬 · 의존은 순차 · 합류점은 fan-in**
+
+| 조건 | 실행 |
+|---|---|
+| 입력이 다른 작업 출력 불필요 | 병렬 |
+| 입력이 다른 작업 출력 필요 | 선행 완료 후 순차 |
+| 독립 작업을 순차 실행 | 이득 없이 지연 · 소요 = 합계 |
+| 독립 작업을 병렬 실행 | 소요 = 최댓값 (SLA 대응) |
+| 모든 선행이 필요한 합류 작업 | fan-in에서 선행 완료 신호 확인 후 실행 |
+| 의존 무시 병렬 | 최적화 ✗ · 결함 (안전 위반 가능) |
+| 의존 쌍 외 나머지 | 순서 자유 (병렬 · 순차 모두 유효) |
+| 의존 조건이 바뀜 | 정답도 바뀜 → 문항의 선행 조건이 결정 |
+| 자원 공유 작업 | 독립성 붕괴 (예: 장비 1대 공유) → 병렬 ✗ |
+
+**혼합 구조 패턴**
+
+| 구조 | 실행 |
+|---|---|
+| 독립 N개 → 합류 1개 | N개 병렬 → fan-in 1개<br>(저장소별 스캔 → 통합 보고서) |
+| 선행 1개 + 독립 작업 | 독립 작업은 처음부터 병렬<br>의존 작업만 선행 완료 후 |
+| 선행 1개 → 병렬 2개 → 합류 | 빌드 → 테스트 ∥ 스캔 → 배포 |
+| 독립 N개 + 비교 1개 | N개 병렬 → 비교는 N개 결과 수신 후 |
+
+**병렬 기동 방법**
+
+| 구분 | 내용 |
+|---|---|
+| 병렬 기동 | coordinator 한 응답에서<br>Agent tool 호출 여러 개 출력 |
+| 순차 기동 | 응답마다 호출 1개 → 결과 대기 → 다음 위임<br>→ 소요 = 작업 수 배 |
+| ⚠️ tool 이름 | 문항 표기 = Agent tool(구 Task tool)<br>이름은 버전 의존 — 2.1.63에서 Task → Agent로 변경<br>(구 `Task(...)` 표기는 alias) |
+| 의존 작업 | 선행 결과 수신 후 별도 호출<br>전부 동시 위임 ✗ |
+| 의존 명시 | coordinator prompt에 작업 간 의존 관계 기재<br>→ 병렬 · 순차 판단 안정 |
+| 대기 제거 | 각 subagent에 자기완결 brief 전달<br>앞 subagent 요약 대기 ✗ |
+
+**복합 요청 분해**
+
+| 구분 | 내용 |
+|---|---|
+| 증상 | 한 요청에 용건 여러 개<br>→ 첫 용건만 해결 후 종료 · 재문의<br>순차 조사 · 같은 고객 데이터 중복 조회 |
+| 분해 | 개별 이슈로 분해<br>→ 공유 고객 context로 병렬 조사<br>→ 하나의 해결안으로 종합 |
+| 효과 | 중복 조회 제거 · tool 호출 loop 총 횟수 감소<br>한 번의 응대로 전 용건 해결 |
+| 마무리 | 용건별 결과 나열 → 누락 확인 |
+| 판별 기준 | 노력 · 판단을 고객 · 담당자에 떠넘김 ✗<br>확인 끝난 정보 재사용 여부 |
+
+![의존성에 따른 병렬, 순차, fan-in 실행 구조와 소요 시간 비교](svg/1-dependency-parallel.svg)
+*그림: 독립 작업은 병렬로 기동하고 의존 작업은 선행 완료 뒤에 실행하며 합류 작업은 fan-in에서 기다린다*
+
+<sub>근거: CCAR-F-MyPractice-0048, CCAR-F-Udemy02-0024, CCAR-F-Udemy03-0016, CCAR-F-Udemy04-0054, CCAR-F-Udemy05-0035, CCAR-F-paullarionov-0048, CCAR-F-preporato-0005, CCAR-P-jrajath94-0286, CCAR-P-jrajath94-0339, CCAR-P-jrajath94-0465, CCAR-P-jrajath94-0466, CCAR-P-jrajath94-0528</sub>
+
+### 1.17 프로그램 강제 vs prompt 지시
+**확실히 지켜야 하면 모델 밖 코드로 강제**
+
+| 구분 | 프로그램 강제 | prompt 지시 |
+|---|---|---|
+| 수단 | hook · gate · 전제 조건<br>· tool 권한 · CI gate<br>· tool 구현 내 검증 | system prompt · `CLAUDE.md`<br>· tool description · few-shot |
+| 보장 | 결정적 (모델 판단 ✗) | 확률적 · 실패율 0 ✗ |
+| 적합 | 예외 불인정<br>위반 = 법령 · 금전 · 비가역 피해 | 문체 · 설명 품질 · 안내 덧붙이기<br>유연한 판단 · 위반 영향 작음 |
+
+| 상황 | 정답 |
+|---|---|
+| "확실하게 막는다" · "예외 불인정"<br>· "~일 때만 실행" | 모델 밖에서 판정하는 메커니즘 |
+| 금액 · 건수처럼 기계 판정 가능한 규칙 | 코드 강제 (가치 높음) |
+| prompt에 규칙이 있는데도 위반 발생<br>(월 수 건 · 0.8% · `CLAUDE.md` 금지 무시) | prompt 강화 ✗ → hook · gate 추가 |
+| 법령 위반 · 금전 손실 직결 + tool 호출로 검사 가능<br>(예: 수출 관리 대상 발송) | hook으로 강제 |
+| 유연한 판단 · 위반 영향 작음<br>(어조 · 안내 문구) | prompt 지시로 충분 |
+| 필수 artifact 없이 승인 · 공개 실행 금지 | `PreToolUse` hook 거부<br>+ 실행 전 CI gate · tool 권한 제거 |
+| 임계값 초과 환불 차단 + 사람 인계 | 앱 측 guard 또는 tool 구현 내 금액 검증<br>→ `escalate_to_human`으로 유도 |
+
+**강제 수단별 동작**
+
+| 수단 | 동작 |
+|---|---|
+| `PreToolUse` hook | tool 실행 직전 검사 → `permissionDecision` `"deny"`<br>`permissionDecisionReason`으로 이유를 모델에 전달 |
+| hook 평가 시점 | 권한 평가보다 먼저 실행<br>deny 시 `bypassPermissions` 모드에서도 차단 |
+| `PostToolUse` hook | 실행 후 동작 → 방지 수단 ✗ |
+| hook matcher | `Bash`로 좁힘 → `tool_input`의 `command` 검사<br>(`apply` · `destroy` 등 파괴적 하위 명령 일괄 판정) |
+| subagent `tools` 제한 | 부여 안 된 tool은 그 subagent에 비노출<br>예: 공개 tool은 coordinator만 보유 |
+| 앱 측 guard | client tool = Claude는 호출 요청만<br>실행 여부 최종 결정 = 앱 |
+| tool 구현 내 검증 | 요청 금액 검증 → 임계값 초과 거부 |
+| CI gate | Claude Code 단계 전 합격 artifact 없으면 job 실패 |
+
+| 오답 | 이유 |
+|---|---|
+| 지시 추가 · 강조 · 문서 맨 앞으로 이동 · 영향 설명 | 요청일 뿐 · 같은 확률적 메커니즘 |
+| `PostToolUse` hook 사후 검사 · 알림 · rollback | 이미 실행됨 → 방지 ✗ |
+| `tool_choice`로 특정 tool 강제 | 순서 · 조건 판정 수단 ✗<br>일률 강제 → 소액 정당 환불까지 차단 · 해결률 저하 |
+| `temperature` 0 · few-shot · 평가 반복 | 확률적 동작을 결정적으로 못 바꿈 |
+| tool description에 조건 기재 | prompt 지시와 같은 확률적 준수 |
+| 사후 로그 감지 · 담당자 취소 | 잘못된 실행 자체를 못 막음 |
+| tool 제거 (`process_refund` 삭제) | 정당한 처리까지 차단 |
+| 완료 후 hook으로 artifact 확인 | 실행 후 → 방지 ✗ |
+| 공개 tool을 `PostToolUse`로 사후 거부 | 이미 공개됨 |
+| coordinator 지시에 "검증 후 공개" 추가 | 요청에 그침 |
+
+![tool 호출 요청이 모델 밖 gate에서 검증되어 실행되거나 거부 이유와 함께 되돌아오는 흐름](svg/1-enforcement-gate.svg)
+*그림: 확실히 지켜야 하는 규칙은 prompt 지시가 아니라 모델 밖 gate가 실행 전에 검증된 결과로 판정한다*
+
+<sub>근거: CCAR-F-Amey-Thakur-0014, CCAR-F-Udemy01-0019, CCAR-F-Udemy02-0010, CCAR-F-Udemy02-0032, CCAR-F-Udemy04-0016, CCAR-F-Udemy04-0053, CCAR-F-Udemy05-0016, CCAR-F-Udemy06-0050, CCAR-F-Udemy06-0051</sub>
+
+### 1.18 전제 조건 gate 설계
+**gate 조건 = "호출됨"이 아니라 "검증됨"**
+
+| 구분 | 내용 |
+|---|---|
+| 전제 조건 | 선행 단계 완료 전까지 후속 tool 호출 차단<br>(programmatic) |
+| 예 | `get_customer`가 검증된 ID 반환 전<br>`lookup_order` · `process_refund` 차단 |
+| '완료' 정의 | 호출 사실 ✗ · 검증된 결과(ID) 획득 ✓ |
+| 오류 사례 | 호출 여부만 보는 gate<br>→ 후보 여러 명 일치에도 통과 → 타인 계정 환불 |
+| 보강 1 | 검증된 ID를 session 상태에 유지<br>`process_refund` 인수의 ID와 일치 확인 |
+| 보강 2 | 후보 다수 → 추측 선택 ✗<br>추가 식별 정보를 고객에게 질문 |
+| 사고 후 진단 | gate가 있는데 사고 → gate 조건 자체를 의심 |
+
+| 상황 | 정답 |
+|---|---|
+| tool 호출 순서 위반<br>(`get_customer` 건너뛰고 `lookup_order` 직행) | 코드 수준 precondition |
+| subagent 순서 위반<br>(분석 결과 · 출처 반환 전 보고서 위임) | orchestration 계층 precondition<br>필요한 결과 · 출처 대응 갖출 때까지 위임 거부 |
+| 본인 확인 전 배송지 변경 | 코드로 확인 → 미확인 시 tool 거부 |
+| gate 거부 시 | 이유를 tool 결과로 agent에 반환<br>→ 올바른 절차로 복귀 |
+| 위반 조작 차단 후 | 대체 workflow로 유도<br>(plan 결과 담당자 확인 등) |
+| 운영 | 거부 건수 기록 → 절차 생략 지점 · prompt 개선 진척 추적 |
+
+| 오답 | 이유 |
+|---|---|
+| 순서를 보여 주는 few-shot | 확률적 · 건너뜀 가능성 잔존 |
+| system prompt 더 강하게 명시 | 확률적 · 실패율 0 ✗ |
+| routing classifier로 tool 일부만 활성화 | 건너뜀 가능성 자체를 제거 못함 |
+| 반복 횟수 증가 · `tool_choice` 강제 | 순서를 제어하는 메커니즘 ✗ |
+| 지시 강화 (coordinator) | 요청에 그침 |
+
+**gate 판정을 실행에 연결**
+
+| 구분 | 내용 |
+|---|---|
+| 핵심 | gate 판정이 코드에서 출시 결정으로 연결 · fail closed |
+| 차단 없는 verification | 장식 (guardrail ✗ · 대시보드) |
+| gate 역할 | gate마다 하나 · 다른 gate 역할 대신 ✗ |
+| 조치 | 코드로 차단 + 실패 원인 계층(retrieval · prompt) 수정 |
+| 전제 | 원인 수정에 실패 trace 필요 |
+| 부작용 | 차단 → false-positive 차단 증가 가능<br>→ 원인 수정 신속 필요 |
+
+| 오답 (gate 있는데 실패 초안 출시) | 이유 |
+|---|---|
+| 모든 답변 사람 검토 | 하루 50,000건 × 30초 = 417 검토자-시간<br>원인 미수정 |
+| 10% 표본 검토 | 실패의 90% 통과 |
+| gate 제거 | 작동하는 탐지기 파괴 → 눈 가리고 출시 |
+
+| 조건 변화 | 정답 변화 |
+|---|---|
+| 하루 100건 + 답변마다 법적 노출 | 전면 사람 검토 |
+| 실패 드묾 + 표본을 eval 라벨 세트로 활용 | 표본 검토 |
+| gate false-positive가 탐지율 초과 + 더 나은 검사 존재 | gate 교체 · 제거 |
+
+<sub>근거: CCAR-F-MyPractice-0051, CCAR-F-Udemy01-0019, CCAR-F-Udemy01-0020, CCAR-F-Udemy04-0005, CCAR-F-Udemy04-0016, CCAR-F-Udemy04-0053, CCAR-F-Udemy06-0051, CCAR-F-paullarionov-0051, CCAR-P-jrajath94-0114</sub>
+
+### 1.19 비가역 작업 통제와 사람 승인
+**위험 = 피해 크기 · 모델 밖에서 통제**
+
+| 구분 | 내용 |
+|---|---|
+| 운영 위험을 가장 키우는 특성 | checkpoint 없이 되돌릴 수 없는 작업 수행 |
+| 이유 | 되돌릴 수 있는지 = 틀렸을 때 비용 · 피해 범위 결정 |
+| 영향 작은 것 | 모델 수 · 구조 · 실행 시간<br>→ 비용 · 복잡도에만 영향 |
+| 오류 확률 vs 피해 | 모델 성능 · prompt 길이 · tool 수 = 오류 확률에 영향<br>피해 크기 · 비용에는 영향 ✗ |
+
+| 상황 | 정답 |
+|---|---|
+| 자율 단계가 production 데이터 수정 | 사람 승인 checkpoint 또는 되돌림 장치<br>모델 밖에서 강제 |
+| 틀린 결정의 비용 최소화 | 동작을 되돌릴 수 있게 구성<br>또는 확인을 거쳐야 실행되게 구성 |
+| 금전 이동 · 고객 대상 메시지<br>(모델 단독 실행 금지) | 모델은 제안 · gate가 처분<br>작성 = 자동 · 발송 · 환불 = gate 뒤 |
+| gate 구성 예 | 규칙 엔진이 정책 · 금액 · 사기 flag 확인<br>발송 = 사람 승인 |
+| `dry_run` 우회 방지<br>(미리보기 후 실행 강제) | preview · execute 두 tool 분리<br>preview = 영향 세부 + 1회용 confirmation token<br>execute = token 필수 → 실행을 preview에 바인딩 |
+
+| 오답 | 이유 |
+|---|---|
+| 더 큰 모델 · 더 긴 system prompt · 재시도 | 피해 범위 제한 ✗ |
+| "double-check the policy" 지시 | 여전히 모델 판단 → prompt-plea 함정 |
+| 행동 전 추론 상세 설명 요구 | 결정 주체 불변 · 모델 단독 실행 |
+| 두 agent 투표 · 둘 다 동의 시 실행 | 모델 판단 2개 · 결정론적 점검 ✗ · 사람 점검 ✗ |
+| 직전 60초 내 `dry_run=true` 이력 validation | 시간 간격 heuristic 의존 |
+| tool에 confirmation 표시 + orchestration 계층이 승인 요청 | orchestration 계층의 정상 동작에 의존 |
+| tool 설명 · few-shot으로 preview 먼저 호출 지시 | LLM 지시 준수에 의존 |
+
+![모델 제안, 규칙 엔진, 사람 승인, 실행으로 이어지는 비가역 작업 통제와 preview · execute 분리](svg/1-irreversible-approval.svg)
+*그림: 비가역 작업은 모델이 제안만 하고, 실행은 모델 밖 gate와 사람 승인 또는 preview에 묶인 token 뒤에서만 일어난다*
+
+<sub>근거: CCAR-F-Amey-Thakur-0014, CCAR-F-Amey-Thakur-0053, CCAR-F-Amey-Thakur-0068, CCAR-F-MyPractice-0061, CCAR-P-jrajath94-0067</sub>
+
+### 1.20 병렬 tool 호출과 loop 수 줄이기
+**독립 호출은 한 turn에 · 결과는 한 user 메시지에**
+
+| 구분 | 내용 |
+|---|---|
+| 기본 동작 | Claude = 한 응답에서 여러 tool 호출(parallel tool use) 가능 |
+| 호출 쪽 | 독립 호출을 한 assistant turn에서 함께 발행 |
+| 반환 쪽 | 모든 `tool_result`를 하나의 user 메시지로 묶어 반환 |
+| 결과 분리 반환 | 별도 user 메시지 → 병렬 호출 회피를 Claude에게 학습시킴 |
+| `disable_parallel_tool_use` | `tool_choice` 안에서 `true`면 병렬 비활성<br>→ 기본값 `false` 유지 |
+| 요령 | 호출 방식 + 결과 반환 방식 둘 다 확인 |
+
+| 상황 | 정답 |
+|---|---|
+| 독립 subagent 조사 3개를 순차 처리 | 한 assistant turn에서 Agent 호출 함께 발행<br>결과는 다음 user 메시지에 묶어 반환<br>`disable_parallel_tool_use` 기본값 유지 |
+| 처음부터 둘 다 필요한 tool을 별도 turn에 요청<br>→ API loop 수 과다 | prompt로 관련 tool 요청을 한 turn에 묶게 지시<br>결과를 함께 반환 후 다음 호출<br>(구조 변경 최소) |
+
+| 오답 | 이유 |
+|---|---|
+| 한 번에 하나씩 호출 + background 지정 | 순차 대기 잔존 |
+| subagent 요약을 완료 즉시 개별 user 메시지로 반환 | 순차 대기 잔존 · 병렬 회피 학습 |
+| 필요할 만한 tool 자동 병렬 호출 (speculative execution) | 요청하지 않은 tool 실행 · 결과 반환 |
+| `max_tokens` 상향 | 출력 제한 · tool 요청 결합과 무관 |
+| composite tool (`get_customer_with_orders`) | tool 설계 변경 필요 · 최소 변경 아님 |
+
+<sub>근거: CCAR-F-MyPractice-0053, CCAR-F-Udemy01-0028, CCAR-F-Udemy03-0008, CCAR-F-paullarionov-0053</sub>
+
+### 1.21 기타 — trace · 경계 계약 · retrieval 분할
+**진단 = trace · 경계 = 계약 · 혼입 = 분할**
+
+| 상황 | 정답 |
+|---|---|
+| production agent 디버깅 · 실패 원인 진단 | 단계별 trace 기록<br>(각 단계 입력 · tool 호출 · 출력) |
+| trace가 필요한 이유 | 비결정적 실행을 사후 재구성 가능 |
+| 각 구성요소는 정상인데 경계에서 간헐 실패 | 둘 사이 계약(interface) 불충분<br>특히 edge case · 오류 case |
+| 여러 지역 · 팀 정책이 답변에 혼입 | 데이터 도메인별 분할<br>문서에 지역 tag<br>→ semantic search 전 사용자 지역으로 retrieval 필터 |
+
+| 오답 | 이유 |
+|---|---|
+| tool 수 축소 · 단일 모델 통일 | 단순화일 뿐 원인 설명 ✗ |
+| step 한도 상향 | 실패만 길어짐 · 더 분명해지지 않음 |
+| 최종 출력 · token 총량 · 모델 버전만 기록 | 어느 지점에서 어긋났는지 알 수 없음 |
+| 더 큰 모델 · 구성요소 추가 (경계 실패) | 인터페이스 정의 ✗ |
+| 재시도 (경계 실패) | 문제 은폐 |
+| 전 지역 정책 전부 투입 | context stuffing |
+| 지역별 agent 14개가 협상 | retrieval 문제에 조율 장치만 추가 |
+| 사용자에게 지역 언급 요청만 | 혼합 retrieval 유지 |
+
+<sub>근거: CCAR-F-Amey-Thakur-0017, CCAR-F-Amey-Thakur-0054, CCAR-P-Amey-Thakur-0070, CCAR-P-preporato-0005</sub>
+
+### 1.22 Hybrid 설계 — 고정 뼈대 + 열린 판단
+**고정 단계는 코드 · 열린 판단만 모델 · 사이에 gate**
+
+| 구분 | 내용 |
+|---|---|
+| 분기 규칙 | 입력 형태별 lane 배정<br>고정 매핑 → 결정론적 코드<br>열린 입력 → Claude + gate |
+| 구조 | 고정 단계 = deterministic workflow<br>모호한 소수 사례(3~10%) → agent 호출<br>→ 이후 workflow 복귀(지급 · 경고 · 게시) |
+| handoff 지점 | workflow ↔ agent 전환 지점 |
+| 두 형태 작업<br>(열린 평가 + 고정 발행) | agentic loop로 평가 → 고정 schema<br>→ deterministic workflow로 발행 |
+| 연결 조건 | loop 출력 = workflow schema 계약<br>loop = step 상한으로 평가 비용 제한 |
+| 정답 형태 | 두 형태 작업의 표준 정답 = hybrid<br>패턴 하나만 고르기 ✗ |
+
+**패턴 스펙트럼 판단 축**
+
+| 축 | 판단 |
+|---|---|
+| 점수 기준 | 예측 가능성 · 되돌림 가능성<br>오류 비용 · 지연 · 비용 |
+| 오류 비용 높음 + 되돌리기 어려움 | 결정론 쪽(스펙트럼 왼쪽)으로 이동 |
+| 계획 필요성 높은 단계 (평가 · 조사) | agent |
+| 예측 가능성 필요한 단계 (발행 · 지급) | workflow |
+| 결정 요인 | 작업의 형태 (구호 ✗) |
+
+**Gate · 사람 검토의 확장성**
+
+| 상황 | 판단 |
+|---|---|
+| 고정 사례 규칙 처리<br>+ 열린 사례 Claude 처리 | 모든 초안 · 지급에 code gate<br>(원본 대조 · 사진 · 기록 검사 통과 전 차단) |
+| gate 입력 | 검사가 원본(메시지 · 사진 · 기록)을 볼 수 있어야 함 |
+| 모든 건을 사람이 검토 | 대량엔 불가<br>(12,000건 × 30초 ≈ 하루 100 간호사-시간) |
+| 전수 사람 검토가 맞는 경우 | 물량 소량(하루 40~60건)<br>+ 건당 법적 책임 |
+| 검사 없는 agent · 최상위 tier | gate 없음 → 오류 비용 한도 위반 |
+
+**비용 절감 = lane 선택**
+
+| 상황 | 정답 |
+|---|---|
+| 고정 layout 80% + 열린 형식 20%<br>precision 하한 유지 | 고정분 → deterministic parser<br>열린 20% → Claude<br>합계 검사 gate 유지 |
+| 절감의 원천 | tier 선택 ✗ · lane 선택 ✓ |
+| 새 layout 등장 | parser가 학습할 때까지 Claude로 라우팅 |
+| 유지보수 비용 | 양식 변경마다 규칙 세트 · parser 갱신 |
+| ⚠️ 수치 | 문항 toy 수치: 월 $540 → $132(약 4배 절감)<br>최상위 tier ≈ Fast tier의 10~14배<br>→ 가격 · tier 구성은 시점에 따라 바뀜 |
+
+**확실한 하위 작업의 결정론적 분리**
+
+| 구분 | 내용 |
+|---|---|
+| 분리 대상 | 합산 · 평일 검사 등 정답이 확정된 하위 작업 |
+| 역할 | 코드 = 계산 · 검증<br>Claude = 검증된 값을 둘러싼 글쓰기 |
+| 조건 | 표 형식 계약 필요 (형식 변경 시 script 갱신)<br>글이 숫자를 재계산 ✗ |
+| 원리 | 능력 ≠ 확실성<br>→ 확실한 하위 작업 = 코드 |
+
+**쓰기 통제권 유지**
+
+| 구분 | 내용 |
+|---|---|
+| 고정 단계 + 분류 판단 1회 | 앱 코드가 단계 실행<br>모델 호출 = 분류 1회<br>게시(쓰기) = 앱 코드 |
+| 통제권 상실 | 모델이 직접 게시<br>(MCP connector · 네트워크<br>· server-executed tool) |
+| agent loop의 대가 | 계획 단계 = 고정 코드에 불필요한 비용 · 변동 |
+
+![입력 형태에 따라 고정 단계 코드와 Claude agentic loop로 갈라지고 gate를 거쳐 workflow로 합류하는 hybrid 구조](svg/1-hybrid-lanes.svg)
+*그림: 고정 단계는 결정론적 코드가, 열린 판단만 Claude가 맡고, 둘 사이와 쓰기 앞에는 code gate를 둔다*
+
+<sub>근거: CCAR-P-jrajath94-0107, CCAR-P-jrajath94-0110, CCAR-P-jrajath94-0115, CCAR-P-jrajath94-0118, CCAR-P-jrajath94-0126, CCAR-P-jrajath94-0282, CCAR-P-jrajath94-0284, CCAR-P-jrajath94-0336, CCAR-P-jrajath94-0399, CCAR-P-jrajath94-0462, CCAR-P-jrajath94-0521, CCAR-P-jrajath94-0525, CCAR-P-jrajath94-0602</sub>
+
+### 1.23 구조적 통제 · gate 위치 · trust boundary
+**보장이 필요하면 prompt가 아닌 구조로 강제**
+
+| 요구 | 구조적 수단 |
+|---|---|
+| 지어낸 거절 이유 0건<br>(내부 agent → 가입자 대상 확대) | 결정론 단계가 실제 decision record 조회<br>모델 = 기록 바꿔 말하기만<br>자체 이유 제시 ✗ |
+| 테넌트 간 데이터 격리<br>(통제 = 강제 가능) | tenant별 session context(아키텍처 계층)<br>tenant 범위 credential · 필터된 tool 접근<br>모델 밖 data partitioning |
+| 격리 효과 | 다른 tenant 데이터에 도달 불가<br>→ prompt 실패로도 유출 ✗ |
+| 원칙 | prompt 지시 = 권고적 · 우회 가능<br>보안 경계로 검증 불가 |
+| 확대 위험 | 내부용 agent는 제약된 적 없음<br>외부 대상 확대 = 위험 상승 → 방어 장치 추가 |
+
+**Gate 위치와 강도**
+
+| 구분 | 내용 |
+|---|---|
+| 위치 | 모델 출력 뒤 · 부수 효과 앞<br>(발송 · 지급 · 공지 · 수여) |
+| 되돌릴 수 없음 + 중대 | 효과 전 사람 검토<br>검토자가 제안 · 증거 · system of record를<br>한 화면에서 확인 |
+| 되돌릴 수 있음 | 코드 검사 유지<br>(자격 입력 vs 원본 문서 대조) |
+| 대외적 난처함 위험 | 코드 검사 + 사람 표본 검토 |
+| 검토 SLA | gate가 실제 긴급 대응을 지연 ✗ 하도록 설정 |
+| 원칙 | 검토 강도 = 결과 중대성 · 되돌림 가능성에 비례 |
+
+**Trust boundary**
+
+| 구분 | 내용 |
+|---|---|
+| 경계 ① | 신뢰할 수 없는 입력이 들어오는 지점<br>(폭언 · 조작 가능 채팅 → 검증 단계) |
+| 경계 ② | 모델 출력이 부수 효과로 나가는 지점<br>(티켓 쓰기 = 코드에서 권한 부여) |
+| 경계 아님 | 내부 구간<br>(logger → disk · 순수 함수 사이<br>· system of record 읽기 → 모델) |
+| system of record | 신뢰 출처 · 점검 기준 |
+| 파이프라인 순서 | 입력 → 검증 → context 조립 → 모델<br>→ 검증 → 부수 효과 → 피드백 |
+
+<sub>근거: CCAR-P-jrajath94-0065, CCAR-P-jrajath94-0069, CCAR-P-jrajath94-0283, CCAR-P-jrajath94-0523, CCAR-P-jrajath94-0524</sub>
+
+### 1.24 Session — continue · resume · fork
+**이어가기 = resume · 갈라서 시도 = fork**
+
+| 옵션 | 동작 | 용도 |
+|---|---|---|
+| continue<br>`continue_conversation=True`<br>`claude --continue` | 현재 디렉터리의<br>최신 session 재개 | 최신이 곧 대상일 때<br>분기 원본 보장 ✗ |
+| resume<br>`resume=<id>`<br>`claude --resume <name>` | session ID(또는 이름)<br>지정 재개 | 이어가기<br>복귀 사용자의 history 복원 |
+| fork<br>`fork_session=True`<br>`--fork-session` · `/branch` | 원본 이력 복사한 새 session<br>새 session ID<br>원본 ID · 이력 불변 | 같은 시점에서 독립 탐색<br>나중에 어느 쪽으로든 복귀 |
+
+**Fork 운용**
+
+| 구분 | 내용 |
+|---|---|
+| 분기 원본 | 완료 시점 session ID 기록<br>→ 각 분기 worker에 전달 |
+| 분기 후 | 새로 생성된 session ID 추적 → 나중에 재개 |
+| 분기 대상 | 대화 이력만 (파일 시스템 ✗) |
+| 파일 수정이 겹침 | 별도 작업 복사본(git worktree 등) 병행 |
+| file checkpoint | 파일 변경 되돌림 기능<br>대화 분기 수단 ✗ |
+| 복귀 사용자 + 관리자 실험 | 사용자 = resume (history 복원)<br>관리자 = fork (실험이 원본에 불반영) |
+
+**Resume vs 새 session + 요약**
+
+| 상황 | 선택 |
+|---|---|
+| 이전 context 대체로 유효<br>(변경 미미) | resume |
+| 일부 파일만 변경 (예: 25개 중 3개) | resume + 변경 파일을 구체적으로 전달<br>→ 범위 좁힌 재분석 |
+| 대규모 변경 (분석 파일의 약 4할~3분의 2 변경) | 확인된 결론만 구조화 요약<br>→ 새 session에 주입 |
+| 구분 이유 | session = 대화 저장 · 파일 시스템 ✗<br>이력 속 tool 결과가 현재 코드와 어긋남 |
+| 요약의 이점 | 유효한 결론만 이어받음<br>낡은 관찰을 현재 코드로 취급 ✗ |
+| 판단 축 | 재개한 문맥을 신뢰할 수 있는가 |
+| 변경 목록 확보 | `git diff --name-only` 등으로 전달 → 누락 방지 |
+
+**Claude Code 이름 붙인 session**
+
+| 구분 | 내용 |
+|---|---|
+| 상황 | 며칠에 걸친 병행 조사 여러 개 |
+| 이름 붙이기 | 시작 시 `claude -n` · session 중 `/rename` |
+| 재개 | `claude --resume <name>`<br>(이름 = 조사 내용을 알 수 있게) |
+| `--continue` 한계 | 최신 session만 선택<br>→ 병행 조사에서 엉뚱한 session이 열림 |
+
+![continue, resume, fork의 session 재개 방식 비교](svg/1-session-options.svg)
+*그림: continue는 최신 session, resume은 지정한 session을 이어가고, fork는 원본을 그대로 둔 채 이력을 복사한 새 session을 만든다*
+
+<sub>근거: CCAR-F-Udemy02-0037, CCAR-F-Udemy02-0043, CCAR-F-Udemy03-0012, CCAR-F-Udemy04-0031, CCAR-F-Udemy04-0055, CCAR-F-Udemy05-0014, CCAR-F-Udemy05-0027, CCAR-F-Udemy06-0027, CCAR-F-Udemy06-0059, CCAR-F-preporato-0004</sub>
+
+### 1.25 Agent SDK — subagent 위임 구성 · 권한
+**위임 = subagent 정의 + `Agent` tool 허용**
+
+| 구분 | 내용 |
+|---|---|
+| 전제 ① 위임 대상 | `agents` 파라미터(`AgentDefinition`)<br>또는 `.claude/agents/` 파일로 정의 |
+| 전제 ② 위임 수단 | `allowedTools`(`allowed_tools`)에 `Agent` 포함 |
+| 증상 | coordinator가 호출 없이 직접 수행<br>→ 전제 ①② 확인 |
+| description | Claude가 위임 대상을 고르는 근거<br>추상적("조사를 돕는다") → 위임 ✗ · 오선택 |
+| 모니터링 | 로그에서 `Agent` tool_use 발행 · 선택된 subagent 확인 |
+| ⚠️ tool 이름 | 공식 문서: `tool_use` 블록 = `Agent`<br>v2.1.63 이전 · `system:init` 목록 = `Task`<br>→ 시점에 따라 바뀜 · 감지 시 둘 다 매칭 |
+
+**AgentDefinition 필드**
+
+| 필드 | 역할 |
+|---|---|
+| `description` | 어떤 작업을 어느 subagent에 맡길지 판단하는 재료 |
+| `prompt` | subagent의 역할 |
+| `tools` | subagent별 사용 가능 tool 범위 |
+
+**권한 평가 순서와 설정 범위**
+
+| 구분 | 내용 |
+|---|---|
+| 평가 순서 | hook → deny rule → ask rule<br>→ permission mode → allow rule<br>→ `canUseTool` callback |
+| 미결 호출 | `canUseTool`로 이동<br>callback이 결정 못하면 대화형 확인 → 무인 실행 중단 |
+| 최상위 `allowedTools` | 승인 없이 실행할 tool 목록(allow rule)<br>제한 수단 ✗ |
+| 최상위 `disallowedTools` | session 전체에 적용<br>subagent 간 권한 분리 ✗ |
+| `AgentDefinition.tools` | subagent 단위 제한 ✓ |
+| `permissionMode: acceptEdits` | 편집 계열 승인만 생략 → 위임 승인과 무관 |
+| `bypassPermissions` | 승인 생략 · tool 무제한 허용<br>위임 대상 제공 ✗ |
+| `tool_choice` | 호출 tool 고정<br>위임 대상 제공 ✗ |
+| worker `tools`의 `Agent` | 중첩 위임용 · 최초 위임과 무관 |
+
+**무인 실행이 위임에서 멈출 때**
+
+| 상황 | 정답 |
+|---|---|
+| 자동 승인 = Read · Grep · Glob뿐<br>첫 위임 시도에서 권한 확인 대기 | coordinator `allowedTools`에 위임 tool 추가<br>+ 위임 호출을 승인하는 `canUseTool` callback |
+| ⚠️ 위임 tool 이름 | 문항은 v2.1.63 이전 설정 기준 `Task`<br>현행 = `Agent` |
+
+**최소 권한 · 역할 분리**
+
+| 상황 | 정답 |
+|---|---|
+| 용도별 분배 + 문서용만 읽기 전용 | `agents` map에 subagent별<br>`description` + `prompt`<br>문서용 `tools` = 읽기 계열만 |
+| 통합 agent가 역할 밖 광범위 검색 | 역할별 tool 제한<br>추가 조회는 coordinator 경유 |
+| 원칙 | 예상 밖 행동이 반복되면 지시 강화 전에<br>권한 · tool 부여 방식 재검토 |
+| 근거 | tool을 쓸 수 있는 상태에서 말로 유도 = 확률적<br>(문서 리뷰 subagent에 Read · Grep만 부여) |
+
+<sub>근거: CCAR-F-Udemy01-0059, CCAR-F-Udemy02-0038, CCAR-F-Udemy02-0042, CCAR-F-Udemy03-0038, CCAR-F-Udemy06-0002</sub>
+
+### 1.26 Agent SDK hook — tool 결과 제어 (PostToolUse)
+**tool 결과 변환 = PostToolUse + `updatedToolOutput`**
+
+| 필드 · 시점 | 동작 |
+|---|---|
+| `updatedToolOutput` | 출력 교체 (Claude가 보기 전)<br>MCP tool 포함 |
+| `additionalContext` | tool 결과에 정보 덧붙임만 |
+| `decision: "block"` | 이유 첨부만<br>Claude는 원래 출력을 계속 봄 |
+| PostToolUse | tool 결과가 반환된 시점에 동작 |
+| PreToolUse | 호출 전 동작<br>→ 돌아오는 결과 형식 변경 ✗ |
+| 구분 요령 | 필드가 교체 · 덧붙임 · 멈춤 중 무엇인지 확인 |
+
+**tool 결과 정규화**
+
+| 상황 | 정답 |
+|---|---|
+| 여러 MCP tool 출력 형식 혼재<br>(timestamp · ISO 8601 · status code)<br>+ 수정 불가 third-party server | PostToolUse hook으로 정규화<br>= 중앙 집중 · 결정적 · 모든 출력에 일관 적용 |
+| 수정 가능한 자사 MCP server | 구현에서 정규화도 유효 (발생원 수정) |
+| prompt에 형식 설명 · 변환표 | 오류 감소 ✗<br>변환 여부가 모델에 의존 |
+| `normalize_data` tool을 agent가 호출 | 호출 · 변환이 LLM 의존 → 유지보수 열세 |
+| 외부 server에 PreToolUse로 형식 지정 | 결과 형식 변경 ✗ · server 형식 변경 불가 |
+| 운영 팁 | 정규화 전 값도 로그 보존 → 변환 오류 사후 검증 |
+
+**모델에 전달 금지 항목 (PII)**
+
+| 구분 | 내용 |
+|---|---|
+| 요구 구분 | "답변에 안 낸다" = 출력 제어<br>"모델에 안 전달한다" = 입력 차단 |
+| 정답 수단 | PostToolUse `updatedToolOutput`으로 항목 제거<br>또는 MCP server 응답에서 항목 제외 |
+| matcher | `mcp__{서버명}__{tool명}`으로 대상 tool 한정<br>→ 다른 tool 결과 영향 ✗ |
+| 감사 지적 = "입력에 포함" | prompt 강화로 해결 ✗ |
+
+<sub>근거: CCAR-F-MyPractice-0059, CCAR-F-Udemy02-0017, CCAR-F-Udemy04-0002, CCAR-F-Udemy05-0038, CCAR-F-paullarionov-0059</sub>
+
+## 2. 상황별 정답 판단 규칙
+
+**패턴 선택**
+
+| 상황 | 정답 |
+|---|---|
+| 단계 고정 · 순서 동일 · 모든 입력에서 동일 | 결정론적 workflow (prompt chaining)<br>모델은 필요한 지점에서만 호출 |
+| 고정 단계 사이 검증 필요 | 단계 사이 validation gate<br>(programmatic · schema check) |
+| 매핑 고정 형식 변환 | deterministic script<br>해석 필요 시 schema 둔 단일 호출<br>agent loop ✗ |
+| 중간 결과를 봐야 다음 단계 결정 | agent |
+| 입력마다 조사 · subtask가 다름<br>+ 결과 통합 필요 | orchestrator-workers<br>(orchestrator가 동적 분해 · 위임 · 통합) |
+| 입력 유형별 다른 처리로 보내기만 | routing |
+| 같은 작업을 여러 관점으로 돌려 확신도 향상 | parallelization (voting) |
+| 명확한 평가 기준 + 하나의 출력 반복 개선 | evaluator-optimizer |
+
+**Subagent · 컨텍스트**
+
+| 상황 | 정답 |
+|---|---|
+| 독립 문서 여러 개 → 단일 agent 컨텍스트 초과 | orchestrator가 문서별 subagent 병렬 실행<br>→ 요약만 받아 통합 |
+| 대량 자료 읽는 전문 검사 위임<br>+ 부모 컨텍스트 보호 | subagent로 격리<br>부모에는 최종 결과만 |
+| subagent 도입 후 품질 저하 | handoff prompt에 빠진 컨텍스트 명시 |
+
+**Loop · state**
+
+| 상황 | 정답 |
+|---|---|
+| `stop_reason: "tool_use"` | tool 실행 → `tool_result` 추가 → API 재호출 |
+| `stop_reason: "end_turn"` + `tool_use` 없음 | 턴 완료 → content 반환 |
+| loop 종료 시점 | success condition<br>(또는 `tool_use` 아님)<br>+ step ceiling(최대 반복 cap) |
+| step ceiling 이유 | 비수렴 시 피해 · 비용 제한 |
+| 오래전 결정 유지 | compaction과 무관한 명시적 state |
+| tool 목적 겹침 | 잘못된 tool 선택 증가 → 겹침 제거 |
+
+**구현 수단**
+
+| 상황 | 정답 |
+|---|---|
+| 파일 · shell · context 관리 · permission<br>갖춘 agent (loop 구현 없이) | Claude Agent SDK |
+| 인프라 운영 없이 최단 production | Managed Agents |
+| 실행 환경 · 세션 로그 모두 자사 인프라 | Agent SDK를 자사 프로세스에서 실행<br>(self-hosted) |
+| durable execution · human-in-the-loop<br>· state 영속화 필요한 장시간 agent | LangGraph 등 orchestration 프레임워크 |
+| 실시간성 불필요 대량 일괄 처리 | Message Batches API (agent 용도 ✗) |
+| 각 단계는 정상인데 최종 인용이 주장을 못 뒷받침 | handoff에서 출처 소실<br>→ 본문 + metadata 분리 구조화 레코드 |
+| 통합 subagent 결과가 일반론 · 출처 없음 | 위임 prompt에 조사 결과 · 출처 직접 삽입<br>양 많으면 파일 저장 → 경로 전달 |
+| 조건 다른 값이 한 경향으로 묶임 | 구조화 근거 레코드 반환<br>통합 전 필수 metadata 검증 |
+| subagent 직접 통신 → 실패 간과 · 중복 · 추적 불가 | 모든 통신 coordinator 경유 |
+| 통합 결과가 품질 기준 미달 | coordinator가 평가 → 부족분만 재위임<br>→ 통합 재호출 (반복 상한 + 미해결 주석) |
+| 검색 subagent 일시 네트워크 오류 | subagent 내 재시도<br>→ 실패 시 오류 · 확보 정보원 구조화 반환 |
+| 긴 조사로 메인 context 오염 | 읽기 전용 subagent에 위임<br>→ 경로 · 줄번호 요약만 반환 |
+| 생성자와 독립된 리뷰 필요 | 새 session 또는 reviewer subagent<br>(diff · 사양 · 기준만 전달) · fork ✗ |
+| 병렬 worker가 덮어쓰기 · 중복 | 겹치지 않는 범위 + 고유 키 저장소<br>+ orchestrator 마지막 병합 |
+| worker 의견 충돌 | contract 불일치 규칙 (critic · arbiter)<br>적용 · 기록 |
+| 단순 질문에도 전 subagent 호출 | 고정 순서 폐기 · 필요한 subagent만<br>subagent 설명에 호출 조건 명시 |
+| 경미한 확인마다 막힘 + 역할 중복 | 좁은 `verify_fact` tool만 부여<br>범위 넘는 조사 = coordinator로 반환 |
+| 사용자가 사람 대응을 명시 요구 | 난이도 무관 즉시 사람 review |
+| 인수 담당자가 대화 기록 못 봄 | 구조화 handoff 요약<br>(ID · 원인 · 시도 · 권장 조치 + 근거) |
+| 정형 · 반복 점검 (항목 고정) | 고정 순차 chain |
+| 범위 미정 조사 · 원인 탐색 · 레거시 전반 작업 | 동적 분해<br>(구조 파악 → 우선순위 → 갱신) |
+| 한 도구에 정형 + 조사 의뢰 공존 | 유형 판정 후 분기<br>(정형 = chain · 조사 = 동적) |
+| 열린 조사에 동적 분해 적용 | 모델 바깥에서 강제하는 한도 병행 |
+| 대량 파일 검토 + 중간 산출물 로그 필요 | 파일 단위 호출 chain + 통합 호출 |
+| 고정 순서 chain에서 오류 누적 · 지연 합산 | 독립 조각 병렬 · 재작성 제거<br>확실한 작업 = deterministic code<br>병합에 validation gate |
+| subagent 정상 + 보고서 영역 누락 | coordinator 분해 범위 점검 (좁은 분해) |
+| agent 간 결과 중복 · token 증가 | 위임 전 조사 영역 분할<br>담당 · 비담당 범위 기재 |
+| 정보원별 분해 + 주제 영역 누락 | 주제 영역별 분해로 축 변경 |
+| 낯선 주제 포괄성 낮음 | 사전 광범위 탐색 + 공백에만 2차 할당 |
+| 독립 관점 · 항목 다수 | sectioning 병렬 → 집계 |
+| 독립 작업 + 합류 작업 | 독립 병렬 → fan-in → 합류 작업 순차 |
+| 의존 관계가 주어진 일정 · 절차 | 의존 쌍은 순차 · 나머지만 병렬 |
+| 독립 위임 여러 개 | 한 응답에 Agent tool 호출 동시 출력 |
+| 순차 대화 · 라운드 의존 · 얽힌 작업 | 단일 agent (fan-out ✗) |
+| 단계별 공유 문서 편집 | 하나의 thread · 고정 순서 · 단계별 확인 |
+| 한 문의에 여러 용건 | 이슈별 분해 → 공유 context 병렬 조사 → 종합 |
+| 유형별 처리가 다른 입력 | route 먼저 · 유형별 경로 |
+| 단순 요청에도 전 전문 agent 호출 | triage + 해당 agent에만 routing<br>단순 확인은 직접 답변 |
+| 질의 형태 혼재 (현재값 + 독립 문서 다수) | 현재값 = 도구 호출 · 문서 = fan-out + 병합 gate |
+| 독립 조각 + 품질 편차 | fan-out + critique(점검자 · 기준) → 병합 |
+| 병합 숫자 · 인용 정합 필요 | 코드 검사 gate · 인용은 생성 시점에 부착 |
+| 대규모 번역 · 용어 일관 | 병렬 fan-out + 공통 용어집 주입 + 계층적 병합 |
+| 무한 loop · tool 왕복 · 결론 불가 | 종료 장치 설계: 반복 예산 · 반복 호출 감지 · escalation |
+| loop 계속 · 종료 판정 | `stop_reason` 확인 (문구 · text 유무 ✗) |
+| 반복 횟수 상한 | 안전장치로만 사용 · 도달 시 미완료 기록 + escalation |
+| token · 비용 예산 | 코드가 `usage` 누적 측정 → 초과 시 중단<br>약 80%에서 마무리 지시 주입 |
+| 무인 Agent SDK 실행 | `max_turns` · `max_budget_usd` + `subtype` 확인<br>+ `session_id` resume |
+| 단계 미정 + 세션별 고정 지출 상한 | agent loop + `session budget` |
+| 후속 요청 400 · 같은 tool 반복 요청 | assistant `tool_use` turn<br>+ 바로 다음 user `tool_result` 확인 |
+| `stop_reason: "pause_turn"` | 응답을 assistant turn으로 보내 이어감 |
+| 독립 tool 호출이 순차 처리됨 | 한 turn에 묶어 발행 + 결과를 한 user 메시지로 반환 |
+| 같은 유형인데 필요한 대응이 건마다 다름 | 고정 경로 ✗ · `tool_choice` `auto` + loop |
+| "확실히 막는다" · 예외 불인정 | 모델 밖 강제: `PreToolUse` hook · gate · tool 구현 검증 |
+| prompt에 규칙이 있는데 위반 발생 | hook · gate 추가 (prompt 강조 ✗) |
+| 선행 단계 미완료 시 후속 tool 차단 | 검증된 결과(ID)를 조건으로 한 programmatic precondition |
+| 비가역 · 금전 · 고객 발송 | 사람 승인 · gate · 되돌림 장치 (모델은 제안) |
+| 단계 간 값 의존 | 다음 단계 전 코드 검사 → 실패 시 체인 중단 |
+| 결과 즉시 필요 vs 지연 가능 대량 | 동기 Messages API vs Batches + `custom_id` |
+| 디버깅 · 실패 진단 | 단계별 trace |
+| 지역별 정책 혼입 | tag + retrieval 필터링 |
+| 순서 고정 · 입력 일정 · 규칙 알려짐 | deterministic 구현<br>모델은 모호한 부분에만 |
+| 고정 경로 + 열린 단계 1개 | augmented LLM (도구 가진 workflow)<br>loop 통제 불필요 |
+| 검색 1회 + 판단 1회로 종결 | augmented single call |
+| 단계를 실행 전엔 모름<br>각 발견이 다음 단계 결정 | agentic loop + step 상한 · 중지 규칙 |
+| 같은 순서 · 같은 trace 요구 | deterministic workflow |
+| 고정 단계 + 소수(3~10%) 모호 사례 | hybrid<br>(workflow → agent 호출 → workflow 복귀) |
+| 열린 평가 + 고정 형식 발행 | agentic loop → schema 계약 → workflow 발행 |
+| 고정 사례 + 열린 사례 혼재<br>+ 비용 · 안전 제약 | 고정 = 규칙 · 열린 = Claude<br>모든 출력 code gate |
+| 비용 절감 + precision 하한 | lane 분기 (tier 상향 ✗) |
+| 정확해야 하는 합계 · 날짜 규칙 | 코드로 분리<br>Claude = 검증된 값 둘러싼 글쓰기 |
+| 쓰기 통제권 유지 | 앱 코드가 쓰기 · 모델은 판단 1회 |
+| 작은 작업에 subagent 다수<br>→ 느리고 비쌈 | 단일 호출 + 가벼운 검증으로 축소 |
+| 여러 팀 소유 super-agent<br>→ 실패 귀속 불가 | 경계 agent + 계약 + 얇은 orchestrator<br>+ agent별 eval · 버전 관리 |
+| 지어낸 설명 · tenant 유출 0건 요구 | 구조적 통제<br>(결정 기록 조회 · tenant 범위 credential) |
+| 되돌릴 수 없는 부수 효과 | 효과 전 사람 검토 (전체 context 제공) |
+| 되돌릴 수 있음 + 대외적 난처함 | 코드 검사 + 사람 표본 검토 |
+| trust boundary 위치 | 비신뢰 입력 진입점 · 모델 → 부수 효과 지점 |
+| 돌아온 사용자의 대화 이어가기 | resume |
+| 같은 시점에서 독립 탐색 · 원본 불변 | resume + fork 옵션<br>+ 새 session ID 추적 |
+| fork 분기에서 파일도 독립 | 별도 작업 복사본 · checkpoint로 되돌림 |
+| 이전 분석 유효 + 일부 파일 변경 | resume + 변경 파일 구체 전달 |
+| 대규모 변경 후 재개 | 구조화 요약 → 새 session |
+| Claude Code 병행 조사 여러 개 | `/rename` → `claude --resume <name>` |
+| crash 복구 · 로컬 session 보존 불확실 | JSON state manifest 영속화 · 재시작 시 주입 |
+| coordinator가 subagent에 위임 ✗ | `agents` 정의 + `allowedTools`에 `Agent`<br>+ 구체적 `description` |
+| 무인 실행이 위임 승인 대기에서 정지 | `allowedTools`에 위임 tool<br>+ `canUseTool` callback |
+| subagent별 권한 분리 · 읽기 전용 | `AgentDefinition.tools` |
+| agent가 역할 밖 행동 반복 | 역할별 tool 제한 · 추가 조회는 coordinator 경유 |
+| 서로 다른 형식의 tool 결과 정규화 | PostToolUse hook + `updatedToolOutput` |
+| 모델에 금지 항목 전달 금지 | PostToolUse로 제거 또는 server 응답에서 제외 |
+
+![2장 규칙의 workflow 패턴과 agent 선택 decision tree](svg/1-rule-architecture-tree.svg)
+*그림: 고정 단계부터 확인하고, agent는 중간 결과를 봐야 다음 단계가 정해질 때만 고른다*
+
+![2장 규칙의 컨텍스트·subagent·state·tool 문제 진단](svg/1-rule-context-tree.svg)
+*그림: 컨텍스트 문제마다 정답(격리, handoff 보강, 명시적 state, 겹침 제거)과 흔한 오답이 짝을 이룬다*
+
+<sub>근거: Amey-0004, Amey-0005, Amey-0023, Amey-0024, Amey-0025, Amey-0026, Amey-0036, Amey-0040, Amey-0041, Amey-0059, Amey-0060, Amey-0073, CCAR-F-Amey-Thakur-0001, CCAR-F-Amey-Thakur-0003, CCAR-F-Amey-Thakur-0011, CCAR-F-Amey-Thakur-0013, CCAR-F-Amey-Thakur-0015, CCAR-F-Amey-Thakur-0016, CCAR-F-Amey-Thakur-0017, CCAR-F-Amey-Thakur-0051, CCAR-F-Amey-Thakur-0053, CCAR-F-Amey-Thakur-0054, CCAR-F-Amey-Thakur-0066, CCAR-F-MyPractice-0004, CCAR-F-MyPractice-0011, CCAR-F-MyPractice-0048, CCAR-F-MyPractice-0059, CCAR-F-Udemy01-0003, CCAR-F-Udemy01-0005, CCAR-F-Udemy01-0011, CCAR-F-Udemy01-0018, CCAR-F-Udemy01-0021, CCAR-F-Udemy01-0028, CCAR-F-Udemy01-0036, CCAR-F-Udemy01-0045, CCAR-F-Udemy01-0048, CCAR-F-Udemy01-0055, CCAR-F-Udemy01-0059, CCAR-F-Udemy01-0060, CCAR-F-Udemy02-0007, CCAR-F-Udemy02-0009, CCAR-F-Udemy02-0010, CCAR-F-Udemy02-0012, CCAR-F-Udemy02-0017, CCAR-F-Udemy02-0024, CCAR-F-Udemy02-0036, CCAR-F-Udemy02-0037, CCAR-F-Udemy02-0038, CCAR-F-Udemy02-0042, CCAR-F-Udemy02-0043, CCAR-F-Udemy02-0045, CCAR-F-Udemy03-0003, CCAR-F-Udemy03-0012, CCAR-F-Udemy03-0016, CCAR-F-Udemy03-0019, CCAR-F-Udemy03-0037, CCAR-F-Udemy03-0038, CCAR-F-Udemy03-0043, CCAR-F-Udemy03-0050, CCAR-F-Udemy03-0060, CCAR-F-Udemy04-0002, CCAR-F-Udemy04-0005, CCAR-F-Udemy04-0008, CCAR-F-Udemy04-0009, CCAR-F-Udemy04-0014, CCAR-F-Udemy04-0022, CCAR-F-Udemy04-0024, CCAR-F-Udemy04-0028, CCAR-F-Udemy04-0031, CCAR-F-Udemy04-0043, CCAR-F-Udemy04-0048, CCAR-F-Udemy04-0054, CCAR-F-Udemy04-0055, CCAR-F-Udemy05-0010, CCAR-F-Udemy05-0014, CCAR-F-Udemy05-0017, CCAR-F-Udemy05-0019, CCAR-F-Udemy05-0025, CCAR-F-Udemy05-0027, CCAR-F-Udemy05-0035, CCAR-F-Udemy05-0036, CCAR-F-Udemy05-0038, CCAR-F-Udemy05-0045, CCAR-F-Udemy05-0054, CCAR-F-Udemy06-0002, CCAR-F-Udemy06-0011, CCAR-F-Udemy06-0022, CCAR-F-Udemy06-0023, CCAR-F-Udemy06-0026, CCAR-F-Udemy06-0027, CCAR-F-Udemy06-0029, CCAR-F-Udemy06-0038, CCAR-F-Udemy06-0050, CCAR-F-Udemy06-0059, CCAR-F-paullarionov-0004, CCAR-F-paullarionov-0011, CCAR-F-paullarionov-0048, CCAR-F-paullarionov-0051, CCAR-F-paullarionov-0058, CCAR-F-paullarionov-0059, CCAR-F-preporato-0004, CCAR-F-preporato-0005, CCAR-F-preporato-0009, CCAR-F-preporato-0010, CCAR-F-preporato-0011, CCAR-F-preporato-0012, CCAR-F-preporato-0013, CCAR-P-Amey-Thakur-0005, CCAR-P-Amey-Thakur-0045, CCAR-P-jrajath94-0013, CCAR-P-jrajath94-0015, CCAR-P-jrajath94-0016, CCAR-P-jrajath94-0018, CCAR-P-jrajath94-0021, CCAR-P-jrajath94-0023, CCAR-P-jrajath94-0065, CCAR-P-jrajath94-0066, CCAR-P-jrajath94-0067, CCAR-P-jrajath94-0069, CCAR-P-jrajath94-0070, CCAR-P-jrajath94-0107, CCAR-P-jrajath94-0110, CCAR-P-jrajath94-0115, CCAR-P-jrajath94-0116, CCAR-P-jrajath94-0117, CCAR-P-jrajath94-0118, CCAR-P-jrajath94-0120, CCAR-P-jrajath94-0122, CCAR-P-jrajath94-0123, CCAR-P-jrajath94-0124, CCAR-P-jrajath94-0125, CCAR-P-jrajath94-0126, CCAR-P-jrajath94-0282, CCAR-P-jrajath94-0283, CCAR-P-jrajath94-0284, CCAR-P-jrajath94-0285, CCAR-P-jrajath94-0286, CCAR-P-jrajath94-0289, CCAR-P-jrajath94-0336, CCAR-P-jrajath94-0337, CCAR-P-jrajath94-0339, CCAR-P-jrajath94-0340, CCAR-P-jrajath94-0399, CCAR-P-jrajath94-0400, CCAR-P-jrajath94-0401, CCAR-P-jrajath94-0402, CCAR-P-jrajath94-0403, CCAR-P-jrajath94-0462, CCAR-P-jrajath94-0463, CCAR-P-jrajath94-0465, CCAR-P-jrajath94-0466, CCAR-P-jrajath94-0521, CCAR-P-jrajath94-0523, CCAR-P-jrajath94-0524, CCAR-P-jrajath94-0525, CCAR-P-jrajath94-0528, CCAR-P-jrajath94-0529, CCAR-P-jrajath94-0602, CCAR-P-jrajath94-0603, CCAR-P-jrajath94-0607, CCAR-P-jrajath94-0609, CCAR-P-preporato-0005, Patrick-0012, Patrick-0022, Patrick-0038, Patrick-0039, Preporato-0016, Preporato-0017, Preporato-0018, Preporato-0019, Udemy-0004, Udemy-0006, Udemy-0014, Udemy-0019, Udemy-0051, Udemy-0053</sub>
+
+## 3. 자주 나오는 오답 함정
+
+**패턴 선택**
+
+| 오답 | 이유 |
+|---|---|
+| agent가 fixed code보다 유능 · 고품질 | 경로가 알려진 작업에서 자율성<br>→ 비용 · 비결정성만 증가 |
+| agent는 불필요 단계 건너뛰기 가능 | validation 건너뛰기 = 결함 (기능 ✗) |
+| 작업 길다 · tool 많다 ·<br>structured output 필요 → agent | 모두 고정 workflow로 충족 |
+| 고정 단계에 orchestrator-workers<br>· 단계별 agent | 동적 분해 대상 없음<br>orchestrator 호출만큼 비용 · 불확실성 증가 |
+| 고정 단계를 evaluator-optimizer로 | 반복 횟수 미지 → 시간 · 비용 불안정<br>하나의 출력 다듬는 구조도 아님 |
+| 하나의 거대한 prompt로 전부 처리 | 단계 사이 checkpoint · 검증 소실 |
+| 서로 감독하는 agent 2개 | supervision hierarchy = 위임 필요 문제 전용 |
+
+**Subagent · 컨텍스트**
+
+| 오답 | 이유 |
+|---|---|
+| subagent가 부모 이력 · system prompt 상속<br>→ 지시 짧게 써도 됨 | 상속은 fork형뿐<br>일반 subagent = 빈 컨텍스트에서 시작 |
+| context 격리로 시스템 전체 토큰 감소 | 각자 따로 읽음 → 증가 가능<br>격리 이점 = 부모 컨텍스트 보호 |
+| subagent 품질 저하<br>→ 더 큰 모델 · subagent 추가 | 빠진 컨텍스트는 모델 크기로 못 채움<br>subagent 증가 → 결함도 증가 |
+| subagent로 합의 · rate limit 우회 · fallback | subagent 가치 = 위임 · 컨텍스트 격리 |
+| subagent끼리 직접 통신 | 결과 통합 · 실패 격리하는 coordinator 소실 |
+
+**Loop · state**
+
+| 오답 | 이유 |
+|---|---|
+| 컨텍스트 부족 → `max_tokens` 상향 | `max_tokens` = 출력 제한 · 문제는 입력 |
+| `tool_use`인데 같은 요청 재전송 · 턴 종료 | 모델이 tool 결과 대기 중 |
+| `end_turn`인데 마지막 tool 재실행<br>· 빈 `tool_result` 전송 | 이미 완료된 턴 |
+| 응답에 text 있으면 종료 | text · tool 호출 공존 가능 |
+| 정확히 N회 반복 후 종료 | 고정 횟수 → 모델 신호 무시 |
+| step ceiling 목적<br>= 성공한 실행의 비용 절감 · 속도 | 비수렴(무한 loop) 방지 안전 상한 |
+| context window가 기억 | 컨텍스트 유한 · compaction 손실 |
+| 주기적으로 재시작 | 재시작 → 결정 소실 |
+| tool 많을수록 빠르고 저렴 | 겹치는 tool → 선택 오류 증가 |
+| 장시간 승인 대기 state를 프로세스 메모리에 | 장애 · 재시작 시 소실 → 재개 불가 |
+
+**구현 수단**
+
+| 오답 | 이유 |
+|---|---|
+| Agent SDK 장점 = streaming | streaming은 Client SDK에서도 가능 |
+| Agent SDK로 Anthropic 인프라 호스팅 | 호스팅 = Managed Agents<br>Agent SDK = 사용자 프로세스 실행 |
+| Agent SDK 제품을 claude.ai 로그인으로 사용 | API key 인증 필요 |
+| Agent SDK가 vector DB ·<br>fine-tuning · 시각 designer 제공 | 미제공 |
+| Managed Agents + self-hosted sandbox<br>→ 세션 로그도 자사 | session · event log = Anthropic 쪽 저장 |
+| Message Batches API로 agent 실행 | 비동기 일괄 요청용 · loop · 세션 미제공 |
+| LangGraph → 호출 · 토큰 감소 | 비용 절감 도구 ✗ |
+| LangGraph → prompt · 구성 직접 작성 불필요 | 저수준 → 구성은 개발자 설계 |
+| 단계 수 · 길이 · 도구 차이 · 속도가 subagent 근거 | 한 context · workflow로 충분<br>위임 = 지연 증가 · 근거 = context 오염 |
+| 최대 비용 = 큰 모델 · tool 불가 · token 2배 | 실제 비용 = 명시 안 한 부모 context 손실 |
+| Agent tool 제거 + CLAUDE.md 암묵 선택<br>· 리뷰어끼리 직접 메시지 · 이력 상속 | 중앙 판단 · 요약 통합 요건과 불일치 |
+| 공유 대화 기록으로 lead가 모든 턴 열람 | subagent별 대화 기록 따로 유지<br>lead = 최종 보고서 수신 |
+| 한 agent에 tool 전부 부여 후 순차 분석 | capability bloat · 병렬 포기 · context 혼합 |
+| 병합 없는 별도 agent 3개 + 수작업 병합 | synthesis · 병합 규칙 부재 → 일관성 ✗ |
+| 판단 필요한 검토를 모델 없는 workflow로 | 판단 제거 |
+| 경유 이점 = API 호출 감소 · 자동 retry · 직렬화 | 이점 아님<br>이점 = 관찰 · error 일관 처리 · 정보 통제 |
+| 원본 출력을 이어 붙여 최종 결과로 반환 | synthesis 없음 · 통합 품질 ✗ |
+| 한 agent가 다른 agent에 직접 결과 전달 · 요청 | coordinator 제어 상실 |
+| 공유 scratchpad · peer 메시지 · 전체 이력 공유 | 조정 책임 분산 → 모순 · 중복 감지 주체 불명 |
+| 로그 추가 · queue retry · dedup<br>· 직접 error 통지 | 부품 보강일 뿐 구성 문제 미해결<br>직접 주고받기 증가 |
+| 통합 부실 원인 = 요약 과다 · window 초과<br>· 검색 tool 부재 | 원인 = 위임 prompt에 데이터 없음<br>(로그의 prompt 내용으로 확인) |
+| 부모 이력 상속 설정 · system prompt에 부모 대화 참조 | 일반 subagent는 상속 ✗ |
+| @멘션 호출 · 통합 subagent에 Agent tool 추가 | 도달 정보 불변 |
+| 직접 통신 · agent team 재구성<br>으로 인용 손실 해결 | 정보 경로만 증가 · 전달 결락 불변 |
+| 통합 subagent에 검색 tool 주고 재조사 | 중복 · 오용 위험 · 역할 경계 붕괴 |
+| 원본 대화 전체 · 모든 tool 출력 전달 | 무관 자료에 token · attention 낭비<br>(lost-in-the-middle) |
+| 위임받은 agent가 고객에게 재질문 | coordinator가 가진 사실로 메울 틈을 고객에 전가 |
+| 부모 transcript 읽기 지시<br>· 이전 CI transcript 의존 | 일반 subagent 접근 불가<br>→ prompt 포함 또는 fork |
+| 단계별 절차서형 위임 | 예상 밖 상황 대응 수단 ✗<br>품질 기준 미전달 → 오래된 자료 반환 |
+| 부모 대화를 fork로 상속시켜 탐색 격리 | 분기마다 무거운 context<br>격리 효과 ✗ |
+| 메인 직접 탐색 후 compaction · transcript 붙여넣기 | 압축 전까지 context 비대 · 원본 출력 유입 |
+| 조사와 수정을 한 subagent에 동시 | 원인 특정 전 변경 |
+| prompt에 "출처 정확히" 명시 · 사후 출처 재부여 | 확률적 대책 · 사후 재부여 = 대응 관계 추측 |
+| 논문 전문 · 추출 텍스트 전체를 통합에 전달 | 분할 이점 상실 · context 압박 |
+| coordinator가 결과 요약 후 통합에 전달 | 세부 소실 지점 증가 |
+| fork로 부모 맥락 상속시켜 출력 형태 개선 | 출력 형태 불변 |
+| CLAUDE.md에 지침 저장 → 이번 전달 누락 해결 | 향후 실행용 · 이번 누락 미해결 |
+| 평가를 사람에게 회부 · 주석만 달고 진행 · 전체 재실행 | 느림 · 재조사 생략 · 범위 미축소 |
+| 검색 상한 2배 · "데이터 없음" 명기 · 통합에 검색 tool | 부족 확인 없는 양 증가 · 조사 전 포기 · 역할 붕괴 |
+| coordinator가 내부 tool 호출 검사<br>· 부모 tool 상속 · 대체 tool | subagent 분리 붕괴 |
+| 실패 시 빈 성공 결과 반환 | 실패 은폐 → 통합이 누락을 추측 |
+| 고정 4개 순차 → 4개 병렬 · 앞단 분류 모델 | 호출 범위 불변 · 과잉 설계 |
+| tool 제거 후 확인마다 승인 · 같은 권한 · 역할 합치기 | 정체 악화 · 중복 재발 · 효과 없음 |
+| 순차 실행으로 충돌 회피 | 병렬성 파괴 (researcher 6개 = 6배 시간) |
+| 개인 memory + 출력 이어 붙임 · peer 채팅 | 중복 · 병합 충돌 · 비구조 · orchestrator 가시성 ✗ |
+| fork_session · 비판 지시 · 상위 모델로 독립 리뷰 | 이력에 생성 시 추론 잔존 = self-review |
+| 충돌 평가를 평균 · 선착순 · 3번째 worker 다수결 | 아무도 안 낸 판단 · 임의 · 증거 없는 투표 |
+| 두 worker 일치할 때까지 재실행 | 종료 보장 없음 · 예산 소진 |
+| 전사와 번역 충돌을 다수결 · 특정 worker 우선 | 서로 다른 것을 판단 · 위세로 승자 · 재발 |
+| 불일치 해법 = 더 큰 모델 · worker 추가 · timeout 연장 | 자원 추가일 뿐 규칙 아님 |
+| 검증 불가 단계를 그대로 진행 · 기록만 · 2회 일치까지 재시도 | 미검증 근거로 행동 · 일관성 ≠ 진실 |
+| 불만도 점수 · 추출 난이도로 사람 인계 결정 | 명시 요구라는 가장 확실한 신호를 대체 |
+| 인계에 대화 전문 첨부 · 감정 점수 · turn 수 | 요점 불명 · 내용 없음 → 담당자 재질문 |
+| 누락 원인 = subagent 실행 · 요약 품질 | subagent는 할당을 정상 수행<br>원인 = coordinator의 좁은 분해 |
+| 통합 단계에서 중복 제외 | 사후 정리 · 경계 불명 원인 미해결 |
+| 1개 agent로 집약 | 병렬화 이점 포기 |
+| 대화 기록 전체 전달로 범위 구분 | 담당 범위 구분 ✗ |
+| 전원이 전체 건 검토 · 중첩 상세 요약 | 중복 · 통합 context 비대 |
+| 키워드 · 정보원 · 검색 건수 추가 | 정보원별 분해 유지 → 양만 조정 |
+| 통합 단계에서 공백 보완 | 추가 조사 없는 근거 없는 보완 |
+| 출처 단위 분할 | 이미 취득한 범위 안의 병렬화 |
+| 전 주제 할당 수 일률 증가 | 공백 아닌 전체 증가<br>→ 정답 = 공백에만 2차 할당 |
+| 발견 반영이 필요한 조사에 고정 pipeline | 도중 발견을 반영 못함 |
+| 열린 조사를 사전 병렬 분할 | 노력 낭비 · 발견을 연결할 주체 없음 |
+| 증거 수집 수단 없이 답만 요구 | 확인할 방법 부재 |
+| 처리 상한(예산)만 인상 | 문제는 처리량 아닌 순서 |
+| 사전 균등 분할 | 예측 가능한 정형 작업용 분해 |
+| 디렉터리 · 알파벳 순 처리 | 작업 편의순 · 중요도 미반영 → 재작업 |
+| 의존 파악 없이 병렬 수정 | 미지의 의존 관계 대응 ✗ |
+| 더 큰 context window | 구조 부재 미해결 → 훑기만 함 |
+| 계획 없이 페이지별 순차 작성 | 일관성 없는 보고서 · 개요 이탈 |
+| 출처 대부분 폐기 | 종합 제약 위반 |
+| 반복 횟수 조정 | 분해 방식 불변 |
+| 전 파일 일괄 로드 | 동적 조사 이점 폐기 |
+| 두 유형에 같은 범용 방식 · 일괄 처리 | 작업 성격 차이 무시 |
+| 직접 실행으로 시작 | 상황 파악 전에 수정 |
+| 의존 작업까지 전부 동시 위임 | 의존 관계 무시 (비교는 개별 결과 필요) |
+| 여러 작업을 하나의 prompt로 묶음 | 병렬화 이점 폐기 |
+| 순차 인계 · 병렬 도구 비활성화 | 순차라는 원인 그대로 |
+| 독립 작업을 chain · 고정 순서 직렬 | 지연만 증가 · 독립성 미활용 |
+| 의존 선행 없이 합류 작업 병렬 | 안전 위반 · 결함 |
+| 순차 대화를 다중 subagent로 fan-out | 분할이 아닌 중복<br>대화 컨텍스트 분절 |
+| subagent 수만 축소 (5 → 3) | 같은 구조 결함 |
+| 순차 대화에 voting | 비용 증가 · 컨텍스트 분절 |
+| 더 큰 모델로 분해 실수 해결 | 작업이 순차인 한 변함없음 |
+| 협상 · 얽힌 작업을 supervisor + worker로 분할 | 파편화 · handoff 비용이 이득 초과 |
+| 분할 후 검사자 추가 | 병은 검사 부족이 아닌 분할 |
+| 라운드를 사전 고정 | 상대 반응에 따라 적응 필요 |
+| 공유 sandbox = 공유 컨텍스트 | subagent는 각자 대화 기록 유지 |
+| 한 설계에 패턴 하나만 | 독립 규모 · 품질 편차는 별개 문제 |
+| 반복 작업 120건을 한 호출 | context 초과 · 건별 점검 없음 |
+| 모든 티켓을 전 단계 chain 통과 | 형태 문제 → 낭비 단계 · 분기 부재 |
+| chain 유지 + 추론 추가 · 상위 모델 · caching | 분기 부재 미해결<br>caching = prefix 안정일 때만 이득 |
+| 12단계 chain에 상위 모델 | 한 단계 오류 지배 + 그 단계가 어려울 때만 유효<br>초안 재작성 · 지연 합산 그대로 |
+| 13번째 비평 단계 추가 | 이미 재작성 과다 · 짧고 검사 가능한 chain에만 유효 |
+| caching으로 오류 누적 해결 | 안정 prefix · 지연 문제에만 이득 |
+| 현재 가격을 캐시 · 다단계 chain으로 응답 | 스냅샷 = 오래된 답 · 대기 증가 |
+| 문서 다수를 한 컨텍스트에 투입 | 중간 문서 묻힘 · 주의 희석 |
+| 인용을 기억에서 생성 · 초안 후 추가 | 출처 신뢰 불가 · 추적성 붕괴 |
+| 섹션 순차 chain 재작성 | 오류 누적 · 출처 불명 숫자 |
+| 공유 용어집 없는 독립 agent | 언어 간 용어 drift 보장 |
+| 단일 교정 agent로 전량 검수 | 순차 병목 → 기한 초과 |
+| 응답 단축 | 호출 후 대증요법 · 호출 범위 미조정 |
+| prompt 통합 | 전문 분화 폐기 |
+| worker가 스스로 skip 판단 | 기동 낭비 그대로 |
+| 일부 subagent 통합 | 전 건 순차 통과 구조 유지 |
+| text가 있으면 · 완료 문구가 있으면 loop 종료 | text와 `tool_use` 공존 · 구조화된 신호 아님 |
+| 반복 횟수 상한을 주된 종료 조건으로 사용 | 복잡한 건만 중간 절단 · 상한은 안전장치 |
+| 상한 숫자만 증가 | 구조 동일 · 안티패턴 유지 |
+| `temperature` 0 · 큰 모델 · context 확대로 loop 해결 | 반복 제한 ✗ · 수렴 보장 ✗ |
+| `effort` low · Stop hook으로 지출 상한 | turn당 소비만 변경 · loop 끝나야 발화 |
+| assistant turn 없이 `tool_result`만 전송 | 400 오류 · 대응 `tool_use` 소실 |
+| `pause_turn`을 `end_turn`처럼 처리<br>· `max_tokens` 올려 재전송 | 반쯤 한 결과 반환 · 처음부터 + 비용 2회 |
+| prompt 강화 · `CLAUDE.md` 강조 · few-shot<br>· `temperature` 0 → 100% 준수 기대 | 확률적 · 실패율 0 ✗ |
+| `PostToolUse` hook으로 위반 방지 | 실행 후 동작 |
+| `tool_choice` 강제로 순서 · 조건 통제 | 제어 메커니즘 ✗ · 일률 강제 부작용 |
+| 호출 여부만 보는 gate | 검증된 결과(ID) 확인 아님 |
+| 모델 self-check · 2 agent 투표로 비가역 통제 | 모델 판단 · 결정 주체 불변 |
+| 전면 사람 검토 · 10% 표본 검토 | 규모상 비실현 · 실패 90% 통과 |
+| 둘 다 Batches · 배정 반대 | blocking 판정을 비동기로 만듦 |
+| tool 결과를 개별 user 메시지로 반환 | 순차 대기 잔존 · 병렬 회피 학습 |
+| 단계 미정 작업을 코드에 하드코딩 | 다음 단계를 결과로 정하는 작업에 부적합 |
+| 규칙 고정 작업에 agent<br>(미래 유연성 · step 한도<br>· 관심사 분리 multi-agent) | 필요 없는 비용 그대로<br>비결정성만 추가 |
+| agent 3개가 순서를 협상 | 고정 순서에 비결정성만 추가<br>과잉 설계 |
+| tool을 쓰니 agentic | 기준 = 단계를 누가 정하나<br>고정 경로 = 도구 가진 workflow |
+| 순차 3단계 → agent 3개 | 순차 단계 ≠ agent<br>orchestration overhead만 추가 |
+| 모든 리뷰 코멘트를 사람이 승인 | 자동화 목표 무력화 · 설계가 요구 ✗ |
+| workflow 선택 이유 = agent는 새롭고 덜 검증<br>· workflow는 항상 정확<br>· 팀 시간 부족 | 엔지니어링 근거 아님<br>근거 = 경로가 알려졌는가 |
+| 열린 연구를 고정 10단계 workflow로 | 실행 전에 없는 단계는 나열 불가 |
+| 열린 연구를 검색 10회 담은 prompt 1개 | 의외의 발견 시 재계획 지점 없음 |
+| 정해진 도구 순서에 분기만 추가 | 결정 트리만 커짐<br>질문마다 필요 절차가 다름 |
+| 반복 5회 고정 후 답변 | 상한 = 안전장치<br>주된 중지 조건 ✗ |
+| 과분해 pipeline → 큰 모델 교체<br>· subagent 병렬화 · 출력 cache | 병렬화 = chain에 부적합<br>cache = 같은 질문 반복에만 이득<br>설계 비용은 그대로 |
+| super-agent에 label 붙은 memory 섹션 | 소유권 · 독립 평가 생성 ✗<br>귀속 = 여전히 의견 문제 |
+| 릴리스마다 각 팀이 전체 prompt 공동 검토 | 팀 결합 → 독립 배포와 정반대 |
+| 환각 감소용 더 큰 모델로 라우팅<br>(bigger-model 함정) | 실패는 아키텍처 문제 · 용량 ✗ |
+| system prompt에 규제 주의 · 예시 보강<br>(prompt-plea) | 우회 가능 · 검증 불가<br>컴플라이언스 위험 |
+| 내부 agent가 가입자 질문에 직접 응답 | 방어 장치 없이 위험만 상승 |
+| 두 번째 agent가 유출을 검토 | 검토자도 모델: 놓침 · 속음<br>비용 · 지연 2배 |
+| 교차 tenant 접근 로깅 | 유출 후 탐지 · 방지 ✗ |
+| 사람이 모든 건 검토 | 대량엔 불가<br>triage 실패는 그대로 남음 |
+| 검사 없는 agent · 최상위 tier 일괄 처리 | gate 없음<br>tier 일괄 = 예산 위반 · 고정 건에도 agent 비용 |
+| 모든 호출에 explicit reasoning | 기준 충족 상태에서 출력 token · 지연만 추가 |
+| 가변 꼬리까지 대화 전체 cache | prefix 불안정 → hit rate ≈ 0<br>write 비용은 계속 청구 |
+| few-shot · 큰 tier · 2차 Claude 호출로 산술 보장 | 모두 샘플링 → 보장 ✗ |
+| 정확도가 높으니 검토 생략 | 정확도 = 지표<br>지표는 부수 효과를 gate ✗ |
+| 원시 입력 단계 검토 | 판단할 제안이 없음 |
+| 되돌릴 수 없는 행동 뒤 사후 검토 | 피해 이후 |
+| trust boundary = logger · 순수 함수 사이 | 내부 구간 |
+| fork 대신 같은 session resume 2회 · 동시 resume | 하나의 이력 공유 → 독립성 ✗ |
+| `continue`로 분기 | 최신 session 선택 → 분기 원본 보장 ✗ |
+| 분기마다 새 session에서 분석 반복 | 분석 공유 소실 |
+| file checkpoint로 대화 이력 분기 | checkpoint = 파일 되돌림 |
+| fork가 파일도 분기 | 대화 이력만 분기 |
+| 변경 후 session 그대로 resume + 변경 미언급 | 낡은 tool 결과를 현재 코드로 취급 |
+| 일부 변경에도 25개 전체 재분석 | 과도한 재작업<br>변경분만 전달해 좁힘 |
+| "최신 상태 확인하고 계속" 같은 모호한 지시 | 전체 재탐색 유발 |
+| 요약 이유 = resume이 기록 덮어씀<br>· 이력 자동 압축 | resume 동작에 대한 오해 |
+| 병행 조사 재개를 `--continue` + `/clear` | `/clear`는 session 전환 ✗ |
+| `--continue --fork-session`<br>· CLAUDE.md 진행 기록 + 새 session | fork = 분기 생성 · 유효한 context 폐기 |
+| crash 복구 = system prompt 강화 | 잃은 정보를 못 되찾음 |
+| crash 복구 = `continue` · 로컬 JSONL 복사 | filesystem 비공유 · 재시작 후 보존 불확실 |
+| 위임 안 됨 → `bypassPermissions` · `tool_choice` | 위임 대상 제공 ✗ |
+| 위임 안 됨 → 지시를 coordinator prompt로 이식<br>· subagent prompt에 부모 이력 참조 | multi-agent 포기 · 이력 상속 오해 |
+| `acceptEdits` · worker `tools`에 `Agent` | 편집 승인 전용 · 중첩 위임 전용 |
+| 최상위 `allowedTools`로 제한<br>· `disallowedTools`로 subagent별 분리 | 승인 생략 목록 · session 전체 적용 |
+| tool 이름 변경 · few-shot · 금지 prompt<br>(역할 이탈 방지 목적) | tool 접근 가능 상태 → 확률적 |
+| 정규화에 `additionalContext`<br>· `decision: "block"` | 덧붙임 · 이유 첨부만 → 원래 출력 유지 |
+| 정규화에 PreToolUse | 호출 전 동작 → 결과 형식 변경 ✗ |
+| PII 금지를 system prompt 강조 · few-shot | 출력 제어 · 확률적<br>모델 입력엔 이미 포함 |
+| PII 해결로 PreToolUse에서 tool 호출 전면 거부 | 필요한 정보까지 소실 |
+
+<sub>근거: Amey-0004, Amey-0005, Amey-0023, Amey-0024, Amey-0025, Amey-0026, Amey-0036, Amey-0041, Amey-0059, Amey-0073, CCAR-F-Amey-Thakur-0003, CCAR-F-Amey-Thakur-0011, CCAR-F-Amey-Thakur-0012, CCAR-F-Amey-Thakur-0013, CCAR-F-Amey-Thakur-0015, CCAR-F-Amey-Thakur-0016, CCAR-F-Amey-Thakur-0051, CCAR-F-Amey-Thakur-0052, CCAR-F-Amey-Thakur-0066, CCAR-F-Amey-Thakur-0067, CCAR-F-MyPractice-0002, CCAR-F-MyPractice-0004, CCAR-F-MyPractice-0008, CCAR-F-MyPractice-0011, CCAR-F-Udemy01-0003, CCAR-F-Udemy01-0005, CCAR-F-Udemy01-0011, CCAR-F-Udemy01-0014, CCAR-F-Udemy01-0018, CCAR-F-Udemy01-0021, CCAR-F-Udemy01-0028, CCAR-F-Udemy01-0036, CCAR-F-Udemy01-0045, CCAR-F-Udemy01-0048, CCAR-F-Udemy01-0055, CCAR-F-Udemy01-0059, CCAR-F-Udemy01-0060, CCAR-F-Udemy02-0006, CCAR-F-Udemy02-0007, CCAR-F-Udemy02-0009, CCAR-F-Udemy02-0010, CCAR-F-Udemy02-0012, CCAR-F-Udemy02-0017, CCAR-F-Udemy02-0024, CCAR-F-Udemy02-0036, CCAR-F-Udemy02-0037, CCAR-F-Udemy02-0038, CCAR-F-Udemy02-0042, CCAR-F-Udemy02-0043, CCAR-F-Udemy02-0045, CCAR-F-Udemy02-0060, CCAR-F-Udemy03-0003, CCAR-F-Udemy03-0012, CCAR-F-Udemy03-0016, CCAR-F-Udemy03-0024, CCAR-F-Udemy03-0037, CCAR-F-Udemy03-0038, CCAR-F-Udemy03-0043, CCAR-F-Udemy03-0050, CCAR-F-Udemy04-0002, CCAR-F-Udemy04-0005, CCAR-F-Udemy04-0008, CCAR-F-Udemy04-0009, CCAR-F-Udemy04-0014, CCAR-F-Udemy04-0022, CCAR-F-Udemy04-0024, CCAR-F-Udemy04-0028, CCAR-F-Udemy04-0031, CCAR-F-Udemy04-0043, CCAR-F-Udemy04-0048, CCAR-F-Udemy04-0053, CCAR-F-Udemy04-0054, CCAR-F-Udemy04-0055, CCAR-F-Udemy05-0010, CCAR-F-Udemy05-0014, CCAR-F-Udemy05-0017, CCAR-F-Udemy05-0019, CCAR-F-Udemy05-0024, CCAR-F-Udemy05-0025, CCAR-F-Udemy05-0027, CCAR-F-Udemy05-0035, CCAR-F-Udemy05-0036, CCAR-F-Udemy05-0038, CCAR-F-Udemy05-0045, CCAR-F-Udemy05-0054, CCAR-F-Udemy06-0002, CCAR-F-Udemy06-0011, CCAR-F-Udemy06-0022, CCAR-F-Udemy06-0023, CCAR-F-Udemy06-0026, CCAR-F-Udemy06-0027, CCAR-F-Udemy06-0029, CCAR-F-Udemy06-0038, CCAR-F-Udemy06-0050, CCAR-F-Udemy06-0051, CCAR-F-Udemy06-0059, CCAR-F-paullarionov-0002, CCAR-F-paullarionov-0004, CCAR-F-paullarionov-0008, CCAR-F-paullarionov-0011, CCAR-F-paullarionov-0048, CCAR-F-paullarionov-0051, CCAR-F-preporato-0001, CCAR-F-preporato-0004, CCAR-F-preporato-0005, CCAR-F-preporato-0009, CCAR-F-preporato-0010, CCAR-F-preporato-0011, CCAR-F-preporato-0012, CCAR-P-Amey-Thakur-0005, CCAR-P-Amey-Thakur-0045, CCAR-P-jrajath94-0013, CCAR-P-jrajath94-0015, CCAR-P-jrajath94-0016, CCAR-P-jrajath94-0018, CCAR-P-jrajath94-0021, CCAR-P-jrajath94-0023, CCAR-P-jrajath94-0065, CCAR-P-jrajath94-0066, CCAR-P-jrajath94-0067, CCAR-P-jrajath94-0069, CCAR-P-jrajath94-0070, CCAR-P-jrajath94-0107, CCAR-P-jrajath94-0110, CCAR-P-jrajath94-0114, CCAR-P-jrajath94-0115, CCAR-P-jrajath94-0116, CCAR-P-jrajath94-0117, CCAR-P-jrajath94-0119, CCAR-P-jrajath94-0120, CCAR-P-jrajath94-0122, CCAR-P-jrajath94-0123, CCAR-P-jrajath94-0124, CCAR-P-jrajath94-0125, CCAR-P-jrajath94-0126, CCAR-P-jrajath94-0282, CCAR-P-jrajath94-0283, CCAR-P-jrajath94-0285, CCAR-P-jrajath94-0286, CCAR-P-jrajath94-0289, CCAR-P-jrajath94-0523, CCAR-P-jrajath94-0524, CCAR-P-jrajath94-0602, CCAR-P-jrajath94-0603, CCAR-P-jrajath94-0605, CCAR-P-jrajath94-0607, CCAR-P-preporato-0004, Patrick-0012, Patrick-0022, Patrick-0038, Patrick-0039, Preporato-0017, Preporato-0019, Udemy-0004, Udemy-0014, Udemy-0019, Udemy-0051, Udemy-0053</sub>
+
+## 4. 암기 목록
+
+| 이름 | 의미 |
+|---|---|
+| `stop_reason: "tool_use"` | tool 실행 → `tool_result` 추가 → 재호출 (loop 계속) |
+| `stop_reason: "end_turn"` | 모델이 턴 종료 → 결과 반환 |
+| `stop_reason: "max_tokens"` | 출력 상한 도달 → 별도 처리 필요 (종료 신호 ✗) |
+| `max_tokens` | 출력 길이 제한 · 입력 컨텍스트와 무관 |
+| `tool_result` | tool 실행 결과를 대화에 붙여 돌려주는 block |
+| step ceiling = max iteration cap | 비수렴 loop에 대한 안전 상한 |
+| prompt chaining | 고정 순서 + 단계 사이 gate |
+| routing | 분류 → 전용 처리로 보냄 |
+| parallelization (voting) | 같은 작업 여러 번 실행 → 다수결 |
+| orchestrator-workers | 실행 중 동적 분해 → 위임 → 통합 |
+| evaluator-optimizer | 채점 → 수정 반복 |
+| Agent tool | subagent 호출 · 부모에는 최종 메시지만 반환 |
+| `AgentDefinition`의 `prompt` | subagent 자신의 system prompt<br>(부모 system prompt 상속 ✗) |
+| `model` (subagent 정의) | subagent별 가벼운 모델 지정 → 비용 절감 |
+| fork형 subagent | 현재 대화 분기 → 부모 이력 상속 (예외) |
+| `CLAUDE.md` | 설정에 따라 로드되는 프로젝트 공통 방침 |
+| Claude Agent SDK | loop · context management<br>built-in tool(Read · Edit · Bash · 검색) |
+| Agent SDK 제어 · 확장 | hooks · permissions<br>subagents · MCP · sessions |
+| Agent SDK 실행 위치 | 자사 프로세스 |
+| tool runner (beta) | Client SDK에서 tool loop 대행 |
+| Managed Agents | Anthropic이 loop · sandbox 호스팅<br>session · event log = Anthropic 쪽 저장 |
+| 세션 JSONL · `SessionStore` | Agent SDK 세션 저장 (디스크 · 자사 스토리지 adapter) |
+| Message Batches API | 비동기 대량 처리 · agent 용도 ✗ |
+| LangGraph | 저수준 stateful orchestration<br>durable execution · human-in-the-loop<br>state 영속화 |
+| provenance | 주장과 출처의 대응 정보 · handoff 중 소실 위험 |
+| hub-and-spoke (star) | 모든 통신 coordinator 경유<br>(관찰 · error · 정보 통제) |
+| 근거 레코드 | 주장 · 출처 위치 · 취득 조건을 담은 구조화 단위 |
+| handoff contract | 입력 · 출력 · 병합 규칙 · 불일치 규칙<br>(해설 용어) |
+| disagree rule | 충돌 시 우선 근거 · arbiter 지정 + 적용 기록 |
+| arbiter | worker 충돌을 contract 규칙대로 결정하는 중재자 |
+| critic 단계 | 조항 원문 + 두 근거로 재검토 |
+| checkpoint | 각 handoff 저장 → 실패 시 재개<br>판단 망설임 지점 = 사람 피드백 |
+| `Explore` | 읽기 전용 내장 subagent · 탐색을 메인에서 격리 |
+| `fork_session` | 이력 사본 + 새 session ID로 분기<br>(대안 시도용 · 독립 리뷰 ✗) |
+| agent team | 여러 session이 공유 task list로 협조 (실험적) |
+| `escalate_to_human` | 사람 인계 tool · 입력 schema로 요약 항목 필수화 |
+| `verify_fact` | 좁은 목적 확인 tool 예시 |
+| sectioning | 독립 서브태스크 분할 → 동시 실행 → 집계 |
+| fan-out / fan-in | 독립 조각 병렬 실행 / 결과 병합 |
+| validation gate | 병합 후 코드 · 기준 대조 검사 |
+| disagree rule | fan-in에서 결과 충돌을 처리하는 규칙 |
+| critique | 점검자 + 기준 + 수정 loop로 품질 편차 대응 |
+| triage | 복잡도 판정 → 투입 agent · 호출 수 조정 |
+| 동적 분해 | 발견에 따라 서브태스크 생성 · 갱신 |
+| 고정 분해 | 사전 확정 절차 = prompt chain |
+| 분해 축 | 어디(정보원) vs 무엇(주제 영역) |
+| 작업 경계 | 담당 · 비담당 범위<br>(위임 prompt에 명시) |
+| Agent tool(구 Task tool) | 한 응답에서 여러 호출 → subagent 병렬 기동 |
+| `pause_turn` | server tool loop 반복 한도 도달 → 응답을 이어 보냄 |
+| `max_turns` · `max_budget_usd` | Agent SDK의 turn · 비용 상한 |
+| `ResultMessage` `subtype` | 성공과 한도 도달 구분 (`error_max_turns` 등) |
+| `session_id` | 중단된 요청을 `resume`하는 식별자 |
+| `usage` 필드 | 응답별 token 사용량 → 누적 측정 |
+| `session budget` | list cost 상한 → 새 모델 요청 중단<br>⚠️ Managed Agents beta 기능 |
+| `PreToolUse` hook | 실행 직전 검사 · `deny`로 차단 |
+| `PostToolUse` hook | 실행 후 동작 · 방지 수단 ✗ |
+| `permissionDecision` · `permissionDecisionReason` | `deny` 결정 · 이유를 모델에 전달 |
+| precondition(전제 조건) | 선행 단계 완료 전 후속 tool 차단 |
+| `disable_parallel_tool_use` | `true`면 병렬 tool 호출 비활성 (기본 `false`) |
+| `tool_choice` `auto` | tool 사용 · 직접 답변을 Claude가 판단 |
+| `custom_id` | batch 결과를 요청과 대조하는 키 |
+| augmented LLM · augmented single call | 도구 가진 단일 판단<br>(고정 경로 + 열린 1단계) |
+| hybrid | workflow ↔ agent를 오가는 구조<br>(전환 지점 = handoff) |
+| lane | 입력 형태별 처리 경로 (규칙 · Claude) |
+| code gate | 부수 효과 앞에서 코드로 검사 |
+| prompt-plea | 보장을 prompt 지시에 의존하는 함정 |
+| bigger-model 함정 | 구조 문제를 큰 모델로 해결하려는 오답 |
+| system of record | 신뢰 출처 DB · 점검 기준 |
+| trust boundary | 비신뢰 입력 진입점 · 모델 출력의 부수 효과 지점 |
+| `continue_conversation` · `--continue` | 현재 디렉터리 최신 session 재개 |
+| `resume` · `claude --resume <name>` | ID · 이름 지정 재개 |
+| `fork_session` · `--fork-session` · `/branch` | 이력 복사한 새 session 생성 (원본 불변) |
+| `claude -n` · `/rename` | session 이름 부여 |
+| file checkpointing | 파일 변경 되돌림 (대화 분기 ✗) |
+| state manifest | 확인된 사실 · 판단을 담은 JSON 영속 state |
+| `agents` 파라미터 | `AgentDefinition` map으로 subagent 정의 |
+| `Agent` tool (구 `Task`) | subagent 위임 tool |
+| `AgentDefinition` `description` · `tools` | 위임 판단 근거 · subagent별 tool 제한 |
+| `allowedTools` · `disallowedTools` | 승인 생략 목록 · session 전체 차단 목록 |
+| `canUseTool` callback | 앞 단계에서 결정 안 된 호출의 승인 판단 |
+| `PostToolUse` · `PreToolUse` | tool 결과 반환 시점 · 호출 전 hook |
+| `updatedToolOutput` | tool 출력을 Claude가 보기 전에 교체 |
+| `additionalContext` | tool 결과에 정보 덧붙임 |
+
+<sub>근거: Amey-0005, Amey-0026, Amey-0036, CCAR-F-Amey-Thakur-0003, CCAR-F-Udemy01-0003, CCAR-F-Udemy01-0005, CCAR-F-Udemy01-0011, CCAR-F-Udemy01-0014, CCAR-F-Udemy01-0019, CCAR-F-Udemy01-0021, CCAR-F-Udemy01-0028, CCAR-F-Udemy01-0036, CCAR-F-Udemy01-0045, CCAR-F-Udemy01-0048, CCAR-F-Udemy01-0059, CCAR-F-Udemy01-0060, CCAR-F-Udemy02-0017, CCAR-F-Udemy02-0036, CCAR-F-Udemy02-0037, CCAR-F-Udemy02-0038, CCAR-F-Udemy02-0042, CCAR-F-Udemy02-0043, CCAR-F-Udemy03-0003, CCAR-F-Udemy03-0012, CCAR-F-Udemy03-0016, CCAR-F-Udemy03-0060, CCAR-F-Udemy04-0002, CCAR-F-Udemy04-0008, CCAR-F-Udemy04-0016, CCAR-F-Udemy04-0024, CCAR-F-Udemy04-0031, CCAR-F-Udemy04-0043, CCAR-F-Udemy04-0053, CCAR-F-Udemy04-0054, CCAR-F-Udemy05-0010, CCAR-F-Udemy05-0025, CCAR-F-Udemy05-0038, CCAR-F-Udemy05-0054, CCAR-F-Udemy06-0002, CCAR-F-Udemy06-0026, CCAR-F-paullarionov-0051, CCAR-F-paullarionov-0059, CCAR-F-preporato-0010, CCAR-F-preporato-0013, CCAR-P-jrajath94-0016, CCAR-P-jrajath94-0018, CCAR-P-jrajath94-0065, CCAR-P-jrajath94-0069, CCAR-P-jrajath94-0107, CCAR-P-jrajath94-0110, CCAR-P-jrajath94-0119, CCAR-P-jrajath94-0121, CCAR-P-jrajath94-0122, CCAR-P-jrajath94-0123, CCAR-P-jrajath94-0282, CCAR-P-jrajath94-0283, CCAR-P-jrajath94-0285, CCAR-P-jrajath94-0289, CCAR-P-jrajath94-0336, CCAR-P-jrajath94-0340, CCAR-P-jrajath94-0399, CCAR-P-jrajath94-0400, CCAR-P-jrajath94-0401, CCAR-P-jrajath94-0402, CCAR-P-jrajath94-0524, CCAR-P-jrajath94-0527, CCAR-P-jrajath94-0603, Patrick-0038, Preporato-0017, Preporato-0019, Udemy-0004, Udemy-0006, Udemy-0014, Udemy-0019, Udemy-0051, Udemy-0053</sub>
+
+## 5. 시험 직전 체크리스트
+
+- [ ] workflow vs agent = 다음 단계 결정 주체(코드 vs 모델)
+- [ ] 단계 고정 → prompt chaining + validation gate
+- [ ] 단계 고정에 agent · orchestrator ✗
+- [ ] agent 필요 신호 = 중간 결과를 봐야 다음 단계를 앎 (유일)
+- [ ] 동적 분해 → 위임 → 통합 = orchestrator-workers
+- [ ] 분류만 = routing · 다수결 = voting
+- [ ] coordinator = 분해 · 위임 · 통합
+- [ ] subagent = 격리 컨텍스트에서 좁은 작업 → 요약만 반환
+- [ ] subagent 상속 ✗ (부모 이력 · system prompt)
+- [ ] 필요한 컨텍스트 → 위임 prompt에 명시
+- [ ] subagent 도입 후 품질 저하 → handoff 컨텍스트 누락 의심
+- [ ] context 격리 = 부모 window 보호 · 총 토큰 감소 ✗
+- [ ] `tool_use` → 실행 · `tool_result` · 재호출
+- [ ] `end_turn` → 반환
+- [ ] loop 종료 = success condition + ceiling
+- [ ] step ceiling = 비수렴 대비
+- [ ] `max_tokens` = 출력 제한 · 컨텍스트 부족 해법 ✗
+- [ ] 오래 유지할 결정 → compaction과 무관한 명시적 state
+- [ ] 겹치는 tool → 잘못된 tool 선택 증가
+- [ ] Agent SDK = loop · built-in tool · context 관리
+- [ ] Agent SDK = hooks · permissions 포함
+- [ ] Agent SDK = 자사 프로세스 실행 · API key 인증
+- [ ] Managed Agents = 호스팅 · 세션 로그 모두 Anthropic
+- [ ] data residency → self-hosted Agent SDK
+- [ ] 각 단계 정상 + 최종 오류 → handoff 소실 의심 (prompt 미포함 · metadata 미분리)
+- [ ] subagent 간 통신 전부 coordinator 경유 (관찰 · error · 정보 통제)
+- [ ] worker 충돌 → contract 불일치 규칙(critic · arbiter) 적용 · 기록
+- [ ] 사람 인계 = 명시 요구 즉시 · 구조화 요약(ID · 원인 · 시도 · 권장 조치)
+- [ ] 절차 사전 확정 = chain · 발견 따라 변동 = 동적 분해
+- [ ] subagent 정상 + 누락 · 중복 → 분해 · 경계 점검
+- [ ] 독립 = 병렬 · 의존 = 순차 · 순차 대화 = 단일 agent
+- [ ] 유형별 처리 상이 = routing · 품질 편차 = critique
+- [ ] loop 종료 판정 = `stop_reason` · 반복 상한 = 안전장치 (text · 문구 ✗)
+- [ ] token · 비용 예산 = 코드가 `usage` 측정 · 중단 (prompt ✗)
+- [ ] 확실히 막을 규칙 = `PreToolUse` hook · gate (prompt · `PostToolUse` ✗)
+- [ ] gate 조건 = 검증된 결과 · 비가역 작업 = 사람 승인 (모델은 제안)
+- [ ] 고정 뼈대 + 소수 모호 사례 = hybrid (lane 분기)
+- [ ] 0건 보장 요구 = 구조적 통제 · 부수 효과 앞 gate
+- [ ] 이어가기 resume · 분기 fork · 큰 변경은 요약 + 새 session
+- [ ] 위임 안 됨 = `Agent` 허용 확인 · 결과 교체 = PostToolUse
+
+<sub>근거: CCAR-F-Amey-Thakur-0003, CCAR-F-Amey-Thakur-0015, CCAR-F-Udemy01-0019, CCAR-F-Udemy01-0045, CCAR-F-Udemy01-0060, CCAR-F-Udemy02-0017, CCAR-F-Udemy03-0012, CCAR-F-Udemy04-0005, CCAR-F-Udemy04-0008, CCAR-F-Udemy04-0024, CCAR-F-Udemy04-0043, CCAR-F-Udemy04-0048, CCAR-F-Udemy04-0055, CCAR-F-Udemy05-0010, CCAR-F-Udemy05-0017, CCAR-F-Udemy06-0002, CCAR-F-paullarionov-0004, CCAR-F-paullarionov-0011, CCAR-F-preporato-0004, CCAR-F-preporato-0005, CCAR-F-preporato-0013, CCAR-P-jrajath94-0065, CCAR-P-jrajath94-0066, CCAR-P-jrajath94-0067, CCAR-P-jrajath94-0122, CCAR-P-jrajath94-0124, CCAR-P-jrajath94-0283, CCAR-P-jrajath94-0285, CCAR-P-jrajath94-0336, CCAR-P-jrajath94-0340</sub>

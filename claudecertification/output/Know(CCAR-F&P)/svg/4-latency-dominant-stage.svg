@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="단계별 p95를 재서 지배 단계를 지목하고, 삭감할 때마다 정확도 하한과 eval을 재확인한다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Latency 최적화</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-latency-dominant-stage" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Latency: 단계별 p95를 재서 지배 단계부터 줄이고, 삭감마다 eval로 검증</text>
+<text x="20" y="56" font-size="11" fill="#6B7280" text-anchor="start">예: 단계별 p95 비중 (전체 합계 = SLA 대비 필요 감축량 계산의 기준)</text>
+<rect x="20" y="66" width="468" height="36" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="254.0" y="88.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">OCR 56% = 지배 단계</text>
+<rect x="492" y="66" width="368" height="36" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="676.0" y="88.5" font-size="13" fill="#1F2937" text-anchor="middle">그 밖 단계 합 44%</text>
+<text x="20" y="122" font-size="11" fill="#6B7280" text-anchor="start">지배 단계 = 단일 단계 과반, 또는 두 단계 합이 대부분. 작은 단계의 0.1~0.2초 감축 = 노이즈</text>
+<rect x="20" y="140" width="150" height="110" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="95.0" y="178.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">① 측정</text>
+<text x="95.0" y="193.3" font-size="11" fill="#6B7280" text-anchor="middle">단계별 p95 · 합계</text>
+<text x="95.0" y="207.3" font-size="11" fill="#6B7280" text-anchor="middle">SLA 대비 필요</text>
+<text x="95.0" y="221.3" font-size="11" fill="#6B7280" text-anchor="middle">감축량 계산</text>
+<rect x="250" y="140" width="150" height="110" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="325.0" y="178.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">② 지목</text>
+<text x="325.0" y="193.3" font-size="11" fill="#6B7280" text-anchor="middle">비중 큰 단계</text>
+<text x="325.0" y="207.3" font-size="11" fill="#6B7280" text-anchor="middle">감축량을 채우는 단계</text>
+<text x="325.0" y="221.3" font-size="11" fill="#6B7280" text-anchor="middle">의견 ✗ · 측정이 지목</text>
+<rect x="480" y="140" width="150" height="110" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="555.0" y="171.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">③ 삭감</text>
+<text x="555.0" y="186.3" font-size="11" fill="#6B7280" text-anchor="middle">정확도 1pt당 ms가</text>
+<text x="555.0" y="200.3" font-size="11" fill="#6B7280" text-anchor="middle">최악인 단계</text>
+<text x="555.0" y="214.3" font-size="11" fill="#6B7280" text-anchor="middle">rerank 700ms/1pt:</text>
+<text x="555.0" y="228.3" font-size="11" fill="#6B7280" text-anchor="middle">2.9→2.2초 · 93→92%</text>
+<rect x="710" y="140" width="150" height="110" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="785.0" y="178.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">④ 검증</text>
+<text x="785.0" y="193.3" font-size="11" fill="#6B7280" text-anchor="middle">정확도 하한 위인지</text>
+<text x="785.0" y="207.3" font-size="11" fill="#6B7280" text-anchor="middle">계산 + eval 재실행</text>
+<text x="785.0" y="221.3" font-size="11" fill="#6B7280" text-anchor="middle">삭감 = 여유 포인트 소모</text>
+<path d="M170,195 L250,195" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-dominant-stage)"/>
+<rect x="178.5" y="175" width="63.0" height="17" fill="#FFFFFF"/>
+<text x="210" y="187" font-size="11" fill="#1F2937" text-anchor="middle">측정값으로</text>
+<path d="M400,195 L480,195" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-dominant-stage)"/>
+<rect x="406.9" y="175" width="66.3" height="17" fill="#FFFFFF"/>
+<text x="440" y="187" font-size="11" fill="#1F2937" text-anchor="middle">지목한 단계</text>
+<path d="M630,195 L710,195" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-dominant-stage)"/>
+<rect x="647.9" y="175" width="44.3" height="17" fill="#FFFFFF"/>
+<text x="670" y="187" font-size="11" fill="#1F2937" text-anchor="middle">삭감 후</text>
+<path d="M785,250 L785,282" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-dominant-stage)"/>
+<rect x="791.0" y="260" width="44.0" height="17" fill="#FFFFFF"/>
+<text x="795" y="272" font-size="12" fill="#1F2937" text-anchor="start">재측정</text>
+<polygon points="785,282.0 870.0,322 785,362.0 700.0,322" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="785" y="326.6" font-size="13" fill="#1F2937" text-anchor="middle">p95 ≤ SLA?</text>
+<path d="M700,322 L325,322 L325,250" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-dominant-stage)"/>
+<rect x="374.0" y="305" width="291.9" height="17" fill="#FFFFFF"/>
+<text x="520" y="317" font-size="12" fill="#1F2937" text-anchor="middle">아니오: 남은 격차 추가 탐색 (예: 2.2초 &gt; SLA 2초)</text>
+<path d="M785,362 L785,392" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-latency-dominant-stage)"/>
+<rect x="791.0" y="370" width="20.0" height="17" fill="#FFFFFF"/>
+<text x="795" y="382" font-size="12" fill="#1F2937" text-anchor="start">예</text>
+<rect x="680" y="392" width="200" height="50" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="780.0" y="414.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">완료</text>
+<text x="780.0" y="429.4" font-size="11" fill="#6B7280" text-anchor="middle">SLA · 정확도 하한 모두 충족</text>
+<text x="20" y="386" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">오답</text>
+<rect x="20" y="396" width="200" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="120.0" y="421.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">작은 단계 최적화 ✗</text>
+<text x="120.0" y="436.4" font-size="11" fill="#6B7280" text-anchor="middle">0.1~0.2초 감축 = 노이즈</text>
+<text x="120.0" y="450.4" font-size="11" fill="#6B7280" text-anchor="middle">격차 못 메움</text>
+<rect x="235" y="396" width="200" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="335.0" y="421.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">단계 추가 ✗</text>
+<text x="335.0" y="436.4" font-size="11" fill="#6B7280" text-anchor="middle">안전 · 필터 · 번역 · cache</text>
+<text x="335.0" y="450.4" font-size="11" fill="#6B7280" text-anchor="middle">단계 → p95 증가</text>
+<rect x="450" y="396" width="200" height="70" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="550.0" y="421.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">보호 단계 삭제 ✗</text>
+<text x="550.0" y="436.4" font-size="11" fill="#6B7280" text-anchor="middle">verification 삭제 →</text>
+<text x="550.0" y="450.4" font-size="11" fill="#6B7280" text-anchor="middle">93 − 4 = 89% &lt; 하한 90%</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="610" viewBox="0 0 900 610" role="img" aria-label="기준선 측정 여부에 따라 파일럿을 거쳐 순가치를 계산하고 양수면 구축 음수면 구축하지 않는 흐름">
+<title>순가치 계산으로 구축 여부를 정하는 판단 흐름</title>
+<defs><marker id="arr-net-value-decision" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450.0" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">순가치가 양수일 때만 구축 · 음수도 완전한 답</text>
+<polygon points="170,64.0 290.0,104 170,144.0 50.0,104" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170" y="108.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">기준선을 아는가?</text>
+<polyline points="290,104 380,104" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-net-value-decision)"/>
+<text x="335" y="96" font-size="11" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="380" y="76" width="260" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="510.0" y="101.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">고정 범위 파일럿</text>
+<text x="510.0" y="115.7" font-size="11" fill="#1F2937" text-anchor="middle">SKU 집합 · 기간 · 성공 기준 고정</text>
+<polyline points="170,144 170,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-net-value-decision)"/>
+<text x="178" y="172" font-size="11" fill="#1F2937" text-anchor="start">예</text>
+<polyline points="510,132 510,190" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-net-value-decision)"/>
+<text x="518" y="166" font-size="11" fill="#1F2937" text-anchor="start">실측으로 기준선 확보</text>
+<rect x="20" y="190" width="860" height="100" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="223.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">순가치 = (기준선 − 새 비용) × 물량 + 회피된 오류 비용 − 구축 · 운영 비용</text>
+<text x="450.0" y="237.7" font-size="11" fill="#1F2937" text-anchor="middle">필요 입력: 기준선 · 새 비용 · 회피 오류 · 구축 비용 (구축 비용 누락 = 가장 흔한 비즈니스 케이스 오류)</text>
+<text x="450.0" y="251.7" font-size="11" fill="#1F2937" text-anchor="middle">기간 맞춤: 월 = 월 물량 × 단위 절감 − 월 고정비 · 첫해 = 12 × 월 절감 − 일회성 비용</text>
+<text x="450.0" y="265.7" font-size="11" fill="#1F2937" text-anchor="middle">예: 월 60,000건 × ($1.10 − $0.18) − $400 = $54,800</text>
+<polyline points="450,290 450,312" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-net-value-decision)"/>
+<polygon points="450,312.0 570.0,352 450,392.0 330.0,352" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="450" y="356.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">순가치 &gt; 0?</text>
+<polyline points="330,352 210,352 210,424" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-net-value-decision)"/>
+<text x="270" y="344" font-size="11" fill="#1F2937" text-anchor="middle">양수</text>
+<polyline points="570,352 690,352 690,424" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-net-value-decision)"/>
+<text x="630" y="344" font-size="11" fill="#1F2937" text-anchor="middle">음수</text>
+<rect x="20" y="424" width="380" height="96" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="210.0" y="455.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">구축</text>
+<text x="210.0" y="469.7" font-size="11" fill="#1F2937" text-anchor="middle">연 인건비 절감 $156,000 + 회피 오류 $3,000</text>
+<text x="210.0" y="483.7" font-size="11" fill="#1F2937" text-anchor="middle">− 구축 $20,000 − 실행 $1,040</text>
+<text x="210.0" y="497.7" font-size="11" fill="#1F2937" text-anchor="middle">= 순가치 약 $137,960</text>
+<rect x="500" y="424" width="380" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="690.0" y="455.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">구축 ✗ · "아니오"도 완전한 답</text>
+<text x="690.0" y="469.7" font-size="11" fill="#1F2937" text-anchor="middle">실행비 연 $40,000 vs 절감 연 $25,000</text>
+<text x="690.0" y="483.7" font-size="11" fill="#1F2937" text-anchor="middle">오류 항목 없음 → 순가치 연 −$15,000</text>
+<text x="690.0" y="497.7" font-size="11" fill="#1F2937" text-anchor="middle">음수인데 더 작은 파일럿 = 지연일 뿐</text>
+<rect x="20" y="540" width="860" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="565.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: 단위당 비용만 비교 · 구축 비용 누락 · 오류 항목 누락 · "전략적으로 중요" · "비용은 늘 떨어짐"</text>
+<text x="450.0" y="579.7" font-size="11" fill="#1F2937" text-anchor="middle">가격 매긴 항목 ✗ · 토큰 · 코드 줄 수 · tier 이름은 조건 없이 결정 숫자 ✗</text>
+</g>
+</svg>

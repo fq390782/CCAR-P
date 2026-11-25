@@ -1,0 +1,192 @@
+[
+ {
+  "id": "CCAR-F-Udemy03-0005",
+  "question": "A team at an apparel e-commerce marketplace is using Claude Code to accelerate software development. They use Claude Code for code generation, refactoring, debugging, and documentation, and have integrated it into their development workflow using custom slash commands and CLAUDE.md configuration. They also want to understand how to choose between plan mode and direct execution.\n\nA senior engineer is about to migrate a shared authorization layer that is used by multiple packages. The situation is as follows.\n\nThe dependency graph is unclear\n\nThere are multiple feasible design options\n\nPrevious attempts to start editing right away resulted in broad rewrites that had to be reverted later\n\nWhich actions should this engineer take first? (Select two.)",
+  "choices": {
+   "A": "Start Claude Code in acceptEdits mode, have it investigate the affected scope, and then review the resulting source code changes.",
+   "B": "Have Claude Code investigate the dependency graph of the packages that use the authorization layer and report its findings before choosing a design option.",
+   "C": "Switch to bypassPermissions mode, let Claude investigate and edit freely, and rely on tests to catch bad changes.",
+   "D": "Start Claude Code in plan mode, have it investigate the affected scope, review the proposed plan, and then approve the edits."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0006",
+  "question": "You are building an insurance claims triage agent using the Claude Agent SDK. The agent handles highly ambiguous requests such as returns, billing inquiries, and account issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_policyholder, lookup_claim, process_payout, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nYou are about to add a large feature that caches payout eligibility determinations before calling the backend tools. However, the engineer is not familiar with the following.\n\nPolicy edge cases\n\nCache invalidation risks\n\nFailure modes caused by stale eligibility data\n\nWhat should the engineer do before asking Claude Code to implement this change?",
+  "choices": {
+   "A": "Have Claude Code create a detailed implementation plan from the current codebase, and proceed to implementation once the plan looks technically consistent.",
+   "B": "Have Claude Code implement a conservative cache with a short expiration time, and then review the diff for gaps in policy or escalation handling.",
+   "C": "Before moving on to planning the code, have Claude Code interview the engineer about requirements related to edge cases and failure modes using AskUserQuestion.",
+   "D": "Have Claude Code write tests for common payout eligibility caching scenarios, and use the failing tests to drive the implementation incrementally."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0007",
+  "question": "A mortgage lending company is building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates output using a JSON (JavaScript Object Notation) schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nEvaluation in production showed that accuracy drops on 60-page loan application packages. These packages consist of predictable sections such as the application form, underwriter notes, invoices, and attachments.\n\nThe current approach of extracting everything at once captures fields within individual sections, but sometimes produces output with the following problems.\n\nDuplicate entities\n\nInconsistent monetary totals\n\nSchema-valid JSON with incorrect relationships\n\nWhich task decomposition strategy should the team adopt first?",
+  "choices": {
+   "A": "Send the entire package in a single large extraction prompt and have Claude self-check the JSON before returning it.",
+   "B": "Run extraction passes per section, and then use a subsequent reconciliation pass to remove duplicates and verify consistency across sections.",
+   "C": "Dynamically generate the next subtask as each page is read, and stop when the agent decides the required fields have been collected.",
+   "D": "First condense the entire package into a single prose summary, and then extract the required schema fields from that summary in a final pass."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0008",
+  "question": "You are building a legal case law research assistant using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include one that searches a case law database, one that analyzes filed briefs, one that creates memos summarizing the key points of cases, and one that assembles the final motion. The system researches legal issues and produces motions with citations.\n\nIn one test run, the coordinator proceeded in the following order.\n\nIt ran the case search subagent and the brief analysis subagent, and sent each of their tool_result blocks\n\nIt received an assistant response with stop_reason \"tool_use\" requesting a call to the memo creation subagent\n\nHowever, the current loop treats that response as the final answer as-is and passes its text to the motion creation process. As a result, the motion is created without the case key-point analysis.\n\nWhich changes should be made? (Select two.)",
+  "choices": {
+   "A": "While stop_reason is tool_use, execute the tool and return the result, and treat only an end_turn response as the final answer.",
+   "B": "Decide whether to run the next subagent by checking whether the response text contains phrasing such as \"ready to summarize.\"",
+   "C": "Create one tool_result for each requested tool_use block, and return them together in a single user message.",
+   "D": "Send the memo creation subagent's result as a tool_result with a new tool_use_id, and resume creating the motion."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0009",
+  "question": "A development team is introducing Claude Code into its development workflow to streamline code generation, refactoring, debugging, and documentation. They make use of custom slash commands and CLAUDE.md configuration, and they also need to understand how to choose between plan mode and direct execution.\n\nA team member wants to add just one guard clause to a single known function that rejects negative quantities, and then run the existing unit tests for that file. The target file path and the expected behavior are already known, and the change involves no changes to APIs, schemas, or architecture.\n\nWhat should the developer do?",
+  "choices": {
+   "A": "First switch to acceptEdits mode and let Claude make the edit, and then review the diff afterward.",
+   "B": "Have Claude Code make the small change directly and run the specified unit tests.",
+   "C": "First enable bypassPermissions so that Claude Code can edit and test without permission prompts.",
+   "D": "First enter plan mode, review the plan, and then approve the implementation after investigation."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0010",
+  "question": "The SRE team at a SaaS company operates an incident investigation agent that runs on a custom agent loop they implemented on top of the Messages API. The agent behaves as follows.\n\nAt the start of an investigation, it calls get_incident to obtain the incident definition (affected service, severity, and occurrence time)\n\nIt then performs dozens of searches in a single investigation, receiving log excerpts of thousands of tokens each time from search_logs\n\nLog excerpts are rarely revisited once they have been analyzed. In contrast, the incident definition is referenced repeatedly until the final report is written.\n\nLate in an investigation, input tokens approach the context window limit, and response latency and cost are also increasing.\n\nWhich changes can reduce context bloat while preserving the incident definition? (Select two.)",
+  "choices": {
+   "A": "Count input tokens before sending, and when a threshold is exceeded, delete messages starting with the oldest ones at the beginning of the conversation.",
+   "B": "Enable clear_tool_uses so that old tool results, except for the most recent few, are cleared.",
+   "C": "Specify get_incident in exclude_tools so that the incident definition result is retained until the final report.",
+   "D": "Increase the number of results that search_logs returns per call, so that a wide range of logs is received with fewer calls."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0011",
+  "question": "A team at a healthcare data platform is using Claude Code to accelerate software development. They use Claude Code for code generation, refactoring, debugging, and documentation, and have integrated it into their development workflow using custom slash commands and CLAUDE.md configuration. They need to understand how to choose between plan mode and direct execution.\n\nThe team is about to replace its in-house authorization layer with a policy engine across API handlers, middleware, and tests. The situation is as follows.\n\nEngineers disagree about where the policy boundary should be placed\n\nThe developer assigned to this work is unfamiliar with the multiple affected packages\n\nWhich workflows should be chosen before starting implementation? (Select two.)",
+  "choices": {
+   "A": "Have Claude Code present candidate placements for the policy boundary using AskUserQuestion, and settle the disagreement before implementation.",
+   "B": "In plan mode, have Claude Code investigate the codebase and present its proposed changes before editing any files.",
+   "C": "Select the opus model alias, and then have Claude Code complete the refactoring through to the end using direct execution.",
+   "D": "Using direct execution, have Claude Code start editing immediately and learn the architecture through test failures."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0012",
+  "question": "You are building a customer support resolution agent using the Claude Agent SDK. The agent handles highly ambiguous requests such as returns, billing disputes, and account issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nA support engineering team has an agent that has already collected the facts of a difficult billing dispute. The team wants to try two different resolution approaches from that same point. The requirements are as follows.\n\nEach approach has its own conversation history that can be resumed later\n\nThe original analysis thread itself is not modified\n\nWhich approach should the team adopt?",
+  "choices": {
+   "A": "For each approach, specify resume=baseline_session_id and fork_session=True, and save the new session_id.",
+   "B": "For each approach, run query() with resume=baseline_session_id, and then distinguish the results using application-side metadata.",
+   "C": "Enable file checkpointing before each approach, and rely on those checkpoints to create separate conversation histories.",
+   "D": "Run query() twice in the same directory with continue_conversation=True, and save the latest session output."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0013",
+  "question": "You are building a multi-agent grant application research system using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches topics and produces comprehensive reports with sources cited.\n\nAfter a refactoring, two related defects have appeared in the generated reports.\n\nCitations appear twice in the final report\n\nSome of the supporting excerpts disappear when the synthesis subagent's output is passed to the report generation agent\n\nThe cause is thought to span the claim and source schema, the synthesis prompt, and the report template. The acceptance test needs to confirm that each claim appears exactly once, together with its supporting excerpt and source URL.\n\nWhich ways of using Claude Code would most effectively address these defects? (Select two.)",
+  "choices": {
+   "A": "In plan mode, combine both defects, along with the scope of impact, constraints, and verification method, into a single request, and have Claude make edits after you review the plan.",
+   "B": "Open a separate /clear-ed session for each defect, have each edit only its assigned files, and merge the results later.",
+   "C": "Add and run an acceptance test that verifies each claim appears exactly once with its excerpt and source URL.",
+   "D": "Skip planning and have Claude broadly fix the defects around the report, and review the diff all at once after the work is finished."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0014",
+  "question": "You are building a structured data extraction system using Claude for a property management company. The system extracts information from unstructured documents such as lease agreements, tenant applications, and repair requests, validates output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nThe system currently reports a 99% schema-conformant output rate, and most lease agreements, tenant applications, and repair requests receive high field-level confidence scores.\n\nReviewers can manually check only a small fraction of high-confidence records each week. However, before reducing review any further, you need to estimate the error rate in production and detect rare new failure patterns.\n\nWhich actions should be taken? (Select two.)",
+  "choices": {
+   "A": "Sample high-confidence records by document type and key field, and track error patterns by segment.",
+   "B": "Review only low-confidence records and ambiguous documents, and treat high-confidence records as accurate after validation.",
+   "C": "Use an automated evaluation set for regression checks alongside stratified manual sampling, and keep adding new failure patterns to it.",
+   "D": "Draw a single random sample from all high-confidence records, and report only the weekly aggregate accuracy to executives."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0015",
+  "question": "You are using Claude Code to accelerate software development. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You have integrated it into your development workflow using custom slash commands and CLAUDE.md configuration, and you need to understand how to choose between plan mode and direct execution.\n\nA release notes platform team has a custom MCP tool that publishes release notes, and it is invoked from a shared /publish command on every deployment.\n\nWhen the target CMS space is locked, the tool currently returns only the plain-text string \"operation failed.\" As a result, Claude Code retries the same publishing operation many times before asking the developer what happened.\n\nWhich changes would most effectively prevent wasted retries while preserving recovery from transient failures? (Select two.)",
+  "choices": {
+   "A": "Configure the command to retry every publishing failure with exponential backoff before reporting the failure.",
+   "B": "When the CMS space is locked, return an empty result treated as a success so that Claude Code can continue the workflow as is.",
+   "C": "Set isError and return an MCP error result with structured content that distinguishes locks from transient errors.",
+   "D": "State explicitly in the /publish command that transient errors should be retried and that failures caused by a lock should be raised with the developer."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0016",
+  "question": "You are building a contract clause extraction system using Claude for a law firm. The system extracts information from non-standard contracts, validates output using a JSON schema, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems.\n\nBenchmark results showed the following.\n\nLong contracts that contain multiple independent extraction targets (such as indemnification clauses, termination clauses, and liability clauses) are slow to process\n\nWhen any one section is unusually long, a different clause is often missing from the final JSON\n\nEach extraction target uses the same contract metadata and source text, but the targets have no dependencies on one another until the final schema validation stage.\n\nWhich design changes would most effectively address these latency and completeness problems? (Select two.)",
+  "choices": {
+   "A": "Disable parallel tool use, process each clause in a fixed order, and append validation result notes to the final JSON.",
+   "B": "Have each extraction task directly call the next task to share intermediate state, and return JSON fragments in the order they complete.",
+   "C": "Give each clause extraction task only the sections of the contract that are relevant to the clause it is responsible for.",
+   "D": "Split extraction for each clause into parallel tasks that are given the common contract metadata, and then merge and validate the results at the end."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0017",
+  "question": "An engineering team at an e-commerce platform is using Claude Code to accelerate software development. They use Claude Code for code generation, refactoring, debugging, and documentation, and have integrated it into their development workflow using custom slash commands and CLAUDE.md configuration. They need to understand how to choose between plan mode and direct execution.\n\nThe /release-note command needs to send a pull request diff to Claude and receive a typed object with fields such as title, risk_level, testing_summary, and breaking_change.\n\nIn the prototype, Claude is asked to return JSON, and the assistant text is then parsed. However, parsing fails when Claude includes explanatory text before the JSON.\n\nWhich implementation change would most improve reliability while preserving the requirement of schema-based extraction?",
+  "choices": {
+   "A": "Declare a client-side extraction tool with an input_schema for the release note fields, force that tool call to be required, and read the input object of the tool_use block.",
+   "B": "After Claude requests a tool, run a local extraction function, send a tool_result, and parse the subsequent assistant text.",
+   "C": "Store the release note schema in CLAUDE.md, ask the slash command to follow it, and parse the final assistant text.",
+   "D": "Keep the prompt that asks for JSON in text, prefill the assistant response with an opening curly brace, and parse the first balanced object from the assistant text."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0018",
+  "question": "You are building a multi-agent system for legal research using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include one that searches a case law database, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches issues and produces comprehensive reports with sources cited.\n\nThe document analysis subagent extracts a citation_type field using a JSON Schema enum. The enum values are statute, case_law, regulation, and treatise. Testing uncovered the following problems.\n\nAmbiguous citations are forced into one of the categories\n\nNew types of sources sometimes produce values outside the range of the enum values, causing downstream validation to fail\n\nWhich changes would most improve the schema design while maintaining reliable classification? (Select two.)",
+  "choices": {
+   "A": "Add unclear and other to the enum and also provide an other_detail field, and give instructions on when to use each.",
+   "B": "Remove the enum constraint from citation_type and let each subagent freely write whatever category label it thinks is best.",
+   "C": "Keep the current enum list as it is, and instruct the model to choose the single closest category for every citation.",
+   "D": "Monitor how often other and unclear appear, and promote source types that appear repeatedly to their own enum values."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0019",
+  "question": "You are on the build automation team at a game studio and are using Claude Code to accelerate development. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You have integrated it into your development workflow using custom slash commands and CLAUDE.md configuration, and you need to understand how to choose between plan mode and direct execution.\n\nA workflow script received a response containing stop_reason: \"tool_use\" for a client-side run_build_preview tool. The script succeeded in generating the build preview, but Claude does not interpret the result and keeps asking to call the same tool again.\n\nWhat should the script change in its next request?",
+  "choices": {
+   "A": "First add a user text summary, and include the corresponding tool_result block later in that same turn.",
+   "B": "Append the assistant's tool-use turn to the conversation history, and immediately after it append a user turn that contains the corresponding tool_result block.",
+   "C": "Append an assistant text turn containing the build preview output, followed by a user turn that prompts Claude to continue.",
+   "D": "Append a user text turn containing the build preview output, and resume the conversation as a normal user instruction."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0020",
+  "question": "You are building a competitive intelligence system for a consumer electronics manufacturer using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that writes reports. The system researches topics and produces comprehensive reports with sources cited.\n\nIn a competitor product research workflow, the following occurs after the exploration phase is finished.\n\nSubagents in later phases repeatedly run searches that earlier subagents have already completed\n\nThe reasoning behind decisions about why certain sources were not adopted is not carried over\n\nThe coordinator has received only concise output from the earlier subagents, and work in the next phase begins as though no exploration had taken place.\n\nWhat should the coordinator change before launching the next phase's subagents?",
+  "choices": {
+   "A": "Condense the exploration results so far into a summary with links to sources, and include it in the delegation prompt for each next subagent.",
+   "B": "Reserve the earlier findings for the final synthesis prompt, and keep delegation to each next subagent independent of one another.",
+   "C": "Attach the full conversation transcripts of the earlier subagents to each next delegation, without omitting any detail.",
+   "D": "Launch the next subagents as usual, and leave access to the parent's history to each subagent's independent context window."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0021",
+  "question": "You are building a telecom carrier account support agent using the Claude Agent SDK. The agent handles highly ambiguous requests such as cancellation procedures, billing inquiries, and account issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_subscriber, lookup_invoice, process_credit, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe customer support engineering team is implementing a manual Messages API client tool loop for get_subscriber. In integration testing, processing proceeded in the following order.\n\nClaude requests get_subscriber\n\nThe application successfully calls the MCP server\n\nThe next Claude turn proceeds as if the subscriber information does not exist\n\nThe request trace shows that the lookup result was saved in the application's logs. However, the next Messages API request contained only the original user message and a new assistant prefill summarizing the lookup result.\n\nWhich changes should be made to the manual orchestration loop? (Select two.)",
+  "choices": {
+   "A": "Return the lookup result in the content of a tool_result that corresponds to the issued tool_use_id.",
+   "B": "Keep the assistant's tool_use response, and follow it with a user message containing the corresponding tool_result.",
+   "C": "Insert a single confirmation message to the user before returning the lookup result, and include the lookup result in the message after that.",
+   "D": "Add an assistant message summarizing the lookup result, and have Claude generate a continuation from that prefilled summary."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0022",
+  "question": "You are on an engineering team at a fintech company and are using Claude Code to accelerate development for a payment SDK upgrade. Your team uses Claude Code for code generation, refactoring, debugging, and documentation. You have integrated it into your development workflow using custom slash commands and CLAUDE.md configuration, and you need to understand how to choose between plan mode and direct execution.\n\nThe team delegates documentation research to separate Claude Code subagents. In a recently compiled payment SDK upgrade guide, a 2021 compatibility note and a 2024 release announcement were both treated as equally current information. This happened because the parent conversation had received only short summaries from each subagent.\n\nWhich changes would most directly ensure that future generated documents correctly handle how current or outdated the information is? (Select two.)",
+  "choices": {
+   "A": "Instruct the parent agent in CLAUDE.md to compare source dates and prefer the newer finding when they conflict.",
+   "B": "Have each research subagent return JSON that includes the source date for each finding and the basis for that date.",
+   "C": "Only when summarized findings appear to contradict each other, have the parent agent ask each subagent to re-summarize in prose.",
+   "D": "Enable the citations feature on the sources used for research, and use the location information of the cited passages to supply temporal context."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy03-0023",
+  "question": "You are building an IT help desk resolution agent using the Claude Agent SDK. The agent handles highly ambiguous requests such as incident reports, license defects, and access permission issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_employee, lookup_ticket, resolve_access_request, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nIn production testing, the agent's initial analysis enumerates every possible incident and access issue, including peripheral ones. Reviewers complain that because all results arrive at the same priority, they cannot tell which of the following each one falls into.\n\nThose to resolve automatically\n\nThose to route to human review\n\nThose to use only for trend analysis\n\nWhich changes would make it possible to route reviews using calibrated criteria while maintaining broad coverage? (Select two.)",
+  "choices": {
+   "A": "Run a separate schema-constrained verification pass that assigns a confidence and severity to each finding.",
+   "B": "Define explicit routing rules that map combinations of confidence and severity to routing destinations.",
+   "C": "Instruct the initial analysis pass to return only high-confidence issues labeled with a customer-impact severity.",
+   "D": "Read the confidence value included in each Messages API response and use it as the criterion for routing cases."
+  }
+ }
+]

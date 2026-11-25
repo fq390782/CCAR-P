@@ -1,0 +1,49 @@
+{
+ "add": {},
+ "rep": [
+  [
+   "판단 분산형<br>⚠️ 공식: 실험적 · 기본 비활성 → 시점에 따라 변동",
+   "판단 분산형<br>공식: 실험적 · 기본 비활성"
+  ],
+  [
+   "| ⚠️ `pause_turn` | 공식 문서: server tool 사용 중 발생<br>종료 ✗ → 응답 그대로 다시 보내 이어감<br>→ \"`tool_use` 아니면 무조건 종료\" = 지나친 단순화 |",
+   "| ⚠️ `pause_turn` | 공식 문서: server tool loop가 한도(기본 10)<br>도달 시 발생 → 응답 그대로 다시 보내 이어감<br>→ \"`tool_use` 아니면 무조건 종료\" = 지나친 단순화 |"
+  ],
+  [
+   "공식 loop 예제 = `end_turn`(모델 판단)으로 종료<br>문항 해설(Amey 0060번) = 모델 판단만으론 보장 ✗<br>→ 앱 수준 success condition 강조",
+   "공식 문서: tool call 없으면 `end_turn` 종료<br>해설(Amey 0060번) = 모델 판단만으론 보장 ✗<br>→ 앱 수준 success condition 강조"
+  ],
+  [
+   "| ⚠️ 기능 상태 | 공식 문서상 Managed Agents beta 기능<br>→ 이름 · 동작 변경 가능성 |",
+   "| 기능 상태 | 공식 문서상 Managed Agents beta 기능 |"
+  ],
+  [
+   "| ⚠️ 요금 · 시간 | 일반 요금의 50% · 대부분 1시간 이내 · 최대 24시간<br>→ 시점 따라 변동 가능 |",
+   "| 요금 · 시간 | 일반 요금의 50% · 대부분 1시간 이내 · 최대 24시간 |"
+  ],
+  [
+   "해설 자체 용어 · 공식 문서에서 동일 정의 미확인<br>→ 구성 항목은 해설 기준 |",
+   "해설 자체 용어 · 공식 문서에 동일 정의 없음<br>→ 구성 항목은 해설 기준 (공식 문서 미확인) |"
+  ],
+  [
+   "| ⚠️ tool 이름 | 문항 표기 = Agent tool(구 Task tool)<br>이름은 버전 의존 — 2.1.63에서 Task → Agent로 변경<br>",
+   "| tool 이름 | 문항 표기 = Agent tool(구 Task tool)<br>2.1.63에서 Task → Agent로 변경<br>"
+  ],
+  [
+   "→ 가격 · tier 구성은 시점에 따라 바뀜 |",
+   "공식 문서: Fable 5.2 ≈ Haiku 5.5의 80배(MTok) |"
+  ],
+  [
+   "| ⚠️ tool 이름 | 공식 문서: `tool_use` 블록 = `Agent`<br>v2.1.63 이전 · `system:init` 목록 = `Task`<br>→ 시점에 따라 바뀜 · 감지 시 둘 다 매칭 |",
+   "| tool 이름 | 공식 문서: `tool_use` 블록 = `Agent`<br>v2.1.63 이전 · `system:init` 목록 = `Task`<br>→ 감지 시 둘 다 매칭 |"
+  ],
+  [
+   "| ⚠️ 위임 tool 이름 |",
+   "| 위임 tool 이름 |"
+  ],
+  [
+   "<br>⚠️ Managed Agents beta 기능 |",
+   "<br>Managed Agents beta 기능 |"
+  ]
+ ]
+}

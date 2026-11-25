@@ -1,0 +1,33 @@
+{
+ "add": {},
+ "rep": [
+  [
+   "<br>⚠️ 모델 버전명은 시점에 따라 바뀜",
+   ""
+  ],
+  [
+   "해설: spend limit 불가<br>공식 문서: 불가 = Google Cloud · AWS 플랫폼 한정<br>Console은 설정 가능하나 일부 사용 미집계",
+   "해설 \"spend limit 불가\"와 달리 공식 문서:<br>Google Cloud · Claude Platform on AWS만 불가<br>Console은 설정 가능하나 일부 사용 미집계"
+  ],
+  [
+   "⚠️ 해설 수치 · 90일→2년은 약 8배",
+   "⚠️ 해설 수치 · 90일→2년은 약 8배 (공식 문서 미확인)"
+  ],
+  [
+   "⚠️ 시점 변동 | plan별 BAA 적용 · HIPAA 적격 서비스 목록은 바뀜<br>",
+   "HIPAA readiness 범위 | "
+  ],
+  [
+   "해설은 \"ZDR\" 하나로 서술",
+   "해설은 \"ZDR\" 하나로 서술 (문서상 = Legacy ZDR)"
+  ],
+  [
+   "⚠️ 시점 변동 | 지원 = Claude 4.6 이상 모델 · 지원 플랫폼 한정 (공식 문서 기준)<br>",
+   "`inference_geo` 지원 범위 | 지원 = Claude 4.6 이상 모델 · 지원 플랫폼 한정 (공식 문서 기준)<br>"
+  ],
+  [
+   "현재 인가 여부는 공식 문서 · 조달 심사에서 확인",
+   "공식 문서: FedRAMP High · IL4 · IL5 필요 시<br>Bedrock 권고 · 그 외 경로 (공식 문서 미확인)"
+  ]
+ ]
+}

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="요약만 넘기면 출처가 사라지고 claim record로 넘기면 보고서까지 출처가 유지되는 흐름">
+<title>요약만 넘기면 출처가 사라지고 claim record로 넘기면 보고서까지 출처가 유지되는 흐름</title>
+<defs><marker id="arr-provenance-claim-source" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="450" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">provenance: claim-source 쌍을 구조화해 synthesis 끝까지 유지</text>
+<text x="20" y="54" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">안티패턴: 요약 + 일반 출처 목록만 반환</text>
+<rect x="20" y="66" width="170" height="84" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="105" y="98.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">subagent</text>
+<text x="105" y="113" font-size="11" fill="#1F2937" text-anchor="middle">간결한 요약 + 일반 출처 목록</text>
+<text x="105" y="127.3" font-size="11" fill="#1F2937" text-anchor="middle">반환</text>
+<rect x="250" y="66" width="170" height="84" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="335" y="105.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">handoff</text>
+<text x="335" y="120.2" font-size="11" fill="#1F2937" text-anchor="middle">주장 ↔ 출처 대응 없음</text>
+<rect x="480" y="66" width="170" height="84" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="565" y="98.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">synthesis</text>
+<text x="565" y="113" font-size="11" fill="#1F2937" text-anchor="middle">단계를 넘으며 provenance</text>
+<text x="565" y="127.3" font-size="11" fill="#1F2937" text-anchor="middle">소실</text>
+<rect x="710" y="66" width="170" height="84" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="795" y="98.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">최종 보고서</text>
+<text x="795" y="113" font-size="11" fill="#1F2937" text-anchor="middle">출처가 엉뚱 · 근거 논문 추적</text>
+<text x="795" y="127.3" font-size="11" fill="#1F2937" text-anchor="middle">불가</text>
+<polyline points="190,108 250,108" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-provenance-claim-source)"/>
+<text x="220" y="100" font-size="11" fill="#1F2937" text-anchor="middle">요약만</text>
+<polyline points="420,108 480,108" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-provenance-claim-source)"/>
+<text x="450" y="100" font-size="11" fill="#1F2937" text-anchor="middle">출처 소실</text>
+<polyline points="650,108 710,108" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-provenance-claim-source)"/>
+<text x="680" y="100" font-size="11" fill="#1F2937" text-anchor="middle">작성</text>
+<text x="20" y="190" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="start">권장: 주장마다 출처 · 날짜를 함께 반환</text>
+<rect x="20" y="202" width="170" height="124" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="105" y="247" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">claim record 반환</text>
+<text x="105" y="261.9" font-size="11" fill="#1F2937" text-anchor="middle">주장 + 출처 위치</text>
+<text x="105" y="276.2" font-size="11" fill="#1F2937" text-anchor="middle">발행일 · 근거 발췌</text>
+<text x="105" y="290.5" font-size="11" fill="#1F2937" text-anchor="middle">상류: 반환 형식</text>
+<polyline points="190,264 250,264" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-provenance-claim-source)"/>
+<text x="220" y="256" font-size="11" fill="#1F2937" text-anchor="middle">구조화</text>
+<rect x="250" y="202" width="170" height="124" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="335" y="247" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">synthesis</text>
+<text x="335" y="261.9" font-size="11" fill="#1F2937" text-anchor="middle">출처 종류별 가중</text>
+<text x="335" y="276.2" font-size="11" fill="#1F2937" text-anchor="middle">날짜 모순 시 신규 우선</text>
+<text x="335" y="290.5" font-size="11" fill="#1F2937" text-anchor="middle">하류: CLAUDE.md 규칙</text>
+<polyline points="420,264 480,264" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-provenance-claim-source)"/>
+<text x="450" y="256" font-size="11" fill="#1F2937" text-anchor="middle">통합</text>
+<polygon points="565,202 650,264 565,326 480,264" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="565" y="261.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">출처 부착?</text>
+<text x="565" y="276.2" font-size="11" fill="#1F2937" text-anchor="middle">코드로 검증</text>
+<polyline points="650,264 710,264" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-provenance-claim-source)"/>
+<text x="680" y="256" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="710" y="202" width="170" height="124" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="795" y="254.1" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">최종 보고서</text>
+<text x="795" y="269" font-size="11" fill="#1F2937" text-anchor="middle">주장마다 출처 · 날짜 유지</text>
+<text x="795" y="283.3" font-size="11" fill="#1F2937" text-anchor="middle">주장 단위로 출처 대응</text>
+<polyline points="565,326 565,360" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-provenance-claim-source)"/>
+<text x="573" y="348" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<rect x="480" y="362" width="170" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="565" y="389.3" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">출처와 대응 안 된 주장</text>
+<text x="565" y="404.2" font-size="11" fill="#1F2937" text-anchor="middle">보고서에서 제외</text>
+<rect x="20" y="446" width="860" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450" y="470.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">상류(반환 형식) + 하류(판단 규칙) 둘 다 필요: CLAUDE.md 규칙만 · JSON 반환만으로는 불충분</text>
+</g>
+</svg>

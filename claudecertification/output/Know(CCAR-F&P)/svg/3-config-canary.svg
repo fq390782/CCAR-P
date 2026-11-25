@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="910" height="320" viewBox="0 0 910 320" role="img" aria-label="에이전트 구성 배포 흐름: 구성 변경을 canary 그룹에 먼저 롤아웃하고 smoke test를 통과하면 전체 롤아웃, 실패하면 배포를 자동 중단하고 이전 구성으로 rollback" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>에이전트 구성 canary 배포와 rollback</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-canary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="455" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">구성 변경도 canary로 검증하고, 실패하면 한 명령으로 복구한다</text>
+
+  <rect x="20" y="56" width="140" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="90" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">구성 변경</text>
+  <text x="90" y="99" text-anchor="middle" font-size="11" fill="#6B7280">CLAUDE.md ·</text>
+  <text x="90" y="113" text-anchor="middle" font-size="11" fill="#6B7280">MCP 서버 구성</text>
+  <line x1="160" y1="88" x2="202" y2="88" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-canary)"/>
+  <text x="181" y="80" text-anchor="middle" font-size="11" fill="#6B7280">먼저</text>
+  <rect x="204" y="56" width="140" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="274" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">canary</text>
+  <text x="274" y="99" text-anchor="middle" font-size="11" fill="#6B7280">소규모 그룹에</text>
+  <text x="274" y="113" text-anchor="middle" font-size="11" fill="#6B7280">먼저 롤아웃</text>
+  <line x1="344" y1="88" x2="386" y2="88" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-canary)"/>
+  <text x="365" y="80" text-anchor="middle" font-size="11" fill="#6B7280">실행</text>
+  <rect x="388" y="56" width="140" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="458" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">smoke test</text>
+  <text x="458" y="99" text-anchor="middle" font-size="11" fill="#6B7280">좋은 출력이 있는</text>
+  <text x="458" y="113" text-anchor="middle" font-size="11" fill="#6B7280">샘플 작업 실행</text>
+  <line x1="528" y1="88" x2="570" y2="88" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-canary)"/>
+  <text x="549" y="80" text-anchor="middle" font-size="11" fill="#6B7280">결과</text>
+  <polygon points="642,48 712,88 642,128 572,88" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="642" y="93" text-anchor="middle" font-size="13" fill="#1F2937">통과?</text>
+  <line x1="712" y1="88" x2="754" y2="88" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-canary)"/>
+  <text x="733" y="80" text-anchor="middle" font-size="11" fill="#6B7280">통과</text>
+  <rect x="756" y="56" width="134" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="823" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">전체 롤아웃</text>
+  <text x="823" y="99" text-anchor="middle" font-size="11" fill="#6B7280">검증 통과 후</text>
+
+  <line x1="642" y1="128" x2="642" y2="174" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-canary)"/>
+  <text x="650" y="156" font-size="11" fill="#6B7280">실패</text>
+  <rect x="572" y="176" width="140" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="642" y="199" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">배포 자동 중단</text>
+  <text x="642" y="217" text-anchor="middle" font-size="11" fill="#6B7280">smoke test 실패 시</text>
+  <line x1="572" y1="204" x2="542" y2="204" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-canary)"/>
+  <text x="557" y="196" text-anchor="middle" font-size="11" fill="#6B7280">복구</text>
+  <rect x="310" y="176" width="230" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="425" y="199" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">rollback</text>
+  <text x="425" y="217" text-anchor="middle" font-size="11" fill="#6B7280">이전 구성 유지 → 한 번의 명령으로 복구</text>
+
+  <line x1="90" y1="120" x2="90" y2="176" stroke="#1F2937" stroke-width="1.5"/>
+  <rect x="20" y="176" width="270" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="155" y="199" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">증상 (구성 변경 직후)</text>
+  <text x="155" y="217" text-anchor="middle" font-size="11" fill="#6B7280">오래된 지시 사용 · 이름 바뀐 tool에서 루프</text>
+
+  <rect x="20" y="256" width="870" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="455" y="283" text-anchor="middle" font-size="13" fill="#1F2937">구성 changelog 필수 → fleet 행동 감사 가능</text>
+</svg>

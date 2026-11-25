@@ -1,0 +1,49 @@
+{
+ "add": {},
+ "rep": [
+  [
+   "| ⚠️ 해설 보충<br>(`max_tokens` 잘림) |",
+   "| 해설 보충<br>(`max_tokens` 잘림) |"
+  ],
+  [
+   "| ⚠️ 모델 · 시점 의존<br>(해설 보충) | 해설: 일부 모델(예: Opus 5.5)<br>`any` · `tool` 강제 → 400<br>대안 = `auto` + `strict: true` tool<br>· structured outputs<br>2026년 9월 업데이트 · 시험 가이드(2026년 7월판)보다 새로움<br>→ 시험은 강제 가능 전제로 출제될 수 있음 |",
+   "| 모델 의존<br>(해설 보충) | Opus 5.5 등: `any` · `tool` 강제 → 400<br>대안 = `auto` + `strict: true` tool<br>또는 structured outputs |"
+  ],
+  [
+   "| ⚠️ 해설 보충<br>(rate limit 측정) | 해설: \"호출 수로 측정\"<br>공식 rate limit = RPM + ITPM · OTPM(토큰)<br>요청 크기 축소 → 토큰 한도에 영향 가능<br>정답(backoff + 상한)은 유효 |",
+   "| ⚠️ 해설 보충<br>(rate limit 측정) | 해설: \"호출 수로 측정\"<br>공식 문서: RPM · ITPM · OTPM 3종으로 측정<br>→ 요청 크기 축소가 토큰 한도에 영향<br>정답(backoff + 상한)은 유효 |"
+  ],
+  [
+   "Message Batches API는 request마다 `custom_id` 필수<br>→ 일반 상관 ID 관행 설명으로만 이해 |",
+   "공식 문서: Message Batches API는 request마다<br>고유 `custom_id`(1~64자) 필수<br>→ 일반 상관 ID 관행 설명으로만 이해 |"
+  ],
+  [
+   "| ⚠️ model ID 표기 | 모델 버전 · 플랫폼별 ID는 시점에 따라 변동<br>출제 시점 공식 문서로 재확인 |",
+   "| model ID 표기 | 모델 버전 · 플랫폼별 ID는 시점에 따라 변동 |"
+  ],
+  [
+   "| ⚠️ 직접 API 거주 범위 | 해설: 추론 글로벌 또는 미국 한정 · workspace 저장소 미국 한정<br>지원 범위는 시점에 따라 변동 → 공식 data residency 문서로 재확인 |",
+   "| 직접 API 거주 범위 | 해설: 추론 글로벌 또는 미국 한정<br>· workspace 저장소 미국 한정 |"
+  ],
+  [
+   "| ⚠️ 해설의 \"(Inference)\" 표기 | \"streaming은 총 생성 작업량 감소 ✗\"<br>\"큰 모델은 지연 목표 이탈 가능\"<br>문서 직접 근거가 아닌 추론 표기 |",
+   "| 해설의 \"(Inference)\" 표기 | \"streaming은 총 생성 작업량 감소 ✗\"<br>\"큰 모델은 지연 목표 이탈 가능\" |"
+  ],
+  [
+   "| ⚠️ fast mode 지원 모델 | 지원 모델 · 배율은 시점에 따라 변동<br>사용 전 공식 fast mode 문서 확인 |",
+   "| fast mode 지원 모델 | 지원 모델 · 배율은 모델마다 다름 |"
+  ],
+  [
+   "| ⚠️ 모델 · 시점 의존<br>(해설 보충) | 해설: 2026년 9월 이후 일부 모델<br>`any` · `tool` 강제 → 400<br>시험 가이드(2026년 7월판)보다 새로움<br>→ 시험은 강제 가능 전제로 출제될 수 있음 |",
+   "| 모델 의존<br>(해설 보충) | 해설: 일부 모델은<br>`any` · `tool` 강제 → 400 |"
+  ],
+  [
+   "<br>⚠️ 해설: prefill은 Claude 4.6 세대 이후 모델에서 불가 | 텍스트 의존<br>⚠️ 모델 버전 의존(시점에 따라 바뀜) |",
+   "<br>해설: prefill은 Claude 4.6 세대 이후 모델에서 불가 | 텍스트 의존 |"
+  ],
+  [
+   "| `claude-haiku-5-5` ⚠️ | Claude Platform on AWS model ID 예<br>모델 ID는 시점에 따라 변동 |",
+   "| `claude-haiku-5-5` | Claude Platform on AWS model ID 예 |"
+  ]
+ ]
+}

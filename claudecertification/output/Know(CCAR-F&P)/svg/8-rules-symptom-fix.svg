@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-label="판단 규칙 2: tool 정의와 설계 문제는 증상별로 보장 수단이 정해져 있다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>판단 규칙 2: tool 정의와 설계 문제는 증상별로 보장 수단이 정해져 있다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-rules-symptom-fix" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="170" y="34" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">이런 증상이면</text>
+<text x="530" y="34" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">정답 방향</text>
+<text x="790" y="34" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">보장 못 하는 오답</text>
+<rect x="20" y="52" width="300" height="62" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170.0" y="78.0" font-size="13" fill="#1F2937" text-anchor="middle">답변 전에 반드시</text>
+<text x="170.0" y="95.0" font-size="13" fill="#1F2937" text-anchor="middle">특정 tool을 호출</text>
+<rect x="380" y="52" width="300" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="78.0" font-size="13" fill="#1F2937" text-anchor="middle">tool_choice로 그 tool 지정</text>
+<text x="530.0" y="95.0" font-size="13" fill="#1F2937" text-anchor="middle">미지원 모델: auto + 프롬프트 + strict</text>
+<rect x="720" y="52" width="160" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="800.0" y="85.5" font-size="11" fill="#1F2937" text-anchor="middle">tool_choice: auto만 두기</text>
+<polyline points="320,83 378,83" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-rules-symptom-fix)"/>
+<rect x="20" y="130" width="300" height="62" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170.0" y="156.0" font-size="13" fill="#1F2937" text-anchor="middle">tool 입력 타입이 틀림,</text>
+<text x="170.0" y="173.0" font-size="13" fill="#1F2937" text-anchor="middle">필수 필드 누락</text>
+<rect x="380" y="130" width="300" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="164.5" font-size="13" fill="#1F2937" text-anchor="middle">tool 정의에 strict: true</text>
+<rect x="720" y="130" width="160" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="800.0" y="156.0" font-size="11" fill="#1F2937" text-anchor="middle">description 늘리기,</text>
+<text x="800.0" y="171.0" font-size="11" fill="#1F2937" text-anchor="middle">temperature 낮추기</text>
+<polyline points="320,161 378,161" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-rules-symptom-fix)"/>
+<rect x="20" y="208" width="300" height="62" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170.0" y="242.5" font-size="13" fill="#1F2937" text-anchor="middle">모델이 엉뚱한 tool을 고름</text>
+<rect x="380" y="208" width="300" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="234.0" font-size="13" fill="#1F2937" text-anchor="middle">description 구체화 +</text>
+<text x="530.0" y="251.0" font-size="13" fill="#1F2937" text-anchor="middle">겹치는 tool 통합·역할 구분</text>
+<rect x="720" y="208" width="160" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="800.0" y="234.0" font-size="11" fill="#1F2937" text-anchor="middle">"신중히 고르라" 지시,</text>
+<text x="800.0" y="249.0" font-size="11" fill="#1F2937" text-anchor="middle">context 확장, 정렬</text>
+<polyline points="320,239 378,239" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-rules-symptom-fix)"/>
+<rect x="20" y="286" width="300" height="62" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170.0" y="312.0" font-size="13" fill="#1F2937" text-anchor="middle">MCP 서버 추가 뒤</text>
+<text x="170.0" y="329.0" font-size="13" fill="#1F2937" text-anchor="middle">성공률 하락</text>
+<rect x="380" y="286" width="300" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="312.0" font-size="13" fill="#1F2937" text-anchor="middle">새 tool의 중복과</text>
+<text x="530.0" y="329.0" font-size="13" fill="#1F2937" text-anchor="middle">description 구별성부터 확인</text>
+<rect x="720" y="286" width="160" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="800.0" y="312.0" font-size="11" fill="#1F2937" text-anchor="middle">uptime·latency나</text>
+<text x="800.0" y="327.0" font-size="11" fill="#1F2937" text-anchor="middle">모델 변경부터 의심</text>
+<polyline points="320,317 378,317" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-rules-symptom-fix)"/>
+<rect x="20" y="364" width="300" height="62" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170.0" y="398.5" font-size="13" fill="#1F2937" text-anchor="middle">큰 객체를 다음 호출에만 씀</text>
+<rect x="380" y="364" width="300" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="398.5" font-size="13" fill="#1F2937" text-anchor="middle">identifier(handle)만 반환</text>
+<rect x="720" y="364" width="160" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="800.0" y="397.5" font-size="11" fill="#1F2937" text-anchor="middle">항상 전체 / 항상 id만</text>
+<polyline points="320,395 378,395" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-rules-symptom-fix)"/>
+<rect x="20" y="442" width="300" height="62" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="170.0" y="468.0" font-size="13" fill="#1F2937" text-anchor="middle">업무 순서를 반드시 지킴</text>
+<text x="170.0" y="485.0" font-size="13" fill="#1F2937" text-anchor="middle">(본인 확인 먼저)</text>
+<rect x="380" y="442" width="300" height="62" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="530.0" y="468.0" font-size="13" fill="#1F2937" text-anchor="middle">앱 state machine으로</text>
+<text x="530.0" y="485.0" font-size="13" fill="#1F2937" text-anchor="middle">상태별 허용 tool만 전달</text>
+<rect x="720" y="442" width="160" height="62" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="800.0" y="468.0" font-size="11" fill="#1F2937" text-anchor="middle">번호 목록, few-shot,</text>
+<text x="800.0" y="483.0" font-size="11" fill="#1F2937" text-anchor="middle">effort 상향</text>
+<polyline points="320,473 378,473" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-rules-symptom-fix)"/>
+</svg>

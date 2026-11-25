@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="560" viewBox="0 0 920 560" role="img" aria-label="streaming SSE 이벤트 순서" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>streaming SSE 이벤트 순서</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-streaming-event-order" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="460" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">stream: true → HTTP SSE로 서버에서 클라이언트로만 이벤트가 흐른다 (WebSocket 아님)</text>
+<rect x="60" y="46" width="160" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="140.0" y="70.5" font-size="13" text-anchor="middle" fill="#1F2937">서버 (Messages API)</text>
+<rect x="360" y="46" width="160" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="440.0" y="70.5" font-size="13" text-anchor="middle" fill="#1F2937">클라이언트 (앱)</text>
+<polyline points="140,86 140,520" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+<polyline points="440,86 440,520" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+<polyline points="140,112 440,112" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="106" font-size="12" text-anchor="middle" fill="#1F2937">message_start</text>
+<rect x="455" y="97" width="445" height="30" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="677.5" y="116.5" font-size="12" text-anchor="middle" fill="#1F2937">생성 전에 옴 → 최종 stop_reason은 아직 모름</text>
+<polyline points="140,154 440,154" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="148" font-size="12" text-anchor="middle" fill="#1F2937">content_block_start (text)</text>
+<polyline points="140,196 440,196" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="190" font-size="12" text-anchor="middle" fill="#1F2937">content_block_delta: text_delta × N</text>
+<rect x="455" y="181" width="445" height="30" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="677.5" y="200.5" font-size="12" text-anchor="middle" fill="#1F2937">조각을 바로 화면에 표시 → 체감 지연(TTFT) 감소</text>
+<polyline points="140,238 440,238" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="232" font-size="12" text-anchor="middle" fill="#1F2937">ping</text>
+<text x="460" y="242" font-size="11" text-anchor="start" fill="#6B7280">연결 유지용, 중간 어디서나 섞일 수 있음</text>
+<polyline points="140,280 440,280" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="274" font-size="12" text-anchor="middle" fill="#1F2937">content_block_stop</text>
+<polyline points="140,322 440,322" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="316" font-size="12" text-anchor="middle" fill="#1F2937">content_block_start (tool_use)</text>
+<polyline points="140,364 440,364" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="358" font-size="12" text-anchor="middle" fill="#1F2937">content_block_delta: input_json_delta × N</text>
+<rect x="455" y="349" width="445" height="30" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="677.5" y="368.5" font-size="12" text-anchor="middle" fill="#1F2937">partial_json 조각은 올바른 JSON 아님 → 이어 붙이기만</text>
+<polyline points="140,406 440,406" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="400" font-size="12" text-anchor="middle" fill="#1F2937">content_block_stop</text>
+<rect x="455" y="391" width="445" height="30" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="677.5" y="410.5" font-size="12" text-anchor="middle" fill="#1F2937">모은 문자열을 여기서 한 번 JSON 파싱 (SDK helper가 대신 처리)</text>
+<polyline points="140,448 440,448" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="442" font-size="12" text-anchor="middle" fill="#1F2937">message_delta</text>
+<rect x="455" y="433" width="445" height="30" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="677.5" y="452.5" font-size="12" text-anchor="middle" fill="#1F2937">최종 stop_reason + 누적 output token usage</text>
+<polyline points="140,490 440,490" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-streaming-event-order)"/>
+<text x="290" y="484" font-size="12" text-anchor="middle" fill="#1F2937">message_stop</text>
+<text x="460" y="494" font-size="11" text-anchor="start" fill="#6B7280">스트림 종료</text>
+<polyline points="50,148 44,148 44,286 50,286" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+<text x="36" y="221.0" font-size="11" text-anchor="end" fill="#6B7280">블록 1</text>
+<polyline points="50,316 44,316 44,412 50,412" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+<text x="36" y="368.0" font-size="11" text-anchor="end" fill="#6B7280">블록 2</text>
+<text x="30" y="112" font-size="11" text-anchor="middle" fill="#1F2937"></text>
+<polyline points="60,538 90,538" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<text x="96" y="542" font-size="11" text-anchor="start" fill="#6B7280">이벤트</text>
+<polyline points="139.0,538 169.0,538" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="175.0" y="542" font-size="11" text-anchor="start" fill="#6B7280">중간에 섞일 수 있는 이벤트</text>
+<text x="900" y="542" font-size="11" text-anchor="end" fill="#6B7280">streaming은 TTFT와 HTTP timeout만 해결 · 가격·정확도·rate limit 그대로</text>
+</svg>

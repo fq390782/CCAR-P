@@ -1,0 +1,264 @@
+[
+ {
+  "id": "CCDV-F-Udemy2-0028",
+  "question": "A retail chain wants to automate a process that generates an inventory report every week using the same procedure. The steps are always the same and proceed in the following order:\nRetrieve sales data\nAggregate by store\nCreate a summary with Claude\nFormat it into the prescribed format\nWhich approach is most appropriate for this process?",
+  "choices": {
+   "A": "Classify the data by store size and format, and route it to summarization prompts prepared for each category.",
+   "B": "Have Claude look at each week's sales data and proceed while deciding the necessary aggregations and processing order each time.",
+   "C": "Call each step in a fixed order defined in code, passing the output of the previous step to the next.",
+   "D": "Generate the per-store summaries in parallel, and have an evaluator LLM score them and have them rewritten until they meet the criteria."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0029",
+  "question": "A shipping company is building a Claude app that extracts data from bills of lading and arrival notices. Because the extraction results are fed directly into a downstream core system, the app must return a JSON object containing only the specified fields, without any preamble or closing text.\nWhich prompt design most reliably enforces the output format?",
+  "choices": {
+   "A": "Set a closing brace in stop_sequences so that output generation is cut off when the JSON closes.",
+   "B": "Show the expected JSON structure and an example output, and instruct in positive terms to return only JSON with no preamble.",
+   "C": "List the styles to avoid in the instructions, such as \"Do not write a preamble\" and \"Do not add explanations.\"",
+   "D": "Set max_tokens just large enough for the JSON, leaving no room for text before or after it."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0030",
+  "question": "A property and casualty insurer is planning a Claude assistant to support first-line handling of accident claim intake. During requirements definition, the departments raised the following requirements:\nDisplay candidate responses within 2 seconds (call center department)\nCite and show the relevant policy clause in every response (compliance department)\nKeep monthly costs within the current budget (IT department)\nTesting showed that it is difficult to fully satisfy all three at the same time.\nWhich is the most appropriate way to finalize the requirements?",
+  "choices": {
+   "A": "Prioritize the requirements of the department with the most senior executive, and record the remaining requirements as items for consideration in the next phase.",
+   "B": "Agree on priorities in a cross-departmental meeting, and let the development team decide the acceptance criteria as implementation proceeds.",
+   "C": "Present the business rationale and trade-offs of each requirement, and agree with stakeholders on priorities and acceptance criteria.",
+   "D": "Have the development team adopt requirements in order of technical ease, and notify each department of the decisions after the fact."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0031",
+  "question": "A bank's risk analysis app uses a model with extended thinking enabled that performs multi-step reasoning while using tools.\nWhich statement correctly describes how thinking blocks are handled in the API?",
+  "choices": {
+   "A": "Keep thinking enabled while specifying a particular tool with tool_choice to force it to be called every time.",
+   "B": "Treat thinking tokens as non-billable, and exclude responses containing long reasoning from cost estimates.",
+   "C": "When returning tool results, send the preceding thinking block unmodified along with the tool_result.",
+   "D": "When returning tool results, delete the thinking block from the previous response and send only the tool_result."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0032",
+  "question": "An e-commerce service operates a Claude-integrated app across three environments: development, staging, and production.\nWhen managing configuration with settings.json and environment variables (env), which policy properly separates the settings for each environment?",
+  "choices": {
+   "A": "Commit shared settings in settings.json, put environment-specific differences in env, and put personal overrides in settings.local.json.",
+   "B": "Embed configuration values such as endpoints and model names as constants in the app code, and build separately for each environment.",
+   "C": "Write configuration values, including API keys, into separate per-environment settings.json files, and commit all three files to Git.",
+   "D": "Share and commit a single settings.json across all environments, and have operators manually edit production-specific values when an incident occurs."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0033",
+  "question": "A power company has Claude summarize large volumes of equipment inspection logs. Requests for long responses with a large max_tokens occasionally time out.\nWhat is the most appropriate countermeasure against timeouts for long-running responses?",
+  "choices": {
+   "A": "Upload the inspection logs to the Files API and send the request containing only the file_id.",
+   "B": "Stay with non-streaming, increase the SDK timeout and max_retries, and have the same request resent.",
+   "C": "Use stream: true to receive the response incrementally as SSE, receiving the long generation while keeping the connection open.",
+   "D": "Cache the inspection logs as a common prefix with prompt caching to shorten request processing time."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0034",
+  "question": "An online travel agency (OTA) app bundles a long inquiry thread and itinerary data and passes them to Claude in a single request.\nWhich most accurately describes the behavior when the context window is exceeded?",
+  "choices": {
+   "A": "If the input alone exceeds the limit, a 400 error is returned; if only the sum of the input and max_tokens exceeds it, generation stops at the limit.",
+   "B": "If the input exceeds the limit, the API automatically deletes messages starting from the oldest and responds using the remaining history.",
+   "C": "If the input exceeds the limit, the excess is automatically split into a separate request, and the responses are combined and returned later.",
+   "D": "Specifying a larger max_tokens expands the context window by the same amount, so long inputs are accepted."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0035",
+  "question": "An insurance company's development team is building a claims review support tool with Claude Code. They want to provide routine tasks as their own slash commands.\nWhich best describes the relationship between built-in commands and custom skills (slash commands)?",
+  "choices": {
+   "A": "Only custom skills placed in ~/.claude/skills/ are active; the project's .claude/skills/ is not loaded.",
+   "B": "Separately from built-in commands such as /help, you can add your own /<name> with .claude/skills/<name>/SKILL.md.",
+   "C": "Custom commands can only be placed in .claude/commands/; SKILL.md files in .claude/skills/ are for Claude's reference only.",
+   "D": "Custom skills run only when the user invokes them with /<name>; they are never loaded automatically based on their description."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0036",
+  "question": "An insurance company runs a Claude pipeline that processes insurance claim documents in the following six stages:\nLoad OCR text\nExtract fields\nMatch against the policy\nGenerate assessment notes\nRegister in the core system\nSend notifications\nIn one overnight batch, after stages 1–3 completed and saved their results, stage 4 (assessment note generation) returned HTTP 529 overloaded_error and processing stopped.\nWhich recovery strategy is most appropriate?",
+  "choices": {
+   "A": "Reuse the saved results of stages 1–3 and resume processing by retrying from stage 4 with backoff.",
+   "B": "Treat the 529 as a permanent failure, abort the job, and ask staff to rerun it manually the next day.",
+   "C": "Treat the 529 as a failure caused by invalid input, correct what is passed to stage 4, and then rerun all stages from the beginning.",
+   "D": "Rerun the entire pipeline from the beginning, redoing the processing of stages 1–3 and saving their results again."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0037",
+  "question": "A local government is building a service that accepts inquiries from residents. Claude returns a JSON object with category, priority, and needs_followup, and the backend routes requests based on those values.\nThe team has enabled structured outputs (json_schema), but a senior engineer argues that defensive parsing is still needed on the application side.\nWhich is the most appropriate approach and implementation?",
+  "choices": {
+   "A": "Enable structured outputs, remove the application-side validation, and use the returned values as-is.",
+   "B": "Check stop_reason, then validate the required keys and types, and route responses that fail validation to human review.",
+   "C": "Add an instruction at the end of the output for Claude to review its own JSON, and use that in place of application-side validation.",
+   "D": "Retry the same request repeatedly until the output parses as JSON, and use the first parseable result as-is."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0038",
+  "question": "A renewable energy company uses Claude to summarize wind turbine maintenance logs and compile figures such as failure counts and downtime into findings. Engineers make decisions based on those figures, but Claude sometimes confidently presents figures that do not exist in the original logs.\nWhat is the most effective design for guarding against confident but incorrect output?",
+  "choices": {
+   "A": "Switch to a higher-tier model, and adopt the figures for which the model shows high confidence directly as findings for engineers.",
+   "B": "Instruct Claude in the system prompt to answer assertively, reducing ambiguous wording and hedging.",
+   "C": "Have Claude extract the figures from the logs verbatim as evidence, allow it to say \"I don't know\" when unsure, and have it verify its claims with quotes.",
+   "D": "Set effort high to deepen thinking, and have Claude trace how each figure was derived more carefully, one by one."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0039",
+  "question": "A weather service operates a Claude agent that has a tool for issuing severe weather warnings to the public (the warnings are distributed to the general public). Because the cost of a false warning is high, they want Claude to draft and propose warnings but want to avoid having it issue them autonomously.\nWhich is the correct human-in-the-loop approval pattern?",
+  "choices": {
+   "A": "Specify the warning tool with tool_choice on every request, so that Claude calls the warning tool every time.",
+   "B": "Define the warning distribution process as a server tool, and have Anthropic perform the approval and distribution.",
+   "C": "Instruct Claude in the system prompt to ask the user for confirmation before distribution, and have it comply.",
+   "D": "In the warning tool's handler, route the proposal to human review instead of distributing it, and have the app distribute it after approval."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0040",
+  "question": "A software maintenance company is developing a feature that uses the Messages API to have Claude modify customers' configuration files. For this feature, they adopted the text editor tool whose schema is defined by Anthropic (text_editor_20250728).\nWhich statements correctly describe integrating this tool? (Select TWO.)",
+  "choices": {
+   "A": "Viewing and editing of files are executed on Anthropic's infrastructure, and the results are returned directly in the response.",
+   "B": "Commands such as view and str_replace are executed by the application, and the results are returned as tool_result.",
+   "C": "Upload the files to be edited to the Files API in advance, and pass their file_id to the tool to have them edited.",
+   "D": "The tool definition only needs type and name; you do not need to write input_schema yourself.",
+   "E": "Extend the tool's behavior by adding commands and arguments to input_schema to suit your own use case."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0041",
+  "question": "A real estate portal implements its own agent loop on top of the Messages API. With the web search server tool enabled, it has Claude research the latest information on redevelopment plans and transit near properties.\nFor requests with a broad research scope, the response's stop_reason is pause_turn and the answer stops partway through.\nWhat is the most appropriate way for the harness to handle this?",
+  "choices": {
+   "A": "Create a tool_result for each server_tool_use block and return them as the next user message to continue processing.",
+   "B": "Treat pause_turn as a transient error and retry the same request with exponential backoff with jitter.",
+   "C": "Append the returned assistant response to the conversation as-is, and send the request again with the same tool definitions to generate the continuation.",
+   "D": "Raise max_tokens and resend the same request from the beginning so that the research completes in a single response."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0042",
+  "question": "A recruiting SaaS company receives new-application webhooks from a partner's applicant tracking system (ATS) and screens résumés with Claude for each event.\nWhat is the most appropriate basic design for an event-driven webhook receiving endpoint?",
+  "choices": {
+   "A": "Return 2xx immediately on receipt and process asynchronously via a queue, verifying the signature and deduplicating by event ID.",
+   "B": "Verify the request signature, but screen redelivered events as new applications every time.",
+   "C": "Return 2xx immediately on receipt and process via a queue, relying on an IP address allowlist alone to verify the sender.",
+   "D": "Call Claude synchronously within the webhook handler and return the screening result in the response body."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0043",
+  "question": "A hospital is building an agent with the Claude Agent SDK that reads patient records. They want to allow the agent only to view records and make it completely unable to modify or delete files.\nWhat is the most appropriate way to restrict permissions?",
+  "choices": {
+   "A": "Write \"Do not modify or delete files\" in the system prompt and have the agent follow it as a working policy.",
+   "B": "Allow read-only tools with allowed_tools and exclude write tools with disallowed_tools.",
+   "C": "Allow all tools with allowed_tools, and log each tool's execution with a PostToolUse hook for after-the-fact auditing.",
+   "D": "Set permission_mode to acceptEdits to auto-approve edits, and record the changes in a work log."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0044",
+  "question": "An automaker is about to deploy to production a Claude agent that queries a production scheduling API and reads a parts database. The security department requires secure by design.\nFrom the standpoint of least privilege and IAM, which policy is most appropriate?",
+  "choices": {
+   "A": "Give the agent an Admin API key with organization administrator privileges so that it can call any API without permission errors.",
+   "B": "Specify the resources it may access in the system prompt so that it does not touch resources outside the task.",
+   "C": "Share a single API key across development, staging, and production so that rotation is done in one place.",
+   "D": "Scope the agent's key to only what is needed, separate environments with workspaces, and audit key usage."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0045",
+  "question": "A consulting firm continuously improves the prompts it uses for report generation. Switching to a new prompt sometimes degrades output quality. When that happens, they want to revert immediately.\nWhich policy for prompt versioning and rollback is most appropriate?",
+  "choices": {
+   "A": "Edit prompts directly in the production settings screen, and have the editor keep the previous content in personal notes.",
+   "B": "Version-control the prompts and pin the production version, and when quality degrades, roll back to a version that performed well.",
+   "C": "When quality drops, rewrite the prompt on the spot while looking at the evaluation results and push it to production.",
+   "D": "Have Claude automatically generate the prompt on every run, and adopt the ones that produced good results."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0046",
+  "question": "A research firm runs a research agent built on the Claude Agent SDK in a container. The agent fetches and summarizes external web pages and can also read internal customer materials.\nEven if an injection via hidden instructions embedded in a fetched page succeeds, they want a structural safeguard that prevents internal data from being sent to arbitrary external servers.\nWhat is the most appropriate countermeasure?",
+  "choices": {
+   "A": "Log each tool's execution with a PostToolUse hook and periodically audit for traces of outbound transmission.",
+   "B": "Cut off the container's network and allow external connections only through a proxy that relays to allowed domains.",
+   "C": "Prohibit sending data externally in the system prompt, and instruct the agent to treat fetched pages as untrusted data.",
+   "D": "Pre-screen fetched pages with a lightweight model and remove content suspected of injection before passing it to the agent."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0047",
+  "question": "An accounting firm uses a Claude agent to run a long-running reconciliation task across multiple ledgers. However, when the conversation approaches the context window limit, the work can no longer continue.\nWhich context management policy is most appropriate for keeping long-running tasks going?",
+  "choices": {
+   "A": "Make the conversation history a target of prompt caching, and continue by excluding the cached portion from the limit calculation.",
+   "B": "Replace older exchanges with a summary on the server side and continue working beyond the limit.",
+   "C": "Estimate the input with the token counting API, and start a new conversation from scratch when the limit is approached.",
+   "D": "Switch to a model with a 1M-token context window and continue working while retaining the full history."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0048",
+  "question": "A chemical manufacturer's app exchanges safety data sheet fields as structured data between Claude and internal systems.\nWhat is the most appropriate policy for designing input/output schemas that cross boundaries as \"contracts\"?",
+  "choices": {
+   "A": "Show only a list of field names in the prompt, and leave decisions about types and required fields to each receiving implementation.",
+   "B": "Use a JSON Schema that defines each field's type and whether it is required as the contract, and validate outputs and inputs against that definition.",
+   "C": "Have Claude write findings in free text, and have the receiver extract the fields with regular expressions and register them in the internal systems.",
+   "D": "Remove schema validation and operate provisionally whenever requirements change, and rebuild the schema once the specification settles."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0049",
+  "question": "A logistics company releases a Node.js service every month that depends on multiple npm packages, including the Claude SDK. In package.json, dependencies are specified as ^ ranges.\nAn incident investigation revealed that the versions of some dependency packages differed between the build that passed regression evaluation in staging and the build later rebuilt for production.\nWhat is the most appropriate way to reproduce the same dependency tree across environments?",
+  "choices": {
+   "A": "Change the range specifiers in package.json from ^ to ~, and align versions by pulling in the latest patch versions with npm install in each build.",
+   "B": "Add package-lock.json to .gitignore, and have npm install in each environment generate a lockfile specific to that environment.",
+   "C": "Delete node_modules before each build and then run npm install to re-resolve dependencies from a clean state.",
+   "D": "Commit package-lock.json to the repository, and install dependencies with npm ci for the staging and production builds."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0050",
+  "question": "A security operations center (SOC) classifies large volumes of alerts with Claude in a batch every night. Urgency is low, and a common classification guideline (a long fixed prompt) is reused in every request.\nWhich cost modeling approach is most appropriate?",
+  "choices": {
+   "A": "Cache the fixed guideline with prompt caching, and estimate costs with the Message Batches API discount stacked on top.",
+   "B": "Do not use prompt caching, and estimate costs by calculating input tokens at the base input price.",
+   "C": "Estimate by multiplying the number of input tokens by the input price, and exclude output tokens from the calculation because they are fewer.",
+   "D": "Treat the Message Batches API and prompt caching as mutually exclusive, and estimate using the Message Batches API discount, which has the larger discount rate."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0051",
+  "question": "An EdTech company is strengthening the management of API keys and secrets handled by its Claude-based service.\nWhich are best practices for secret management? (Select TWO.)",
+  "choices": {
+   "A": "Inject secrets at runtime from environment variables or a secrets manager, and do not keep them in source control.",
+   "B": "Scope key permissions to the minimum necessary, set expiration dates, and rotate them regularly.",
+   "C": "Share a single long-lived key across all environments and teams to consolidate the effort of issuing and managing keys.",
+   "D": "Write API keys into configuration files and commit them to the repository along with the app code.",
+   "E": "Embed the API key in the mobile app and call the Claude API directly from the device without going through a backend."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0052",
+  "question": "A nonprofit's development team plans to use Claude to generate code changes and incorporate it into its existing software development process.\nWhich is the most appropriate branching strategy and approach to reviewing AI-generated code?",
+  "choices": {
+   "A": "Commit AI-generated changes directly to the main branch and conduct code reviews in bulk at the end of the month.",
+   "B": "Put AI-generated changes into pull requests from feature branches as well, and merge them after human review and CI.",
+   "C": "Manage AI-generated changes in a dedicated repository and release them as an artifact separate from the main codebase.",
+   "D": "Merge AI-generated changes that pass an automated review by Claude without human review."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy2-0053",
+  "question": "A retailer exposes an internal MCP server over Streamable HTTP that provides inventory lookup and demand forecast aggregation tools. As usage grows, they want to scale out by placing multiple server instances behind a load balancer.\nSome of the aggregation tools take several minutes to complete, and their progress is queried later.\nWhich server design is most appropriate under the 2026-07-28 version of the MCP specification?",
+  "choices": {
+   "A": "Process each request using only the information contained in its _meta, and reference aggregation jobs that span requests from a shared store using explicit IDs.",
+   "B": "Enable sticky sessions on the load balancer so that requests from the same client are always sent to the same instance.",
+   "C": "Store the client information and capabilities received in the first request in the instance's memory and reuse them for subsequent requests.",
+   "D": "Assign a conversation session to each connection, and discard the state of the jobs belonging to that connection when it disconnects."
+  }
+ }
+]

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-label="client tool은 앱에서, server tool은 Anthropic 인프라에서 실행된다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>client tool은 앱에서, server tool은 Anthropic 인프라에서 실행된다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-client-vs-server-tools" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect x="20" y="30" width="300" height="380" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170" y="54" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">앱 · 사내 인프라</text>
+<rect x="580" y="30" width="300" height="380" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="730" y="54" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Anthropic 인프라</text>
+<rect x="45" y="74" width="250" height="180" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170.0" y="168.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">앱</text>
+<rect x="605" y="74" width="250" height="180" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="730.0" y="168.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Claude</text>
+<polyline points="295,104 603,104" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<rect x="314.61538461538464" y="84" width="268.7692307692308" height="16" fill="#FFFFFF"/>
+<text x="449" y="96" font-size="12" fill="#1F2937" text-anchor="middle">① 요청: tools에 client·server tool 선언</text>
+<polyline points="603,144 297,144" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<rect x="361.9230769230769" y="124" width="174.15384615384616" height="16" fill="#FFFFFF"/>
+<text x="449" y="136" font-size="12" fill="#1F2937" text-anchor="middle">② tool_use (client tool)</text>
+<polyline points="295,184 603,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<rect x="400.0" y="164" width="98.0" height="16" fill="#FFFFFF"/>
+<text x="449" y="176" font-size="12" fill="#1F2937" text-anchor="middle">④ tool_result</text>
+<polyline points="603,230 297,230" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<rect x="319.2307692307692" y="210" width="259.53846153846155" height="16" fill="#FFFFFF"/>
+<text x="449" y="222" font-size="12" fill="#1F2937" text-anchor="middle">(c) server tool 결과가 같은 응답에 포함</text>
+<rect x="317.2307692307692" y="235" width="263.53846153846155" height="15" fill="#FFFFFF"/>
+<text x="449" y="246" font-size="11" fill="#6B7280" text-anchor="middle">앱은 실행하지도, tool_result를 보내지도 않음</text>
+<rect x="45" y="300" width="250" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="170.0" y="327.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">client tools</text>
+<text x="170.0" y="343.5" font-size="12" fill="#1F2937" text-anchor="middle">직접 정의한 tool,</text>
+<text x="170.0" y="359.5" font-size="12" fill="#1F2937" text-anchor="middle">bash, text_editor</text>
+<text x="170.0" y="375.5" font-size="12" fill="#1F2937" text-anchor="middle">사내 시스템(SIEM) 접근</text>
+<rect x="605" y="300" width="250" height="96" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="730.0" y="335.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">server tools</text>
+<text x="730.0" y="351.5" font-size="12" fill="#1F2937" text-anchor="middle">web_search, web_fetch,</text>
+<text x="730.0" y="367.5" font-size="12" fill="#1F2937" text-anchor="middle">code_execution, tool_search</text>
+<polyline points="140,254 140,298" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<rect x="142" y="269" width="71.03846153846155" height="15" fill="#FFFFFF"/>
+<text x="146" y="280" font-size="11" fill="#1F2937" text-anchor="start">③ 앱이 실행</text>
+<polyline points="200,298 200,256" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<polyline points="700,254 700,298" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<rect x="642.6153846153846" y="269" width="55.38461538461539" height="15" fill="#FFFFFF"/>
+<text x="694" y="280" font-size="11" fill="#1F2937" text-anchor="end">(a) 실행</text>
+<polyline points="760,298 760,256" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-client-vs-server-tools)"/>
+<rect x="762" y="269" width="55.38461538461539" height="15" fill="#FFFFFF"/>
+<text x="766" y="280" font-size="11" fill="#1F2937" text-anchor="start">(b) 결과</text>
+<rect x="20" y="430" width="860" height="74" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="454.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답</text>
+<text x="450.0" y="470.5" font-size="12" fill="#1F2937" text-anchor="middle">server tool은 앱이 실행 / client tool은 Anthropic에서 실행  |  server tool은 MCP·Batch API 전용</text>
+<text x="450.0" y="486.5" font-size="12" fill="#1F2937" text-anchor="middle">사내 시스템을 server tool로 연결 (사용자가 정의할 수 없고 사내망에 닿지 않음)</text>
+</svg>

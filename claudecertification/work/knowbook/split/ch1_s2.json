@@ -1,0 +1,817 @@
+[
+ {
+  "row": "| 단계 고정 · 순서 동일 · 모든 입력에서 동일 | 결정론적 workflow (prompt chaining)<br>모델은 필요한 지점에서만 호출 |",
+  "ids": [
+   "Amey-0004",
+   "Amey-0023",
+   "Udemy-0053",
+   "CCAR-F-Amey-Thakur-0011",
+   "CCAR-F-Amey-Thakur-0051",
+   "CCAR-P-Amey-Thakur-0005",
+   "CCAR-P-jrajath94-0013"
+  ]
+ },
+ {
+  "row": "| 고정 단계 사이 검증 필요 | 단계 사이 validation gate<br>(programmatic · schema check) |",
+  "ids": [
+   "Patrick-0012",
+   "Patrick-0022",
+   "CCAR-F-Amey-Thakur-0051",
+   "CCAR-F-Udemy01-0055",
+   "CCAR-P-jrajath94-0013"
+  ]
+ },
+ {
+  "row": "| 매핑 고정 형식 변환 | deterministic script<br>해석 필요 시 schema 둔 단일 호출<br>agent loop ✗ |",
+  "ids": [
+   "Preporato-0016",
+   "CCAR-F-Amey-Thakur-0016",
+   "CCAR-P-jrajath94-0118",
+   "CCAR-P-jrajath94-0110"
+  ]
+ },
+ {
+  "row": "| 중간 결과를 봐야 다음 단계 결정 | agent |",
+  "ids": [
+   "Amey-0024",
+   "CCAR-F-Udemy04-0028",
+   "CCAR-P-jrajath94-0117",
+   "CCAR-P-jrajath94-0337"
+  ]
+ },
+ {
+  "row": "| 입력마다 조사 · subtask가 다름<br>+ 결과 통합 필요 | orchestrator-workers<br>(orchestrator가 동적 분해 · 위임 · 통합) |",
+  "ids": [
+   "Udemy-0006",
+   "CCAR-F-Udemy02-0009",
+   "CCAR-P-jrajath94-0015"
+  ]
+ },
+ {
+  "row": "| 입력 유형별 다른 처리로 보내기만 | routing |",
+  "ids": [
+   "Udemy-0006",
+   "CCAR-F-Udemy02-0007",
+   "CCAR-P-jrajath94-0124"
+  ]
+ },
+ {
+  "row": "| 같은 작업을 여러 관점으로 돌려 확신도 향상 | parallelization (voting) |",
+  "ids": [
+   "Udemy-0006"
+  ]
+ },
+ {
+  "row": "| 명확한 평가 기준 + 하나의 출력 반복 개선 | evaluator-optimizer |",
+  "ids": [
+   "Udemy-0053",
+   "CCAR-F-Udemy06-0022",
+   "CCAR-P-jrajath94-0340"
+  ]
+ },
+ {
+  "row": "| 독립 문서 여러 개 → 단일 agent 컨텍스트 초과 | orchestrator가 문서별 subagent 병렬 실행<br>→ 요약만 받아 통합 |",
+  "ids": [
+   "Preporato-0019",
+   "CCAR-F-Udemy03-0043",
+   "CCAR-P-jrajath94-0015"
+  ]
+ },
+ {
+  "row": "| 대량 자료 읽는 전문 검사 위임<br>+ 부모 컨텍스트 보호 | subagent로 격리<br>부모에는 최종 결과만 |",
+  "ids": [
+   "Udemy-0004",
+   "Amey-0041",
+   "CCAR-F-Udemy01-0011",
+   "CCAR-F-Udemy01-0036"
+  ]
+ },
+ {
+  "row": "| subagent 도입 후 품질 저하 | handoff prompt에 빠진 컨텍스트 명시 |",
+  "ids": [
+   "Amey-0025",
+   "CCAR-F-Udemy04-0048",
+   "CCAR-F-Udemy01-0018"
+  ]
+ },
+ {
+  "row": "| `stop_reason: \"tool_use\"` | tool 실행 → `tool_result` 추가 → API 재호출 |",
+  "ids": [
+   "Amey-0005",
+   "Patrick-0038",
+   "CCAR-F-paullarionov-0058",
+   "CCAR-F-Udemy04-0014"
+  ]
+ },
+ {
+  "row": "| `stop_reason: \"end_turn\"` + `tool_use` 없음 | 턴 완료 → content 반환 |",
+  "ids": [
+   "Amey-0036",
+   "CCAR-F-paullarionov-0058",
+   "CCAR-F-Udemy03-0060",
+   "CCAR-F-Udemy04-0014"
+  ]
+ },
+ {
+  "row": "| loop 종료 시점 | success condition<br>(또는 `tool_use` 아님)<br>+ step ceiling(최대 반복 cap) |",
+  "ids": [
+   "Amey-0060",
+   "Patrick-0038",
+   "CCAR-F-Amey-Thakur-0013",
+   "CCAR-F-Udemy05-0045",
+   "CCAR-P-jrajath94-0023"
+  ]
+ },
+ {
+  "row": "| step ceiling 이유 | 비수렴 시 피해 · 비용 제한 |",
+  "ids": [
+   "Amey-0026",
+   "CCAR-F-Amey-Thakur-0013",
+   "CCAR-P-jrajath94-0337"
+  ]
+ },
+ {
+  "row": "| 오래전 결정 유지 | compaction과 무관한 명시적 state |",
+  "ids": [
+   "Amey-0073",
+   "CCAR-F-Amey-Thakur-0066"
+  ]
+ },
+ {
+  "row": "| tool 목적 겹침 | 잘못된 tool 선택 증가 → 겹침 제거 |",
+  "ids": [
+   "Amey-0059",
+   "CCAR-F-Udemy04-0028"
+  ]
+ },
+ {
+  "row": "| 파일 · shell · context 관리 · permission<br>갖춘 agent (loop 구현 없이) | Claude Agent SDK |",
+  "ids": [
+   "Patrick-0039",
+   "Preporato-0017",
+   "Udemy-0019"
+  ]
+ },
+ {
+  "row": "| 인프라 운영 없이 최단 production | Managed Agents |",
+  "ids": [
+   "Preporato-0018",
+   "Udemy-0019",
+   "Udemy-0051"
+  ]
+ },
+ {
+  "row": "| 실행 환경 · 세션 로그 모두 자사 인프라 | Agent SDK를 자사 프로세스에서 실행<br>(self-hosted) |",
+  "ids": [
+   "Udemy-0051",
+   "Preporato-0018"
+  ]
+ },
+ {
+  "row": "| durable execution · human-in-the-loop<br>· state 영속화 필요한 장시간 agent | LangGraph 등 orchestration 프레임워크 |",
+  "ids": [
+   "Udemy-0014"
+  ]
+ },
+ {
+  "row": "| 실시간성 불필요 대량 일괄 처리 | Message Batches API (agent 용도 ✗) |",
+  "ids": [
+   "Patrick-0039",
+   "Udemy-0051",
+   "CCAR-F-Udemy01-0021"
+  ]
+ },
+ {
+  "row": "| 각 단계는 정상인데 최종 인용이 주장을 못 뒷받침 | handoff에서 출처 소실<br>→ 본문 + metadata 분리 구조화 레코드 |",
+  "ids": [
+   "CCAR-F-Amey-Thakur-0003",
+   "CCAR-F-Udemy04-0024",
+   "CCAR-F-Udemy06-0011"
+  ]
+ },
+ {
+  "row": "| 통합 subagent 결과가 일반론 · 출처 없음 | 위임 prompt에 조사 결과 · 출처 직접 삽입<br>양 많으면 파일 저장 → 경로 전달 |",
+  "ids": [
+   "CCAR-F-Udemy04-0048",
+   "CCAR-F-Udemy01-0018",
+   "CCAR-F-Udemy03-0037",
+   "CCAR-F-Udemy06-0011",
+   "Amey-0025",
+   "Udemy-0004"
+  ]
+ },
+ {
+  "row": "| 조건 다른 값이 한 경향으로 묶임 | 구조화 근거 레코드 반환<br>통합 전 필수 metadata 검증 |",
+  "ids": [
+   "CCAR-F-Udemy01-0003",
+   "CCAR-F-Udemy02-0012"
+  ]
+ },
+ {
+  "row": "| subagent 직접 통신 → 실패 간과 · 중복 · 추적 불가 | 모든 통신 coordinator 경유 |",
+  "ids": [
+   "CCAR-F-Udemy04-0043",
+   "Preporato-0019",
+   "CCAR-P-jrajath94-0016"
+  ]
+ },
+ {
+  "row": "| 통합 결과가 품질 기준 미달 | coordinator가 평가 → 부족분만 재위임<br>→ 통합 재호출 (반복 상한 + 미해결 주석) |",
+  "ids": [
+   "CCAR-F-Udemy04-0009",
+   "CCAR-F-Udemy06-0022",
+   "CCAR-P-jrajath94-0340"
+  ]
+ },
+ {
+  "row": "| 검색 subagent 일시 네트워크 오류 | subagent 내 재시도<br>→ 실패 시 오류 · 확보 정보원 구조화 반환 |",
+  "ids": [
+   "CCAR-F-Udemy01-0005"
+  ]
+ },
+ {
+  "row": "| 긴 조사로 메인 context 오염 | 읽기 전용 subagent에 위임<br>→ 경로 · 줄번호 요약만 반환 |",
+  "ids": [
+   "CCAR-F-Udemy01-0011",
+   "CCAR-F-Udemy01-0036",
+   "Udemy-0004",
+   "Amey-0041"
+  ]
+ },
+ {
+  "row": "| 생성자와 독립된 리뷰 필요 | 새 session 또는 reviewer subagent<br>(diff · 사양 · 기준만 전달) · fork ✗ |",
+  "ids": [
+   "CCAR-F-Udemy05-0054"
+  ]
+ },
+ {
+  "row": "| 병렬 worker가 덮어쓰기 · 중복 | 겹치지 않는 범위 + 고유 키 저장소<br>+ orchestrator 마지막 병합 |",
+  "ids": [
+   "CCAR-P-jrajath94-0016"
+  ]
+ },
+ {
+  "row": "| worker 의견 충돌 | contract 불일치 규칙 (critic · arbiter)<br>적용 · 기록 |",
+  "ids": [
+   "CCAR-P-jrajath94-0122",
+   "CCAR-P-jrajath94-0285",
+   "CCAR-P-jrajath94-0401",
+   "CCAR-P-jrajath94-0402"
+  ]
+ },
+ {
+  "row": "| 단순 질문에도 전 subagent 호출 | 고정 순서 폐기 · 필요한 subagent만<br>subagent 설명에 호출 조건 명시 |",
+  "ids": [
+   "CCAR-F-Udemy05-0036",
+   "CCAR-F-Udemy02-0007",
+   "CCAR-F-Udemy03-0003"
+  ]
+ },
+ {
+  "row": "| 경미한 확인마다 막힘 + 역할 중복 | 좁은 `verify_fact` tool만 부여<br>범위 넘는 조사 = coordinator로 반환 |",
+  "ids": [
+   "CCAR-F-Udemy01-0048"
+  ]
+ },
+ {
+  "row": "| 사용자가 사람 대응을 명시 요구 | 난이도 무관 즉시 사람 review |",
+  "ids": [
+   "CCAR-F-Udemy01-0060"
+  ]
+ },
+ {
+  "row": "| 인수 담당자가 대화 기록 못 봄 | 구조화 handoff 요약<br>(ID · 원인 · 시도 · 권장 조치 + 근거) |",
+  "ids": [
+   "CCAR-F-Udemy05-0010"
+  ]
+ },
+ {
+  "row": "| 정형 · 반복 점검 (항목 고정) | 고정 순차 chain |",
+  "ids": [
+   "CCAR-F-Udemy04-0008",
+   "CCAR-F-Udemy06-0029",
+   "CCAR-P-jrajath94-0463",
+   "Udemy-0053"
+  ]
+ },
+ {
+  "row": "| 범위 미정 조사 · 원인 탐색 · 레거시 전반 작업 | 동적 분해<br>(구조 파악 → 우선순위 → 갱신) |",
+  "ids": [
+   "CCAR-F-Udemy04-0008",
+   "CCAR-F-Udemy04-0022",
+   "CCAR-F-Udemy05-0019",
+   "CCAR-F-Udemy06-0038",
+   "CCAR-F-preporato-0012",
+   "CCAR-P-jrajath94-0117",
+   "Udemy-0006"
+  ]
+ },
+ {
+  "row": "| 한 도구에 정형 + 조사 의뢰 공존 | 유형 판정 후 분기<br>(정형 = chain · 조사 = 동적) |",
+  "ids": [
+   "CCAR-F-Udemy04-0008",
+   "CCAR-F-Udemy06-0029",
+   "CCAR-P-jrajath94-0118"
+  ]
+ },
+ {
+  "row": "| 열린 조사에 동적 분해 적용 | 모델 바깥에서 강제하는 한도 병행 |",
+  "ids": [
+   "CCAR-F-preporato-0012",
+   "CCAR-P-jrajath94-0337",
+   "CCAR-P-jrajath94-0023"
+  ]
+ },
+ {
+  "row": "| 대량 파일 검토 + 중간 산출물 로그 필요 | 파일 단위 호출 chain + 통합 호출 |",
+  "ids": [
+   "CCAR-F-Udemy01-0055"
+  ]
+ },
+ {
+  "row": "| 고정 순서 chain에서 오류 누적 · 지연 합산 | 독립 조각 병렬 · 재작성 제거<br>확실한 작업 = deterministic code<br>병합에 validation gate |",
+  "ids": [
+   "CCAR-P-jrajath94-0116"
+  ]
+ },
+ {
+  "row": "| subagent 정상 + 보고서 영역 누락 | coordinator 분해 범위 점검 (좁은 분해) |",
+  "ids": [
+   "CCAR-F-MyPractice-0004",
+   "CCAR-F-paullarionov-0004"
+  ]
+ },
+ {
+  "row": "| agent 간 결과 중복 · token 증가 | 위임 전 조사 영역 분할<br>담당 · 비담당 범위 기재 |",
+  "ids": [
+   "CCAR-F-MyPractice-0011",
+   "CCAR-F-paullarionov-0011",
+   "CCAR-F-Udemy03-0043",
+   "CCAR-F-Udemy06-0026",
+   "CCAR-P-jrajath94-0016"
+  ]
+ },
+ {
+  "row": "| 정보원별 분해 + 주제 영역 누락 | 주제 영역별 분해로 축 변경 |",
+  "ids": [
+   "CCAR-F-Udemy05-0025"
+  ]
+ },
+ {
+  "row": "| 낯선 주제 포괄성 낮음 | 사전 광범위 탐색 + 공백에만 2차 할당 |",
+  "ids": [
+   "CCAR-F-Udemy03-0050",
+   "CCAR-F-Udemy02-0045"
+  ]
+ },
+ {
+  "row": "| 독립 관점 · 항목 다수 | sectioning 병렬 → 집계 |",
+  "ids": [
+   "Preporato-0019",
+   "CCAR-F-Udemy02-0024",
+   "CCAR-F-Udemy03-0016",
+   "CCAR-P-jrajath94-0123",
+   "CCAR-P-jrajath94-0289"
+  ]
+ },
+ {
+  "row": "| 독립 작업 + 합류 작업 | 독립 병렬 → fan-in → 합류 작업 순차 |",
+  "ids": [
+   "CCAR-F-preporato-0005",
+   "CCAR-F-Udemy04-0054",
+   "CCAR-P-jrajath94-0286",
+   "CCAR-P-jrajath94-0402",
+   "Preporato-0019"
+  ]
+ },
+ {
+  "row": "| 의존 관계가 주어진 일정 · 절차 | 의존 쌍은 순차 · 나머지만 병렬 |",
+  "ids": [
+   "CCAR-P-jrajath94-0339",
+   "CCAR-P-jrajath94-0465",
+   "CCAR-P-jrajath94-0466",
+   "CCAR-P-jrajath94-0528",
+   "CCAR-F-Udemy04-0054"
+  ]
+ },
+ {
+  "row": "| 독립 위임 여러 개 | 한 응답에 Agent tool 호출 동시 출력 |",
+  "ids": [
+   "CCAR-F-Udemy04-0054",
+   "CCAR-F-Udemy01-0028"
+  ]
+ },
+ {
+  "row": "| 순차 대화 · 라운드 의존 · 얽힌 작업 | 단일 agent (fan-out ✗) |",
+  "ids": [
+   "CCAR-P-jrajath94-0066",
+   "CCAR-P-jrajath94-0120",
+   "CCAR-P-jrajath94-0607"
+  ]
+ },
+ {
+  "row": "| 단계별 공유 문서 편집 | 하나의 thread · 고정 순서 · 단계별 확인 |",
+  "ids": [
+   "CCAR-P-jrajath94-0607"
+  ]
+ },
+ {
+  "row": "| 한 문의에 여러 용건 | 이슈별 분해 → 공유 context 병렬 조사 → 종합 |",
+  "ids": [
+   "CCAR-F-Udemy05-0035",
+   "CCAR-F-MyPractice-0048",
+   "CCAR-F-paullarionov-0048"
+  ]
+ },
+ {
+  "row": "| 유형별 처리가 다른 입력 | route 먼저 · 유형별 경로 |",
+  "ids": [
+   "CCAR-P-jrajath94-0124",
+   "CCAR-F-Udemy02-0007",
+   "CCAR-F-Udemy03-0003"
+  ]
+ },
+ {
+  "row": "| 단순 요청에도 전 전문 agent 호출 | triage + 해당 agent에만 routing<br>단순 확인은 직접 답변 |",
+  "ids": [
+   "CCAR-F-Udemy03-0003",
+   "CCAR-F-Udemy02-0007",
+   "CCAR-F-Udemy05-0036"
+  ]
+ },
+ {
+  "row": "| 질의 형태 혼재 (현재값 + 독립 문서 다수) | 현재값 = 도구 호출 · 문서 = fan-out + 병합 gate |",
+  "ids": [
+   "CCAR-P-jrajath94-0125"
+  ]
+ },
+ {
+  "row": "| 독립 조각 + 품질 편차 | fan-out + critique(점검자 · 기준) → 병합 |",
+  "ids": [
+   "CCAR-P-jrajath94-0289",
+   "CCAR-P-jrajath94-0340",
+   "CCAR-P-jrajath94-0529"
+  ]
+ },
+ {
+  "row": "| 병합 숫자 · 인용 정합 필요 | 코드 검사 gate · 인용은 생성 시점에 부착 |",
+  "ids": [
+   "CCAR-P-jrajath94-0123",
+   "CCAR-P-jrajath94-0403"
+  ]
+ },
+ {
+  "row": "| 대규모 번역 · 용어 일관 | 병렬 fan-out + 공통 용어집 주입 + 계층적 병합 |",
+  "ids": [
+   "CCAR-P-jrajath94-0021"
+  ]
+ },
+ {
+  "row": "| 무한 loop · tool 왕복 · 결론 불가 | 종료 장치 설계: 반복 예산 · 반복 호출 감지 · escalation |",
+  "ids": [
+   "CCAR-F-Amey-Thakur-0001",
+   "CCAR-F-Amey-Thakur-0013",
+   "CCAR-P-jrajath94-0023",
+   "Amey-0026"
+  ]
+ },
+ {
+  "row": "| loop 계속 · 종료 판정 | `stop_reason` 확인 (문구 · text 유무 ✗) |",
+  "ids": [
+   "CCAR-F-paullarionov-0058",
+   "CCAR-F-Udemy04-0014",
+   "CCAR-F-Udemy05-0017",
+   "CCAR-F-Udemy06-0023",
+   "Patrick-0038"
+  ]
+ },
+ {
+  "row": "| 반복 횟수 상한 | 안전장치로만 사용 · 도달 시 미완료 기록 + escalation |",
+  "ids": [
+   "CCAR-F-Udemy05-0045",
+   "CCAR-F-Udemy06-0023",
+   "CCAR-P-jrajath94-0023",
+   "Patrick-0038"
+  ]
+ },
+ {
+  "row": "| token · 비용 예산 | 코드가 `usage` 누적 측정 → 초과 시 중단<br>약 80%에서 마무리 지시 주입 |",
+  "ids": [
+   "CCAR-F-preporato-0013"
+  ]
+ },
+ {
+  "row": "| 무인 Agent SDK 실행 | `max_turns` · `max_budget_usd` + `subtype` 확인<br>+ `session_id` resume |",
+  "ids": [
+   "CCAR-F-Udemy01-0045"
+  ]
+ },
+ {
+  "row": "| 단계 미정 + 세션별 고정 지출 상한 | agent loop + `session budget` |",
+  "ids": [
+   "CCAR-P-jrajath94-0603"
+  ]
+ },
+ {
+  "row": "| 후속 요청 400 · 같은 tool 반복 요청 | assistant `tool_use` turn<br>+ 바로 다음 user `tool_result` 확인 |",
+  "ids": [
+   "CCAR-F-preporato-0009",
+   "CCAR-F-Udemy03-0019"
+  ]
+ },
+ {
+  "row": "| `stop_reason: \"pause_turn\"` | 응답을 assistant turn으로 보내 이어감 |",
+  "ids": [
+   "CCAR-F-preporato-0010"
+  ]
+ },
+ {
+  "row": "| 독립 tool 호출이 순차 처리됨 | 한 turn에 묶어 발행 + 결과를 한 user 메시지로 반환 |",
+  "ids": [
+   "CCAR-F-Udemy01-0028"
+  ]
+ },
+ {
+  "row": "| 같은 유형인데 필요한 대응이 건마다 다름 | 고정 경로 ✗ · `tool_choice` `auto` + loop |",
+  "ids": [
+   "CCAR-F-Udemy03-0060",
+   "CCAR-F-Udemy04-0028"
+  ]
+ },
+ {
+  "row": "| \"확실히 막는다\" · 예외 불인정 | 모델 밖 강제: `PreToolUse` hook · gate · tool 구현 검증 |",
+  "ids": [
+   "CCAR-F-Udemy02-0010",
+   "CCAR-F-Udemy06-0050",
+   "CCAR-P-jrajath94-0067",
+   "CCAR-P-jrajath94-0069"
+  ]
+ },
+ {
+  "row": "| prompt에 규칙이 있는데 위반 발생 | hook · gate 추가 (prompt 강조 ✗) |",
+  "ids": [
+   "CCAR-F-Udemy06-0050",
+   "CCAR-F-Udemy04-0002",
+   "CCAR-P-jrajath94-0067",
+   "CCAR-P-jrajath94-0069"
+  ]
+ },
+ {
+  "row": "| 선행 단계 미완료 시 후속 tool 차단 | 검증된 결과(ID)를 조건으로 한 programmatic precondition |",
+  "ids": [
+   "CCAR-F-Udemy04-0005",
+   "CCAR-F-paullarionov-0051"
+  ]
+ },
+ {
+  "row": "| 비가역 · 금전 · 고객 발송 | 사람 승인 · gate · 되돌림 장치 (모델은 제안) |",
+  "ids": [
+   "CCAR-F-Amey-Thakur-0053",
+   "CCAR-P-jrajath94-0067",
+   "CCAR-P-jrajath94-0115"
+  ]
+ },
+ {
+  "row": "| 단계 간 값 의존 | 다음 단계 전 코드 검사 → 실패 시 체인 중단 |",
+  "ids": [
+   "CCAR-P-jrajath94-0609"
+  ]
+ },
+ {
+  "row": "| 결과 즉시 필요 vs 지연 가능 대량 | 동기 Messages API vs Batches + `custom_id` |",
+  "ids": [
+   "CCAR-F-Udemy01-0021"
+  ]
+ },
+ {
+  "row": "| 디버깅 · 실패 진단 | 단계별 trace |",
+  "ids": [
+   "CCAR-F-Amey-Thakur-0017",
+   "CCAR-F-Amey-Thakur-0054"
+  ]
+ },
+ {
+  "row": "| 지역별 정책 혼입 | tag + retrieval 필터링 |",
+  "ids": [
+   "CCAR-P-preporato-0005"
+  ]
+ },
+ {
+  "row": "| 순서 고정 · 입력 일정 · 규칙 알려짐 | deterministic 구현<br>모델은 모호한 부분에만 |",
+  "ids": [
+   "CCAR-F-Amey-Thakur-0016",
+   "CCAR-P-jrajath94-0118",
+   "Amey-0004",
+   "Amey-0040",
+   "Preporato-0016"
+  ]
+ },
+ {
+  "row": "| 고정 경로 + 열린 단계 1개 | augmented LLM (도구 가진 workflow)<br>loop 통제 불필요 |",
+  "ids": [
+   "CCAR-P-jrajath94-0018"
+  ]
+ },
+ {
+  "row": "| 검색 1회 + 판단 1회로 종결 | augmented single call |",
+  "ids": [
+   "CCAR-P-jrajath94-0400"
+  ]
+ },
+ {
+  "row": "| 단계를 실행 전엔 모름<br>각 발견이 다음 단계 결정 | agentic loop + step 상한 · 중지 규칙 |",
+  "ids": [
+   "Amey-0024",
+   "CCAR-F-preporato-0012",
+   "CCAR-P-jrajath94-0117",
+   "CCAR-P-jrajath94-0337"
+  ]
+ },
+ {
+  "row": "| 같은 순서 · 같은 trace 요구 | deterministic workflow |",
+  "ids": [
+   "CCAR-P-jrajath94-0463",
+   "CCAR-P-Amey-Thakur-0005",
+   "CCAR-P-Amey-Thakur-0045",
+   "Amey-0040"
+  ]
+ },
+ {
+  "row": "| 고정 단계 + 소수(3~10%) 모호 사례 | hybrid<br>(workflow → agent 호출 → workflow 복귀) |",
+  "ids": [
+   "CCAR-P-jrajath94-0336",
+   "CCAR-P-jrajath94-0399",
+   "CCAR-P-jrajath94-0462",
+   "CCAR-P-jrajath94-0525"
+  ]
+ },
+ {
+  "row": "| 열린 평가 + 고정 형식 발행 | agentic loop → schema 계약 → workflow 발행 |",
+  "ids": [
+   "CCAR-P-jrajath94-0284"
+  ]
+ },
+ {
+  "row": "| 고정 사례 + 열린 사례 혼재<br>+ 비용 · 안전 제약 | 고정 = 규칙 · 열린 = Claude<br>모든 출력 code gate |",
+  "ids": [
+   "CCAR-P-jrajath94-0107",
+   "CCAR-P-jrajath94-0115",
+   "CCAR-P-jrajath94-0282",
+   "CCAR-P-jrajath94-0521"
+  ]
+ },
+ {
+  "row": "| 비용 절감 + precision 하한 | lane 분기 (tier 상향 ✗) |",
+  "ids": [
+   "CCAR-P-jrajath94-0110"
+  ]
+ },
+ {
+  "row": "| 정확해야 하는 합계 · 날짜 규칙 | 코드로 분리<br>Claude = 검증된 값 둘러싼 글쓰기 |",
+  "ids": [
+   "CCAR-P-jrajath94-0126"
+  ]
+ },
+ {
+  "row": "| 쓰기 통제권 유지 | 앱 코드가 쓰기 · 모델은 판단 1회 |",
+  "ids": [
+   "CCAR-P-jrajath94-0602"
+  ]
+ },
+ {
+  "row": "| 작은 작업에 subagent 다수<br>→ 느리고 비쌈 | 단일 호출 + 가벼운 검증으로 축소 |",
+  "ids": [
+   "CCAR-F-preporato-0011"
+  ]
+ },
+ {
+  "row": "| 여러 팀 소유 super-agent<br>→ 실패 귀속 불가 | 경계 agent + 계약 + 얇은 orchestrator<br>+ agent별 eval · 버전 관리 |",
+  "ids": [
+   "CCAR-P-jrajath94-0070"
+  ]
+ },
+ {
+  "row": "| 지어낸 설명 · tenant 유출 0건 요구 | 구조적 통제<br>(결정 기록 조회 · tenant 범위 credential) |",
+  "ids": [
+   "CCAR-P-jrajath94-0065",
+   "CCAR-P-jrajath94-0069"
+  ]
+ },
+ {
+  "row": "| 되돌릴 수 없는 부수 효과 | 효과 전 사람 검토 (전체 context 제공) |",
+  "ids": [
+   "CCAR-P-jrajath94-0283",
+   "CCAR-P-jrajath94-0115",
+   "CCAR-F-Amey-Thakur-0053",
+   "CCAR-F-Amey-Thakur-0015"
+  ]
+ },
+ {
+  "row": "| 되돌릴 수 있음 + 대외적 난처함 | 코드 검사 + 사람 표본 검토 |",
+  "ids": [
+   "CCAR-P-jrajath94-0523"
+  ]
+ },
+ {
+  "row": "| trust boundary 위치 | 비신뢰 입력 진입점 · 모델 → 부수 효과 지점 |",
+  "ids": [
+   "CCAR-P-jrajath94-0524"
+  ]
+ },
+ {
+  "row": "| 돌아온 사용자의 대화 이어가기 | resume |",
+  "ids": [
+   "CCAR-F-preporato-0004"
+  ]
+ },
+ {
+  "row": "| 같은 시점에서 독립 탐색 · 원본 불변 | resume + fork 옵션<br>+ 새 session ID 추적 |",
+  "ids": [
+   "CCAR-F-Udemy02-0037",
+   "CCAR-F-Udemy03-0012",
+   "CCAR-F-Udemy05-0014",
+   "CCAR-F-Udemy02-0043",
+   "CCAR-F-preporato-0004"
+  ]
+ },
+ {
+  "row": "| fork 분기에서 파일도 독립 | 별도 작업 복사본 · checkpoint로 되돌림 |",
+  "ids": [
+   "CCAR-F-Udemy02-0043"
+  ]
+ },
+ {
+  "row": "| 이전 분석 유효 + 일부 파일 변경 | resume + 변경 파일 구체 전달 |",
+  "ids": [
+   "CCAR-F-Udemy05-0027",
+   "CCAR-F-Udemy04-0055",
+   "CCAR-F-Udemy06-0027"
+  ]
+ },
+ {
+  "row": "| 대규모 변경 후 재개 | 구조화 요약 → 새 session |",
+  "ids": [
+   "CCAR-F-Udemy04-0055",
+   "CCAR-F-Udemy06-0027",
+   "CCAR-F-Udemy06-0059"
+  ]
+ },
+ {
+  "row": "| Claude Code 병행 조사 여러 개 | `/rename` → `claude --resume <name>` |",
+  "ids": [
+   "CCAR-F-Udemy04-0031",
+   "CCAR-F-Udemy06-0027",
+   "CCAR-F-Udemy05-0027"
+  ]
+ },
+ {
+  "row": "| crash 복구 · 로컬 session 보존 불확실 | JSON state manifest 영속화 · 재시작 시 주입 |",
+  "ids": [
+   "CCAR-F-Udemy02-0036"
+  ]
+ },
+ {
+  "row": "| coordinator가 subagent에 위임 ✗ | `agents` 정의 + `allowedTools`에 `Agent`<br>+ 구체적 `description` |",
+  "ids": [
+   "CCAR-F-Udemy01-0059",
+   "CCAR-F-Udemy06-0002",
+   "CCAR-F-Udemy02-0038"
+  ]
+ },
+ {
+  "row": "| 무인 실행이 위임 승인 대기에서 정지 | `allowedTools`에 위임 tool<br>+ `canUseTool` callback |",
+  "ids": [
+   "CCAR-F-Udemy02-0042"
+  ]
+ },
+ {
+  "row": "| subagent별 권한 분리 · 읽기 전용 | `AgentDefinition.tools` |",
+  "ids": [
+   "CCAR-F-Udemy02-0038",
+   "CCAR-F-Udemy03-0038",
+   "CCAR-F-Udemy01-0048"
+  ]
+ },
+ {
+  "row": "| agent가 역할 밖 행동 반복 | 역할별 tool 제한 · 추가 조회는 coordinator 경유 |",
+  "ids": [
+   "CCAR-F-Udemy03-0038",
+   "CCAR-F-Udemy01-0048"
+  ]
+ },
+ {
+  "row": "| 서로 다른 형식의 tool 결과 정규화 | PostToolUse hook + `updatedToolOutput` |",
+  "ids": [
+   "CCAR-F-MyPractice-0059",
+   "CCAR-F-paullarionov-0059",
+   "CCAR-F-Udemy02-0017",
+   "CCAR-F-Udemy05-0038"
+  ]
+ },
+ {
+  "row": "| 모델에 금지 항목 전달 금지 | PostToolUse로 제거 또는 server 응답에서 제외 |",
+  "ids": [
+   "CCAR-F-Udemy04-0002"
+  ]
+ }
+]

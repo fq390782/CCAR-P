@@ -1,0 +1,43 @@
+{
+  "chapters": {
+    "1": "Agents and Workflows",
+    "2": "Applications and Integration",
+    "3": "Claude Code & Developer Productivity",
+    "4": "Eval, Testing, Observability & Debugging",
+    "5": "Model Selection and Optimization",
+    "6": "Prompt, Structured Output & Context Engineering",
+    "7": "Security, Safety & Governance",
+    "8": "Tools and MCPs",
+    "9": "RAG & Retrieval",
+    "10": "Reliability, Escalation & Human Oversight",
+    "11": "Solution Design & Stakeholder Communication"
+  },
+  "map": {
+    "CCDV-F": {
+      "1. Agents and Workflows": [1],
+      "2. Applications and Integration": [2, 11],
+      "3. Claude Code": [3],
+      "4. Eval, Testing, and Debugging": [4],
+      "5. Model Selection and Optimization": [5],
+      "6. Prompt and Context Engineering": [6],
+      "7. Security and Safety": [7],
+      "8. Tools and MCPs": [8]
+    },
+    "CCAR-F": {
+      "1. Agentic Architecture & Orchestration": [1],
+      "2. Tool Design & MCP Integration": [8],
+      "3. Claude Code Configuration & Workflows": [3],
+      "4. Prompt Engineering & Structured Output": [6, 2, 4],
+      "5. Context Management & Reliability": [10, 6]
+    },
+    "CCAR-P": {
+      "1. Solution Design & Architecture": [11, 1],
+      "2. Claude Models, Prompting & Context Engineering": [5, 6],
+      "3. Integration": [9, 8, 2, 4],
+      "4. Evaluation, Testing & Optimization": [4, 5],
+      "5. Governance, Safety & Risk Management": [7, 10],
+      "6. Stakeholder Communication & Lifecycle Management": [11],
+      "7. Developer Productivity & Operational Enablement": [3]
+    }
+  }
+}

@@ -1,0 +1,291 @@
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q15</span><span class="constraint">D1</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A market-research team wants a 30-page industry report generated from 200 source documents. A single prompt ("write the report") produces shallow, repetitive output that misses key sources.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the report must synthesize all 200 sources with depth in each section.</div>
+<div class="qb-ask">Which decomposition approach fixes the shallow output?</div>
+<ol class="qb-opts" type="A"><li>Reduce the source set to 20 documents so one prompt can handle it.</li>
+<li>Use a larger context window and repeat the same single prompt.</li>
+<li>Decompose: a planner outlines sections, researcher subagents gather evidence per section in parallel, then a synthesizer writes the full report from the gathered evidence.</li>
+<li>Ask the model to write the report one page at a time with no plan.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p17" data-kind="prose"><strong>Why C is correct:</strong> Decomposition matches the work to the model's strengths. First, plan the structure. Then, gather evidence for each section in parallel. After that, synthesize the information. Each step has a manageable context. This avoids one impossible large prompt.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong because a bigger window does not fix the lack of structure. The model still skims. It does not go deep.</li>
+<li>D is wrong because writing page-by-page without a plan produces incoherent reports. The reports drift from the outline.</li>
+<li>A is wrong because it discards 90 percent of the sources. This violates the synthesis constraint.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q16</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A competitive-intelligence system uses one orchestrator and six researcher subagents covering pricing, product, hiring, patents, news, and social. Early tests show subagents overwriting each other's findings and two agents researching the same competitor twice.</div>
+<div class="constraint-block"><strong>Constraint:</strong> each finding recorded once, no duplicated research effort, and the orchestrator can see everything.</div>
+<div class="qb-ask">Which orchestration design resolves this?</div>
+<ol class="qb-opts" type="A"><li>Run the six researchers sequentially so they cannot collide.</li>
+<li>Give every subagent its own private memory and merge by concatenating outputs.</li>
+<li>Let subagents coordinate peer-to-peer with a shared chat channel.</li>
+<li>Orchestrator assigns non-overlapping scopes, all findings go to a shared structured store with unique keys, and the orchestrator merges at the end.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p18" data-kind="prose"><strong>Why D is correct:</strong> Non-overlapping scopes remove duplicated effort. A shared keyed store prevents overwrites. Each finding has one key. The orchestrator keeps full visibility for the merge. All three parts of the constraint are met.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. Peer-to-peer chat is not structured. Agents still collide. The orchestrator loses visibility into side conversations.</li>
+<li>A is wrong because sequential execution fixes collisions. It does this by destroying parallelism. Six researchers take six times longer.</li>
+<li>B is wrong because private memories plus concatenation duplicates effort. It produces conflicting merged output. There is no deduplication.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q17</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A support team deploys an answer bot and adds a thumbs up / thumbs down button on every answer. After three months they have 40,000 ratings but answer quality has not improved. The ratings sit in a database nobody queries.</div>
+<div class="constraint-block"><strong>Constraint:</strong> user feedback must actually drive quality improvement, on a repeating cadence.</div>
+<div class="qb-ask">What is not present? What completes the process?</div>
+<ol class="qb-opts" type="A"><li>More ratings. Add a popup asking every user to rate.</li>
+<li>This is a feedback loop. Sample low-rated answers each week. Add the failures to the eval set. Review prompt or retrieval fixes against the eval set. Ship what makes the score better.</li>
+<li>A bigger model, since ratings show the current one is weak.</li>
+<li>Delete the rating button; it creates noise without value.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p19" data-kind="prose"><strong>Why B is correct:</strong> Feedback makes quality better only when it goes somewhere. Failures become evaluation cases. You test fixes against the evaluation set. The loop repeats on a schedule. B builds the full input, processing, output, and feedback system. The constraint asks for this.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong because the problem is not rating volume. 40,000 unused ratings prove more data without a loop changes nothing.</li>
+<li>C is wrong because the ratings do not diagnose the model as the cause. The failures can be retrieval or prompt issues. A bigger model would share these issues.</li>
+<li>D is wrong because it destroys the signal. It does not use the signal.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q18</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">
+<div>A team builds a code-review bot. It runs the linter. It runs the test suite. It reads the diff. It posts review comments. The sequence is always the same.</div>
+
+<div>Writing the comments is the only open-ended part. One architect calls it &quot;agentic.&quot; Another calls it &quot;a workflow with tools.&quot;</div>
+</div>
+<div class="constraint-block"><strong>Constraint:</strong> choose the pattern honestly so the team designs the right controls (and does not overbuild).</div>
+<div class="qb-ask">Which pattern is this, and why does the label matter?</div>
+<ol class="qb-opts" type="A"><li>
+<div>This is an Augmented LLM. It is a workflow with tools. The path is fixed. The model fills in one open-ended step. The label is important. A fixed path needs validation gates.</div>
+
+<div>It does not need agent loop controls.</div>
+</li>
+<li>Fully manual, because a human must approve every comment.</li>
+<li>Multi-agent, because linting, testing, and commenting are three jobs.</li>
+<li>Agentic, because it uses tools. Agentic systems need loop limits and escalation controls.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p20" data-kind="prose"><strong>Why A is correct:</strong> Tool use alone does not make a system agentic. Who decides the steps is important. Here the steps are fixed. So, it is an augmented LLM. It is a tool-using workflow. The label controls the system.</p>
+
+<p id="question-bank-106-items-in-number-order-p21" data-kind="prose">Fixed paths get gates and checks.</p>
+<p class="qb-why" id="question-bank-106-items-in-number-order-p22" data-kind="prose">Truly agentic loops need iteration limits and stop conditions.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong because it mislabels the system. Applying agent loop controls to a fixed pipeline adds complexity. It does this without benefit.</li>
+<li>B is wrong because human approval of every comment defeats the automation goal. The design does not require this.</li>
+<li>C is wrong because three sequential steps do not make three agents. Splitting them adds orchestration overhead. There is no gain.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q19</span><span class="constraint">D1</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A trading desk wants a Claude assistant for pre-trade research. The desk's SLA: 99.9 percent uptime, p95 response under 3 seconds, including during market-open spikes when request volume jumps 10x.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the SLA must hold during 10x spikes. A slow or down assistant during market open is worse than no assistant.</div>
+<div class="qb-ask">Which design best protects the SLA?</div>
+<ol class="qb-opts" type="A"><li>Use the largest model for best answer quality and accept slower spikes.</li>
+<li>Disable the assistant during market open to protect the SLA.</li>
+<li>Provision for average load and add a queue; users wait during spikes.</li>
+<li>Design for peak with autoscaling. Add a defined degraded mode. Use cached or short answers. Show a clear banner when the full pipeline cannot meet 3 seconds. The SLA states degraded-mode behavior clearly.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p23" data-kind="prose"><strong>Why D is correct:</strong> Autoscaling handles the 10x spike. The explicit degraded mode means the SLA is honest. It states what happens under extreme load. It does not silently break. Stating degraded behavior in the SLA makes it a real SLA. It is not just a hope.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong because queuing during market open directly violates the 3-second p95 requirement.</li>
+<li>A is wrong because it prioritizes quality over the stated SLA. The constraint ranks the latency bar above model size.</li>
+<li>B is wrong because disabling the system at peak need is an admission. It means the design failed the SLA.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q20</span><span class="constraint">D1</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">An insurer designs a claims pipeline: intake (classify claim type), processing (validate against policy, estimate payout), output (draft decision letter), feedback (adjuster corrections flow back into the eval set). The architect must present the end-to-end design.</div>
+<div class="constraint-block"><strong>Constraint:</strong> every stage must be observable, and failures at any stage must be routable to a human without losing the claim.</div>
+<div class="qb-ask">Which design element is most critical to satisfying the constraint?</div>
+<ol class="qb-opts" type="A"><li>Making the pipeline fully autonomous with no human queues, to maximize throughput.</li>
+<li>Combining intake and processing into one giant prompt to reduce handoff errors.</li>
+<li>Using the same model for all four stages to keep behavior consistent.</li>
+<li>Stage boundaries with structured handoffs: each stage emits a typed result plus confidence. Route low-confidence or failed results to a human queue. Attach the full stage history to each routed result. Log every handoff.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p24" data-kind="prose"><strong>Why D is correct:</strong> Structured handoffs with confidence scores make each stage observable. The human queue with full history satisfies the routability requirement. It does not lose claims. Logging every handoff gives the audit trail. It is the only option built around the constraint.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. Model uniformity does not create observability or human routing. It is an implementation convenience.</li>
+<li>A is wrong. It directly violates the human-routing half of the constraint.</li>
+<li>B is wrong. Merging stages destroys per-stage observability. It makes failures harder to localize.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q21</span><span class="constraint">D1</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A localization team must translate 5,000 product documents (each 20 to 80 pages) into 12 languages. Quality must be consistent across languages, terminology must match the company glossary, and the job must finish in 30 days.</div>
+<div class="constraint-block"><strong>Constraint:</strong> glossary-consistent terminology across all 12 languages, 30-day deadline, no quality drift between early and late documents.</div>
+<div class="qb-ask">Which orchestration strategy best meets all three?</div>
+<ol class="qb-opts" type="A"><li>One agent translating documents sequentially in all 12 languages.</li>
+<li>Split documents into sections. Translate sections at the same time for each language. Inject the glossary into every prompt. A hierarchical merge step checks cross-section consistency. Then finalize each document.</li>
+<li>Twelve separate agents, one per language, each working independently with no shared glossary.</li>
+<li>Machine-translate everything first, then have one agent proofread all 5,000 documents.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p25" data-kind="prose"><strong>Why B is correct:</strong> Parallel fan-out meets the 30-day deadline. Glossary injection in every prompt enforces terminology consistency. The hierarchical merge catches the cross-section drift that parallel work introduces. Each constraint maps to one design element.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. Sequential translation of 5,000 documents times 12 languages cannot fit 30 days.</li>
+<li>C is wrong. Independent agents with no shared glossary guarantee terminology drift across languages.</li>
+<li>D is wrong. One proofreading agent over 5,000 documents reintroduces the sequential bottleneck. The deadline fails.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q22</span><span class="constraint">D1</span><span class="qb-pill hard">Hard</span><span class="constraint">Select two</span></div>
+<div class="qb-scenario">A CIO has budget for one AI initiative. Proposal X: automate invoice data entry (saves 4,000 staff-hours per year, measurable in 3 months, low risk). Proposal Y: an AI product copilot for customers (could open a new revenue line, 12-month horizon, high uncertainty). The company's stated strategy this year is cost discipline.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the pick must align with the stated strategy (cost discipline) and be defensible with measurable value.</div>
+<div class="qb-ask">Which two statements best guide the decision? (Select two.)</div>
+<ol class="qb-opts" type="A"><li>Fund both at half budget to keep options open.</li>
+<li>Choose X: it maps to the efficiency and cost pillars, matches the cost-discipline strategy, and its value is measurable within one quarter.</li>
+<li>Choose Y: transformation projects always beat efficiency projects in the long run.</li>
+<li>Defer the decision until both proposals have quantified value, cost, risk, and time-to-value estimates.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B, D</span><p class="qb-why" id="question-bank-106-items-in-number-order-p26" data-kind="prose"><strong>Why B, D is correct:</strong> B and D work as a pair. B names the strategy-aligned pick. X maps to the efficiency and cost pillars. It is measurable within a quarter. This is what the constraint demands. D states the evidentiary standard that makes the pick defensible.</p>
+<p class="qb-why" id="question-bank-106-items-in-number-order-p27" data-kind="prose">It requires quantified value, cost, risk, and time-to-value for both proposals. X already meets that standard. Y does not. This is exactly why X wins.</p>
+<ol class="qb-distractors" type="A"><li>C is wrong. "Transformation always beats efficiency" is a slogan. It is not an analysis. It ignores the stated strategy. It ignores the measurability constraint.</li>
+<li>A is wrong. Splitting the budget starves both proposals. It avoids the prioritization decision that the CIO needs.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q23</span><span class="constraint">D1</span><span class="qb-pill hard">Hard</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">Give a research agent open-ended questions. An example is &quot;what should our pricing strategy be?&quot; The agent sometimes loops during testing. It calls the same search tools many times. It refines forever. It never makes the final memo. Each loop uses many tokens.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the agent must always terminate with a useful deliverable, and runaway token burn must be impossible.</div>
+<div class="qb-ask">Which control design guarantees termination?</div>
+<ol class="qb-opts" type="A"><li>Tell the agent in the system prompt to "be efficient and finish promptly."</li>
+<li>Use hard controls. Set a maximum iteration budget. Use an explicit stop condition. The agent must satisfy a deliverable checklist. Escalate to a human with partial results. Do this when the budget is gone.</li>
+<li>Remove all search tools so the agent cannot loop on them.</li>
+<li>Lower the temperature to zero so the agent behaves deterministically.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p28" data-kind="prose"><strong>Why B is correct:</strong> Prompt instructions alone do not guarantee termination. A hard iteration budget makes runaway burn impossible. The deliverable checklist defines "done." This allows the agent to stop. Human escalation with partial results guarantees a useful output.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. Polite prompt requests are soft controls. The observed looping happened despite similar instructions.</li>
+<li>C is wrong. Removing search tools cripples the research task. The agent exists to do this task.</li>
+<li>D is wrong. Temperature zero does not prevent loops. A deterministic agent can deterministically repeat the same calls.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q24</span><span class="constraint">D4</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A team builds a meeting-summarization feature. The product requirement is that summaries must not invent action items that were never discussed. The team currently measures quality with ROUGE scores against reference summaries.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the metric must capture invented content (hallucinated action items), which is the actual product risk.</div>
+<div class="qb-ask">What should the primary metric be?</div>
+<ol class="qb-opts" type="A"><li>Latency, since fast summaries matter most to users.</li>
+<li>ROUGE score, since it is the standard summarization metric.</li>
+<li>Faithfulness: the share of summary claims verifiable against the transcript, rated by humans on a sample plus an automated claim-check.</li>
+<li>Summary length in words, since shorter summaries hallucinate less.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p29" data-kind="prose"><strong>Why C is correct:</strong> The product risk: invented action items. ROUGE measures word overlap. It does not measure truthfulness. Faithfulness directly measures whether the transcript grounds each claim. This is exactly the constraint.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. ROUGE rewards similar wording. A fluent invented action item can score well on ROUGE.</li>
+<li>D is wrong. Length is not a quality metric. Short summaries can still invent content.</li>
+<li>A is wrong. Latency measures speed. It says nothing about invented action items.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q25</span><span class="constraint">D4</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A bank builds an eval set for its loan-document assistant. An engineer suggests 50 examples pulled from last week's tickets. The assistant must handle 12 document types, including rare ones like foreign income statements.</div>
+<div class="constraint-block"><strong>Constraint:</strong> The eval set must show all 12 document types. This includes rare types. If not, launch metrics will mislead.</div>
+<div class="qb-ask">How should the eval set be built?</div>
+<ol class="qb-opts" type="A"><li>Skip the eval set and rely on production user ratings after launch.</li>
+<li>Use the 50 recent tickets; recent data is the most representative.</li>
+<li>Build a stratified set. Sample across all 12 document types. Use minimum counts per type. Include rare types and known edge cases. Size the set in the hundreds.</li>
+<li>Generate 50 synthetic examples with another model; it is faster.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p30" data-kind="prose"><strong>Why C is correct:</strong> Stratified sampling guarantees coverage of every document type. This includes rare types. This is the constraint. Fifty recent tickets will over-represent common types. They will hide failures on the rare types.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. Recency does not equal coverage. Rare types will be absent. Their failures will be invisible.</li>
+<li>D is wrong. Synthetic examples reflect the generating model's biases. They do not reflect real document variety.</li>
+<li>A is wrong. Post-launch ratings mean shipping untested. The constraint is about pre-launch confidence.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q26</span><span class="constraint">D4</span><span class="qb-pill easy">Easy</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">After a prompt rewrite, the support bot's answers get noticeably worse: more off-topic replies, more "I cannot help with that" on in-scope questions. The team debates whether the prompt caused it or something else changed.</div>
+<div class="constraint-block"><strong>Constraint:</strong> determine whether the prompt change caused the regression, with evidence, before changing anything else.</div>
+<div class="qb-ask">What is the correct first diagnostic step?</div>
+<ol class="qb-opts" type="A"><li>Ask users whether they noticed a change.</li>
+<li>Immediately revert the prompt; the timing proves it caused the problem.</li>
+<li>Run the frozen eval set against both the old and new prompts and compare scores per category.</li>
+<li>Switch to a larger model to compensate for the weaker prompt.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: C</span><p class="qb-why" id="question-bank-106-items-in-number-order-p31" data-kind="prose"><strong>Why C is correct:</strong> A frozen eval set runs against both prompt versions. This isolates the prompt as the variable. Per-category comparison shows exactly what regressed. This gives evidence instead of a guess.</p>
+<ol class="qb-distractors" type="A"><li>B is wrong. Timing is correlation. It is not evidence. Reverting without diagnosis teaches nothing. It may discard a fixable improvement.</li>
+<li>D is wrong. It compensates blindly without confirming the cause. It raises cost permanently.</li>
+<li>A is wrong. User impressions are noisy and slow. The eval set gives a same-day answer.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q27</span><span class="constraint">D4</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A team wants to A/B test a new support-bot prompt in production. The bot serves 100,000 conversations per week across three regions with different question mixes. The team plans to run the new prompt for one week, then the old prompt for the next week, and compare.</div>
+<div class="constraint-block"><strong>Constraint:</strong> the comparison must be fair: same traffic mix, no time-based confounds, and guardrail metrics watched alongside the primary metric.</div>
+<div class="qb-ask">What is wrong with the planned test, and what is the correct design?</div>
+<ol class="qb-opts" type="A"><li>Sequential weeks confound the prompt with time (different weeks bring different question mixes). Run both prompts concurrently on randomly split traffic, pre-register the primary metric plus guardrail metrics (safety, latency), and require a minimum sample before calling a winner.</li>
+<li>The test needs more regions, not a different design.</li>
+<li>Skip the test and ship the new prompt; offline evals already passed.</li>
+<li>Nothing is wrong; sequential weeks are a valid A/B test.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: A</span><p class="qb-why" id="question-bank-106-items-in-number-order-p32" data-kind="prose"><strong>Why A is correct:</strong> Concurrent randomized split removes time confounds. The traffic mix is identical. Pre-registration prevents cherry-picking metrics after the fact. Guardrail metrics catch regressions that the primary metric misses. Every element answers the constraint.</p>
+<ol class="qb-distractors" type="A"><li>D is wrong. Sequential weeks let external changes masquerade as prompt effects. These changes include product launches and news events.</li>
+<li>B is wrong. More regions do not fix the time confound. The design flaw is structural.</li>
+<li>C is wrong. Offline evaluations do not cover production distribution shift. The constraint demands a fair live comparison.</li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div class="qb-q"><div class="qb-head"><span class="qb-num">Q28</span><span class="constraint">D4</span><span class="qb-pill medium">Medium</span><span class="constraint">Select one</span></div>
+<div class="qb-scenario">A legal research assistant sometimes cites court cases that do not exist. The citations look plausible: real-sounding names, correct formats, wrong reality. The team needs to diagnose the failure mode and fix it.</div>
+<div class="constraint-block"><strong>Constraint:</strong> no fabricated citation may reach the user. The fix must be verifiable, not just "a better prompt."</div>
+<div class="qb-ask">Which diagnosis and fix pair is correct?</div>
+<ol class="qb-opts" type="A"><li>Diagnosis: prompt failure. Fix: add "do not hallucinate" to the system prompt.</li>
+<li>Diagnosis: ungrounded generation. The model invents citations from parametric memory. Fix: require every citation to resolve against the retrieved sources (citation-to-source verification step). Eval with a groundedness metric that checks each cited case exists in the corpus.</li>
+<li>Diagnosis: model mismatch. Fix: switch to a larger model.</li>
+<li>Diagnosis: bad luck. Fix: retry failed answers up to three times.</li>
+</ol>
+<details class="pq"><summary>Show answer and explanation</summary>
+<div class="pq-answer"><span class="qb-verdict">Answer: B</span><p class="qb-why" id="question-bank-106-items-in-number-order-p33" data-kind="prose"><strong>Why B is correct:</strong> The failure: ungrounded generation. This is a hallucination subtype. The verifiable fix is structural. Citations must resolve to retrieved sources. The evaluation metric checks existence in the corpus. A prompt plea is not verifiable.</p>
+<p class="qb-why" id="question-bank-106-items-in-number-order-p34" data-kind="prose">A verification step is verifiable.</p>
+<ol class="qb-distractors" type="A"><li>A is wrong. &quot;Do not hallucinate&quot; is not a control. You cannot verify it. Models still confabulate under it.</li>
+<li>C is wrong. Larger models also hallucinate citations from parametric memory. Scale does not ground outputs.</li>
+<li>D is wrong. Retries sample the same ungrounded distribution. They do not add grounding.</li>
+</ol>
+</div>
+</details>
+</div>
+

@@ -1,0 +1,835 @@
+[
+ {
+  "id": "CCAR-F-Udemy05-0054",
+  "question": "ある不動産管理会社の開発チームは、Claude Agent SDKで開発者の生産性向上ツールを作っています。エージェントが賃貸契約の更新料を計算するモジュールを改修すると、ツールはその生成セッションをfork_sessionで分岐させ、分岐したセッションに「この変更をレビューして」と依頼します。チームは、生成とは別のセッションIDになるので、独立したレビューになると考えていました。\n\n直近の40件の改修では、次のような結果になりました。\n\nレビューの指摘は合計2件で、文面には「改修時に検討したとおり、端数は切り捨てで問題ありません」のように、生成時の判断を前提にした記述が多く見られた\n\n受け入れテストでは、月の途中で解約した場合の日割り計算の誤りなど、9件の不具合が見つかった\n\nレビューの仕組みとして適切な変更はどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "分岐したセッションへの依頼に、生成時の判断を疑って批判的に確認するよう書き加える。",
+   "B": "生成セッションをresumeせずに新しいセッションを開始し、レビューを実行させる。",
+   "C": "改修後のファイルと計算規則だけを渡すレビュー用のサブエージェントを定義する。",
+   "D": "生成時より上位のモデルを指定して、分岐したセッションでレビューを実行させる。"
+  },
+  "en_question": "The development team at a real estate management company uses the Claude Agent SDK to build a developer productivity tool. When the agent modifies the module that calculates rental contract renewal fees, the tool branches the generation session with fork_session and asks the branched session to \"review this change.\" The team believed that because the session ID differs from the generation session's, the review would be independent.\n\nThe results for the most recent 40 modifications were as follows.\n\nThe review raised a total of 2 findings, and the wording often presupposed decisions made during generation, such as \"as considered during the modification, rounding down fractions is fine\"\n\nAcceptance testing found 9 defects, such as errors in the daily proration calculation when a contract is canceled mid-month\n\nWhich changes to the review mechanism are appropriate? (Select two.)",
+  "en_choices": {
+   "A": "Add to the request to the branched session an instruction to question the decisions made during generation and check them critically.",
+   "B": "Start a new session without resuming the generation session, and run the review in it.",
+   "C": "Define a review subagent that is given only the modified files and the calculation rules.",
+   "D": "Specify a higher-tier model than the one used for generation, and run the review in the branched session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0055",
+  "question": "ある自動車メーカーのコネクテッドサービス開発チームは、Claude Codeで車両データの受信APIを改修しています。本番のエラーログから、受信した車台番号（VIN）の桁数を確かめていないために、validate_vin関数で例外が発生していることが分かりました。\n\nスタックトレースで原因の行は特定済みで、この不具合を再現する失敗テストも1件用意してあります。修正は、validate_vin関数に17桁かどうかの確認を1つ加えるだけで済む見込みです。\n\nこの修正の進め方として、最も適切なものはどれですか。",
+  "choices": {
+   "A": "直接実行でそのまま修正させ、用意した失敗テストと既存のテストが通ることを確かめさせる。",
+   "B": "インタビューパターンで、VINの検証に関する要件を開発者から聞き取らせてから実装させる。",
+   "C": "Exploreサブエージェントで、リポジトリ内のVINの扱いをすべて洗い出させてから修正させる。",
+   "D": "プランモードに入り、車両データの処理全体への影響を調査させてから修正の計画を提示させる。"
+  },
+  "en_question": "The connected services development team at an automobile manufacturer uses Claude Code to modify a vehicle data ingestion API. The production error logs showed that an exception occurs in the validate_vin function because the number of digits in the received vehicle identification number (VIN) is not checked.\n\nThe offending line has already been identified from the stack trace, and one failing test that reproduces this defect has been prepared. The fix is expected to require only adding a single check to the validate_vin function for whether the VIN is 17 characters.\n\nWhich is the most appropriate way to proceed with this fix?",
+  "en_choices": {
+   "A": "Use direct execution to have it make the fix as is, and have it confirm that the prepared failing test and the existing tests pass.",
+   "B": "Use the interview pattern to have it gather the requirements for VIN validation from the developer, and then implement.",
+   "C": "Use an Explore subagent to have it identify everything in the repository that deals with VINs, and then make the fix.",
+   "D": "Enter plan mode, have it investigate the impact on the entire vehicle data processing, and then have it present a plan for the fix."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0056",
+  "question": "ある電力会社のシステム開発チームは、Claude Codeで料金計算システムのコードを生成しています。SQLファイルは、ルートのschema.sqlのほか、services/billing/db/queries/やtools/reports/など複数のディレクトリに散在しています。\n\nチームはSQLの規約を.claude/rules/sql.mdにまとめ、フロントマターにpaths: [\"*.sql\"]を指定しました。SQL以外の作業では、この規約をコンテキストに読み込ませたくないと考えています。\n\nところが、ルートのschema.sqlを編集したときは規約が適用されるのに、services/billing/db/queries/配下のSQLファイルを編集したときは適用されません。\n\n最も適切な修正はどれですか。",
+  "choices": {
+   "A": "pathsの値を\"**/*.sql\"に変更し、どの階層にあるSQLファイルにも一致させる。",
+   "B": "sql.mdからpathsを削除し、規約がすべてのセッションで起動時に読み込まれるようにする。",
+   "C": "sql.mdを.claude/rules/db/に移し、ルールファイルの配置をSQLファイルの構成に合わせる。",
+   "D": "SQLファイルがある各ディレクトリにCLAUDE.mdを置き、sql.mdと同じ内容を記載する。"
+  },
+  "en_question": "The system development team at an electric power company uses Claude Code to generate code for a billing calculation system. SQL files are scattered across multiple directories, such as services/billing/db/queries/ and tools/reports/, in addition to schema.sql at the root.\n\nThe team put the SQL conventions together in .claude/rules/sql.md and specified paths: [\"*.sql\"] in the frontmatter. They do not want these conventions loaded into the context during non-SQL work.\n\nHowever, the conventions are applied when the root schema.sql is edited, but not when SQL files under services/billing/db/queries/ are edited.\n\nWhich is the most appropriate fix?",
+  "en_choices": {
+   "A": "Change the paths value to \"**/*.sql\" so that it matches SQL files at any level of the hierarchy.",
+   "B": "Remove paths from sql.md so that the conventions are loaded at startup in every session.",
+   "C": "Move sql.md to .claude/rules/db/ and align the placement of the rule file with the structure of the SQL files.",
+   "D": "Place a CLAUDE.md in each directory that contains SQL files and write the same content as sql.md in each."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0057",
+  "question": "あるデジタル広告企業の開発チームは、広告配信SDKのプルリクエストをClaude Codeで自動レビューしています。指摘は--json-schemaで定めたJSON形式で出力し、PRのインラインコメントとして投稿しています。直近3か月で、開発者が「却下」した指摘の割合は29%から46%に上がりました。\n\nチームは却下の多い指摘の傾向を調べたいと考えています。しかし、指摘の文面は「非同期処理の例外が握りつぶされています」「catchの中で何もしていません」のように毎回異なり、どの指摘が同じ種類のコードに対するものなのかを集計できません。\n\n却下の傾向を体系的に分析できるようにするための対応として、最も適切なものはどれですか。",
+  "choices": {
+   "A": "各指摘に確信度を出力させ、確信度0.7未満の指摘はインラインコメントに投稿しない。",
+   "B": "スキーマにdetected_patternを加え、指摘の元になったコード構造を記録させる。",
+   "C": "却下のたびに、開発者に却下の理由を自由記述で入力してもらい、その文章を集計する。",
+   "D": "PRごとの却下率を集計し、却下率の高いPRの作成者に、指摘を確認するよう促す。"
+  },
+  "en_question": "The development team at a digital advertising company automatically reviews pull requests for an ad delivery SDK with Claude Code. Findings are output in the JSON format defined with --json-schema and posted as inline comments on the PR. Over the last three months, the proportion of findings that developers \"dismissed\" rose from 29% to 46%.\n\nThe team wants to investigate the tendencies of frequently dismissed findings. However, the wording of the findings differs every time, as in \"Exceptions in asynchronous processing are being swallowed\" and \"Nothing is done inside the catch,\" so they cannot aggregate which findings concern the same kind of code.\n\nWhich is the most appropriate response to make it possible to systematically analyze dismissal tendencies?",
+  "en_choices": {
+   "A": "Have it output a confidence for each finding, and do not post findings with a confidence below 0.7 as inline comments.",
+   "B": "Add detected_pattern to the schema and have it record the code structure that gave rise to each finding.",
+   "C": "Each time a finding is dismissed, ask the developer to enter the reason for dismissal as free text, and aggregate that text.",
+   "D": "Aggregate the dismissal rate for each PR, and prompt the authors of PRs with high dismissal rates to review the findings."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0058",
+  "question": "ある半導体メーカーの組込みソフトウェアチームは、Claude Codeでファームウェアのコードを生成しています。コードの書き方の指示は、次のように複数のCLAUDE.mdに書かれています。\n\nリポジトリのルートのCLAUDE.mdには「インデントはスペース4つ」\n\nfirmware/ディレクトリのCLAUDE.mdには「MISRA Cに準拠し、インデントはスペース2つ」\n\n一部のメンバーの~/.claude/CLAUDE.mdには「インデントはタブを使う」\n\nfirmware/配下で生成されたCのコードを調べると、インデントがセッションやメンバーによって、タブ・スペース4つ・スペース2つとばらばらでした。\n\n最も適切な対処はどれですか。",
+  "choices": {
+   "A": "firmware/のCLAUDE.mdの先頭に「上位のCLAUDE.mdより優先する」と書き、他の記述はそのまま残す。",
+   "B": "ルートのCLAUDE.mdのインデント規約をfirmware/以外に限り、個人のCLAUDE.mdからインデントの指示を外す。",
+   "C": "ルートのCLAUDE.mdを削除し、各ディレクトリのCLAUDE.mdだけでプロジェクトの規約を管理する。",
+   "D": "firmware/の規約を各メンバーの~/.claude/CLAUDE.mdにも書いてもらい、全員の設定をそろえる。"
+  },
+  "en_question": "The embedded software team at a semiconductor manufacturer uses Claude Code to generate firmware code. Instructions on how to write code are written in multiple CLAUDE.md files, as follows.\n\nThe CLAUDE.md at the repository root says \"Indent with 4 spaces\"\n\nThe CLAUDE.md in the firmware/ directory says \"Comply with MISRA C and indent with 2 spaces\"\n\nThe ~/.claude/CLAUDE.md of some members says \"Use tabs for indentation\"\n\nExamining the C code generated under firmware/ showed that the indentation was inconsistent, varying between tabs, 4 spaces, and 2 spaces depending on the session and the member.\n\nWhich is the most appropriate way to handle this?",
+  "en_choices": {
+   "A": "Write \"takes precedence over the higher-level CLAUDE.md\" at the top of the firmware/ CLAUDE.md, and leave the other entries as they are.",
+   "B": "Limit the indentation convention in the root CLAUDE.md to everything other than firmware/, and remove the indentation instruction from the personal CLAUDE.md files.",
+   "C": "Delete the root CLAUDE.md and manage the project's conventions with only the CLAUDE.md in each directory.",
+   "D": "Ask each member to also write the firmware/ conventions in their own ~/.claude/CLAUDE.md so that everyone's settings are aligned."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0059",
+  "question": "あるプロスポーツクラブの開発チームは、チケット販売アプリのプルリクエストをClaude Codeで自動レビューするCIパイプラインを運用しています。レビュー用のプロンプトにはN+1クエリを指摘するfew-shotの例が3件ありますが、いずれもforループの中で関連テーブルを参照する、同じ書き方のコードです。\n\n直近3か月の振り返りでは、本番で見つかったN+1クエリ9件のうち7件をレビューが見落としていました。見落とした7件は、内包表記の中での参照やシリアライザー経由での参照など、例とは書き方が異なるものでした。\n\nレビューが例と異なる形の問題にも判断を広げられるようにするための、few-shotの例の見直し方として最も効果的なものはどれですか。",
+  "choices": {
+   "A": "few-shotの例を外し、N+1クエリの定義と検出条件をシステムプロンプトに詳しく書く。",
+   "B": "書き方の異なるN+1の例と問題のない一括取得の例を、判断の理由付きでプロンプトに示す。",
+   "C": "既存の例は残し、「類似のパターンも漏れなく報告する」という指示を追記する。",
+   "D": "見落とした7件のコードを、そのままfew-shotの例として追加する。"
+  },
+  "en_question": "The development team at a professional sports club runs a CI pipeline that automatically reviews pull requests for a ticketing app with Claude Code. The review prompt has three few-shot examples that point out N+1 queries, and all of them are code written in the same way, referencing a related table inside a for loop.\n\nIn a retrospective of the last three months, the review had missed 7 of the 9 N+1 queries found in production. The 7 that were missed were written differently from the examples, such as references inside comprehensions or references via serializers.\n\nWhich review of the few-shot examples is most effective for enabling the review to extend its judgment to problems in forms different from the examples?",
+  "en_choices": {
+   "A": "Remove the few-shot examples and write a detailed definition of N+1 queries and detection conditions in the system prompt.",
+   "B": "Show in the prompt examples of N+1 written in different ways and examples of acceptable bulk fetching, with the reasoning for each judgment.",
+   "C": "Keep the existing examples and add the instruction \"Report similar patterns without omission.\"",
+   "D": "Add the code of the 7 missed cases as is as few-shot examples."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy05-0060",
+  "question": "あるホテル予約サイトの開発チームは、CIパイプラインでClaude Codeに料金計算の不具合を修正させ、同じセッションの中で「自分の変更をレビューし、問題があれば指摘して」と依頼しています。レビューの精度を上げるため、拡張思考も有効にしています。\n\n過去30件のPRで、このセルフレビューが指摘した問題は0件でした。しかしリリース後に、連泊割引と消費税の丸めの順序が逆になっている不具合など、4件の不具合が見つかりました。\n\nレビューの仕組みとして適切な改善はどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "レビュー役には差分と仕様・レビュー基準だけを渡し、修正時の説明や推論は渡さない。",
+   "B": "修正を生成するセッションのeffortを上げ、より深く考えてからレビューさせる。",
+   "C": "同じセッションのまま、チェックリストを渡して「より厳しく」レビューし直すよう指示する。",
+   "D": "修正を生成したセッションとは別の、独立したインスタンスでレビューを実行する。"
+  },
+  "en_question": "The development team at a hotel reservation site has Claude Code fix pricing calculation defects in a CI pipeline, and in the same session asks it to \"review your own changes and point out any problems.\" Extended thinking is also enabled to improve review accuracy.\n\nAcross the past 30 PRs, this self-review flagged 0 problems. However, 4 defects were found after release, including one where the order of the multi-night discount and the consumption tax rounding was reversed.\n\nWhich improvements to the review mechanism are appropriate? (Select two.)",
+  "en_choices": {
+   "A": "Give the reviewer only the diff and the specification and review criteria, and do not give it the explanations or reasoning from when the fix was made.",
+   "B": "Raise the effort of the session that generates the fix so that it thinks more deeply before reviewing.",
+   "C": "Stay in the same session, give it a checklist, and instruct it to review again \"more strictly.\"",
+   "D": "Run the review in an independent instance separate from the session that generated the fix."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0001",
+  "question": "ある農業機械メーカーの開発チームは、圃場センサーのデータを扱うマイクロサービス群のリポジトリでClaude Codeを使っています。Protocol Buffersの定義ファイル（*.proto）の書き方に関する規約を.claude/rules/proto.mdに書き、フロントマターにpaths: [\"proto/*.proto\"]を指定しました。\n\nところが、services/irrigation/api/v1/schedule.protoのように各サービスの配下にある定義ファイルを編集するときには、この規約が読み込まれていないことがわかりました。\n\n場所に関係なく、すべての定義ファイルにこの規約を適用するための修正として最も適切なものはどれですか。",
+  "choices": {
+   "A": "pathsの値を[\"*.proto\"]に変更し、拡張子だけで定義ファイルに一致させる。",
+   "B": "フロントマターからpathsの行を削除し、ルールを無条件に読み込ませる。",
+   "C": "各サービスのディレクトリにCLAUDE.mdを置き、同じ規約をそれぞれに書き写す。",
+   "D": "pathsの値を[\"**/*.proto\"]に変更し、どの階層の定義ファイルにも一致させる。"
+  },
+  "en_question": "The development team at an agricultural machinery manufacturer uses Claude Code in a repository of microservices that handle field sensor data. They wrote conventions for writing Protocol Buffers definition files (*.proto) in .claude/rules/proto.md and specified paths: [\"proto/*.proto\"] in the frontmatter.\n\nHowever, they found that these conventions are not loaded when editing definition files under each service, such as services/irrigation/api/v1/schedule.proto.\n\nWhich is the most appropriate fix to apply these conventions to all definition files regardless of location?",
+  "en_choices": {
+   "A": "Change the paths value to [\"*.proto\"] so that definition files are matched by extension alone.",
+   "B": "Delete the paths line from the frontmatter so that the rule is loaded unconditionally.",
+   "C": "Place a CLAUDE.md in each service's directory and copy the same conventions into each.",
+   "D": "Change the paths value to [\"**/*.proto\"] so that it matches definition files at any level of the hierarchy."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0002",
+  "question": "ある国際協力NGOの調査部門は、Claude Agent SDKを使って、支援対象地域の保健・教育データを調べるマルチエージェントリサーチシステムを構築しています。コーディネーターのオプションは、次のように設定しました。\n\nagentsパラメータに、web-researcherとdocument-analystの2つのAgentDefinitionを定義する\n\nallowedToolsには、Read・Grep・WebSearchを指定する\n\nところが実行ログを見ると、サブエージェントは一度も呼び出されず、コーディネーター自身がウェブ検索と文書の読み込みをすべて行っていました。また、2つのdescriptionはどちらも「調査を手伝う」という一文だけでした。\n\nサブエージェントに作業を委任させるための変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "各サブエージェントのpromptに「コーディネーターの会話履歴を参照すること」と書き加える。",
+   "B": "2つのサブエージェントの手順をコーディネーターのシステムプロンプトに書き写し、1体で処理させる。",
+   "C": "各descriptionに、どんな依頼のときにそのサブエージェントを使うかを具体的に書く。",
+   "D": "allowedToolsに、サブエージェントを起動するAgentツール（旧Taskツール）を追加する。"
+  },
+  "en_question": "The research division of an international cooperation NGO uses the Claude Agent SDK to build a multi-agent research system that investigates health and education data for the regions it supports. The coordinator's options were set as follows.\n\nTwo AgentDefinitions, web-researcher and document-analyst, are defined in the agents parameter\n\nRead, Grep, and WebSearch are specified in allowedTools\n\nHowever, the execution logs show that the subagents were never invoked, and the coordinator itself did all of the web searching and document reading. Also, both descriptions consisted of only a single sentence: \"Helps with research.\"\n\nWhich changes are appropriate to get the coordinator to delegate work to the subagents? (Select two.)",
+  "en_choices": {
+   "A": "Add to each subagent's prompt the instruction \"Refer to the coordinator's conversation history.\"",
+   "B": "Copy the procedures of the two subagents into the coordinator's system prompt and have a single agent handle everything.",
+   "C": "Write in each description, specifically, for what kinds of requests that subagent should be used.",
+   "D": "Add the Agent tool (formerly the Task tool), which launches subagents, to allowedTools."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0003",
+  "question": "ある研究機関の情報基盤チームは、研究者がClaude Codeから日常業務のシステムを操作できるよう、MCPサーバーの導入を計画しています。対象は次の3つです。\n\nソースコードを管理するGitLab\n\n連絡に使うSlack\n\n研究所独自の実験装置予約システム\n\n予約システムには、装置ごとの利用資格の確認と、安全講習の受講記録の照合を経てから予約を確定する独自の手順があります。開発に使える人員は1名で、保守の負担を最小限にしたいと考えています。\n\nMCPサーバーの選び方として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "MCPサーバーは導入せず、Claudeにcurlで各システムのAPIを直接呼ばせる手順をCLAUDE.mdに書く。",
+   "B": "GitLabとSlackには、公開されている既存のMCPサーバーを採用する。",
+   "C": "実験装置予約システムには、独自の予約手順を実装したカスタムMCPサーバーを作る。",
+   "D": "3つのシステムをまとめて扱う1つのカスタムMCPサーバーを作り、GitLabとSlackのAPIも自前で実装する。"
+  },
+  "en_question": "The information infrastructure team at a research institution is planning to introduce MCP servers so that researchers can operate their day-to-day systems from Claude Code. The targets are the following three.\n\nGitLab, which manages source code\n\nSlack, used for communication\n\nThe institution's own laboratory equipment reservation system\n\nThe reservation system has its own procedure in which a reservation is confirmed only after checking eligibility to use each piece of equipment and verifying safety training attendance records. Only one person is available for development, and they want to minimize the maintenance burden.\n\nWhich are appropriate ways to choose MCP servers? (Select two.)",
+  "en_choices": {
+   "A": "Do not introduce MCP servers, and write in CLAUDE.md a procedure for having Claude call each system's API directly with curl.",
+   "B": "Adopt existing publicly available MCP servers for GitLab and Slack.",
+   "C": "For the laboratory equipment reservation system, build a custom MCP server that implements its own reservation procedure.",
+   "D": "Build a single custom MCP server that handles all three systems together, and implement the GitLab and Slack APIs in-house as well."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0004",
+  "question": "ある鉄道会社は、Claude Agent SDKを使って、乗車券の払い戻しや変更の問い合わせに対応するカスタマーサポート解決エージェントを運用しています。予約を照会するlookup_reservationツールは、1回の呼び出しで座席表、経路の詳細、運賃の内訳、ポイントの履歴など約45のフィールドを返します。しかし、払い戻しの判断に使うのは、予約番号、乗車日、区間、支払額、払い戻しの可否の5つです。\n\n複数の予約について問い合わせる長い会話では、照会結果がコンテキストに積み上がり、会話の後半で、序盤に確認した支払額をエージェントが取り違えるケースが見られます。\n\nこの問題の原因に直接効く対策として、最も効果的なものはどれですか。",
+  "choices": {
+   "A": "照会結果がコンテキストに入る前に、払い戻しに関係する5つのフィールドだけに切り詰める。",
+   "B": "照会のたびに、それまでのツール結果をすべて会話履歴から削除してから次の照会を行う。",
+   "C": "より大きなコンテキストウィンドウを持つモデルに切り替え、照会結果をそのまま保持させる。",
+   "D": "会話が長くなったら、それまでのやり取りを段階的に要約し、古いメッセージを要約に置き換える。"
+  },
+  "en_question": "A railway company uses the Claude Agent SDK to operate a customer support resolution agent that handles inquiries about ticket refunds and changes. The lookup_reservation tool, which looks up a reservation, returns about 45 fields in a single call, including the seat map, route details, fare breakdown, and points history. However, only five are used to decide on a refund: reservation number, travel date, section, amount paid, and refund eligibility.\n\nIn long conversations about multiple reservations, lookup results pile up in the context, and in the later part of the conversation, cases have been seen in which the agent confuses an amount paid that it confirmed early on.\n\nWhich is the most effective measure that directly addresses the cause of this problem?",
+  "en_choices": {
+   "A": "Before lookup results enter the context, trim them down to only the five fields relevant to refunds.",
+   "B": "Each time a lookup is made, delete all previous tool results from the conversation history before making the next lookup.",
+   "C": "Switch to a model with a larger context window and keep the lookup results as they are.",
+   "D": "When the conversation gets long, progressively summarize the exchanges so far and replace old messages with the summary."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0005",
+  "question": "ある会計事務所は、Claudeを使って、顧問先から届く決算書類のPDFから構造化データを抽出しています。処理は次の2段階です。\n\nextract_metadataで、顧問先名・決算期・書類の種類を抽出する\n\nその結果を使ってlookup_client_ledgerで顧問先の総勘定元帳を照会し、データを補完する\n\n初回のリクエストでは、tool_choiceを{\"type\": \"any\"}にしています。しかし、ログを確認すると、約12%のケースで最初にlookup_client_ledgerが呼ばれ、書類から読み取った正式名称ではなく、推測した顧問先名で元帳が照会されていました。\n\n抽出を確実に先に実行させるための変更として最も適切なものはどれですか。",
+  "choices": {
+   "A": "初回のリクエストではlookup_client_ledgerの呼び出しを許可し、結果が空なら抽出からやり直す。",
+   "B": "初回のリクエストでtool_choiceにextract_metadataを指定し、抽出ツールを強制する。",
+   "C": "lookup_client_ledgerの説明に、extract_metadataの結果を受け取ってから呼ぶことを明記する。",
+   "D": "初回のリクエストのtool_choiceをautoに戻し、システムプロンプトで抽出を先に行うよう指示する。"
+  },
+  "en_question": "An accounting firm uses Claude to extract structured data from PDFs of financial statements received from client companies. Processing has the following two stages.\n\nUse extract_metadata to extract the client name, fiscal period, and document type\n\nUse those results to query the client's general ledger with lookup_client_ledger and supplement the data\n\nIn the initial request, tool_choice is set to {\"type\": \"any\"}. However, checking the logs shows that in about 12% of cases lookup_client_ledger is called first, and the ledger is queried with a guessed client name rather than the official name read from the document.\n\nWhich change is most appropriate to ensure that extraction runs first?",
+  "en_choices": {
+   "A": "Allow the lookup_client_ledger call in the initial request, and start over from extraction if the result is empty.",
+   "B": "In the initial request, specify extract_metadata in tool_choice to force the extraction tool.",
+   "C": "State explicitly in the description of lookup_client_ledger that it should be called only after receiving the result of extract_metadata.",
+   "D": "Return the tool_choice of the initial request to auto, and instruct in the system prompt that extraction be performed first."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0006",
+  "question": "ある不動産仲介会社の開発チームは、物件検索サービスの改修にClaude Codeを使っています。チームで共有しているスキル/compare-designsは、新機能の設計案を5つほど挙げ、それぞれの長所と短所を検討したうえで推奨案を示します。\n\nところが、このスキルをメインの会話で実行すると、採用しなかった案の詳しい検討内容が会話に大量に残ります。その結果、その後の実装の段階で、Claudeが不採用の案の考え方をコードに混ぜてしまうことがありました。\n\nメインの会話を汚さずにこのスキルを使えるようにする変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "SKILL.mdのフロントマターにcontext: forkを追加する。",
+   "B": "スキルを実行したあとに毎回/clearを実行し、会話をリセットしてから実装に進む。",
+   "C": "スキルの本文に、最後は推奨案とその理由、比較表だけを要約して返すよう指示を書く。",
+   "D": "スキルの内容をプロジェクトのCLAUDE.mdに移し、設計の検討を常に読み込まれる手順にする。"
+  },
+  "en_question": "The development team at a real estate brokerage uses Claude Code to modify a property search service. The skill /compare-designs shared by the team lists about five design proposals for a new feature, weighs the pros and cons of each, and presents a recommended proposal.\n\nHowever, when this skill is run in the main conversation, a large amount of detailed discussion of the proposals that were not adopted remains in the conversation. As a result, in the later implementation phase, Claude sometimes mixed the thinking behind the rejected proposals into the code.\n\nWhich changes are appropriate to make it possible to use this skill without polluting the main conversation? (Select two.)",
+  "en_choices": {
+   "A": "Add context: fork to the frontmatter of SKILL.md.",
+   "B": "Run /clear every time after running the skill, resetting the conversation before moving on to implementation.",
+   "C": "In the body of the skill, write an instruction to return, at the end, only a summary of the recommended proposal, its rationale, and a comparison table.",
+   "D": "Move the contents of the skill to the project's CLAUDE.md, making design deliberation a procedure that is always loaded."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0007",
+  "question": "ある広告代理店の開発チームは、Claude Agent SDKを使って、エンジニアが広告配信システムのコードや関連資料を調べるための開発者の生産性向上ツールを構築しています。\n\nエージェントには組み込みツールのほかに、社内のMCPサーバーが提供するsearch_assets（説明は「アセットを検索する」）とsearch_creatives（説明は「クリエイティブを検索する」）があります。前者はコードとインフラ設定のリポジトリを、後者は広告素材の管理システムを検索するツールです。\n\nログを分析すると、広告素材に関する質問の41%でsearch_assetsが呼ばれていました。また、システムプロンプトには「ユーザーが『検索』と言ったら、まずsearch_assetsを使うこと」という一文がありました。\n\n誤ったルーティングを減らすための変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "search_assetsをsearch_code_and_infraに名前変更し、両ツールの説明に検索対象と使い分けを書く。",
+   "B": "tool_choiceでsearch_creativesを強制し、素材に関する質問では必ずこのツールが呼ばれるようにする。",
+   "C": "「検索」という語に反応してツールを決める一文を、質問の対象に応じて選ぶ書き方に改める。",
+   "D": "search_assetsの結果に素材が含まれない場合は、続けてsearch_creativesを呼ぶようループ側で再実行する。"
+  },
+  "en_question": "The development team at an advertising agency uses the Claude Agent SDK to build a developer productivity tool that engineers use to investigate ad delivery system code and related materials.\n\nIn addition to built-in tools, the agent has search_assets (description: \"Searches assets\") and search_creatives (description: \"Searches creatives\"), provided by an internal MCP server. The former searches repositories of code and infrastructure configuration, and the latter searches the ad creative management system.\n\nAnalyzing the logs showed that search_assets was called for 41% of the questions about ad creatives. Also, the system prompt contained the sentence \"When the user says 'search', use search_assets first.\"\n\nWhich changes are appropriate to reduce incorrect routing? (Select two.)",
+  "en_choices": {
+   "A": "Rename search_assets to search_code_and_infra, and write the search targets and how to choose between them in both tools' descriptions.",
+   "B": "Force search_creatives with tool_choice so that this tool is always called for questions about creatives.",
+   "C": "Rewrite the sentence that decides the tool based on the word \"search\" so that the tool is chosen according to what the question is about.",
+   "D": "If the results of search_assets contain no creatives, have the loop re-run by calling search_creatives next."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0008",
+  "question": "ある製薬会社の開発チームは、Claude Code（Read・Grep・Globを含む組み込みツールを有効にした構成）を使って、治験データ管理システムのコードを改修しています。\n\n新しく参加したエンジニアが「症例データをCSVで書き出すエクスポート機能が、どのモジュールを経由して出力しているかを説明して」と依頼しました。すると、Claudeはリポジトリ内の約400ファイルを順にReadで読み始め、途中でコンテキストの大半を使い切ってしまいました。\n\nこのような依頼でコードベースの理解を段階的に進めるために、Claudeに取らせるべき探索の進め方として最も適切なものはどれですか。",
+  "choices": {
+   "A": "最初にREADMEとdocs/配下の設計書だけをReadで読ませ、その記述をもとに処理の流れを説明させる。",
+   "B": "Globで**/*export*.pyに一致するファイルを列挙し、見つかったファイルをすべてReadで読ませる。",
+   "C": "400ファイルを10ファイルずつに分け、Readで読んで要約する作業を、全ファイルが終わるまで順に繰り返させる。",
+   "D": "Grepで処理の入口となるコマンド名を探し、そこからimportをたどってReadで読ませる。"
+  },
+  "en_question": "The development team at a pharmaceutical company uses Claude Code (configured with built-in tools enabled, including Read, Grep, and Glob) to modify the code of a clinical trial data management system.\n\nA newly joined engineer asked, \"Explain which modules the export feature that writes case data to CSV goes through to produce its output.\" Claude then began reading about 400 files in the repository one after another with Read, and used up most of its context partway through.\n\nWhich is the most appropriate way for Claude to proceed with exploration, in order to build understanding of the codebase incrementally for a request like this?",
+  "en_choices": {
+   "A": "Have it first read only the README and the design documents under docs/ with Read, and explain the processing flow based on what they say.",
+   "B": "Use Glob to list the files matching **/*export*.py, and have it read all of the files found with Read.",
+   "C": "Split the 400 files into groups of 10, and have it repeat the work of reading each group with Read and summarizing it, in order, until all files are done.",
+   "D": "Use Grep to find the command name that is the entry point of the processing, and have it follow the imports from there, reading with Read."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0009",
+  "question": "ある会計事務所は、Claude Agent SDKを使って、顧問先の業界動向や財務資料を調べるマルチエージェントリサーチシステムを運用しています。文書分析サブエージェントは、所内の文書管理システムのMCPツールfetch_client_documentで資料を取得します。事務所の独立性規程により、監査を担当している顧問先の税務資料は、アドバイザリー部門の調査には使えません。\n\nこの規程に該当する要求に対して、ツールは現在「Access denied」とだけ返しています。サブエージェントは資料名や検索語を変えて同じ取得を何度も試みた末に、レポートに「一部の資料を取得できませんでした」とだけ記載していました。\n\nこの状況を改善するためのツールの変更として最も適切なものはどれですか。",
+  "choices": {
+   "A": "isError: trueに、規程による拒否の分類とリトライ不可のフラグを添えて返す。",
+   "B": "検索結果から該当資料を除外し、存在しないかのように空の結果を返す。",
+   "C": "HTTPのステータスコード403だけを返し、どう対処するかの判断はサブエージェントに任せる。",
+   "D": "エラーメッセージに「リトライは3回まで」という指示を含めて返す。"
+  },
+  "en_question": "An accounting firm uses the Claude Agent SDK to operate a multi-agent research system that investigates client industry trends and financial materials. The document analysis subagent retrieves materials with the MCP tool fetch_client_document of the firm's internal document management system. Under the firm's independence policy, the tax materials of a client for which the firm is conducting an audit cannot be used in advisory division research.\n\nFor requests that fall under this policy, the tool currently returns only \"Access denied.\" The subagent tried the same retrieval many times, changing the document name and search terms, and in the end wrote only \"Some materials could not be retrieved\" in the report.\n\nWhich change to the tool is most appropriate to improve this situation?",
+  "en_choices": {
+   "A": "Return isError: true with a classification of denial due to the policy and a flag indicating that retrying is not allowed.",
+   "B": "Exclude the relevant materials from the search results and return an empty result as if they did not exist.",
+   "C": "Return only the HTTP status code 403 and leave the decision of how to respond to the subagent.",
+   "D": "Return an error message that includes the instruction \"Retry up to 3 times.\""
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0010",
+  "question": "あるゲーム開発会社のツールチームは、エンジニアがClaude Codeからゲーム内アセットの管理システムを操作できるよう、社内のMCPサーバーasset-pipelineを用意しました。このサーバーはチーム全員で使い、接続には各自のアクセストークンが必要です。\n\n一方、あるエンジニアは、自作のプロファイラー連携用のMCPサーバーを試験的に使っており、まだチームに共有する段階ではありません。\n\nこれらのMCPサーバーの設定方法として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "プロファイラー連携のサーバーも.mcp.jsonに定義し、個人用であることをサーバー名に含めてコミットする。",
+   "B": "asset-pipelineは.mcp.jsonに定義し、各自のトークンをそのまま書き込んだうえで.gitignoreに追加する。",
+   "C": "プロファイラー連携のサーバーは、claude mcp add --scope userでユーザースコープに追加する。",
+   "D": "asset-pipelineは.mcp.jsonに定義し、トークンは${ASSET_API_TOKEN}で参照してコミットする。"
+  },
+  "en_question": "The tooling team at a game development company has set up an internal MCP server, asset-pipeline, so that engineers can work with the in-game asset management system from Claude Code. The whole team uses this server, and each person needs their own access token to connect.\n\nSeparately, one engineer is experimentally using a self-built MCP server for profiler integration, and it is not yet at the stage of being shared with the team.\n\nWhich are appropriate ways to configure these MCP servers? (Select two.)",
+  "en_choices": {
+   "A": "Also define the profiler-integration server in .mcp.json and commit it, including in the server name that it is for personal use.",
+   "B": "Define asset-pipeline in .mcp.json, write each person's token into it as is, and add the file to .gitignore.",
+   "C": "Add the profiler-integration server at user scope with claude mcp add --scope user.",
+   "D": "Define asset-pipeline in .mcp.json, reference the token with ${ASSET_API_TOKEN}, and commit it."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0011",
+  "question": "ある飲食チェーンの本部は、マルチエージェントリサーチシステムを使って、主要都市での新業態の出店候補を調べるレポートを作成しています。コーディネーターは、ウェブ検索サブエージェントと文書分析サブエージェントの結果を受け取ったあと、統合サブエージェントに「これまでの調査結果をもとに、出店候補の比較レポートを作成して」とだけ指示しています。\n\n統合サブエージェントが返したレポートは「前述の調査によれば」といった表現ばかりで、具体的な数値や出典がほとんど含まれていませんでした。\n\n統合サブエージェントに適切な情報を渡すための変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "調査結果を本文と、ソースURLや文書名、ページ番号などのメタデータに分けた構造化データで渡す。",
+   "B": "ウェブ検索と文書分析のツールを統合サブエージェントにも与え、必要な情報を自分で集めさせる。",
+   "C": "コーディネーターの会話履歴を参照するよう、統合サブエージェントのシステムプロンプトに書き加える。",
+   "D": "ウェブ検索と文書分析の調査結果を、統合サブエージェントを起動するプロンプトに直接含める。"
+  },
+  "en_question": "The headquarters of a restaurant chain is using a multi-agent research system to produce a report investigating candidate locations for opening a new store format in major cities. After receiving the results from the web search subagent and the document analysis subagent, the coordinator instructs the synthesis subagent only with \"Based on the findings so far, create a comparison report of the candidate locations.\"\n\nThe report returned by the synthesis subagent was full of phrases like \"according to the aforementioned research\" and contained almost no specific figures or sources.\n\nWhich changes are appropriate for giving the synthesis subagent the right information? (Select two.)",
+  "en_choices": {
+   "A": "Pass the findings as structured data, separated into the body text and metadata such as source URLs, document names, and page numbers.",
+   "B": "Give the synthesis subagent the web search and document analysis tools as well, and have it gather the information it needs by itself.",
+   "C": "Add to the synthesis subagent's system prompt an instruction to refer to the coordinator's conversation history.",
+   "D": "Include the web search and document analysis findings directly in the prompt that launches the synthesis subagent."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0012",
+  "question": "ある産業機械メーカーの開発チームは、工場の設備監視システムの保守にClaude Codeを使っています。今週は次の2つの作業があります。\n\nサポートが終了するPLC通信ライブラリを新しいライブラリに置き換える作業（約60ファイルに影響し、接続のリトライやタイムアウトの扱いが新旧のライブラリで異なる）\n\n温度センサーの設定画面で、入力値が上限を超えたときにエラーを表示するバリデーションを1つ追加する作業（変更箇所は特定済み）\n\nそれぞれの作業に最も適した進め方はどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "ライブラリの置き換えは、プランモードで影響範囲と移行方針を計画し、承認後に直接実行で進める。",
+   "B": "バリデーションの追加は、直接実行で変更を依頼し、テストで動作を確認する。",
+   "C": "バリデーションの追加も、作業手順をそろえる目的でプランモードの計画を作り、承認してから実装する。",
+   "D": "ライブラリの置き換えは、直接実行でディレクトリごとに書き換え、ビルドが壊れたら/rewindで戻す。"
+  },
+  "en_question": "The development team at an industrial machinery manufacturer uses Claude Code to maintain a factory equipment monitoring system. This week there are two tasks.\n\nReplacing a PLC communication library whose support is ending with a new library (affects about 60 files, and the handling of connection retries and timeouts differs between the old and new libraries)\n\nAdding one validation to the temperature sensor settings screen that displays an error when the input value exceeds the upper limit (the location of the change has already been identified)\n\nWhich are the most suitable approaches for each task? (Select two.)",
+  "en_choices": {
+   "A": "For the library replacement, use plan mode to plan the scope of impact and the migration approach, and after approval proceed with direct execution.",
+   "B": "For adding the validation, request the change with direct execution and confirm the behavior with tests.",
+   "C": "For adding the validation as well, create a plan in plan mode to standardize the work procedure, and implement after approving it.",
+   "D": "For the library replacement, use direct execution to rewrite directory by directory, and use /rewind to go back if the build breaks."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0013",
+  "question": "ある電力会社のシステム部門は、需給管理システムのリポジトリで、Claude Codeによる自動コードレビューをCIに組み込んでいます。レビューの指摘は、明らかなバグについては精度が高い一方で、「タイムアウト値のハードコード」や「例外を握りつぶすtry/except」など、状況によっては許容されるパターンの判定が実行ごとにばらついています。\n\nチームは改善のため、典型的なバグの指摘例40件をfew-shotの例としてプロンプトに追加しました。しかし、ばらつきは改善せず、1回あたりの入力トークンが約2倍に増えました。\n\n判定の一貫性を高めるために最も効果的な変更はどれですか。",
+  "choices": {
+   "A": "「判断に迷うパターンは指摘しないこと」という規則を、プロンプトの冒頭に追加する。",
+   "B": "許容されるパターンかどうかの判定を、指摘ごとに3回実行して多数決で決める。",
+   "C": "few-shotの例をさらに80件に増やし、許容されるパターンの例もその中に含めて網羅する。",
+   "D": "40件の例を、判断の分かれるケースで指摘する・しないの理由を示した少数の例に置き換える。"
+  },
+  "en_question": "The systems department of an electric power company has built automated code review by Claude Code into CI for its supply-and-demand management system repository. The review's findings are highly accurate for obvious bugs, but its judgments on patterns that are acceptable depending on the situation, such as \"hard-coded timeout values\" and \"try/except that swallows exceptions,\" vary from run to run.\n\nTo improve this, the team added 40 examples of flagging typical bugs to the prompt as few-shot examples. However, the variability did not improve, and the input tokens per run roughly doubled.\n\nWhich change is most effective for improving the consistency of the judgments?",
+  "en_choices": {
+   "A": "Add a rule at the beginning of the prompt saying \"Do not flag patterns you are unsure about.\"",
+   "B": "Run the judgment of whether a pattern is acceptable three times for each finding and decide by majority vote.",
+   "C": "Increase the few-shot examples by another 80, including examples of acceptable patterns among them, to be comprehensive.",
+   "D": "Replace the 40 examples with a small number of examples that show the reasons for flagging or not flagging in cases where judgments differ."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0014",
+  "question": "ある電力会社の経営企画部は、マルチエージェントリサーチシステムを使って、国内の家庭用蓄電池の普及状況を調べるレポートを作成しています。\n\n文書分析サブエージェントが、2つの信頼できる情報源から、家庭用蓄電池の累計導入件数として次の異なる値を抽出しました。\n\n政府の統計では約45万件\n\n業界団体の報告書では約62万件\n\n統合サブエージェントは、新しそうに見えた業界団体の値だけを採用してレポートに記載しており、2つの値の調査時点が異なる可能性は検討されていませんでした。\n\nこの問題に対処する変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "統合サブエージェントに、より権威のある政府の統計の値を優先して採用する規則を与える。",
+   "B": "2つの値の平均をとり、「約53.5万件」という1つの値にまとめてレポートに記載させる。",
+   "C": "サブエージェントに、各値の公開日とデータの収集日を構造化出力に含めさせる。",
+   "D": "矛盾する値は一方を選ばず、それぞれの出典を付けて併記し、矛盾していることを注記させる。"
+  },
+  "en_question": "The corporate planning department of an electric power company is using a multi-agent research system to produce a report investigating the adoption of home storage batteries in Japan.\n\nThe document analysis subagent extracted the following differing values for the cumulative number of home storage battery installations from two reliable sources.\n\nGovernment statistics: about 450,000\n\nIndustry association report: about 620,000\n\nThe synthesis subagent adopted only the industry association's value, which looked newer, and included it in the report, without considering that the two values may have been measured at different points in time.\n\nWhich changes are appropriate for addressing this problem? (Select two.)",
+  "en_choices": {
+   "A": "Give the synthesis subagent a rule to prioritize and adopt the value from the more authoritative government statistics.",
+   "B": "Take the average of the two values and have the report state a single value of \"about 535,000.\"",
+   "C": "Have the subagent include each value's publication date and data collection date in its structured output.",
+   "D": "Do not pick one of the conflicting values; have the report list both with their respective sources and note that they conflict."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0015",
+  "question": "あるセキュリティ企業の脅威インテリジェンスチームは、マルチエージェントリサーチシステムを使って、特定の攻撃グループに関する週次レポートを作成しています。\n\n今週の実行では、8つの情報源カテゴリのうち、有償の脅威フィードがタイムアウトし、脆弱性データベースは権限エラーで参照できませんでした。サブエージェントはこれらの失敗を構造化されたエラーとしてコーディネーターに報告しました。しかし、最終レポートはいつもと同じ体裁で作られ、利用できた6カテゴリの情報だけで書かれていることが、読み手にはわかりませんでした。\n\n読み手が結論の確かさを正しく判断できるようにするための変更として最も適切なものはどれですか。",
+  "choices": {
+   "A": "参照できなかった2カテゴリについては、前週のレポートの記述をそのまま引き継いで記載する。",
+   "B": "タイムアウトと権限エラーが解消するまで、サブエージェントにリトライを繰り返させてから統合する。",
+   "C": "いずれかの情報源カテゴリが失敗した場合は、レポートの作成を中止して翌週の実行まで待つ。",
+   "D": "統合の出力に、裏付けの十分な結果と情報源が欠けた領域を示すカバレッジの注記を付ける。"
+  },
+  "en_question": "The threat intelligence team at a security company is using a multi-agent research system to produce weekly reports on a specific attack group.\n\nIn this week's run, of the eight source categories, the paid threat feed timed out and the vulnerability database could not be accessed because of a permission error. The subagents reported these failures to the coordinator as structured errors. However, the final report was produced in the same format as usual, and readers could not tell that it was written using only the six categories that were available.\n\nWhich change is most appropriate for enabling readers to correctly judge how reliable the conclusions are?",
+  "en_choices": {
+   "A": "For the two categories that could not be accessed, carry over the previous week's report text as is.",
+   "B": "Have the subagents retry repeatedly until the timeout and permission errors are resolved, and then synthesize.",
+   "C": "If any source category fails, abort report creation and wait until the next week's run.",
+   "D": "Attach a coverage note to the synthesis output indicating which areas have well-supported results and which areas lack sources."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0016",
+  "question": "ある半導体メーカーの設計自動化チームは、Claude Codeを使ってEDAツール向けのスクリプトを生成しています。タイミング解析のフローだけで使う規約（クロック制約の書き方や、解析レポートのファイル名の付け方など）を、timing/ディレクトリに置いたCLAUDE.mdに書いてコミットしました。チームのエンジニアは普段からリポジトリのルートでClaude Codeを起動し、合成や配置配線のフローも含めて作業しています。\n\nあるエンジニアがルートでClaude Codeを起動して/contextを実行したところ、Memory filesの一覧にはルートのCLAUDE.mdだけが表示され、timing/CLAUDE.mdは表示されませんでした。このエンジニアは「timing/CLAUDE.mdが読み込まれていない」とチームに報告しています。\n\nこの報告を受けて、次に取るべき対応として最も適切なものはどれですか。",
+  "choices": {
+   "A": "timing/CLAUDE.mdの内容をルートのCLAUDE.mdに移し、/contextの一覧に表示されることを確かめる。",
+   "B": "timing/にあるファイルをClaudeに読ませ、その時点でtiming/CLAUDE.mdが読み込まれるかを見る。",
+   "C": "timing/CLAUDE.mdを.claude/rules/timing.mdに移し、pathsに\"timing/**/*\"を指定する。",
+   "D": "ルートのCLAUDE.mdに@timing/CLAUDE.mdを書き、起動時に取り込まれるようにする。"
+  },
+  "en_question": "The design automation team at a semiconductor manufacturer uses Claude Code to generate scripts for EDA tools. They wrote conventions used only in the timing analysis flow (such as how to write clock constraints and how to name analysis report files) in a CLAUDE.md placed in the timing/ directory and committed it. The team's engineers usually launch Claude Code at the repository root and work there, including on the synthesis and place-and-route flows.\n\nAn engineer launched Claude Code at the root and ran /context, and the Memory files list showed only the root CLAUDE.md and did not show timing/CLAUDE.md. This engineer reported to the team that \"timing/CLAUDE.md is not being loaded.\"\n\nWhich is the most appropriate next action to take in response to this report?",
+  "en_choices": {
+   "A": "Move the contents of timing/CLAUDE.md into the root CLAUDE.md and confirm that they appear in the /context list.",
+   "B": "Have Claude read a file under timing/ and see whether timing/CLAUDE.md is loaded at that point.",
+   "C": "Move timing/CLAUDE.md to .claude/rules/timing.md and specify \"timing/**/*\" in paths.",
+   "D": "Write @timing/CLAUDE.md in the root CLAUDE.md so that it is imported at startup."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0017",
+  "question": "ある通信事業者の開発チームは、料金計算システムのリポジトリでClaude Codeを使っています。ルートのCLAUDE.mdは、4つのチームが書き足してきた結果1,200行を超え、ネットワーク設定、課金API、リリース手順、テストの規約が1つのファイルに混在しています。\n\n最近は、次の問題が起きています。\n\n同じファイルへの同時編集で、マージの競合が頻繁に起きる\n\nClaudeがファイルの後半に書かれた規約を守らないケースが増えている\n\nこの状況を改善する変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "CLAUDE.mdの内容を各エンジニアの~/.claude/CLAUDE.mdに分けて移し、チームごとに必要な部分だけを持たせる。",
+   "B": "規約をトピックごとに分け、.claude/rules/のbilling-api.mdなどのファイルにする。",
+   "C": "ルートのCLAUDE.mdには、プロジェクト全体に関わる最小限の内容だけを残す。",
+   "D": "すべての規約をスキルに移し、作業のたびに開発者が該当するスキルを呼び出して読み込ませる。"
+  },
+  "en_question": "The development team at a telecommunications company uses Claude Code in its billing system repository. The root CLAUDE.md has grown to over 1,200 lines as four teams have added to it, and network configuration, billing API, release procedures, and testing conventions are mixed together in a single file.\n\nThe following problems have recently occurred.\n\nSimultaneous edits to the same file frequently cause merge conflicts\n\nThere are more cases where Claude does not follow conventions written in the latter part of the file\n\nWhich changes are appropriate for improving this situation? (Select two.)",
+  "en_choices": {
+   "A": "Split the contents of CLAUDE.md into each engineer's ~/.claude/CLAUDE.md, so that each team holds only the parts it needs.",
+   "B": "Split the conventions by topic into files such as billing-api.md under .claude/rules/.",
+   "C": "Leave only the minimum content that concerns the whole project in the root CLAUDE.md.",
+   "D": "Move all conventions into skills, and have developers invoke the relevant skill to load it each time they work."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0018",
+  "question": "ある新聞社のデータ報道チームは、マルチエージェントリサーチシステムを使って、過去の報道を踏まえた解説記事の下調べをしています。検索サブエージェントには、ウェブを検索するsearch_webと、新たに追加したsearch_archive（説明は「アーカイブを検索する」）があります。\n\nsearch_archiveは、自社が1990年から2015年に掲載した紙面記事の全文を検索できるツールですが、追加から1か月の間、ほとんど呼ばれていませんでした。2015年以前の自社の報道に関する調査でも、エージェントはsearch_webで他社の記事を探しています。\n\nsearch_archiveが適切に選ばれるようにするための変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "search_archiveの名前を、収録範囲が分かるsearch_own_archive_1990_2015に変える。",
+   "B": "search_archiveの説明に、収録範囲（1990〜2015年の自社紙面）と検索語の例を書く。",
+   "C": "tool_choiceを{\"type\": \"any\"}にして、検索のたびにいずれかのツールを呼ばせる。",
+   "D": "検索サブエージェントのsearch_webを一時的に無効にし、search_archiveを優先して使わせる。"
+  },
+  "en_question": "The data journalism team at a newspaper company is using a multi-agent research system for preliminary research on explanatory articles that draw on past reporting. The search subagent has search_web, which searches the web, and a newly added search_archive (described as \"Searches the archive\").\n\nsearch_archive is a tool that can search the full text of the company's own print articles published from 1990 to 2015, but it was rarely called during the month after it was added. Even in research on the company's own reporting from before 2015, the agent looks for other companies' articles with search_web.\n\nWhich changes are appropriate for getting search_archive to be selected appropriately? (Select two.)",
+  "en_choices": {
+   "A": "Rename search_archive to search_own_archive_1990_2015, which makes its coverage clear.",
+   "B": "In the description of search_archive, write its coverage (the company's own print editions from 1990 to 2015) and examples of search terms.",
+   "C": "Set tool_choice to {\"type\": \"any\"} so that the agent calls one of the tools on every search.",
+   "D": "Temporarily disable search_web for the search subagent so that it uses search_archive preferentially."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0019",
+  "question": "ある情報セキュリティ企業は、マルチエージェントリサーチシステムを使って、特定の業界を狙うサイバー攻撃の傾向を四半期ごとにまとめています。12の検索サブエージェントの結果を連結して統合サブエージェントに渡しており、入力は約8万トークンになります。\n\n完成したレポートを確認すると、入力の冒頭と末尾に置かれたサブエージェントの調査結果はよく反映されている一方で、5番目から8番目のサブエージェントが報告した重要な攻撃手法が抜け落ちていました。\n\n統合サブエージェントへの入力の構成を改善する方法として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "統合サブエージェントのmax_tokensを増やし、より長いレポートを出力させる。",
+   "B": "入力の冒頭に、各サブエージェントの主要な調査結果の要約を置く。",
+   "C": "12の結果の並び順を実行のたびに無作為に入れ替え、特定の結果が毎回中間に来ない状態にする。",
+   "D": "詳細な結果を、サブエージェントやトピックごとに明示的なセクション見出しで整理する。"
+  },
+  "en_question": "An information security company is using a multi-agent research system to compile quarterly summaries of trends in cyberattacks targeting a specific industry. It concatenates the results of 12 search subagents and passes them to the synthesis subagent, and the input comes to about 80,000 tokens.\n\nWhen the completed report was reviewed, the findings of the subagents placed at the beginning and end of the input were well reflected, but important attack techniques reported by the fifth through eighth subagents were missing.\n\nWhich are appropriate ways to improve how the input to the synthesis subagent is structured? (Select two.)",
+  "en_choices": {
+   "A": "Increase the synthesis subagent's max_tokens so that it outputs a longer report.",
+   "B": "Place a summary of each subagent's key findings at the beginning of the input.",
+   "C": "Randomly shuffle the order of the 12 results on every run so that no particular result ends up in the middle every time.",
+   "D": "Organize the detailed results with explicit section headings by subagent or topic."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0020",
+  "question": "ある不動産管理会社は、Claudeを使って、賃貸借契約書から賃料・共益費・駐車場代・月額合計を抽出し、家賃管理システムに登録しています。抽出には、入力をJSONスキーマで定義した抽出ツールを使っており、出力がJSONとして解析できないエラーは発生していません。\n\nところが、抽出結果の約4%で、次のような誤りがありました。\n\n月額合計が各項目の合計と一致しない\n\n共益費の金額が賃料のフィールドに入っている\n\n担当者は「ツールの定義にstrict: trueを追加すれば解決する」と提案しています。\n\nこの問題への対処として最も適切なものはどれですか。",
+  "choices": {
+   "A": "月額合計のフィールドをスキーマから削除し、登録するときにシステム側で合計を計算する。",
+   "B": "抽出後にコードで合計を照合し、不一致があれば具体的な検証エラーを添えて再抽出させる。",
+   "C": "同じ契約書の抽出を2回実行し、2回の結果が一致した項目に限って登録する。",
+   "D": "担当者の提案どおりツールの定義にstrict: trueを追加し、出力をスキーマに厳密に従わせる。"
+  },
+  "en_question": "A real estate management company uses Claude to extract the rent, common service fee, parking fee, and monthly total from lease agreements and register them in its rent management system. The extraction uses an extraction tool whose input is defined with a JSON schema, and no errors occur where the output cannot be parsed as JSON.\n\nHowever, about 4% of the extraction results contained errors such as the following.\n\nThe monthly total does not match the sum of the individual items\n\nThe common service fee amount was put in the rent field\n\nThe person in charge proposes that \"adding strict: true to the tool definition will solve it.\"\n\nWhich is the most appropriate way to handle this problem?",
+  "en_choices": {
+   "A": "Remove the monthly total field from the schema and have the system calculate the total when registering.",
+   "B": "After extraction, check the total in code, and if there is a mismatch, have Claude re-extract with a specific validation error attached.",
+   "C": "Run the extraction of the same agreement twice, and register only the items on which the two results match.",
+   "D": "Follow the person in charge's proposal, adding strict: true to the tool definition to make the output strictly follow the schema."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0021",
+  "question": "ある市役所の情報システム課は、住民税の計算システムの保守にClaude Codeを使い、CI/CDパイプラインでコードの生成とレビューを自動化しています。現在のパイプラインでは、Claudeが課題に応じてコードを生成したあと、同じセッションで「あなたの変更をレビューし、問題があれば指摘して」と依頼しています。\n\nしかし、本番で見つかった税額の端数処理の不具合3件は、いずれもこのレビューで「問題なし」とされていました。チームは拡張思考の予算を増やしてレビューを再実行しましたが、結果は変わりませんでした。\n\nレビューで見つけにくい問題を検出しやすくするための変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "同じセッションで、生成したコードに対するレビューを3回繰り返させ、毎回異なる観点を指定する。",
+   "B": "レビューは、生成時のセッションを引き継がない別のclaude -pの実行として、差分を渡して行う。",
+   "C": "生成したセッションを--resumeで再開し、レビューの指示をより厳しい表現に書き換えて再度依頼する。",
+   "D": "独立したレビューでは、CLAUDE.mdに記載した税額計算のレビュー基準に沿って判断させる。"
+  },
+  "en_question": "The information systems division of a city hall uses Claude Code to maintain its resident tax calculation system and automates code generation and review in a CI/CD pipeline. In the current pipeline, after Claude generates code in response to an issue, it is asked in the same session to \"review your changes and point out any problems.\"\n\nHowever, three defects in tax amount rounding that were found in production had all been judged \"no problems\" by this review. The team increased the extended thinking budget and re-ran the review, but the result did not change.\n\nWhich changes are appropriate for making it easier to detect problems that are hard to find in review? (Select two.)",
+  "en_choices": {
+   "A": "In the same session, have the generated code reviewed three times in a row, specifying a different perspective each time.",
+   "B": "Run the review as a separate claude -p execution that does not carry over the generation session, passing the diff to it.",
+   "C": "Resume the generation session with --resume, rewrite the review instruction in stricter wording, and ask again.",
+   "D": "In the independent review, have it make its judgments according to the tax calculation review criteria written in CLAUDE.md."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0022",
+  "question": "ある旅館・ホテルの業界団体は、マルチエージェントリサーチシステムを使って、地方の宿泊施設の人手不足対策に関するレポートを作成しています。調査の依頼では、採用、定着、業務の自動化、外国人材の活用、賃金、地域連携の6つの観点を必ず含めるよう指定しています。\n\n現在のコーディネーターは、検索と文書分析のサブエージェントに作業を委任し、統合サブエージェントの出力をそのまま最終レポートにしています。しかし、完成したレポートで外国人材の活用と地域連携の観点がほとんど扱われていないことがありました。\n\nコーディネーターの改善として最も適切なものはどれですか。",
+  "choices": {
+   "A": "検索サブエージェントの検索結果の上限件数を2倍に増やし、より多くの情報源を集めさせる。",
+   "B": "統合サブエージェントに、情報が不足する観点を「データなし」と明記させてから出力させる。",
+   "C": "統合の出力を観点ごとに評価し、不足があれば的を絞って再委任し、統合をやり直させる。",
+   "D": "統合サブエージェントにウェブ検索のツールを与え、不足する観点を自分で調べて補わせる。"
+  },
+  "en_question": "An industry association of inns and hotels is using a multi-agent research system to produce a report on measures against labor shortages at regional accommodation facilities. The research request specifies that six perspectives must always be included: recruitment, retention, work automation, use of foreign workers, wages, and regional collaboration.\n\nThe current coordinator delegates work to the search and document analysis subagents and uses the synthesis subagent's output as is for the final report. However, there have been cases where the completed report barely covered the perspectives of use of foreign workers and regional collaboration.\n\nWhich is the most appropriate improvement to the coordinator?",
+  "en_choices": {
+   "A": "Double the maximum number of search results for the search subagent so that it gathers more sources.",
+   "B": "Have the synthesis subagent explicitly state \"no data\" for perspectives with insufficient information before it produces its output.",
+   "C": "Evaluate the synthesis output perspective by perspective, and if there are gaps, re-delegate with a narrowed focus and redo the synthesis.",
+   "D": "Give the synthesis subagent a web search tool and have it investigate and fill in the missing perspectives by itself."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0023",
+  "question": "ある家電メーカーの商品企画部門は、マルチエージェントリサーチシステムを構築しています。コーディネーターエージェントが市場動向の調査をサブエージェントに委任し、出典付きのレポートを作成します。\n\nコーディネーターのエージェントループはClaude APIで独自に実装しており、現在は次の仕組みで終了します。\n\n応答にテキストブロックが含まれていれば、最終回答とみなして終了する\n\nそれとは別に、8回の反復で必ず打ち切る\n\nテストでは、調査の途中でループが終了し、実行されていないツール呼び出しが残ったまま、不完全なレポートが返されるケースが見つかりました。\n\nループの制御を見直す変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "反復回数の上限は暴走を止める安全策として残し、通常の終了判定には使わない。",
+   "B": "stop_reasonがtool_useなら続行し、end_turnなら終了する。",
+   "C": "アシスタントの応答テキストに「調査完了」という語が含まれた時点で、ループを終了する。",
+   "D": "反復回数の上限を8回から30回に引き上げ、上限に達した時点の応答をそのまま最終回答とする。"
+  },
+  "en_question": "The product planning division of a home appliance manufacturer is building a multi-agent research system. A coordinator agent delegates market trend research to subagents and produces a report with sources.\n\nThe coordinator's agent loop is implemented independently with the Claude API, and it currently terminates through the following mechanisms.\n\nIf the response contains a text block, it is regarded as the final answer and the loop terminates\n\nSeparately, it is always cut off after 8 iterations\n\nIn testing, cases were found in which the loop terminated partway through the research and an incomplete report was returned with tool calls left unexecuted.\n\nWhich changes are appropriate for revising the loop control? (Select two.)",
+  "en_choices": {
+   "A": "Keep the iteration limit as a safety measure to stop runaway behavior, and do not use it for normal termination decisions.",
+   "B": "Continue if stop_reason is tool_use, and terminate if it is end_turn.",
+   "C": "Terminate the loop at the point when the assistant's response text contains the phrase \"research complete.\"",
+   "D": "Raise the iteration limit from 8 to 30, and use the response at the point the limit is reached as the final answer as is."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0024",
+  "question": "あるSaaS企業の分析チームは、Claude Agent SDKを使ってマルチエージェントリサーチシステムを構築しています。検索サブエージェントは、社内の利用ログ基盤と外部の業界レポートを検索するMCPツールを使います。\n\n1週間分のログを分析したところ、次のことがわかりました。\n\nツールのエラーは1,200件あり、そのうち約70%は存在しないワークスペースIDを指定したことによる失敗で、残りは利用ログ基盤のタイムアウトだった\n\nツールはどの失敗でもisError: trueと「Operation failed」だけを返していた\n\nエージェントはすべての失敗を同じ入力のまま3回ずつリトライしていた\n\nタイムアウトの多くは1回のリトライで成功していた\n\n無駄なリトライを減らすための変更として最も効果的なものはどれですか。",
+  "choices": {
+   "A": "すべての失敗に対するリトライ回数を3回から1回に減らし、それでも失敗したらコーディネーターに伝える。",
+   "B": "失敗したツール呼び出しの入力と結果をキャッシュし、同じ入力での呼び出しには前回のエラーを返す。",
+   "C": "失敗の種類とリトライ可否を示す構造化エラーを返す。",
+   "D": "リトライの間隔を指数バックオフにして、リトライのたびに次の呼び出しまでの待ち時間を2倍に延ばす。"
+  },
+  "en_question": "The analytics team at a SaaS company is building a multi-agent research system using the Claude Agent SDK. The search subagent uses MCP tools that search the internal usage log platform and external industry reports.\n\nAnalyzing one week of logs revealed the following.\n\nThere were 1,200 tool errors, of which about 70% were failures caused by specifying a nonexistent workspace ID, and the rest were timeouts of the usage log platform\n\nThe tool returned only isError: true and \"Operation failed\" for every failure\n\nThe agent retried every failure three times with the same input\n\nMost of the timeouts succeeded on a single retry\n\nWhich change is most effective for reducing wasted retries?",
+  "en_choices": {
+   "A": "Reduce the number of retries for all failures from three to one, and if it still fails, report it to the coordinator.",
+   "B": "Cache the input and result of failed tool calls, and return the previous error for calls with the same input.",
+   "C": "Return a structured error indicating the type of failure and whether it can be retried.",
+   "D": "Use exponential backoff for the retry interval, doubling the wait time until the next call on each retry."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0025",
+  "question": "ある化学メーカーの研究開発部門は、Claude Codeを使って、実験記録システムの古いデータを新しい形式に変換するスクリプトを作成しています。変換の要件の1つに、温度の表記をそろえる処理があります。\n\n旧データには「25℃」「298K」「室温」「77°F」など多様な表記があり、Claudeに「温度は摂氏の数値と単位にそろえ、室温のような表記は元の文字列を残して」と文章で依頼しました。しかし、生成された変換処理は、依頼するたびに室温の扱いや小数の桁数が異なっていました。\n\n変換の要件を一貫して伝えるための方法として最も効果的なものはどれですか。",
+  "choices": {
+   "A": "「298K」→「24.85℃」、「室温」→「室温（未換算）」のような入出力の例を2〜3個示す。",
+   "B": "変換結果を確認して誤りを文章で指摘し、修正させる反復を続ける。",
+   "C": "依頼文の説明に、摂氏への換算式と、小数第2位で四捨五入する規則を文章で書き足す。",
+   "D": "CLAUDE.mdに温度表記の変換規則を箇条書きで追加し、毎回のセッションで読み込ませる。"
+  },
+  "en_question": "The R&D division of a chemical manufacturer uses Claude Code to create a script that converts old data in its experiment record system into a new format. One of the conversion requirements is a process to standardize the notation of temperatures.\n\nThe old data contains diverse notations such as \"25℃\", \"298K\", \"室温\" (room temperature), and \"77°F\", and the team asked Claude in prose: \"Standardize temperatures to a Celsius numeric value and unit, and for notations like 室温 keep the original string.\" However, the generated conversion code handled 室温 and the number of decimal places differently each time it was requested.\n\nWhich is the most effective way to convey the conversion requirements consistently?",
+  "en_choices": {
+   "A": "Show two or three input and output examples, such as \"298K\" -> \"24.85℃\" and \"室温\" -> \"室温（未換算）\".",
+   "B": "Continue iterating by checking the conversion results and pointing out errors in prose to have them corrected.",
+   "C": "Add to the explanation in the request, in prose, the conversion formula to Celsius and a rule to round to two decimal places.",
+   "D": "Add the temperature notation conversion rules as a bulleted list to CLAUDE.md so that they are loaded in every session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0026",
+  "question": "ある旅行会社の商品企画チームは、マルチエージェントリサーチシステムを使って、「訪日客の地方分散の動向」に関するレポートを作成しています。コーディネーターは3つの検索サブエージェントに、同じトピックの説明と同じ指示を渡して並列に調査させています。\n\n直近10回の実行を分析したところ、次のことがわかりました。\n\n3つのサブエージェントが返した情報源の約70%が重複している\n\n検索にかかるトークンは、1体で調べた場合の約3倍になっている\n\nレポートで引用される情報源の数は、ほとんど増えていない\n\nこの非効率を解消するためのコーディネーターの変更として最も適切なものはどれですか。",
+  "choices": {
+   "A": "検索サブエージェントを1体に減らし、同じ指示のまま検索の上限件数を3倍に増やす。",
+   "B": "統合エージェントに、重複する情報源を除外してから調査結果を統合する手順を新たに追加する。",
+   "C": "各サブエージェントに、コーディネーターの会話履歴全体をプロンプトとして渡す。",
+   "D": "サブエージェントごとに、官公庁の統計や業界レポートなど異なる情報源の種類を割り当てる。"
+  },
+  "en_question": "The product planning team at a travel company is using a multi-agent research system to produce a report on \"trends in the regional dispersion of inbound visitors to Japan.\" The coordinator passes the same topic description and the same instructions to three search subagents and has them research in parallel.\n\nAnalyzing the last 10 runs revealed the following.\n\nAbout 70% of the sources returned by the three subagents overlap\n\nThe tokens used for search are about three times what they would be if one agent did the research\n\nThe number of sources cited in the report has barely increased\n\nWhich change to the coordinator is most appropriate for eliminating this inefficiency?",
+  "en_choices": {
+   "A": "Reduce the search subagents to one, and triple the maximum number of search results with the same instructions.",
+   "B": "Add a new step for the synthesis agent to exclude duplicate sources before synthesizing the findings.",
+   "C": "Pass the coordinator's entire conversation history to each subagent as its prompt.",
+   "D": "Assign each subagent a different type of source, such as government statistics or industry reports."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0027",
+  "question": "あるSaaS企業の開発チームは、Claude Codeで2つの調査を並行して進めています。\n\n1つは、請求処理のバッチが特定の条件で二重請求を起こす原因の調査で、billing-dupという名前のセッションで3日前から続けています。この間、請求処理のコードには変更がありません。\n\nもう1つは認証モジュールのパフォーマンスの調査ですが、昨日のセッションのあとに認証モジュールが大幅に書き換えられ、以前に分析したファイルの大半が変わっています。\n\nそれぞれの調査を再開する方法として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "認証モジュールの調査は、昨日のセッションを--resumeで再開し、そのまま分析の続きを依頼する。",
+   "B": "二重請求の調査は、claude --resume billing-dupで名前付きセッションを再開して続ける。",
+   "C": "認証モジュールの調査は、以前の結論を構造化したサマリーにして新しいセッションで始める。",
+   "D": "二重請求の調査も、念のため新しいセッションで最初からコードベース全体を探索し直させる。"
+  },
+  "en_question": "The development team at a SaaS company is running two investigations in parallel with Claude Code.\n\nOne is an investigation into the cause of a billing batch causing double billing under certain conditions, which has been continuing for three days in a session named billing-dup. During this time, there have been no changes to the billing code.\n\nThe other is a performance investigation of the authentication module, but after yesterday's session the authentication module was substantially rewritten, and most of the files analyzed earlier have changed.\n\nWhich are appropriate ways to resume each investigation? (Select two.)",
+  "en_choices": {
+   "A": "For the authentication module investigation, resume yesterday's session with --resume and ask it to continue the analysis as is.",
+   "B": "For the double billing investigation, resume the named session with claude --resume billing-dup and continue.",
+   "C": "For the authentication module investigation, turn the previous conclusions into a structured summary and start in a new session.",
+   "D": "For the double billing investigation as well, to be safe, start a new session and have it explore the entire codebase again from scratch."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0028",
+  "question": "ある農業協同組合の営農支援部は、マルチエージェントリサーチシステムを使って、新しい施肥技術の効果に関するレポートを作成しています。文書分析サブエージェントは各論文の調査結果を要約してコーディネーターに返し、統合サブエージェントがそれらの要約をまとめてレポートを作ります。\n\n完成したレポートには「この技術で収量が平均12%増加した」と書かれていました。しかし、どの論文のどの試験に基づく数値なのかを確認しようとしたところ、要約の段階で出典の情報が失われており、たどれませんでした。\n\n出典を保持したレポートを作るための変更として最も適切なものはどれですか。",
+  "choices": {
+   "A": "統合サブエージェントに、レポートの最後に参考文献の一覧を付けるよう指示する。",
+   "B": "各主張に情報源のURLや論文名、抜粋を対応付けた構造化データを出力させ、統合でも保持させる。",
+   "C": "レポートの作成後に、ウェブ検索で数値の出典を探して脚注を付けるステップを追加する。",
+   "D": "文書分析サブエージェントの要約を短くさせ、統合サブエージェントが扱う情報量を減らす。"
+  },
+  "en_question": "The farm guidance support department of an agricultural cooperative is using a multi-agent research system to produce a report on the effects of a new fertilization technique. The document analysis subagent summarizes the findings of each paper and returns them to the coordinator, and the synthesis subagent compiles those summaries to produce the report.\n\nThe completed report stated that \"this technique increased yields by 12% on average.\" However, when the team tried to check which trial in which paper the figure was based on, the source information had been lost at the summarization stage and could not be traced.\n\nWhich change is most appropriate for producing a report that retains its sources?",
+  "en_choices": {
+   "A": "Instruct the synthesis subagent to attach a list of references at the end of the report.",
+   "B": "Have the subagents output structured data that maps each claim to a source URL, paper title, and excerpt, and have the synthesis retain it as well.",
+   "C": "Add a step after the report is created that looks for the source of the figures with web search and adds footnotes.",
+   "D": "Have the document analysis subagent make its summaries shorter, reducing the amount of information the synthesis subagent handles."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0029",
+  "question": "ある人材紹介会社の開発チームは、Claude Agent SDKを使って、社内エンジニア向けの開発者の生産性向上ツールを構築しています。このツールで、次の2種類の依頼を自動化しようとしています。\n\n毎週の定型作業である「求人票テンプレートの必須項目のチェック、表記ゆれの修正、差分レポートの作成」\n\n「先月から求人マッチングAPIの応答が遅くなった原因を調べる」のような、毎回内容の異なる調査\n\nそれぞれの依頼に適したタスク分解の方法として正しいものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "定型作業は、決まった3つの手順を順に実行する固定のプロンプトチェーンにする。",
+   "B": "両方の依頼を同じ汎用エージェントに渡し、反復回数の上限を20回にして自由に進めさせる。",
+   "C": "原因の調査は、最初に得られた調査結果に応じて次のサブタスクを決める動的な分解にする。",
+   "D": "原因の調査は、関係しそうなファイルを一度に読み込ませる単一のプロンプトで一括して実行する。"
+  },
+  "en_question": "The development team at a staffing agency is using the Claude Agent SDK to build a developer productivity tool for its internal engineers. They are trying to automate the following two kinds of requests with this tool.\n\nA weekly routine task: \"check the required fields of the job posting template, fix notation inconsistencies, and create a diff report\"\n\nAn investigation whose content differs each time, such as \"investigate why the job matching API's responses have become slow since last month\"\n\nWhich are the correct task decomposition methods for each request? (Select two.)",
+  "en_choices": {
+   "A": "For the routine task, use a fixed prompt chain that executes three predetermined steps in order.",
+   "B": "Give both requests to the same general-purpose agent, set the iteration limit to 20, and let it proceed freely.",
+   "C": "For the cause investigation, use dynamic decomposition in which the next subtask is decided according to the findings obtained first.",
+   "D": "For the cause investigation, run it all at once with a single prompt that loads all potentially relevant files at once."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0030",
+  "question": "ある広告会社は、Claudeを使って、広告主との契約書や発注書から出稿期間・媒体・金額などを抽出し、出稿管理システムに登録しています。抽出エージェントには、5種類の抽出ツールに加えて、CRMの検索と更新、メールの送信、カレンダーへの登録、社内チャットへの投稿など、合計18個のツールが与えられています。\n\n評価では、抽出に関係のないツールが呼ばれたり、似た抽出ツールの間で選択を誤ったりするケースが11%ありました。\n\nツール選択の信頼性を高めるための変更として最も適切なものはどれですか。",
+  "choices": {
+   "A": "18個のツールを1つの汎用ツールにまとめ、actionパラメータで操作の種類を指定させる。",
+   "B": "tool_choiceを{\"type\": \"any\"}にして、毎回いずれかのツールを呼ぶよう強制する。",
+   "C": "18個のツールそれぞれについて、正しい選択を示すfew-shotの例をシステムプロンプトに追加する。",
+   "D": "抽出エージェントには抽出に必要なツールだけを与え、CRMやメールは別のエージェントに任せる。"
+  },
+  "en_question": "An advertising company uses Claude to extract the placement period, media, amount, and other details from contracts and purchase orders with advertisers and register them in its placement management system. The extraction agent is given a total of 18 tools: five extraction tools, plus CRM search and update, email sending, calendar registration, and posting to internal chat.\n\nIn evaluation, 11% of cases involved tools unrelated to extraction being called or the wrong choice being made among similar extraction tools.\n\nWhich change is most appropriate for improving the reliability of tool selection?",
+  "en_choices": {
+   "A": "Combine the 18 tools into a single general-purpose tool and have it specify the type of operation with an action parameter.",
+   "B": "Set tool_choice to {\"type\": \"any\"} to force it to call one of the tools every time.",
+   "C": "Add few-shot examples showing the correct choice for each of the 18 tools to the system prompt.",
+   "D": "Give the extraction agent only the tools needed for extraction, and leave CRM and email to a separate agent."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0031",
+  "question": "あるEC企業の開発チームは、8つのパッケージからなるモノレポでClaude Codeを使っています。決済API・在庫API・配送APIの設計標準はdocs/standards/にファイルとしてまとめられていますが、各パッケージのCLAUDE.mdには、そのパッケージに関係する標準の本文がコピーして貼り付けられています。\n\nその結果、標準を改訂しても一部のパッケージのCLAUDE.mdが古いままになり、パッケージによってClaudeが異なる規約でコードを生成するようになりました。どのパッケージにどの標準が関係するかは、各パッケージのメンテナーが把握しています。\n\n最も適切な変更はどれですか。",
+  "choices": {
+   "A": "各パッケージのCLAUDE.mdに標準ファイルのパスを書き、必要なときにClaudeが読むよう文章で指示する。",
+   "B": "各パッケージのCLAUDE.mdの本文を削除し、選んだ標準ファイルを@importで取り込む。",
+   "C": "すべての標準ファイルの内容をルートのCLAUDE.mdにまとめ、どのパッケージでも全標準を読み込ませる。",
+   "D": "標準を改訂したときに、各パッケージのCLAUDE.mdへ本文を自動でコピーするスクリプトをCIで実行する。"
+  },
+  "en_question": "The development team at an e-commerce company uses Claude Code in a monorepo made up of eight packages. The design standards for the payment API, inventory API, and shipping API are compiled as files in docs/standards/, but each package's CLAUDE.md contains copied and pasted text of the standards relevant to that package.\n\nAs a result, even when a standard is revised, some packages' CLAUDE.md files remain outdated, and Claude has come to generate code following different conventions depending on the package. Each package's maintainer knows which standards are relevant to which package.\n\nWhich is the most appropriate change?",
+  "en_choices": {
+   "A": "Write the paths of the standards files in each package's CLAUDE.md, and instruct Claude in prose to read them when needed.",
+   "B": "Delete the body text of each package's CLAUDE.md and import the selected standards files with @import.",
+   "C": "Consolidate the contents of all standards files into the root CLAUDE.md and have every package load all the standards.",
+   "D": "Run a script in CI that automatically copies the text into each package's CLAUDE.md whenever a standard is revised."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0032",
+  "question": "ある自動車部品メーカーの開発チームは、Claude Code（Read・Grep・Globを含む組み込みツールを有効にした構成）を使って、車載ECU向けの診断ツールのコードを改修しています。低レベルのCAN通信関数send_frameを置き換える前に、その関数が使われている箇所をすべて洗い出す必要があります。\n\nところが、多くのモジュールはsend_frameを直接importせず、can_bus/__init__.pyというラッパーモジュールが別名（transmit、tx_frameなど）で再エクスポートした名前を使っています。最初にsend_frameという名前で検索したところ、見つかった使用箇所は実際の一部にとどまりました。\n\n使用箇所を漏れなく追跡するための手順として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "元の関数名send_frameを正規表現の部分一致に変えて、もう一度コードベース全体を検索する。",
+   "B": "Bashでテストスイートを実行し、send_frameの呼び出し時に記録したスタックトレースから呼び出し元を集める。",
+   "C": "特定したそれぞれの名前でコードベース全体をGrepで検索し、呼び出し箇所を洗い出す。",
+   "D": "can_bus/__init__.pyをReadで読み、元の関数を再エクスポートしている名前をすべて特定する。"
+  },
+  "en_question": "The development team at an automotive parts manufacturer uses Claude Code (configured with built-in tools including Read, Grep, and Glob enabled) to modify the code of a diagnostic tool for in-vehicle ECUs. Before replacing the low-level CAN communication function send_frame, they need to identify every place where that function is used.\n\nHowever, many modules do not import send_frame directly, and instead use names re-exported under aliases (such as transmit and tx_frame) by a wrapper module, can_bus/__init__.py. When they first searched for the name send_frame, the usage sites found were only a portion of the actual total.\n\nWhich are appropriate steps for tracking down the usage sites without omission? (Select two.)",
+  "en_choices": {
+   "A": "Change the original function name send_frame to a partial-match regular expression and search the entire codebase again.",
+   "B": "Run the test suite with Bash and collect the callers from stack traces recorded when send_frame is called.",
+   "C": "Search the entire codebase with Grep for each of the identified names to find the call sites.",
+   "D": "Read can_bus/__init__.py with Read and identify all the names that re-export the original function."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0033",
+  "question": "ある公益財団法人の開発チームは、寄付者管理システムのリポジトリで、プルリクエストごとにClaude Codeでテストケースを自動生成するCIを運用しています。生成されたテストを確認すると、次の問題がありました。\n\n実在しそうな氏名や住所を直接書き込んだテストデータが使われている\n\n既存のテストスイートですでにカバーされているシナリオが、重複して提案されている\n\nリポジトリには、匿名化済みの寄付者データのフィクスチャがtests/fixtures/に用意されています。\n\nテスト生成の品質を高めるための変更として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "生成後に別のジョブで、テスト名の文字列が既存のテストと一致したものを削除する。",
+   "B": "CIを実行するランナーのユーザーの~/.claude/CLAUDE.mdに、テストデータの扱い方を書いておく。",
+   "C": "テストの規約、良いテストの基準、使えるフィクスチャをリポジトリのCLAUDE.mdに書いてコミットする。",
+   "D": "テストを生成するときに、対象モジュールの既存のテストファイルをコンテキストとして渡す。"
+  },
+  "en_question": "The development team at a public interest foundation operates a CI that automatically generates test cases with Claude Code for each pull request in its donor management system repository. Reviewing the generated tests revealed the following problems.\n\nTest data is used that directly hardcodes realistic-looking names and addresses\n\nScenarios already covered by the existing test suite are proposed again in duplicate\n\nThe repository has fixtures of anonymized donor data prepared in tests/fixtures/.\n\nWhich changes are appropriate for improving the quality of test generation? (Select two.)",
+  "en_choices": {
+   "A": "After generation, use a separate job to delete tests whose test name strings match existing tests.",
+   "B": "Write how to handle test data in ~/.claude/CLAUDE.md of the user on the runner that executes CI.",
+   "C": "Write the testing conventions, the criteria for good tests, and the available fixtures in the repository's CLAUDE.md and commit it.",
+   "D": "When generating tests, pass the existing test files of the target module as context."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0034",
+  "question": "ある消費財メーカーのデジタル部門は、3つのブランドサイトで共有しているUIコンポーネントのライブラリを新しいデザインシステムに移行する作業に、Claude Codeを使っています。作業は、各サイトでのコンポーネントの使われ方を調べる調査フェーズと、移行方針を決めて実装するフェーズに分かれます。\n\n前回の試行では、次の2つの問題が起きました。\n\n調査フェーズでClaudeが数百のファイルを読み込んだ結果、実装フェーズに入る前にコンテキストの大半が埋まり、調査の序盤で確認した制約が実装に反映されなかった\n\n調査の途中で一部のコンポーネントを書き換え始めてしまい、方針の決定後に手戻りが生じた\n\n次の試行で取るべき進め方として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "調査と実装を同じ会話で続け、コンテキストが上限に近づいたら自動の圧縮に任せる。",
+   "B": "調査と方針の設計はプランモードで行い、計画を承認してから直接実行で実装させる。",
+   "C": "3つのサイトのファイルをすべて最初にReadで読み込ませ、全体を把握したうえで実装を始めさせる。",
+   "D": "冗長な調査はExploreサブエージェントに任せ、メインの会話には使用状況の要約だけを返させる。"
+  },
+  "en_question": "The digital division of a consumer goods manufacturer is using Claude Code to migrate a UI component library shared by three brand sites to a new design system. The work is divided into an investigation phase that examines how components are used on each site, and a phase that decides the migration approach and implements it.\n\nIn the previous attempt, the following two problems occurred.\n\nIn the investigation phase, Claude read hundreds of files, and most of the context was filled before the implementation phase began, so constraints confirmed early in the investigation were not reflected in the implementation\n\nPartway through the investigation, Claude began rewriting some components, which caused rework after the approach was decided\n\nWhich are appropriate approaches to take in the next attempt? (Select two.)",
+  "en_choices": {
+   "A": "Continue the investigation and implementation in the same conversation, and leave it to automatic compaction when the context approaches its limit.",
+   "B": "Do the investigation and approach design in plan mode, and after approving the plan, have it implement with direct execution.",
+   "C": "Have Claude first load all files of the three sites with Read, and start implementation after grasping the whole picture.",
+   "D": "Delegate the verbose investigation to an Explore subagent, and have it return only a summary of usage to the main conversation."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0035",
+  "question": "ある外食チェーンは、Claude Agent SDKを使って、予約の変更やキャンセルに対応するカスタマーサポート解決エージェントを運用しています。予約の変更が完了したときの確認メッセージには、次の4項目をこの順で含めるよう、システムプロンプトで詳しく指示しています。\n\n店舗名\n\n変更前と変更後の日時\n\n人数\n\nキャンセル規定\n\nしかし監査では、確認メッセージの23%で、項目の順序が入れ替わっていたり、キャンセル規定が文章の途中に埋もれていたりしました。\n\n確認メッセージの形式を一貫させるために最も効果的な変更はどれですか。",
+  "choices": {
+   "A": "確認メッセージの作成だけを別のサブエージェントに委任し、そのシステムプロンプトに同じ指示を書く。",
+   "B": "確認メッセージを送る前に、項目の順序を正規表現で検査して並べ替える後処理を追加する。",
+   "C": "4項目の指示に【必須】の見出しを付けて強調し、システムプロンプトの冒頭と末尾の両方に繰り返し書く。",
+   "D": "人数の変更や日時の変更など、ケースごとの確認メッセージの完成例を数件示す。"
+  },
+  "en_question": "A restaurant chain uses the Claude Agent SDK to run a customer support resolution agent that handles reservation changes and cancellations. The system prompt gives detailed instructions that the confirmation message sent when a reservation change is completed must include the following four items in this order.\n\nRestaurant name\n\nDate and time before and after the change\n\nNumber of guests\n\nCancellation policy\n\nHowever, an audit found that in 23% of confirmation messages, the order of the items was swapped or the cancellation policy was buried in the middle of a sentence.\n\nWhich change would be most effective for making the format of confirmation messages consistent?",
+  "en_choices": {
+   "A": "Delegate only the writing of confirmation messages to a separate subagent and put the same instructions in its system prompt.",
+   "B": "Add post-processing that checks the order of the items with a regular expression and reorders them before the confirmation message is sent.",
+   "C": "Emphasize the four-item instructions with a [Required] heading and repeat them at both the beginning and the end of the system prompt.",
+   "D": "Provide several complete example confirmation messages for individual cases, such as a change in the number of guests and a change in date and time."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0036",
+  "question": "ある大学は、Claude Agent SDKを使って、学生からの履修登録や証明書発行の問い合わせに対応するカスタマーサポート解決エージェントを運用しています。エージェントは、氏名でget_studentを呼び出して学生の記録を取得します。\n\n監査の結果、氏名で照会して複数の学生が一致したケースのうち約30%で、エージェントが最近ログインした学生を選んで手続きを進めており、別の学生の履修記録を案内してしまった事例が見つかりました。\n\nこの問題への対処として最も適切なものはどれですか。",
+  "choices": {
+   "A": "複数の学生が一致した場合は、問い合わせを自動的に人間の担当者にエスカレーションする。",
+   "B": "複数の学生が一致した場合は、学籍番号や生年月日など追加の識別情報を尋ねてから手続きを進める。",
+   "C": "複数の学生が一致した場合は、最終ログイン日時が最も新しい学生を選ぶ規則をシステムプロンプトに書く。",
+   "D": "複数の学生が一致した場合は、一致した全員の氏名・学部・学年を一覧で示し、本人に選んでもらう。"
+  },
+  "en_question": "A university uses the Claude Agent SDK to run a customer support resolution agent that handles student inquiries about course registration and certificate issuance. The agent retrieves a student's record by calling get_student with the student's name.\n\nAn audit found that in about 30% of cases where a name lookup matched multiple students, the agent selected the student who had logged in most recently and proceeded with the process, and in some cases it provided another student's course registration records.\n\nWhich is the most appropriate way to address this problem?",
+  "en_choices": {
+   "A": "When multiple students match, automatically escalate the inquiry to a human agent.",
+   "B": "When multiple students match, ask for additional identifying information such as the student ID number or date of birth before proceeding.",
+   "C": "Write a rule in the system prompt that, when multiple students match, the student with the most recent last login date and time is selected.",
+   "D": "When multiple students match, display a list of the name, department, and year of all matching students and have the person choose themselves."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0037",
+  "question": "ある教育サービス企業の開発チームは、学習管理システムのリポジトリに、コードレビューの手順をまとめたスキルを.claude/skills/review/SKILL.mdとしてコミットし、全員が/reviewで使っています。\n\n先月、チームでレビューの観点に「アクセシビリティの確認」を追加しましたが、あるエンジニアの/reviewだけは、新しい観点を含まない古い手順で動いていました。調べると、このエンジニアは以前、自分の好みに合わせて手順を変えたスキルを~/.claude/skills/review/SKILL.mdに作っていたことがわかりました。\n\nこのエンジニアが自分用の手順を残しつつ、チームの更新も受け取れるようにするための対応として最も適切なものはどれですか。",
+  "choices": {
+   "A": "個人用のスキルのフロントマターにdisable-model-invocation: trueを追加し、自動で読み込まれない設定にする。",
+   "B": "個人用のスキルをreview-strictのような別の名前に変え、/reviewではチームのスキルを使う。",
+   "C": "個人用のスキルを残したまま、チームの更新があるたびに差分を手作業で個人用のファイルに反映する。",
+   "D": "個人用のスキルの内容でプロジェクトのスキルを上書きしてコミットし、チーム全員を同じ手順にそろえる。"
+  },
+  "en_question": "The development team at an education services company has committed a skill that documents the code review procedure to its learning management system repository as .claude/skills/review/SKILL.md, and everyone uses it with /review.\n\nLast month the team added \"accessibility checks\" to the review criteria, but one engineer's /review alone kept running an old procedure that did not include the new criterion. Investigation showed that this engineer had previously created a skill at ~/.claude/skills/review/SKILL.md with a procedure modified to their own preferences.\n\nWhich is the most appropriate action that lets this engineer keep their own procedure while still receiving the team's updates?",
+  "en_choices": {
+   "A": "Add disable-model-invocation: true to the frontmatter of the personal skill so that it is not loaded automatically.",
+   "B": "Rename the personal skill to something like review-strict, and use the team's skill for /review.",
+   "C": "Keep the personal skill as it is and manually apply the differences to the personal file each time the team updates its skill.",
+   "D": "Overwrite the project skill with the contents of the personal skill and commit it, so that the whole team uses the same procedure."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0038",
+  "question": "ある鉄道会社のシステム部門は、Claude Agent SDKを使って、開発者の生産性向上ツールを構築しています。エンジニアがレガシーシステムを理解し、反復的な作業を自動化するためのツールです。\n\nあるエンジニアがツールに「運行管理システム全体のエラー処理を、新しい共通の例外クラスに統一して」と依頼しました。対象は約900ファイルで、どのモジュールがどの例外に依存しているかは誰も把握していません。\n\n最初の試行では、エージェントがディレクトリ名の順にファイルを1つずつ書き換え始めました。3時間後、遅延の伝播を計算するモジュールの変更が多数の箇所に影響していることが判明し、作業の大半をやり直すことになりました。\n\nこのようなオープンエンドなタスクを分解する方法として最も適切なものはどれですか。",
+  "choices": {
+   "A": "対象のファイルをまとめて1回のリクエストで読み込ませ、変更箇所の一覧を出力させてから書き換えさせる。",
+   "B": "まず依存関係を把握して影響の大きい領域から計画を立て、新たな発見に応じて計画を見直させる。",
+   "C": "900ファイルを100ファイルずつ9つのサブエージェントに割り当て、同じ指示で並列に書き換えさせる。",
+   "D": "あらかじめ「検索→置換→テスト」の固定チェーンを決め、すべてのファイルに同じ順で適用させる。"
+  },
+  "en_question": "The systems department of a railway company uses the Claude Agent SDK to build a developer productivity tool. The tool helps engineers understand legacy systems and automate repetitive tasks.\n\nAn engineer asked the tool to \"unify the error handling across the entire train operations management system with a new shared exception class.\" The scope is about 900 files, and no one knows which modules depend on which exceptions.\n\nIn the first attempt, the agent started rewriting files one at a time in directory name order. Three hours later, it turned out that a change to the module that calculates delay propagation affected many places, and most of the work had to be redone.\n\nWhich is the most appropriate way to decompose an open-ended task like this?",
+  "en_choices": {
+   "A": "Load all the target files in a single request, have it output a list of the places to change, and then have it rewrite them.",
+   "B": "First have it map the dependencies and build a plan starting from the highest-impact areas, then revise the plan as new findings emerge.",
+   "C": "Assign the 900 files to nine subagents of 100 files each and have them rewrite in parallel with the same instructions.",
+   "D": "Define a fixed chain of \"search -> replace -> test\" in advance and apply it to all files in the same order."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0039",
+  "question": "ある建設コンサルタント会社は、マルチエージェントリサーチシステムを使って、インフラの老朽化対策の事例を調べています。文書分析サブエージェントには、次の2つのツールがあります。\n\nrecord_finding（調査結果を記録する）\n\nflag_unreadable（読み取れない文書を報告する）\n\nログでは、約9%のケースで、サブエージェントがどちらのツールも呼ばずに文章だけを返しており、コーディネーターが結果を集計できていませんでした。文章だけが返されたケースの多くは、文書に関連する記述がなかった場合でした。\n\nこの問題に対処する設定と設計として適切なものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "関連する記述がなかったことを記録するrecord_no_relevant_contentツールを追加する。",
+   "B": "tool_choiceをrecord_findingに固定し、どの文書でも調査結果を記録させる。",
+   "C": "文章だけの応答が返ったときは、その文章を要約させてrecord_findingの内容として登録する。",
+   "D": "tool_choiceを{\"type\": \"any\"}にして、いずれかのツールを必ず呼ばせる。"
+  },
+  "en_question": "A construction consulting firm uses a multi-agent research system to investigate case studies of countermeasures for aging infrastructure. The document analysis subagent has the following two tools.\n\nrecord_finding (records a research finding)\n\nflag_unreadable (reports a document that cannot be read)\n\nThe logs show that in about 9% of cases, the subagent returned only text without calling either tool, and the coordinator was unable to aggregate the results. Most of the cases where only text was returned were cases where the document contained no relevant content.\n\nWhich configuration and design changes appropriately address this problem? (Select two.)",
+  "en_choices": {
+   "A": "Add a record_no_relevant_content tool that records that no relevant content was found.",
+   "B": "Fix tool_choice to record_finding so that findings are recorded for every document.",
+   "C": "When a text-only response is returned, have it summarize that text and register it as the content of record_finding.",
+   "D": "Set tool_choice to {\"type\": \"any\"} so that one of the tools is always called."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0040",
+  "question": "あるEC物流企業の開発チームは、倉庫管理システムのリポジトリで、Claude Codeによる自動コードレビューをCI/CDパイプラインに組み込んでいます。\n\n開発者から誤検知が多いという苦情が出たため、レビュー用のプロンプトに「保守的に判断し、確信度の高い指摘事項のみを報告すること」という一文を追加しました。2週間後に集計したところ、次の結果になりました。\n\n誤検知率は38%から36%にしか下がらなかった\n\n在庫引当ロジックの実際のバグを見逃すケースが増えた\n\nこの変更で精度が改善しなかった理由として正しいものはどれですか。（2つ選択してください。）",
+  "choices": {
+   "A": "「保守的に」という指示は報告する問題としない問題の基準を示しておらず、判断の境界が変わらないため。",
+   "B": "追加した一文をプロンプトの末尾に置いたことで、長い差分の後ろに隠れて読み飛ばされたため。",
+   "C": "自己申告の確信度は誤検知と対応するようキャリブレーションされておらず、誤った指摘にも高い確信度が付くため。",
+   "D": "確信度に関する指示は、-pフラグで非対話実行したClaude Codeでは無視され、対話モードでしか反映されないため。"
+  },
+  "en_question": "The development team at an e-commerce logistics company has built automated code review with Claude Code into the CI/CD pipeline for its warehouse management system repository.\n\nBecause developers complained about too many false positives, the team added the sentence \"Judge conservatively and report only findings with high confidence\" to the review prompt. Two weeks later, the aggregated results were as follows.\n\nThe false positive rate dropped only from 38% to 36%\n\nThere were more cases of missing actual bugs in the inventory allocation logic\n\nWhich are correct reasons why this change did not improve precision? (Select two.)",
+  "en_choices": {
+   "A": "The instruction to be \"conservative\" does not specify criteria for which issues to report and which not to, so the decision boundary does not change.",
+   "B": "Because the added sentence was placed at the end of the prompt, it was hidden behind a long diff and was overlooked.",
+   "C": "Self-reported confidence is not calibrated to correspond to false positives, so incorrect findings also receive high confidence.",
+   "D": "Instructions about confidence are ignored by Claude Code run non-interactively with the -p flag and are reflected only in interactive mode."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0041",
+  "question": "ある証券会社は、Claude Agent SDKを使って、口座の残高照会や取引履歴の問い合わせに対応するカスタマーサポート解決エージェントを運用しています。エージェントには、get_customerで本人確認を行ったあとに、口座データベースに対して任意のSQLを実行できるrun_sqlツールが与えられています。\n\n監査の結果、エージェントが生成したクエリの0.4%で絞り込みの条件が誤っており、本人確認済みの顧客以外の口座情報が応答に含まれていたことがわかりました。\n\nこの問題に対する最も適切な対策はどれですか。",
+  "choices": {
+   "A": "run_sqlを呼ぶ前に、生成したクエリが正しいかをエージェント自身に再確認させるステップを追加する。",
+   "B": "システムプロンプトに、クエリには必ず本人確認済みの顧客IDを条件として含めるよう明記する。",
+   "C": "run_sqlを残したまま、実行されたクエリを人間の担当者が毎日事後に確認する運用を追加する。",
+   "D": "run_sqlを、検証済みの顧客IDの口座だけを返すget_account_summaryに置き換える。"
+  },
+  "en_question": "A securities firm uses the Claude Agent SDK to run a customer support resolution agent that handles inquiries about account balances and transaction history. After verifying the customer's identity with get_customer, the agent is given a run_sql tool that can execute arbitrary SQL against the account database.\n\nAn audit found that in 0.4% of the queries the agent generated, the filter condition was incorrect, and account information for people other than the identity-verified customer was included in the response.\n\nWhich is the most appropriate countermeasure for this problem?",
+  "en_choices": {
+   "A": "Add a step that has the agent itself recheck whether the generated query is correct before calling run_sql.",
+   "B": "State explicitly in the system prompt that queries must always include the identity-verified customer ID as a condition.",
+   "C": "Keep run_sql and add a process in which a human agent reviews the executed queries after the fact every day.",
+   "D": "Replace run_sql with get_account_summary, which returns only the accounts of the verified customer ID."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0042",
+  "question": "あるエンターテインメント企業の開発チームは、チケット販売システムのリポジトリで、Claude Codeによる自動コードレビューをCIに組み込んでいます。指摘をカテゴリ別に集計すると、正しく問題を指摘できた割合は、次のとおりでした。\n\nセキュリティは92%\n\nN+1クエリは88%\n\n命名規則は31%\n\n開発者への聞き取りでは、「どうせ誤検知が多い」という理由で、セキュリティの指摘まで読まずに閉じる人が増えていることがわかりました。\n\n開発者の信頼を回復するために、最初に取るべき対応として最も適切なものはどれですか。",
+  "choices": {
+   "A": "各カテゴリの指摘に確信度を付けさせ、確信度が0.9未満の指摘は投稿しない設定にする。",
+   "B": "命名規則のカテゴリを一時的に無効にし、その間に命名規則の判定基準と例を改善する。",
+   "C": "開発者向けに、誤検知の指摘でも内容を確認してから閉じるよう求める運用ルールを周知する。",
+   "D": "誤検知を減らす目的で、レビューを実行するモデルをより上位のモデルに切り替える。"
+  },
+  "en_question": "The development team at an entertainment company has built automated code review with Claude Code into CI for its ticketing system repository. When the findings were aggregated by category, the proportion of findings that correctly identified a real problem was as follows.\n\nSecurity: 92%\n\nN+1 queries: 88%\n\nNaming conventions: 31%\n\nInterviews with developers revealed that a growing number of people were closing findings without reading them, even security findings, because \"there are lots of false positives anyway.\"\n\nWhich is the most appropriate first action to take to restore developers' trust?",
+  "en_choices": {
+   "A": "Have it attach a confidence level to the findings in each category, and configure it not to post findings with a confidence below 0.9.",
+   "B": "Temporarily disable the naming conventions category, and use that time to improve the criteria and examples for judging naming conventions.",
+   "C": "Announce an operating rule asking developers to check the content of findings before closing them, even false positives.",
+   "D": "Switch the model that runs the review to a higher-tier model in order to reduce false positives."
+  }
+ }
+]

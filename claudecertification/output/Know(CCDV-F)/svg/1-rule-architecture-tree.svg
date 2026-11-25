@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="700" viewBox="0 0 920 700" role="img" aria-label="2장 판단 규칙: workflow 패턴과 agent 선택 decision tree" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>2장 판단 규칙: workflow 패턴과 agent 선택 decision tree</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-d1-rule-architecture-tree-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-d1-rule-architecture-tree-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker><marker id="arr-d1-rule-architecture-tree-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563EB"/></marker><marker id="arr-d1-rule-architecture-tree-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker></defs>
+<text x="20" y="30" font-size="14" fill="#1F2937" text-anchor="start" font-weight="bold">패턴 선택 판단 — 위에서부터 확인</text>
+<polygon points="210,53.0 390.0,95 210,137.0 30.0,95" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="89.1" font-size="13" fill="#1F2937" text-anchor="middle">단계가 고정이고</text>
+<text x="210" y="107.1" font-size="13" fill="#1F2937" text-anchor="middle">모든 입력에서 같은가?</text>
+<rect x="430" y="63" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="82.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">결정론적 workflow (prompt chaining)</text>
+<text x="665.0" y="98.7" font-size="11" fill="#6B7280" text-anchor="middle">단계 사이 programmatic validation gate(schema check)</text>
+<text x="665.0" y="114.7" font-size="11" fill="#6B7280" text-anchor="middle">매핑 고정 변환이면 deterministic script / schema 단일 호출</text>
+<path d="M390,95 L430,95" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="401.5" y="88" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="99" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,137 L210,163" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="215.0" y="144" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="155" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,163.0 390.0,205 210,247.0 30.0,205" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="199.1" font-size="13" fill="#1F2937" text-anchor="middle">입력 유형별로 다른 처리에</text>
+<text x="210" y="217.1" font-size="13" fill="#1F2937" text-anchor="middle">보내기만 하면 되나?</text>
+<rect x="430" y="173" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="200.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">routing</text>
+<text x="665.0" y="216.7" font-size="11" fill="#6B7280" text-anchor="middle">분류 후 전용 처리로 보내고 끝</text>
+<path d="M390,205 L430,205" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="401.5" y="198" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="209" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,247 L210,273" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="215.0" y="254" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="265" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,273.0 390.0,315 210,357.0 30.0,315" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="309.1" font-size="13" fill="#1F2937" text-anchor="middle">같은 작업을 여러 번 돌려</text>
+<text x="210" y="327.1" font-size="13" fill="#1F2937" text-anchor="middle">확신도를 높이고 싶나?</text>
+<rect x="430" y="283" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="310.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">parallelization (voting)</text>
+<text x="665.0" y="326.7" font-size="11" fill="#6B7280" text-anchor="middle">다수결 · 작업 분해가 아님</text>
+<path d="M390,315 L430,315" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="401.5" y="308" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="319" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,357 L210,383" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="215.0" y="364" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="375" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,383.0 390.0,425 210,467.0 30.0,425" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="419.1" font-size="13" fill="#1F2937" text-anchor="middle">명확한 평가 기준으로 하나의</text>
+<text x="210" y="437.1" font-size="13" fill="#1F2937" text-anchor="middle">출력을 반복 개선하나?</text>
+<rect x="430" y="393" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="420.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">evaluator-optimizer</text>
+<text x="665.0" y="436.7" font-size="11" fill="#6B7280" text-anchor="middle">서로 다른 단계를 순서대로 처리하는 일에는 부적합</text>
+<path d="M390,425 L430,425" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="401.5" y="418" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="429" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,467 L210,493" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="215.0" y="474" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="485" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,493.0 390.0,535 210,577.0 30.0,535" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="529.1" font-size="13" fill="#1F2937" text-anchor="middle">입력마다 subtask가 달라지고</text>
+<text x="210" y="547.1" font-size="13" fill="#1F2937" text-anchor="middle">결과를 하나로 합치나?</text>
+<rect x="430" y="503" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="530.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">orchestrator-workers</text>
+<text x="665.0" y="546.7" font-size="11" fill="#6B7280" text-anchor="middle">manager가 동적으로 분해·위임·통합</text>
+<path d="M390,535 L430,535" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="401.5" y="528" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="539" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M210,577 L210,603" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="215.0" y="584" width="39.0" height="15" fill="#FFFFFF"/>
+<text x="218" y="595" font-size="11" fill="#1F2937" text-anchor="start">아니오</text>
+<polygon points="210,603.0 390.0,645 210,687.0 30.0,645" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="210" y="639.1" font-size="13" fill="#1F2937" text-anchor="middle">중간 결과를 봐야</text>
+<text x="210" y="657.1" font-size="13" fill="#1F2937" text-anchor="middle">다음 단계가 정해지나?</text>
+<rect x="430" y="613" width="470" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="665.0" y="640.1" font-size="13" fill="#1F2937" text-anchor="middle" font-weight="bold">agent</text>
+<text x="665.0" y="656.7" font-size="11" fill="#6B7280" text-anchor="middle">경로를 실행 중에 발견해야 할 때만</text>
+<path d="M390,645 L430,645" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-d1-rule-architecture-tree-k)"/>
+<rect x="401.5" y="638" width="17.0" height="15" fill="#FFFFFF"/>
+<text x="410" y="649" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+</svg>

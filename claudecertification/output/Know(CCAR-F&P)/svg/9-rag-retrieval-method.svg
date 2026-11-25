@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="질의 형태별 검색 방식 선택 흐름: keyword, semantic, hybrid, 질의 라우팅">
+<title>질의 형태별 검색 방식 선택 흐름: keyword, semantic, hybrid, 질의 라우팅</title>
+<defs><marker id="arr-rag-retrieval-method" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<text x="480" y="28" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">질의 형태가 검색 방식을 결정: 정확 코드는 keyword, 표현 변형은 semantic, 혼합은 hybrid</text>
+<rect x="40" y="150" width="120" height="32" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="100" y="170.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">사용자 질의</text>
+<polyline points="100,182 100,211" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<polygon points="100,211 180,251 100,291 20,251" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="100" y="255.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">질의 형태?</text>
+<polyline points="180,251 200,251" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="200,73 200,430" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="200,73 222,73" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<polyline points="200,139 222,139" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<polyline points="200,230 222,230" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<polyline points="200,341 222,341" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<polyline points="200,430 222,430" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<rect x="224" y="48" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="324" y="69.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">정확 식별자</text>
+<text x="324" y="85.2" font-size="11" fill="#1F2937" text-anchor="middle">E-4031 · 부품 코드 · SKU · ID</text>
+<polyline points="424,73 494,73" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<text x="459" y="67" font-size="11" fill="#1F2937" text-anchor="middle">정확 일치</text>
+<rect x="494" y="48" width="446" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="717" y="69.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">keyword · 정확 조회</text>
+<text x="717" y="85.2" font-size="11" fill="#1F2937" text-anchor="middle">dense 검색은 비슷하지만 틀린 항목을 반환할 수 있음</text>
+<rect x="224" y="114" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="324" y="135.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">paraphrase 질의</text>
+<text x="324" y="151.2" font-size="11" fill="#1F2937" text-anchor="middle">표현이 다양한 유사 사례</text>
+<polyline points="424,139 494,139" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<text x="459" y="133" font-size="11" fill="#1F2937" text-anchor="middle">의미 유사</text>
+<rect x="494" y="114" width="446" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="717" y="135.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">semantic(dense) 검색</text>
+<text x="717" y="151.2" font-size="11" fill="#1F2937" text-anchor="middle">정확 키워드 매칭은 표현 변형을 놓침</text>
+<rect x="224" y="205" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="324" y="226.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">코드 + paraphrase 혼합</text>
+<text x="324" y="242.2" font-size="11" fill="#1F2937" text-anchor="middle">예: 제품 기능 + 환불 정책</text>
+<polyline points="424,230 494,230" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<text x="459" y="224" font-size="11" fill="#1F2937" text-anchor="middle">둘 다 필요</text>
+<rect x="494" y="180" width="140" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="564" y="204.4" font-size="13" fill="#1F2937" text-anchor="middle">keyword matcher</text>
+<rect x="494" y="240" width="140" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="564" y="264.4" font-size="13" fill="#1F2937" text-anchor="middle">semantic matcher</text>
+<polyline points="634,200 654,200 654,230 674,230" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<polyline points="634,260 654,260 654,230" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="674" y="205" width="120" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="734" y="226.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">후보 병합</text>
+<text x="734" y="242.2" font-size="11" fill="#1F2937" text-anchor="middle">rank fusion</text>
+<polyline points="794,230 830,230" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<rect x="830" y="205" width="100" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="880" y="234.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">re-ranking</text>
+<text x="494" y="298" font-size="11" fill="#6B7280" text-anchor="start">fusion 가중치는 eval 세트에서 튜닝 · 나쁜 가중치는 한 신호가 다른 신호를 압도</text>
+<rect x="224" y="316" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="324" y="337.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">구조 속성 + 자유 서술</text>
+<text x="324" y="353.2" font-size="11" fill="#1F2937" text-anchor="middle">예: 색상 · 가격</text>
+<polyline points="424,341 494,341" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<text x="459" y="335" font-size="11" fill="#1F2937" text-anchor="middle">후보 축소</text>
+<rect x="494" y="316" width="446" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="717" y="337.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">metadata 필터 + semantic</text>
+<text x="717" y="353.2" font-size="11" fill="#1F2937" text-anchor="middle">필터로 후보를 먼저 축소</text>
+<rect x="224" y="405" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="324" y="426.9" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">ID 질의 + 모호 질의</text>
+<text x="324" y="442.2" font-size="11" fill="#1F2937" text-anchor="middle">한 시스템에 공존</text>
+<polyline points="424,430 494,430" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<text x="459" y="424" font-size="11" fill="#1F2937" text-anchor="middle">공존 시</text>
+<polygon points="560,396 626,430 560,464 494,430" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="560" y="434.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">ID 패턴?</text>
+<polyline points="626,430 700,430" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<text x="663" y="424" font-size="11" fill="#1F2937" text-anchor="middle">예</text>
+<rect x="700" y="413" width="240" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="820" y="434.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">감지 → 정확 조회</text>
+<polyline points="560,464 560,496 700,496" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-rag-retrieval-method)"/>
+<text x="630" y="490" font-size="11" fill="#1F2937" text-anchor="middle">아니오</text>
+<rect x="700" y="479" width="240" height="34" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="820" y="500.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">그 외 → semantic</text>
+<rect x="224" y="534" width="716" height="54" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="582" y="550.4" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: 한쪽 방식만 사용</text>
+<text x="582" y="565.7" font-size="11" fill="#1F2937" text-anchor="middle">semantic 전용(큰 embedding · 후보 수 증가 포함)은 정확 코드를 놓침</text>
+<text x="582" y="580.7" font-size="11" fill="#1F2937" text-anchor="middle">keyword 전용은 paraphrase를 놓침: 실패를 뒤집을 뿐</text>
+</g>
+</svg>

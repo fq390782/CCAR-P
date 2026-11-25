@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="350" viewBox="0 0 960 350" role="img" aria-label="실행 전 deny 규칙 평가만 모델 판단과 무관하게 강제되고, 시스템 프롬프트, CLAUDE.md, sandbox 도메인 목록, PostToolUse hook은 강제 수단이 아니다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+  <title>permissions 평가 시점과 실행 전 강제 수단</title>
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+  <defs>
+    <marker id="arr-perm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker>
+  </defs>
+  <text x="480" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#1F2937">금지는 실행 전에 평가되는 deny 규칙으로 강제한다</text>
+
+  <rect x="20" y="46" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="120" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">Claude의 도구 호출</text>
+  <text x="120" y="85" text-anchor="middle" font-size="11" fill="#6B7280">모델 판단 영역</text>
+  <rect x="260" y="46" width="200" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="360" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">deny 규칙 평가</text>
+  <text x="360" y="85" text-anchor="middle" font-size="11" fill="#6B7280">deny 먼저 평가 (실행 전)</text>
+  <rect x="500" y="46" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="600" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">도구 실행</text>
+  <text x="600" y="85" text-anchor="middle" font-size="11" fill="#6B7280">sandbox 안 명령</text>
+  <rect x="740" y="46" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="840" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">PostToolUse hook</text>
+  <text x="840" y="85" text-anchor="middle" font-size="11" fill="#6B7280">호출 성공 후 발화</text>
+  <line x1="220" y1="71" x2="258" y2="71" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-perm)"/>
+  <text x="239" y="63" text-anchor="middle" font-size="11" fill="#6B7280">호출</text>
+  <line x1="460" y1="71" x2="498" y2="71" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-perm)"/>
+  <text x="479" y="63" text-anchor="middle" font-size="11" fill="#6B7280">통과</text>
+  <line x1="700" y1="71" x2="738" y2="71" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-perm)"/>
+  <text x="719" y="63" text-anchor="middle" font-size="11" fill="#6B7280">성공 후</text>
+
+  <line x1="120" y1="96" x2="120" y2="124" stroke="#1F2937" stroke-width="1.5"/>
+  <line x1="360" y1="96" x2="360" y2="124" stroke="#1F2937" stroke-width="1.5"/>
+  <line x1="600" y1="96" x2="600" y2="124" stroke="#1F2937" stroke-width="1.5"/>
+  <line x1="840" y1="96" x2="840" y2="124" stroke="#1F2937" stroke-width="1.5"/>
+
+  <rect x="20" y="126" width="200" height="116" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="120" y="148" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">모델 판단에 의존</text>
+  <text x="120" y="170" text-anchor="middle" font-size="11" fill="#6B7280">시스템 프롬프트에</text>
+  <text x="120" y="186" text-anchor="middle" font-size="11" fill="#6B7280">금지 문장 반복 ✗</text>
+  <text x="120" y="206" text-anchor="middle" font-size="11" fill="#6B7280">CLAUDE.md에 deny 기재 ✗</text>
+  <text x="120" y="222" text-anchor="middle" font-size="11" fill="#6B7280">→ permission 강제 ✗</text>
+  <rect x="260" y="126" width="200" height="116" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="360" y="148" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">실행 전 평가 · 모델 무관</text>
+  <text x="360" y="170" text-anchor="middle" font-size="11" fill="#6B7280">deny 일치 → 차단</text>
+  <text x="360" y="186" text-anchor="middle" font-size="11" fill="#6B7280">모델이 결과 뒤집기 ✗</text>
+  <text x="360" y="206" text-anchor="middle" font-size="11" fill="#6B7280">커밋된 settings의 deny</text>
+  <text x="360" y="222" text-anchor="middle" font-size="11" fill="#6B7280">→ pull 후 모든 clone에 유지</text>
+  <rect x="500" y="126" width="200" height="116" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="600" y="148" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">sandbox 허용 도메인</text>
+  <text x="600" y="170" text-anchor="middle" font-size="11" fill="#6B7280">호스트를 목록에서</text>
+  <text x="600" y="186" text-anchor="middle" font-size="11" fill="#6B7280">제외해도 닿는 호스트만 제어</text>
+  <text x="600" y="206" text-anchor="middle" font-size="11" fill="#6B7280">명령 실행 자체는</text>
+  <text x="600" y="222" text-anchor="middle" font-size="11" fill="#6B7280">금지 ✗</text>
+  <rect x="740" y="126" width="200" height="116" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="840" y="148" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">PostToolUse로 차단</text>
+  <text x="840" y="170" text-anchor="middle" font-size="11" fill="#6B7280">도구 호출 성공 후에만</text>
+  <text x="840" y="186" text-anchor="middle" font-size="11" fill="#6B7280">실행</text>
+  <text x="840" y="206" text-anchor="middle" font-size="11" fill="#6B7280">→ 읽기 차단 ✗</text>
+
+  <rect x="20" y="262" width="450" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="245" y="283" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">분류</text>
+  <text x="245" y="301" text-anchor="middle" font-size="11" fill="#6B7280">안전 → allow · 위험 → deny · 판단이 중요한 회색 → ask</text>
+  <text x="245" y="317" text-anchor="middle" font-size="11" fill="#6B7280">전부 ask → 읽지 않고 허용 · 전부 allow → 통제 제거</text>
+  <rect x="490" y="262" width="450" height="70" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="715" y="283" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F2937">팀 강제 범위</text>
+  <text x="715" y="301" text-anchor="middle" font-size="11" fill="#6B7280">팀 deny = 커밋된 settings · 개인 예외 = local의 allow ✓</text>
+  <text x="715" y="317" text-anchor="middle" font-size="11" fill="#6B7280">개인 user settings의 deny = 팀 전체 강제 ✗</text>
+</svg>

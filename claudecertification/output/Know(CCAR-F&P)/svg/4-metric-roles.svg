@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="제약이 주요 지표를 고르고, 가드 지표는 위반 시 출시를 막고, 비용 지표에는 정확도 지표가 균형추가 된다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>지표의 역할</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-metric-roles" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">지표의 역할: 제약이 주요 지표를 고르고, 가드는 하한, 비용 지표에는 균형추</text>
+<rect x="20" y="150" width="220" height="150" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="130.0" y="208.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">주요 지표</text>
+<text x="130.0" y="223.3" font-size="11" fill="#6B7280" text-anchor="middle">목표를 직접 재는 지표 1개</text>
+<text x="130.0" y="237.3" font-size="11" fill="#6B7280" text-anchor="middle">제약 · 위험이 고름</text>
+<text x="130.0" y="251.3" font-size="11" fill="#6B7280" text-anchor="middle">정확도가 항상 주요 지표 ✗</text>
+<rect x="400" y="56" width="480" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="640.0" y="84.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">가드 지표 (임계값 0)</text>
+<text x="640.0" y="99.3" font-size="11" fill="#6B7280" text-anchor="middle">위반 1건 → 출시 차단 · 도메인 정의 + label 필요</text>
+<text x="640.0" y="113.3" font-size="11" fill="#6B7280" text-anchor="middle">정확도로 대체 ✗: 95%가 5% 중증 오배정을 숨길 수 있음</text>
+<path d="M240,225 L320,225 L320,94 L400,94" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-metric-roles)"/>
+<rect x="324.2" y="76" width="71.6" height="17" fill="#FFFFFF"/>
+<text x="360" y="88" font-size="12" fill="#1F2937" text-anchor="middle">안전 · 보안</text>
+<rect x="400" y="146" width="480" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="640.0" y="174.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">비즈니스 지표: 성공한 작업당 비용</text>
+<text x="640.0" y="189.3" font-size="11" fill="#6B7280" text-anchor="middle">어려운 건 거부 유인 → 정확도 지표가 균형추</text>
+<text x="640.0" y="203.3" font-size="11" fill="#6B7280" text-anchor="middle">예산이 제약이면 비용 지표 폐기 ✗</text>
+<path d="M240,225 L320,225 L320,184 L400,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-metric-roles)"/>
+<rect x="344.0" y="166" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="360" y="178" font-size="12" fill="#1F2937" text-anchor="middle">예산</text>
+<rect x="400" y="236" width="480" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="640.0" y="264.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">지연 지표: p95 · p99</text>
+<text x="640.0" y="279.4" font-size="11" fill="#6B7280" text-anchor="middle">p50 중앙값은 느린 5% 은폐 (p50 1.8초 · p95 9초 → 불만)</text>
+<text x="640.0" y="293.4" font-size="11" fill="#6B7280" text-anchor="middle">interactive SLA는 p95 또는 p99 기준으로 재작성</text>
+<path d="M240,225 L320,225 L320,274 L400,274" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-metric-roles)"/>
+<rect x="345.6" y="256" width="28.9" height="17" fill="#FFFFFF"/>
+<text x="360" y="268" font-size="12" fill="#1F2937" text-anchor="middle">SLA</text>
+<rect x="400" y="326" width="480" height="76" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="640.0" y="354.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">groundedness (주장 → 원문 추적)</text>
+<text x="640.0" y="369.4" font-size="11" fill="#6B7280" text-anchor="middle">지어낸 액션 아이템 금지 · 요약에 대한 신뢰</text>
+<text x="640.0" y="383.4" font-size="11" fill="#6B7280" text-anchor="middle">주장마다 검증 비용</text>
+<path d="M240,225 L320,225 L320,364 L400,364" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-metric-roles)"/>
+<rect x="324.2" y="346" width="71.6" height="17" fill="#FFFFFF"/>
+<text x="360" y="358" font-size="12" fill="#1F2937" text-anchor="middle">지어냄 금지</text>
+<rect x="20" y="424" width="860" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="450.0" y="449.6" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">활동 지표 · 속도 · 비용 · 가용성 지표로 품질 · 위험 지표를 대체 ✗</text>
+<text x="450.0" y="464.4" font-size="11" fill="#6B7280" text-anchor="middle">활동 지표 = 프롬프트 수정 횟수 · 응답 길이 · 분당 리뷰 줄 수 → 불만 해결 여부 증명 ✗</text>
+</svg>

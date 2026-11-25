@@ -1,0 +1,520 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0398",
+  "question": "결제 파이프라인이 채팅 요청을 받는다. 파이프라인은 요청을 검증한다. 파이프라인은 원장(ledger)을 확인한다. 원장은 system of record이다. 파이프라인은 fraud model을 실행한다. 파이프라인은 이체를 실행한다. 채팅 입력은 조작될 수 있다. 원장은 신뢰할 수 있는 시스템이다. 신뢰 경계(trust boundary)에 해당하는 것은 무엇인가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "채팅 입력과 검증 사이.",
+   "B": "fraud model과 이체 실행 사이.",
+   "C": "원장 읽기와 fraud model 사이.",
+   "D": "하나의 VPC 안에서 mutual TLS를 사용하는 두 내부 서비스 사이.",
+   "E": "로그 기록기와 디스크 사이."
+  },
+  "explanation": "결정적 문구: \"Chat input may be manipulated... runs a fraud model, and executes the transfer.\" 이유: 신뢰할 수 없는 채팅이 검증 단계로 넘어오므로(선별해야 한다) 경계이다. 이체는 부수 효과(side effect)이므로 모델에서 이체로 넘어가는 지점에는 코드에서의 권한 부여가 필요하다. C, D, E는 내부의 신뢰할 수 있는 경계 통과이다. 반사실 가정: 서비스들이 서로 다른 신뢰 영역에 있다면 D가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0399",
+  "question": "한 신문사가 시장 요약을 작성한다. 단계는 고정되어 있다. 첫째, 가격을 가져온다. 둘째, 변동을 계산한다. 셋째, 초안을 작성한다. 넷째, 편집자가 검토한다. 다섯째, 게시한다. 초안의 약 10%는 모호한 사건에 대한 판단이 필요하다. 어떤 패턴이 적합한가?",
+  "choices": {
+   "A": "모든 것에 순수 agent loop를 사용한다.",
+   "B": "고정된 단계에는 deterministic workflow를 사용하고, 모호한 10%에는 agent 호출을 끼워 넣은 뒤, 게시 단계에서는 다시 workflow로 돌아온다.",
+   "C": "도구가 없는 augmented single call.",
+   "D": "수동 처리만 한다."
+  },
+  "explanation": "결정적 문구는 \"Steps are fixed... 10% need judgment on ambiguous events.\"이다. 고정된 단계에는 workflow가 필요하다. 모호한 10%에는 런타임 판단이 필요하다. 하이브리드가 둘을 결합한다. 사건 목록을 미리 고정할 수 없다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0400",
+  "question": "지원 봇이 knowledge base를 기반으로 답한다. 한 번의 검색과 한 번의 판단으로 채팅의 95%가 해결된다. 어떤 패턴이 적합한가?",
+  "choices": {
+   "A": "10단계의 autonomous loop.",
+   "B": "Augmented single call: 검색한 뒤 한 번 판단한다.",
+   "C": "Multi-agent coordinator.",
+   "D": "12단계의 deterministic workflow."
+  },
+  "explanation": "결정적 문구: \"One retrieval plus one judgment resolves 95% of chats.\" 이유: 도구 컨텍스트를 가진 한 번의 판단은 augmented call의 정확한 형태이다. loop는 계획할 것이 없는데도 반복만 늘린다. 반사실 가정: 다음 단계가 이전 tool 결과에 의존한다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0401",
+  "question": "코드 리뷰가 세 개의 worker를 사용한다: lint, tests, security scan. 이들은 병렬로 실행되고 병합된다. 어떤 finding이 우선하는지 정하는 규칙이 없어서 병합 시 불일치가 자주 발생한다. 어떤 공백이 있는가?",
+  "choices": {
+   "A": "worker를 더 늘린다.",
+   "B": "handoff contract의 disagree rule: 심각도 순서 또는 중재자(arbiter)를 병합 시 적용하고 기록한다.",
+   "C": "더 큰 모델.",
+   "D": "더 긴 timeout."
+  },
+  "explanation": "결정적 문구: \"no rule says which finding wins.\" 이유: V2-D1.4는 contract에 disagree rule을 요구한다. 병합 규칙이 없는 병렬 작업은 병렬적인 논쟁일 뿐이다. 반사실 가정: 작업이 더 많은 독립적인 조각으로 나뉜다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0402",
+  "question": "제품 출시에는 시장 조사, 가격 점검, 채널 계획이 필요하다. 세 가지는 상태를 공유하지 않으며 서로 다른 도구를 사용한다. 출시 브리프는 이들을 병합해야 한다. 어떤 분해 방식이 적합한가?",
+  "choices": {
+   "A": "하나의 순차적 chain.",
+   "B": "세 개의 병렬 전문가로 fan-out하고, disagree rule이 있는 병합 단계로 fan-in한다.",
+   "C": "하나의 agent가 즉흥적으로 처리한다.",
+   "D": "병합을 생략한다."
+  },
+  "explanation": "결정적 문구: \"share no state and use different tools... must merge them.\" 이유: 독립성과 서로 다른 도구는 multi-agent가 유리한 조건이다. fan-in에는 병합과 disagree rule이 필요하다. 반사실 가정: 조각들이 상태를 공유한다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0403",
+  "question": "분기 비즈니스 리뷰에는 매출 수치, 지원 티켓 주제, 이탈(churn) 분석이 필요하다. 각각 서로 다른 시스템에서 온다. 수치는 리뷰 전에 일치해야 한다. 어떤 두 패턴이 적합한가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "Fan-out/fan-in: 세 개의 병렬 추출을 하나의 브리프로 병합한다.",
+   "B": "Validation pattern: 리뷰 전에 checker가 수치를 원천 시스템과 대조하여 일치시킨다.",
+   "C": "이탈이 매출에 의존하고 매출이 티켓에 의존하는 chaining.",
+   "D": "도구가 없는 단일 호출.",
+   "E": "지원 주제를 생략한다."
+  },
+  "explanation": "결정적 문구: \"different system... numbers must reconcile before the review.\" 이유: 독립적인 추출은 fan-out한다. 수치 대조는 validation pattern이다. C는 존재하지 않는 의존성을 만들어 낸다. 반사실 가정: 이탈이 실제로 매출 출력에서 도출된다면 C가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0404",
+  "question": "한 클리닉이 예약 알림을 자동화한다. 직원들은 하루 2시간을 전화에 썼다. 자동화 설계는 월 $60가 든다. 노쇼 비율은 변하지 않는다. 어떤 숫자가 가치를 결정하는가?",
+  "choices": {
+   "A": "모델의 정확도.",
+   "B": "월 순가치: (2시간 x 30 x 시간당 인건비) - $60.",
+   "C": "p95 latency.",
+   "D": "코드 줄 수."
+  },
+  "explanation": "결정적 문구: \"Staff spent 2 hours per day... costs $60 per month.\" 이유: V2-D1.6은 기준선 인건비를 전체 비용과 비교한다. 절약된 시간에 인건비 단가를 곱하고 운영 비용을 뺀 것이 순가치이다. 반사실 가정: SLA가 위약금과 함께 latency를 명시한다면 C가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0405",
+  "question": "한 팀이 fraud detector의 모델 비용을 50% 줄이자고 제안한다. 이 detector는 현재 월 $200,000의 사기를 막고 있다. 비용 절감으로 놓치는 사기가 2% 늘어날 위험이 있다. 무엇이 결정하는가?",
+  "choices": {
+   "A": "50% 비용 절감 하나만.",
+   "B": "순가치: 절약한 비용 대 예상되는 놓친 사기(월 $200,000의 2% = $4,000)에 품질 하한(quality floor) 영향을 더한 것.",
+   "C": "tier 이름.",
+   "D": "팀의 열의."
+  },
+  "explanation": "결정적 문구: \"stops $200,000 per month... risks 2% more missed fraud.\" 이유: 절감액은 새로 발생하는 월 $4,000의 손실보다 커야 한다. 비즈니스 가치가 결정하며, 절감 비율은 결정하지 않는다. 반사실 가정: 놓친 사기에 비용이 들지 않는다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0406",
+  "question": "여행 봇이 하루 20,000건의 채팅을 처리한다. 약 94%는 예약 조회이다. 약 6%는 오류가 나면 여행자가 발이 묶이는 복잡한 다중 도시 일정이다. 어떤 tier 전략이 적합한가?",
+  "choices": {
+   "A": "모든 것에 가장 성능이 높은 tier를 쓴다.",
+   "B": "조회에는 Fast tier, 일정에는 더 강한 tier를 쓰고, 발이 묶일 위험이 있는 답변에는 quality floor를 둔다.",
+   "C": "모든 것에 Fast tier를 쓴다.",
+   "D": "조회에는 더 강한 tier, 일정에는 Fast tier를 쓴다."
+  },
+  "explanation": "결정적 문구: \"an error strands a traveler.\" 이유: 오류 비용이 클래스별 tier를 정한다. D는 거꾸로이다. 반사실 가정: 조회도 여행자를 발이 묶이게 한다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0407",
+  "question": "한 팀이 단순한 질문은 Fast tier로, 어려운\n질문은 Balanced tier로 라우팅한다. 라우터는 키워드 목록이다.\n\n위험은 무엇인가?",
+  "choices": {
+   "A": "위험 없음. 키워드는 완벽하다.",
+   "B": "라우터의 오분류: 어려운 질문이 저렴한 tier로 가고(품질 위험)\n쉬운 질문이 비싼 tier로 간다(비용 위험).\n라우터도 다른 구성 요소처럼 evals가 필요하다.",
+   "C": "tier가 너무 빠르다.",
+   "D": "키워드는 비용이 너무 많이 든다."
+  },
+  "explanation": "결정적 문구: \"The router is a keyword list.\" 이유: 라우터는\n양방향으로 실패 모드를 가진 구성 요소이다. 자체 evals가\n필요하다. 반사실 가정: A는 결코 정답이 되지 않는다. 완벽한 라우터는 없다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0408",
+  "question": "채용 봇은 다른 지원자의\n이름을 절대 공개해서는 안 된다. 지원자 데이터는 retrieval index에 있다.\n\n올바른 통제는 무엇인가?",
+  "choices": {
+   "A": "이를 금지하는 system prompt 한 줄.",
+   "B": "다른 지원자의 레코드를 제외하는 retrieval filter와\n표시 전에 이름을 차단하는 코드 내 output check.",
+   "C": "더 긴 prompt.",
+   "D": "희망."
+  },
+  "explanation": "결정적 문구: \"must never reveal other candidates'\nnames.\" 이유: \"never\"는 retrieval과 output 단계의 코드 내 통제이다.\nA와 C는 guidance이다. 반사실 가정: A는 어조에는 맞지만 기밀 유지에는\n결코 맞지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0409",
+  "question": "가격 책정 봇은 다음을 강제해야 한다: 할인에는 관리자\n승인이 필요하고, 정가(list price)는 공개이다.\n\n올바른 배치는 무엇인가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "할인 도구가 실행되기 전에 코드에서 처리하는 할인 승인 gate.",
+   "B": "공개 카탈로그에서 제공되는 정가(gate 불필요).",
+   "C": "system prompt에만 있는 할인 규칙.",
+   "D": "모델의 판단에 맡긴 승인.",
+   "E": "통제가 전혀 없음."
+  },
+  "explanation": "결정적 문구: \"discounts need manager approval, and\nlist prices are public.\" 이유: 승인은 코드에서의 부수 효과 gate이다.\n공개 가격에는 gate가 필요 없다. C와 D는 돈에 관한 일을 모델에 맡긴다.\n반사실 가정: 없음.\n\n금전 gate는 코드에 둔다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0410",
+  "question": "이력서 파서가 기술(skills)을 추출한다. 특이한 직함에서\n실패하며 이를 기술로 잘못 나열한다.\n\n가장 먼저 어떤 기법이 적합한가?",
+  "choices": {
+   "A": "특이한 직함을 거부 예시로 포함한 few-shot 예시와\nstructured output schema.",
+   "B": "Zero-shot.",
+   "C": "더 큰 모델.",
+   "D": "파서 제거."
+  },
+  "explanation": "결정적 문구: \"fails on unusual job titles.\" 이유:\n거부 예시가 경계를 가르친다. schema는 형식을 바로잡는다.\nV2-D2.3: evals를 통과하는 가장 단순한 기법. 반사실 가정: 좋은 예시로도\n여전히 실패한다면 C가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0411",
+  "question": "한 법률 어시스턴트가 모든 호출마다 선례 40건을 로드한다.\n비용이 두 배가 되었다. 모델은 현재 사안에\n엉뚱한 사건을 인용한다.\n\n첫 번째 해결책은 무엇인가?",
+  "choices": {
+   "A": "더 큰 window.",
+   "B": "호출마다 40건을 모두 로드하는 대신, 관련 사건의 just-in-time retrieval과\ncompaction.",
+   "C": "더 강한 tier.",
+   "D": "더 긴 prompt."
+  },
+  "explanation": "결정적 문구는 \"loads 40 prior cases into every call... cites the wrong case.\"이다. 이는 증가와 희석을 보여 준다. Retrieval은 중요한 것을 로드한다. Compaction은 나머지를 줄인다. 모든 호출에 40건이 모두 필요하고 예산이 허용한다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0412",
+  "question": "한 쇼핑 어시스턴트의 컨텍스트에는 전체 카탈로그\n(50,000 tokens), 사용자의 최근 메시지 200개, 그리고 동일한 배송\n정책이 4번 붙여 넣어져 있다.\n\n어떤 두 가지 결함이 있는가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "증가: 전체 카탈로그가 매 호출마다 로드된다.",
+   "B": "중복: 배송 정책이 4번 나타난다.",
+   "C": "손실: 오래된 turn이 사라진다.",
+   "D": "고갈: window에서 오류가 난다.",
+   "E": "완벽한 컨텍스트."
+  },
+  "explanation": "결정적 문구: \"full catalog (50,000 tokens)... pasted\n4 times.\" 이유: 카탈로그 로드는 증가이다. 정책이 4번인 것은\n중복이다. C와 D는 근거가 없다. 반사실 가정: 호출이 window 크기\n때문에 오류가 난다면 D가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0413",
+  "question": "한 코드 어시스턴트가 하루 8,000건의 호출에 걸쳐 10,000 tokens짜리 스타일 가이드 prefix를\n공유한다. 질문은 다양하다. prefix 수정은 매주 일어난다.\n\n절감을 주장하기 전에 팀은 무엇을 확인해야 하는가?",
+  "choices": {
+   "A": "매주 prefix가 초기화되는 점을 고려하여, 측정된 hit rate를\n손익분기점과 비교한 값.",
+   "B": "총 호출 수.",
+   "C": "모델의 기분.",
+   "D": "없음. 캐싱은 항상 이득이다."
+  },
+  "explanation": "결정적 문구: \"Prefix edits happen weekly.\" 이유: 수정은\n캐시를 초기화하고 쓰기 비용을 다시 지불하게 한다. 측정된 hit rate를\n손익분기점과 비교한 값만이 결정한다. 반사실 가정: D는 결코 정답이 되지 않는다. 측정이\n결정한다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0414",
+  "question": "한 지원 agent에 refund_order와 issue_refund\n도구가 있다. 둘은 같은 일을 한다. 팀은 \"안전을 위해\" 둘 다 유지한다.\n\n올바른 것은 무엇인가?",
+  "choices": {
+   "A": "안전을 위해 둘 다 유지한다.",
+   "B": "하나를 제거한다. 겹치는 설명은 tool 선택을 혼란스럽게 한다. 명확한 schema를 가진\n환불 도구 하나가 더 안전하다.",
+   "C": "세 번째 환불 도구를 추가한다.",
+   "D": "매주 둘의 이름을 바꾼다."
+  },
+  "explanation": "결정적 문구: \"Both do the same thing.\" 이유: 중복은\nV2-D3.1 비대화(bloat) 신호이다. 하나의 동작에 이름이 둘이면\n잘못된 도구가 선택될 가능성이 두 배가 된다. 반사실 가정: 동일한 도구에 대해 A는 결코 정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0415",
+  "question": "한 HR agent가 read_policy(매일 사용),\nwrite_policy(전혀 사용 안 함), delete_employee(전혀 사용 안 함),\ndraft_email(매일 사용)을 갖고 있다.\n\n반드시 제거해야 하는 두 도구는 무엇인가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "write_policy.",
+   "B": "delete_employee.",
+   "C": "read_policy.",
+   "D": "draft_email.",
+   "E": "감사 로그."
+  },
+  "explanation": "결정적 문구: \"write_policy (never used),\ndelete_employee (never used).\" 이유: 불필요한 도구는 순전히 공격\n표면이며, 이 둘은 위험하다. 팀은 C와 D를 매일 사용한다. E는\n관측 가능성(observability)을 없앤다. 반사실 가정: 없음. 사용하는 도구는 유지한다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0416",
+  "question": "한 재무 봇이 두 개의 자회사를 서비스한다. 자회사 A의\n수치는 자회사 B에 절대 닿아서는 안 된다. 설계는 사용자가 드롭다운에서\n선택하는 자회사 필드로 필터링한다.\n\n무엇이 잘못되었는가?",
+  "choices": {
+   "A": "문제 없음. 드롭다운이 필터링한다.",
+   "B": "드롭다운 값은 사용자 입력이지 권한 부여 결정이 아니다. 필터는 인증된\n사용자의 자회사를 코드에서 사용해야 한다.",
+   "C": "봇에 더 큰 모델이 필요하다.",
+   "D": "드롭다운은 너무 느리다."
+  },
+  "explanation": "결정적 문구: \"filters by a subsidiary field the user\nselects.\" 이유: 사용자가 선택했다는 것은 사용자가 주장했다는 뜻이다. 드롭다운을\n한 번 바꾸면 다른 자회사의 수치를 읽게 된다. 검증된 신원이 결정한다.\n반사실 가정: 드롭다운이 검증된 세션에 묶여 있다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0417",
+  "question": "한 agent가 공유 API 키로 벤더 API를 호출한다. 세 개\n팀이 그 키를 공유한다. 사고 조사에서 어느 팀이 호출했는지\n귀속(attribution)이 필요하다.\n올바른 설계는 무엇인가?",
+  "choices": {
+   "A": "공유 키를 유지한다. 귀속은 중요하지 않다.",
+   "B": "팀별 자격 증명(또는 팀별 토큰)을 사용하여 각 호출이 호출자의 신원을 담도록 한다. 귀속이 중요할 때는 공유 자격 증명을 쓰지 않는다.",
+   "C": "더 큰 모델.",
+   "D": "로그를 삭제한다."
+  },
+  "explanation": "결정적 문구: \"needs attribution: which team made the\ncall.\" 이유: V2-D3.2는 귀속이 중요할 때 공유 자격 증명을\n금지한다. 팀별 자격 증명은 각 호출을 귀속 가능하게 만든다.\n반사실 가정: 귀속 필요가 없는 읽기 전용 내부 대시보드라면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0418",
+  "question": "한 문서 파이프라인의 p95를 측정했다: OCR 2.5 s, chunking 0.2\ns, embedding 0.8 s, model 1.0 s. 합계 4.5 s. SLA는 3.0 s이다.\n어떤 단계를 가장 먼저 최적화해야 하는가?",
+  "choices": {
+   "A": "Chunking.",
+   "B": "OCR: 전체의 절반 넘게 차지한다.",
+   "C": "Embedding.",
+   "D": "맞춤법 검사 단계를 추가한다."
+  },
+  "explanation": "결정적 문구: \"OCR 2.5 s... Total 4.5 s. The SLA is 3.0\ns.\" 이유: OCR은 예산의 56%이다. 1.5 s 감축은 대부분\n여기서 나와야 한다.\nA는 기껏해야 0.2 s를 줄인다. 반사실 가정: embedding이 지배적이라면 C가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0419",
+  "question": "한 예약 agent가 웹 서비스, 큐, 워커에 걸쳐 있다.\n예약 하나가 사라진다. 각 hop이 로그를 남기지만 큐가 correlation\nid를 떨어뜨린다.\n해결책은 무엇인가?",
+  "choices": {
+   "A": "웹 서비스에 로그를 더 추가한다.",
+   "B": "큐를 통해 run id를 전파한다: 큐가 이를 받아 전달해야 하며, 그래야 실행을 처음부터 끝까지 재구성할 수 있다.",
+   "C": "더 큰 모델.",
+   "D": "두 번째 큐."
+  },
+  "explanation": "결정적 문구: \"the queue drops the correlation id.\"\n이유: 큐가 trace 전파에서 끊어진 고리이다. 모든 hop이\nid를 전달해야 한다. 반사실 가정: 웹 서비스가 아무것도 로깅하지 않는다면 A가\n정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0420",
+  "question": "팀이 엔지니어링 문서용 RAG 파이프라인을 구축한다. 팀이\n단계를 나열한다.\n생성(generation) 이후에 속하는 두 단계는 무엇인가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "Grounding checks: 주장을 source chunk와 대조하여 검증한다.",
+   "B": "Citation checks: 인용된 구간이 주장을 뒷받침하는지 검증한다.",
+   "C": "Ingestion.",
+   "D": "Chunking.",
+   "E": "Indexing."
+  },
+  "explanation": "결정적 문구: \"stages... after generation.\" 이유: 표준\n파이프라인은 generation, grounding/citation checks 순으로 끝난다. C, D,\nE는 retrieval 이전 단계이다. 반사실 가정: 없음. 순서는\n정의상 정해져 있다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0421",
+  "question": "한 지원용 RAG가 200페이지 매뉴얼을 500-token 고정 크기로\n자른다. 답변이 chunk 경계에 걸친 내용을 놓친다.\n해결책은 무엇인가?",
+  "choices": {
+   "A": "더 큰 고정 chunk.",
+   "B": "구조 인식(structure-aware) chunking: 매뉴얼 섹션별로 나누어 각 chunk가\n완결된 단위가 되게 하고, 경계에는 overlap 또는 metadata를 둔다.",
+   "C": "더 많은 문서.",
+   "D": "더 강한 모델."
+  },
+  "explanation": "결정적 문구: \"miss content that spans chunk\nboundaries.\" 이유: 고정 절단은 의미를 쪼갠다. 구조 인식 chunk는\n단위를 온전히 유지한다. A는 더 큰 깨진 조각을 만든다. 반사실 가정: chunk가\n질의 단위에 비해 단순히 너무 작다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0422",
+  "question": "한 항공편 상태 봇이 \"내 항공편은 어디 있나\"에 답한다. 항공편\n위치는 30초마다 갱신된다. 설계는 위치를 한 시간 동안\n캐시한다.\n무엇이 잘못되었는가?",
+  "choices": {
+   "A": "문제 없음. 캐싱은 좋다.",
+   "B": "오래된 캐시 뒤에 있는 실시간 상태: 위치는 30초마다 바뀌므로\n한 시간 전의 위치는 틀렸다. 실시간 위치는 tool 호출 뒤에 두어야 한다.",
+   "C": "봇에 더 큰 모델이 필요하다.",
+   "D": "항공편이 움직이지 말아야 한다."
+  },
+  "explanation": "결정적 문구: \"update every 30 seconds... caches\npositions for one hour.\" 이유: V2-D3.6은 실시간 트랜잭션 상태를\ntool 호출 뒤에 둔다. 운항 중 한 시간 전의 위치는 빠르게 제공된\n틀린 답이다. 반사실 가정: 공항 주소처럼 천천히 바뀌는 데이터라면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0423",
+  "question": "하나의 Python 서비스가 하나의 내부 geocoding API를 호출한다.\n팀이 MCP 서버를 만들지 논쟁한다.\n올바른 것은 무엇인가?",
+  "choices": {
+   "A": "MCP 서버를 만든다. 최신 선택이다.",
+   "B": "직접 API를 사용한다. 소비자가 하나이고 언어가 하나이면 protocol 비용을 정당화할\n재사용 이득이 없다.",
+   "C": "CLI를 감싼다.",
+   "D": "geocoding을 다시 구현한다."
+  },
+  "explanation": "결정적 문구: \"One Python service calls one internal\ngeocoding API.\" 이유: V2-D3.7: 한 쌍에서는 직접 API가 이긴다. 재사용이 없으면 MCP의 비용은\n얻는 것이 없다. 반사실 가정: 네 개 팀이 더 이 기능을 필요로 한다면 A가\n정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0424",
+  "question": "한 팀이 다음을 위한 통합 방식을 고른다: (1) 여섯 개 팀이 필요로 하는 공유\n번역 기능, (2) 벤더 CLI를 호출하는 일회성\n스크립트.\n올바른 두 가지는 무엇인가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "공유 번역 기능을 위한 MCP 서버.",
+   "B": "일회성 벤더 스크립트를 위한 CLI wrapper(기능이 CLI로만\n존재함).",
+   "C": "일회성 스크립트를 위한 MCP 서버.",
+   "D": "번역을 위해 직접 API를 여섯 번 다시 구현한다.",
+   "E": "텍스트를 벤더에게 이메일로 보낸다."
+  },
+  "explanation": "결정적 문구: \"six teams... one-off script... vendor\nCLI.\" 이유: 소비자가 여섯이면 MCP의 protocol 비용이 정당화된다. CLI로만\n존재하는 기능에는 CLI wrapper를 쓴다. C는 한 번 쓰려고 비용을 치른다. D는\n여섯 번 중복된다.\n반사실 가정: 없음."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0425",
+  "question": "한 chat agent가 6개의 도구를 사용한다. SLA는 800 ms이다. token 예산은\n넉넉하다.\n어떤 컨텍스트 전략이 적합한가?",
+  "choices": {
+   "A": "Progressive discovery.",
+   "B": "Monolithic context: 6개의 schema를 모두 미리 로드한다. 빡빡한 SLA에서는 discovery\n왕복이 없다.",
+   "C": "도구를 제거한다.",
+   "D": "세 번의 왕복이 있는 discovery."
+  },
+  "explanation": "결정적 문구: \"6 tools... SLA is 800 ms.\" 이유: 작은\n표면과 빡빡한 SLA는 monolithic에 유리하다. Discovery의 왕복은\ntoken 이득도 없이 800 ms를 위협한다. 반사실 가정: 도구가 60개이고 SLA가 느슨하다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0426",
+  "question": "한 코드 리뷰 봇은 보안 버그를 잡아야 한다. 팀이\n지표를 논쟁한다.\n어떤 지표가 주된 지표인가?",
+  "choices": {
+   "A": "분당 리뷰한 줄 수.",
+   "B": "알려진 취약점 클래스에 대한 recall: 실제 버그 중\n잡아낸 비율.",
+   "C": "Token 비용.",
+   "D": "가동 시간(uptime)."
+  },
+  "explanation": "결정적 문구: \"must catch security bugs.\" 이유: 목표는\n버그를 잡는 것이다. 버그 클래스에 대한 recall이 정확히 그것을 측정한다.\nA는 속도, C는 비용, D는 가용성을 측정한다. 반사실 가정: 예산이 제약이고 recall이 이미 충족되었다면\nC가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0427",
+  "question": "한 번역 봇의 요구 사항은 \"좋은 번역\"이다.\n팀은 이를 인수 기준(acceptance threshold)으로 바꿔야 한다.\n올바른 변환은 무엇인가?",
+  "choices": {
+   "A": "팀이 좋다고 느낀다.",
+   "B": "측정된 기준. 예를 들어 사람이 평가한 adequacy가 4/5 이상이다.\n표본 크기와 평가자 간 일치도가 명확하다.",
+   "C": "더 큰 모델.",
+   "D": "더 많은 언어."
+  },
+  "explanation": "결정적 문구: \"'good translations.'\" 이유: V2-D4.1은\n모호한 요구 사항을 인수 기준으로 바꾼다. B는 지표, 기준선,\n측정 방법을 명시한다. 반사실 가정: A는 기준으로서 결코 정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0428",
+  "question": "한 judge model이 지원 답변을 채점한다. 팀은 judge를\n사람의 채점과 대조해 본 적이 없다.\n무엇이 필요한가?",
+  "choices": {
+   "A": "judge를 신뢰한다.",
+   "B": "judge의 채점을 신뢰하기 전에 표본 집합에서 사람의 label과 대조하여 judge를 보정(calibrate)한다.",
+   "C": "더 큰 judge.",
+   "D": "더 많은 답변."
+  },
+  "explanation": "결정적 문구는 \"never checked the judge against human grades.\"이다.\n채점 사다리(grading ladder)는 코드를 먼저 둔다.\n그다음 judge를 둔다.\n그다음 사람을 둔다.\njudge는 사람의 label과 대조하여 보정한다.\n\n보정되지 않은 judge는 검증되지 않은 채점자이다.\n채점에서 A는 결코 정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0429",
+  "question": "의료 triage 봇의 eval 세트에 교과서적인 사례만\n있다.\n어떤 두 drawer가 없는가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "Edge cases: 비전형적이지만 유효한 증상 발현.",
+   "B": "Adversarial cases: triage를 속이도록 만든 입력.",
+   "C": "더 많은 교과서적 사례.",
+   "D": "training set을 다시 사용한다.",
+   "E": "빈 페이지."
+  },
+  "explanation": "결정적 문구: \"only textbook cases.\" 이유: 대표성\ndrawer는 가득 차 있다. Edge와 adversarial은 비어 있다. triage에서는\n둘 다 안전에 직결된다. 반사실 가정: E는 형식이 잘못된(malformed) drawer로서 세 번째\n추가 항목이 된다면 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0430",
+  "question": "한 팀이 새 인사말을 A/B 테스트한다. 배정이 페이지 로드마다 무작위여서\n한 사용자가 방문마다 두 인사말을 모두 본다.\n무엇이 잘못되었는가?",
+  "choices": {
+   "A": "아무것도 하지 않는다. 무작위는 무작위이다.",
+   "B": "배정이 일관되지 않다. 같은 사용자가 두 variant를 모두 받는다. 이는 측정과 경험을 모두 손상시킨다.\n사용자별로 일관되게 배정한다.",
+   "C": "인사말은 테스트할 수 없다.",
+   "D": "테스트에 인사말이 더 필요하다."
+  },
+  "explanation": "결정적 문구: \"one user sees both greetings across\nvisits.\" 이유: V2-D4.3은 일관된 배정을 요구한다. 노출이 오락가락하면\n측정과 사용자 경험이 모두 손상된다.\n반사실 가정: 로드별 배정에서는 A가 결코 정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0431",
+  "question": "한 RAG 봇의 답변 품질이 떨어진다. trace는 올바른\nchunk가 도착하고 있음을 보여 주지만, 새 prompt가 \"cite your source\"\n지시를 제거했고 이제 답변이 chunk에서 벗어난다.\n어느 계층이 실패했는가?",
+  "choices": {
+   "A": "Retrieval.",
+   "B": "Prompt 계층: 제거된 지시가 답변 동작을 바꿨다.\n복원하고 다시 테스트한다.",
+   "C": "Index.",
+   "D": "GPU."
+  },
+  "explanation": "결정적 문구: \"right chunks arriving... removed the\n'cite your source' instruction.\" 이유: trace가 retrieval의 혐의를 벗긴다.\n변경 로그가 prompt 수정을 지목한다. 실패한 구성 요소를 고친다.\n반사실 가정: chunk가 전혀 도착하지 않는다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0432",
+  "question": "한 classifier의 정확도가 떨어진다. 조사 결과: 입력\nfeed가 지난 화요일부터 잘린 텍스트를 보내기 시작했고, 하락도\n지난 화요일에 시작되었다.\n데이터 계층을 가리키는 두 사실은 무엇인가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "feed가 잘린 텍스트를 보낸다.",
+   "B": "시점이 하락 시작과 일치한다.",
+   "C": "모델 버전은 변하지 않는다.",
+   "D": "Latency는 정상이다.",
+   "E": "사무실이 이전했다."
+  },
+  "explanation": "결정적 문구: \"truncated text last Tuesday... drop\nbegan last Tuesday.\" 이유: 원인과 시작 시점이 데이터\nfeed에서 일치한다. C는 모델의 혐의를 벗긴다. D와 E는 중립적이다. 반사실 가정: 그날 버전이 바뀌었다면 C가\n모델 결함 주장을 뒷받침하게 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0433",
+  "question": "한 지원 봇이 매 호출마다 30페이지 전체 정책을 보낸다:\n25,000 tokens. 질문은 한 섹션만 필요로 한다.\n가장 먼저 어떤 최적화가 적합한가?",
+  "choices": {
+   "A": "더 큰 모델.",
+   "B": "30페이지 전체를 보내는 대신 관련 섹션을 just-in-time으로 retrieve한다.",
+   "C": "더 긴 system prompt.",
+   "D": "더 많은 정책."
+  },
+  "explanation": "결정적 문구: \"Questions need one section... 25,000\ntokens.\" 이유: 과대한 컨텍스트가 V2-D4.5의 첫 번째 절감 대상이다. Retrieval이\n통째로 쏟아붓는 방식을 대체한다. 반사실 가정: 올바른 섹션이 있는데도 trace에서 모델이\n실패한다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0434",
+  "question": "한 batch job이 매일 밤 100,000개 문서를 처리한다. 비용은\n밤당 $400이다. 팀은 $250을 원한다.\n어떤 수단이 가장 적합한가?",
+  "choices": {
+   "A": "Tier routing: 문서를 난이도별로 분류하고, 쉬운 것은\nFast tier로 보내고, 어려운 것은 그대로 두며, quality floor를\n유지한다.",
+   "B": "문서의 절반을 삭제한다.",
+   "C": "evals를 끈다.",
+   "D": "희망."
+  },
+  "explanation": "결정적 문구는 \"100,000 documents nightly... hold the quality floor.\"이다.\n난이도가 허용하면 routing이 단가를 줄인다. 규모가 클수록 절감이 커진다. floor는 유지된다.\nB는 작업을 파괴한다.\n\nC는 측정을 파괴한다.\n실제 워크로드에서 B는 정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0435",
+  "question": "한 추천 봇의 click-through가 두 달에 걸쳐 서서히 떨어진다. eval\ndrawer는 1년 전 것이다.\n이 사각지대의 가능한 원인은 무엇인가?",
+  "choices": {
+   "A": "모델이 너무 작다.",
+   "B": "오래된 eval 데이터: drawer가 더 이상 실제 트래픽을 대표하지 않아서\n회귀 suite는 통과하는데 사용자는 고통받는다. 최근의 대표적인 데이터로\ndrawer를 새로 고친다.",
+   "C": "대시보드 색상.",
+   "D": "사용자."
+  },
+  "explanation": "결정적 문구: \"eval drawers are a year old.\" 이유:\nV2-D4.6은 대표성 있는 eval 데이터를 요구한다. 오래된 drawer는 과거의\n현실을 측정한다. 오래된 데이터에서의 녹색 suite는 쇼에 불과하다. 반사실 가정: trace가 새 데이터에서\n모델 실패를 보여 준다면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0436",
+  "question": "한 이메일 어시스턴트가 사용자 명의로 메일을 보낼 수 있다. 초안은\n맞아 보이지만 수신자 목록이 모호하다.\n어떤 통제가 적합한가?",
+  "choices": {
+   "A": "보낸다. 초안이 맞아 보인다.",
+   "B": "Fail closed: 수신자가 모호하면 발송을 차단하고 사용자에게 목록을\n확인해 달라고 요청한다. 발송 gate의 기본값은 deny이다.",
+   "C": "발송을 기록하고 희망한다.",
+   "D": "안전을 위해 모두에게 보낸다."
+  },
+  "explanation": "결정적 문구: \"the recipient list is ambiguous.\" 이유:\n사용자 명의 발송은 되돌릴 수 없고 귀속된다. 모호하면\n추측이 아니라 거부해야 한다. 반사실 가정: 모호한 수신자에 대해 A는 결코\n정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0437",
+  "question": "한 문서 agent가 인터넷에서 올라온 업로드를 처리한다.\n\n어떤 두 통제가 적합한가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "Input screening: 모델이 읽기 전에 업로드에서 악성 콘텐츠를 스캔한다.",
+   "B": "Sandboxing: 업로드를 secret과 네트워크로부터 격리하여 처리한다.",
+   "C": "친절한 system prompt.",
+   "D": "업로드를 전 직원에게 자동 전달한다.",
+   "E": "모든 로깅을 끈다."
+  },
+  "explanation": "결정적 문구: \"uploads from the internet.\" 이유: 신뢰할 수 없는 업로드는 모델에 노출되기 전에 screening이, 실행 전에 sandboxing이 필요하다. C는 guidance이다. D는 위험을 퍼뜨린다. E는 팀의 눈을 가린다. 반사실 가정: 없음."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0438",
+  "question": "한 agent의 도구 목록에 전체 데이터베이스 쓰기 권한을 가진 run_sql 도구가 있다. 이 agent의 작업은 읽기 전용 보고이다.\n\n위험은 무엇이며 해결책은 무엇인가?",
+  "choices": {
+   "A": "위험 없음. 작업이 읽기 전용이다.",
+   "B": "과도한 agency와 데이터 노출: 작업에는 필요하지 않은데도 도구가 쓰기와 삭제를 할 수 있다. 해결책: 도구를 읽기 전용으로 제한하거나 제거한다.",
+   "C": "위험은 느린 쿼리이다.",
+   "D": "해결책은 더 큰 모델이다."
+  },
+  "explanation": "결정적 문구: \"full database write access... task is read-only reporting.\" 이유: 권한이 작업을 초과한다: least privilege가 지켜지지 않았다. Prompt injection이나 오류가 쓰기로 유도할 수 있다. 반사실 가정: 권한이 작업을 초과할 때 A는 결코 정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0439",
+  "question": "한 여행 agent가 사용자의 신용카드로 항공편과 호텔을 예약한다. 여행을 추적하기 위해 확인 이메일을 읽는다.\n\n어떤 두 위험이 있는가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "Indirect injection: 확인 이메일이 지시를 담을 수 있다.",
+   "B": "과도한 agency: 사람의 gate 없이 예약이 돈을 움직인다.",
+   "C": "느린 이메일 읽기.",
+   "D": "보기 흉한 일정표.",
+   "E": "시끄러운 알림."
+  },
+  "explanation": "결정적 문구는 \"books flights... with the user's credit card... reads confirmation emails.\"이다. 이메일은 신뢰할 수 없는 콘텐츠이다. tool 접근이 가까이 있다. 예약은 gate 없이 돈을 움직인다. 둘 다 V2-D5.2의 위험이다. 외관상의 문제는 위험이 아니다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0440",
+  "question": "한 콘텐츠 봇이 블로그 글을 게시한다. 잘못된 글은 브랜드를 난처하게 하지만 몇 분 안에 되돌릴 수 있다.\n\n어떤 검토 형태가 적합한가?",
+  "choices": {
+   "A": "모든 글에 대한 pre-action 승인.",
+   "B": "Post-action 표본 검토와 감사 로깅: 되돌릴 수 있고 위험이 낮으므로, 탐지하고 바로잡는 편이 모든 것을 gate로 막는 것보다 낫다.",
+   "C": "로깅 없음.",
+   "D": "글마다 이사회 승인."
+  },
+  "explanation": "결정적 문구: \"reversible in minutes.\" 이유: V2-D5.3은 검토를 되돌릴 수 있는지에 연동한다. 되돌릴 수 있고 위험이 낮으면 post-action 표본 검토를 택한다. A는 물량이 많으면 쇼에 불과하다. 반사실 가정: 규제 대상이거나 되돌릴 수 없는 글이라면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0441",
+  "question": "한 의료 triage 봇의 권고가 환자를 응급실로 보낸다. 잘못된 권고는 치료를 지연시킨다.\n\n어떤 검토 형태가 적합한가?",
+  "choices": {
+   "A": "Post-action 표본 검토.",
+   "B": "고위험 권고에 대해 자격을 갖춘 직원의 pre-action 승인을 받고, 전체 임상 컨텍스트를 보여 준다.",
+   "C": "검토 없음. 봇은 빠르다.",
+   "D": "연례 검토."
+  },
+  "explanation": "결정적 문구: \"A wrong recommendation delays care.\" 이유: 결과가 중대하고 되돌릴 가능성이 낮다(지연된 치료는 되돌릴 수 없다). 검토자에게는 실제 의사 결정 컨텍스트가 필요하다. 반사실 가정: 위험이 낮은 정보성 답변이라면 A가 정답이 된다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0442",
+  "question": "한 핀테크 봇이 거래 기록을 저장한다. 규제 기관이 접근 통제의 증거를 요구한다.\n\n무엇이 규제 기관을 만족시키는가?",
+  "choices": {
+   "A": "\"우리는 접근 통제를 갖추고 있다.\"",
+   "B": "증거 체인(evidence chain): 요구 사항, 통제, 지정된 담당자, 저장된 증거(로그, 설정), 그리고 검토 주기.",
+   "C": "새 로고.",
+   "D": "더 긴 비밀번호."
+  },
+  "explanation": "결정적 문구: \"requires proof of access controls.\" 이유: V2-D5.4는 요구 사항에서 통제, 담당자, 증거, 주기로 이어진다. 증거는 주장이 아니라 체인이다. 반사실 가정: 규제 기관에 대해 A는 결코 정답이 되지 않는다."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0443",
+  "question": "한 어린이용 앱이 음성 클립을 수집한다. 두 가지 규정이 적용된다: 부모 동의와 데이터 최소화.\n\n어떤 두 통제가 적합한가? 두 가지를 고르시오.",
+  "choices": {
+   "A": "코드 내 동의 gate: 검증된 부모 동의 없이는 수집하지 않는다.",
+   "B": "최소화: 필요한 클립만 보관하고 나머지는 일정에 따라 자동 삭제하며, 담당자와 증거를 둔다.",
+   "C": "모든 것을 영원히 수집한다.",
+   "D": "만화 마스코트.",
+   "E": "더 큰 모델."
+  },
+  "explanation": "결정적 문구: \"parental consent and data minimization.\" 이유: 각 규정은 담당자와 증거가 있는 통제에 대응한다. C는 둘 다 위반한다. 반사실 가정: 없음."
+ }
+]

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="720" viewBox="0 0 900 720" role="img" aria-label="MCP connector: mcp_servers와 mcp_toolset을 적으면 API가 원격 MCP tool을 대신 호출한다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>MCP connector: mcp_servers와 mcp_toolset을 적으면 API가 원격 MCP tool을 대신 호출한다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-mcp-connector" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<rect x="15" y="24" width="230" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="130.0" y="48.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">앱</text>
+<polyline points="130,64 130,360" fill="none" stroke="#9CA3AF" stroke-width="1.2"/>
+<rect x="335" y="24" width="230" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="450.0" y="48.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Messages API + Claude</text>
+<polyline points="450,64 450,360" fill="none" stroke="#9CA3AF" stroke-width="1.2"/>
+<rect x="655" y="24" width="230" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="770.0" y="48.0" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">원격 MCP server (HTTP)</text>
+<polyline points="770,64 770,360" fill="none" stroke="#9CA3AF" stroke-width="1.2"/>
+<polyline points="130,100 450,100" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="173.6153846153846" y="82.0" width="232.76923076923077" height="16" fill="#FFFFFF"/>
+<text x="290.0" y="94.0" font-size="12" fill="#1F2937" text-anchor="middle">① 요청: mcp_servers + mcp_toolset</text>
+<rect x="238.6153846153846" y="109" width="102.76923076923077" height="15" fill="#FFFFFF"/>
+<text x="290.0" y="120" font-size="11" fill="#6B7280" text-anchor="middle">(beta 헤더 필요)</text>
+<polyline points="450,150 770,150" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="548.3076923076923" y="132.0" width="123.38461538461539" height="16" fill="#FFFFFF"/>
+<text x="610.0" y="144.0" font-size="12" fill="#1F2937" text-anchor="middle">② tool 목록 가져옴</text>
+<polyline points="770,180 450,180" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="569.7692307692307" y="162.0" width="80.46153846153847" height="16" fill="#FFFFFF"/>
+<text x="610.0" y="174.0" font-size="12" fill="#1F2937" text-anchor="middle">③ tool 목록</text>
+<rect x="340" y="196" width="220" height="50" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="450.0" y="216.0" font-size="12" fill="#1F2937" text-anchor="middle">④ Claude에 제시</text>
+<text x="450.0" y="232.0" font-size="12" fill="#1F2937" text-anchor="middle">Claude가 tool 선택</text>
+<polyline points="450,274 770,274" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="544.1538461538462" y="256.0" width="131.69230769230768" height="16" fill="#FFFFFF"/>
+<text x="610.0" y="268.0" font-size="12" fill="#1F2937" text-anchor="middle">⑤ 호출까지 대신 실행</text>
+<polyline points="770,306 450,306" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="587.0769230769231" y="288.0" width="45.84615384615385" height="16" fill="#FFFFFF"/>
+<text x="610.0" y="300.0" font-size="12" fill="#1F2937" text-anchor="middle">⑥ 결과</text>
+<polyline points="450,345 130,345" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="156.30769230769232" y="327.0" width="267.38461538461536" height="16" fill="#FFFFFF"/>
+<text x="290.0" y="339.0" font-size="12" fill="#1F2937" text-anchor="middle">⑦ 응답: mcp_tool_use + mcp_tool_result</text>
+<rect x="20" y="372" width="330" height="60" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="185.0" y="397.0" font-size="12" font-weight="bold" fill="#1F2937" text-anchor="middle">오답: 앱이 다시 tools/call·tool_result</text>
+<text x="185.0" y="413.0" font-size="12" fill="#1F2937" text-anchor="middle">→ 중복 실행 (쓰기 작업 중복)</text>
+<text x="20" y="464" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">요청 구성</text>
+<rect x="20" y="478" width="300" height="92" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="170.0" y="511.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">mcp_servers</text>
+<text x="170.0" y="527.5" font-size="12" fill="#1F2937" text-anchor="middle">type, url, name</text>
+<text x="170.0" y="543.5" font-size="12" fill="#1F2937" text-anchor="middle">authorization_token (필요 시)</text>
+<rect x="380" y="478" width="500" height="92" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="630.0" y="503.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">tools: mcp_toolset</text>
+<text x="630.0" y="519.5" font-size="12" fill="#1F2937" text-anchor="middle">mcp_server_name으로 서버 참조</text>
+<text x="630.0" y="535.5" font-size="12" fill="#1F2937" text-anchor="middle">default_config: 전체 기본값</text>
+<text x="630.0" y="551.5" font-size="12" fill="#1F2937" text-anchor="middle">configs: tool별 enabled 덮어쓰기</text>
+<polyline points="378,512 322,512" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="319.13461538461536" y="493" width="61.73076923076923" height="15" fill="#FFFFFF"/>
+<text x="350" y="504" font-size="11" fill="#1F2937" text-anchor="middle">name 참조</text>
+<rect x="380" y="584" width="500" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="630.0" y="609.0" font-size="12" fill="#1F2937" text-anchor="middle">쓰기 tool만 enabled: false → 읽기 전용 (allowlist 형태도 가능)</text>
+<polyline points="630,570 630,582" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-mcp-connector)"/>
+<rect x="20" y="584" width="300" height="120" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="170.0" y="617.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">제약</text>
+<text x="170.0" y="632.5" font-size="11" fill="#1F2937" text-anchor="middle">tool 호출만 (resources·prompts 불가)</text>
+<text x="170.0" y="647.5" font-size="11" fill="#1F2937" text-anchor="middle">HTTP(Streamable HTTP·SSE) 서버만,</text>
+<text x="170.0" y="662.5" font-size="11" fill="#1F2937" text-anchor="middle">로컬 stdio 서버 불가</text>
+<text x="170.0" y="677.5" font-size="11" fill="#1F2937" text-anchor="middle">Bedrock·Google Cloud 미제공</text>
+<rect x="380" y="644" width="500" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="630.0" y="669.0" font-size="12" fill="#1F2937" text-anchor="middle">문서를 읽혀야 하면: 앱이 직접 가져와 메시지에 넣거나</text>
+<text x="630.0" y="685.0" font-size="12" fill="#1F2937" text-anchor="middle">문서를 돌려주는 tool을 서버에 만든다</text>
+</svg>

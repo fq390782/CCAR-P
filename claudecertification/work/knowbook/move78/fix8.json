@@ -1,0 +1,201 @@
+{
+ "add": {},
+ "rep": [
+  [
+   "| 필요한 쓰기 · 삭제 tool의 범위 제한<br>(코드 내 확인 · 영향 범위 상한 · 허용 대상) | ✓ |\n",
+   ""
+  ],
+  [
+   "| 읽기 / 쓰기 권한 분리<br>쓰기는 역할상 필요한 곳만 + 명시적 승인 게이트 | ✓ |\n",
+   ""
+  ],
+  [
+   "| 확인 대화상자 · 업무 시간 제한 | 보완 통제 · 권한은 활성 상태 |\n",
+   ""
+  ],
+  [
+   "| 두 번째 모델의 호출 검토 | ✗ 같은 오해석 반복 · tool은 활성 |\n",
+   ""
+  ],
+  [
+   "| 모든 tool 제거 | ✗ 최소 권한 아닌 권한 없음 |\n",
+   ""
+  ],
+  [
+   "| 고빈도 + gate 정상인 민감 tool(`refund`) | 유지 · 민감성은 gate가 처리 |\n",
+   ""
+  ],
+  [
+   "| 사고를 낸 `delete_account` | 제거 또는 범위 제한<br>(코드 확인 · 영향 범위 제한 · 허용 대상) |\n",
+   ""
+  ],
+  [
+   "| 사고 대응에 실제로 필요한 삭제 tool | 유지 + 감시 + gate (반례) |\n",
+   ""
+  ],
+  [
+   "| 구분 | 내용 |\n|---|---|\n| tool description · schema | 모델 입력 = 주입 경로<br>악의적 · 침해된 서버가 지시 주입 가능 |\n| 원격 설정 파일에서 description 로드 | 조용한 업데이트로 변조 가능 → 버전 고정 |\n| 완화책 | 버전 고정 · schema를 신뢰 불가로 취급<br>샌드박스 · 확인 게이트로 가로챈 호출의 영향 제한 |\n| 결함의 위치 | 프로토콜 ✗ · 신뢰할 수 없는 콘텐츠 |\n| 자금 이동 tool(closed-source 벤더 server) | 최소 권한 자격 증명 + 사람의 승인 |\n| 승인 강제 위치 | 효과를 수행하는 계층 |\n| 결제 결정 | 제3자 설명(description)에 의존 ✗ |\n\n",
+   ""
+  ],
+  [
+   "| 상황 | 정답 |\n|---|---|\n| 감사에서 지시한 사람 특정 | per-user delegation<br>요청 사용자 ID로 동작 · 대상 시스템이 그 사용자 권한 강제 |\n| 팀 단위 귀속 | 팀별 credential · token |\n| remote MCP server가 요청 직원 기록 | 사용자별 OAuth token<br>→ `authorization_token`으로 전달 |\n| 사용자 데이터 읽기 | 마스터 API key ✗<br>좁은 scope의 사용자별 delegation token |\n| 공유 설정 속 개인 credential | scope 제한된 service identity |\n| 귀속 불필요한 read-only 내부 대시보드 | 공유 credential 허용 |\n\n",
+   ""
+  ],
+  [
+   "| 방식 | 귀속 불가 이유 |\n|---|---|\n| 공유 credential | 로그에 공유 ID 하나로 합쳐짐 |\n| 프롬프트에 직원 이름 | 시스템이 검증 불가 · 인증 ✗ |\n| 앱 로그에 이름 기록 | 기록 시스템(ERP)은 단일 ID만 인가<br>두 로그가 어긋날 수 있음 |\n| 부서별 credential | 사람 특정 ✗ |\n| 공유 OAuth token + 로깅 프록시 | 로그인한 사용자를 식별하는 token ✗ |\n| `anthropic-workspace-id` 헤더 | 팀 workspace 지정 · 직원 식별 ✗ |\n| 마스터 키 | ambient authority → confused deputy<br>모든 사용자의 데이터 접근 |\n| 설정에 하드코딩된 개인 credential | 귀속 ✗ · 교체 ✗<br>개발자 이탈 시 credential도 이탈 |\n\n",
+   ""
+  ],
+  [
+   "| 경계 통제 | 내용 |\n|---|---|\n| 경계 넘는 bearer token | audience 바인딩<br>수신 시 audience 확인 |\n| TLS | 전송 중 privacy · audience 증명 ✗ |\n| token 주기 교체 | 수명 위협 대응 · 바인딩 ✗ |\n| token · secret 보관 | 시스템 프롬프트 ✗ |\n| 환불 인가 | 소유 시스템(청구)에서 결정론 강제 · fail closed |\n| 캐시된 승인 | 승인자가 내리지 않은 승인 ✗ |\n| 검토용 두 번째 model | 같은 신뢰 못 할 입력을 읽음 |\n| 의존성 | 파트너의 바인딩 확인 협조<br>청구 시스템의 승인 통합 |\n| per-user delegation 비용 | IdP의 사용자별 token · 대상 시스템 권한 매핑<br>공유 secret보다 무거움 |\n\n",
+   ""
+  ],
+  [
+   "| 읽기 · 쓰기 혼재 agent | 읽기 / 쓰기 분리 + 쓰기는 필요 역할만 + 승인 게이트 |\n",
+   ""
+  ],
+  [
+   "| 서드파티 MCP 서버 연동 | 버전 고정 + description 신뢰 불가 취급<br>+ 샌드박스 · 확인 게이트 |\n",
+   ""
+  ],
+  [
+   "| 서드파티 server의 결제 tool | 최소 권한 자격 증명 + 사람의 승인(효과 계층) |\n",
+   ""
+  ],
+  [
+   "| 사용자 입력 값으로 tenant 필터 | 인증된 신원에서 tenant 도출 · 코드에서 필터 |\n",
+   ""
+  ],
+  [
+   "| 부작용 tool 권한 검사 | 실행 전 코드에서 결정론적 검사 · fail closed |\n",
+   ""
+  ],
+  [
+   "| 감사에서 사람 특정 | per-user delegation |\n",
+   ""
+  ],
+  [
+   "| remote MCP server가 직원별 기록 | 사용자별 OAuth token → `authorization_token` |\n",
+   ""
+  ],
+  [
+   "| 신뢰 경계를 넘는 bearer token | audience 바인딩 + 수신 시 확인 |\n",
+   ""
+  ],
+  [
+   "| 확인 대화상자 · 업무 시간 제한 · 두 번째 검토 모델 | 보완일 뿐 · 권한 존재 · 노출 시간대만 축소 |\n",
+   ""
+  ],
+  [
+   "| refund처럼 gate된 고빈도 tool 제거 | 정당한 사용 박탈 · 민감성은 gate 몫 |\n",
+   ""
+  ],
+  [
+   "| 모든 tool 제거 후 context만으로 답변 | 정당한 기능 상실 |\n",
+   ""
+  ],
+  [
+   "| 서드파티 주입 위험에 더 큰 모델 · 전체 재작성 · 유출 후 키 삭제 | 주입 경로 미해결 · MCP 가치 소실 · 증상만 처리 |\n",
+   ""
+  ],
+  [
+   "| SOC 2 보고서 · prompt 지시로 결제 안전 확보 | 벤더 통제 설명일 뿐 · 우회 가능 |\n",
+   ""
+  ],
+  [
+   "| 입력 clinic · `tenant_id`<br>드롭다운 · profile 필드로 필터 | 사용자 claim · 값 변경 한 번에 타 tenant 데이터 읽음 |\n",
+   ""
+  ],
+  [
+   "| 응답 후 필터 · 사후 감사 로그만 | 읽기 · 변경이 이미 발생 |\n",
+   ""
+  ],
+  [
+   "| 시스템 프롬프트 · 모델 판단 · 더 큰 모델로 인가 | 모델은 권한 보유자 모름<br>신뢰 경계를 성능 문제로 취급 |\n",
+   ""
+  ],
+  [
+   "| 로그인만 확인하고 입력한 대상 조회 허용 | authN만 있고 authZ 없음 |\n",
+   ""
+  ],
+  [
+   "| 프롬프트에 이름 · 앱 로그 · 부서별 credential로 귀속 | 시스템이 검증하는 사용자 ID ✗ |\n",
+   ""
+  ],
+  [
+   "| 공유 OAuth token + 로깅 프록시<br>`anthropic-workspace-id` 헤더 | 직원별 귀속 수단 ✗ |\n",
+   ""
+  ],
+  [
+   "| 마스터 API key를 agent에 부여 | ambient authority → confused deputy |\n",
+   ""
+  ],
+  [
+   "| TLS · 주기 교체 · 두 번째 model로 token · 환불 통제 | audience 바인딩 · 소유 시스템 강제 ✗ |\n",
+   ""
+  ],
+  [
+   "| token을 시스템 프롬프트에 보관 · 환불 승인 캐시 | secret 노출 · 승인자가 내리지 않은 승인 |\n",
+   ""
+  ],
+  [
+   "| per-user delegation | 요청 사용자 ID로 동작 · 대상 시스템이 권한 강제 |\n",
+   ""
+  ],
+  [
+   "| ambient authority | 마스터 키처럼 호출자와 무관하게 가진 넓은 권한 |\n",
+   ""
+  ],
+  [
+   "| confused deputy | ambient authority를 가진 agent가 사용자 대신 접근 |\n",
+   ""
+  ],
+  [
+   "| claim | 사용자가 주장한 값 · 인가 근거 ✗ |\n",
+   ""
+  ],
+  [
+   "| audience 바인딩 | token을 특정 수신 서비스에 묶음 · 수신 시 확인 |\n",
+   ""
+  ],
+  [
+   "| fail closed | 확인 불가 시 거부 |\n",
+   ""
+  ],
+  [
+   "| system of record | 기록 · 권한 기준 시스템(예: ERP) |\n",
+   ""
+  ],
+  [
+   "- [ ] 입력값(tenant · 이름 · 드롭다운) = claim → 인가는 코드에서 강제\n",
+   ""
+  ],
+  [
+   "- [ ] 정적 카탈로그 = resource · 귀속 필요 = 사용자별 credential",
+   "- [ ] 정적 카탈로그 = resource"
+  ],
+  [
+   "<sub>근거: CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0029, CCAR-F-Amey-Thakur-0062, CCAR-F-Udemy03-0054, CCAR-F-Udemy03-0058, CCAR-P-jrajath94-0008, CCAR-P-jrajath94-0079</sub>",
+   "<sub>근거: CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0029, CCAR-F-Amey-Thakur-0062, CCAR-F-Udemy03-0054, CCAR-F-Udemy03-0058</sub>"
+  ],
+  [
+   "<sub>근거: CCAR-P-jrajath94-0160, CCAR-P-jrajath94-0161, CCAR-P-jrajath94-0162, CCAR-P-jrajath94-0417, CCAR-P-jrajath94-0480, CCAR-P-jrajath94-0543, CCAR-P-jrajath94-0632, CCAR-P-jrajath94-0649</sub>",
+   "<sub>근거: CCAR-P-jrajath94-0162, CCAR-P-jrajath94-0649</sub>"
+  ],
+  [
+   "<sub>근거: Amey-0009, Amey-0031, Amey-0032, Amey-0044, Amey-0077, Amey-0078, CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0010, CCAR-F-Amey-Thakur-0028, CCAR-F-Amey-Thakur-0029, CCAR-F-Amey-Thakur-0030, CCAR-F-Amey-Thakur-0037, CCAR-F-Amey-Thakur-0039, CCAR-F-Amey-Thakur-0061, CCAR-F-Amey-Thakur-0062, CCAR-F-Amey-Thakur-0063, CCAR-F-Amey-Thakur-0076, CCAR-F-Amey-Thakur-0077, CCAR-F-MyPractice-0044, CCAR-F-MyPractice-0056, CCAR-F-MyPractice-0062, CCAR-F-Udemy01-0007, CCAR-F-Udemy01-0012, CCAR-F-Udemy01-0013, CCAR-F-Udemy01-0016, CCAR-F-Udemy01-0027, CCAR-F-Udemy01-0035, CCAR-F-Udemy01-0037, CCAR-F-Udemy01-0044, CCAR-F-Udemy01-0050, CCAR-F-Udemy01-0052, CCAR-F-Udemy01-0054, CCAR-F-Udemy02-0002, CCAR-F-Udemy02-0008, CCAR-F-Udemy02-0013, CCAR-F-Udemy02-0016, CCAR-F-Udemy02-0039, CCAR-F-Udemy02-0046, CCAR-F-Udemy02-0048, CCAR-F-Udemy02-0049, CCAR-F-Udemy02-0054, CCAR-F-Udemy03-0004, CCAR-F-Udemy03-0021, CCAR-F-Udemy03-0027, CCAR-F-Udemy03-0028, CCAR-F-Udemy03-0031, CCAR-F-Udemy03-0032, CCAR-F-Udemy03-0054, CCAR-F-Udemy03-0055, CCAR-F-Udemy03-0057, CCAR-F-Udemy03-0058, CCAR-F-Udemy03-0059, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0012, CCAR-F-Udemy04-0019, CCAR-F-Udemy04-0021, CCAR-F-Udemy04-0027, CCAR-F-Udemy04-0029, CCAR-F-Udemy04-0030, CCAR-F-Udemy04-0036, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0052, CCAR-F-Udemy04-0057, CCAR-F-Udemy05-0006, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0011, CCAR-F-Udemy05-0015, CCAR-F-Udemy05-0018, CCAR-F-Udemy05-0028, CCAR-F-Udemy05-0033, CCAR-F-Udemy05-0040, CCAR-F-Udemy05-0046, CCAR-F-Udemy06-0003, CCAR-F-Udemy06-0008, CCAR-F-Udemy06-0010, CCAR-F-Udemy06-0018, CCAR-F-Udemy06-0030, CCAR-F-Udemy06-0032, CCAR-F-Udemy06-0039, CCAR-F-Udemy06-0041, CCAR-F-Udemy06-0046, CCAR-F-Udemy06-0048, CCAR-F-Udemy06-0052, CCAR-F-Udemy06-0056, CCAR-F-paullarionov-0010, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-F-paullarionov-0046, CCAR-F-paullarionov-0056, CCAR-F-paullarionov-0057, CCAR-F-preporato-0003, CCAR-F-preporato-0007, CCAR-F-preporato-0014, CCAR-F-preporato-0015, CCAR-F-preporato-0016, CCAR-P-Amey-Thakur-0001, CCAR-P-Amey-Thakur-0003, CCAR-P-Amey-Thakur-0038, CCAR-P-Amey-Thakur-0050, CCAR-P-jrajath94-0002, CCAR-P-jrajath94-0003, CCAR-P-jrajath94-0008, CCAR-P-jrajath94-0012, CCAR-P-jrajath94-0079, CCAR-P-jrajath94-0159, CCAR-P-jrajath94-0160, CCAR-P-jrajath94-0161, CCAR-P-jrajath94-0162, CCAR-P-jrajath94-0175, CCAR-P-jrajath94-0176, CCAR-P-jrajath94-0177, CCAR-P-jrajath94-0179, CCAR-P-jrajath94-0298, CCAR-P-jrajath94-0305, CCAR-P-jrajath94-0351, CCAR-P-jrajath94-0414, CCAR-P-jrajath94-0477, CCAR-P-jrajath94-0541, CCAR-P-jrajath94-0589, CCAR-P-jrajath94-0629, CCAR-P-jrajath94-0630, CCAR-P-jrajath94-0632, CCAR-P-jrajath94-0646, CCAR-P-jrajath94-0649, CCAR-P-jrajath94-0650, CCAR-P-jrajath94-0651, Patrick-0002, Patrick-0017, Patrick-0018, Preporato-0024, Preporato-0025, Udemy-0011, Udemy-0013, Udemy-0016, Udemy-0025, Udemy-0033, Udemy-0036, Udemy-0045</sub>",
+   "<sub>근거: Amey-0009, Amey-0031, Amey-0032, Amey-0044, Amey-0077, Amey-0078, CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0010, CCAR-F-Amey-Thakur-0028, CCAR-F-Amey-Thakur-0029, CCAR-F-Amey-Thakur-0030, CCAR-F-Amey-Thakur-0037, CCAR-F-Amey-Thakur-0039, CCAR-F-Amey-Thakur-0061, CCAR-F-Amey-Thakur-0062, CCAR-F-Amey-Thakur-0063, CCAR-F-Amey-Thakur-0076, CCAR-F-Amey-Thakur-0077, CCAR-F-MyPractice-0044, CCAR-F-MyPractice-0056, CCAR-F-MyPractice-0062, CCAR-F-Udemy01-0007, CCAR-F-Udemy01-0012, CCAR-F-Udemy01-0013, CCAR-F-Udemy01-0016, CCAR-F-Udemy01-0027, CCAR-F-Udemy01-0035, CCAR-F-Udemy01-0037, CCAR-F-Udemy01-0044, CCAR-F-Udemy01-0050, CCAR-F-Udemy01-0052, CCAR-F-Udemy01-0054, CCAR-F-Udemy02-0002, CCAR-F-Udemy02-0008, CCAR-F-Udemy02-0013, CCAR-F-Udemy02-0016, CCAR-F-Udemy02-0039, CCAR-F-Udemy02-0046, CCAR-F-Udemy02-0048, CCAR-F-Udemy02-0049, CCAR-F-Udemy02-0054, CCAR-F-Udemy03-0004, CCAR-F-Udemy03-0021, CCAR-F-Udemy03-0027, CCAR-F-Udemy03-0028, CCAR-F-Udemy03-0031, CCAR-F-Udemy03-0032, CCAR-F-Udemy03-0054, CCAR-F-Udemy03-0055, CCAR-F-Udemy03-0057, CCAR-F-Udemy03-0058, CCAR-F-Udemy03-0059, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0012, CCAR-F-Udemy04-0019, CCAR-F-Udemy04-0021, CCAR-F-Udemy04-0027, CCAR-F-Udemy04-0029, CCAR-F-Udemy04-0030, CCAR-F-Udemy04-0036, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0052, CCAR-F-Udemy04-0057, CCAR-F-Udemy05-0006, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0011, CCAR-F-Udemy05-0015, CCAR-F-Udemy05-0018, CCAR-F-Udemy05-0028, CCAR-F-Udemy05-0033, CCAR-F-Udemy05-0040, CCAR-F-Udemy05-0046, CCAR-F-Udemy06-0003, CCAR-F-Udemy06-0008, CCAR-F-Udemy06-0010, CCAR-F-Udemy06-0018, CCAR-F-Udemy06-0030, CCAR-F-Udemy06-0032, CCAR-F-Udemy06-0039, CCAR-F-Udemy06-0041, CCAR-F-Udemy06-0046, CCAR-F-Udemy06-0048, CCAR-F-Udemy06-0052, CCAR-F-Udemy06-0056, CCAR-F-paullarionov-0010, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-F-paullarionov-0046, CCAR-F-paullarionov-0056, CCAR-F-paullarionov-0057, CCAR-F-preporato-0003, CCAR-F-preporato-0007, CCAR-F-preporato-0014, CCAR-F-preporato-0015, CCAR-F-preporato-0016, CCAR-P-Amey-Thakur-0001, CCAR-P-Amey-Thakur-0003, CCAR-P-Amey-Thakur-0038, CCAR-P-jrajath94-0002, CCAR-P-jrajath94-0003, CCAR-P-jrajath94-0012, CCAR-P-jrajath94-0159, CCAR-P-jrajath94-0162, CCAR-P-jrajath94-0175, CCAR-P-jrajath94-0176, CCAR-P-jrajath94-0177, CCAR-P-jrajath94-0179, CCAR-P-jrajath94-0351, CCAR-P-jrajath94-0414, CCAR-P-jrajath94-0477, CCAR-P-jrajath94-0541, CCAR-P-jrajath94-0589, CCAR-P-jrajath94-0629, CCAR-P-jrajath94-0630, CCAR-P-jrajath94-0646, CCAR-P-jrajath94-0649, CCAR-P-jrajath94-0650, CCAR-P-jrajath94-0651, Patrick-0002, Patrick-0017, Patrick-0018, Preporato-0024, Preporato-0025, Udemy-0011, Udemy-0013, Udemy-0016, Udemy-0025, Udemy-0033, Udemy-0036, Udemy-0045</sub>"
+  ],
+  [
+   "<sub>근거: Amey-0009, Amey-0031, Amey-0032, Amey-0044, Amey-0063, CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0010, CCAR-F-Amey-Thakur-0028, CCAR-F-Amey-Thakur-0029, CCAR-F-Amey-Thakur-0030, CCAR-F-Amey-Thakur-0031, CCAR-F-Amey-Thakur-0039, CCAR-F-Amey-Thakur-0061, CCAR-F-Amey-Thakur-0062, CCAR-F-Amey-Thakur-0075, CCAR-F-Amey-Thakur-0076, CCAR-F-Amey-Thakur-0077, CCAR-F-MyPractice-0007, CCAR-F-MyPractice-0044, CCAR-F-MyPractice-0046, CCAR-F-MyPractice-0056, CCAR-F-MyPractice-0057, CCAR-F-MyPractice-0062, CCAR-F-Udemy01-0006, CCAR-F-Udemy01-0007, CCAR-F-Udemy01-0012, CCAR-F-Udemy01-0013, CCAR-F-Udemy01-0016, CCAR-F-Udemy01-0026, CCAR-F-Udemy01-0027, CCAR-F-Udemy01-0031, CCAR-F-Udemy01-0035, CCAR-F-Udemy01-0037, CCAR-F-Udemy01-0044, CCAR-F-Udemy01-0050, CCAR-F-Udemy01-0052, CCAR-F-Udemy01-0054, CCAR-F-Udemy01-0056, CCAR-F-Udemy02-0002, CCAR-F-Udemy02-0008, CCAR-F-Udemy02-0013, CCAR-F-Udemy02-0016, CCAR-F-Udemy02-0039, CCAR-F-Udemy02-0046, CCAR-F-Udemy02-0048, CCAR-F-Udemy02-0049, CCAR-F-Udemy02-0054, CCAR-F-Udemy02-0057, CCAR-F-Udemy03-0004, CCAR-F-Udemy03-0015, CCAR-F-Udemy03-0021, CCAR-F-Udemy03-0027, CCAR-F-Udemy03-0028, CCAR-F-Udemy03-0031, CCAR-F-Udemy03-0032, CCAR-F-Udemy03-0042, CCAR-F-Udemy03-0054, CCAR-F-Udemy03-0055, CCAR-F-Udemy03-0056, CCAR-F-Udemy03-0057, CCAR-F-Udemy03-0058, CCAR-F-Udemy03-0059, CCAR-F-Udemy04-0004, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0012, CCAR-F-Udemy04-0018, CCAR-F-Udemy04-0019, CCAR-F-Udemy04-0021, CCAR-F-Udemy04-0027, CCAR-F-Udemy04-0029, CCAR-F-Udemy04-0030, CCAR-F-Udemy04-0036, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0052, CCAR-F-Udemy04-0057, CCAR-F-Udemy04-0060, CCAR-F-Udemy05-0002, CCAR-F-Udemy05-0006, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0011, CCAR-F-Udemy05-0015, CCAR-F-Udemy05-0018, CCAR-F-Udemy05-0020, CCAR-F-Udemy05-0033, CCAR-F-Udemy05-0040, CCAR-F-Udemy05-0046, CCAR-F-Udemy05-0052, CCAR-F-Udemy06-0003, CCAR-F-Udemy06-0007, CCAR-F-Udemy06-0010, CCAR-F-Udemy06-0018, CCAR-F-Udemy06-0024, CCAR-F-Udemy06-0030, CCAR-F-Udemy06-0032, CCAR-F-Udemy06-0039, CCAR-F-Udemy06-0041, CCAR-F-Udemy06-0046, CCAR-F-Udemy06-0048, CCAR-F-Udemy06-0052, CCAR-F-Udemy06-0056, CCAR-F-paullarionov-0007, CCAR-F-paullarionov-0010, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-F-paullarionov-0046, CCAR-F-paullarionov-0057, CCAR-F-preporato-0003, CCAR-F-preporato-0007, CCAR-F-preporato-0015, CCAR-F-preporato-0016, CCAR-P-Amey-Thakur-0001, CCAR-P-Amey-Thakur-0003, CCAR-P-Amey-Thakur-0050, CCAR-P-jrajath94-0002, CCAR-P-jrajath94-0003, CCAR-P-jrajath94-0008, CCAR-P-jrajath94-0012, CCAR-P-jrajath94-0077, CCAR-P-jrajath94-0078, CCAR-P-jrajath94-0079, CCAR-P-jrajath94-0157, CCAR-P-jrajath94-0158, CCAR-P-jrajath94-0159, CCAR-P-jrajath94-0160, CCAR-P-jrajath94-0161, CCAR-P-jrajath94-0162, CCAR-P-jrajath94-0175, CCAR-P-jrajath94-0176, CCAR-P-jrajath94-0177, CCAR-P-jrajath94-0178, CCAR-P-jrajath94-0179, CCAR-P-jrajath94-0298, CCAR-P-jrajath94-0305, CCAR-P-jrajath94-0353, CCAR-P-jrajath94-0354, CCAR-P-jrajath94-0414, CCAR-P-jrajath94-0416, CCAR-P-jrajath94-0417, CCAR-P-jrajath94-0423, CCAR-P-jrajath94-0424, CCAR-P-jrajath94-0477, CCAR-P-jrajath94-0479, CCAR-P-jrajath94-0480, CCAR-P-jrajath94-0486, CCAR-P-jrajath94-0540, CCAR-P-jrajath94-0542, CCAR-P-jrajath94-0543, CCAR-P-jrajath94-0589, CCAR-P-jrajath94-0629, CCAR-P-jrajath94-0630, CCAR-P-jrajath94-0632, CCAR-P-jrajath94-0646, CCAR-P-jrajath94-0647, CCAR-P-jrajath94-0648, CCAR-P-jrajath94-0649, CCAR-P-jrajath94-0650, CCAR-P-jrajath94-0651, CCAR-P-preporato-0011, CCAR-P-preporato-0013, Patrick-0002, Patrick-0017, Patrick-0018, Preporato-0023, Preporato-0024, Preporato-0025, Udemy-0011, Udemy-0013, Udemy-0016, Udemy-0025, Udemy-0033, Udemy-0036, Udemy-0045</sub>",
+   "<sub>근거: Amey-0009, Amey-0031, Amey-0032, Amey-0044, Amey-0063, CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0010, CCAR-F-Amey-Thakur-0028, CCAR-F-Amey-Thakur-0029, CCAR-F-Amey-Thakur-0030, CCAR-F-Amey-Thakur-0031, CCAR-F-Amey-Thakur-0039, CCAR-F-Amey-Thakur-0061, CCAR-F-Amey-Thakur-0062, CCAR-F-Amey-Thakur-0075, CCAR-F-Amey-Thakur-0076, CCAR-F-Amey-Thakur-0077, CCAR-F-MyPractice-0007, CCAR-F-MyPractice-0044, CCAR-F-MyPractice-0046, CCAR-F-MyPractice-0056, CCAR-F-MyPractice-0057, CCAR-F-MyPractice-0062, CCAR-F-Udemy01-0006, CCAR-F-Udemy01-0007, CCAR-F-Udemy01-0012, CCAR-F-Udemy01-0013, CCAR-F-Udemy01-0016, CCAR-F-Udemy01-0026, CCAR-F-Udemy01-0027, CCAR-F-Udemy01-0031, CCAR-F-Udemy01-0035, CCAR-F-Udemy01-0037, CCAR-F-Udemy01-0044, CCAR-F-Udemy01-0050, CCAR-F-Udemy01-0052, CCAR-F-Udemy01-0054, CCAR-F-Udemy01-0056, CCAR-F-Udemy02-0002, CCAR-F-Udemy02-0008, CCAR-F-Udemy02-0013, CCAR-F-Udemy02-0016, CCAR-F-Udemy02-0039, CCAR-F-Udemy02-0046, CCAR-F-Udemy02-0048, CCAR-F-Udemy02-0049, CCAR-F-Udemy02-0054, CCAR-F-Udemy02-0057, CCAR-F-Udemy03-0004, CCAR-F-Udemy03-0015, CCAR-F-Udemy03-0021, CCAR-F-Udemy03-0027, CCAR-F-Udemy03-0028, CCAR-F-Udemy03-0031, CCAR-F-Udemy03-0032, CCAR-F-Udemy03-0042, CCAR-F-Udemy03-0054, CCAR-F-Udemy03-0055, CCAR-F-Udemy03-0056, CCAR-F-Udemy03-0057, CCAR-F-Udemy03-0058, CCAR-F-Udemy03-0059, CCAR-F-Udemy04-0004, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0012, CCAR-F-Udemy04-0018, CCAR-F-Udemy04-0019, CCAR-F-Udemy04-0021, CCAR-F-Udemy04-0027, CCAR-F-Udemy04-0029, CCAR-F-Udemy04-0030, CCAR-F-Udemy04-0036, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0052, CCAR-F-Udemy04-0057, CCAR-F-Udemy04-0060, CCAR-F-Udemy05-0002, CCAR-F-Udemy05-0006, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0011, CCAR-F-Udemy05-0015, CCAR-F-Udemy05-0018, CCAR-F-Udemy05-0020, CCAR-F-Udemy05-0033, CCAR-F-Udemy05-0040, CCAR-F-Udemy05-0046, CCAR-F-Udemy05-0052, CCAR-F-Udemy06-0003, CCAR-F-Udemy06-0007, CCAR-F-Udemy06-0010, CCAR-F-Udemy06-0018, CCAR-F-Udemy06-0024, CCAR-F-Udemy06-0030, CCAR-F-Udemy06-0032, CCAR-F-Udemy06-0039, CCAR-F-Udemy06-0041, CCAR-F-Udemy06-0046, CCAR-F-Udemy06-0048, CCAR-F-Udemy06-0052, CCAR-F-Udemy06-0056, CCAR-F-paullarionov-0007, CCAR-F-paullarionov-0010, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-F-paullarionov-0046, CCAR-F-paullarionov-0057, CCAR-F-preporato-0003, CCAR-F-preporato-0007, CCAR-F-preporato-0015, CCAR-F-preporato-0016, CCAR-P-Amey-Thakur-0001, CCAR-P-Amey-Thakur-0003, CCAR-P-Amey-Thakur-0050, CCAR-P-jrajath94-0002, CCAR-P-jrajath94-0003, CCAR-P-jrajath94-0012, CCAR-P-jrajath94-0077, CCAR-P-jrajath94-0078, CCAR-P-jrajath94-0157, CCAR-P-jrajath94-0158, CCAR-P-jrajath94-0159, CCAR-P-jrajath94-0162, CCAR-P-jrajath94-0175, CCAR-P-jrajath94-0176, CCAR-P-jrajath94-0177, CCAR-P-jrajath94-0178, CCAR-P-jrajath94-0179, CCAR-P-jrajath94-0414, CCAR-P-jrajath94-0423, CCAR-P-jrajath94-0424, CCAR-P-jrajath94-0477, CCAR-P-jrajath94-0486, CCAR-P-jrajath94-0540, CCAR-P-jrajath94-0589, CCAR-P-jrajath94-0629, CCAR-P-jrajath94-0630, CCAR-P-jrajath94-0646, CCAR-P-jrajath94-0647, CCAR-P-jrajath94-0648, CCAR-P-jrajath94-0649, CCAR-P-jrajath94-0650, CCAR-P-jrajath94-0651, CCAR-P-preporato-0011, CCAR-P-preporato-0013, Patrick-0002, Patrick-0017, Patrick-0018, Preporato-0023, Preporato-0024, Preporato-0025, Udemy-0011, Udemy-0013, Udemy-0016, Udemy-0025, Udemy-0033, Udemy-0036, Udemy-0045</sub>"
+  ],
+  [
+   "<sub>근거: Amey-0044, CCAR-F-Udemy01-0012, CCAR-F-Udemy01-0013, CCAR-F-Udemy01-0016, CCAR-F-Udemy01-0035, CCAR-F-Udemy01-0037, CCAR-F-Udemy02-0008, CCAR-F-Udemy02-0039, CCAR-F-Udemy02-0046, CCAR-F-Udemy03-0027, CCAR-F-Udemy03-0031, CCAR-F-Udemy03-0042, CCAR-F-Udemy03-0057, CCAR-F-Udemy03-0058, CCAR-F-Udemy03-0059, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0052, CCAR-F-Udemy05-0004, CCAR-F-Udemy05-0006, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0015, CCAR-F-Udemy05-0040, CCAR-F-Udemy05-0046, CCAR-F-Udemy06-0010, CCAR-F-Udemy06-0024, CCAR-F-Udemy06-0039, CCAR-F-Udemy06-0041, CCAR-F-Udemy06-0046, CCAR-F-paullarionov-0010, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-P-jrajath94-0002, CCAR-P-jrajath94-0012, CCAR-P-jrajath94-0160, CCAR-P-jrajath94-0161, CCAR-P-jrajath94-0177, CCAR-P-jrajath94-0179, CCAR-P-jrajath94-0298, CCAR-P-jrajath94-0361, CCAR-P-jrajath94-0480, CCAR-P-jrajath94-0543, CCAR-P-jrajath94-0589, CCAR-P-jrajath94-0629, CCAR-P-jrajath94-0649, CCAR-P-jrajath94-0650, CCAR-P-jrajath94-0651, CCAR-P-preporato-0012, CCAR-P-preporato-0013, Patrick-0002, Patrick-0017, Patrick-0018, Preporato-0024, Preporato-0025, Udemy-0011, Udemy-0013, Udemy-0025, Udemy-0033, Udemy-0036, Udemy-0045</sub>",
+   "<sub>근거: Amey-0044, CCAR-F-Udemy01-0012, CCAR-F-Udemy01-0013, CCAR-F-Udemy01-0016, CCAR-F-Udemy01-0035, CCAR-F-Udemy01-0037, CCAR-F-Udemy02-0008, CCAR-F-Udemy02-0039, CCAR-F-Udemy02-0046, CCAR-F-Udemy03-0027, CCAR-F-Udemy03-0031, CCAR-F-Udemy03-0042, CCAR-F-Udemy03-0057, CCAR-F-Udemy03-0058, CCAR-F-Udemy03-0059, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0052, CCAR-F-Udemy05-0004, CCAR-F-Udemy05-0006, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0015, CCAR-F-Udemy05-0040, CCAR-F-Udemy05-0046, CCAR-F-Udemy06-0010, CCAR-F-Udemy06-0024, CCAR-F-Udemy06-0039, CCAR-F-Udemy06-0041, CCAR-F-Udemy06-0046, CCAR-F-paullarionov-0010, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-P-jrajath94-0002, CCAR-P-jrajath94-0012, CCAR-P-jrajath94-0177, CCAR-P-jrajath94-0179, CCAR-P-jrajath94-0361, CCAR-P-jrajath94-0589, CCAR-P-jrajath94-0629, CCAR-P-jrajath94-0649, CCAR-P-jrajath94-0650, CCAR-P-jrajath94-0651, CCAR-P-preporato-0012, CCAR-P-preporato-0013, Patrick-0002, Patrick-0017, Patrick-0018, Preporato-0024, Preporato-0025, Udemy-0011, Udemy-0013, Udemy-0025, Udemy-0033, Udemy-0036, Udemy-0045</sub>"
+  ],
+  [
+   "<sub>근거: CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0030, CCAR-F-Amey-Thakur-0061, CCAR-F-Udemy01-0007, CCAR-F-Udemy01-0054, CCAR-F-Udemy03-0057, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0029, CCAR-F-Udemy04-0036, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0057, CCAR-F-Udemy05-0004, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0011, CCAR-F-Udemy05-0020, CCAR-F-Udemy06-0048, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-F-paullarionov-0046, CCAR-P-jrajath94-0160, CCAR-P-jrajath94-0176, CCAR-P-jrajath94-0298, CCAR-P-jrajath94-0351, CCAR-P-jrajath94-0353, CCAR-P-jrajath94-0414, CCAR-P-jrajath94-0416, CCAR-P-jrajath94-0630</sub>",
+   "<sub>근거: CCAR-F-Amey-Thakur-0002, CCAR-F-Amey-Thakur-0030, CCAR-F-Amey-Thakur-0061, CCAR-F-Udemy01-0007, CCAR-F-Udemy01-0054, CCAR-F-Udemy03-0057, CCAR-F-Udemy04-0010, CCAR-F-Udemy04-0029, CCAR-F-Udemy04-0036, CCAR-F-Udemy04-0044, CCAR-F-Udemy04-0047, CCAR-F-Udemy04-0057, CCAR-F-Udemy05-0004, CCAR-F-Udemy05-0008, CCAR-F-Udemy05-0009, CCAR-F-Udemy05-0011, CCAR-F-Udemy05-0020, CCAR-F-Udemy06-0048, CCAR-F-paullarionov-0015, CCAR-F-paullarionov-0044, CCAR-F-paullarionov-0046, CCAR-P-jrajath94-0176, CCAR-P-jrajath94-0351, CCAR-P-jrajath94-0414, CCAR-P-jrajath94-0630</sub>"
+  ]
+ ]
+}

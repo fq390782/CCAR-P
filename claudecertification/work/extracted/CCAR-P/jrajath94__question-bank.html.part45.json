@@ -1,0 +1,155 @@
+[
+  {
+    "number": "M4-Q27",
+    "heading": "M4-Q27 (V2-D3.5), Select TWO",
+    "question": "A RAG pipeline for HR policies is built. The team wants\ncited answers employees can trust.\n\nWhich TWO stages make citations trustworthy? Select TWO.",
+    "choices": {
+      "A": "Grounding checks: each claim verified against its source chunk.",
+      "B": "Citation support checks: cited spans must imply the claims.",
+      "C": "Bigger chunks.",
+      "D": "More documents.",
+      "E": "A stronger model."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"cited answers employees can trust.\"\nWhy: trust needs verification stages: grounding plus citation support.\nC, D, and E improve retrieval or generation, not trust.\nCounterfactual: none.",
+    "source_section": "V2-D3.5"
+  },
+  {
+    "number": "M4-Q28",
+    "heading": "M4-Q28 (V2-D3.6)",
+    "question": "A delivery tracker shows package locations from a\nyesterday's export. Locations update every few minutes.\n\nWhat is wrong?",
+    "choices": {
+      "A": "Nothing. Exports are fine.",
+      "B": "Stale export for live state: locations change every few minutes.\nPut live tracking behind a tool call. Keep the export for history.",
+      "C": "The bot needs a bigger model.",
+      "D": "Packages should stop moving."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"yesterday's export. Locations update\nevery few minutes.\" Why: live state belongs behind a tool call.\nYesterday's locations are wrong all day. Counterfactual: A wins for\nhistorical reports.",
+    "source_section": "V2-D3.6"
+  },
+  {
+    "number": "M4-Q29",
+    "heading": "M4-Q29 (V2-D3.7)",
+    "question": "Four teams in three languages need the same currency\nconversion capability.\n\nWhich mechanism fits?",
+    "choices": {
+      "A": "Each team builds its own converter.",
+      "B": "An MCP server with declared conversion tools. All four teams\nconsume it.",
+      "C": "A CLI wrapper with text parsing.",
+      "D": "A shared spreadsheet."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Four teams in three languages need the\nsame capability.\" Why: reuse across teams and languages is the MCP win\ncondition. A duplicates four times. Counterfactual: A wins for one\nteam in one language.",
+    "source_section": "V2-D3.7"
+  },
+  {
+    "number": "M4-Q30",
+    "heading": "M4-Q30 (V2-D3.7), Select TWO",
+    "question": "A team integrates: (1) a shared logging capability\nneeded by eight services, (2) a single admin script that shells to a\nvendor CLI.\n\nWhich TWO are correct? Select TWO.",
+    "choices": {
+      "A": "MCP server (or shared library/service) for the eight-service\nlogging capability.",
+      "B": "CLI wrapper for the single admin script's vendor CLI.",
+      "C": "MCP server for the single admin script.",
+      "D": "Eight separate logging reimplementations.",
+      "E": "Manual log copying."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"eight services... single admin\nscript.\" Why: eight consumers justify the shared mechanism. The\none-off CLI takes the wrapper. C pays tax for one use. D duplicates\neight times.\nCounterfactual: none.",
+    "source_section": "V2-D3.7"
+  },
+  {
+    "number": "M4-Q31",
+    "heading": "M4-Q31 (V2-D3.8)",
+    "question": "A data-entry agent uses 5 tools. The SLA is 1 second.\nTokens are fine.\n\nWhich strategy fits?",
+    "choices": {
+      "A": "Progressive discovery.",
+      "B": "Monolithic context: 5 schemas up front, no round trips under the\n1-second SLA.",
+      "C": "Remove the tools.",
+      "D": "Discovery with two round trips."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"5 tools... SLA is 1 second.\" Why: tiny\nsurface plus tight SLA favors monolithic. Discovery's round trips risk\nthe SLA for no gain. Counterfactual: A wins at 50 tools with a loose\nSLA.",
+    "source_section": "V2-D3.8"
+  },
+  {
+    "number": "M4-Q32",
+    "heading": "M4-Q32 (V2-D4.1)",
+    "question": "A meeting-action extractor must not invent action items.\nThe team debates the primary metric.\n\nWhich metric is primary?",
+    "choices": {
+      "A": "Actions extracted per minute.",
+      "B": "Groundedness: each action item traces to the transcript.",
+      "C": "Token cost.",
+      "D": "The model's name."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"must not invent action items.\" Why: the\nrequirement is truth. Groundedness measures exactly that.\nCounterfactual: C wins when the budget binds and truth is already met.",
+    "source_section": "V2-D4.1"
+  },
+  {
+    "number": "M4-Q33",
+    "heading": "M4-Q33 (V2-D4.1)",
+    "question": "A chatbot's requirement is \"helpful answers.\" The team\nproposes CSAT at or above 4.2/5 on sampled chats.\n\nIs this sufficient as an acceptance threshold?",
+    "choices": {
+      "A": "Yes, fully.",
+      "B": "Partially: it needs the sampling method, sample size, and\nmeasurement cadence defined, or teams will game the sample.",
+      "C": "No. SAT never matters.",
+      "D": "Yes, and stop measuring anything else."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"CSAT at or above 4.2/5 on sampled chats.\"\nWhy: a threshold needs the metric, the line, and the measurement\nmethod. Undefined sampling invites cherry-picking. Counterfactual: A\nwins when the sampling standard is already fixed.",
+    "source_section": "V2-D4.1"
+  },
+  {
+    "number": "M4-Q34",
+    "heading": "M4-Q34 (V2-D4.2)",
+    "question": "A team keeps no holdout set: all labeled data trains the\nmodel, and the same data measures it.\n\nWhat is wrong?",
+    "choices": {
+      "A": "Nothing. More training data is better.",
+      "B": "No generalization measurement: scores on training data measure\nmemorization. Hold out a representative set the model never trains on.",
+      "C": "The model is too big.",
+      "D": "Labels are bad."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"the same data measures it.\" Why: V2-D4.2\nrequires holdouts. Training-set scores flatter. Counterfactual: A wins\nnever for evaluation.",
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "M4-Q35",
+    "heading": "M4-Q35 (V2-D4.2), Select TWO",
+    "question": "An eval set for a travel bot has only English queries.\n\nWhich TWO drawers are absent? Select TWO.",
+    "choices": {
+      "A": "Representative coverage of the other supported languages.",
+      "B": "Malformed cases: garbled, partial, or mistyped queries.",
+      "C": "More English queries.",
+      "D": "The training set again.",
+      "E": "Blank screens."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"only English queries.\" Why: the\nrepresentative drawer misses whole languages. The malformed drawer is\nempty though real traffic is messy. Counterfactual: E wins never as a\ndrawer name.",
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "M4-Q36",
+    "heading": "M4-Q36 (V2-D4.3)",
+    "question": "A team tests two prompts by showing prompt A on Mondays\nand prompt B on Tuesdays.\n\nWhat is wrong?",
+    "choices": {
+      "A": "Do nothing. The days are different.",
+      "B": "The day-of-week confuses the test. Traffic is different by day. Assign users randomly.\nAssign users consistently per user.",
+      "C": "You cannot test prompts.",
+      "D": "The week is too short."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"prompt A on Mondays and prompt B on\nTuesdays.\" Why: the assignment confounds the variant with the day.\nV2-D4.3 requires consistent randomized assignment. Counterfactual: A\nwins never with day-based assignment.",
+    "source_section": "V2-D4.3"
+  }
+]

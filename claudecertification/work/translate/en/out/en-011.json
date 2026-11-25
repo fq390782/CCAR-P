@@ -1,0 +1,272 @@
+[
+ {
+  "id": "CCAR-F-Udemy04-0030",
+  "question": "A development team at a pharmaceutical company is building a multi-agent research system with the Claude Agent SDK. A subagent that searches literature databases returns errors such as rate limits (HTTP 429) and timeouts directly to the coordinator every time they occur.\n\nEach time, the coordinator re-delegates the same search, and the logs show that about 30% of the coordinator's tokens are spent handling these errors. Most of these errors would succeed if the request waited a few seconds.\n\nWhich improvement is most appropriate?",
+  "choices": {
+   "A": "Stop the entire workflow and notify a person in charge once the number of errors exceeds a certain threshold.",
+   "B": "Catch the errors in the subagent and return only the data that was retrieved as a successful result.",
+   "C": "Add a retry-only subagent to the coordinator whose sole job is to re-delegate failed requests.",
+   "D": "Retry transient failures inside the subagent, and propagate only the failures that remain unresolved."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0031",
+  "question": "At an airline's development team, engineers use Claude Code to run multiple investigations in parallel. One engineer has been continuing the following three investigations, each in a separate session, over several days.\n\nA bug in delay notifications in the flight operations management system\n\nA performance problem in the maintenance records export\n\nPreparation for migrating the crew scheduling system\n\nEvery morning the engineer resumes work with claude --continue, but the session for a different investigation that was touched most recently opens, and the engineer has to spend time explaining the context again.\n\nWhich is the most appropriate way to handle this?",
+  "choices": {
+   "A": "Add --fork-session to --continue so that the original session is preserved while resuming.",
+   "B": "Write each investigation's progress in CLAUDE.md and start a new session every morning.",
+   "C": "Resume with --continue every time, and if it is the session for a different investigation, run /clear and explain the context again.",
+   "D": "Give each session a name with /rename, and resume by specifying the name with claude --resume."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0032",
+  "question": "A development team at a logistics company is building a multi-agent research system with the Claude Agent SDK. A report on \"trends in warehouse automation in Japan\" covers the following three types of content.\n\nA comparison of capital expenditure and operating margin among listed companies\n\nThe chronology of industry news\n\nFindings from research on robot technical specifications\n\nThe current report-generation subagent converts all content into the same bulleted-list format, and readers have said that \"numbers are hard to compare\" and \"the flow of the news is unclear.\"\n\nWhich improvement is most appropriate?",
+  "choices": {
+   "A": "Change the format of the entire report from bulleted lists to tables, aligning all items into columns.",
+   "B": "Explain the financial data in prose, and summarize the news and technical specifications in tables.",
+   "C": "Prepare one generic template and have every section output the same heading structure.",
+   "D": "Have the financial data expressed as a table, the news as prose, and the technical specifications as a structured list."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0033",
+  "question": "A development team at a household goods manufacturer is building a structured data extraction system with Claude. From product specification sheets received from business partners, it extracts the product name, content volume, manufacturer's suggested retail price, and JAN code, and registers them in the product master.\n\nPreviously, JSON was extracted from the response text, so processing sometimes stopped because of syntax errors. After switching to a method that calls an extraction tool via tool_use with a JSON schema as the input parameter, the syntax errors disappeared. However, about 4% of errors remain in which values go into the wrong fields, such as the content volume \"500\" being placed in the suggested retail price field.\n\nWhich responses are appropriate for this situation? (Select two.)",
+  "choices": {
+   "A": "Specify the unit and the location in the specification sheet in each field's description to make value mix-ups less likely.",
+   "B": "Use tool_choice to force selection of the extraction tool so that this tool is always called.",
+   "C": "Add strict: true to the tool definition to guarantee that the output conforms to the schema and prevent the errors.",
+   "D": "Check semantic correctness, such as consistency of digits and units between the price and the content volume, with validation code on the application side."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0034",
+  "question": "A development team at a security company has Claude Code review pull requests in a CI pipeline. The following two problems are currently occurring.\n\nWhen detecting hardcoded credentials, for similar-looking code it sometimes flags dummy API keys used for testing and sometimes does not, and it also sometimes misses real tokens\n\nThe way findings are written differs from run to run, making it hard for developers to read what they need to address\n\nWhich are appropriate prompt improvements? (Select two.)",
+  "choices": {
+   "A": "Instruct it to \"report only high-confidence findings,\" so that borderline cases are not reported.",
+   "B": "Have it flag suspicious strings broadly and leave the judgment of whether they are real to developers.",
+   "C": "Show output examples with a consistent format of location, problem, severity, and suggested fix.",
+   "D": "Show two to four few-shot examples that contrast dummy values with real credentials, with the reasoning for each judgment attached."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0035",
+  "question": "A development team at a hotel chain is using Claude Code to write a reservation data migration script. In the old system, for reservations where the guest moved rooms partway through a multi-night stay, the check-out date of the first room is stored as null.\n\nWhen checking the migrated data, the number of nights for these reservations was 0. The developer explained twice, \"If the check-out date is null, use the check-in date of the next room with the same reservation number,\" but even after the fix, the same error remains in other reservations.\n\nWhich next action would be most effective?",
+  "choices": {
+   "A": "Provide test cases showing input records that contain null and the expected output, and have it fix the script until they pass.",
+   "B": "Start a new session, give the same explanation first, and have it rewrite the script.",
+   "C": "Add \"handle null values robustly\" to the prompt and have it review the entire script.",
+   "D": "Switch to plan mode and have it reconsider the design of the entire migration script from scratch."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0036",
+  "question": "A development team at a cosmetics manufacturer is building a multi-agent research system with the Claude Agent SDK. A search subagent that investigates ingredients of competing products uses an MCP tool, search_ingredients, that queries an internal ingredient database.\n\nThis tool currently returns an empty array both when there are zero matching ingredients and when the database connection times out. As a result, the final report stated 「該当成分なし」 for products that had actually not been searched.\n\nWhich way of returning results from search_ingredients is most appropriate?",
+  "choices": {
+   "A": "Return isError: true in both cases, and write 「検索に失敗しました」 in the error string.",
+   "B": "On a timeout, return the results obtained from the previous search for the same product as a success.",
+   "C": "Return an empty array in both cases, and record the occurrence of the timeout only in the server's logs.",
+   "D": "Return zero matches as a normal empty result, and return a timeout as isError: true with an indication of whether it can be retried."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0037",
+  "question": "A development team at a construction company has Claude Code review pull requests in a CI pipeline. An analysis of the past month's results by finding category revealed the following.\n\nFindings for SQL injection and N+1 queries were almost always correct\n\nAbout 70% of \"naming convention\" findings and about 60% of \"comment accuracy\" findings were false positives\n\nMany developers have started closing review comments without reading them, regardless of category.\n\nWhich responses are appropriate? (Select two.)",
+  "choices": {
+   "A": "Temporarily disable the two categories with many false positives, and re-enable them after improving the prompt.",
+   "B": "Stop automated review for all categories until developers' trust is restored.",
+   "C": "State in the prompt that comment accuracy findings are limited to \"cases where the description contradicts the actual behavior.\"",
+   "D": "Instruct, for all categories in common, \"report only high-confidence findings.\""
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0038",
+  "question": "A development team at a publisher is building a structured data extraction system with Claude. It extracts the amount, payment due date, and vendor code from invoices received from printing companies and translators. Extractions with a confidence of 0.90 or higher skipped human review and were sent directly to the accounting system.\n\nHowever, after one printing company changed its invoice format, payment due dates were mixed up for three weeks in extractions with a confidence of around 0.95. The team noticed only after payment delays occurred.\n\nWhich change would be most effective for detecting similar problems early?",
+  "choices": {
+   "A": "Add invoices in the new format to the extraction prompt as few-shot examples so that the same mix-up does not occur.",
+   "B": "Adopt a practice of reviewing every invoice from a vendor for a while after being notified by that vendor of a format change.",
+   "C": "Continue random sampling of high-confidence extractions as well, stratified by vendor and document type, and measure the error rate for each stratum.",
+   "D": "Raise the confidence threshold for automatic sending from 0.90 to 0.97 to increase the number of items routed to human review."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0039",
+  "question": "A development team at a home appliance manufacturer is building a customer support resolution agent with the Claude Agent SDK. Analyzing the logs revealed the following two problems.\n\nWhen a customer gave only their name, get_customer returned three customers with the same name, and the agent chose the one with the most recent purchase history and proceeded with a repair appointment, which ended up changing another person's appointment\n\nFor a washing machine drain error, the agent gave the same reset procedure four times with different wording, and the conversation continued for more than 40 minutes without resolution\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "If the procedures it can offer have been tried and there is no progress toward resolution, escalate to a human agent.",
+   "B": "When multiple candidates match, have the agent choose the most likely customer and record its rationale.",
+   "C": "In conversations that are not resolved, judge the level of dissatisfaction from the customer's statements, and escalate when it is judged to be strong.",
+   "D": "When multiple candidates match, ask for additional identifying information such as a phone number or order number before proceeding."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0040",
+  "question": "A development team at an e-commerce logistics company is building a structured data extraction system with Claude. It currently uses real-time Messages API calls for the following three processes.\n\n(1) A process that extracts addresses from shipping slips and determines whether a label can be issued while a warehouse worker waits at the terminal\n\n(2) A process that extracts carrier invoices closed at month-end and hands them to auditors the following week\n\n(3) A process that extracts tracking numbers from slip images that customers attach in chat and answers shipping status on the spot\n\nTo reduce costs, the team is considering using the Message Batches API.\n\nWhich way of using the Message Batches API is most appropriate?",
+  "choices": {
+   "A": "Switch only (2) to batch processing, and keep real-time calls for (1) and (3).",
+   "B": "Keep real-time calls for all three, and reduce costs by using prompt caching.",
+   "C": "Switch (1) and (2) to batch processing, and keep real-time calls for (3).",
+   "D": "Switch (2) and (3) to batch processing, and keep real-time calls for (1)."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0041",
+  "question": "The quality assurance department at an automobile manufacturer is building a multi-agent research system with the Claude Agent SDK to investigate recall information in eight countries. A subagent that searches each country's regulatory authority database returns, upon failure, a structured response containing the failure type, the query attempted, partial results, and possible alternatives.\n\nIn last week's run, the searches for seven countries succeeded, and only Country A failed with a permission error. The error indicated the following.\n\nCountry A's database can be viewed only by paid subscribers\n\nAs an alternative, recall notices published in that country's official gazette can be searched\n\nHowever, the coordinator was built to re-delegate searches for all eight countries with the same instructions upon receiving an error. As a result, the same permission error was repeated three times, and the search cost was about four times the normal amount.\n\nWhich are appropriate recovery decisions for the coordinator? (Select two.)",
+  "choices": {
+   "A": "Do not re-search the results for the seven successful countries, and use them as they are as partial results for synthesis.",
+   "B": "For Country A, add exponential backoff and have it retry the same query up to three times.",
+   "C": "Abort the entire run when Country A's failure is received, and report the failure details to a human agent.",
+   "D": "For Country A, delegate the task of searching the recall notices in the official gazette indicated in the error."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0042",
+  "question": "A development team at a travel company uses Claude Code for code generation and refactoring.\n\nThe CLAUDE.md at the repository root has grown to 1,400 lines and also contains the following.\n\nConventions specific to the Terraform files that define the booking engine's infrastructure (*.tf files under infra/) (600 lines)\n\nThe payment SDK migration procedure, which is performed only a few times a year (200 lines)\n\nAll of this is loaded even while working on the frontend, putting pressure on the context.\n\nWhich changes are appropriate for reducing token usage? (Select two.)",
+  "choices": {
+   "A": "Move the Terraform conventions to a file in .claude/rules/ with paths: [\"infra/**/*.tf\"] specified.",
+   "B": "Write the Terraform conventions out to docs/terraform.md and load them from the root CLAUDE.md with @import.",
+   "C": "Move the Terraform conventions to each member's ~/.claude/rules/terraform.md.",
+   "D": "Turn the payment SDK migration procedure into a skill so that it is invoked and loaded only when needed."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0043",
+  "question": "A development team at an accounting firm is building a multi-agent research system with the Claude Agent SDK. To investigate the impact of tax reform, they rushed development and configured subagents to send requests directly to one another through a shared message queue. As a result, the following problems are occurring.\n\nSynthesis sometimes proceeds without anyone noticing a failure of the document analysis subagent\n\nThe same search is requested redundantly by different subagents\n\nIt is not possible to trace from the logs which information flowed through which path\n\nWhich improvement is most appropriate?",
+  "choices": {
+   "A": "Add a mechanism by which a failed subagent directly notifies other subagents of the error.",
+   "B": "Add retry and deduplication mechanisms to requests between subagents to make the queue more reliable.",
+   "C": "Stop direct communication between subagents and route all communication through the coordinator.",
+   "D": "Add detailed logging to the shared queue and record the messages that flowed so they can be traced later."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0044",
+  "question": "A development team at a bank is building a multi-agent research system. The document analysis subagent is implemented as code that calls the Messages API directly, and is designed to return its results with one of the following two tools.\n\nreport_findings (returns research findings in a structured form)\n\nreport_no_relevant_content (returns, with a reason, that there was no relevant content)\n\nThe coordinator parses this tool call to decide the next step. However, in about 6% of all cases, the subagent calls neither tool and returns a text-only summary, and processing stops.\n\nWhich is the most appropriate response?",
+  "choices": {
+   "A": "Specify {\"type\": \"tool\", \"name\": \"report_findings\"} with tool_choice so that this tool is always called.",
+   "B": "Leave tool_choice as \"auto\" and emphasize in the prompt, \"always return the result with one of the tools.\"",
+   "C": "When a text-only response is returned, have the coordinator parse the text and convert it into research findings.",
+   "D": "Set tool_choice to \"any\" so that one of the two tools is always called."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0045",
+  "question": "A development team at a chemical manufacturer is building a structured data extraction system with Claude. From certificates of analysis received from raw material suppliers, it extracts the content percentage of each component and the total stated on the certificate. The schema has the following fields.\n\nstated_total (the total stated on the certificate)\n\ncalculated_total (the total calculated from the extracted components)\n\nconflict_detected (indicates a mismatch between the two)\n\nCurrently, when a mismatch is detected, it re-extracts up to three times. As a result, 18% of all documents reach the retry limit, and API costs have doubled from what was expected. Investigation showed that most of the documents that reached the limit have a transcription error in the total field of the certificate itself.\n\nWhich improvement is most appropriate?",
+  "choices": {
+   "A": "Discard the extraction results for documents whose totals do not match, exclude them from processing, and keep only a record.",
+   "B": "Limit retries to one, and route documents that still do not match to review by a person in charge with conflict_detected left as true.",
+   "C": "Increase the retry limit from three to five, and keep re-extracting until the totals match.",
+   "D": "Overwrite stated_total with the value of calculated_total and send the data to downstream systems with the totals in agreement."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0046",
+  "question": "A development team at a law firm is using Claude Code to modify an internal contract management system. The next task is an investigation for switching the e-signature service to a different provider, and it requires identifying the modules involved in signing processing.\n\nIn a similar investigation last time, search results and file contents for hundreds of files were loaded into the main session, and by the time implementation began, important decisions had been pushed out of the conversation. In addition, files were accidentally modified during the investigation. This time, the team wants to reliably prevent edits during the investigation.\n\nWhich is the most appropriate method?",
+  "choices": {
+   "A": "Delegate the investigation to an Explore subagent and have it return only a summary to the main conversation.",
+   "B": "Delegate the investigation to a general-purpose subagent and have it write the results to a file.",
+   "C": "Investigate in the main session, and summarize the conversation with /compact before starting implementation.",
+   "D": "Switch the main session to plan mode and carry out the investigation within the same session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0047",
+  "question": "A development team at a semiconductor manufacturer is building a multi-agent research system with the Claude Agent SDK. Because they rushed development, they have given the same 18 tools to all subagents: web search, document analysis, synthesis, and report generation.\n\nIn evaluation, 15% of cases involved incorrect tool selection, such as the document analysis subagent calling web search or report formatting tools partway through analyzing a patent document.\n\nWhich is the most effective response?",
+  "choices": {
+   "A": "Add monitoring that logs tool calls and redoes the analysis if an incorrect selection occurred.",
+   "B": "Rewrite the descriptions of all 18 tools in more detail so that any subagent can select correctly.",
+   "C": "Set the document analysis subagent's tool_choice to \"any\" so that it always calls a tool.",
+   "D": "Narrow each subagent's tools down to the four to five that its role requires."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0048",
+  "question": "A development team at a research institution is building a multi-agent research system with the Claude Agent SDK.\n\nWhen researching \"trends in regenerative medicine research in Japan,\" the web search subagent found 28 relevant papers and news reports, and the document analysis subagent also correctly extracted the key points of each paper. However, the draft produced by the synthesis subagent consisted only of generalities that did not touch on any of the research findings.\n\nChecking the logs, the prompt used when the coordinator called the synthesis subagent was only one sentence: \"Synthesize the search results and analysis results so far and create a draft.\"\n\nWhich is the most likely root cause?",
+  "choices": {
+   "A": "The document analysis subagent summarized the key points too briefly, and information needed for synthesis was lost.",
+   "B": "The synthesis subagent's context window is overflowing, filled with the search results for 28 items.",
+   "C": "The synthesis subagent's tools do not include a search tool, so it cannot gather information on its own.",
+   "D": "The research findings are not passed automatically to the synthesis subagent, and they are not included in the prompt either."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0049",
+  "question": "A development team at a telecommunications carrier is building a customer support resolution agent with the Claude Agent SDK. In a single inquiry, one customer raised the following three matters.\n\n(1) Call charges being double-counted on the September bill\n\n(2) The remaining balance on the device installment plan\n\n(3) The cancellation fee if the contract is terminated\n\nOnce the exchange exceeded 30 turns, the agent confused the double-counted amount with the remaining installment balance, and started investigating (1) again even though it had already been resolved. In addition, the order lookup tool returns more than 40 fields per call.\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "Delete the turns for resolved matters from the conversation history, and keep only the exchanges for unresolved matters.",
+   "B": "Structure each matter's number, amount, and status, keep them in a layer separate from the conversation, and pass them in every turn.",
+   "C": "Trim tool output to only the fields relevant to each matter before adding it to the conversation.",
+   "D": "Combine the three matters into a single summary text, and send it with older turns replaced by that summary."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0050",
+  "question": "A development team at a home appliance manufacturer uses Claude Code to improve developer productivity. An engineer is about to request the following two tasks.\n\nMigrating the communication library used for firmware updates of smart home appliances to a new major version (affects more than 60 files, and there are multiple possible approaches to implementing reconnection handling)\n\nFixing a typo in an error message displayed on the settings screen in one place\n\nWhich are appropriate ways to proceed? (Select two.)",
+  "choices": {
+   "A": "Investigate and plan the library migration in plan mode, and implement it with direct execution after the plan is approved.",
+   "B": "Split the library migration into groups of 10 affected files, and fix each group in turn with direct execution.",
+   "C": "Have it create a plan in plan mode for the typo fix as well, and execute after reviewing the contents.",
+   "D": "Carry out the typo fix with direct execution, without using plan mode."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0051",
+  "question": "A development team at a sporting goods manufacturer runs Claude Code in GitHub Actions to generate test code for each pull request and review those tests. The current job generates tests with claude -p, then continues the same session with claude -p --continue and asks it to \"review the generated tests.\"\n\nThe review rarely produces any findings, yet missing tests and incorrect expected values are found after merging.\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "Add \"verify it yourself before output\" to the generation prompt, and skip running the review.",
+   "B": "Write the test standards and review criteria in the repository's CLAUDE.md, and have the review run refer to those criteria as well.",
+   "C": "Resume the same session as the generation with --resume, and strengthen the prompt with \"check strictly.\"",
+   "D": "Make the review a separate claude -p run without --continue, and have it read the diff in a new session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0052",
+  "question": "A development team at an agricultural IoT company is building a developer productivity tool with the Claude Agent SDK. In this agent, the built-in Read, Grep, and Glob are enabled. A field staff member reported that the error 「センサーIDが登録されていません」 appears. The engineer wants to know the following two things.\n\nWhere this message is output\n\nFrom where the validateSensorId function, which validates the sensor ID, is called\n\nWhich are appropriate ways to choose the tools to have the agent use? (Select two.)",
+  "choices": {
+   "A": "Use Glob to list the files matching **/*sensor*, and read the files found one by one with Read.",
+   "B": "Use Grep to search for the error message string and identify where it is output.",
+   "C": "Use Bash find to look for files whose names contain error and check their contents.",
+   "D": "Use Grep to search the entire codebase for calls to validateSensorId."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0053",
+  "question": "A development team at an agricultural machinery manufacturer is building a developer productivity tool with the Claude Agent SDK. This agent also works in the infrastructure configuration repository for the irrigation control system. The rule is that changes are applied to the production environment by the person in charge only after they review the terraform plan results.\n\nHowever, last month the agent ran terraform apply with Bash, and the water supply schedule for a certain field was changed unintentionally. CLAUDE.md contained the statement \"Do not run apply.\"\n\nWhich are appropriate measures to prevent recurrence? (Select two.)",
+  "choices": {
+   "A": "Use a PreToolUse hook to deny Bash calls that contain terraform apply.",
+   "B": "In the denial reason, indicate the procedure for routing the plan results to the person in charge for review, and have the agent proceed to the alternative procedure.",
+   "C": "Move the statement in CLAUDE.md to the top and rewrite it with emphasis by adding \"IMPORTANT.\"",
+   "D": "Use a PostToolUse hook to roll back to the previous state when the result of an apply execution is detected."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0054",
+  "question": "A development team at an advertising agency is building a multi-agent research system with the Claude Agent SDK. In a market survey for a new product, consumer trends are researched independently for each of five age groups (teens, 20s, 30s, 40s, and 50s and over), and a comparison across age groups is compiled at the end.\n\nThe logs show that the coordinator called the Agent tool (formerly the Task tool) only once per response, waited for the result to return, and then delegated the next age group. As a result, the entire survey took five times longer than expected.\n\nWhich are appropriate improvements? (Select two.)",
+  "choices": {
+   "A": "Have the coordinator issue the research for the five age groups as multiple Agent tool calls within a single response.",
+   "B": "Have all six delegations, including the comparison across age groups, issued at the same time in the same response.",
+   "C": "Have the comparison across age groups delegated in the next turn, after the five research results are available.",
+   "D": "Remove the Agent tool from the coordinator and have it research the five age groups together in a single prompt."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0055",
+  "question": "A development team at an accounting firm is building a developer productivity tool with the Claude Agent SDK. The tool has a session resumption feature that lets engineers carry out codebase investigations over several days.\n\nThis morning, two engineers are about to continue the previous day's investigations.\n\nEngineer A is investigating the tax calculation module, and the only change since yesterday is one typo fix in the README\n\nEngineer B is investigating the journal entry engine, but a large-scale refactoring was merged overnight, and about 40% of the files analyzed yesterday were moved or renamed\n\nWhich resumption method is most appropriate for each of them?",
+  "choices": {
+   "A": "Both Engineer A and Engineer B resume the previous day's session as is, and tell it only the list of files that changed.",
+   "B": "Engineer A starts a new session with a summary of the previous day injected, and Engineer B resumes the previous day's session as is.",
+   "C": "Both Engineer A and Engineer B start new sessions and have the previous day's investigation redone from the beginning.",
+   "D": "Engineer A resumes the previous day's session as is, and Engineer B injects a summary of the still-valid investigation findings into a new session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy04-0056",
+  "question": "A development team at a nonprofit organization has embedded Claude Code in the CI pipeline of its donation management system and generates test cases overnight. The current nightly job repeats the following cycle an average of six times per file.\n\nClaude writes a test\n\nRun the test with Bash\n\nLook at the failed result and fix it\n\nBecause the budget is limited, the team is considering migrating to the Message Batches API in anticipation of a 50% cost reduction.\n\nWhich are appropriate migration designs? (Select two.)",
+  "choices": {
+   "A": "Number the requests' custom_id sequentially, and have one request refer to the results of previous requests.",
+   "B": "Include the source and existing tests in the prompt in advance, and send to the batch only the generation of test proposals that are completed in a single response.",
+   "C": "Keep the iteration of running tests and fixing based on failures in synchronous execution, which can return tool results.",
+   "D": "Define a Bash tool in each batch request, and have it run tests and receive the results while the batch is being processed."
+  }
+ }
+]

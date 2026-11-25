@@ -1,0 +1,113 @@
+{
+ "add": {},
+ "rep": [
+  [
+   "| ⚠️ 라인업 · 가격 | 해설 기준 최상위 = Fable 5.1<br>시점 변동 → 현재 문서 확인 |",
+   "| ⚠️ 라인업 · 가격 | 해설 기준 최상위 = Fable 5.1<br>공식 문서: 현재 최상위 = Fable 5.2($8/$40)<br>Fable 5.1($10/$50)은 이전 모델 |"
+  ],
+  [
+   "| ⚠️ 해설 라인업 | Fable 5.2 = Opus 위 계층으로 소개 |\n| ⚠️ 시점 변동 | 라인업은 시점마다 상이 |\n| ⚠️ 시험 판단 | Opus · Sonnet · Haiku 3계층별 적합 작업 기준 |",
+   "| 해설 라인업 | Fable 5.2 = Opus 위 계층으로 소개 |\n| 시점 변동 | 라인업은 시점마다 상이 |\n| ⚠️ 시험 판단 | Opus · Sonnet · Haiku 3계층별 적합 작업 기준<br>공식 문서: 현재 4계층(최상위 = Fable 5.2)<br>Fable 5.2 · Opus/Sonnet/Haiku 5.5 |"
+  ],
+  [
+   "| ⚠️ `budget_tokens` | 사고량 고정하는 예전 extended thinking 방식 |\n| ⚠️ 해설 기준 | Claude Opus 4.7 이후 모델에서 미지원 |\n| ⚠️ 확인 | 모델 버전별 상이 → 현재 문서 확인 |",
+   "| `budget_tokens` | 사고량 고정하는 예전 extended thinking 방식 |\n| 지원 범위 | Claude Opus 4.7 이후 모델에서 미지원 |"
+  ],
+  [
+   "| ⚠️ 해설 \"Haiku = extended thinking 없음\" | 공식 문서상 Haiku 5.5는 effort 지원<br>모델 세대별 상이 → 문서 확인 |",
+   "| ⚠️ 해설 \"Haiku = extended thinking 없음\" | 공식 문서: Haiku 5.5 adaptive thinking 기본 on<br>effort 5단계 지원 · `budget_tokens` 400<br>Haiku 4.5 = extended thinking 지원 |"
+  ],
+  [
+   "| ⚠️ 모델 사양 | Haiku 5.5 high 지원 · 기본 medium<br>해설 기준 · 시점 변동 → 문서 확인 |",
+   "| 모델 사양 | Haiku 5.5 high 지원 · 기본 medium |"
+  ],
+  [
+   "| ⚠️ 수치 | 약 40% = Anthropic 테스트 수치<br>모델 · workload별 차이 → 현재 문서 확인 |",
+   "| 수치 | 약 40% = Anthropic 테스트 수치 |"
+  ],
+  [
+   "| ⚠️ 공식 과금 | 실제 사용 token 기준 · window 크기 자체 과금 ✗ |\n| ⚠️ 비용 차이 | window보다 모델 tier 단가에서 발생 |",
+   "| ⚠️ 공식 과금 | 공식 문서: 실제 사용 token 기준 과금<br>window 크기 자체 과금 ✗ |\n| ⚠️ 비용 차이 | 공식 문서: 1M window 전 구간 표준 단가<br>(Haiku 5.5만 100,000 token 초과 prompt 상승)<br>→ window보다 모델 tier 단가에서 발생 |"
+  ],
+  [
+   "| ⚠️ 수치 | 50% · 100,000 · 256 MB · 29일 = 해설 기준<br>시점별 변동 가능 → 현재 문서 확인 |",
+   "| 수치 | 50% · 100,000 · 256 MB · 29일 |"
+  ],
+  [
+   "공식 문서는 최상위 필드 = 자동 caching 인정",
+   "공식 문서: 최상위 필드 = 자동 caching"
+  ],
+  [
+   "| 구분 | 내용 |\n|---|---|\n| ⚠️ 출처 | 위 ID 명명 규칙 = 해설 기준 |\n| ⚠️ 확인 | 세대마다 상이 → 문서 확인 |\n\n",
+   ""
+  ],
+  [
+   "\n| ⚠️ ID 규칙 | alias · snapshot 형식은 세대별 상이 → 문서 확인 |",
+   ""
+  ],
+  [
+   "| ⚠️ 대상 | 해설 기준 Claude Sonnet 5 · Opus 5.5 등 일부 모델 |\n| ⚠️ 제약 | `temperature` · `top_p` · `top_k`<br>비기본값 설정 → 에러 |\n| ⚠️ 대응 | 출력 방향 = prompt로 조정 |\n| ⚠️ 확인 | 모델별 사양 → 문서 확인 |",
+   "| 대상 | Claude Sonnet 5 · Opus 5.5 등 일부 모델 |\n| ⚠️ 제약 | `temperature` · `top_p` · `top_k`<br>비기본값 설정 → 에러<br>공식 문서: API 2026-10-21부터 모든 모델 · 기본값도 400 |\n| 대응 | 출력 방향 = prompt로 조정 |"
+  ],
+  [
+   "| ⚠️ 가격 | write 1.25배 · read 0.1배 · TTL 5분<br>= 해설 기준(2026년 10월)<br>read 배율 모델별 상이 → 문서 확인 |",
+   "| ⚠️ 가격 | 해설(2026년 10월): write 1.25배 · read 0.1배<br>TTL 5분 · 공식 문서: read 0.1배는 대부분 모델<br>Opus·Sonnet 5.5 0.05배 · Fable 5.2 0.025배 |"
+  ],
+  [
+   "| ⚠️ 손익분기 수치 | 해설 4~5% = 해설 자체 예시<br>1.25배 · 0.1배 단순 계산(약 22%)과 달라 보임<br>→ 자체 가격 · prefix 크기로 재계산 |",
+   "| ⚠️ 손익분기 수치 | 해설 4~5% = 해설 자체 예시 · 공식 수치 ✗<br>공식 문서: 5분 cache는 read 1회 후 이득<br>단순 계산 약 22% → 자체 가격 · prefix로 재계산 |"
+  ],
+  [
+   "| ⚠️ 출력 길이 제한 | 해설 조합 계획에 출력 길이 단축 포함<br>1-5(`max_tokens` 낮춤 = 절감 ✗)와 상충 가능 |",
+   "| 출력 길이 제한 | 해설 조합 계획에 출력 길이 단축 포함 |"
+  ],
+  [
+   "| ⚠️ 단가 · 구간 | Haiku 5.5 요율 · 100,000 token 구간 = 해설 기준<br>가격은 시점별 변동 → 현재 가격표 확인 |",
+   "| 단가 · 구간 | Haiku 5.5 요율 · 100,000 token 구간 |"
+  ],
+  [
+   "| ⚠️ Default Workspace | 공식 문서: 직접 API에서는 설정 가능<br>일부 사용량은 미집계 · 차단 안 될 수 있음 |",
+   "| ⚠️ Default Workspace | 공식 문서: 직접 API에서는 설정 가능<br>(Claude Platform on AWS 등 일부 플랫폼 불가)<br>일부 사용량은 미집계 · 차단 안 될 수 있음 |"
+  ],
+  [
+   "| ⚠️ bucket 범위 | 공식: legacy cost 보고서 = `1d`만",
+   "| ⚠️ bucket 범위 | 공식 문서: legacy cost 보고서 = `1d`만"
+  ],
+  [
+   "해설 기준 일 단위만 지원<br>⚠️ 공식 신규 API는 `1m` · `1h` · `1d` |",
+   "해설 기준 일 단위만 지원<br>⚠️ 공식 문서: 신규 API는 `1m` · `1h` · `1d` |"
+  ],
+  [
+   "| ⚠️ \"확신 없으면 Opus 5.5부터\" | 해설 인용 시점의 안내 · 버전별 상이 |",
+   "| \"확신 없으면 Opus 5.5부터\" | 해설 인용 시점의 안내 |"
+  ],
+  [
+   "| ⚠️ `budget_tokens` | 예전 extended thinking의 사고량 고정 방식<br>해설 기준 Opus 4.7 이후 미지원 |",
+   "| `budget_tokens` | 예전 extended thinking의 사고량 고정 방식<br>Opus 4.7 이후 미지원 |"
+  ],
+  [
+   "| ⚠️ Haiku 5.5 | $0.10 / $0.50 |\n| ⚠️ Sonnet 5.5 | $2 / $10 |\n| ⚠️ Opus 5.5 | $4 / $20 |",
+   "| Haiku 5.5 | $0.10 / $0.50 |\n| Sonnet 5.5 | $2 / $10 |\n| Opus 5.5 | $4 / $20 |"
+  ],
+  [
+   "| ⚠️ 기준 시점 | 2026년 11월 기준 해설 수치 |",
+   "| 기준 시점 | 2026년 11월 기준 해설 수치 |"
+  ],
+  [
+   "| ⚠️ 시험 가이드 | 2026년 7월판 · 이전 라인업(예: Haiku 4.5) 기준 가능<br>→ 시점별 변동 |",
+   "| ⚠️ 시험 가이드 | 2026년 7월판 · 이전 라인업(예: Haiku 4.5) 기준 가능<br>→ 시점별 변동 (공식 문서 미확인) |"
+  ],
+  [
+   "| ⚠️ 캐시 단가 | write 1.25배 · read 0.1배 · TTL 5분<br>= 해설 기준(2026년 10월)<br>read 배율 모델별 상이 · 시점 변동 |",
+   "| ⚠️ 캐시 단가 | 해설(2026년 10월): write 1.25배 · read 0.1배<br>TTL 5분 · 공식 문서: read 0.1배는 대부분 모델<br>Opus·Sonnet 5.5 0.05배 · Fable 5.2 0.025배 |"
+  ],
+  [
+   "| ⚠️ Haiku 5.5 effort | high 지원 · 기본 medium = 해설 기준<br>`budget_tokens` 400 · 시점 변동 |",
+   "| Haiku 5.5 effort | high 지원 · 기본 medium<br>`budget_tokens` 400 |"
+  ],
+  [
+   "| low → high effort 재실행 | 같은 통과율 · 비용 약 40% 감소<br>⚠️ Anthropic 테스트 수치 · 시점별 변동 |",
+   "| low → high effort 재실행 | 같은 통과율 · 비용 약 40% 감소<br>Anthropic 테스트 수치 |"
+  ]
+ ]
+}

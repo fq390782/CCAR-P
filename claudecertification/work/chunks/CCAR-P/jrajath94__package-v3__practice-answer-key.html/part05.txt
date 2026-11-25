@@ -1,0 +1,258 @@
+<div class="item"><p><span class="lbl">85.</span> Monthly spend rose 30 percent while completed tasks stayed flat. The team needs an alert before the budget breaks. The alert must reflect the value of each task, and it needs a named owner.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Alert on total token count per day, since token counts rise with spend.</li>
+<li><span class="lbl">B.</span> Alert on 40 metrics, with latency, token counts, and per-user spend among them, each with its own owner.</li>
+<li><span class="lbl">C.</span> Alert on cost per completed task, and name the owner who acts when the line breaks.</li>
+<li><span class="lbl">D.</span> Set the Cost API to alert on one-minute buckets, so spend breaks show within a minute.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> Cost per completed task shows whether spend buys finished work. A named owner turns the alert into a control that someone acts on. (Inference)</p>
+<p class="c-trap">Trap. One-minute Cost API buckets look like faster alerts, but the Cost API supports only daily buckets.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/manage-claude/usage-cost-api</p>
+</div>
+
+<div class="item"><p><span class="lbl">86.</span> The data rules allow only metadata in the observability destination. A request failed across three services. The team uses the Claude API and needs the order and timing of each hop for that one request.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Export full content for every request, then search the prompts for the failed call.</li>
+<li><span class="lbl">B.</span> Read the per-hop trace for the failed request, with metadata-only export.</li>
+<li><span class="lbl">C.</span> Build a custom span format and tracing service before the next incident.</li>
+<li><span class="lbl">D.</span> Turn on the claude_code.session.count metric, which records the timing of each hop.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> A trace shows the order and timing of each hop in one request. Metadata-only spans still carry identifiers and timing, so the data rules hold.</p>
+<p class="c-trap">Trap. The session count metric sounds like timing data, but it counts sessions as each one starts.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/manage-claude/opentelemetry</p>
+</div>
+
+<div class="item"><p><span class="lbl">87.</span> A team pinned a model ID. Live quality dropped after an infrastructure update, and no code changed. The team must find the cause with evidence before it changes the model. Which two actions meet this constraint?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Freeze the infrastructure that serves the model ID, so no update can change observable behavior.</li>
+<li><span class="lbl">B.</span> Compare live metrics with the baseline from before the update, and record the model ID with each metric.</li>
+<li><span class="lbl">C.</span> Rewrite the prompt with a new template and retrain the grader before any metric comparison.</li>
+<li><span class="lbl">D.</span> Check prompt and data changes from the same period before the team changes the model ID.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, D.</span> A pinned ID fixes the weights, so the infrastructure that serves it remains a likely cause of the shift. A baseline and the change history point to the actual cause.</p>
+<p class="c-trap">Trap. A setting that freezes the infrastructure sounds like a fix, but the docs describe no such setting.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions</p>
+</div>
+<h3>D5.1 Guardrails and safety controls</h3>
+
+<div class="item"><p><span class="lbl">88.</span> Users type free text into a support app that reaches the main model. The team needs a check before the main call. The check must return a parseable verdict that code can count.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Add a stricter system prompt that tells the main model to refuse harmful messages, then send every message.</li>
+<li><span class="lbl">B.</span> Screen each message with a lightweight model that returns a boolean verdict, and block a harmful verdict.</li>
+<li><span class="lbl">C.</span> Screen each message with the main model at high effort, and store the full reasoning for each message.</li>
+<li><span class="lbl">D.</span> Turn on the computer use classifiers for each message, since they scan text before the model reads it.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> A lightweight model such as Haiku 5.5 screens the input before the main call. Structured output limits the screen to a boolean that code can parse and count.</p>
+<p class="c-trap">Trap. A stricter system prompt looks like a control, but the model can still follow an injected instruction, and no code stops the call.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks</p>
+</div>
+
+<div class="item"><p><span class="lbl">89.</span> A Claude Code agent must never run the deploy script. The system prompt forbids it, but the agent still proposes the command. The team needs a rule that Claude Code enforces before the command runs.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Add three more sentences to the system prompt that repeat the deploy ban, and ask the agent to confirm.</li>
+<li><span class="lbl">B.</span> Move the deploy script into a separate container with its own network policy, outside the reach of the agent.</li>
+<li><span class="lbl">C.</span> Set the sandbox allowed domains to exclude the deploy host, so the script cannot reach it.</li>
+<li><span class="lbl">D.</span> Add a deny rule for the deploy command in the permission settings, which Claude Code checks before it runs.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: D.</span> Claude Code evaluates deny rules first, and the model cannot override that result. A deny rule for the command blocks each attempt before the command runs.</p>
+<p class="c-trap">Trap. A sandbox domain list sounds like it blocks the deploy, but that list controls only the hosts that sandboxed commands reach.</p>
+<p class="tag">Source. https://code.claude.com/docs/en/permissions</p>
+</div>
+
+<div class="item"><p><span class="lbl">90.</span> An agent runs shell commands on a developer machine. Untrusted issue text can steer those commands. The shell must not reach unknown hosts. The Read tool must not open credential files. Which two settings meet both constraints?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Run /sandbox to turn on the sandbox, and keep the allowed domain list empty until a task needs a host.</li>
+<li><span class="lbl">B.</span> Add a sandbox denyRead entry for the credential files, so the Read tool cannot open them.</li>
+<li><span class="lbl">C.</span> Run the agent in a separate virtual machine for each issue, with its own network and disk.</li>
+<li><span class="lbl">D.</span> Add permission deny rules for the credential paths, so the Read tool cannot open those files.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A, D.</span> The sandbox routes shell network traffic through a proxy, and its allowed domain list starts empty. Permission rules govern the built-in Read tool, which the sandbox does not cover.</p>
+<p class="c-trap">Trap. A denyRead entry in the sandbox looks like it blocks the Read tool, but the sandbox does not stop that tool.</p>
+<p class="tag">Source. https://code.claude.com/docs/en/sandboxing</p>
+</div>
+<h3>D5.2 Risks and failure modes</h3>
+
+<div class="item"><p><span class="lbl">91.</span> A new agent loops overnight and drives API spend up. The team shares one organization across three projects. The team needs a monthly ceiling for each project and a stop for a single runaway loop.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Set a monthly spend limit on each project workspace with alerts, and cap tool calls per run in code.</li>
+<li><span class="lbl">B.</span> Raise the workspace rate limit, so the loop finishes its work within the same hour.</li>
+<li><span class="lbl">C.</span> Set a spend limit on the Default Workspace that holds the project key.</li>
+<li><span class="lbl">D.</span> Create a separate organization for each project, each with its own billing and dashboard.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A.</span> A workspace spend limit caps monthly spend for each project, and alerts fire at thresholds that you choose. A call cap in code stops one runaway run within minutes. (Inference)</p>
+<p class="c-trap">Trap. A higher rate limit looks like a fix for a stalled loop, but it allows more calls and raises spend.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/manage-claude/workspaces</p>
+</div>
+
+<div class="item"><p><span class="lbl">92.</span> An audited workflow calls an alias for an earlier model. The output must stay fixed through a validation period. The team must also find any deprecated use before the retirement date.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Keep the alias, since aliases for earlier models point to a fixed snapshot that never moves.</li>
+<li><span class="lbl">B.</span> Move the workflow to the newest model now, and skip the replacement test to save time.</li>
+<li><span class="lbl">C.</span> Pin a dated snapshot ID, and export usage by key and model to find deprecated use.</li>
+<li><span class="lbl">D.</span> Build a shadow environment that replays every request to two model IDs, with a dashboard per token.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> A dated snapshot ID stays fixed for the validation period. A usage export by key and model shows which calls still use deprecated models.</p>
+<p class="c-trap">Trap. An alias for an earlier model sounds fixed, but it points to the most recent snapshot for that minor version.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions</p>
+</div>
+
+<div class="item"><p><span class="lbl">93.</span> An assistant summarizes a long contract, and a wrong claim has a real cost. The model must stay the same. Each claim must point to source text. Which two controls meet these constraints?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Use a larger model tier for summaries, because larger tiers invent fewer contract terms.</li>
+<li><span class="lbl">B.</span> Ask for word-for-word quotes before the summary, because the contract is a long document.</li>
+<li><span class="lbl">C.</span> Turn on contract mode, which blocks any summary that lacks a citation.</li>
+<li><span class="lbl">D.</span> Remove each summary claim that has no source quote, after the quote check runs.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, D.</span> Quotes before the summary ground each claim in the text of the document. Claims with no quote are removed, so each claim that stays in the summary is checkable.</p>
+<p class="c-trap">Trap. A larger model tier looks like the fix for invented terms, but the constraints keep the same model.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations</p>
+</div>
+<h3>D5.3 Human-in-the-loop validation</h3>
+
+<div class="item"><p><span class="lbl">94.</span> A managed agent can delete customer records through an MCP tool. A deletion cannot be undone. Each deletion must wait for a person to approve it before the tool runs.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Subscribe to the session.status_idled webhook, which pauses the session before each deletion.</li>
+<li><span class="lbl">B.</span> Run an offline reviewer job that samples sessions after each deletion, and reports the results weekly.</li>
+<li><span class="lbl">C.</span> Add an approval service with a hook, a review queue, and a separate audit database for each tool.</li>
+<li><span class="lbl">D.</span> Set the permission policy to always_ask for the delete tool, so the session pauses until a reply arrives.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: D.</span> The always_ask policy pauses the session until a reviewer answers the approval request. The pause happens before the tool runs, so the deletion waits for the answer.</p>
+<p class="c-trap">Trap. The status idled webhook sounds like a pause control, but it only reports that a session went idle.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/managed-agents/permission-policies</p>
+</div>
+
+<div class="item"><p><span class="lbl">95.</span> A Claude Code team wants a check on shell commands that no permission rule can express. The check must block a command that touches a production host before the command runs.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Print a warning from the hook and exit with code 0, so the developer sees the reason.</li>
+<li><span class="lbl">B.</span> Set permissionDecision to allow in the hook JSON, which lets the command run with a warning.</li>
+<li><span class="lbl">C.</span> Add a PreToolUse hook on the shell matcher that exits with code 2 when the host check fails.</li>
+<li><span class="lbl">D.</span> Route every shell command to an approval service with a review queue and a manual reply.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> A PreToolUse hook that exits with code 2 prevents the tool call. The matcher limits the hook to shell commands, so other tools stay unaffected.</p>
+<p class="c-trap">Trap. A warning printed from a hook with exit code 0 looks like a block, but the call continues.</p>
+<p class="tag">Source. https://code.claude.com/docs/en/hooks</p>
+</div>
+
+<div class="item"><p><span class="lbl">96.</span> An agent edits files in a reversible way across 5,000 sessions each day. Review can happen after each action, and a tested undo path must exist. Which two steps meet these constraints?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Set evaluated_permission to review, which pauses each file edit until a reviewer answers.</li>
+<li><span class="lbl">B.</span> Sample sessions at a random rate for offline review, and send flagged actions to a human reviewer.</li>
+<li><span class="lbl">C.</span> Test a rollback procedure before the run, so a flagged file edit can be reversed.</li>
+<li><span class="lbl">D.</span> Require approval for every file edit before it runs, with a decision record for each edit.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, C.</span> Random sampling covers high volume at low review cost. (Inference) Flagged actions reach a person, and a tested rollback path makes each flagged edit reversible.</p>
+<p class="c-trap">Trap. Setting evaluated_permission to review sounds like a pause control, but that field only reports the decision on each tool call event.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/managed-agents/secure-deployment-monitoring</p>
+</div>
+<h3>D5.4 Regulatory compliance and data controls</h3>
+
+<div class="item"><p><span class="lbl">97.</span> A clinic sends patient notes to the Messages API. The contract requires that prompts and responses not persist after each response. The clinic also tests prompts in the Console playground.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Keep default retention, and encrypt each prompt in the clinic network before it leaves.</li>
+<li><span class="lbl">B.</span> Enable ZDR for the organization, send API calls only with its keys, and keep patient data out of the playground.</li>
+<li><span class="lbl">C.</span> Enable HIPAA readiness, which stops storage of prompts after each response.</li>
+<li><span class="lbl">D.</span> Enable ZDR, and attach a customer-managed key to a new workspace for all stored data.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> Zero data retention means Anthropic does not store prompts or responses at rest after the response returns. ZDR does not cover Console usage, so patient data stays out of the playground.</p>
+<p class="c-trap">Trap. HIPAA readiness sounds like the no-storage setting, but it adds safeguards and does not require deletion after each response.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/manage-claude/api-and-data-retention</p>
+</div>
+
+<div class="item"><p><span class="lbl">98.</span> A company must keep inference in the United States for a model at version 4.6 or later. The rule must hold even when application code omits the residency setting.</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Set the application server region to US, which keeps inference in the United States.</li>
+<li><span class="lbl">B.</span> Set inference_geo to us on each request, and leave the workspace allowed list open.</li>
+<li><span class="lbl">C.</span> Set default_inference_geo and allowed_inference_geos to us on the workspace.</li>
+<li><span class="lbl">D.</span> Create a new workspace with US workspace geo, and set its default and allowed inference geos to us.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> The default geo applies when a request omits inference_geo. The allowed list rejects any request that names another geo, so application code cannot skip the rule.</p>
+<p class="c-trap">Trap. A region on the application server sounds like it sets inference location, but inference_geo controls where inference runs.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/manage-claude/data-residency</p>
+</div>
+
+<div class="item"><p><span class="lbl">99.</span> A bank must hold its own keys for new stored data, and it must show who read which records. The audit record must remain after a key is revoked. Which two actions meet these constraints?</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Attach a customer-managed key to a new workspace before its first request.</li>
+<li><span class="lbl">B.</span> Re-encrypt old workspaces under the customer key, with the key added after the first request.</li>
+<li><span class="lbl">C.</span> Export Activity Feed events to an internal audit store on a schedule.</li>
+<li><span class="lbl">D.</span> Create a separate workspace and customer key for every team, each with its own Compliance Access Key.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A, C.</span> CMEK protects data written after the key takes effect, so a key set up before the first request covers all new data. The Activity Feed sits under the Anthropic key, so audit records survive a key revocation.</p>
+<p class="c-trap">Trap. A key added after the first request sounds like it protects old data, but earlier data is not re-encrypted.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/manage-claude/cmek</p>
+</div>
+<h3>D5.5 Responsible AI</h3>
+
+<div class="item"><p><span class="lbl">100.</span> A marketplace moderates listings in six languages. The rules change every month. The team must update the rules without new labeled training data. Which design meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Retrain a custom classifier for each language after every rule change.</li>
+<li><span class="lbl">B.</span> Use the built-in safety classifiers as the marketplace rules.</li>
+<li><span class="lbl">C.</span> Put the written rules and edge-case examples in the prompt, and constrain the verdict with a JSON schema.</li>
+<li><span class="lbl">D.</span> Put the written rules in the prompt, and have a person approve every verdict before a listing goes live.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> The written rules and examples in the prompt are the control, so a rule change needs an edit to text, not new training data. A JSON schema keeps each verdict parseable.</p>
+<p class="c-trap">Trap. A custom classifier for each language looks rigorous, but each rule change then needs new labels and a new training cycle.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation</p>
+</div>
+
+<div class="item"><p><span class="lbl">101.</span> A compliance dashboard must count declined requests by policy area. The team cannot change the model. Which method meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> HTTP error responses look like the standard count, since each declined request returns an error status code.</li>
+<li><span class="lbl">B.</span> Read stop_reason on each response, and count the stop_details category when stop_reason is refusal.</li>
+<li><span class="lbl">C.</span> Read the category value from the usage field, which lists the policy area of each call.</li>
+<li><span class="lbl">D.</span> Log every full prompt, response, and header for each call, then sort the logs by policy area.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B.</span> A decline arrives as a regular response with the stop reason refusal, not as an error. The stop_details category names the policy area, so the count needs no error parsing.</p>
+<p class="c-trap">Trap. HTTP error responses look like the standard count, but a decline returns a normal response with a stop reason.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback</p>
+</div>
+
+<div class="item"><p><span class="lbl">102.</span> A release review asks for evidence that the product works for each user group. The review also asks which model the product uses. Select two actions that meet both requests.</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Build an evaluation set with a group label for each user group, and set a floor for each group.</li>
+<li><span class="lbl">B.</span> Cite the model system card as the fairness result for product users.</li>
+<li><span class="lbl">C.</span> Request subgroup fairness metrics that Anthropic publishes for each Claude model.</li>
+<li><span class="lbl">D.</span> Record the model system card link and the exact model ID in the release record.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: A, D.</span> The per-group evaluation tests the product on its own users, and a floor blocks a release that fails one group. (Inference) The system card and the exact model ID document the model that the product uses.</p>
+<p class="c-trap">Trap. A system card cited as fairness evidence looks sufficient, but the card describes model tests, not the product users.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/resources/overview</p>
+</div>
+<h3>D6.1 Structured discovery</h3>
+
+<div class="item"><p><span class="lbl">103.</span> A product owner asks for a fast and accurate answer bot. The team has no number for either word. The team must set a pass or fail check before any design work. Which step meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Pick the largest model, and tune the wording until the demo looks accurate.</li>
+<li><span class="lbl">B.</span> Enable a workspace spend limit so that the bot stays fast and accurate.</li>
+<li><span class="lbl">C.</span> Set a metric, a threshold, and an owner, and add a weekly human panel to score every answer.</li>
+<li><span class="lbl">D.</span> Convert fast and accurate into a latency threshold and a task fidelity score, with an owner who signs each threshold.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: D.</span> Task fidelity and latency are common success criteria, and each needs a threshold before design starts. The owner who signs each threshold is general practice. (Inference)</p>
+<p class="c-trap">Trap. The largest model with tuned wording looks productive, but the team then builds toward a bar that nobody measured.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/test-and-evaluate/develop-tests</p>
+</div>
+
+<div class="item"><p><span class="lbl">104.</span> A project team needs a monthly spend cap for its own traffic only. The cap must not include traffic from other teams. Which setup meets the constraint?</p>
+<p class="tag">Select one answer.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Create a project workspace and a staging workspace, scope each API key, and set a spend limit on each.</li>
+<li><span class="lbl">B.</span> Use the Default Workspace with a shared key, and set a spend limit there.</li>
+<li><span class="lbl">C.</span> Create a workspace for the project, scope its API key to that workspace, and set a spend limit on it.</li>
+<li><span class="lbl">D.</span> Set a per-minute rate limit on the project key, which caps the monthly spend.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: C.</span> A workspace has its own spend limit, and a key scoped to that workspace counts only toward it. The Default Workspace offers no spend limit, so the project needs its own workspace.</p>
+<p class="c-trap">Trap. A spend limit on the Default Workspace looks like the simplest cap, but that workspace accepts no spend limit.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/manage-claude/workspaces</p>
+</div>
+
+<div class="item"><p><span class="lbl">105.</span> A support bot team builds an evaluation set. The team wants a fast check loop and coverage of rare cases from real traffic. Select two actions that meet both requests.</p>
+<p class="tag">Select two answers.</p>
+<ol class="opts" type="A"><li><span class="lbl">A.</span> Score every answer with a human panel before each test run.</li>
+<li><span class="lbl">B.</span> Add edge cases from real traffic to the test set.</li>
+<li><span class="lbl">C.</span> Use code-based checks wherever the output format allows them.</li>
+<li><span class="lbl">D.</span> Use the workspace spend limit as the pass threshold for each answer.</li>
+</ol>
+<p class="c-rule"><span class="lbl">Answer: B, C.</span> Code-based checks rank first in speed and reliability in the docs. Test sets should follow the real task mix and include edge cases.</p>
+<p class="c-trap">Trap. A human panel on every answer looks thorough, but the docs call human grades slow and expensive.</p>
+<p class="tag">Source. https://platform.claude.com/docs/en/test-and-evaluate/develop-tests</p>
+</div>
+<h3>D6.2 Trade-off communication</h3>

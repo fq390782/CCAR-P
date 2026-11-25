@@ -1,0 +1,252 @@
+[
+ {
+  "id": "CCAR-F-Udemy06-0010",
+  "question": "The tooling team at a game development company has set up an internal MCP server, asset-pipeline, so that engineers can work with the in-game asset management system from Claude Code. The whole team uses this server, and each person needs their own access token to connect.\n\nSeparately, one engineer is experimentally using a self-built MCP server for profiler integration, and it is not yet at the stage of being shared with the team.\n\nWhich are appropriate ways to configure these MCP servers? (Select two.)",
+  "choices": {
+   "A": "Also define the profiler-integration server in .mcp.json and commit it, including in the server name that it is for personal use.",
+   "B": "Define asset-pipeline in .mcp.json, write each person's token into it as is, and add the file to .gitignore.",
+   "C": "Add the profiler-integration server at user scope with claude mcp add --scope user.",
+   "D": "Define asset-pipeline in .mcp.json, reference the token with ${ASSET_API_TOKEN}, and commit it."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0011",
+  "question": "The headquarters of a restaurant chain is using a multi-agent research system to produce a report investigating candidate locations for opening a new store format in major cities. After receiving the results from the web search subagent and the document analysis subagent, the coordinator instructs the synthesis subagent only with \"Based on the findings so far, create a comparison report of the candidate locations.\"\n\nThe report returned by the synthesis subagent was full of phrases like \"according to the aforementioned research\" and contained almost no specific figures or sources.\n\nWhich changes are appropriate for giving the synthesis subagent the right information? (Select two.)",
+  "choices": {
+    "A": "Pass the findings as structured data, separated into the body text and metadata such as source URLs, document names, and page numbers.",
+    "B": "Give the synthesis subagent the web search and document analysis tools as well, and have it gather the information it needs by itself.",
+    "C": "Add to the synthesis subagent's system prompt an instruction to refer to the coordinator's conversation history.",
+    "D": "Include the web search and document analysis findings directly in the prompt that launches the synthesis subagent."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0012",
+  "question": "The development team at an industrial machinery manufacturer uses Claude Code to maintain a factory equipment monitoring system. This week there are two tasks.\n\nReplacing a PLC communication library whose support is ending with a new library (affects about 60 files, and the handling of connection retries and timeouts differs between the old and new libraries)\n\nAdding one validation to the temperature sensor settings screen that displays an error when the input value exceeds the upper limit (the location of the change has already been identified)\n\nWhich are the most suitable approaches for each task? (Select two.)",
+  "choices": {
+    "A": "For the library replacement, use plan mode to plan the scope of impact and the migration approach, and after approval proceed with direct execution.",
+    "B": "For adding the validation, request the change with direct execution and confirm the behavior with tests.",
+    "C": "For adding the validation as well, create a plan in plan mode to standardize the work procedure, and implement after approving it.",
+    "D": "For the library replacement, use direct execution to rewrite directory by directory, and use /rewind to go back if the build breaks."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0013",
+  "question": "The systems department of an electric power company has built automated code review by Claude Code into CI for its supply-and-demand management system repository. The review's findings are highly accurate for obvious bugs, but its judgments on patterns that are acceptable depending on the situation, such as \"hard-coded timeout values\" and \"try/except that swallows exceptions,\" vary from run to run.\n\nTo improve this, the team added 40 examples of flagging typical bugs to the prompt as few-shot examples. However, the variability did not improve, and the input tokens per run roughly doubled.\n\nWhich change is most effective for improving the consistency of the judgments?",
+  "choices": {
+   "A": "Add a rule at the beginning of the prompt saying \"Do not flag patterns you are unsure about.\"",
+   "B": "Run the judgment of whether a pattern is acceptable three times for each finding and decide by majority vote.",
+   "C": "Increase the few-shot examples by another 80, including examples of acceptable patterns among them, to be comprehensive.",
+   "D": "Replace the 40 examples with a small number of examples that show the reasons for flagging or not flagging in cases where judgments differ."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0014",
+  "question": "The corporate planning department of an electric power company is using a multi-agent research system to produce a report investigating the adoption of home storage batteries in Japan.\n\nThe document analysis subagent extracted the following differing values for the cumulative number of home storage battery installations from two reliable sources.\n\nGovernment statistics: about 450,000\n\nIndustry association report: about 620,000\n\nThe synthesis subagent adopted only the industry association's value, which looked newer, and included it in the report, without considering that the two values may have been measured at different points in time.\n\nWhich changes are appropriate for addressing this problem? (Select two.)",
+  "choices": {
+   "A": "Give the synthesis subagent a rule to prioritize and adopt the value from the more authoritative government statistics.",
+   "B": "Take the average of the two values and have the report state a single value of \"about 535,000.\"",
+   "C": "Have the subagent include each value's publication date and data collection date in its structured output.",
+   "D": "Do not pick one of the conflicting values; have the report list both with their respective sources and note that they conflict."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0015",
+  "question": "The threat intelligence team at a security company is using a multi-agent research system to produce weekly reports on a specific attack group.\n\nIn this week's run, of the eight source categories, the paid threat feed timed out and the vulnerability database could not be accessed because of a permission error. The subagents reported these failures to the coordinator as structured errors. However, the final report was produced in the same format as usual, and readers could not tell that it was written using only the six categories that were available.\n\nWhich change is most appropriate for enabling readers to correctly judge how reliable the conclusions are?",
+  "choices": {
+   "A": "For the two categories that could not be accessed, carry over the previous week's report text as is.",
+   "B": "Have the subagents retry repeatedly until the timeout and permission errors are resolved, and then synthesize.",
+   "C": "If any source category fails, abort report creation and wait until the next week's run.",
+   "D": "Attach a coverage note to the synthesis output indicating which areas have well-supported results and which areas lack sources."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0016",
+  "question": "The design automation team at a semiconductor manufacturer uses Claude Code to generate scripts for EDA tools. They wrote conventions used only in the timing analysis flow (such as how to write clock constraints and how to name analysis report files) in a CLAUDE.md placed in the timing/ directory and committed it. The team's engineers usually launch Claude Code at the repository root and work there, including on the synthesis and place-and-route flows.\n\nAn engineer launched Claude Code at the root and ran /context, and the Memory files list showed only the root CLAUDE.md and did not show timing/CLAUDE.md. This engineer reported to the team that \"timing/CLAUDE.md is not being loaded.\"\n\nWhich is the most appropriate next action to take in response to this report?",
+  "choices": {
+   "A": "Move the contents of timing/CLAUDE.md into the root CLAUDE.md and confirm that they appear in the /context list.",
+   "B": "Have Claude read a file under timing/ and see whether timing/CLAUDE.md is loaded at that point.",
+   "C": "Move timing/CLAUDE.md to .claude/rules/timing.md and specify \"timing/**/*\" in paths.",
+   "D": "Write @timing/CLAUDE.md in the root CLAUDE.md so that it is imported at startup."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0017",
+  "question": "The development team at a telecommunications company uses Claude Code in its billing system repository. The root CLAUDE.md has grown to over 1,200 lines as four teams have added to it, and network configuration, billing API, release procedures, and testing conventions are mixed together in a single file.\n\nThe following problems have recently occurred.\n\nSimultaneous edits to the same file frequently cause merge conflicts\n\nThere are more cases where Claude does not follow conventions written in the latter part of the file\n\nWhich changes are appropriate for improving this situation? (Select two.)",
+  "choices": {
+   "A": "Split the contents of CLAUDE.md into each engineer's ~/.claude/CLAUDE.md, so that each team holds only the parts it needs.",
+   "B": "Split the conventions by topic into files such as billing-api.md under .claude/rules/.",
+   "C": "Leave only the minimum content that concerns the whole project in the root CLAUDE.md.",
+   "D": "Move all conventions into skills, and have developers invoke the relevant skill to load it each time they work."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0018",
+  "question": "The data journalism team at a newspaper company is using a multi-agent research system for preliminary research on explanatory articles that draw on past reporting. The search subagent has search_web, which searches the web, and a newly added search_archive (described as \"Searches the archive\").\n\nsearch_archive is a tool that can search the full text of the company's own print articles published from 1990 to 2015, but it was rarely called during the month after it was added. Even in research on the company's own reporting from before 2015, the agent looks for other companies' articles with search_web.\n\nWhich changes are appropriate for getting search_archive to be selected appropriately? (Select two.)",
+  "choices": {
+   "A": "Rename search_archive to search_own_archive_1990_2015, which makes its coverage clear.",
+   "B": "In the description of search_archive, write its coverage (the company's own print editions from 1990 to 2015) and examples of search terms.",
+   "C": "Set tool_choice to {\"type\": \"any\"} so that the agent calls one of the tools on every search.",
+   "D": "Temporarily disable search_web for the search subagent so that it uses search_archive preferentially."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0019",
+  "question": "An information security company is using a multi-agent research system to compile quarterly summaries of trends in cyberattacks targeting a specific industry. It concatenates the results of 12 search subagents and passes them to the synthesis subagent, and the input comes to about 80,000 tokens.\n\nWhen the completed report was reviewed, the findings of the subagents placed at the beginning and end of the input were well reflected, but important attack techniques reported by the fifth through eighth subagents were missing.\n\nWhich are appropriate ways to improve how the input to the synthesis subagent is structured? (Select two.)",
+  "choices": {
+   "A": "Increase the synthesis subagent's max_tokens so that it outputs a longer report.",
+   "B": "Place a summary of each subagent's key findings at the beginning of the input.",
+   "C": "Randomly shuffle the order of the 12 results on every run so that no particular result ends up in the middle every time.",
+   "D": "Organize the detailed results with explicit section headings by subagent or topic."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0020",
+  "question": "A real estate management company uses Claude to extract the rent, common service fee, parking fee, and monthly total from lease agreements and register them in its rent management system. The extraction uses an extraction tool whose input is defined with a JSON schema, and no errors occur where the output cannot be parsed as JSON.\n\nHowever, about 4% of the extraction results contained errors such as the following.\n\nThe monthly total does not match the sum of the individual items\n\nThe common service fee amount was put in the rent field\n\nThe person in charge proposes that \"adding strict: true to the tool definition will solve it.\"\n\nWhich is the most appropriate way to handle this problem?",
+  "choices": {
+   "A": "Remove the monthly total field from the schema and have the system calculate the total when registering.",
+   "B": "After extraction, check the total in code, and if there is a mismatch, have Claude re-extract with a specific validation error attached.",
+   "C": "Run the extraction of the same agreement twice, and register only the items on which the two results match.",
+   "D": "Follow the person in charge's proposal, adding strict: true to the tool definition to make the output strictly follow the schema."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0021",
+  "question": "The information systems division of a city hall uses Claude Code to maintain its resident tax calculation system and automates code generation and review in a CI/CD pipeline. In the current pipeline, after Claude generates code in response to an issue, it is asked in the same session to \"review your changes and point out any problems.\"\n\nHowever, three defects in tax amount rounding that were found in production had all been judged \"no problems\" by this review. The team increased the extended thinking budget and re-ran the review, but the result did not change.\n\nWhich changes are appropriate for making it easier to detect problems that are hard to find in review? (Select two.)",
+  "choices": {
+   "A": "In the same session, have the generated code reviewed three times in a row, specifying a different perspective each time.",
+   "B": "Run the review as a separate claude -p execution that does not carry over the generation session, passing the diff to it.",
+   "C": "Resume the generation session with --resume, rewrite the review instruction in stricter wording, and ask again.",
+   "D": "In the independent review, have it make its judgments according to the tax calculation review criteria written in CLAUDE.md."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0022",
+  "question": "An industry association of inns and hotels is using a multi-agent research system to produce a report on measures against labor shortages at regional accommodation facilities. The research request specifies that six perspectives must always be included: recruitment, retention, work automation, use of foreign workers, wages, and regional collaboration.\n\nThe current coordinator delegates work to the search and document analysis subagents and uses the synthesis subagent's output as is for the final report. However, there have been cases where the completed report barely covered the perspectives of use of foreign workers and regional collaboration.\n\nWhich is the most appropriate improvement to the coordinator?",
+  "choices": {
+   "A": "Double the maximum number of search results for the search subagent so that it gathers more sources.",
+   "B": "Have the synthesis subagent explicitly state \"no data\" for perspectives with insufficient information before it produces its output.",
+   "C": "Evaluate the synthesis output perspective by perspective, and if there are gaps, re-delegate with a narrowed focus and redo the synthesis.",
+   "D": "Give the synthesis subagent a web search tool and have it investigate and fill in the missing perspectives by itself."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0023",
+  "question": "The product planning division of a home appliance manufacturer is building a multi-agent research system. A coordinator agent delegates market trend research to subagents and produces a report with sources.\n\nThe coordinator's agent loop is implemented independently with the Claude API, and it currently terminates through the following mechanisms.\n\nIf the response contains a text block, it is regarded as the final answer and the loop terminates\n\nSeparately, it is always cut off after 8 iterations\n\nIn testing, cases were found in which the loop terminated partway through the research and an incomplete report was returned with tool calls left unexecuted.\n\nWhich changes are appropriate for revising the loop control? (Select two.)",
+  "choices": {
+   "A": "Keep the iteration limit as a safety measure to stop runaway behavior, and do not use it for normal termination decisions.",
+   "B": "Continue if stop_reason is tool_use, and terminate if it is end_turn.",
+   "C": "Terminate the loop at the point when the assistant's response text contains the phrase \"research complete.\"",
+   "D": "Raise the iteration limit from 8 to 30, and use the response at the point the limit is reached as the final answer as is."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0024",
+  "question": "The analytics team at a SaaS company is building a multi-agent research system using the Claude Agent SDK. The search subagent uses MCP tools that search the internal usage log platform and external industry reports.\n\nAnalyzing one week of logs revealed the following.\n\nThere were 1,200 tool errors, of which about 70% were failures caused by specifying a nonexistent workspace ID, and the rest were timeouts of the usage log platform\n\nThe tool returned only isError: true and \"Operation failed\" for every failure\n\nThe agent retried every failure three times with the same input\n\nMost of the timeouts succeeded on a single retry\n\nWhich change is most effective for reducing wasted retries?",
+  "choices": {
+   "A": "Reduce the number of retries for all failures from three to one, and if it still fails, report it to the coordinator.",
+   "B": "Cache the input and result of failed tool calls, and return the previous error for calls with the same input.",
+   "C": "Return a structured error indicating the type of failure and whether it can be retried.",
+   "D": "Use exponential backoff for the retry interval, doubling the wait time until the next call on each retry."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0025",
+  "question": "The R&D division of a chemical manufacturer uses Claude Code to create a script that converts old data in its experiment record system into a new format. One of the conversion requirements is a process to standardize the notation of temperatures.\n\nThe old data contains diverse notations such as \"25℃\", \"298K\", \"室温\" (room temperature), and \"77°F\", and the team asked Claude in prose: \"Standardize temperatures to a Celsius numeric value and unit, and for notations like 室温 keep the original string.\" However, the generated conversion code handled 室温 and the number of decimal places differently each time it was requested.\n\nWhich is the most effective way to convey the conversion requirements consistently?",
+  "choices": {
+   "A": "Show two or three input and output examples, such as \"298K\" -> \"24.85℃\" and \"室温\" -> \"室温（未換算）\".",
+   "B": "Continue iterating by checking the conversion results and pointing out errors in prose to have them corrected.",
+   "C": "Add to the explanation in the request, in prose, the conversion formula to Celsius and a rule to round to two decimal places.",
+   "D": "Add the temperature notation conversion rules as a bulleted list to CLAUDE.md so that they are loaded in every session."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0026",
+  "question": "The product planning team at a travel company is using a multi-agent research system to produce a report on \"trends in the regional dispersion of inbound visitors to Japan.\" The coordinator passes the same topic description and the same instructions to three search subagents and has them research in parallel.\n\nAnalyzing the last 10 runs revealed the following.\n\nAbout 70% of the sources returned by the three subagents overlap\n\nThe tokens used for search are about three times what they would be if one agent did the research\n\nThe number of sources cited in the report has barely increased\n\nWhich change to the coordinator is most appropriate for eliminating this inefficiency?",
+  "choices": {
+   "A": "Reduce the search subagents to one, and triple the maximum number of search results with the same instructions.",
+   "B": "Add a new step for the synthesis agent to exclude duplicate sources before synthesizing the findings.",
+   "C": "Pass the coordinator's entire conversation history to each subagent as its prompt.",
+   "D": "Assign each subagent a different type of source, such as government statistics or industry reports."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0027",
+  "question": "The development team at a SaaS company is running two investigations in parallel with Claude Code.\n\nOne is an investigation into the cause of a billing batch causing double billing under certain conditions, which has been continuing for three days in a session named billing-dup. During this time, there have been no changes to the billing code.\n\nThe other is a performance investigation of the authentication module, but after yesterday's session the authentication module was substantially rewritten, and most of the files analyzed earlier have changed.\n\nWhich are appropriate ways to resume each investigation? (Select two.)",
+  "choices": {
+   "A": "For the authentication module investigation, resume yesterday's session with --resume and ask it to continue the analysis as is.",
+   "B": "For the double billing investigation, resume the named session with claude --resume billing-dup and continue.",
+   "C": "For the authentication module investigation, turn the previous conclusions into a structured summary and start in a new session.",
+   "D": "For the double billing investigation as well, to be safe, start a new session and have it explore the entire codebase again from scratch."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0028",
+  "question": "The farm guidance support department of an agricultural cooperative is using a multi-agent research system to produce a report on the effects of a new fertilization technique. The document analysis subagent summarizes the findings of each paper and returns them to the coordinator, and the synthesis subagent compiles those summaries to produce the report.\n\nThe completed report stated that \"this technique increased yields by 12% on average.\" However, when the team tried to check which trial in which paper the figure was based on, the source information had been lost at the summarization stage and could not be traced.\n\nWhich change is most appropriate for producing a report that retains its sources?",
+  "choices": {
+   "A": "Instruct the synthesis subagent to attach a list of references at the end of the report.",
+   "B": "Have the subagents output structured data that maps each claim to a source URL, paper title, and excerpt, and have the synthesis retain it as well.",
+   "C": "Add a step after the report is created that looks for the source of the figures with web search and adds footnotes.",
+   "D": "Have the document analysis subagent make its summaries shorter, reducing the amount of information the synthesis subagent handles."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0029",
+  "question": "The development team at a staffing agency is using the Claude Agent SDK to build a developer productivity tool for its internal engineers. They are trying to automate the following two kinds of requests with this tool.\n\nA weekly routine task: \"check the required fields of the job posting template, fix notation inconsistencies, and create a diff report\"\n\nAn investigation whose content differs each time, such as \"investigate why the job matching API's responses have become slow since last month\"\n\nWhich are the correct task decomposition methods for each request? (Select two.)",
+  "choices": {
+   "A": "For the routine task, use a fixed prompt chain that executes three predetermined steps in order.",
+   "B": "Give both requests to the same general-purpose agent, set the iteration limit to 20, and let it proceed freely.",
+   "C": "For the cause investigation, use dynamic decomposition in which the next subtask is decided according to the findings obtained first.",
+   "D": "For the cause investigation, run it all at once with a single prompt that loads all potentially relevant files at once."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0030",
+  "question": "An advertising company uses Claude to extract the placement period, media, amount, and other details from contracts and purchase orders with advertisers and register them in its placement management system. The extraction agent is given a total of 18 tools: five extraction tools, plus CRM search and update, email sending, calendar registration, and posting to internal chat.\n\nIn evaluation, 11% of cases involved tools unrelated to extraction being called or the wrong choice being made among similar extraction tools.\n\nWhich change is most appropriate for improving the reliability of tool selection?",
+  "choices": {
+   "A": "Combine the 18 tools into a single general-purpose tool and have it specify the type of operation with an action parameter.",
+   "B": "Set tool_choice to {\"type\": \"any\"} to force it to call one of the tools every time.",
+   "C": "Add few-shot examples showing the correct choice for each of the 18 tools to the system prompt.",
+   "D": "Give the extraction agent only the tools needed for extraction, and leave CRM and email to a separate agent."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0031",
+  "question": "The development team at an e-commerce company uses Claude Code in a monorepo made up of eight packages. The design standards for the payment API, inventory API, and shipping API are compiled as files in docs/standards/, but each package's CLAUDE.md contains copied and pasted text of the standards relevant to that package.\n\nAs a result, even when a standard is revised, some packages' CLAUDE.md files remain outdated, and Claude has come to generate code following different conventions depending on the package. Each package's maintainer knows which standards are relevant to which package.\n\nWhich is the most appropriate change?",
+  "choices": {
+   "A": "Write the paths of the standards files in each package's CLAUDE.md, and instruct Claude in prose to read them when needed.",
+   "B": "Delete the body text of each package's CLAUDE.md and import the selected standards files with @import.",
+   "C": "Consolidate the contents of all standards files into the root CLAUDE.md and have every package load all the standards.",
+   "D": "Run a script in CI that automatically copies the text into each package's CLAUDE.md whenever a standard is revised."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0032",
+  "question": "The development team at an automotive parts manufacturer uses Claude Code (configured with built-in tools including Read, Grep, and Glob enabled) to modify the code of a diagnostic tool for in-vehicle ECUs. Before replacing the low-level CAN communication function send_frame, they need to identify every place where that function is used.\n\nHowever, many modules do not import send_frame directly, and instead use names re-exported under aliases (such as transmit and tx_frame) by a wrapper module, can_bus/__init__.py. When they first searched for the name send_frame, the usage sites found were only a portion of the actual total.\n\nWhich are appropriate steps for tracking down the usage sites without omission? (Select two.)",
+  "choices": {
+   "A": "Change the original function name send_frame to a partial-match regular expression and search the entire codebase again.",
+   "B": "Run the test suite with Bash and collect the callers from stack traces recorded when send_frame is called.",
+   "C": "Search the entire codebase with Grep for each of the identified names to find the call sites.",
+   "D": "Read can_bus/__init__.py with Read and identify all the names that re-export the original function."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0033",
+  "question": "The development team at a public interest foundation operates a CI that automatically generates test cases with Claude Code for each pull request in its donor management system repository. Reviewing the generated tests revealed the following problems.\n\nTest data is used that directly hardcodes realistic-looking names and addresses\n\nScenarios already covered by the existing test suite are proposed again in duplicate\n\nThe repository has fixtures of anonymized donor data prepared in tests/fixtures/.\n\nWhich changes are appropriate for improving the quality of test generation? (Select two.)",
+  "choices": {
+   "A": "After generation, use a separate job to delete tests whose test name strings match existing tests.",
+   "B": "Write how to handle test data in ~/.claude/CLAUDE.md of the user on the runner that executes CI.",
+   "C": "Write the testing conventions, the criteria for good tests, and the available fixtures in the repository's CLAUDE.md and commit it.",
+   "D": "When generating tests, pass the existing test files of the target module as context."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0034",
+  "question": "The digital division of a consumer goods manufacturer is using Claude Code to migrate a UI component library shared by three brand sites to a new design system. The work is divided into an investigation phase that examines how components are used on each site, and a phase that decides the migration approach and implements it.\n\nIn the previous attempt, the following two problems occurred.\n\nIn the investigation phase, Claude read hundreds of files, and most of the context was filled before the implementation phase began, so constraints confirmed early in the investigation were not reflected in the implementation\n\nPartway through the investigation, Claude began rewriting some components, which caused rework after the approach was decided\n\nWhich are appropriate approaches to take in the next attempt? (Select two.)",
+  "choices": {
+   "A": "Continue the investigation and implementation in the same conversation, and leave it to automatic compaction when the context approaches its limit.",
+   "B": "Do the investigation and approach design in plan mode, and after approving the plan, have it implement with direct execution.",
+   "C": "Have Claude first load all files of the three sites with Read, and start implementation after grasping the whole picture.",
+   "D": "Delegate the verbose investigation to an Explore subagent, and have it return only a summary of usage to the main conversation."
+  }
+ }
+]

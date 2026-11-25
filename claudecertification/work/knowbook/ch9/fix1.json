@@ -1,0 +1,36 @@
+{
+ "add": {
+  "### 1.1 지식 출처 선택: index · tool · fine-tuning": [
+   "CCAR-P-jrajath94-0302"
+  ],
+  "### 1.7 Metadata 필터와 접근 제어": [
+   "CCAR-P-jrajath94-0170",
+   "CCAR-P-jrajath94-0172"
+  ],
+  "## 3. 자주 나오는 오답 함정": [
+   "CCAR-P-jrajath94-0306",
+   "CCAR-P-jrajath94-0358"
+  ],
+  "## 4. 암기 목록": [
+   "CCAR-P-jrajath94-0011"
+  ]
+ },
+ "rep": [
+  [
+   "| keyword · 정확 조회 |",
+   "| keyword · 정확 조회<br>사내 KB 코드 검색 정답 = hybrid<br>(keyword를 semantic에 결합) |"
+  ],
+  [
+   "트리거 = 표면 크기 · 고정 토큰 · 오선택 · 지연",
+   "트리거 = 표면 크기 · 고정 토큰 · 오선택<br>지연 SLA는 discovery에 불리"
+  ],
+  [
+   "| 도구 소수 + 빡빡한 SLA | monolithic context |",
+   "| 도구 소수 + 빡빡한 SLA + 토큰 여유 | monolithic context |"
+  ],
+  [
+   "| 소규모 도구 + 빡빡한 SLA에 discovery |",
+   "| 소규모 도구 + 빡빡한 SLA + 토큰 여유에 discovery |"
+  ]
+ ]
+}

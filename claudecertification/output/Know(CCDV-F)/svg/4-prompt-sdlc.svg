@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="372" viewBox="0 0 900 372" role="img" aria-label="prompt를 repository에서 version control하고 pull request에서 review와 eval을 통과한 뒤 merge한다. production A/B test는 통과 후보 중 고르는 마지막 단계다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>Prompt SDLC 파이프라인</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-prompt-sdlc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-prompt-sdlc-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Prompt를 code처럼: repository → PR → review·eval → merge</text>
+<rect x="20" y="90" width="150" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="95.0" y="119.9" text-anchor="middle"><tspan x="95.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">prompt 수정</tspan><tspan x="95.0" dy="14" font-size="11" fill="#6B7280">repository에서</tspan></text>
+<rect x="200" y="90" width="150" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="275.0" y="119.9" text-anchor="middle"><tspan x="275.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">pull request</tspan><tspan x="275.0" dy="14" font-size="11" fill="#6B7280">diff 확인</tspan></text>
+<rect x="380" y="90" width="170" height="64" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="465.0" y="119.9" text-anchor="middle"><tspan x="465.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">review + eval</tspan><tspan x="465.0" dy="14" font-size="11" fill="#6B7280">결과 확인</tspan></text>
+<polygon points="640,84.0 705.0,122 640,160.0 575.0,122" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="640" y="126.5" text-anchor="middle"><tspan x="640" dy="0" font-size="13" fill="#1F2937">통과?</tspan></text>
+<rect x="740" y="90" width="140" height="64" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="810.0" y="119.9" text-anchor="middle"><tspan x="810.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">merge</tspan><tspan x="810.0" dy="14" font-size="11" fill="#6B7280">diff·revert 가능</tspan></text>
+<rect x="680" y="200" width="200" height="50" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="780.0" y="222.6" text-anchor="middle"><tspan x="780.0" dy="0" font-size="13" fill="#1F2937">production A/B test</tspan><tspan x="780.0" dy="14" font-size="11" fill="#6B7280">통과 후보 중 고르는 마지막 단계</tspan></text>
+<path d="M170,122 L200,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-sdlc)"/>
+<path d="M350,122 L380,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-sdlc)"/>
+<path d="M550,122 L575,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-sdlc)"/>
+<path d="M705,122 L740,122" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-sdlc)"/>
+<rect x="712.0" y="102" width="20.0" height="17" fill="#FFFFFF"/>
+<text x="722" y="114" font-size="12" fill="#1F2937" text-anchor="middle">예</text>
+<path d="M640,84 L640,72 L95,72 L95,90" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-prompt-sdlc)"/>
+<rect x="313.6" y="65" width="112.9" height="17" fill="#FFFFFF"/>
+<text x="370" y="77" font-size="12" fill="#1F2937" text-anchor="middle">아니오: 다시 수정</text>
+<path d="M810,154 L810,200" fill="none" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-prompt-sdlc)"/>
+<rect x="814.0" y="170" width="32.0" height="17" fill="#FFFFFF"/>
+<text x="818" y="182" font-size="12" fill="#1F2937" text-anchor="start">선택</text>
+<text x="20" y="282" font-size="14" font-weight="bold" fill="#DC2626" text-anchor="start">이력·review가 남지 않는 경로 (오답)</text>
+<rect x="20" y="292" width="420" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="230.0" y="318.6" text-anchor="middle"><tspan x="230.0" dy="0" font-size="13" fill="#1F2937">✗ 관리 화면에서 production prompt 직접 수정</tspan></text>
+<rect x="460" y="292" width="420" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="670.0" y="318.6" text-anchor="middle"><tspan x="670.0" dy="0" font-size="13" fill="#1F2937">✗ prompt를 DB에 저장해 두고 수정</tspan></text>
+<path d="M20,354 L56,354" stroke="#1F2937" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="64" y="358" font-size="11" fill="#6B7280" text-anchor="start">점선: 선택 단계</text>
+</svg>

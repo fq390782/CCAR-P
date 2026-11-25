@@ -1,0 +1,266 @@
+[
+ {
+  "id": "CCDV-F-Udemy-0028",
+  "question": "A staffing services company is implementing a batch job that integrates with an external job-posting service's REST API and registers new job postings via POST. On network errors or timeouts, the job retries the request.\nWhich implementation is most appropriate in light of REST status codes and idempotency?",
+  "choices": {
+   "A": "Treat a timed-out POST as idempotent, like PUT, and resend it; delete any duplicate job postings manually afterward.",
+   "B": "Treat a POST that returned a 5xx as already registered, and move on to registering the next job posting without resending it.",
+   "C": "Resend requests that returned 400 as well, using exponential backoff, repeating up to a fixed number of times until they succeed.",
+   "D": "Resend a POST only after attaching an idempotency key or confirming whether it was already registered, and do not resend 4xx responses other than 429."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0029",
+  "question": "The development team at a construction company wants to distribute Claude Code coding conventions and permission settings to the entire team.\nWhich understanding of the placement and hierarchy of CLAUDE.md and settings.json is most appropriate?",
+  "choices": {
+   "A": "Describe the shared permissions in prose in CLAUDE.md, and leave the contents of settings.json up to each member.",
+   "B": "Distribute the shared settings to each member's ~/.claude/settings.json, and do not put them in the repository.",
+   "C": "Put the shared conventions in CLAUDE.md and the shared permissions in .claude/settings.json, and share both via Git.",
+   "D": "Write the shared conventions and permissions in .claude/settings.local.json, commit it, and distribute the same contents to everyone."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0030",
+  "question": "A news media company operates a Claude app that summarizes long articles and holds multi-turn conversations with readers.\nWhich statement about the basics of token usage and the context window, which the operations team should understand, is correct?",
+  "choices": {
+   "A": "The context window is the upper limit on response length; the size of the input is managed separately from the window.",
+   "B": "Both input and output count toward the window, and because the history is sent every time, the input grows as the conversation goes on.",
+   "C": "Output tokens do not count toward the window; only the input tokens sent are subject to the limit.",
+   "D": "Only the latest user message is billed as input; past exchanges are retained on the server side."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0031",
+  "question": "An HR SaaS company is rolling out Claude Code plugins (extensions) across the entire team.\nWhich are appropriate management considerations? (Select TWO.)",
+  "choices": {
+   "A": "Let each member install whatever plugins they like at user scope, and do not provide shared team settings.",
+   "B": "Share the plugins to enable with everyone through a committed .claude/settings.json.",
+   "C": "Pin plugin versions, and apply updates deliberately after reviewing what has changed.",
+   "D": "Enable marketplace auto-updates so that the latest plugin versions reach everyone automatically.",
+   "E": "Limit pre-adoption review to checking the description and the number of users, without examining the hooks or MCP servers the plugin adds."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0032",
+  "question": "A university's research support team has adopted Claude Code and is sorting out when to use each component.\nWhich description of the components is most appropriate?",
+  "choices": {
+   "A": "CLAUDE.md is a procedure guide loaded when needed, and skills are conventions loaded every session.",
+   "B": "A subagent inherits the parent's conversation history and works within the same context as the parent.",
+   "C": "Agent Memory is a convention file written by people; Claude never writes what it learns into it automatically.",
+   "D": "CLAUDE.md contains conventions loaded every session, and skills are procedures loaded when needed."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0033",
+  "question": "An electronics manufacturer is developing the following two MCP servers.\nA server that runs as a subprocess on the developer's machine and accesses local files and CLIs\nA server offered over the network to many clients\nWhich choice of MCP server transport is most appropriate?",
+  "choices": {
+   "A": "Use stdio for the local server that runs as a subprocess, and Streamable HTTP for the remote server offered to many clients.",
+   "B": "Distribute the network-facing server to each user's machine as a subprocess as well, and do not use HTTP.",
+   "C": "Implement both with Streamable HTTP, exposing even the server that runs on the developer's machine on a local HTTP port.",
+   "D": "Implement both the local server and the network-facing server with stdio, and offer them to remote users the same way."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0034",
+  "question": "A law firm repeatedly sends Claude many different questions about a contract that is tens of thousands of tokens long. The contract text is identical every time and is placed before the question.\nWhich designs correctly reduce cost with prompt caching? (Select TWO.)",
+  "choices": {
+   "A": "Do not use cache writes; instead, bundle the questions about the same contract into a single request.",
+   "B": "Place the cache_control breakpoint at the end of the user message that includes the request timestamp, which changes every time.",
+   "C": "Treat the cached contract as outside the context window, and add even more reference material.",
+   "D": "Place the contract at the beginning with cache_control at its end, and place the question, which changes every time, after it.",
+   "E": "Ensure that the prefix to be cached is at least the model-specific minimum cacheable token count."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0035",
+  "question": "A consulting firm is selecting Claude models (Opus, Sonnet, Haiku) for multiple workloads.\nWhich are correct approaches to model selection based on the trade-offs among quality, latency, and cost? (Select TWO.)",
+  "choices": {
+   "A": "Once a model has been evaluated and selected, keep using it as is without re-evaluation, even when successor models are released.",
+   "B": "For complex, open-ended analysis where quality matters more than cost, choose Opus even though its unit price is higher.",
+   "C": "Use the cheapest model, Haiku, even for complex analysis, and compensate for the difficulty of the reasoning through prompt engineering.",
+   "D": "For high-volume, simple classification or routing where speed and cost take priority, choose Haiku.",
+   "E": "Standardize on a single model, Opus, for all workloads, from classification to analysis."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0036",
+  "question": "A food manufacturer wants its Claude app to always call an ingredient allergen-checking tool before answering. Calls to the tool can also fail.\nWhich design for controlling tool_choice and handling tool errors is most appropriate?",
+  "choices": {
+   "A": "Leave tool_choice as auto, and when a call fails, have the application re-run the same tool repeatedly until it succeeds.",
+   "B": "On supported models, name the tool with tool_choice, and on failure return a tool_result with is_error.",
+   "C": "When the tool fails, return an empty tool_result and do not tell Claude that an error occurred.",
+   "D": "When the tool fails, raise an exception and end the conversation, aborting processing without returning a tool_result."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0037",
+  "question": "A local government has released to production a Claude-powered system that answers inquiries from residents.\nFrom the perspective of IT system lifecycle management, which activity is most appropriate for the post-release operations and maintenance phase?",
+  "choices": {
+   "A": "Monitor response quality and usage, evaluate the impact of model updates and policy changes, and make planned improvements.",
+   "B": "Establish procedures for failure monitoring and server restarts, and focus maintenance work on maintaining uptime.",
+   "C": "Feed the results of the rating buttons that residents press into model retraining so that answer quality improves automatically.",
+   "D": "Finalize quality through testing during development, and freeze changes to answer content until the next system replacement."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0038",
+  "question": "The development team at a music streaming company is considering whether to use the official Python SDK for its Claude integration or to call the API directly with raw HTTP requests.\nWhich statement about the relationship between the SDK and the REST API is correct?",
+  "choices": {
+   "A": "The SDK connects to a faster endpoint separate from the one used by raw HTTP, so the same call returns a response faster.",
+   "B": "Using the SDK gives access to SDK-only model features that cannot be called via raw HTTP.",
+   "C": "The SDK cannot handle server-sent events, so streaming must be implemented with raw HTTP.",
+   "D": "The SDK is a client that calls the same API as raw HTTP; it adds conveniences such as type definitions and retries, but the functionality is the same."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0039",
+  "question": "A home care provider is building a Claude assistant that helps staff write care records. The records contain personally identifiable information (PII) such as names, addresses, and health conditions.\nWhich design is most appropriate for preventing PII leakage?",
+  "choices": {
+   "A": "Pass only the fields needed for the task, mask direct identifiers, and narrowly scope tool permissions.",
+   "B": "Mask direct identifiers and narrowly scope permissions, but keep the records of all clients loaded in the system prompt at all times.",
+   "C": "To prepare for audits, save the full text of the prompts and responses sent to the model in logs, with names left in.",
+   "D": "Because records are sent over TLS and also encrypted at rest, do not minimize the fields passed to the prompt."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0040",
+  "question": "A restaurant chain is embedding Claude in the ordering chat of its mobile app. So that customers are not kept waiting even when responses are long, the company is considering adopting streaming in the Messages API.\nWhich explanation of how streaming works and its benefits is correct?",
+  "choices": {
+   "A": "With stream: true, the app receives incremental SSE delivery and displays content on screen as it arrives.",
+   "B": "The unit price of output tokens drops to 50% of standard, so the longer the response, the more the ordering chat's costs are reduced.",
+   "C": "After generation completes, the full text is bundled into a single event and sent, and the client updates the display all at once.",
+   "D": "A bidirectional WebSocket connection is opened, and additional orders can be accepted over the same connection even mid-generation."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0041",
+  "question": "A retail company is building an HR assistant for employees. Claude queries the HR database with the get_employee_record tool on an internal MCP server. The current setup is as follows.\nThe get_employee_record tool runs under a service account that can read every employee's record\nThe rule \"handle only the user's own record and, for managers, their direct reports' records\" is written only in the system prompt\nIn testing, cleverly worded questions were able to extract the performance reviews of employees in other departments.\nWhich remediation is most appropriate?",
+  "choices": {
+   "A": "Rewrite the rule in the system prompt with concrete examples of what is prohibited, and use few-shot prompting to show questions that should be refused.",
+   "B": "Attach the logged-in employee's token to tool execution, and have the server determine the queryable scope based on that employee's permissions.",
+   "C": "Inspect responses with a separate model before sending them, and if a response contains names other than the requester's, block the answer and regenerate it.",
+   "D": "Have Claude pass the requester's employee ID as a tool argument, and have the server return only records within that ID's scope."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0042",
+  "question": "A logistics warehouse operator is building a Claude feature that extracts the SKU, quantity, and presence or absence of damage, in a consistent format, from free-text notes on receiving slips. The format of the extraction results varies from run to run, and the operator wants to eliminate this.\nWhich approach to designing few-shot prompting and output constraints is most effective?",
+  "choices": {
+   "A": "Show 3–5 representative examples close to real cases in example tags, and specify the output format in positive terms.",
+   "B": "Do not use examples; instead, convey the format by adding a paragraph that describes the output format in detail at the start of the instructions.",
+   "C": "Convey the format by listing prohibitions such as \"Do not use bullet points\" and \"Do not add explanations.\"",
+   "D": "List dozens of slip notes on hand as is without curating them, presenting as many examples as possible."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0043",
+  "question": "A real estate company is developing an app that uses Claude to analyze property photos to support appraisals. The same property photos are referenced repeatedly across multi-turn conversations and multiple requests. The company therefore wants to avoid re-sending the images with every request and inflating the request payload.\nWhich method of providing images to the Messages API is most appropriate?",
+  "choices": {
+   "A": "Upload the images once to the Files API, and reference the returned file_id in each request.",
+   "B": "Write the image URLs as text in the prompt, and have Claude open the links and read the photos.",
+   "C": "Encode the images in base64 and embed them in an image block with every request.",
+   "D": "Add cache_control to the images' image blocks, and cache and reuse them with prompt caching."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0044",
+  "question": "An airline is building a Claude feature that extracts specified fields (aircraft number, maintenance category, time required, etc.) from free-text maintenance records into structured records.\nWhich designs are appropriate for ensuring that the model reliably returns structured data that conforms to the schema? (Select TWO.)",
+  "choices": {
+   "A": "Before using the result, confirm that stop_reason does not indicate a refusal (refusal) or reaching the limit (max_tokens).",
+   "B": "Extract each field from the free-text response with regular expressions, and register any fields that are not found as blank.",
+   "C": "Set max_tokens low to keep the output short, so that no parts that deviate from the schema appear.",
+   "D": "Assume that using structured outputs always guarantees a schema-compliant response, and skip checking stop_reason.",
+   "E": "Constrain the response to the schema with a JSON schema in output_config.format or with strict tool use."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0045",
+  "question": "A hotel reservation assistant has multiple tools registered, such as checking availability, confirming a reservation, and canceling a reservation. Claude sometimes calls a tool that does not fit the situation.\nWhich design is most appropriate in light of the relationship between how tool descriptions are written and tool selection accuracy?",
+  "choices": {
+   "A": "Keep the description short, as a memo for developers, and compensate for selection accuracy by choosing tool names carefully.",
+   "B": "Give every tool the same generic description, and leave the choice among them to the model's flexible judgment.",
+   "C": "Write a distinct, specific description of each tool's purpose and when to use it, eliminating overlap in roles between tools.",
+   "D": "When the wrong tool is called, return an exception and have Claude retry and reselect the correct tool."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0046",
+  "question": "A hospital is planning a Claude-powered system that automatically generates clinical summaries from transcripts of consultation audio. The business goal is to \"reduce the time physicians spend on paperwork by 30%.\"\nWhich is the most appropriate \"functional requirement\" derived from this business requirement?",
+  "choices": {
+   "A": "Generate a clinical summary in the hospital's specified format from the transcript text, and display it on the physician's review screen.",
+   "B": "Handle 100 concurrent requests at peak, keeping the 95th percentile response time within 10 seconds.",
+   "C": "Reduce the time physicians spend on paperwork by 30% compared with before adoption, increasing the time available for patient care.",
+   "D": "Complete development within three months, and keep first-year build and operating costs within the approved budget."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0047",
+  "question": "A government agency's portal answers thousands of inquiries from citizens based on a corpus of regulatory documents that rarely changes. In every request, the system prompt and the regulatory documents (a large amount of text) placed at the beginning are the same; only the citizen's inquiry changes.\nWhich statement about the cost design of prompt caching is correct?",
+  "choices": {
+   "A": "On many models, cache reads cost 0.1x the base input price and 5-minute TTL writes cost 1.25x, so the more reuse, the cheaper it becomes.",
+   "B": "The cache is reused only within the same user's conversation, so a separate write is needed for each citizen.",
+   "C": "1-hour TTL writes are cheaper than 5-minute TTL writes, so the 1-hour TTL is advantageous regardless of the reuse interval.",
+   "D": "A 5-minute TTL cache is billed for a rewrite every 5 minutes, so the 1-hour TTL is advantageous even when inquiries arrive continuously."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0048",
+  "question": "An advertising agency is designing an internal system that analyzes the wording of tens of thousands of accumulated ad copies every night. The analysis results only need to be ready by the next morning's regular meeting, and reducing processing cost is the top priority.\nWhich is the correct reason to choose the Message Batches API for this use case?",
+  "choices": {
+   "A": "Results arrive incrementally via server-sent events, so the progress of the analysis can be displayed on screen continuously.",
+   "B": "Requests are processed asynchronously at 50% of standard pricing, with most completing within 1 hour and a maximum window of 24 hours.",
+   "C": "Each request's response returns faster than with the standard API, shortening the overnight analysis time.",
+   "D": "Results are returned in the same order as submitted, so they can be matched to the original ad copy without custom_id."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0049",
+  "question": "A chemical manufacturer is building a Claude assistant. The assistant inserts the inquiry text sent by users into a prompt template and answers it.\nWhen assembling the prompt, which approach to handling (sanitizing) untrusted user input is most appropriate?",
+  "choices": {
+   "A": "Wrap the input in an XML tag such as user_query, and state in the system prompt that its contents are data.",
+   "B": "Strip symbols from the input so that only text characters remain, and insert the result into the template as is.",
+   "C": "Concatenate the input as is into the middle of the instructions, and leave it to the model's contextual judgment to distinguish instructions from input.",
+   "D": "Before inserting the input, have a separate model summarize it, and insert the paraphrased text into the template instead."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0050",
+  "question": "A securities company is deploying a customer-facing Claude chatbot to production. It wants to put robust guardrails in place against inappropriate requests, such as facilitating insider trading or disclosing customer information.\nWhich design is most appropriate?",
+  "choices": {
+   "A": "Use a refusal policy in the system prompt and an output filter, and skip pre-screening of input to keep processing light.",
+   "B": "Set up a mechanism that screens input with a lightweight model, and process requests that pass screening as is.",
+   "C": "Try attacks through red teaming before release to harden the defenses, and add no further checks after going live.",
+   "D": "Layer output filtering and monitoring on top of input screening and a refusal policy in the system prompt, for defense in depth."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0051",
+  "question": "A bank is building an internal agent that handles customer data. For regulatory compliance, it must meet the following requirements.\nThe agent's execution environment and session state (conversation logs) are kept within infrastructure that the bank manages itself\nThe agent directly operates on files and services within the bank's own network\nWhich deployment model best fits these requirements?",
+  "choices": {
+   "A": "Adopt Managed Agents, and run tools in a self-hosted sandbox on the bank's own infrastructure.",
+   "B": "Adopt the Message Batches API, and submit each step of the agent as an asynchronous batch.",
+   "C": "Adopt the Claude Agent SDK, and run the agent loop in the bank's own process on its own infrastructure.",
+   "D": "Adopt Managed Agents, and run sessions in an Anthropic-managed cloud sandbox."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0052",
+  "question": "A renewable energy company uses a Claude Code agent that can run shell commands in its operations repository. It wants to block destructive commands, such as deleting production configuration, deterministically (reliably) before they run, without relying on the model's judgment.\nWhich approach is most appropriate?",
+  "choices": {
+   "A": "State explicitly in the system prompt: \"Do not run commands that delete production configuration.\"",
+   "B": "Instruct the agent to call a reviewer subagent before execution, and have the subagent judge whether a command is destructive.",
+   "C": "Inspect Bash execution results with a PostToolUse hook, and notify the person in charge if a destructive operation is detected.",
+   "D": "Inspect commands before execution with a PreToolUse hook, and stop them by returning deny if they match."
+  }
+ },
+ {
+  "id": "CCDV-F-Udemy-0053",
+  "question": "An insurance company is trying to automate first-pass processing of insurance claims. Every time, processing runs the following three steps in this order, and the order never changes.\nCheck the submitted documents for required fields\nCross-check against the policy terms\nGenerate a receipt notification for the customer\nWhich LLM-based implementation approach is most appropriate?",
+  "choices": {
+   "A": "Implement it with the orchestrator-workers pattern, in which a manager LLM decides the subtasks for each claim and delegates them to worker LLMs.",
+   "B": "Implement it with the evaluator-optimizer pattern, in which an evaluator LLM scores the output and generation and revision repeat until the criteria are met.",
+   "C": "Implement it as a prompt chaining workflow that calls each step in order through predefined code paths.",
+   "D": "Implement it as an autonomous agent in which the LLM itself decides at runtime the order of tool use and the processing steps."
+  }
+ }
+]

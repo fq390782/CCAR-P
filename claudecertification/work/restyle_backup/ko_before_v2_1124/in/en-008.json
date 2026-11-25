@@ -1,0 +1,222 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0009",
+  "question": "A code-migration agent must work across a 2-million-line monorepo. The first design loaded a summary of every file into context at session start. Sessions now exceed the context window before the agent does any useful work, and costs have tripled.\n\nConstraint: the agent must navigate the full repo without loading it all upfront, and per-session token cost must return to the original budget.\n\nWhich context strategy fixes this?",
+  "choices": {
+   "A": "Switch to a model with a 1-million-token context window and keep loading all summaries.",
+   "B": "Use progressive discovery. Give the agent search tools. Give the agent file-reading tools. Give the agent an index of entry points. The agent pulls only the code it needs. The agent pulls code when it needs it.",
+   "C": "Compress all summaries with a smaller model before the session starts, then load the compressed version.",
+   "D": "Split the repo into 50 fixed partitions and run 50 agents, one per partition."
+  },
+  "explanation": "Why B is correct: Progressive discovery replaces the monolithic upfront load with on-demand retrieval. The agent starts from entry points. It fetches only relevant files. This fits any repo size. It brings token cost back down. This is the textbook fix for monolithic-context failure.\nA is wrong. A bigger window just delays the failure. It costs more per token. It does not change the wasteful load-everything pattern.\nC is wrong. Compression loses the details migration work depends on. This includes exact APIs and edge cases. It still front-loads cost for code never touched.\nD is wrong. 50 agents multiply cost and coordination overhead. Most partitions are irrelevant to any single migration task."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0010",
+  "question": "A hospital uses a discharge-summary assistant. The assistant handles PHI. Legal requires patient data to stay in the hospital's AWS region. Legal requires no use of data for model training. Legal requires an audit of every access. The team considers the direct Anthropic API.\n\nThe team also considers Anthropic models on AWS Bedrock.\n\nConstraint: data residency pinned to the hospital's approved AWS region, no training on PHI, full auditability. All three are legal requirements, not preferences.\n\nWhich deployment choice satisfies all three?",
+  "choices": {
+   "A": "Direct Anthropic API with zero data retention (ZDR) enabled, plus application-level audit logs.",
+   "B": "AWS Bedrock is in the hospital's region. It has a PHI-eligible configuration. It has a signed BAA. It sends inference logs to the hospital's audit store. No data leaves the region.",
+   "C": "Direct Anthropic API in the default configuration, since Anthropic never trains on API data by default.",
+   "D": "Self-host an open-weights model on hospital servers to avoid all third-party terms."
+  },
+  "explanation": "Why B is correct: Bedrock keeps inference inside the chosen AWS region. This is residency. It offers HIPAA-eligible services with a BAA. This is the legal instrument auditors require. It lets the hospital own the audit logs. It is the only option that structurally satisfies all three legal requirements.\nA is wrong. The direct API cannot pin processing and storage to a specific AWS region. Inference is global or US-only. Workspace storage is US-only. So, it cannot satisfy the residency requirement. ZDR plus a BAA would cover the other two requirements.\n\nBut residency is a hard legal bar here.\nC is wrong. \"Never trains by default\" is a policy claim. It is not a regional control. It is not a contractual control. It fails residency. It fails auditability.\nD is wrong. Self-hosting puts the whole compliance burden on the hospital. This includes hardening, patching, and auditing the model stack. It reduces model quality. It gives no legal gain over option B."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0011",
+  "question": "A company builds a RAG system over a mixed corpus: long PDF policy documents, relational tables of product specs, and a codebase. One engineer proposes a single chunking rule (500-token windows) and one dense vector index for everything.\n\nConstraint: retrieval quality must stay high across all three content types. A query like \"which products support feature X and what does the policy say about refunds\" must work.\n\nWhy will the single-strategy proposal fail, and what should replace it?",
+  "choices": {
+   "A": "It will not fail. Uniform chunking is the industry standard for mixed corpora.",
+   "B": "It will fail on cost. Replace it with a smaller embedding model.",
+   "C": "It will fail. Different data shapes need different handling. Chunk PDFs by section. Index tables as structured rows with metadata filters. Chunk code by function. Use hybrid dense plus keyword search.\n\nDo this over the combined index.",
+   "D": "It will fail on latency. Replace it with an in-memory cache of all embeddings."
+  },
+  "explanation": "Why C is correct: Tables sliced into 500-token windows destroy row structure. Code sliced mid-function destroys meaning. Match the chunking to the data shape. This includes sections, rows, and functions. Use metadata filters and hybrid search. This keeps what each type needs for accurate retrieval.\nB is wrong. The failure is retrieval quality. It is not embedding cost. A cheaper embedding of badly chunked text is still badly chunked.\nD is wrong. Latency is not the problem. A cache does not repair broken chunk boundaries.\nA is wrong. It denies the problem. Uniform chunking across prose, tables, and code is a known retrieval-quality trap."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0012",
+  "question": "A travel company has two vendor-built agents: a booking agent (flights and hotels) and an expense agent (receipts and policy). They must cooperate: after booking, the booking agent hands trip details to the expense agent, which files the report. An architect must choose the integration mechanism between them.\n\nConstraint: the two agents are separate systems from different vendors. They must exchange goals and status, not just raw data.\n\nWhich mechanism fits, and why?",
+  "choices": {
+   "A": "A shared REST API that both agents poll for updates.",
+   "B": "An agent-to-agent protocol, because the integration is agent to agent: they need to delegate tasks and report status, which is what agent-to-agent communication is for.",
+   "C": "Merge both agents into one agent with all tools, eliminating the integration.",
+   "D": "MCP, because MCP connects the booking agent's tools to the expense agent."
+  },
+  "explanation": "Why B is correct: MCP connects agents to tools and data sources. It does not define how two autonomous agents delegate and coordinate. An agent-to-agent protocol is for this purpose. It handles task handoff, status updates, and negotiation between separate agents.\nD is wrong. It misapplies MCP. MCP is agent-to-tool. It is not agent-to-agent.\nA is wrong. Polling a REST API gives data exchange. It gives no task-delegation semantics. Each vendor would have to invent coordination.\nC is wrong. The agents are separate vendor systems. Merging them is not technically feasible. Merging them is not contractually feasible."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0013",
+  "question": "An accounting firm processes 20,000 vendor invoices each month. The steps are fixed. The steps are known. Extract fields. Validate totals against the PO. Flag mismatches.\n\nPost to the ledger. The sequence does not change for any invoice.\n\nConstraint: the process is fully deterministic in structure. Auditability of every step matters more than flexibility.\n\nWhich architectural pattern fits best?",
+  "choices": {
+   "A": "An augmented LLM with open tool access and no prescribed sequence.",
+   "B": "A multi-agent swarm where subagents negotiate who handles each invoice.",
+   "C": "A fully agentic system where the model plans its own steps per invoice.",
+   "D": "A workflow: fixed prompt chain with defined steps, validation gates, and logging at each stage."
+  },
+  "explanation": "Why D is correct: The steps are known upfront. The steps never change. A workflow is the most reliable choice. It is also the most auditable choice. It removes the nondeterminism that the constraint does not want.\nC is wrong. Agentic planning adds nondeterminism. It adds cost to a process. The steps of this process are already known. Flexibility is not necessary here.\nA is wrong. Open tool access without a prescribed sequence makes auditing harder. It invites skipped validation steps.\nB is wrong. A negotiating swarm is massive overengineering. This is for identical invoices with fixed steps."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0014",
+  "question": "A CFO decides whether to fund a Claude-based contract review assistant. The vendor talks about \"AI transformation.\" The vendor talks about \"delighting users.\" The CFO asks for the business case in her language.\n\nConstraint: The case must show measurable business value. It must not show technology enthusiasm.\n\nHow should the architect frame the value?",
+  "choices": {
+   "A": "Map the solution to value pillars with numbers: hours saved per contract, cost per review before and after, error-rate reduction, and payback period.",
+   "B": "Promise full transformation of the legal department within one quarter.",
+   "C": "Focus on the elegant multi-agent architecture under the hood.",
+   "D": "Emphasize that the system uses the most advanced model available."
+  },
+  "explanation": "Why A is correct: The value pillars are efficiency, cost, productivity, and performance. The CFO's language is numbers. This includes hours, cost per unit, error rates, and payback. A translates the solution into these terms.\nD is wrong. Model choice is an implementation detail. It is not business value.\nB is wrong. An unmeasurable transformation promise is the hype. The CFO screens out this hype.\nC is wrong. Architecture elegance does not appear on any value pillar."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0015",
+  "question": "A market-research team wants a 30-page industry report generated from 200 source documents. A single prompt (\"write the report\") produces shallow, repetitive output that misses key sources.\n\nConstraint: the report must synthesize all 200 sources with depth in each section.\n\nWhich decomposition approach fixes the shallow output?",
+  "choices": {
+   "A": "Reduce the source set to 20 documents so one prompt can handle it.",
+   "B": "Use a larger context window and repeat the same single prompt.",
+   "C": "Decompose: a planner outlines sections, researcher subagents gather evidence per section in parallel, then a synthesizer writes the full report from the gathered evidence.",
+   "D": "Ask the model to write the report one page at a time with no plan."
+  },
+  "explanation": "Why C is correct: Decomposition matches the work to the model's strengths. First, plan the structure. Then, gather evidence for each section in parallel. After that, synthesize the information. Each step has a manageable context. This avoids one impossible large prompt.\nB is wrong because a bigger window does not fix the lack of structure. The model still skims. It does not go deep.\nD is wrong because writing page-by-page without a plan produces incoherent reports. The reports drift from the outline.\nA is wrong because it discards 90 percent of the sources. This violates the synthesis constraint."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0016",
+  "question": "A competitive-intelligence system uses one orchestrator and six researcher subagents covering pricing, product, hiring, patents, news, and social. Early tests show subagents overwriting each other's findings and two agents researching the same competitor twice.\n\nConstraint: each finding recorded once, no duplicated research effort, and the orchestrator can see everything.\n\nWhich orchestration design resolves this?",
+  "choices": {
+   "A": "Run the six researchers sequentially so they cannot collide.",
+   "B": "Give every subagent its own private memory and merge by concatenating outputs.",
+   "C": "Let subagents coordinate peer-to-peer with a shared chat channel.",
+   "D": "Orchestrator assigns non-overlapping scopes, all findings go to a shared structured store with unique keys, and the orchestrator merges at the end."
+  },
+  "explanation": "Why D is correct: Non-overlapping scopes remove duplicated effort. A shared keyed store prevents overwrites. Each finding has one key. The orchestrator keeps full visibility for the merge. All three parts of the constraint are met.\nC is wrong. Peer-to-peer chat is not structured. Agents still collide. The orchestrator loses visibility into side conversations.\nA is wrong because sequential execution fixes collisions. It does this by destroying parallelism. Six researchers take six times longer.\nB is wrong because private memories plus concatenation duplicates effort. It produces conflicting merged output. There is no deduplication."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0017",
+  "question": "A support team deploys an answer bot and adds a thumbs up / thumbs down button on every answer. After three months they have 40,000 ratings but answer quality has not improved. The ratings sit in a database nobody queries.\n\nConstraint: user feedback must actually drive quality improvement, on a repeating cadence.\n\nWhat is not present? What completes the process?",
+  "choices": {
+   "A": "More ratings. Add a popup asking every user to rate.",
+   "B": "This is a feedback loop. Sample low-rated answers each week. Add the failures to the eval set. Review prompt or retrieval fixes against the eval set. Ship what makes the score better.",
+   "C": "A bigger model, since ratings show the current one is weak.",
+   "D": "Delete the rating button; it creates noise without value."
+  },
+  "explanation": "Why B is correct: Feedback makes quality better only when it goes somewhere. Failures become evaluation cases. You test fixes against the evaluation set. The loop repeats on a schedule. B builds the full input, processing, output, and feedback system. The constraint asks for this.\nA is wrong because the problem is not rating volume. 40,000 unused ratings prove more data without a loop changes nothing.\nC is wrong because the ratings do not diagnose the model as the cause. The failures can be retrieval or prompt issues. A bigger model would share these issues.\nD is wrong because it destroys the signal. It does not use the signal."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0018",
+  "question": "A team builds a code-review bot. It runs the linter. It runs the test suite. It reads the diff. It posts review comments. The sequence is always the same.\n\nWriting the comments is the only open-ended part. One architect calls it \"agentic.\" Another calls it \"a workflow with tools.\"\n\nConstraint: choose the pattern honestly so the team designs the right controls (and does not overbuild).\n\nWhich pattern is this, and why does the label matter?",
+  "choices": {
+   "A": "This is an Augmented LLM. It is a workflow with tools. The path is fixed. The model fills in one open-ended step. The label is important. A fixed path needs validation gates.\n\nIt does not need agent loop controls.",
+   "B": "Fully manual, because a human must approve every comment.",
+   "C": "Multi-agent, because linting, testing, and commenting are three jobs.",
+   "D": "Agentic, because it uses tools. Agentic systems need loop limits and escalation controls."
+  },
+  "explanation": "Why A is correct: Tool use alone does not make a system agentic. Who decides the steps is important. Here the steps are fixed. So, it is an augmented LLM. It is a tool-using workflow. The label controls the system.\nTruly agentic loops need iteration limits and stop conditions.\nD is wrong because it mislabels the system. Applying agent loop controls to a fixed pipeline adds complexity. It does this without benefit.\nB is wrong because human approval of every comment defeats the automation goal. The design does not require this.\nC is wrong because three sequential steps do not make three agents. Splitting them adds orchestration overhead. There is no gain."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0019",
+  "question": "A trading desk wants a Claude assistant for pre-trade research. The desk's SLA: 99.9 percent uptime, p95 response under 3 seconds, including during market-open spikes when request volume jumps 10x.\n\nConstraint: the SLA must hold during 10x spikes. A slow or down assistant during market open is worse than no assistant.\n\nWhich design best protects the SLA?",
+  "choices": {
+   "A": "Use the largest model for best answer quality and accept slower spikes.",
+   "B": "Disable the assistant during market open to protect the SLA.",
+   "C": "Provision for average load and add a queue; users wait during spikes.",
+   "D": "Design for peak with autoscaling. Add a defined degraded mode. Use cached or short answers. Show a clear banner when the full pipeline cannot meet 3 seconds. The SLA states degraded-mode behavior clearly."
+  },
+  "explanation": "Why D is correct: Autoscaling handles the 10x spike. The explicit degraded mode means the SLA is honest. It states what happens under extreme load. It does not silently break. Stating degraded behavior in the SLA makes it a real SLA. It is not just a hope.\nC is wrong because queuing during market open directly violates the 3-second p95 requirement.\nA is wrong because it prioritizes quality over the stated SLA. The constraint ranks the latency bar above model size.\nB is wrong because disabling the system at peak need is an admission. It means the design failed the SLA."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0020",
+  "question": "An insurer designs a claims pipeline: intake (classify claim type), processing (validate against policy, estimate payout), output (draft decision letter), feedback (adjuster corrections flow back into the eval set). The architect must present the end-to-end design.\n\nConstraint: every stage must be observable, and failures at any stage must be routable to a human without losing the claim.\n\nWhich design element is most critical to satisfying the constraint?",
+  "choices": {
+   "A": "Making the pipeline fully autonomous with no human queues, to maximize throughput.",
+   "B": "Combining intake and processing into one giant prompt to reduce handoff errors.",
+   "C": "Using the same model for all four stages to keep behavior consistent.",
+   "D": "Stage boundaries with structured handoffs: each stage emits a typed result plus confidence. Route low-confidence or failed results to a human queue. Attach the full stage history to each routed result. Log every handoff."
+  },
+  "explanation": "Why D is correct: Structured handoffs with confidence scores make each stage observable. The human queue with full history satisfies the routability requirement. It does not lose claims. Logging every handoff gives the audit trail. It is the only option built around the constraint.\nC is wrong. Model uniformity does not create observability or human routing. It is an implementation convenience.\nA is wrong. It directly violates the human-routing half of the constraint.\nB is wrong. Merging stages destroys per-stage observability. It makes failures harder to localize."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0021",
+  "question": "A localization team must translate 5,000 product documents (each 20 to 80 pages) into 12 languages. Quality must be consistent across languages, terminology must match the company glossary, and the job must finish in 30 days.\n\nConstraint: glossary-consistent terminology across all 12 languages, 30-day deadline, no quality drift between early and late documents.\n\nWhich orchestration strategy best meets all three?",
+  "choices": {
+   "A": "One agent translating documents sequentially in all 12 languages.",
+   "B": "Split documents into sections. Translate sections at the same time for each language. Inject the glossary into every prompt. A hierarchical merge step checks cross-section consistency. Then finalize each document.",
+   "C": "Twelve separate agents, one per language, each working independently with no shared glossary.",
+   "D": "Machine-translate everything first, then have one agent proofread all 5,000 documents."
+  },
+  "explanation": "Why B is correct: Parallel fan-out meets the 30-day deadline. Glossary injection in every prompt enforces terminology consistency. The hierarchical merge catches the cross-section drift that parallel work introduces. Each constraint maps to one design element.\nA is wrong. Sequential translation of 5,000 documents times 12 languages cannot fit 30 days.\nC is wrong. Independent agents with no shared glossary guarantee terminology drift across languages.\nD is wrong. One proofreading agent over 5,000 documents reintroduces the sequential bottleneck. The deadline fails."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0022",
+  "question": "A CIO has budget for one AI initiative. Proposal X: automate invoice data entry (saves 4,000 staff-hours per year, measurable in 3 months, low risk). Proposal Y: an AI product copilot for customers (could open a new revenue line, 12-month horizon, high uncertainty). The company's stated strategy this year is cost discipline.\n\nConstraint: the pick must align with the stated strategy (cost discipline) and be defensible with measurable value.\n\nWhich two statements best guide the decision? (Select two.)",
+  "choices": {
+   "A": "Fund both at half budget to keep options open.",
+   "B": "Choose X: it maps to the efficiency and cost pillars, matches the cost-discipline strategy, and its value is measurable within one quarter.",
+   "C": "Choose Y: transformation projects always beat efficiency projects in the long run.",
+   "D": "Defer the decision until both proposals have quantified value, cost, risk, and time-to-value estimates."
+  },
+  "explanation": "Why B, D is correct: B and D work as a pair. B names the strategy-aligned pick. X maps to the efficiency and cost pillars. It is measurable within a quarter. This is what the constraint demands. D states the evidentiary standard that makes the pick defensible.\nIt requires quantified value, cost, risk, and time-to-value for both proposals. X already meets that standard. Y does not. This is exactly why X wins.\nC is wrong. \"Transformation always beats efficiency\" is a slogan. It is not an analysis. It ignores the stated strategy. It ignores the measurability constraint.\nA is wrong. Splitting the budget starves both proposals. It avoids the prioritization decision that the CIO needs."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0023",
+  "question": "Give a research agent open-ended questions. An example is \"what should our pricing strategy be?\" The agent sometimes loops during testing. It calls the same search tools many times. It refines forever. It never makes the final memo. Each loop uses many tokens.\n\nConstraint: the agent must always terminate with a useful deliverable, and runaway token burn must be impossible.\n\nWhich control design guarantees termination?",
+  "choices": {
+   "A": "Tell the agent in the system prompt to \"be efficient and finish promptly.\"",
+   "B": "Use hard controls. Set a maximum iteration budget. Use an explicit stop condition. The agent must satisfy a deliverable checklist. Escalate to a human with partial results. Do this when the budget is gone.",
+   "C": "Remove all search tools so the agent cannot loop on them.",
+   "D": "Lower the temperature to zero so the agent behaves deterministically."
+  },
+  "explanation": "Why B is correct: Prompt instructions alone do not guarantee termination. A hard iteration budget makes runaway burn impossible. The deliverable checklist defines \"done.\" This allows the agent to stop. Human escalation with partial results guarantees a useful output.\nA is wrong. Polite prompt requests are soft controls. The observed looping happened despite similar instructions.\nC is wrong. Removing search tools cripples the research task. The agent exists to do this task.\nD is wrong. Temperature zero does not prevent loops. A deterministic agent can deterministically repeat the same calls."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0024",
+  "question": "A team builds a meeting-summarization feature. The product requirement is that summaries must not invent action items that were never discussed. The team currently measures quality with ROUGE scores against reference summaries.\n\nConstraint: the metric must capture invented content (hallucinated action items), which is the actual product risk.\n\nWhat should the primary metric be?",
+  "choices": {
+   "A": "Latency, since fast summaries matter most to users.",
+   "B": "ROUGE score, since it is the standard summarization metric.",
+   "C": "Faithfulness: the share of summary claims verifiable against the transcript, rated by humans on a sample plus an automated claim-check.",
+   "D": "Summary length in words, since shorter summaries hallucinate less."
+  },
+  "explanation": "Why C is correct: The product risk: invented action items. ROUGE measures word overlap. It does not measure truthfulness. Faithfulness directly measures whether the transcript grounds each claim. This is exactly the constraint.\nB is wrong. ROUGE rewards similar wording. A fluent invented action item can score well on ROUGE.\nD is wrong. Length is not a quality metric. Short summaries can still invent content.\nA is wrong. Latency measures speed. It says nothing about invented action items."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0025",
+  "question": "A bank builds an eval set for its loan-document assistant. An engineer suggests 50 examples pulled from last week's tickets. The assistant must handle 12 document types, including rare ones like foreign income statements.\n\nConstraint: The eval set must show all 12 document types. This includes rare types. If not, launch metrics will mislead.\n\nHow should the eval set be built?",
+  "choices": {
+   "A": "Skip the eval set and rely on production user ratings after launch.",
+   "B": "Use the 50 recent tickets; recent data is the most representative.",
+   "C": "Build a stratified set. Sample across all 12 document types. Use minimum counts per type. Include rare types and known edge cases. Size the set in the hundreds.",
+   "D": "Generate 50 synthetic examples with another model; it is faster."
+  },
+  "explanation": "Why C is correct: Stratified sampling guarantees coverage of every document type. This includes rare types. This is the constraint. Fifty recent tickets will over-represent common types. They will hide failures on the rare types.\nB is wrong. Recency does not equal coverage. Rare types will be absent. Their failures will be invisible.\nD is wrong. Synthetic examples reflect the generating model's biases. They do not reflect real document variety.\nA is wrong. Post-launch ratings mean shipping untested. The constraint is about pre-launch confidence."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0026",
+  "question": "After a prompt rewrite, the support bot's answers get noticeably worse: more off-topic replies, more \"I cannot help with that\" on in-scope questions. The team debates whether the prompt caused it or something else changed.\n\nConstraint: determine whether the prompt change caused the regression, with evidence, before changing anything else.\n\nWhat is the correct first diagnostic step?",
+  "choices": {
+   "A": "Ask users whether they noticed a change.",
+   "B": "Immediately revert the prompt; the timing proves it caused the problem.",
+   "C": "Run the frozen eval set against both the old and new prompts and compare scores per category.",
+   "D": "Switch to a larger model to compensate for the weaker prompt."
+  },
+  "explanation": "Why C is correct: A frozen eval set runs against both prompt versions. This isolates the prompt as the variable. Per-category comparison shows exactly what regressed. This gives evidence instead of a guess.\nB is wrong. Timing is correlation. It is not evidence. Reverting without diagnosis teaches nothing. It may discard a fixable improvement.\nD is wrong. It compensates blindly without confirming the cause. It raises cost permanently.\nA is wrong. User impressions are noisy and slow. The eval set gives a same-day answer."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0027",
+  "question": "A team wants to A/B test a new support-bot prompt in production. The bot serves 100,000 conversations per week across three regions with different question mixes. The team plans to run the new prompt for one week, then the old prompt for the next week, and compare.\n\nConstraint: the comparison must be fair: same traffic mix, no time-based confounds, and guardrail metrics watched alongside the primary metric.\n\nWhat is wrong with the planned test, and what is the correct design?",
+  "choices": {
+   "A": "Sequential weeks confound the prompt with time (different weeks bring different question mixes). Run both prompts concurrently on randomly split traffic, pre-register the primary metric plus guardrail metrics (safety, latency), and require a minimum sample before calling a winner.",
+   "B": "The test needs more regions, not a different design.",
+   "C": "Skip the test and ship the new prompt; offline evals already passed.",
+   "D": "Nothing is wrong; sequential weeks are a valid A/B test."
+  },
+  "explanation": "Why A is correct: Concurrent randomized split removes time confounds. The traffic mix is identical. Pre-registration prevents cherry-picking metrics after the fact. Guardrail metrics catch regressions that the primary metric misses. Every element answers the constraint.\nD is wrong. Sequential weeks let external changes masquerade as prompt effects. These changes include product launches and news events.\nB is wrong. More regions do not fix the time confound. The design flaw is structural.\nC is wrong. Offline evaluations do not cover production distribution shift. The constraint demands a fair live comparison."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0028",
+  "question": "A legal research assistant sometimes cites court cases that do not exist. The citations look plausible: real-sounding names, correct formats, wrong reality. The team needs to diagnose the failure mode and fix it.\n\nConstraint: no fabricated citation may reach the user. The fix must be verifiable, not just \"a better prompt.\"\n\nWhich diagnosis and fix pair is correct?",
+  "choices": {
+   "A": "Diagnosis: prompt failure. Fix: add \"do not hallucinate\" to the system prompt.",
+   "B": "Diagnosis: ungrounded generation. The model invents citations from parametric memory. Fix: require every citation to resolve against the retrieved sources (citation-to-source verification step). Eval with a groundedness metric that checks each cited case exists in the corpus.",
+   "C": "Diagnosis: model mismatch. Fix: switch to a larger model.",
+   "D": "Diagnosis: bad luck. Fix: retry failed answers up to three times."
+  },
+  "explanation": "Why B is correct: The failure: ungrounded generation. This is a hallucination subtype. The verifiable fix is structural. Citations must resolve to retrieved sources. The evaluation metric checks existence in the corpus. A prompt plea is not verifiable.\nA verification step is verifiable.\nA is wrong. \"Do not hallucinate\" is not a control. You cannot verify it. Models still confabulate under it.\nC is wrong. Larger models also hallucinate citations from parametric memory. Scale does not ground outputs.\nD is wrong. Retries sample the same ungrounded distribution. They do not add grounding."
+ }
+]

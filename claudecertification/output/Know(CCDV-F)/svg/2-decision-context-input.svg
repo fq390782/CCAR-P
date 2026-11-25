@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="602" viewBox="0 0 940 602" role="img" aria-label="context·입력·출력 형식 상황별 판단 트리" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>context·입력·출력 형식 상황별 판단 트리</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-decision-context-input" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="470" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">context·입력·출력 형식: window에 무엇을 어떻게 올릴지 고른다</text>
+<rect x="20" y="46" width="200" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="120.0" y="70.5" font-size="13" text-anchor="middle" fill="#1F2937">context·입력 설계 문제</text>
+<text x="425" y="100" font-size="11" text-anchor="middle" fill="#6B7280">상황</text>
+<text x="757" y="100" font-size="11" text-anchor="middle" fill="#6B7280">정답 방향</text>
+<polygon points="150,174.0 250.0,210.0 150,246.0 50.0,210.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="206.0" font-size="12" text-anchor="middle" fill="#1F2937">대화 이력·</text>
+<text x="150" y="223.0" font-size="12" text-anchor="middle" fill="#1F2937">window 문제?</text>
+<polyline points="40,210.0 50,210.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<polyline points="250,210.0 265,210.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,132 265,288" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,132 285,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="110" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="136.5" font-size="12" text-anchor="middle" fill="#1F2937">챗봇이 이전 대화를 잊음</text>
+<polyline points="565,132 595,132" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="110" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="136.5" font-size="12" text-anchor="middle" fill="#1F2937">전체 이력(user/assistant 번갈아)을 매번 전송</text>
+<polyline points="265,184 285,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="162" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="188.5" font-size="12" text-anchor="middle" fill="#1F2937">긴 agent가 window 한계에 다가감</text>
+<polyline points="565,184 595,184" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="162" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="180.0" font-size="12" text-anchor="middle" fill="#1F2937">compaction + context editing</text>
+<text x="757.5" y="197.0" font-size="12" text-anchor="middle" fill="#1F2937">(tool result clearing)</text>
+<polyline points="265,236 285,236" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="214" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="240.5" font-size="12" text-anchor="middle" fill="#1F2937">tool이 거대한 payload를 돌려줌</text>
+<polyline points="565,236 595,236" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="214" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="240.5" font-size="12" text-anchor="middle" fill="#1F2937">tool이 필요한 필드만 돌려주도록 수정</text>
+<polyline points="265,288 285,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="266" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="284.0" font-size="12" text-anchor="middle" fill="#1F2937">window에 들어가는지, 비용이</text>
+<text x="425.0" y="301.0" font-size="12" text-anchor="middle" fill="#1F2937">얼마인지 미리 알아야 함</text>
+<polyline points="565,288 595,288" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="266" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="292.5" font-size="12" text-anchor="middle" fill="#1F2937">token counting endpoint</text>
+<polygon points="150,352.0 250.0,388.0 150,424.0 50.0,388.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="384.0" font-size="12" text-anchor="middle" fill="#1F2937">출력 형식·</text>
+<text x="150" y="401.0" font-size="12" text-anchor="middle" fill="#1F2937">출처가 필요?</text>
+<polyline points="40,388.0 50,388.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<polyline points="250,388.0 265,388.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,362 265,414" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,362 285,362" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="340" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="366.5" font-size="12" text-anchor="middle" fill="#1F2937">형식이 정해진 레코드 추출</text>
+<polyline points="565,362 595,362" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="340" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="358.0" font-size="12" text-anchor="middle" fill="#1F2937">output_config.format 또는 strict tool use</text>
+<text x="757.5" y="375.0" font-size="12" text-anchor="middle" fill="#1F2937">+ stop_reason 확인</text>
+<polyline points="265,414 285,414" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="392" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="418.5" font-size="12" text-anchor="middle" fill="#1F2937">주장마다 출처 구절을 표시해야 함</text>
+<polyline points="565,414 595,414" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="392" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="418.5" font-size="12" text-anchor="middle" fill="#1F2937">document block + citations: {enabled: true}</text>
+<polygon points="150,478.0 250.0,514.0 150,550.0 50.0,514.0" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="150" y="510.0" font-size="12" text-anchor="middle" fill="#1F2937">파일·이미지</text>
+<text x="150" y="527.0" font-size="12" text-anchor="middle" fill="#1F2937">입력?</text>
+<polyline points="40,514.0 50,514.0" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<polyline points="250,514.0 265,514.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,488 265,540" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="265,488 285,488" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="466" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="492.5" font-size="12" text-anchor="middle" fill="#1F2937">같은 PDF나 이미지를 여러 번 참조</text>
+<polyline points="565,488 595,488" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="466" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="492.5" font-size="12" text-anchor="middle" fill="#1F2937">Files API 업로드 → file_id 참조 (+ caching)</text>
+<polyline points="265,540 285,540" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="285" y="518" width="280" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="425.0" y="544.5" font-size="12" text-anchor="middle" fill="#1F2937">고해상도 사진 때문에 지연이 큼</text>
+<polyline points="565,540 595,540" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-decision-context-input)"/>
+<rect x="595" y="518" width="325" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="757.5" y="544.5" font-size="12" text-anchor="middle" fill="#1F2937">앱에서 미리 resize</text>
+<polyline points="40,86 40,514.0" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+</svg>

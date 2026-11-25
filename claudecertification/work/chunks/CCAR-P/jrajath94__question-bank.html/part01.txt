@@ -1,0 +1,1023 @@
+<h3 id="bank-d1-h2">Q-D1-01 (V2-D1.1)</h3>
+
+<p id="sec-bank-d1-p03" data-kind="prose"><strong>Scenario.</strong> A hospital routes patient intake messages. The desk receives 12,000 messages each day. About 70% are standard forms. These forms have five checkboxes. These forms have a fixed symptom list.</p>
+
+<p id="sec-bank-d1-p04" data-kind="prose">About 30% are free-text messages. The patient describes symptoms in their own words. A wrong route delays care. The IT budget is fixed.</p>
+
+<p id="sec-bank-d1-p05" data-kind="prose"><strong>Question.</strong> Which design fits the scenario best?</p>
+
+<p id="sec-bank-d1-p06" data-kind="prose"><strong>Options.</strong>
+A) One agent handles every message end to end with no checks.
+B) Deterministic rules route the 70% standard cases. Claude drafts replies for the 30% open cases. Code checks every draft against the source message before send.
+C) The most capable tier answers every message with no checks.</p>
+
+<p id="sec-bank-d1-p07" data-kind="prose">D) Claude triages all messages, and a nurse reviews every draft before send.</p>
+
+<p id="sec-bank-d1-p08" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d1-p09" data-kind="prose">1. Question type: best architecture under constraints.
+2. Lifecycle stage: design.
+3. Objective: safe routing inside a fixed budget.</p>
+
+<p id="sec-bank-d1-p10" data-kind="prose">4. Hard constraints: a wrong route delays care. The system must process 12,000 messages per day. The budget is fixed. No unchecked draft reaches a patient.
+5.</p>
+
+<p id="sec-bank-d1-p11" data-kind="prose">System layer: orchestration pattern plus verification.
+6. Eliminate infeasible: all four are technically feasible.
+7. Eliminate constraint-violating: A has no check on care routing. C has no checks.</p>
+
+<p id="sec-bank-d1-p12" data-kind="prose">D needs 12,000 x 30 s = 100 nurse-hours per day. The fixed budget cannot carry this.
+8. Compare on objective: B pairs the fork with a gate on every draft. Fixed cases are deterministic. Open cases use Claude.</p>
+
+<p id="sec-bank-d1-p13" data-kind="prose">9. Hidden dependencies: B needs the rule set maintained. The check must see the source message.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d1-p14" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;A wrong route delays care. The IT budget is fixed.&quot;
+3.</p>
+
+<p id="sec-bank-d1-p15" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Fixed cases route cheap</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Open cases get language understanding</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Gate on every draft</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Fits fixed budget at 12k/day</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>
+<div>B satisfies all hard constraints. Deterministic rules handle 70% of fixed cases. This uses parser cost. Claude handles 30% of open cases. The code check enforces &quot;no unchecked output reaches patients&quot;. The fork keeps the daily cost low.</div>
+
+<div>This cost is far below all top-tier options.</div>
+</li>
+
+<li>Why B best meets the objective: the fork maps task shape to lane (fixed mapping goes deterministic, open input with a verifiable output goes to Claude with a gate), which is the V2-D1.1 decision rule.</li>
+
+<li>
+<div>A is valid. But A violates the error-cost limit. An agent with no checks on care routing is not good. C is valid for quality. But C violates the budget. C uses the most capable tier for every message.</div>
+
+<div>This tier costs about 14 times more than the Fast tier. C has no gate. D is valid as a safety instinct. But D is not possible. 12,000 x 30 seconds is 360,000 seconds. This is 100 nurse-hours per day.</div>
+
+<div>The budget is fixed. D fixes nothing. The triage failure stays in the system.</div>
+</li>
+
+<li>Exact limitation or tradeoff: B needs the rule set maintained as forms change, and the check must see the source message, which adds per-call code.</li>
+
+<li>Relevant evidence (with date): fork rule and 80/20 split from lesson-D1-1 (§4), Oct 6 2026, tier pricing from S10-S12, Oct 2026, verify against official docs, reviewer math is an original toy for this question.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins for an internal demo with no patients and no side effects (lesson-D1-2 counterfactual). C wins when the quality floor is unmet on every cheaper tier and evals prove the gain. D wins when volume is 50 per day and each draft carries legal risk, so the review labor fits.</li>
+
+<li>Misconception tested: "more autonomy and more review always help." Here autonomy removes the gate and review removes the budget. The scenario, not a slogan, picks the design.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h3">Q-D1-02 (V2-D1.1)</h3>
+
+<p id="sec-bank-d1-p16" data-kind="prose"><strong>Scenario.</strong> A retail CFO asks for an AI system. The system reads supplier invoices. The system pays invoices automatically. About 80% of invoices have one fixed layout. About 20% are open scans from new suppliers.</p>
+
+<p id="sec-bank-d1-p17" data-kind="prose">Finance states one rule. Money never moves on an unchecked total.</p>
+
+<p id="sec-bank-d1-p18" data-kind="prose"><strong>Question.</strong> What is the best FIRST action?</p>
+
+<p id="sec-bank-d1-p19" data-kind="prose"><strong>Options.</strong>
+A) Start building the end-to-end payment agent. The CFO sees progress this week.
+B) Benchmark the most capable tier against the fast tier. Use 1,000 invoices.
+C) Write the hard constraint into the design.</p>
+
+<p id="sec-bank-d1-p20" data-kind="prose">Fork fixed layouts to a deterministic parser. Route open scans to Claude. Place a code gate on every total before payment.
+D) Draft the system prompt with strict instructions. The instructions forbid paying wrong totals.</p>
+
+<p id="sec-bank-d1-p21" data-kind="prose"><strong>Answer.</strong> C</p>
+
+<p id="sec-bank-d1-p22" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: first action in a design discussion.
+2. Lifecycle stage: discovery moving into design.
+3.</p>
+
+<p id="sec-bank-d1-p23" data-kind="prose">Objective: a payable-invoice design that honors the finance rule.
+4. Hard constraints: money never moves on an unchecked total, 80/20 layout split.
+5. System layer: requirements translation plus lane choice.
+6.</p>
+
+<p id="sec-bank-d1-p24" data-kind="prose">Eliminate infeasible: all are feasible as actions.
+7. Eliminate constraint-violating: A builds before the constraint is in the design, D puts a money rule in a prompt, and prompts are not enforcement.
+8. Compare on objective: C is the only action that turns the stated constraint into architecture before any build.
+9.</p>
+
+<p id="sec-bank-d1-p25" data-kind="prose">Hidden dependencies: the gate needs the parsed total and the source invoice as inputs.
+10. Verify: C alone. Single select.</p>
+
+<p id="sec-bank-d1-p26" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: C.
+2. Decisive scenario phrase: "money never moves on an unchecked total."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Constraint enters the design first</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Fork matches the 80/20 split</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Enforcement in code, not prose</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>C satisfies all hard constraints. C records the no-unchecked-payment rule as a code gate. C picks lanes by input shape. Fixed inputs go to the parser. Open inputs go to Claude. No later step can drop the gate.</li>
+
+<li>C best meets the objective. V2-D1.1 requires hard constraints. These constraints filter the design before the build. C is the only option that does the filtering.</li>
+
+<li>
+<div>Every rejected choice explained: A is a classic skip-a-link failure. You build before you set the five-link chain. The chain is outcome, function, numbers, limits, fit. B is useful later. But B answers the wrong first question. You choose the tier before you record the constraint.</div>
+
+<div>D is a documented trap. A prompt is guidance. A prompt is not a lock. The model can comply or not. No audit can prove the gate ran.</div>
+</li>
+
+<li>Exact limitation or tradeoff: C produces no visible progress this week, which can frustrate the CFO, the cost is a short design pause.</li>
+
+<li>Relevant evidence (with date): five-link translation chain from lesson-D1-1 (§4), Oct 6 2026, "prompts are contracts, never authorization" from lesson-D2-2, Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when the ask is a throwaway prototype with no money movement. B wins after the gate is in the design and the question is which tier clears the quality floor. D wins for style guidance (tone, format), never for money rules.</li>
+
+<li>Misconception tested: a strong instruction equals a control. It does not. The exam rewards the answer that puts the money rule in code.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h4">Q-D1-03 (V2-D1.1), Select TWO</h3>
+
+<p id="sec-bank-d1-p27" data-kind="prose"><strong>Scenario.</strong> A bank scans paper cheques. Fields include payee name, amount in figures, amount in words, date, and signature presence. A fabricated payee name or an altered amount causes a direct loss. The scan volume is 40,000 cheques per day.</p>
+
+<p id="sec-bank-d1-p28" data-kind="prose"><strong>Question.</strong> Which TWO items are hard constraints for the design? Select TWO.</p>
+
+<p id="sec-bank-d1-p29" data-kind="prose"><strong>Options.</strong>
+A) The system must support three languages by launch.
+B) No payment on a cheque whose amount fields disagree.
+C) No fabricated payee names may reach the payment step.
+D) Cost per cheque must stay under $0.01.
+E) The p95 latency must stay under 30 seconds.</p>
+
+<p id="sec-bank-d1-p30" data-kind="prose"><strong>Answer.</strong> B, C</p>
+
+<p id="sec-bank-d1-p31" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: constraint identification (multi-select).
+2. Lifecycle stage: discovery.
+3.</p>
+
+<p id="sec-bank-d1-p32" data-kind="prose">Objective: separate hard constraints from goals.
+4. Hard constraints: the scenario names direct loss from fabricated payees and altered amounts.
+5. System layer: requirements translation.
+6.</p>
+
+<p id="sec-bank-d1-p33" data-kind="prose">Eliminate infeasible: all five are feasible requirements.
+7. Eliminate constraint-violating: A, D, E are real goals. No goal is a must-never-happen.
+8. Compare on objective: only B and C name conditions that must never occur.</p>
+
+<p id="sec-bank-d1-p34" data-kind="prose">9. Hidden dependencies: B needs both amount fields parsed. C needs a check against a trusted payee source.
+10. Verify: B and C together. No third item fits the &quot;must never happen&quot; test.</p>
+
+<p id="sec-bank-d1-p35" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B, C.
+2. Decisive scenario phrase: "A fabricated payee name or an altered amount causes a direct loss."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Violation causes direct loss</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Stated as must-never-happen</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>A hard constraint is a condition that must never occur. B and C are the only options stated that way. Each option ties to direct loss.</li>
+
+<li>Why B and C best meet the objective: V2-D1.1 requires naming hard constraints before lane choice, the design forks around exactly these two gates.</li>
+
+<li>Every rejected choice explained: A is a launch goal, not a never-event, missing a language delays launch but causes no loss. D is a budget target, exceeding it is a business decision, not a loss event. E is a nonfunctional requirement, a slow cheque causes delay, not loss.</li>
+
+<li>Treating only B and C as hard means A, D, E can slip. The team must still track them as goals with owners.</li>
+
+<li>Relevant evidence (with date): hard-constraint definition from lesson-D1-1 (§4), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins as the hard constraint if a regulator fines the bank per unsupported language. D wins if the business case goes negative above $0.01. Then it is a build/no-build gate. E wins if a clearing window closes at 30 s. The system rejects late cheques with fees.</li>
+
+<li>Misconception tested: every numbered requirement is a hard constraint. It is not. Goals have thresholds and owners, hard constraints have gates.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h5">Q-D1-04 (V2-D1.1)</h3>
+
+<p id="sec-bank-d1-p36" data-kind="prose"><strong>Scenario.</strong> A logistics firm routes all 10,000 daily invoices through Claude on the Fast tier. 80% have a fixed layout. Monthly model cost is $540. The CFO asks for the single change that cuts cost most while keeping field precision at or above 98%.</p>
+
+<p id="sec-bank-d1-p37" data-kind="prose"><strong>Question.</strong> Which change best meets the goal?</p>
+
+<p id="sec-bank-d1-p38" data-kind="prose"><strong>Options.</strong>
+A) Switch all traffic to the most capable tier for better precision.
+B) Fork the 80% fixed-layout invoices to a deterministic parser, keep Claude on the 20% open scans, keep the total-check gate.
+C) Add explicit reasoning to every call to raise precision.
+D) Cache the full conversation including the variable invoice tail.</p>
+
+<p id="sec-bank-d1-p39" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d1-p40" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best optimization action under a quality floor.
+2. Lifecycle stage: operation (iteration).
+3.</p>
+
+<p id="sec-bank-d1-p41" data-kind="prose">Objective: cut cost with precision at or above 98%.
+4. Hard constraints: precision floor 98%, gate on totals stays.
+5. System layer: lane assignment.
+6.</p>
+
+<p id="sec-bank-d1-p42" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright, but A raises cost (wrong direction).
+8. Compare on objective: only B cuts cost, the lesson toy prices it at $132/month vs $540.
+9.</p>
+
+<p id="sec-bank-d1-p43" data-kind="prose">Hidden dependencies: the parser needs the fixed layout spec, the gate still sees every total.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d1-p44" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: &quot;80% have a fixed layout&quot; plus &quot;precision at or above 98%&quot;.
+3.</p>
+
+<p id="sec-bank-d1-p45" data-kind="prose">Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Cuts monthly cost</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Keeps precision floor</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Keeps the total gate</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>Why B satisfies all hard constraints: the parser handles fixed layouts deterministically (precision risk falls, not rises), Claude keeps the open 20%, and the gate stays on every total.</li>
+
+<li>On the lesson toy, hybrid costs $4.40 per day ($132 per month). All-Claude costs $18 per day ($540 per month). This is a 4x cut. The fork and the gate hold the quality floor.</li>
+
+<li>Every rejected choice explained: A moves cost the wrong way ($72/day on the Capable toy) with no eval showing the gain. C adds output tokens and latency to 10,000 calls a day while the bar is already met. D caches a variable tail, so the prefix never stabilizes and the hit rate sits near zero while writes keep billing.</li>
+
+<li>Exact limitation or tradeoff: B needs the parser maintained as layouts drift, a new supplier layout must route to Claude until the parser learns it.</li>
+
+<li>Relevant evidence (with date): fork arithmetic from lesson-D1-1 (§5), Oct 6 2026, tier pricing S10-S12, Oct 2026, verify against official docs, cache prefix rule from lesson-D2-5, Oct 6 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if evals show the Fast tier below the 98% floor and the capable tier above it. C wins if errors concentrate on hard scans where steps are checkable. D wins if the tail were stable (it is not here).</li>
+
+<li>Misconception tested: cost cutting means a cheaper model. Here the cut comes from lane choice, not tier choice.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h6">Q-D1-05 (V2-D1.2)</h3>
+
+<p id="sec-bank-d1-p46" data-kind="prose"><strong>Scenario.</strong> A clinic drafts discharge notes with Claude. A wrong dose harms a patient. An auditor must replay any note from six months ago and see exactly what the model saw and checked.</p>
+
+<p id="sec-bank-d1-p47" data-kind="prose"><strong>Question.</strong> Which architecture best fits?</p>
+
+<p id="sec-bank-d1-p48" data-kind="prose"><strong>Options.</strong>
+A) Make a single Claude call with a careful system prompt. Log the prompts.
+B) Use seven gates: input, validation, context and retrieval, model and tools, verification, output, feedback. Validation and authorization run in code before context assembly. Every hop emits a trace with one request ID.</p>
+
+<p id="sec-bank-d1-p49" data-kind="prose">The trace carries input hash, chunk IDs, the draft, and the check result.
+C) Make a Claude call. A nurse reads every draft. The nurse&#x27;s approval is the trace.
+D) Make two Claude calls: one drafts, one reviews. The review call is the verification gate.</p>
+
+<p id="sec-bank-d1-p50" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d1-p51" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: architecture interpretation.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-d1-p52" data-kind="prose">Objective: safe notes with full replay six months later.
+4. Hard constraints: wrong dose harms. Replay must show what the model saw and checked. State and checks are in code.
+5.</p>
+
+<p id="sec-bank-d1-p53" data-kind="prose">System layer: end-to-end pipeline plus observability.
+6. Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: A cannot show what the model saw. A has no retrieval record.</p>
+
+<p id="sec-bank-d1-p54" data-kind="prose">A has no check record. C makes the nurse the trace. The system does not record the model context. D has the reviewer see only the draft. D does not show the retrieved source chunks.
+8.</p>
+
+<p id="sec-bank-d1-p55" data-kind="prose">Compare on objective: only B records the full chain the auditor needs.
+9. Hidden dependencies: B needs a system of record for the dose facts. B needs retention for the traces.
+10. Verify: B alone.</p>
+
+<p id="sec-bank-d1-p56" data-kind="prose">Single select.</p>
+
+<p id="sec-bank-d1-p57" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "replay any note from six months ago and see exactly what the model saw and checked."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Gate before the model in code</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Verification against source</td>
+<td>No</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>Replay shows retrieved facts</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Trace survives six months</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. Validation and authorization run in code at the trust boundary. Verification checks the draft against retrieved chunks. Per-stage traces use one request ID. This makes any run replayable.</li>
+
+<li>Why B best meets the objective: V2-D1.2 names the seven gates and the trace content (input hash, chunk ids, draft, check result) as the mechanism for exactly this audit demand.</li>
+
+<li>
+<div>Explain every rejected choice. A hopes the prompt validates input. A hopes the prompt verifies output. Hope is not a gate. Prompt logs do not record retrieved chunks. C puts the human in the loop.</div>
+
+<div>C leaves the model context unrecorded. The auditor cannot see the check record for the draft. D improves the draft. The reviewer call sees only the draft text. A dose error can still pass. There is no source comparison.</div>
+</li>
+
+<li>Exact limitation or tradeoff: B is the heaviest build of the four, trace storage for every note has a real retention cost.</li>
+
+<li>Relevant evidence (with date): seven gates and trace content from lesson-D1-2 (§3-§5), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins for an internal demo with no patients and no audit (lesson-D1-2 counterfactual). C wins at 50 notes a day where each note carries legal risk and the nurse sees the retrieved sources too. D wins when the check is stylistic (tone, format), not factual.</li>
+
+<li>Misconception tested: a second model call equals verification. It does not unless the check compares the draft against the source in a recorded way.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h7">Q-D1-06 (V2-D1.2), Select TWO</h3>
+
+<p id="sec-bank-d1-p58" data-kind="prose"><strong>Scenario.</strong> A payment support bot issues refunds. The bot uses a tool. A refund went to the wrong account. The team must replay any refund decision. The team must name the exact hop that authorized the refund.</p>
+
+<p id="sec-bank-d1-p59" data-kind="prose"><strong>Question.</strong> Which TWO trace contents are mandatory for the replay? Select TWO.</p>
+
+<p id="sec-bank-d1-p60" data-kind="prose"><strong>Options.</strong>
+A) Show the model temperature and top-p from the generation time.
+B) Show the retrieved account record. The system checked the amount against this record. Show its ID.
+C) Show the per-hop record.</p>
+
+<p id="sec-bank-d1-p61" data-kind="prose">It shows which gate authorized the refund. It is tied to one request ID.
+D) Show the full prompt text with all few-shot examples.
+E) Show the GPU cluster region that served the call.</p>
+
+<p id="sec-bank-d1-p62" data-kind="prose"><strong>Answer.</strong> B, C</p>
+
+<p id="sec-bank-d1-p63" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: control placement for audit replay (multi-select).
+2. Lifecycle stage: design (observability design).
+3.</p>
+
+<p id="sec-bank-d1-p64" data-kind="prose">Objective: replay any refund and name the authorizing hop.
+4. Hard constraints: money moved, audit must name the hop, end-to-end reconstructability.
+5. System layer: observability (V2-D3.4) inside the seven gates.
+6.</p>
+
+<p id="sec-bank-d1-p65" data-kind="prose">Eliminate infeasible: all are recordable.
+7. Eliminate constraint-violating: A, D, E record facts that cannot name the authorizing hop or the checked record.
+8. Compare on objective: only B gives the source of truth for the amount, only C names the authorizing gate.
+9.</p>
+
+<p id="sec-bank-d1-p66" data-kind="prose">Hidden dependencies: the account record id must come from the system of record, not the draft.
+10. Verify: B and C together, adding D is nice but not mandatory for the stated objective.</p>
+
+<p id="sec-bank-d1-p67" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B, C.
+2. Decisive scenario phrase: "name the exact hop that authorized it."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Names the checked record</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Names the authorizing hop</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Tied to one request id</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B and C satisfy all hard constraints. B carries the system-of-record facts that checked the amount. C carries per-hop authorization under one id. The replay names the gate.</li>
+
+<li>B and C best meet the objective. V2-D1.2 and V2-D3.4 require per-stage traces. These traces must have one request ID. They must also have the source facts. B plus C provides this information.</li>
+
+<li>Every rejected choice explained: A records sampler settings, they cannot name a hop or a record. D is bulky context that shows what the model saw but not which gate authorized the money move. E is infrastructure trivia with no audit value.</li>
+
+<li>This is an exact limitation or tradeoff. B and C do not record why the model chose the draft. They record what checked the draft and who authorized it. This is what the auditor asked for.</li>
+
+<li>Relevant evidence (with date): trace content list from lesson-D1-2 (§5), Oct 6 2026, "sample deep, skeleton the rest, keep all errors" from lesson-D3-4, Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins when debugging a quality regression across a sampler change. D wins when the dispute is about prompt content (e.g., a stale instruction). E wins for a latency or residency incident, not an authorization replay.</li>
+
+<li>Misconception tested: more logged data equals better audit. It does not. The audit needs the record and the hop, not the sampler.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h8">Q-D1-07 (V2-D1.2)</h3>
+
+<p id="sec-bank-d1-p68" data-kind="prose"><strong>Scenario.</strong> A support bot quotes prices from a product catalog. Users report wrong prices on 3% of answers. The traces show validation passed. Retrieval returned the 2024 price list. The model quoted those prices faithfully.</p>
+
+<p id="sec-bank-d1-p69" data-kind="prose">The verification check compared each claim against the retrieved chunks and passed.</p>
+
+<p id="sec-bank-d1-p70" data-kind="prose"><strong>Question.</strong> Which gate is the root cause, and what is the best fix?</p>
+
+<p id="sec-bank-d1-p71" data-kind="prose"><strong>Options.</strong>
+A) The verification gate, make the model check prices twice.
+B) The context and retrieval gate, the index holds a stale 2024 price list, so re-ingest the current catalog.
+C) The model, move to a more capable tier.
+D) The output gate, add a regex for price formats.</p>
+
+<p id="sec-bank-d1-p72" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d1-p73" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: root cause from traces.
+2. Lifecycle stage: incident response.
+3.</p>
+
+<p id="sec-bank-d1-p74" data-kind="prose">Objective: correct prices.
+4. Hard constraints: the fix must address the failing layer, verification passed, so the draft matched its source.
+5. System layer: context and retrieval.
+6.</p>
+
+<p id="sec-bank-d1-p75" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: the trace indicts retrieval (stale list), the check passed because the draft matched stale facts. Fix the failing component, not a proxy.</p>
+
+<p id="sec-bank-d1-p76" data-kind="prose">9. Hidden dependencies: re-ingestion needs the current catalog as the system of record and a freshness check.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d1-p77" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "retrieval returned the 2024 price list" while "the verification check ... passed."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Fixes the indicted layer</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Addresses stale facts</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Keeps the passing gates intact</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. The trace shows verification did its job. The draft matched the source. The fault is upstream. The fix re-ingests the current catalog into the index.</li>
+
+<li>B best meets the objective. V2-D1.2 and V2-D4.4 require fixing the failing component. They do not require fixing a proxy. Every other option polishes a gate that already passed.</li>
+
+<li>
+<div>Explain every rejected choice. A doubles a check. The check already passed. A cannot see that the source is stale. C is the classic proxy fix. A bigger tier quotes the same stale list.</div>
+
+<div>This gives the same wrong prices. This costs more. D validates price format. The prices were well-formed. The prices were wrong.</div>
+</li>
+
+<li>Exact limitation or tradeoff: re-ingestion fixes staleness but not retrieval ranking, if wrong-chunk errors appear next, the fix moves to chunk size and boundaries.</li>
+
+<li>Relevant evidence (with date): "fix the failing component, not a proxy" from lesson-D3-5 (§9) and lesson-D4-4 (§9), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if the draft contradicted the chunks and the check missed it (verification fault). C wins if traces show the model misread fresh chunks (model fault). D wins if wrong prices came from malformed model output, not stale facts.</li>
+
+<li>Misconception tested: a passing verification proves the answer is right. It proves only that the draft matches its source. A stale source passes every check.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h9">Q-D1-08 (V2-D1.2)</h3>
+
+<p id="sec-bank-d1-p78" data-kind="prose"><strong>Scenario.</strong> A team ships a Claude support bot. The bot handles 50,000 answers per day. The verification gate catches 2% of drafts with unsupported claims. Those drafts ship anyway. This happens because &quot;the reviewers will catch them.&quot; The proposal is to put a human reviewer on every answer.</p>
+
+<p id="sec-bank-d1-p79" data-kind="prose"><strong>Question.</strong> What is the best next action?</p>
+
+<p id="sec-bank-d1-p80" data-kind="prose"><strong>Options.</strong>
+A) Approve the reviewer plan, human review is the strongest safety control.
+B) Block the 2% failed drafts from shipping in code, then fix the retrieval or prompt cause of the failures, do not add universal review.
+C) Hire a review vendor and sample 10% of answers for review.
+D) Remove the verification gate since its failures ship anyway.</p>
+
+<p id="sec-bank-d1-p81" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d1-p82" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: next action on a broken control.
+2. Lifecycle stage: operation (incident response).
+3.</p>
+
+<p id="sec-bank-d1-p83" data-kind="prose">Objective: stop unsupported claims from shipping.
+4. Hard constraints: 50,000 answers per day, failed checks currently ship, the gate exists but has no teeth.
+5. System layer: verification gate plus feedback.
+6.</p>
+
+<p id="sec-bank-d1-p84" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: D removes a working detector, A needs 50,000 x 30 s = 417 reviewer-hours per day.
+8. Compare on objective: B enforces the existing gate in code and attacks the cause, C samples but lets 90% of failures through.
+9.</p>
+
+<p id="sec-bank-d1-p85" data-kind="prose">Hidden dependencies: blocking needs the check result wired to the ship decision, the cause fix needs the failure traces.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d1-p86" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "those drafts ship anyway because 'the reviewers will catch them.'"
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Failed drafts stop shipping</td>
+<td>Partial</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Feasible at 50k/day</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Fixes the cause</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. The gate&#x27;s verdict becomes the ship decision in code. The gate fails closed. The team fixes the layer that the failure traces indict.</li>
+
+<li>B best meets the objective. V2-D1.2 says each gate has one job. A gate never borrows another&#x27;s job. Verification that does not block is decoration. Universal review is 417 reviewer-hours per day. This fixes nothing.</li>
+
+<li>Every rejected choice explained: A is valid as an instinct but infeasible at this volume and leaves the failing stage failing. C is cheaper than A but still lets most failures ship and never fixes the cause. D destroys the detector instead of giving it teeth, the team would then ship blind.</li>
+
+<li>Blocking on the check can raise false-positive blocks. The cause fix must follow quickly. If not, the block rate becomes a product problem.</li>
+
+<li>Relevant evidence (with date): "gate is mandatory... reviewer on every answer" valid-but-inferior from lesson-D1-2 (§10), Oct 6 2026, "controls must fail closed" from V2-D5.1 scope, exam via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins at 100 answers a day with legal exposure per answer. C wins when failures are rare and the sample feeds a labeled set for eval. D wins if the gate's false-positive rate exceeds its catch rate and a better check replaces it.</li>
+
+<li>Misconception tested: a detector plus a hope equals a control. Without the block wired in code, the gate is a dashboard, not a guardrail.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h10">Q-D1-09 (V2-D1.3)</h3>
+
+<p id="sec-bank-d1-p87" data-kind="prose"><strong>Scenario.</strong> A warehouse handles returns. 90% are unopened boxes with a barcode. You scan the barcode. You check the order. You refund the money.</p>
+
+<p id="sec-bank-d1-p88" data-kind="prose">10% are damaged goods. These goods need a judgment call. You decide to restock or write off the goods. A wrong refund costs the item margin. The error cost is high. It is hard to reverse refunds.</p>
+
+<p id="sec-bank-d1-p89" data-kind="prose"><strong>Question.</strong> Which pattern fits best?</p>
+
+<p id="sec-bank-d1-p90" data-kind="prose"><strong>Options.</strong>
+A) One agent handles every return end to end.
+B) A deterministic workflow handles the 90% barcode cases. Claude handles the 10% judgment cases with a gate on every refund. Code verifies the order and the amount before money moves.
+C) An augmented single call: Claude sees the barcode scan and decides every case with tools.</p>
+
+<p id="sec-bank-d1-p91" data-kind="prose">D) A multi-agent team: one agent per return, coordinated by a supervisor agent.</p>
+
+<p id="sec-bank-d1-p92" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d1-p93" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best architecture under constraints.
+2. Lifecycle stage: design.
+3.</p>
+
+<p id="sec-bank-d1-p94" data-kind="prose">Objective: correct refunds with bounded cost.
+4. Hard constraints: wrong refund costs margin. Refunds are hard to reverse. There is a 90/10 split.
+5.</p>
+
+<p id="sec-bank-d1-p95" data-kind="prose">System layer: orchestration pattern.
+6. Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: A and D give an agent unsupervised money moves. High error cost and low reversibility push left on the spectrum.</p>
+
+<p id="sec-bank-d1-p96" data-kind="prose">C uses the model for fixed barcode steps. It uses model price with no gate named.
+8. Compare on objective: B matches the 90/10 split. It puts the gate where the money moves.
+9.</p>
+
+<p id="sec-bank-d1-p97" data-kind="prose">Hidden dependencies: the barcode lookup must hit the order system of record. The gate needs the amount and the policy.
+10. Verify: B alone. Select one.</p>
+
+<p id="sec-bank-d1-p98" data-kind="prose"><strong>Explanation.</strong>
+1. The correct answer is B.
+2. The decisive scenario phrase is &quot;A wrong refund costs the item margin&quot;. Another decisive phrase is &quot;90% are unopened boxes with a barcode.&quot;
+3.</p>
+
+<p id="sec-bank-d1-p99" data-kind="prose">This is the requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Fixed cases deterministic</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Judgment cases get the model</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Gate on every refund</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Cost fits the 90/10 split</td>
+<td>No</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. Fixed steps go left on the spectrum. This is a deterministic workflow. The judgment 10% gets Claude. The code gate enforces the high-error-cost rule. It does this before money moves.</li>
+
+<li>B best meets the objective. The pattern spectrum scores on predictability. It also scores on reversibility, error cost, latency, and cost. High error cost with low reversibility pushes left. The open 10% needs the model. B is the hybrid the spectrum prescribes.</li>
+
+<li>
+<div>Every rejected choice explained: A is the lesson&#x27;s valid-but-inferior. It handles the open 10%. But it pays agent cost on the fixed 90%. It varies run to run on fixed cases. This is $480 per day versus $55.40 on the lesson toy. C pays model price for barcode parsing.</div>
+
+<div>It names no gate on the refund. D adds coordination overhead. This is a supervisor plus workers. This work needs no planning. Traces would show a plan the team never wrote.</div>
+</li>
+
+<li>B needs the barcode rule set. B needs the refund policy. Maintain the barcode rule set. Maintain the refund policy. Damaged-goods edge cases are outside the 10%. These cases still need a fallback route.</li>
+
+<li>Relevant evidence (with date): pattern spectrum and hybrid verdict from lesson-D1-patterns (§9, V2-D1.3), Oct 6 2026, refund toy ($480 vs $55.40/day) from the same lesson, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins for open-ended research where steps are unknown until runtime. C wins when every case needs one judgment plus tools and steps are few. D wins when returns split into independent specialist tracks with a deadline (V2-D1.4 territory).</li>
+
+<li>Misconception tested: one agent for everything is the modern default. The spectrum says the task shape decides, fixed bones go deterministic.</li>
+
+</ol>
+
+
+<h3 id="bank-d1-h11">Q-D1-10 (V2-D1.3)</h3>
+
+<p id="sec-bank-d1-p100" data-kind="prose"><strong>Scenario.</strong> A document pipeline uses 12 Claude calls. The calls are in a fixed order. The steps are extract, classify, summarize, check, and format. There are seven more steps. Traces show each step rewrites the draft.</p>
+
+<p id="sec-bank-d1-p101" data-kind="prose">Errors increase across steps. Total latency is the sum of all 12 calls. The steps are fixed. The steps are known in advance.</p>
+
+<p id="sec-bank-d1-p102" data-kind="prose"><strong>Question.</strong> What is the best next action?</p>
+
+<p id="sec-bank-d1-p103" data-kind="prose"><strong>Options.</strong>
+A) Move to a more capable tier. Each step will make fewer errors.
+B) Replace the chain with fan-out and fan-in. Run the independent extractions in parallel. Merge with a validation gate.</p>
+
+<p id="sec-bank-d1-p104" data-kind="prose">Move the certain sub-tasks into deterministic code. These sub-tasks are format checks and totals.
+C) Add a 13th call. A second model reviews the final draft.
+D) Add prompt caching on the full conversation. This will cut latency.</p>
+
+<p id="sec-bank-d1-p105" data-kind="prose"><strong>Answer.</strong> B</p>
+
+<p id="sec-bank-d1-p106" data-kind="prose"><strong>Method walk (Steps 1-10).</strong>
+1. Question type: best next action on a diagnosed architecture fault.
+2. Lifecycle stage: operation (optimization).
+3.</p>
+
+<p id="sec-bank-d1-p107" data-kind="prose">Objective: cut compounded errors and summed latency.
+4. Hard constraints: steps fixed and known, errors compound across rewrites, latency sums.
+5. System layer: orchestration pattern.
+6.</p>
+
+<p id="sec-bank-d1-p108" data-kind="prose">Eliminate infeasible: all are feasible.
+7. Eliminate constraint-violating: none violate outright.
+8. Compare on objective: B attacks both failure modes (parallelism cuts summed latency, no rewrites cut compounding, deterministic code removes model variance on certain tasks).
+9.</p>
+
+<p id="sec-bank-d1-p109" data-kind="prose">Hidden dependencies: fan-out needs independence verified per piece, the merge needs a validation gate with a citation or totals check.
+10. Verify: B alone. Single select.</p>
+
+<p id="sec-bank-d1-p110" data-kind="prose"><strong>Explanation.</strong>
+1. Correct answer: B.
+2. Decisive scenario phrase: "each step rewrites the draft, errors compound" and "total latency is the sum of all 12 calls."
+3. Requirement-to-option matrix:</p>
+
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>Stops error compounding</td>
+<td>No</td>
+<td>Yes</td>
+<td>Partial</td>
+<td>No</td>
+</tr>
+
+<tr>
+<td>Cuts summed latency</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial</td>
+</tr>
+
+<tr>
+<td>Certain tasks deterministic</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+
+</tbody>
+</table>
+
+<ol>
+<li>B satisfies all hard constraints. Parallel independent work removes the latency sum. The merge gate checks the combined result. Deterministic code does the certain sub-tasks. This code has zero model variance.</li>
+
+<li>B best meets the objective. V2-D1.5 names fan-out/fan-in for independent pieces. V2-D1.5 names the deterministic split for certain sub-tasks. V2-D1.3 pushes fixed known steps left on the spectrum.</li>
+
+<li>
+<div>Every rejected choice has an explanation. A is a proxy fix. A bigger tier still rewrites the draft 12 times. It still sums latency. It has a higher cost. C adds a 13th rewrite.</div>
+
+<div>The pipeline has too many rewrites. D helps only if the prefix is stable. A 12-step chain has a changing draft. This defeats the prefix rule. Caching does not fix compounding errors.</div>
+</li>
+
+<li>Exact limitation or tradeoff: B needs the independence of pieces proven and a merge contract written, misjudged independence creates merge conflicts.</li>
+
+<li>Relevant evidence (with date): "chain everything" valid-but-inferior and fan-out verdict from lesson-D1-patterns (§10, V2-D1.5), Oct 6 2026, exam scope via S03/S04, Sept 2026.</li>
+
+<li>Counterfactual where each plausible alternative wins: A wins if traces show one step's errors dominate and that step is genuinely hard (model fault). C wins as a cheap critique pass when the chain is short and the check is checkable. D wins when the chain shares a large stable prefix and latency, not errors, is the complaint.</li>
+
+<li>Misconception tested: chaining is the safe default because failures point at one step. Clear failure attribution does not fix compounding, the pattern must match the independence of the work.</li>
+
+</ol>
+

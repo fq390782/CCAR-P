@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="580" viewBox="0 0 900 580" role="img" aria-label="stop_reason별 처리 분기" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>stop_reason별 처리 분기</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-stop-reason-branching" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="450" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">stop_reason에 따라 처리한다: 완성 / 이어서 다시 요청 / 미완성·보장 밖</text>
+<rect x="30" y="60" width="170" height="46" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="115.0" y="87.5" font-size="13" text-anchor="middle" fill="#1F2937">Messages API 응답</text>
+<polyline points="115,106 115,245" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<polygon points="115,245.0 200.0,300 115,355.0 30.0,300" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="115" y="304.5" font-size="13" text-anchor="middle" fill="#1F2937">stop_reason?</text>
+<polyline points="200,300 240,300" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="240,70 240,478" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<polyline points="240,70 450,70" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<rect x="315.6" y="49.0" width="58.8" height="18" fill="#FFFFFF"/>
+<text x="345" y="62.5" font-size="11" text-anchor="middle" fill="#6B7280">end_turn</text>
+<rect x="450" y="44" width="420" height="52" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="660.0" y="74.5" font-size="13" text-anchor="middle" fill="#1F2937">자연스럽게 끝남 → 완성된 답으로 처리</text>
+<polyline points="240,138 450,138" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<rect x="299.8" y="117.0" width="90.5" height="18" fill="#FFFFFF"/>
+<text x="345" y="130.5" font-size="11" text-anchor="middle" fill="#6B7280">stop_sequence</text>
+<rect x="450" y="112" width="420" height="52" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="660.0" y="142.5" font-size="13" text-anchor="middle" fill="#1F2937">지정한 문자열에서 멈춤 → 정상 처리</text>
+<polyline points="240,206 450,206" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<rect x="316.9" y="185.0" width="56.2" height="18" fill="#FFFFFF"/>
+<text x="345" y="198.5" font-size="11" text-anchor="middle" fill="#6B7280">tool_use</text>
+<rect x="450" y="180" width="420" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="660.0" y="202.0" font-size="13" text-anchor="middle" fill="#1F2937">오류 아님: 앱이 tool 실행 → tool_result를</text>
+<text x="660.0" y="219.0" font-size="13" text-anchor="middle" fill="#1F2937">messages에 붙여 다시 요청 (루프 계속)</text>
+<polyline points="240,274 450,274" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<rect x="309.3" y="253.0" width="71.5" height="18" fill="#FFFFFF"/>
+<text x="345" y="266.5" font-size="11" text-anchor="middle" fill="#6B7280">pause_turn</text>
+<rect x="450" y="248" width="420" height="52" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="660.0" y="270.0" font-size="13" text-anchor="middle" fill="#1F2937">server-side tool loop 일시 정지</text>
+<text x="660.0" y="287.0" font-size="13" text-anchor="middle" fill="#1F2937">→ 응답을 그대로 다시 보내 이어감</text>
+<polyline points="240,342 450,342" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<rect x="309.3" y="321.0" width="71.5" height="18" fill="#FFFFFF"/>
+<text x="345" y="334.5" font-size="11" text-anchor="middle" fill="#6B7280">max_tokens</text>
+<rect x="450" y="316" width="420" height="52" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="660.0" y="338.0" font-size="13" text-anchor="middle" fill="#1F2937">출력 상한에서 잘림 (문장 중간 끊김)</text>
+<text x="660.0" y="355.0" font-size="13" text-anchor="middle" fill="#1F2937">→ 파싱 금지, max_tokens 올리기</text>
+<polyline points="240,410 450,410" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<rect x="251.5" y="389.0" width="187.0" height="18" fill="#FFFFFF"/>
+<text x="345" y="402.5" font-size="11" text-anchor="middle" fill="#6B7280">model_context_window_exceeded</text>
+<rect x="450" y="384" width="420" height="52" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="660.0" y="406.0" font-size="13" text-anchor="middle" fill="#1F2937">모델 window 한계에서 멈춤</text>
+<text x="660.0" y="423.0" font-size="13" text-anchor="middle" fill="#1F2937">→ 미완성, 파싱 금지</text>
+<polyline points="240,478 450,478" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-stop-reason-branching)"/>
+<rect x="320.1" y="457.0" width="49.9" height="18" fill="#FFFFFF"/>
+<text x="345" y="470.5" font-size="11" text-anchor="middle" fill="#6B7280">refusal</text>
+<rect x="450" y="452" width="420" height="52" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="660.0" y="474.0" font-size="13" text-anchor="middle" fill="#1F2937">거부 → 구조화 출력 보장 밖</text>
+<text x="660.0" y="491.0" font-size="13" text-anchor="middle" fill="#1F2937">→ 데이터로 저장하지 않음</text>
+<rect x="30" y="510" width="18" height="14" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="54" y="522" font-size="11" text-anchor="start" fill="#6B7280">완성된 응답</text>
+<rect x="160" y="510" width="18" height="14" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="184" y="522" font-size="11" text-anchor="start" fill="#6B7280">앱이 처리한 뒤 다시 요청</text>
+<rect x="350" y="510" width="18" height="14" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="374" y="522" font-size="11" text-anchor="start" fill="#6B7280">미완성이거나 보장 밖 → 완성된 답으로 파싱하지 않음</text>
+<text x="450" y="560" font-size="11" text-anchor="middle" fill="#6B7280">입력 자체가 window를 넘으면 stop_reason 없이 생성 전에 400 invalid_request_error</text>
+</svg>

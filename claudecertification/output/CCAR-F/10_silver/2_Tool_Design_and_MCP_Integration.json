@@ -1,0 +1,735 @@
+[
+ {
+  "id": "CCAR-F-Amey-Thakur-0002",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "process_refund currently accepts any amount. Support policy caps agent-initiated refunds at $200; larger refunds need a human. Where does that rule belong?",
+  "choices": {
+   "A": "In the system prompt, phrased firmly",
+   "B": "In the model's reasoning, since it reads the policy",
+   "C": "In quarterly staff training",
+   "D": "Enforced in the tool layer: the tool rejects amounts over the cap with a structured error, and a hook or the tool itself routes larger cases to escalation"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Hard policy limits are enforced deterministically at the tool boundary, not requested of the model. Prompt phrasing (A) and model reasoning (B) are probabilistic where the requirement is absolute, and training (C) does not constrain the agent at all.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "2",
+  "source_heading": "Support resolution agent",
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0082",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0010",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "Your codebase-exploration agent has get_file_contents, read_source, and fetch_file tools that all read files, and it frequently picks poorly among them. What is the correct fix?",
+  "choices": {
+   "A": "Add a fourth, better file-reading tool",
+   "B": "Fine-tune the model on the tool list",
+   "C": "Randomize which tool the harness dispatches",
+   "D": "Consolidate to one file-reading tool, or give the survivors sharply differentiated descriptions that state exactly when each applies"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Tool selection runs on descriptions; overlapping tools with vague descriptions produce dithering. Consolidation or sharp differentiation is the documented cure. Adding overlap (A) worsens it, fine-tuning (B) is disproportionate, and randomization (C) institutionalizes the confusion.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": "Developer productivity agent",
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0090",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0028",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "What is the strongest indicator that a tool surface needs redesign?",
+  "choices": {
+   "A": "It contains more than ten tools",
+   "B": "The model regularly selects a tool that cannot accomplish the request",
+   "C": "The tools return JSON",
+   "D": "The tools are implemented across several services"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "**B.** Repeated wrong selection is evidence that the tools are not distinguishable from their descriptions, which is a design fault. Tool count (A), return format (C), and implementation topology (D) are not themselves problems.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "28",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0108",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0029",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "How should a tool that performs an irreversible action be designed?",
+  "choices": {
+   "A": "With a description warning the model to be careful",
+   "B": "So that it requires more parameters",
+   "C": "So that authorisation and confirmation are enforced outside the model",
+   "D": "So that it is declared last"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "**C.** Irreversibility is controlled by the surrounding system, because a prompt-level warning is a request rather than a guarantee. Extra parameters (B) and ordering (D) do not constrain authority.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "29",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0109",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0030",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "A tool returns a large payload that consumes most of the context window. What is the right change?",
+  "choices": {
+   "A": "Increase the context window",
+   "B": "Summarise the payload with a second model call",
+   "C": "Call the tool less often",
+   "D": "Return only what the task needs, with a way to request more detail"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "**D.** Tools should return task-relevant results rather than everything available, which keeps context for reasoning. A larger window (A) postpones the problem, a second call (B) adds cost and a failure point, and calling less often (C) does not change the payload.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "30",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0110",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0031",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/practice-questions.md",
+  "question": "What belongs in a tool's description?",
+  "choices": {
+   "A": "What the tool does, when to use it, and what its parameters mean",
+   "B": "The implementation language and framework",
+   "C": "The service level agreement",
+   "D": "The name of the team that owns it"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "**A.** The description is the model's selection guide, so it must answer purpose, applicability, and parameters. Implementation detail (B), service levels (C), and ownership (D) are irrelevant to the choice.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "31",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0111",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0037",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-1.md",
+  "question": "process_refund fails intermittently because the billing backend times out. What should the tool return so the agent can behave sensibly?",
+  "choices": {
+   "A": "An empty string",
+   "B": "A message asking the user to try later",
+   "C": "A structured error with a category and a retryable flag, so the agent can retry or escalate deliberately",
+   "D": "The exception stack trace"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Structured errors with categories and retryable flags are what let an agent recover deliberately",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "2",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0117",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0039",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-1.md",
+  "question": "The agent sometimes calls get_customer when it should call lookup_order. What is the most effective change?",
+  "choices": {
+   "A": "Rewrite both tool descriptions so each states precisely when it applies and how it differs from the other",
+   "B": "Reorder the tools in the configuration",
+   "C": "Merge them into one tool with a mode flag",
+   "D": "Increase the model's temperature"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Tool selection runs on descriptions, so differentiation is the fix for confusion between similar tools",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "4",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0119",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0061",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-2.md",
+  "question": "What is the clearest sign that a tool surface needs redesign rather than better prompting?",
+  "choices": {
+   "A": "It exposes more than five tools",
+   "B": "The model repeatedly selects a tool that cannot satisfy the request",
+   "C": "The tools are implemented in different services",
+   "D": "The tools return large payloads"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Repeated wrong selection indicates the tools are not distinguishable from their descriptions, which is a design fault. Tool count (A) and implementation topology (C) are not faults, and payload size (D) is a separate problem",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0141",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0062",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-2.md",
+  "question": "How should a tool that deletes records be constrained?",
+  "choices": {
+   "A": "By enforcing authorisation and scope outside the model",
+   "B": "By a description warning the model to use it carefully",
+   "C": "By requiring more parameters",
+   "D": "By declaring it last among the tools"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Destructive capability is bounded by the surrounding system, since a description is a request rather than a control. Extra parameters (C) and ordering (D) do not limit authority",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0142",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0063",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-2.md",
+  "question": "An MCP integration exposes an entire database through one general query tool. What is the architectural concern?",
+  "choices": {
+   "A": "The model's authority is unbounded, and least privilege cannot be applied",
+   "B": "It will be slow",
+   "C": "It uses too many tokens",
+   "D": "It cannot return structured output"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "A single unrestricted tool removes the ability to scope what the model may reach. Speed (B) and tokens (C) are secondary, and structured output (D) is achievable either way",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "13",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0143",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0075",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-3.md",
+  "question": "Two tools do nearly the same thing with different names. What is the architectural fault?",
+  "choices": {
+   "A": "Duplication of code",
+   "B": "Higher latency",
+   "C": "The model has no reliable basis for choosing between them",
+   "D": "Increased token cost"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Ambiguity at the point of selection is the fault, because the model chooses from descriptions. Code duplication (A), latency (B), and cost (D) are secondary consequences",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "10",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0155",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0076",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-3.md",
+  "question": "What should a tool do when given arguments it cannot satisfy?",
+  "choices": {
+   "A": "Return the closest result it can",
+   "B": "Return a clear error stating what was wrong, so the model can correct the call",
+   "C": "Return an empty result",
+   "D": "Raise an exception that terminates the run"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "An informative error keeps the model able to adapt. A closest-guess (A) and an empty result (C) are silently wrong, and terminating (D) discards a recoverable run",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "11",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0156",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0077",
+  "exam": "CCAR-F",
+  "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+  "source_file": "architect-foundations/mock-exam-3.md",
+  "question": "An MCP tool exposes a write operation that the use case never needs. What should happen?",
+  "choices": {
+   "A": "Remove it, because unused authority is unnecessary risk",
+   "B": "Leave it, since it may be useful later",
+   "C": "Document that it should not be used",
+   "D": "Rename it to discourage use"
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Authority that is not needed should not be granted. Retaining it for possible future use (B), documenting (C), or renaming (D) all leave the capability reachable",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "12",
+  "source_heading": null,
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-Amey-Thakur-0157",
+    "source_repo": "Amey-Thakur/CLAUDE-CERTIFICATIONS",
+    "source_file": "question-bank.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-paullarionov-0007",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Production logs show a persistent pattern: requests like “analyze the uploaded quarterly report” are routed to the web-search agent 45% of the time instead of the document analysis agent. Reviewing tool definitions, you find that the web-search agent has a tool `analyze_content` described as “analyzes content and extracts key information,” while the document analysis agent has a tool `analyze_document` described as “analyzes documents and extracts key information.” How should you fix the misrouting problem?\n\nHow should you fix the misrouting problem?",
+  "choices": {
+   "A": "Add a pre-routing classifier that detects whether the user refers to uploaded files or web content before the coordinator decides on delegation.",
+   "B": "Rename the web-search tool to `extract_web_results` and update its description to “processes and returns information retrieved from web search and URLs.”",
+   "C": "Add few-shot examples to the coordinator prompt showing correct routing: “User uploads a quarterly report → document analysis agent” and “User asks about a web page → web-search agent.”",
+   "D": "Expand the document analysis tool description with usage examples like “Use for uploaded PDFs, Word docs, and spreadsheets,” leaving the web-search tool unchanged."
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Renaming the web-search tool to `extract_web_results` and updating its description to explicitly reference web search and URLs directly removes the root cause by eliminating semantic overlap between the two tool names and descriptions. This makes each tool’s purpose unambiguous, enabling the coordinator to reliably distinguish document analysis from web search.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "high",
+  "source_number": "7",
+  "source_heading": "Multi-agent Research System",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0010",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "In your system design, you gave the document analysis agent access to a general-purpose tool `fetch_url` so it could download documents by URL. Production logs show this agent now frequently downloads search engine results pages to perform ad hoc web search—behavior that should be routed through the web-search agent—causing inconsistent results. Which fix is most effective?\n\nWhich fix is most effective?",
+  "choices": {
+   "A": "Replace `fetch_url` with a `load_document` tool that validates that URLs point to document formats.",
+   "B": "Remove `fetch_url` from the document analysis agent and route all URL fetching through the coordinator to the web-search agent.",
+   "C": "Implement filtering that blocks `fetch_url` calls to known search engine domains while allowing other URLs.",
+   "D": "Add instructions to the document analysis agent prompt that `fetch_url` should only be used to download document URLs, not to search."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "Replacing a general-purpose tool with a document-specific tool that validates URLs against document formats fixes the root cause by constraining capability at the interface level. This follows the principle of least privilege, making undesired search behavior impossible rather than merely discouraged.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "high",
+  "source_number": "10",
+  "source_heading": "Multi-agent Research System",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0015",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "In testing, you observe that the synthesis agent often needs to verify specific claims while merging results. Currently, when verification is needed, the synthesis agent returns control to the coordinator, which calls the web-search agent and then re-invokes synthesis with the results. This adds 2–3 extra loops per task and increases latency by 40%. Your assessment shows 85% of these verifications are simple fact checks (dates, names, stats) and 15% require deeper research. Which approach most effectively reduces overhead while preserving system reliability?\n\nWhich approach is most effective?",
+  "choices": {
+   "A": "Give the synthesis agent access to all web-search tools so it can handle any verification need directly without coordinator loops.",
+   "B": "Have the synthesis agent accumulate all verification needs and return them as a batch to the coordinator at the end, which then sends them all to the web-search agent at once.",
+   "C": "Have the web-search agent proactively cache extra context around each source during initial research in anticipation of synthesis needing verification.",
+   "D": "Give the synthesis agent a limited-scope `verify_fact` tool for simple checks, while routing complex verifications through the coordinator to the web-search agent."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "A limited-scope fact-verification tool lets the synthesis agent handle 85% of simple checks directly, eliminating most loops, while preserving the coordinator delegation path for the 15% of complex verifications. This applies least privilege while significantly reducing latency.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "high",
+  "source_number": "15",
+  "source_heading": "Multi-agent Research System",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0044",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Your team wants to add a GitHub MCP server for searching PRs and checking CI status via Claude Code. Each of six developers has their own personal GitHub access token. You want consistent tooling across the team without committing credentials to version control.\n\nWhich configuration approach is most effective?",
+  "choices": {
+   "A": "Have each developer add the server in user scope via `claude mcp add --scope user`.",
+   "B": "Create an MCP server wrapper that reads tokens from a `.env` file and proxies GitHub API calls, then add the wrapper to the project `.mcp.json`.",
+   "C": "Add the server to the project `.mcp.json` using environment variable substitution (`${GITHUB_TOKEN}`) for auth and document the required environment variable in the project README.",
+   "D": "Configure the server in project scope with a placeholder token, then tell developers to override it in their local config."
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "A project `.mcp.json` with environment variable substitution is idiomatic: it provides a single version-controlled source of truth for MCP configuration while letting each developer supply credentials via environment variables. Documenting the variable makes onboarding easy without committing secrets.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "high",
+  "source_number": "44",
+  "source_heading": "Code Generation with Claude Code",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0046",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "While testing, you notice the agent often calls `get_customer` when users ask about order status, even though `lookup_order` would be more appropriate. What should you check first to address this problem?\n\nWhat should you check first?",
+  "choices": {
+   "A": "Implement a preprocessing classifier to detect order-related requests and route them directly to `lookup_order`.",
+   "B": "Reduce the number of tools available to the agent to simplify choice.",
+   "C": "Add few-shot examples to the system prompt covering all possible order request patterns to improve tool selection.",
+   "D": "Check the tool descriptions to ensure they clearly differentiate each tool’s purpose."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Tool descriptions are the primary input the model uses to decide which tool to call. When an agent consistently picks the wrong tool, the first diagnostic step is to verify that tool descriptions clearly separate each tool’s purpose and usage boundaries.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "high",
+  "source_number": "46",
+  "source_heading": "Customer Support Agent",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0056",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Production logs show a consistent pattern: when customers include the word “account” in their message (e.g., “I want to check my account for an order I made yesterday”), the agent calls `get_customer` first 78% of the time. When customers phrase similar requests without “account” (e.g., “I want to check an order I made yesterday”), it calls `lookup_order` first 93% of the time. Tool descriptions are clear and unambiguous. What is the most likely root cause of this discrepancy?\n\nWhat is the most likely root cause?",
+  "choices": {
+   "A": "The system prompt contains keyword-sensitive instructions that steer behavior based on terms like “account,” creating unintended tool-selection patterns.",
+   "B": "The model’s base training creates associations between “account” terminology and customer-related operations that override tool descriptions.",
+   "C": "The model needs more training data on multi-concept messages and should be fine-tuned on examples containing both account and order terminology.",
+   "D": "Tool descriptions need additional negative examples specifying when NOT to use each tool to prevent this keyword-induced confusion."
+  },
+  "answer": [
+   "A"
+  ],
+  "select_count": 1,
+  "explanation": "The systematic keyword-driven pattern (78% vs 93%) strongly indicates explicit routing logic in the system prompt reacting to the word “account” and steering the agent toward customer-related tools. Since tool descriptions are already clear, the discrepancy points to prompt-level instructions creating unintended behavioral steering.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "medium",
+  "source_number": "56",
+  "source_heading": "Customer Support Agent",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-paullarionov-0057",
+  "exam": "CCAR-F",
+  "source_repo": "paullarionov/claude-certified-architect",
+  "source_file": "practical_test_en.html",
+  "question": "Production logs show the agent often calls `get_customer` when users ask about orders (e.g., “check my order #12345”) instead of calling `lookup_order`. Both tools have minimal descriptions (“Gets customer information” / “Gets order details”) and accept similar-looking identifier formats. What is the most effective first step to improve tool selection reliability?\n\nWhat is the most effective first step?",
+  "choices": {
+   "A": "Implement a routing layer that analyzes user input before each turn and preselects the correct tool based on detected keywords and ID patterns.",
+   "B": "Combine both tools into a single `lookup_entity` that accepts any identifier and internally decides which backend to query.",
+   "C": "Add few-shot examples to the system prompt demonstrating correct tool selection patterns, with 5–8 examples routing order-related queries to `lookup_order`.",
+   "D": "Expand each tool’s description to include input formats, example queries, edge cases, and boundaries explaining when to use it versus similar tools."
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Expanding tool descriptions with input formats, example queries, edge cases, and clear boundaries directly fixes the root cause—minimal descriptions that don’t give the LLM enough information to distinguish similar tools. It’s a low-effort, high-impact first step that improves the primary mechanism the LLM uses for tool selection.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "high",
+  "source_number": "57",
+  "source_heading": "Customer Support Agent",
+  "source_section": null
+ },
+ {
+  "id": "CCAR-F-preporato-0003",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "A retailer's support system uses a coordinator agent that receives each customer conversation and delegates to three subagents: an order-lookup agent with read-only order tools, a refund agent that can issue refunds, and a policy agent that searches the returns-policy knowledge base. Company policy: refunds above \\$250 need a human's approval, and customers can come back to an open conversation within 7 days.\n\nThe policy agent's knowledge-base search sometimes fails because the search service times out, and sometimes finds nothing because no policy covers the case. Both situations currently return an empty list. How should the tool respond instead?",
+  "choices": {
+   "A": "Keep returning an empty list in both cases and let the agent retry",
+   "B": "Return a structured error for the timeout (error type, retryable: true, what was attempted) and a successful empty result for the no-match case",
+   "C": "Return the closest-matching policy in both cases so the agent always has something to cite",
+   "D": "Raise an exception in both cases so the coordinator ends the conversation"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "B separates a transient failure from a valid empty result, and the two need different recovery: retry the search, or tell the customer no policy applies. With A, the agent can't tell an outage from a real answer and may report that no policy covers the case during an outage. D ends conversations over a recoverable timeout. C invents relevance, which leads the agent to cite a policy that doesn't apply.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "3",
+  "source_heading": "Question 3",
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0033",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0007",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "A security team runs a nightly audit across 40 repositories. A coordinator spawns one scanner subagent per repository. Each scanner has `Read`, `Grep` and `Glob` plus a dependency-check tool. The coordinator merges the findings into one report for the morning stand-up and opens tickets for new critical issues.\n\nAn engineer proposes giving every scanner the full tool set, including `Write`, `Bash` and the ticketing tool, 'in case they need it.' What is the best response?",
+  "choices": {
+   "A": "Replace the scanner tools with Bash alone, since Bash can do everything the other tools do",
+   "B": "Give the scanners every tool and add a system-prompt rule forbidding writes",
+   "C": "Keep each scanner on the read-only tools its job needs, and let only the coordinator open tickets from the merged findings",
+   "D": "Accept the proposal, because more tools make the scanners more capable"
+  },
+  "answer": [
+   "C"
+  ],
+  "select_count": 1,
+  "explanation": "Least privilege scopes each agent to what its responsibility requires. C also keeps tool selection accurate and stops a misbehaving scanner from changing code or opening tickets. D widens the blast radius and adds selection noise for capabilities nobody uses. B relies on a probabilistic instruction to restrain a capability that should never be there. A hands the scanners the broadest tool of all.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "7",
+  "source_heading": "Question 7",
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0037",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0014",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "A team's MCP server should (1) let Claude create Jira tickets, (2) expose the team's API schema files so a user can attach them as context, and (3) provide a reusable 'triage this incident' template with the team's severity rubric. Which MCP primitives fit, in that order?",
+  "choices": {
+   "A": "Tool, tool, tool",
+   "B": "Resource, tool, prompt",
+   "C": "Prompt, resource, tool",
+   "D": "Tool, resource, prompt"
+  },
+  "answer": [
+   "D"
+  ],
+  "select_count": 1,
+  "explanation": "Creating a ticket is an action, so it's a tool. Schema files are read-only data for the client to browse and attach, so they're a resource. The packaged triage template is a prompt. D matches action, data and know-how in that order. A turns data and a template into callable functions. B and C put the action in the wrong primitive.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "14",
+  "source_heading": "Question 14",
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0044",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0015",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "Every developer on a team should get the same internal MCP server in Claude Code, and the server needs an API token. Which TWO choices are correct? (Select TWO)",
+  "choices": {
+   "A": "Put the token in `CLAUDE.md` so Claude can pass it to the server",
+   "B": "Paste the raw token into `.mcp.json` so setup is a single step",
+   "C": "Define the server in the project's `.mcp.json` and commit it to the repository",
+   "D": "Reference the token in `.mcp.json` as `${INTERNAL_API_TOKEN}` and have each developer set that environment variable",
+   "E": "Have each developer add the server with local scope by following a wiki page"
+  },
+  "answer": [
+   "C",
+   "D"
+  ],
+  "select_count": 2,
+  "explanation": "Project scope (C) is the configuration that reaches the whole team through version control, and environment variable expansion (D) keeps the secret out of the repository. B commits a credential. E relies on every developer repeating a manual step, and local scope never propagates. A puts a secret into the model's context, where it can leak through outputs or logs.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "15",
+  "source_heading": "Question 15",
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0045",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ },
+ {
+  "id": "CCAR-F-preporato-0016",
+  "exam": "CCAR-F",
+  "source_repo": "preporato/claude-certification-guide",
+  "source_file": "cca-f/practice-questions.md",
+  "question": "When users ask to change their email address, Claude often calls `get_customer` instead of `update_customer`, then tells the user the change is done. Both tools exist. What is the first fix?",
+  "choices": {
+   "A": "Add a system-prompt line telling Claude to use `update_customer` for updates",
+   "B": "Rewrite both descriptions: what each tool does, when to use it, and when to use the other one instead, with `get_customer` described as read-only",
+   "C": "Rename `get_customer` to `fetch_customer`",
+   "D": "Remove `get_customer` from the agent"
+  },
+  "answer": [
+   "B"
+  ],
+  "select_count": 1,
+  "explanation": "Claude selects tools mainly from their descriptions, so overlapping or vague descriptions are the first thing to fix (B), and the boundary statements ('to change a record, use `update_customer`') are what resolve this confusion. A rename (C) changes little while the descriptions stay vague. A system-prompt patch (A) is weaker than fixing the routing signal itself. Removing the read tool (D) breaks every legitimate lookup.",
+  "domain": "2. Tool Design & MCP Integration",
+  "domain_confidence": "source",
+  "source_number": "16",
+  "source_heading": "Question 16",
+  "source_section": "Tool Design & MCP Integration",
+  "also_in": [
+   {
+    "id": "CCAR-F-preporato-0046",
+    "source_repo": "preporato/claude-certification-guide",
+    "source_file": "practice/cca-f.json"
+   }
+  ]
+ }
+]

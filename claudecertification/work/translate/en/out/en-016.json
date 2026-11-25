@@ -1,0 +1,242 @@
+[
+ {
+  "id": "CCAR-F-Udemy06-0035",
+  "question": "A restaurant chain uses the Claude Agent SDK to run a customer support resolution agent that handles reservation changes and cancellations. The system prompt gives detailed instructions that the confirmation message sent when a reservation change is completed must include the following four items in this order.\n\nRestaurant name\n\nDate and time before and after the change\n\nNumber of guests\n\nCancellation policy\n\nHowever, an audit found that in 23% of confirmation messages, the order of the items was swapped or the cancellation policy was buried in the middle of a sentence.\n\nWhich change would be most effective for making the format of confirmation messages consistent?",
+  "choices": {
+   "A": "Delegate only the writing of confirmation messages to a separate subagent and put the same instructions in its system prompt.",
+   "B": "Add post-processing that checks the order of the items with a regular expression and reorders them before the confirmation message is sent.",
+   "C": "Emphasize the four-item instructions with a [Required] heading and repeat them at both the beginning and the end of the system prompt.",
+   "D": "Provide several complete example confirmation messages for individual cases, such as a change in the number of guests and a change in date and time."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0036",
+  "question": "A university uses the Claude Agent SDK to run a customer support resolution agent that handles student inquiries about course registration and certificate issuance. The agent retrieves a student's record by calling get_student with the student's name.\n\nAn audit found that in about 30% of cases where a name lookup matched multiple students, the agent selected the student who had logged in most recently and proceeded with the process, and in some cases it provided another student's course registration records.\n\nWhich is the most appropriate way to address this problem?",
+  "choices": {
+    "A": "When multiple students match, automatically escalate the inquiry to a human agent.",
+    "B": "When multiple students match, ask for additional identifying information such as the student ID number or date of birth before proceeding.",
+    "C": "Write a rule in the system prompt that, when multiple students match, the student with the most recent last login date and time is selected.",
+    "D": "When multiple students match, display a list of the name, department, and year of all matching students and have the person choose themselves."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0037",
+  "question": "The development team at an education services company has committed a skill that documents the code review procedure to its learning management system repository as .claude/skills/review/SKILL.md, and everyone uses it with /review.\n\nLast month the team added \"accessibility checks\" to the review criteria, but one engineer's /review alone kept running an old procedure that did not include the new criterion. Investigation showed that this engineer had previously created a skill at ~/.claude/skills/review/SKILL.md with a procedure modified to their own preferences.\n\nWhich is the most appropriate action that lets this engineer keep their own procedure while still receiving the team's updates?",
+  "choices": {
+    "A": "Add disable-model-invocation: true to the frontmatter of the personal skill so that it is not loaded automatically.",
+    "B": "Rename the personal skill to something like review-strict, and use the team's skill for /review.",
+    "C": "Keep the personal skill as it is and manually apply the differences to the personal file each time the team updates its skill.",
+    "D": "Overwrite the project skill with the contents of the personal skill and commit it, so that the whole team uses the same procedure."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0038",
+  "question": "The systems department of a railway company uses the Claude Agent SDK to build a developer productivity tool. The tool helps engineers understand legacy systems and automate repetitive tasks.\n\nAn engineer asked the tool to \"unify the error handling across the entire train operations management system with a new shared exception class.\" The scope is about 900 files, and no one knows which modules depend on which exceptions.\n\nIn the first attempt, the agent started rewriting files one at a time in directory name order. Three hours later, it turned out that a change to the module that calculates delay propagation affected many places, and most of the work had to be redone.\n\nWhich is the most appropriate way to decompose an open-ended task like this?",
+  "choices": {
+    "A": "Load all the target files in a single request, have it output a list of the places to change, and then have it rewrite them.",
+    "B": "First have it map the dependencies and build a plan starting from the highest-impact areas, then revise the plan as new findings emerge.",
+    "C": "Assign the 900 files to nine subagents of 100 files each and have them rewrite in parallel with the same instructions.",
+    "D": "Define a fixed chain of \"search -> replace -> test\" in advance and apply it to all files in the same order."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0039",
+  "question": "A construction consulting firm uses a multi-agent research system to investigate case studies of countermeasures for aging infrastructure. The document analysis subagent has the following two tools.\n\nrecord_finding (records a research finding)\n\nflag_unreadable (reports a document that cannot be read)\n\nThe logs show that in about 9% of cases, the subagent returned only text without calling either tool, and the coordinator was unable to aggregate the results. Most of the cases where only text was returned were cases where the document contained no relevant content.\n\nWhich configuration and design changes appropriately address this problem? (Select two.)",
+  "choices": {
+    "A": "Add a record_no_relevant_content tool that records that no relevant content was found.",
+    "B": "Fix tool_choice to record_finding so that findings are recorded for every document.",
+    "C": "When a text-only response is returned, have it summarize that text and register it as the content of record_finding.",
+    "D": "Set tool_choice to {\"type\": \"any\"} so that one of the tools is always called."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0040",
+  "question": "The development team at an e-commerce logistics company has built automated code review with Claude Code into the CI/CD pipeline for its warehouse management system repository.\n\nBecause developers complained about too many false positives, the team added the sentence \"Judge conservatively and report only findings with high confidence\" to the review prompt. Two weeks later, the aggregated results were as follows.\n\nThe false positive rate dropped only from 38% to 36%\n\nThere were more cases of missing actual bugs in the inventory allocation logic\n\nWhich are correct reasons why this change did not improve precision? (Select two.)",
+  "choices": {
+    "A": "The instruction to be \"conservative\" does not specify criteria for which issues to report and which not to, so the decision boundary does not change.",
+    "B": "Because the added sentence was placed at the end of the prompt, it was hidden behind a long diff and was overlooked.",
+    "C": "Self-reported confidence is not calibrated to correspond to false positives, so incorrect findings also receive high confidence.",
+    "D": "Instructions about confidence are ignored by Claude Code run non-interactively with the -p flag and are reflected only in interactive mode."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0041",
+  "question": "A securities firm uses the Claude Agent SDK to run a customer support resolution agent that handles inquiries about account balances and transaction history. After verifying the customer's identity with get_customer, the agent is given a run_sql tool that can execute arbitrary SQL against the account database.\n\nAn audit found that in 0.4% of the queries the agent generated, the filter condition was incorrect, and account information for people other than the identity-verified customer was included in the response.\n\nWhich is the most appropriate countermeasure for this problem?",
+  "choices": {
+    "A": "Add a step that has the agent itself recheck whether the generated query is correct before calling run_sql.",
+    "B": "State explicitly in the system prompt that queries must always include the identity-verified customer ID as a condition.",
+    "C": "Keep run_sql and add a process in which a human agent reviews the executed queries after the fact every day.",
+    "D": "Replace run_sql with get_account_summary, which returns only the accounts of the verified customer ID."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0042",
+  "question": "The development team at an entertainment company has built automated code review with Claude Code into CI for its ticketing system repository. When the findings were aggregated by category, the proportion of findings that correctly identified a real problem was as follows.\n\nSecurity: 92%\n\nN+1 queries: 88%\n\nNaming conventions: 31%\n\nInterviews with developers revealed that a growing number of people were closing findings without reading them, even security findings, because \"there are lots of false positives anyway.\"\n\nWhich is the most appropriate first action to take to restore developers' trust?",
+  "choices": {
+    "A": "Have it attach a confidence level to the findings in each category, and configure it not to post findings with a confidence below 0.9.",
+    "B": "Temporarily disable the naming conventions category, and use that time to improve the criteria and examples for judging naming conventions.",
+    "C": "Announce an operating rule asking developers to check the content of findings before closing them, even false positives.",
+    "D": "Switch the model that runs the review to a higher-tier model in order to reduce false positives."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0043",
+  "question": "A shipping company uses the Claude Agent SDK to run a customer support resolution agent that handles inquiries from shippers. The compensation policy defines the conditions and amounts of compensation for delays on the company's own vessels, but says nothing about delays that occur on legs transshipped to a partner company's vessels.\n\nThe logs show that when asked for compensation for delays on such legs, the agent responded inconsistently: sometimes it applied the rules for the company's own vessels by analogy and quoted a compensation amount, and sometimes it declined on the grounds that the request was outside the policy. In addition, for escalated cases, the human agent who took over had to reread the conversation record from the beginning to confirm what was being requested.\n\nWhich are appropriate ways to address these problems? (Select two.)",
+  "choices": {
+    "A": "When escalating, hand off a structured handoff summary of the case facts and the request.",
+    "B": "Apply the company's own vessel compensation rules by analogy to the partner vessel legs and have the agent quote the calculated compensation amount to the shipper.",
+    "C": "Uniformly decline requests not covered by the policy as outside the policy, and have the agent explain the reason politely.",
+    "D": "State explicitly in the system prompt the criteria for escalating requests that are not covered by the policy."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0044",
+  "question": "The system development team at a law firm is using Claude Code to create a data migration script for a contract management system. For the process that converts the legacy system's \"contract execution date\" column to ISO 8601 dates, they asked Claude in writing three times to \"also handle Japanese-era dates and blank values.\"\n\nHowever, each time a different case broke, such as \"令和元年5月1日\" causing a conversion error, or blank values being replaced with \"1970-01-01\".\n\nWhich is the most effective next action to take to reliably fix the edge case handling?",
+  "choices": {
+    "A": "Switch to plan mode, have Claude plan the approach for date conversion including Japanese-era dates and blank values, and then resume the fix.",
+    "B": "Start with an interview in which Claude asks questions about the conversion by Japanese era name and the meaning of blank values.",
+    "C": "Rewrite the request to explain in more detail, in bullet points, how to convert Japanese-era dates and the rule of leaving blank values as null.",
+    "D": "Provide test cases with inputs and expected values, such as 「令和元年5月1日」→「2019-05-01」, and have it make the fix."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0045",
+  "question": "The firmware development team at a home appliance manufacturer has created a Claude Code skill, /flash-audit, and committed it to the repository. This skill examines the code and git log history related to the firmware flashing procedure and reports safety issues, and it must not modify any files.\n\nAfter it went into use, the following two problems occurred.\n\nThere was a case where, while the skill was running, Claude fixed a typo in a comment using Edit\n\nEvery time the skill runs, permission is requested to run git log, and developers approve it every time\n\nWhich are appropriate changes to make to the frontmatter of SKILL.md? (Select two.)",
+  "choices": {
+    "A": "Add a note at the beginning of the skill body that emphasizes that files must not be modified.",
+    "B": "Specify Edit and Write in disallowed-tools to remove them from the tools available during execution.",
+    "C": "Set context: fork to run the skill in the context of an isolated subagent.",
+    "D": "Specify Bash(git log *) in allowed-tools so that git log runs without confirmation."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0046",
+  "question": "The development team at a semiconductor manufacturing equipment maker maintains the control software for exposure systems using Claude Code (configured with built-in tools enabled, including Read, Grep, and Glob). The following two investigations are needed.\n\nBefore changing the arguments of the function apply_wafer_offset, which performs wafer position correction, find every place that calls this function\n\nIdentify where the error message ALIGN_TIMEOUT: stage not ready, reported from the field, is output\n\nWhich are appropriate methods to use for each investigation? (Select two.)",
+  "choices": {
+    "A": "Use Glob to list files matching **/*wafer*.py, and look for callers among them.",
+    "B": "Use Glob to list files matching **/*error*.py and **/*log*.py, and read them one by one with Read to look for where it is output.",
+    "C": "Use Grep to search the entire codebase for the function name apply_wafer_offset and identify all callers.",
+    "D": "Use Grep to search for the string ALIGN_TIMEOUT: stage not ready and identify where it is output."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0047",
+  "question": "The development team at a music streaming service has created /release-notes as a Claude Code skill and committed .claude/skills/release-notes/SKILL.md to the repository. This skill creates release notes from the commits since a specified version tag and posts them to the company chat.\n\nAfter it went into use, the following two problems occurred.\n\nA developer merely asked, \"Summarize the recent changes,\" and Claude automatically loaded this skill and even posted the notes\n\nDevelopers often run /release-notes without specifying a tag, and notes covering an unintended range are created\n\nWhich are appropriate changes to make to the frontmatter of SKILL.md? (Select two.)",
+  "choices": {
+    "A": "Set context: fork to run the skill in the context of an isolated subagent.",
+    "B": "Set disable-model-invocation: true to limit invocation to explicit calls.",
+    "C": "Set user-invocable: false so that the skill is not shown in the \"/\" menu.",
+    "D": "Set argument-hint to [version-tag] to show the required argument during autocompletion."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0048",
+  "question": "The marketing department at a game company uses the Claude API to build a multi-agent research system that investigates market trends for competing titles. The document analysis subagent calls tools for each article in the following order.\n\nUse extract_metadata to extract the title, publisher, and publication date\n\nUse enrich_with_sales_data to add sales data\n\nTo prevent enrichment from running before extraction, the team fixed tool_choice to {\"type\": \"tool\", \"name\": \"extract_metadata\"} on every request.\n\nAs a result, extraction now always runs first. However, enrich_with_sales_data is never called, and extract_metadata is called repeatedly for the same article.\n\nWhich is the most appropriate fix?",
+  "choices": {
+    "A": "Keep the forcing setting and add \"call after extract_metadata\" to the description of enrich_with_sales_data.",
+    "B": "On each iteration of the loop, alternate the tool forced by tool_choice between the two tools.",
+    "C": "Change tool_choice to {\"type\": \"any\"} and let the model choose which tool to call.",
+    "D": "Force extract_metadata only on the first request, and set tool_choice back to auto for subsequent turns."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0049",
+  "question": "The quality assurance team at a chemical manufacturer uses Claude to build a system that extracts ingredient names, CAS numbers, and hazard classifications from safety data sheets (SDS). The extraction results are validated against a JSON schema and then registered in the company's chemical substance management system. Every night, 12,000 documents are processed in bulk using the Message Batches API.\n\nLast night's batch results were as follows.\n\nsucceeded: 11,620\n\nerrored: 240\n\nexpired: 140\n\nAll 240 errored requests were invalid_request_error, and it turned out that they exceeded the context limit because documents of more than 200 pages were sent in a single request.\n\nWhich are appropriate actions to take to complete extraction of the remaining documents by the following night? (Select two.)",
+  "choices": {
+    "A": "Rebuild only the 240 errored requests as requests that split the documents into chunks and resubmit them.",
+    "B": "Resubmit all 12,000 in a new batch, and match the results to the original documents by the order of submission.",
+    "C": "Treat the 240 errored requests as transient server-side errors and put the same requests into the next batch as they are.",
+    "D": "Resubmit only the 140 expired requests in a new batch, with the request contents unchanged."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0050",
+  "question": "A medical institution group uses the Claude Agent SDK to run a customer support resolution agent that handles inquiries about medical fee payments and refunds. Under internal regulations, refunds exceeding 30,000 yen must not be processed by the agent and must go through approval by an accounting officer.\n\nThe regulation is stated explicitly in the system prompt, but an audit found that several refunds exceeding 30,000 yen were being executed each month through process_refund.\n\nWhich is the most appropriate change to ensure the regulation is reliably followed while appropriately handing off the relevant inquiries?",
+  "choices": {
+    "A": "Inspect the refund result with a PostToolUse hook, and immediately notify the accounting officer if it exceeded 30,000 yen.",
+    "B": "Reject refunds over 30,000 yen with a PreToolUse hook and redirect to escalate_to_human.",
+    "C": "Move the description of the regulation to the beginning of the system prompt and add a sentence that specifically explains the consequences of violating it.",
+    "D": "Remove process_refund from the agent's tools and route all refunds to the accounting officer."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0051",
+  "question": "A parcel delivery company uses the Claude Agent SDK to run a customer support resolution agent that handles delivery address changes and redelivery requests. The procedure for changing a delivery address is to call change_delivery_address only after identity verification with an SMS one-time code has been completed, and the system prompt instructs this order.\n\nIn evaluation, the order was followed in 99.2% of cases, but in the remaining cases the delivery address was changed before identity verification. The team leader believes that \"if we refine how the instructions are written further, we should be able to reach 100%.\"\n\nWhich is the most appropriate assessment of this view?",
+  "choices": {
+    "A": "Instructions are followed only probabilistically, so to reliably prevent this, a prerequisite that checks in code that identity verification has been completed is needed.",
+    "B": "If temperature is set to 0, the same procedure will be chosen for the same input, and the ordering error will no longer reproduce.",
+    "C": "If few-shot examples sufficiently demonstrate the correct order, behavior becomes deterministic and cases with the reversed order will disappear.",
+    "D": "If instructions continue to be improved, the compliance rate will approach 100%, so the evaluation set should be expanded and improvements repeated."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0052",
+  "question": "The development team at a property and casualty insurance company uses Claude Code to modify its claims payment system. The team shares an internal MCP server that returns the latest approved payment rules via .mcp.json, and this server has a tool called search_rules (whose description is \"Searches for rules\"). In the team's Claude Code, the built-in Read, Grep, and Glob are enabled.\n\nHowever, for most questions about payment rules, Claude searches within the repository and answers based on outdated copies of the rules that remain there. search_rules is hardly ever called.\n\nWhich is the most effective first step?",
+  "choices": {
+    "A": "Establish a practice in which developers specify the tool in the request each time, such as \"use search_rules.\"",
+    "B": "Prohibit Grep with a permissions deny rule so that it can no longer search within the repository.",
+    "C": "Add \"Always use search_rules for questions about payment rules\" to CLAUDE.md.",
+    "D": "Add to the description of search_rules that it returns the latest approved rules, the fields it returns, and when it should be used."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0053",
+  "question": "The construction management department at a construction company uses Claude to build a system that extracts structured data from documents received from partner companies and registers it in a cost management system.\n\nThere are three types of documents: estimates, invoices, and change orders, and extraction tools named extract_estimate, extract_invoice, and extract_change_order are defined for them, each with a JSON schema. However, the document type cannot be determined from the file names of email attachments.\n\nCurrently tool_choice is set to auto, and in about 7% of all cases, only text such as \"This document appears to be an invoice\" is returned without calling a tool, and the registration process stops.\n\nWhich are appropriate changes to reliably obtain structured output even when the document type is unknown? (Select two.)",
+  "choices": {
+    "A": "When a text-only response is returned, determine the document type from that text using a regular expression and rerun with the corresponding tool.",
+    "B": "Set tool_choice to {\"type\": \"tool\", \"name\": \"extract_invoice\"} to force the tool for invoices, which are the most numerous.",
+    "C": "Set tool_choice to {\"type\": \"any\"} so that one of the three extraction tools is always called.",
+    "D": "In the description of each extraction tool, write the fields specific to that document and how to distinguish it from the other two types."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0054",
+  "question": "The maintenance department at an airline uses Claude to extract the work performed, part numbers, workers, and work dates from scanned documents of paper maintenance records and registers them in its maintenance management system. It processes about 2,000 records per day, but there are two reviewers who can check the content, and they can check only about 300 records per day.\n\nCurrently the first 300 records in order of arrival are checked, and records that were not checked sometimes retained part number misreadings.\n\nWhich are appropriate designs for making effective use of the limited review capacity? (Select two.)",
+  "choices": {
+    "A": "Have it output field-level confidence, and calibrate the review threshold with a labeled validation set.",
+    "B": "Have it self-report a confidence from 1 to 10 for each document, and register documents scoring 8 or higher as they are without review.",
+    "C": "Randomly select 300 of the 2,000 records to check, and register the records that were not selected as they are.",
+    "D": "Prioritize for review the extractions with low confidence and the records whose entries are ambiguous or contradictory."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0055",
+  "question": "The development team at an e-commerce logistics company uses the Claude Agent SDK to build a developer productivity tool for engineers to explore unfamiliar codebases.\n\nAn engineer spent two hours using this tool to investigate how shipment allocation works in a warehouse management system, and in the later part of the conversation the following changes appeared.\n\nThe agent stopped referring to specific classes it had identified early on, such as AllocationPlanner and ReservationLedger, and began answering with generalities such as \"in common inventory allocation patterns\"\n\nExplanations that contradicted earlier answers also began to appear\n\nWhich is the most appropriate countermeasure for this situation?",
+  "choices": {
+    "A": "Have the engineer add an instruction to every request, such as \"answer with specific class names, not generalities.\"",
+    "B": "Switch to a model with a larger context window so that it retains the history even in long conversations.",
+    "C": "Reset the conversation with /clear, start a new session, and have it redo the same investigation from the beginning.",
+    "D": "Have it record key findings in a scratchpad file and refer to that file for subsequent questions."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0056",
+  "question": "The corporate planning department at a hotel chain uses the Claude Agent SDK to build a multi-agent research system that investigates guest reviews and information about competing hotels.\n\nThe document analysis subagent has only one general-purpose tool, analyze_review. This tool is used by specifying processing such as \"extract the rating,\" \"summarize,\" or \"verify whether a claim is stated in the review\" in a free-text instruction parameter.\n\nThe logs show that even for the same purpose, the wording of instruction differed each time and the output format was inconsistent. As a result, in 18% of cases the synthesis agent could not read the results.\n\nWhich are appropriate changes to address this problem? (Select two.)",
+  "choices": {
+    "A": "Split analyze_review into purpose-specific tools for rating extraction, summarization, and claim verification.",
+    "B": "Add detailed instructions to the synthesis agent's system prompt on how to read results in different formats.",
+    "C": "Add ten examples of commonly used instruction phrasing to the description of the instruction parameter.",
+    "D": "Define the tool's input and output with a JSON schema, and write in the description when to use it and when not to."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0057",
+  "question": "The development team at a sports data distribution company uses Claude Code to help engineers understand unfamiliar codebases and legacy systems.\n\nAn engineer asked, using direct execution, for a comparison of whether the periodic-polling ingestion process used in the live match update delivery service should be replaced with a webhook approach, a message queue approach, or an improvement of the current approach. Claude then started editing 12 files while still investigating the first approach, and the changes had to be reverted before the comparison was finished.\n\nWhich is the most appropriate approach for this engineer to take next to prevent the same rework?",
+  "choices": {
+    "A": "Stay in direct execution and split the request by approach, and if the result is not satisfactory, go back to a checkpoint with /rewind.",
+    "B": "Switch to plan mode, have it investigate and compare the three approaches, and proceed to implementation after reviewing the plan it presents.",
+    "C": "Switch to acceptEdits mode, have it implement prototypes of all the approaches, and then compare them using test results.",
+    "D": "Write \"do not edit files until I approve\" in CLAUDE.md and redo the same request in direct execution."
+  }
+ },
+ {
+  "id": "CCAR-F-Udemy06-0058",
+  "question": "The development team at a publisher has built Claude Code into continuous integration in the repository for its e-book production system. When EPUB validation produces errors, Claude creates a fix with claude -p and opens a pull request for the fix.\n\nPull requests created by humans are reviewed by a review workflow triggered by the pull_request event, using a separate claude -p run. Pull requests created by Claude, on the other hand, are excluded from this workflow.\n\nInstead, the fix session is resumed in the same job using the session_id returned by the fix run. The job runs claude -p --resume \"$SESSION_ID\" and asks, as a continuation of the fix session, \"Review this fix.\"\n\nOver the past two months, findings were raised on about 20% of human pull requests, whereas findings on Claude's pull requests were under 1%. However, most of the changes in which broken table-of-contents links or missing alt text were found after merging had been created by Claude.\n\nWhich are appropriate changes to make the review of Claude-created fixes more effective? (Select two.)",
+  "choices": {
+    "A": "Review Claude-created pull requests with the same review workflow as human ones.",
+    "B": "Add --append-system-prompt to the --resume run to give it a reviewer role and a list of items to check.",
+    "C": "Add \"review your own diff after finishing\" to the prompt of the fix run, and finish it in a single pass.",
+    "D": "At the end of the fix run, delegate the diff review to a subagent and have it check in a new context."
+  }
+ }
+]

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="엉뚱한 tool 선택은 interface 설계 문제: description과 tool surface를 고친다" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>엉뚱한 tool 선택은 interface 설계 문제: description과 tool surface를 고친다</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-8-tool-surface-design" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="225" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">Before</text>
+<text x="675" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="middle">After</text>
+<rect x="30" y="44" width="390" height="100" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="225.0" y="81.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">tool A, tool B: 기능이 겹침</text>
+<text x="225.0" y="97.5" font-size="12" fill="#1F2937" text-anchor="middle">모든 tool에 같은 범용 설명</text>
+<text x="225.0" y="113.5" font-size="12" fill="#1F2937" text-anchor="middle">구별할 단서가 없음</text>
+<rect x="30" y="184" width="390" height="50" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="225.0" y="212.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">모델이 엉뚱한 tool을 고름</text>
+<polyline points="225,144 225,182" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-surface-design)"/>
+<rect x="480" y="44" width="390" height="100" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="675.0" y="81.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">겹치는 작업은 통합</text>
+<text x="675.0" y="98.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">tool마다 목적이 뚜렷하게</text>
+<text x="675.0" y="113.5" font-size="11" fill="#6B7280" text-anchor="middle">의미 있는 이름(서비스명 접두어)은 보조</text>
+<rect x="480" y="160" width="390" height="128" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="675.0" y="195.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">description (tool당 3~4문장 이상)</text>
+<text x="675.0" y="211.5" font-size="12" fill="#1F2937" text-anchor="middle">① tool이 하는 일</text>
+<text x="675.0" y="227.5" font-size="12" fill="#1F2937" text-anchor="middle">② 언제 쓰고 언제 쓰지 말지</text>
+<text x="675.0" y="243.5" font-size="12" fill="#1F2937" text-anchor="middle">③ 각 파라미터의 의미와 영향</text>
+<text x="675.0" y="259.5" font-size="12" fill="#1F2937" text-anchor="middle">④ 제약 (반환하지 않는 정보 등)</text>
+<rect x="480" y="312" width="390" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="675.0" y="337.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">올바른 tool 선택과 입력 작성</text>
+<polyline points="675,144 675,158" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-surface-design)"/>
+<polyline points="675,288 675,310" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-surface-design)"/>
+<polyline points="420,94 478,94" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-surface-design)"/>
+<rect x="433.0" y="74" width="32.0" height="16" fill="#FFFFFF"/>
+<text x="449" y="86" font-size="12" fill="#1F2937" text-anchor="middle">고침</text>
+<rect x="30" y="258" width="390" height="98" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="225.0" y="286.5" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">해결 안 됨 (오답)</text>
+<text x="225.0" y="302.5" font-size="12" fill="#1F2937" text-anchor="middle">"신중히 고르라"는 지시, 더 큰 context window,</text>
+<text x="225.0" y="318.5" font-size="12" fill="#1F2937" text-anchor="middle">정렬 순서, 짧은 description + 이름으로 보완,</text>
+<text x="225.0" y="334.5" font-size="12" fill="#1F2937" text-anchor="middle">잘못된 호출을 사후 재시도로 바로잡기</text>
+<rect x="30" y="372" width="390" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="225.0" y="400.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">영향이 작음</text>
+<text x="225.0" y="415.0" font-size="11" fill="#1F2937" text-anchor="middle">tool 개수·선언 순서, JSON 반환 여부(결과 소비에만)</text>
+<text x="30" y="474" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">MCP 서버를 추가한 뒤 성공률이 떨어지면</text>
+<rect x="30" y="488" width="250" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="155.0" y="512.0" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">성공률 하락</text>
+<text x="155.0" y="527.0" font-size="11" fill="#6B7280" text-anchor="middle">모델은 바뀌지 않음</text>
+<rect x="330" y="488" width="300" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="480.0" y="511.0" font-size="12" fill="#1F2937" text-anchor="middle">먼저: 새 tool이 기존 tool과 겹치나?</text>
+<text x="480.0" y="527.0" font-size="12" fill="#1F2937" text-anchor="middle">description이 구별되나?</text>
+<rect x="680" y="488" width="190" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="775.0" y="511.0" font-size="11" fill="#1F2937" text-anchor="middle">uptime·latency 문제는</text>
+<text x="775.0" y="526.0" font-size="11" fill="#1F2937" text-anchor="middle">에러·지연으로 드러남</text>
+<polyline points="280,516 328,516" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-surface-design)"/>
+<polyline points="630,516 678,516" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-8-tool-surface-design)"/>
+<rect x="633.5" y="497" width="41.0" height="15" fill="#FFFFFF"/>
+<text x="654" y="508" font-size="11" fill="#1F2937" text-anchor="middle">그다음</text>
+</svg>

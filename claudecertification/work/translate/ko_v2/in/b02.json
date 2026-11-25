@@ -1,0 +1,453 @@
+[
+ {
+  "id": "CCAR-F-Amey-Thakur-0041",
+  "question": "When is plan mode the appropriate choice over direct execution?",
+  "choices": {
+   "A": "For every change, since planning is always safer",
+   "B": "Only when the model is unfamiliar with the language",
+   "C": "When the change is large or risky enough that a human should review the approach before edits are made",
+   "D": "When the context window is nearly full"
+  },
+  "explanation": "Plan mode is a human review gate for approach, warranted by risk rather than universally"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0043",
+  "question": "Subagents return full source documents to the coordinator, which then exceeds its context limit. What is the correct design change?",
+  "choices": {
+   "A": "Have subagents return structured findings with citations while raw sources stay at the edge or in a scratchpad",
+   "B": "Give the coordinator a larger model",
+   "C": "Reduce the number of subagents to one",
+   "D": "Truncate each document to its first page"
+  },
+  "explanation": "Delegation exists to keep bulk at the edge and move distilled results"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0044",
+  "question": "Final reports attribute claims to the wrong sources even though each subagent is individually accurate. What is the likely cause?",
+  "choices": {
+   "A": "The synthesis model is too small",
+   "B": "The handoff format does not carry claim and source together, so provenance is lost between stages",
+   "C": "The search subagent returns too many results",
+   "D": "Reports are generated before analysis completes"
+  },
+  "explanation": "Provenance survives handoffs only when the format carries claim and source together"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0045",
+  "question": "A subagent fails permanently on one source. What should the coordinator receive?",
+  "choices": {
+   "A": "Nothing, so the report proceeds",
+   "B": "A silent retry loop until it succeeds",
+   "C": "A propagated error with enough context to decide between retry, exclusion with a noted gap, or abort",
+   "D": "A generic failure flag with no detail"
+  },
+  "explanation": "Errors must propagate with enough context for the coordinator to choose a recovery path"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0046",
+  "question": "The reviewer must emit results a pipeline can parse. Which invocation is correct?",
+  "choices": {
+   "A": "Interactive session with output redirected to a log",
+   "B": "Plan mode with an approval step",
+   "C": "A cron job that emails the transcript",
+   "D": "Non-interactive print mode with JSON output and a schema"
+  },
+  "explanation": "CI requires non-interactive invocation with structured, schema-validated output"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0047",
+  "question": "Reviews flag many low-value style nits and engineers now ignore them. Which change addresses this?",
+  "choices": {
+   "A": "Define explicit review criteria and a severity bar in the prompt, with examples of in-scope and out-of-scope findings",
+   "B": "Post findings to a separate channel",
+   "C": "Run the review only on large pull requests",
+   "D": "Cap output at five findings"
+  },
+  "explanation": "Precision comes from explicit criteria and examples that draw the signal boundary"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0048",
+  "question": "Some invoices legitimately lack a delivery date. How should the schema express this?",
+  "choices": {
+   "A": "Make the field required and let extraction fail",
+   "B": "Make the field nullable so absence is recorded explicitly, with conditional validation where the document type requires it",
+   "C": "Omit the field from the schema",
+   "D": "Default it to today's date"
+  },
+  "explanation": "Nullable fields record legitimate absence; required fields force fabrication or failure"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0049",
+  "question": "Which loop gives the most reliable extraction output?",
+  "choices": {
+   "A": "Generate, then manually review every record",
+   "B": "Generate three times and take the majority",
+   "C": "Enforce a JSON schema through tool use, validate, and on failure retry with the validation error provided to the model",
+   "D": "Generate with temperature zero and accept the result"
+  },
+  "explanation": "Schema enforcement plus a validation-retry loop is the reliability pattern the guide describes"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0050",
+  "question": "Your team reports 97% accuracy measured only on records that passed validation. Why is that number misleading?",
+  "choices": {
+   "A": "Accuracy should be measured per field, not per record",
+   "B": "97% is too low to report",
+   "C": "Validation and accuracy are unrelated",
+   "D": "It excludes the failures, so it measures where the system already succeeded rather than the true rate across all documents"
+  },
+  "explanation": "Measuring only validated records is a biased sample; calibration needs coverage of all documents"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0052",
+  "question": "What is the principal cost of introducing a subagent?",
+  "choices": {
+   "A": "It loses the context the parent held unless the handoff carries it explicitly",
+   "B": "It requires a larger model",
+   "C": "It cannot use tools",
+   "D": "It doubles token cost in every case"
+  },
+  "explanation": "Delegation buys isolation and pays in context, which is why handoffs must be explicit. A subagent does not require a larger model (B), can use tools (C), and cost varies with the work (D)"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0053",
+  "question": "An autonomous step would modify production data. What does the architecture require?",
+  "choices": {
+   "A": "A more capable model",
+   "B": "A longer system prompt describing caution",
+   "C": "A retry policy",
+   "D": "A checkpoint where a person authorises the action, or a reversible mechanism"
+  },
+  "explanation": "Irreversible external effects need an authorisation boundary or reversibility, enforced outside the model. Capability (A), instruction (B), and retries (C) do not bound the consequence"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0054",
+  "question": "What most helps diagnose an agentic failure after the fact?",
+  "choices": {
+   "A": "The final output alone",
+   "B": "A trace of each step's inputs, tool calls, and outputs",
+   "C": "The total token count",
+   "D": "The model version"
+  },
+  "explanation": "A per-step trace reconstructs a nondeterministic run, which is what diagnosis needs. The final output (A), token totals (C), and version (D) do not show where it diverged"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0055",
+  "question": "Where should repository-wide conventions for Claude Code live?",
+  "choices": {
+   "A": "In each developer's local configuration",
+   "B": "In a CLAUDE.md committed to the repository",
+   "C": "In the team's chat channel",
+   "D": "In the CI configuration only"
+  },
+  "explanation": "Committed project memory is shared, versioned, and reviewed with the code. Local configuration (A) does not propagate, chat (C) is not read as context, and CI (D) covers automation rather than interactive work"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0056",
+  "question": "Which task is best suited to headless Claude Code in CI?",
+  "choices": {
+   "A": "Exploratory debugging of an unfamiliar failure",
+   "B": "Designing a new module's architecture",
+   "C": "Pair programming with a developer",
+   "D": "A repeatable, well-specified check that runs on every pull request"
+  },
+  "explanation": "Headless execution suits bounded, repeatable work that runs unattended. Exploration (A), design (B), and pairing (C) all depend on a person in the loop"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0057",
+  "question": "What is a hook for?",
+  "choices": {
+   "A": "Running a deterministic action at a defined point, independently of the model",
+   "B": "Storing reusable instructions",
+   "C": "Holding project context",
+   "D": "Selecting the model"
+  },
+  "explanation": "Hooks execute as code at fixed points, which is how a guarantee is enforced. Instructions (B) and context (C) belong in project memory, and model choice (D) is configuration"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0058",
+  "question": "A pipeline needs output that always conforms to a fixed shape. What is the correct mechanism?",
+  "choices": {
+   "A": "Requesting the shape in the prompt and parsing the result",
+   "B": "Post-processing prose with regular expressions",
+   "C": "Declaring the shape as a schema the model must satisfy, and validating on receipt",
+   "D": "Lowering the temperature"
+  },
+  "explanation": "A declared schema makes the shape a contract rather than a request, and validation closes the loop. Prompt requests (A), text parsing (B), and temperature (D) leave the shape to chance"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0059",
+  "question": "How should a schema handle a value the source may not contain?",
+  "choices": {
+   "A": "Omit the field silently",
+   "B": "Supply a plausible default",
+   "C": "Return an empty string in all cases",
+   "D": "Define an explicit representation for absence"
+  },
+  "explanation": "Absence must be representable so a genuine gap is distinguishable from a failure. Silent omission (A) is ambiguous, a plausible default (B) fabricates, and an empty string (C) conflates absence with an empty value"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0060",
+  "question": "Extraction succeeds on typical inputs and fails on unusual ones. What is the most effective response?",
+  "choices": {
+   "A": "Raise the temperature",
+   "B": "Use a larger model",
+   "C": "Add examples covering the unusual formats and state what to return when a field is missing",
+   "D": "Ask the model to be careful with unusual inputs"
+  },
+  "explanation": "The unusual cases fail because they were never specified, and examples plus a missing-value rule specify them. Temperature (A) adds variance, model size (B) is not aimed at the gap, and exhortation (D) is not specification"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0061",
+  "question": "What is the clearest sign that a tool surface needs redesign rather than better prompting?",
+  "choices": {
+   "A": "It exposes more than five tools",
+   "B": "The model repeatedly selects a tool that cannot satisfy the request",
+   "C": "The tools are implemented in different services",
+   "D": "The tools return large payloads"
+  },
+  "explanation": "Repeated wrong selection indicates the tools are not distinguishable from their descriptions, which is a design fault. Tool count (A) and implementation topology (C) are not faults, and payload size (D) is a separate problem"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0062",
+  "question": "How should a tool that deletes records be constrained?",
+  "choices": {
+   "A": "By enforcing authorisation and scope outside the model",
+   "B": "By a description warning the model to use it carefully",
+   "C": "By requiring more parameters",
+   "D": "By declaring it last among the tools"
+  },
+  "explanation": "Destructive capability is bounded by the surrounding system, since a description is a request rather than a control. Extra parameters (C) and ordering (D) do not limit authority"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0063",
+  "question": "An MCP integration exposes an entire database through one general query tool. What is the architectural concern?",
+  "choices": {
+   "A": "The model's authority is unbounded, and least privilege cannot be applied",
+   "B": "It will be slow",
+   "C": "It uses too many tokens",
+   "D": "It cannot return structured output"
+  },
+  "explanation": "A single unrestricted tool removes the ability to scope what the model may reach. Speed (B) and tokens (C) are secondary, and structured output (D) is achievable either way"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0064",
+  "question": "Quality degrades steadily through a long agentic run. What is the most likely cause?",
+  "choices": {
+   "A": "The model version changed mid-run",
+   "B": "Accumulated context has diluted the material that matters",
+   "C": "The temperature is too low",
+   "D": "The tools have become slower"
+  },
+  "explanation": "Progressive degradation over a long run is the signature of context accumulation. Versions do not change mid-run (A), low temperature (C) reduces variety rather than quality, and tool latency (D) does not affect correctness"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0065",
+  "question": "What must happen for state to survive a compaction boundary?",
+  "choices": {
+   "A": "Nothing, the model retains what matters",
+   "B": "The context window must be enlarged",
+   "C": "The decisions and constraints that must persist are written into an explicit carried-forward summary",
+   "D": "The run must restart"
+  },
+  "explanation": "Compaction is lossy, so persistence must be deliberate. Relying on recall (A) is unreliable, a larger window (B) only moves the boundary, and restarting (D) discards the work"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0066",
+  "question": "An agentic design calls the same expensive tool repeatedly with identical arguments. What does this indicate?",
+  "choices": {
+   "A": "Healthy retry behavior",
+   "B": "The tool is too fast",
+   "C": "The agent is not retaining or reusing the result, which points at the state design",
+   "D": "The model is too capable"
+  },
+  "explanation": "Repeating an identical call means the prior result is not available to the agent, which is a state problem. It is not retry behavior (A), and neither tool speed (B) nor capability (D) explains it"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0067",
+  "question": "What determines whether two lines of work belong in separate subagents?",
+  "choices": {
+   "A": "Whether each needs context the other would pollute",
+   "B": "Their combined length",
+   "C": "Whether they use different tools",
+   "D": "Whether they can run in parallel"
+  },
+  "explanation": "Context isolation is the reason subagents exist. Length (B), tool difference (C), and parallelism (D) can all be handled within one context"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0068",
+  "question": "Which design most reduces the cost of a wrong autonomous decision?",
+  "choices": {
+   "A": "A larger model",
+   "B": "A longer prompt",
+   "C": "More tools",
+   "D": "Making the action reversible, or gating it behind confirmation"
+  },
+  "explanation": "Reversibility and gating bound the consequence, which is what the risk is. Capability (A), prompt length (B), and tools (C) affect the chance of error rather than its cost"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0069",
+  "question": "A CLAUDE.md has grown to several thousand lines. What is the likely effect?",
+  "choices": {
+   "A": "Better results, because more context is available",
+   "B": "The instructions that matter compete with material that no longer applies",
+   "C": "No effect, since it is read once",
+   "D": "Faster responses"
+  },
+  "explanation": "Project memory is context and dilutes like any other. More is not automatically better (A), it is not free (C), and it does not speed anything up (D)"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0070",
+  "question": "What should be true of a skill before it is committed to a shared repository?",
+  "choices": {
+   "A": "It is long enough to be useful",
+   "B": "It encodes a procedure the team genuinely repeats, and it is reviewable",
+   "C": "It is written by the most senior engineer",
+   "D": "It covers every edge case"
+  },
+  "explanation": "A shared skill is justified by genuine repetition and must be reviewable like code. Length (A), authorship (C), and exhaustiveness (D) do not establish that"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0071",
+  "question": "Why is committed configuration preferable to per-developer configuration for team conventions?",
+  "choices": {
+   "A": "It is faster to load",
+   "B": "It uses less context",
+   "C": "It cannot be overridden",
+   "D": "It is versioned, reviewed, and applies to everyone including automation"
+  },
+  "explanation": "Shared, reviewed, versioned context is what makes a convention hold across people and CI. Speed (A) and context size (B) are not the reason, and it can still be overridden locally (C)"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0072",
+  "question": "A schema-validated response fails validation once in every few hundred calls. What is the correct handling?",
+  "choices": {
+   "A": "Define a fallback path: retry, then fail explicitly rather than passing invalid data on",
+   "B": "Ignore it, since the rate is low",
+   "C": "Disable validation to avoid the failures",
+   "D": "Increase the output token limit"
+  },
+  "explanation": "A rare failure still needs a defined path, and silently passing invalid data is the outcome to prevent. Ignoring it (B) and disabling validation (C) do exactly that, and the token limit (D) is not the cause"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0073",
+  "question": "What is the advantage of validating structured output at the boundary rather than downstream?",
+  "choices": {
+   "A": "It is cheaper",
+   "B": "It removes the need for a schema",
+   "C": "The failure is caught where it can still be retried or rejected, before it contaminates later steps",
+   "D": "It improves model accuracy"
+  },
+  "explanation": "Catching at the boundary contains the fault. It is not primarily a cost question (A), the schema is what makes it possible (B), and it does not change the model's accuracy (D)"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0074",
+  "question": "A structured extraction must record where in the source each value came from. What does this require?",
+  "choices": {
+   "A": "A larger model",
+   "B": "A longer prompt",
+   "C": "A second extraction pass",
+   "D": "The schema to include a provenance field the model must populate"
+  },
+  "explanation": "Anything the output must carry has to be part of the declared shape. Model size (A) and prompt length (B) do not create a field, and a second pass (C) is unnecessary if the schema asks for it"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0075",
+  "question": "Two tools do nearly the same thing with different names. What is the architectural fault?",
+  "choices": {
+   "A": "Duplication of code",
+   "B": "Higher latency",
+   "C": "The model has no reliable basis for choosing between them",
+   "D": "Increased token cost"
+  },
+  "explanation": "Ambiguity at the point of selection is the fault, because the model chooses from descriptions. Code duplication (A), latency (B), and cost (D) are secondary consequences"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0076",
+  "question": "What should a tool do when given arguments it cannot satisfy?",
+  "choices": {
+   "A": "Return the closest result it can",
+   "B": "Return a clear error stating what was wrong, so the model can correct the call",
+   "C": "Return an empty result",
+   "D": "Raise an exception that terminates the run"
+  },
+  "explanation": "An informative error keeps the model able to adapt. A closest-guess (A) and an empty result (C) are silently wrong, and terminating (D) discards a recoverable run"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0077",
+  "question": "An MCP tool exposes a write operation that the use case never needs. What should happen?",
+  "choices": {
+   "A": "Remove it, because unused authority is unnecessary risk",
+   "B": "Leave it, since it may be useful later",
+   "C": "Document that it should not be used",
+   "D": "Rename it to discourage use"
+  },
+  "explanation": "Authority that is not needed should not be granted. Retaining it for possible future use (B), documenting (C), or renaming (D) all leave the capability reachable"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0078",
+  "question": "What is the earliest reliable signal that context management has failed in a long run?",
+  "choices": {
+   "A": "The agent begins repeating work or contradicting earlier decisions",
+   "B": "The run takes longer than expected",
+   "C": "Token cost rises",
+   "D": "A tool returns an error"
+  },
+  "explanation": "Repetition and self-contradiction are the behavioral signature of lost state. Duration (B) and cost (C) rise for many reasons, and a tool error (D) is unrelated"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0079",
+  "question": "Why is a defined success criterion necessary for a reliable agentic system?",
+  "choices": {
+   "A": "It reduces token cost",
+   "B": "Without it there is no way to tell completion from failure, so the system cannot stop correctly or be measured",
+   "C": "It makes the prompt shorter",
+   "D": "It is required by the platform"
+  },
+  "explanation": "Termination and measurement both depend on a definition of done. Cost (A), prompt length (C), and platform requirements (D) are not the reason"
+ },
+ {
+  "id": "CCAR-F-Amey-Thakur-0080",
+  "question": "A reliability requirement says wrong output must never reach the user unnoticed. What does the design need?",
+  "choices": {
+   "A": "A more capable model",
+   "B": "More examples in the prompt",
+   "C": "A detection step with a defined action when it fires",
+   "D": "A longer context window"
+  },
+  "explanation": "Preventing silent error requires detection plus a response. Capability (A), examples (B), and context (D) improve the average case without catching the bad one"
+ },
+ {
+  "id": "CCAR-F-paullarionov-0001",
+  "question": "A document analysis agent discovers that two credible sources contain directly contradictory statistics for a key metric: a government report states 40% growth, while an industry analysis states 12%. Both sources look credible, and the discrepancy could materially affect the research conclusions. How should the document analysis agent handle this situation most effectively?\n\nWhich approach is most effective?",
+  "choices": {
+   "A": "Apply credibility heuristics to pick the most likely correct number, finish analysis with that value, and add a footnote mentioning the discrepancy.",
+   "B": "Include both numbers in the analysis output without marking them as conflicting, letting the synthesis agent decide which to use based on broader context.",
+   "C": "Stop analysis and immediately escalate to the coordinator, asking it to decide which source is more authoritative before continuing.",
+   "D": "Complete analysis with both numbers, explicitly annotate the conflict with source attribution, and let the coordinator decide how to reconcile the data before passing to synthesis."
+  },
+  "explanation": "This approach preserves separation of responsibilities: the analysis agent completes its core work without blocking, preserves both conflicting values with clear attribution, and correctly passes reconciliation to the coordinator, which has broader context."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0002",
+  "question": "The web-search and document-analysis agents have completed their tasks and returned results to the coordinator. What is the next step for creating an integrated research report?\n\nWhich next step is most appropriate?",
+  "choices": {
+   "A": "Each agent sends its results directly to the report-writing agent, bypassing the coordinator.",
+   "B": "The document analysis agent requests web-search results and merges them internally.",
+   "C": "The coordinator passes both sets of results to the synthesis agent for a unified integration.",
+   "D": "The coordinator concatenates the raw outputs from both agents and returns them as the final result."
+  },
+  "explanation": "In a coordinator–subagent architecture, the coordinator forwards both result sets to the synthesis agent for centralized integration, preserving control and ensuring high-quality merging."
+ },
+ {
+  "id": "CCAR-F-paullarionov-0003",
+  "question": "A document analysis subagent frequently fails when processing PDF files: some have corrupted sections that trigger parsing exceptions, others are password-protected, and sometimes the parsing library hangs on large files. Currently, any exception immediately terminates the subagent and returns an error to the coordinator, which must decide whether to retry, skip, or fail the whole task. This causes excessive coordinator involvement in routine error handling. What architectural improvement is most effective?\n\nWhich improvement is most effective?",
+  "choices": {
+   "A": "Create a dedicated error-handling agent that monitors all failures via a shared queue and decides recovery actions, sending restart commands directly to subagents.",
+   "B": "Configure the subagent to always return partial results with a success status, embedding error details in metadata; the coordinator treats all responses as successful.",
+   "C": "Make the coordinator validate all documents before sending them to the subagent, rejecting documents that might cause failures.",
+   "D": "Implement local recovery in the subagent for transient failures and escalate to the coordinator only errors it cannot resolve, including attempted steps and partial results."
+  },
+  "explanation": "Handle errors at the lowest level capable of resolving them. Local recovery reduces coordinator workload while still escalating truly unrecoverable issues with full context and partial progress."
+ }
+]

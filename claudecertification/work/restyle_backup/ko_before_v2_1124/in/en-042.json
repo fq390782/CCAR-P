@@ -1,0 +1,409 @@
+[
+ {
+  "id": "CCAR-P-jrajath94-0620",
+  "question": "A ticket classifier misses its accuracy bar on new labels. The team has no budget for model training, and it wants the smallest prompt change first. Which change should the team try first?",
+  "choices": {
+   "A": "Train a custom classifier on the full ticket history before any prompt change.",
+   "B": "Enable citations, so each label links to its source text.",
+   "C": "Add three to five varied labeled examples in example tags, then run the evals.",
+   "D": "Add the examples, and also turn on adaptive thinking for every call."
+  },
+  "explanation": "Three to five examples in example tags steer the output pattern without training. Measure the result first, and add more examples only if the evals need them. Trap. Custom training on the full history looks like the strongest fix, but the team has no training budget."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0621",
+  "question": "A migration moves an extraction service to a Claude 4.6 model. Each request ends with a prefilled assistant turn, and the API returns a 400 error. The fix must keep the output format and run on Claude 4.6.",
+  "choices": {
+   "A": "Turn thinking off, so the prefilled assistant turn is accepted.",
+   "B": "Remove the prefill, and state the output format in the system prompt.",
+   "C": "Keep the prefill, and add structured outputs to the same request.",
+   "D": "Keep the prefill, and route these calls to an earlier model."
+  },
+  "explanation": "Claude 4.6 and later models reject a prefilled final assistant turn. A system prompt instruction keeps the output format without the prefill. Trap. Thinking turned off looks like a valid fix, but the prefilled final turn still returns a 400 error on Claude 4.6."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0622",
+  "question": "A routing service needs one label from a fixed enum for each ticket. The call targets Claude Opus 5.5, which rejects forced tool use. Which two changes meet the constraints?",
+  "choices": {
+   "A": "Use tool_choice auto with a strict tool that has an enum field.",
+   "B": "Set tool_choice to one named tool, so the model must call it.",
+   "C": "Use structured outputs with an enum in the schema.",
+   "D": "Add a prompt caching breakpoint to the label instructions."
+  },
+  "explanation": "Tool choice auto works with strict tool use on Opus 5.5. Structured outputs with an enum also return one label from the fixed list. Trap. A named tool choice looks like the simplest way to lock the label, but Opus 5.5 rejects forced tool use with a 400 error."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0623",
+  "question": "A chat service sends long histories. Each turn must fit an input budget that the app sets before the call, and the model must stay the same. Which change meets both constraints?",
+  "choices": {
+   "A": "Set effort to low, so the input token count falls.",
+   "B": "Skip counting, and rely on the usage fields after each response.",
+   "C": "Count tokens before each send, and switch to a larger-window model when the count is high.",
+   "D": "Count tokens with the target model ID, and trim history that exceeds the budget."
+  },
+  "explanation": "The token counting endpoint reports the input size before the call. The app trims the history, so each turn fits the budget on the same model. Trap. Usage fields in a response look like a budget check, but those counts arrive only after the call is sent."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0624",
+  "question": "An agent task fills its context with old tool results. The team wants no extra summarization call, and recent work must stay in context. Which change meets both constraints?",
+  "choices": {
+   "A": "Add the clear_tool_uses strategy with the context-management beta header.",
+   "B": "Start a separate summary request on every turn, then send that summary.",
+   "C": "Clear all tool results on every turn, even the most recent ones.",
+   "D": "Use the token counting endpoint to delete old turns from the history."
+  },
+  "explanation": "The clear_tool_uses strategy removes old tool results by rule, so no summary call is needed. The beta header enables context editing. Trap. A separate summary on every turn looks thorough, but it adds the model call that the constraint rules out."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0625",
+  "question": "A long agent task loses an early constraint after a default summary. Recent turns must stay word for word after the summary. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Let the default summary run, and trust it to keep every constraint.",
+   "B": "Write a custom summarization prompt that keeps the early constraint.",
+   "C": "Set a keep_recent_turns parameter to five in the compaction request.",
+   "D": "Pick a cut point, and send the later turns after the summary block."
+  },
+  "explanation": "A custom summarization prompt can require the early constraint in the summary. No parameter selects kept turns, so the cut point sets which turns stay word for word. Trap. A keep_recent_turns parameter looks like the direct control, but no parameter sets which turns are kept."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0626",
+  "question": "A research app sends the same 30,000-token reference set with every question. Answers must not change, and the input cost per call must drop. Which change meets both constraints?",
+  "choices": {
+   "A": "Replace the reference set with a short summary, which shrinks each call.",
+   "B": "Place the reference set first, and mark its last stable block with cache_control.",
+   "C": "Place each new question first, then the reference set, and mark the last block with cache_control.",
+   "D": "Send the reference set through the token counting endpoint before each call."
+  },
+  "explanation": "A cache hit needs an identical prefix up to the breakpoint. Cache reads cost a fraction of the base input price, and the answers stay the same. Trap. A short summary looks like a cost fix, but it changes the answers that must stay the same."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0627",
+  "question": "A multi-turn assistant adds two blocks on each turn. The team wants one cache setting and no breakpoint edits. Which change meets both constraints?",
+  "choices": {
+   "A": "Add explicit cache_control to four blocks, and omit the top-level field.",
+   "B": "Add a top-level cache_control field, and move an explicit breakpoint to the newest block on each turn.",
+   "C": "Add a cache_mode parameter set to auto in the request body.",
+   "D": "Add one top-level cache_control field to the request."
+  },
+  "explanation": "Automatic caching moves the breakpoint to the last cacheable block as the conversation grows. One top-level field enables it, so the team needs no breakpoint edits. Trap. Explicit breakpoints on four blocks look more controlled, but they need edits each time the stable content moves."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0628",
+  "question": "A batch job sends a tool list that never changes, then a weekly document. Calls arrive about every 30 minutes. The tool list must stay cached between calls, and the weekly document must not break that cache. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Set ttl to 1h on the breakpoint after the tool list, before the document.",
+   "B": "Place the weekly document first, then cache from its last block.",
+   "C": "Keep the weekly document after the breakpoint, so its edits do not break the cache.",
+   "D": "Set a cache TTL of 2h on the request, so the whole prompt stays cached."
+  },
+  "explanation": "A 1-hour TTL keeps the tool list cached across 30-minute gaps. Content after the breakpoint can change without a miss on the cached prefix. Trap. A document placed first looks harmless, but any change at or before the breakpoint causes a cache miss."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0629",
+  "question": "An invoice agent has 60 tools from several MCP servers. Most requests use three tools. The team must cut the tool schema tokens sent per call, and every tool must stay available.",
+  "choices": {
+   "A": "Remove 40 tools from the agent, so the list fits the prompt.",
+   "B": "Set cache_control on every deferred tool, so their schemas stay cached.",
+   "C": "Add tool search, defer the rarely used tools, and keep the three common tools non-deferred.",
+   "D": "Add tool search, and set defer_loading to true on every tool, the tool search tool too."
+  },
+  "explanation": "Tool search keeps deferred definitions out of the first prompt, so frequent tools stay in context. All 60 tools remain available to the agent. Trap. Setting cache_control on deferred tools looks like a cost fix, but a deferred tool with cache_control returns a 400 error."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0630",
+  "question": "Two lookup tools do the same job, and their descriptions are almost identical. The agent often picks the wrong one. The fix must remove the ambiguity from the tool list itself.",
+  "choices": {
+   "A": "Add a longer system prompt rule that names which lookup to use.",
+   "B": "Merge the two lookups into one tool with an action parameter and a clear description.",
+   "C": "Keep both lookups, and add a classifier model that routes each request first.",
+   "D": "Set defer_loading to true on both lookup tools."
+  },
+  "explanation": "One tool with one name leaves the model no near match to pick. The docs name tool description detail as the most important factor in tool performance. Trap. A system prompt rule that names the right lookup looks like a fix, but two tools with the same job still split the choice."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0631",
+  "question": "A finance agent runs a nightly report task in Claude Code. The task never calls a refund write tool, but a wrong refund fired last week. The team must block that tool and keep the report read tool.",
+  "choices": {
+   "A": "Add a deny rule for the refund write tool in the task's settings.",
+   "B": "Keep the refund tool, and add audit logging of each call.",
+   "C": "Turn on tool search, so the refund tool loads only when searched.",
+   "D": "Remove the refund write tool from the task's tool list."
+  },
+  "explanation": "A deny rule or a removed tool ends the permission, and a log entry does not. A deferred tool still loads when the model searches for it, so tool search does not block the call. Trap. Tool search looks like a safety fix, but a deferred tool still loads when the model finds it."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0632",
+  "question": "An internal assistant calls a remote MCP server. The server must record which employee asked for each action. Which change meets the constraint?",
+  "choices": {
+   "A": "Use one shared service key, and add the employee name to the prompt.",
+   "B": "Send each user's OAuth token in authorization_token for that server.",
+   "C": "Send one shared OAuth token for all users, and route all calls through a logging proxy.",
+   "D": "Set the anthropic-workspace-id header to the employee's team workspace."
+  },
+  "explanation": "The server checks a bearer token that names the signed-in user. A name typed into a prompt cannot prove who asked (Inference). Trap. A shared key with a name in the prompt looks like attribution, but the system cannot verify a name that the user typed (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0633",
+  "question": "A workload runs on Claude Platform on AWS. The security team needs IAM to control each caller, and the workload has no user consent flow. Which change meets both constraints?",
+  "choices": {
+   "A": "Store a long-lived API key in the code, and skip IAM policies.",
+   "B": "Add an OAuth consent screen for each user before each call.",
+   "C": "Sign with SigV4 from one shared role for all callers, and log each request ID in a second store.",
+   "D": "Enable outbound web identity federation, sign with SigV4, and scope IAM to the workspace ARN."
+  },
+  "explanation": "Outbound web identity federation is disabled by default, so requests fail until it is enabled. An IAM policy on the workspace ARN then limits each caller. Trap. An OAuth consent screen looks like user control, but Claude Platform on AWS does not support OAuth."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0634",
+  "question": "On the Claude API, two tenants must not share prompt caches or API keys. The team also wants a separate monthly spend limit for each tenant. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Use one workspace for both tenants, and name each tenant in a header.",
+   "B": "Rename the Default Workspace to the first tenant, then archive it later.",
+   "C": "Create one workspace per tenant, and scope each tenant key to its workspace.",
+   "D": "Set a monthly spend limit on each tenant workspace."
+  },
+  "explanation": "Prompt caches stay isolated by workspace on the Claude API. Each new workspace can also have its own spend limit. Trap. A tenant header in one workspace looks like isolation, but both tenants then share one prompt cache and one spend limit."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0635",
+  "question": "Users must see the first words of a reply before the full answer is ready. The model and the answer quality must stay the same. Which change meets both constraints?",
+  "choices": {
+   "A": "Stream the response, so text appears as the tokens arrive.",
+   "B": "Enable fast mode, which cuts the time to first token.",
+   "C": "Send each request as a Message Batch, and read the results the next day.",
+   "D": "Cache each full answer in a custom store, and show it only after the answer is complete."
+  },
+  "explanation": "Streaming sends output as the model generates it, so the first words appear before the answer ends. Streaming does not reduce the total generation work (Inference). Trap. Fast mode looks like a first-token fix, but its speed gain applies to output tokens per second, not to time to first token."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0636",
+  "question": "An evaluation run has 50,000 prompts. Results can arrive within one day, and the run must cost less than standard calls. No user waits for these results.",
+  "choices": {
+   "A": "Send each prompt one at a time on the standard path, with high effort.",
+   "B": "Buy a Priority Tier commitment, which gives half-price calls.",
+   "C": "Submit one Message Batch, and also run the full set on the standard path.",
+   "D": "Submit the prompts as one Message Batch, and read results after processing ends."
+  },
+  "explanation": "Batch usage is charged at half the standard API price. Results can take up to 24 hours, which fits an evaluation run that no user waits on. Trap. Standard calls look simple, but they keep standard pricing for a job that can wait a day."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0637",
+  "question": "A classifier meets its accuracy floor at medium effort, but its latency target is tight. Many requests are simple, and a short answer is enough for them. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Move all requests to a larger model at high effort.",
+   "B": "Set effort lower for simple requests, and keep medium effort for the rest.",
+   "C": "Enable fast mode on Claude Haiku 5.5, which cuts the first-token wait.",
+   "D": "Ask for a shorter answer in the prompt when output length adds time."
+  },
+  "explanation": "Lower effort cuts output and thinking work on simple requests. A shorter answer cuts output time, and medium effort keeps the accuracy floor on harder requests. Trap. A larger model looks like the safer choice for accuracy, but each call takes longer and can miss the latency target (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0638",
+  "question": "An incident review must find which tool call sent a bad record. Prompt logs show the text but no tool hop. Prompt text must stay out of the trace data.",
+  "choices": {
+   "A": "Store full prompt content in the spans, so each hop shows its text.",
+   "B": "Read the usage report by hour, which lists each tool call.",
+   "C": "Emit one trace per run, with a span for each model and tool hop, in metadata only mode.",
+   "D": "Emit one span per run with no child spans, in metadata only mode, and export it to two collectors."
+  },
+  "explanation": "One trace ID links each model and tool hop, so the review can find the hop that acted. Metadata only mode keeps prompt text out of the spans. Trap. A usage report by hour looks like tool-level detail, but it groups token totals by model, workspace, or key."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0639",
+  "question": "Finance needs a monthly split of API spend by workspace, reconciled with billing. The figures must come from platform reports, not from app logs.",
+  "choices": {
+   "A": "Call the cost report with an Admin API key, grouped by workspace.",
+   "B": "Call the cost report and the usage report hourly, both grouped by workspace.",
+   "C": "Add up input tokens from each app response, then multiply by list prices.",
+   "D": "Call the cost report with hourly buckets for a monthly split."
+  },
+  "explanation": "The cost report returns USD totals, and it groups results by workspace. Its daily buckets suit a monthly split that finance reconciles with billing. Trap. Input token totals from app responses look exact, but finance needs the platform cost totals for billing reconciliation."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0640",
+  "question": "A security team audits developer tool use in Claude Code. The OTLP destination must stay fixed for every developer, and MCP tool arguments must appear in the audit trail. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Pin the OTLP endpoint and credentials in managed settings.",
+   "B": "Enable telemetry in each repository's project settings file.",
+   "C": "Set OTEL_LOG_USER_PROMPTS to 1 to capture tool arguments.",
+   "D": "Set OTEL_LOG_TOOL_DETAILS to 1 to capture MCP call arguments."
+  },
+  "explanation": "Managed settings keep the destination fixed for every developer. Tool details log MCP server names, tool names, and input arguments. Trap. A project setting that enables telemetry looks simple, but Claude Code ignores OTel exporter variables in project settings."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0641",
+  "question": "A support answer must name the source of each claim. The response must stay free text, with no JSON schema. Which change meets both constraints?",
+  "choices": {
+   "A": "Ask the model in the prompt to list sources after each claim.",
+   "B": "Pass each chunk as a search result block with source and title, and enable citations.",
+   "C": "Pass each chunk as search results with citations disabled, and add a reranker before the call.",
+   "D": "Enable structured outputs with a source field for each claim."
+  },
+  "explanation": "Each citation links a claim to a search result block that carries your source and title. Citations are disabled by default, so the request must enable them. Trap. A prompt that asks for sources looks equivalent, but the names are not tied to retrieved blocks, so you cannot check them (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0642",
+  "question": "A policy document has tables split across chunks, and answers cite the wrong row. Each citation must point to one table row.",
+  "choices": {
+   "A": "Keep sentence chunking, and switch to a larger generation model.",
+   "B": "Send each table as a plain text document, and switch to the largest embedding model.",
+   "C": "Build one custom content block per table row, sent as a custom content document.",
+   "D": "Turn on contextual retrieval, so the table rows group automatically."
+  },
+  "explanation": "Custom content documents keep your blocks as they are, with no further chunking. Each row block can then be cited on its own. Trap. Contextual retrieval looks like a table fix, but the docs do not describe it."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0643",
+  "question": "The right passage appears in the candidate list, but it ranks low. The answer model needs that passage among the top passages. Which two changes meet the ranking constraint?",
+  "choices": {
+   "A": "Switch to a larger generation model, with the same candidate list.",
+   "B": "Add a reranker that reorders the candidate list for the query.",
+   "C": "Set input_type to None on the query embedding, so ranking uses raw similarity.",
+   "D": "Send only the top reranked passages to the answer model."
+  },
+  "explanation": "A reranker returns candidates in relevance order for the query. The top reranked passages then reach the answer model. Trap. A larger generation model looks like the fix, but it does not change the candidate order (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0644",
+  "question": "An app answers stock-count questions from an index that refreshes hourly. Users need the current count, and policy questions must stay on the index. Which change meets both constraints?",
+  "choices": {
+   "A": "Refresh the index every five minutes, and keep the snapshot as the only source.",
+   "B": "Enable the SSE transport on the connector, so stock values stream in.",
+   "C": "Route stock questions to a read tool on the inventory server, and keep policy questions on the index.",
+   "D": "Route stock questions and policy questions to a read tool on the inventory server."
+  },
+  "explanation": "A read tool returns the value as it stands at call time. Policy text changes less often, so it can stay in the index (Inference). Trap. A faster index refresh looks like the fix for stale counts, but the index still holds a snapshot (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0645",
+  "question": "A query contains an error code, and users also ask about the same docs in plain words. A semantic index alone misses the exact code. The fix must find both the code and the paraphrased passages.",
+  "choices": {
+   "A": "Use a semantic index only, and raise the number of candidates it returns.",
+   "B": "Store the codes as binary embeddings, which keeps exact matches.",
+   "C": "Run two semantic matchers with different models, and merge both lists.",
+   "D": "Run keyword and semantic matchers, then merge both candidate lists."
+  },
+  "explanation": "A keyword matcher finds exact codes, and a semantic matcher finds paraphrases. The merged candidate list covers both query shapes (Inference). Trap. A larger candidate count from the semantic index looks like coverage, but a vector match can still miss the exact code (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0646",
+  "question": "A chat app must answer with live order status from a remote server. The app must not run an MCP client in its code, and answers must not come from a stored snapshot. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Define the server in mcp_servers, and reference it from one MCP toolset.",
+   "B": "Copy the order status into the index every hour, and search that copy.",
+   "C": "Send the request with the MCP connector beta header.",
+   "D": "Read order status through MCP resources, which the connector loads."
+  },
+  "explanation": "The connector calls the remote server's tools from the Messages API, so the app needs no MCP client. The beta header enables the connector. Trap. MCP resources look like a live feed, but the connector supports only tool calls from the MCP specification."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0647",
+  "question": "One backend service calls an internal billing API from a single host. No other host needs these tools, and the team wants no extra protocol layer.",
+  "choices": {
+   "A": "Register the billing API as a stdio server in Claude Code for the backend.",
+   "B": "Call the billing API directly from the backend code with its own client.",
+   "C": "Wrap the billing API in an MCP server, and let the backend connect as its client.",
+   "D": "Put a CLI wrapper around the API, and parse its text output in the backend."
+  },
+  "explanation": "One consumer on one host needs no shared protocol, so direct calls meet the need with the least machinery (Inference). Trap. An MCP server looks like the standard integration, but it adds a protocol layer that a single host does not need (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0648",
+  "question": "Four hosts written in different languages need the same ticket lookup tools. The team wants one tool schema, and each host connects as a client.",
+  "choices": {
+   "A": "Write a separate client library for each host that calls the service.",
+   "B": "Use the MCP connector with a stdio server on each host.",
+   "C": "Build one MCP server that exposes the ticket tools, and let each host connect.",
+   "D": "Build one MCP server with tools, resources, and prompts, and let each host connect."
+  },
+  "explanation": "One server holds one tool schema, and each host connects to it as a client. The team maintains one definition for all hosts (Inference). Trap. A client library for each host looks flexible, but each copy becomes a second schema to maintain (Inference)."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0649",
+  "question": "A Claude Code team must block one claude.ai connector tool before Claude sees it. The same team must also add an internal service that runs over HTTP. Which two changes meet both constraints?",
+  "choices": {
+   "A": "Add the risky connector tool with an allow rule, so it runs without a prompt.",
+   "B": "Add the internal service with claude mcp add and the http transport.",
+   "C": "Set the idle timeout to zero, so the risky tool stays hidden.",
+   "D": "Set the organization control for that connector tool to blocked."
+  },
+  "explanation": "The http transport adds a remote server by URL. A blocked control removes the connector tool from the list before Claude sees it. Trap. An allow rule looks like a control, but it lets the tool run without a prompt."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0650",
+  "question": "An agent loads 60 tools on every request, and most definitions go unused. The three most common tools must answer each turn without an extra search step. Which setup meets both constraints?",
+  "choices": {
+   "A": "Build a custom embedding index that ranks all 60 tools and injects the top five into each system prompt.",
+   "B": "Add cache_control to each deferred tool, so the API keeps its schema warm between searches.",
+   "C": "Set defer_loading to true on the 57 rare tools, keep the three common tools non-deferred, and add the tool search tool.",
+   "D": "Set defer_loading to true on all 60 tools, so every request starts with a search step."
+  },
+  "explanation": "Tool search loads a tool only when a search finds it, so rare definitions cost no tokens until then. The common tools stay non-deferred, so they need no search step. Trap. Setting defer_loading on all 60 tools looks like the cheapest setup, but every common call then needs a search round trip."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0651",
+  "question": "An SDK agent uses 12 MCP tools in a small context window. The team wants tool search to start only when definitions reach a set share of the window. Which setting meets the constraint?",
+  "choices": {
+   "A": "Set alwaysLoad to 10 percent, so each server activates tool search once its tools reach that share.",
+   "B": "Set ENABLE_TOOL_SEARCH to auto, so tools load upfront until definitions reach 10 percent of the window.",
+   "C": "Set ENABLE_TOOL_SEARCH to false, so every tool definition loads on every turn.",
+   "D": "Write a ranking service that selects tool definitions before each SDK call, on top of the default settings."
+  },
+  "explanation": "The auto value loads tools upfront until definitions reach 10 percent of the context window. Tool search then starts, so the threshold rule meets the constraint without extra code. Trap. The alwaysLoad setting sounds like a threshold, but it only loads the tools of one server upfront."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0652",
+  "question": "A team writes a domain agent with 1,500 lines of guidance. Each request must carry only short metadata until a task needs the details. Which two designs meet this constraint?",
+  "choices": {
+   "A": "Keep the skill name and description in the system prompt, and read the reference files only when a task needs them.",
+   "B": "Enable network access in the skill sandbox, so the model fetches reference pages from a URL on demand.",
+   "C": "Paste all 1,500 lines into the system prompt, so the model never needs a second read.",
+   "D": "Keep SKILL.md under 500 lines, and move detailed sections into separate files that each task reads when relevant."
+  },
+  "explanation": "Only the skill name and description load at startup, and reference files load only when a task reads them. A SKILL.md body under 500 lines keeps the loaded part small. Trap. Network access in the skill sandbox looks like a way to fetch files on demand, but skills on the API run with no network access."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0653",
+  "question": "A support bot team sees fluency rise 12 percent after a prompt change. Resolution rate stays flat. The release decision needs one primary metric with a threshold set before tuning starts.",
+  "choices": {
+   "A": "Set the threshold in the Console evaluation tool, which computes the primary metric for you.",
+   "B": "Resolution rate on the held-out set, with a threshold and an owner set before the next run.",
+   "C": "Fluency score as the primary metric, with no threshold, because the grader scores it automatically.",
+   "D": "Fifteen dashboard metrics, each with its own threshold, reviewed before the primary metric is chosen."
+  },
+  "explanation": "Resolution rate measures the goal directly, so it can decide the release. A threshold and an owner set before tuning give the number a fixed bar. (Inference) Trap. A fluency score that rose 12 percent looks like a win, but it does not measure the goal and has no threshold."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0654",
+  "question": "A team moved to a cheaper model, and monthly spend fell. Completed tasks fell more. The team needs a daily report of value per task for each model version.",
+  "choices": {
+   "A": "Compare total monthly spend only, because finance reads the bill and the bill fell.",
+   "B": "Read the Cost API in one-minute buckets for each task, since minute buckets show spend per task.",
+   "C": "Build a warehouse pipeline that joins every token count with task outcomes in real time.",
+   "D": "Daily spend divided by completed tasks gives value per task, so compare that value for each model and prompt version."
+  },
+  "explanation": "The Cost API reports spend in USD by daily bucket, which fits a daily report. The per-task value then compares versions on the same unit of value. Trap. One-minute Cost API buckets look right for per-task spend, but the Cost API supports only daily buckets."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0655",
+  "question": "A dashboard must show cost and latency for a streaming chat feature. It must also show the quality threshold for the same release. Which two items meet these constraints?",
+  "choices": {
+   "A": "Read time to first token from the Usage API, which reports latency for each bucket.",
+   "B": "Measure time to first token for streaming calls, and baseline latency for other calls.",
+   "C": "Track 20 latency percentiles for every route, each with its own alert owner.",
+   "D": "Show cost per completed task beside the quality threshold, with daily totals from the Usage and Cost API."
+  },
+  "explanation": "Time to first token matters most for streaming, and baseline latency covers the full response of other calls. Cost per completed task sits beside the threshold, so both show in one view. Trap. A latency read from the Usage API looks right, but the Usage API reports token counts and not response times."
+ },
+ {
+  "id": "CCAR-P-jrajath94-0656",
+  "question": "An eval set of 500 clean prompts scores 96 percent. Production users paste long documents and send empty messages, and failures rise. The set must predict production at a low daily cost.",
+  "choices": {
+   "A": "Add production samples with long, empty, and irrelevant inputs, and grade the checkable cases with code.",
+   "B": "Have three reviewers grade every case by hand before each daily run, to catch subtle errors.",
+   "C": "Enable the Console evaluation tool to build the production sample, then score the sample with code.",
+   "D": "Add a versioned set with a dashboard per case type, plus production samples that include edge cases."
+  },
+  "explanation": "Production samples expose failures that clean prompts hide. Code graders score checkable cases at low cost, so the daily run stays cheap. Trap. A Console tool that builds the production sample sounds like a shortcut, but the docs describe no tool that samples production traffic."
+ }
+]

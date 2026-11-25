@@ -1,0 +1,154 @@
+[
+  {
+    "number": "Q-M-16",
+    "heading": "Q-M-16 (V2-D3.1)",
+    "question": "A shipping broker agent carries 24 tools. Three tools overlap: quote_rate, get_rate_quote, and rate_lookup do the same thing. A delete_shipment tool exists though no task deletes shipments. The team proposes logging all tool calls for review. What is the correct bloat response?",
+    "choices": {
+      "A": "Keep all 24 tools and rely on the logs.",
+      "B": "Remove the two overlapping quote tools and the delete tool. Keep the logs as observability, not as the fix.",
+      "C": "Add three more quote tools for redundancy.",
+      "D": "Log the delete tool's calls and keep it."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: capability bloat evaluation. 2. Lifecycle stage: design review. 3. Objective: shrink the tool surface to least privilege. 4. Hard constraints: overlapping descriptions confuse the model, the delete tool serves no task. 5. System layer: tool config evaluation (V2-D3.1). 6. Eliminate infeasible: all four are feasible. 7. Eliminate constraint-violating: A, C, and D keep unneeded or dangerous tools. 8. Compare on objective: only B removes what the tasks do not need. 9. Hidden dependencies: removal needs a check that no hidden workflow calls the delete tool. 10. Verify: B alone. Single select. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"Three tools overlap... A delete_shipment tool exists though no task deletes shipments.\" 3. Requirement-to-option matrix: Requirement A B C D Removes overlapping tools No Yes No No Removes the unneeded delete tool No Yes No No Treats logging as observability No Yes No No 1. Why B satisfies all hard constraints: one quote tool stays, two redundant descriptions leave (wrong-tool risk falls), and the delete tool leaves the config entirely (attack surface shrinks). 2. B meets the objective best. V2-D3.1 requires least privilege. Remove unneeded tools. Limit data visibility and writes. Treat overlapping descriptions as a bloat signal. B does all three. 3. Every rejected choice explained: A keeps the bloat and mistakes logs for a fix. C adds redundancy, which is more bloat. D is the exam's named trap: logging a dangerous unneeded tool is negligence with a dashboard. 4. Exact limitation or tradeoff: removal needs the bloat review repeated periodically. Tools creep back without an owner. 5. Relevant evidence (with date): \"logging is not removal\" from lesson-D3-1 (§4), Oct 6 2026, exam scope via S03/S04, Sept 2026. 6. A counterfactual shows when each alternative wins. A never wins as a bloat fix. C never wins. D wins when the delete tool is necessary for incident response. Then the tool stays watched and gated. 7. Misconception tested: \"monitoring a tool equals securing it.\" Only removal shrinks the surface. Logs watch the surface that remains.",
+    "source_section": "V2-D3.1"
+  },
+  {
+    "number": "Q-M-17",
+    "heading": "Q-M-17 (V2-D3.2)",
+    "question": "A lab-results bot serves three clinics. Each clinic's patients must see only their own clinic's results. The design filters by the clinic name the user types in chat. What is wrong with this design?",
+    "choices": {
+      "A": "Nothing. The filter uses the clinic name.",
+      "B": "The clinic name is a user claim, not an authorization decision. The filter must check the authenticated identity against the clinic roster in code before any data is read.",
+      "C": "The bot needs a bigger model to understand clinic names.",
+      "D": "The filter should run after the model answers."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: authorization design flaw. 2. Lifecycle stage: design review. 3. Objective: enforce tenant isolation on lab results. 4. Hard constraints: patients see only their own clinic's results. 5. System layer: authN and authZ (V2-D3.2). 6. Eliminate infeasible: all four are feasible to build. 7. Eliminate constraint-violating: A accepts the flaw, C buys strength for a trust problem, D filters after exposure. 8. Compare on objective: only B replaces the claim with a verified check. 9. Hidden dependencies: the roster must map authenticated users to clinics. 10. Verify: B alone. Single select. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"The design filters by the clinic name the user types in chat.\" 3. Requirement-to-option matrix: Requirement A B C D Identity is verified No Yes No No Check runs before data access Yes Yes N/A No Claim rejected as proof No Yes No No 1. B satisfies all hard constraints. The system checks the authenticated identity. It checks it against the clinic roster in code. A user who types another clinic's name gets nothing. The check runs before any read. 2. B meets the objective best. V2-D3.2 states that user role claims are not authorization. The source-system ACLs must stay. B enforces the roster. The scenario design enforces a chat message. 3. Every rejected choice explained: A blesses the flaw. C treats a trust boundary as a capability problem. D filters after the model answers, which is after the data was read: the leak already happened. 4. Exact limitation or tradeoff: B needs the roster kept current. A stale roster locks out real patients or admits former ones. 5. Relevant evidence (with date): \"user role claims are not authZ\" from lesson-D3-2 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins never for patient data. C wins when the failure is name ambiguity across clinics with verified identity. D wins never. Post-answer filtering is not a control. 7. Misconception tested: \"the user said so, so it is true.\" Claims are not identity. The roster is.",
+    "source_section": "V2-D3.2"
+  },
+  {
+    "number": "Q-M-18",
+    "heading": "Q-M-18 (V2-D3.3), Select TWO",
+    "question": "A support answer pipeline has four stages. The measured p95 latencies are: parse 0.1 s, retrieval 0.9 s, rerank 1.8 s, model reasoning 2.2 s. The total p95 is 5.0 s. The SLA demands a p95 under 3.0 s. Which TWO stages should the team optimize first? Select TWO.",
+    "choices": {
+      "A": "Parse.",
+      "B": "Retrieval.",
+      "C": "Rerank.",
+      "D": "Model reasoning.",
+      "E": "Add a fifth stage for safety checks."
+    },
+    "answer": ["C", "D"],
+    "select_count": 2,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: latency optimization priority (multi). 2. Lifecycle stage: operate and optimize. 3. Objective: bring p95 from 5.0 s under 3.0 s. 4. Hard constraints: 2.0 s must come out of the pipeline, SLA is p95. 5. System layer: per-stage latency analysis (V2-D3.3). 6. Eliminate infeasible: all five are feasible actions. 7. Eliminate constraint-violating: A saves 0.1 s at most, E adds latency. 8. Compare on objective: C and D hold 4.0 s of the 5.0 s total. 9. Hidden dependencies: cutting reasoning must not drop the quality floor. 10. Verify: C and D. B's 0.9 s cannot close the gap alone. Explanation. 1. Correct answer: C, D. 2. Decisive scenario phrase: \"rerank 1.8 s, model reasoning 2.2 s... SLA demands p95 under 3.0 s.\" 3. Requirement-to-option matrix: Stage p95 Share of 5.0 s Closes the 2.0 s gap Parse 0.1 s 2% No Retrieval 0.9 s 18% No Rerank 1.8 s 36% With D, yes Reasoning 2.2 s 44% With C, yes 1. Why C and D satisfy the objective: they hold 4.0 s of the 5.0 s total. The 2.0 s cut must come mostly from them. Optimizing parse saves 0.1 s at best, which is noise. 2. Why C and D best meet the objective: V2-D3.3 says measure per stage and optimize the stages that dominate. Measurement names rerank and reasoning. Opinion does not enter. 3. Every rejected choice explained: A optimizes 2% of the budget. Even perfect parse saves 0.1 s. B is real latency but only 18%. It cannot carry the 2.0 s cut. E adds a stage, which moves p95 the wrong way. 4. Exact limitation or tradeoff: cutting reasoning risks the quality floor. Every latency cut must hold quality and safety floors. 5. Relevant evidence (with date): per-stage measurement and SLA optimization from lesson-D3-3 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins when parse is 2.5 s of the total. B wins when retrieval dominates. E wins when a missing safety check is the actual requirement, not latency. 7. Misconception tested: \"optimize the stage you understand best.\" Optimize the stage the measurement names.",
+    "source_section": "V2-D3.3"
+  },
+  {
+    "number": "Q-M-19",
+    "heading": "Q-M-19 (V2-D3.4)",
+    "question": "A food delivery dispatch agent fails an order: the driver assignment never happened. The logs show per-hop events: model call ok, retrieval ok, tool call timed out, queue event missing. The team cannot tell which hop dropped the assignment. What gap exists?",
+    "choices": {
+      "A": "More log lines per hop.",
+      "B": "One run id propagated across the model call, retrieval, tools, and the queue, so the run reconstructs end to end.",
+      "C": "A bigger model.",
+      "D": "A second queue."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: observability gap diagnosis. 2. Lifecycle stage: operate. 3. Objective: reconstruct the failed run across hops. 4. Hard constraints: the assignment vanished between hops. Per-hop logs exist. 5. System layer: observability at scale (V2-D3.4). 6. Eliminate infeasible: all four are feasible. 7. Eliminate constraint-violating: A adds volume without linkage, C buys strength for a tracing problem, D adds hops. 8. Compare on objective: only B links the existing events into one run. 9. Hidden dependencies: every hop (including the queue) must accept and forward the run id. 10. Verify: B alone. Single select. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"The team cannot tell which hop dropped the assignment.\" 3. Requirement-to-option matrix: Requirement A B C D Links events across hops No Yes No No Covers the queue hop No Yes No No Uses existing logs No Yes No No 1. Why B satisfies all hard constraints: the run id turns scattered per-hop events into one reconstructable run. The missing queue event becomes visible as the gap in the chain. 2. Why B best meets the objective: V2-D3.4 requires tracing model calls, retrieval, tools, queues, and dependencies with end-to-end reconstructability. The run id is the mechanism. 3. Every rejected choice explained: A adds log volume. Unlinked events stay unlinked. C upgrades the model while the failure is in the hops. D adds a second queue, which is a second place to lose the assignment. 4. Exact limitation or tradeoff: the run id needs propagation discipline and clock discipline across hops, plus a trace store. 5. Relevant evidence (with date): trace across model, retrieval, tools, and queues from lesson-D3-4 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins when a hop logs nothing at all. C wins when the trace shows the model chose wrong with full context. D wins never for observability. 7. Misconception tested: \"more logs equal observability.\" Linked logs equal observability. Unlinked logs are noise.",
+    "source_section": "V2-D3.4"
+  },
+  {
+    "number": "Q-M-20",
+    "heading": "Q-M-20 (V2-D3.5)",
+    "question": "A city archive builds RAG over two collections: council meeting minutes and zoning maps. Minutes are long prose with agenda items. Maps are large images with district labels. Which chunking fits?",
+    "choices": {
+      "A": "Fixed 500-token chunks for both collections.",
+      "B": "Minutes chunked by agenda item, maps chunked by district tile. Each chunk carries its structure metadata.",
+      "C": "One chunk per entire document for both.",
+      "D": "Random chunks for variety."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. This is a chunking strategy question. 2. The lifecycle stage is design. 3. The objective is to chunk by document structure and query type. 4. There are two hard constraints. The documents have two different shapes. The queries target agenda items and districts. 5. The system layer is RAG pipeline chunking (V2-D3.5). 6. Eliminate infeasible options. All four options are feasible. 7. Eliminate constraint-violating options. Option A splits agenda items in the middle. Option C is too large for a useful chunk. Option D is not logical. 8. Compare the options based on the objective. Only Option B matches chunk boundaries to query boundaries. 9. The tile boundaries must align with the district labels. 10. Verify Option B only. This is a single select question. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"Minutes are long prose with agenda items. Maps are large images with district labels.\" 3. Requirement-to-option matrix: Requirement A B C D Chunk boundary matches query unit No Yes No No Respects document structure No Yes No No Metadata supports filtering No Yes No No 1. Why B satisfies all hard constraints: agenda-item chunks answer agenda-item queries. District tiles answer district queries. Structure metadata lets retrieval filter before scoring. 2. Why B best meets the objective: V2-D3.5 chunks by document structure and query type. B is the only option that does both per collection. 3. Every rejected choice explained: A cuts agenda items in half and slices maps on arbitrary token lines. C makes each chunk a whole document: retrieval returns the haystack. D is not a strategy. 4. Exact limitation or tradeoff: structure-aware chunking needs a parser per document type. The parsing stage becomes a failure point to monitor. 5. Relevant evidence (with date): chunking by document structure and query type from lesson-D3-5 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins when the collection is uniform prose with no structure. C wins when documents are tiny. D wins never. 7. Misconception tested: \"one chunk size fits all.\" Structure decides chunking, not a fixed token count.",
+    "source_section": "V2-D3.5"
+  },
+  {
+    "number": "Q-M-21",
+    "heading": "Q-M-21 (V2-D3.6)",
+    "question": "An airline disruption bot rebooks passengers during storms. Seat inventory changes every minute. The design embeds yesterday's seat map in the RAG index. What is the correct retrieval design?",
+    "choices": {
+      "A": "Keep the seat map in the index. Refresh it nightly.",
+      "B": "Put live seat inventory behind a tool call at rebooking time. Use the index only for stable policy text.",
+      "C": "Drop retrieval entirely and guess seat availability.",
+      "D": "Cache one seat map per week for consistency."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: retrieval strategy for live state. 2. Lifecycle stage: design. 3. Objective: rebook against true seat inventory. 4. Hard constraints: inventory changes every minute. A wrong rebooking strands a passenger. 5. System layer: retrieval strategy (V2-D3.6). 6. Eliminate infeasible: all four are feasible to build. 7. Eliminate constraint-violating: A, C, and D serve stale or invented inventory. 8. Compare on objective: only B reads live state at decision time. 9. Hidden dependencies: the tool needs the airline's inventory API with per-request auth. 10. Verify: B alone. Single select. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"Seat inventory changes every minute.\" 3. Requirement-to-option matrix: Requirement A B C D Reads current inventory No Yes No No Stable policy stays retrievable Yes Yes No Yes No stranded passengers from stale data No Yes No No 1. Why B satisfies all hard constraints: the tool call reads the live inventory at the moment of rebooking. The index keeps the slow-moving policy text, which is what indexes are for. 2. Why B best meets the objective: V2-D3.6 is explicit: live transactional state belongs behind a tool call, not a stale index. B is the only option that follows the rule. 3. Every rejected choice explained: A serves yesterday's seats during today's storm. C invents inventory. D is worse than A: a week-old map during irregular operations. 4. Exact limitation or tradeoff: the tool call adds latency and needs the inventory API's uptime. A cache of seconds (not hours) is the compromise. 5. Relevant evidence (with date): live state behind a tool call from lesson-D3-6 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins when inventory changes daily, not minutely. C wins never. D wins never for live state. 7. Misconception tested: \"the index holds all knowledge.\" Indexes hold slow knowledge. Live state needs a live call.",
+    "source_section": "V2-D3.6"
+  },
+  {
+    "number": "Q-M-22",
+    "heading": "Q-M-22 (V2-D3.7), Select TWO",
+    "question": "A farm co-op builds two integrations. (1) A shared soil sensor capability needed by five teams in three languages. (2) A billing pair: one Python service calling one internal invoicing API. Which TWO mechanisms fit? Select TWO.",
+    "choices": {
+      "A": "MCP server for the shared soil sensor capability.",
+      "B": "Direct API for the single billing pair.",
+      "C": "MCP server for the single billing pair.",
+      "D": "CLI wrapper for the soil sensors.",
+      "E": "Direct API reimplemented five times for the sensors."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: integration mechanism selection (multi). 2. Lifecycle stage: design. 3. Objective: pick the mechanism per integration. 4. Hard constraints: five teams and three languages for sensors. One consumer and one language for billing. 5. System layer: integration mechanism choice (V2-D3.7). 6. Eliminate infeasible: all five are feasible. 7. Eliminate constraint-violating: D adds parse risk with no need, E duplicates work five times, C pays protocol tax for one pair. 8. Compare on objective: reuse decides the sensor side, simplicity decides the billing side. 9. Hidden dependencies: the MCP server needs versioning and uptime. The direct API needs per-client updates only. 10. Verify: A and B. Each answers one integration. Explanation. 1. Correct answer: A, B. 2. Decisive scenario phrase: \"five teams in three languages... one Python service calling one internal invoicing API.\" 3. Requirement-to-option matrix: Requirement A B C D E Serves five teams, three languages Yes No Yes No No Cheapest for one pair No Yes No No No Avoids duplicate implementations Yes N/A Yes No No 1. Why A and B satisfy all hard constraints: one MCP server with declared tools serves all five sensor teams. The direct API is the cheapest correct choice for one consumer in one language. 2. Why A and B best meet the objective: V2-D3.7 compares mechanisms on reuse, security boundaries, ownership, and operational complexity. Reuse is real on the sensor side (MCP wins) and absent on the billing side (direct API wins). 3. Every rejected choice explained: C pays MCP's protocol tax (server lifecycle, versioning) for a single pair with zero reuse gain. D wraps a capability in text parsing with no need. E reimplements the same integration five times, which is the cost MCP exists to kill. 4. Exact limitation or tradeoff: the MCP server is a new service to own. The direct API needs per-client updates if the billing pair grows. 5. Relevant evidence (with date): five-option mechanism table from lesson-D3-7 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: C wins when the billing pair grows to five consumers. D wins when the sensors exist only as a CLI. E wins never. It is the anti-pattern. 7. Misconception tested: \"newest protocol wins everywhere.\" Reuse decides. One pair takes the direct API.",
+    "source_section": "V2-D3.7"
+  },
+  {
+    "number": "Q-M-23",
+    "heading": "Q-M-23 (V2-D3.8)",
+    "question": "A real-estate listing agent carries 45 tools with overlapping names. Token budget is tight. The chat latency SLA is loose (10 seconds). Wrong-tool picks climb. Which context strategy fits?",
+    "choices": {
+      "A": "Monolithic context: load all 45 schemas on every call.",
+      "B": "Progressive discovery: show tool names first, fetch full schemas on demand.",
+      "C": "Remove all tools and guess.",
+      "D": "Load 45 schemas plus full documentation on every call."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: discovery vs monolithic context. 2. Lifecycle stage: design to optimize. 3. Objective: cut tokens and wrong-tool picks within the loose SLA. 4. Hard constraints: 45 tools, overlapping names, tight token budget, 10-second SLA. 5. System layer: progressive discovery (V2-D3.8). 6. Eliminate infeasible: all four are feasible. 7. Eliminate constraint-violating: A keeps the bloat, C removes capability, D adds tokens. 8. Compare on objective: only B shrinks both the token bill and the pick surface. 9. Hidden dependencies: the discovery protocol must return the right schema on first fetch. 10. Verify: B alone. Single select. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"45 tools with overlapping names. Token budget is tight... Wrong-tool picks climb.\" 3. Requirement-to-option matrix: Requirement A B C D Cuts schema tokens per call No Yes Yes No Shrinks the visible pick set No Yes N/A No Fits the 10 s SLA Yes Yes Yes Maybe 1. Why B satisfies all hard constraints: names-only first view cuts the per-call schema tokens. Fetching the chosen schema on demand keeps the visible choice set small, which cuts wrong-tool picks. The discovery round trip fits inside the loose 10-second SLA. 2. Why B best meets the objective: V2-D3.8 prescribes discovery when the tool surface is large and tasks vary. 45 overlapping tools is past the threshold, and the SLA has room for the round trip. 3. Every rejected choice explained: A keeps 45 schemas in context every call: tokens burn and picks stay confused. C deletes the capability the product needs. D is A with documentation: more tokens, same confusion. 4. Exact limitation or tradeoff: discovery adds one round trip per call. Under a tight SLA it would lose. 5. Relevant evidence (with date): discovery vs monolithic constraints from lesson-D3-8 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins with 8 tools and a 2-second SLA. C wins never as a strategy. D wins never. 7. Misconception tested: \"load everything so the model can choose.\" Past the bloat threshold, everything to choose from means nothing chosen well.",
+    "source_section": "V2-D3.8"
+  },
+  {
+    "number": "Q-M-24",
+    "heading": "Q-M-24 (V2-D3.2)",
+    "question": "A school district chatbot lets parents ask about grades. A grade change moves through the student information system. The design lets the model call the grade-change tool when the chat sounds convincing. Where must the authorization check run?",
+    "choices": {
+      "A": "In the system prompt: \"only change grades for verified parents.\".",
+      "B": "In code before the tool runs: verify the caller's identity and their right to change that student's grade, then allow or deny.",
+      "C": "After the tool runs, in the audit log.",
+      "D": "In the model's judgment of the conversation."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: authorization enforcement placement. 2. Lifecycle stage: design. 3. Objective: gate grade changes on real authority. 4. Hard constraints: grade changes are high-stakes and regulated. \"Sounds convincing\" is not authority. 5. System layer: authZ enforcement (V2-D3.2). 6. Eliminate infeasible: all four are feasible to build. 7. Eliminate constraint-violating: A and D trust the model, C checks after the change. 8. Compare on objective: only B decides before the side effect in code. 9. Hidden dependencies: the identity system must link callers to students. 10. Verify: B alone. Single select. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"lets the model call the grade-change tool when the chat sounds convincing.\" 3. Requirement-to-option matrix: Requirement A B C D Decides before the side effect No Yes No Maybe Uses verified identity No Yes No No Deterministic, auditable No Yes Partial No 1. Why B satisfies all hard constraints: the code check verifies who calls and whether they may change that student's grade. The tool never runs on a convincing tone. 2. Why B best meets the objective: V2-D3.2 demands deterministic enforcement for side effects, before context, with the model as none of the three (not the identity, not the policy, not the lock). B is the only option that puts the lock in code. 3. Every rejected choice explained: A is the prompt-as-control trap. C logs the change after it happened. The grade is already wrong. D makes the model the authorization authority, which V2-D3.2 forbids. 4. Exact limitation or tradeoff: B needs the parent-student mapping maintained. A stale mapping blocks legitimate changes. 5. Relevant evidence (with date): deterministic enforcement for side effects from lesson-D3-2 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins for tone guidance, never for grade changes. C wins as a complement to B, never alone. D wins never as authorization. 7. This tests a misconception. The model cannot tell who has authorization. Code checks identity against policy.",
+    "source_section": "V2-D3.2"
+  },
+  {
+    "number": "Q-M-25",
+    "heading": "Q-M-25 (V2-D3.5)",
+    "question": "A legal contract RAG pipeline runs: ingestion, parsing, chunking, metadata, indexing, retrieval, rerank, assembly, generation. Answers cite clause numbers. A cited clause once supported the opposite of the claim. Which pipeline stage is absent?",
+    "choices": {
+      "A": "A bigger chunk size.",
+      "B": "Grounding and citation checks: each cited claim verified against its source chunk before the answer ships.",
+      "C": "A stronger reranker.",
+      "D": "More documents in the index."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Method walk (Steps 1-10). 1. Question type: pipeline gap diagnosis. 2. Lifecycle stage: design review. 3. Objective: stop unsupported citations. 4. Hard constraints: cited clauses must support their claims. One inversion already shipped. 5. System layer: RAG pipeline stages (V2-D3.5). 6. Eliminate infeasible: all four are feasible. 7. Eliminate constraint-violating: A, C, and D improve retrieval, not verification. 8. Compare on objective: only B checks the claim against the source. 9. Hidden dependencies: the checker needs the cited chunk text, not just the clause number. 10. Verify: B alone. Single select. Explanation. 1. Correct answer: B. 2. Decisive scenario phrase: \"A cited clause once supported the opposite of the claim.\" 3. Requirement-to-option matrix: Requirement A B C D Verifies claim against source No Yes No No Blocks before ship No Yes No No 1. Why B satisfies all hard constraints: the grounding stage checks that the source chunk implies the claim. The inverted citation fails the check and routes to fix instead of shipping. 2. Why B best meets the objective: V2-D3.5 lists grounding and citation checks as pipeline stages. The scenario's pipeline ends at generation. The missing stage is the one that would have caught the inversion. 3. Every rejected choice explained: A changes chunk size. A bigger chunk can still contradict the claim. C improves ranking. The top chunk was already retrieved. D adds documents. More sources do not verify claims. 4. Exact limitation or tradeoff: the check costs one verification per cited claim. Scope it to consequential claims. 5. Relevant evidence (with date): grounding and citation checks in the RAG pipeline from lesson-D3-5 (§4), Oct 6 2026. 6. Counterfactual where each plausible alternative wins: A wins when chunks split clauses mid-sentence. C wins when the wrong chunk ranks first. D wins when the clause is absent from the index. 7. Misconception tested: \"retrieval quality equals answer truth.\" Retrieval finds candidates. Grounding verifies them.",
+    "source_section": "V2-D3.5"
+  }
+]

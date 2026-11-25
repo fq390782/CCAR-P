@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480" role="img" aria-label="실패를 API 경계에서 분류한다. 4xx는 자사 request 조립 코드, 200 이후 parse 실패는 stop_reason과 원본 본문으로 max_tokens 잘림, 모델 출력 문제, 자사 parser 문제를 가른다." font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>API 경계에서 결함 위치 찾기</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-localize-defect" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="arr-localize-defect-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker></defs>
+<text x="20" y="30" font-size="14" font-weight="bold" fill="#1F2937" text-anchor="start">Debugging: 해결책보다 결함 위치(localize)가 먼저</text>
+<text x="20" y="50" font-size="11" fill="#6B7280" text-anchor="start">API 경계에서 실패를 분류한다</text>
+<rect x="330" y="70" width="260" height="44" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="460.0" y="96.9" text-anchor="middle"><tspan x="460.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">실패 발생</tspan></text>
+<rect x="640" y="64" width="300" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="790.0" y="89.5" text-anchor="middle"><tspan x="790.0" dy="0" font-size="13" fill="#1F2937">request-id header 기록</tspan><tspan x="790.0" dy="14" font-size="11" fill="#6B7280">모든 응답에 붙음 → trace와 API 측 기록 대조</tspan></text>
+<polygon points="460,135.0 580.0,175 460,215.0 340.0,175" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="460" y="171.6" text-anchor="middle"><tspan x="460" dy="0" font-size="13" fill="#1F2937">API 응답</tspan><tspan x="460" dy="16" font-size="13" fill="#1F2937">status?</tspan></text>
+<path d="M460,114 L460,135" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-localize-defect)"/>
+<rect x="20" y="245" width="300" height="84" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="170.0" y="276.9" text-anchor="middle"><tspan x="170.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">4xx: API가 요청을 받지 않음</tspan><tspan x="170.0" dy="16" font-size="13" fill="#1F2937">→ 자사 request 조립 코드 확인</tspan><tspan x="170.0" dy="14" font-size="11" fill="#6B7280">예: tool name pattern 위반 → rename</tspan></text>
+<rect x="560" y="245" width="280" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="700.0" y="269.9" text-anchor="middle"><tspan x="700.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">stop_reason과</tspan><tspan x="700.0" dy="16" font-size="14" font-weight="bold" fill="#1F2937">원본 응답 본문 확인</tspan></text>
+<path d="M340,175 L170,175 L170,245" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-localize-defect)"/>
+<rect x="206.7" y="156" width="96.6" height="17" fill="#FFFFFF"/>
+<text x="255" y="168" font-size="12" fill="#1F2937" text-anchor="middle">4xx (예: 400)</text>
+<path d="M580,175 L700,175 L700,245" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-localize-defect)"/>
+<rect x="601.4" y="156" width="197.1" height="17" fill="#FFFFFF"/>
+<text x="700" y="168" font-size="12" fill="#1F2937" text-anchor="middle">200 → parse/validation 실패</text>
+<rect x="440" y="345" width="150" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="515.0" y="370.9" text-anchor="middle"><tspan x="515.0" dy="0" font-size="14" font-weight="bold" fill="#1F2937">max_tokens</tspan><tspan x="515.0" dy="14" font-size="11" fill="#6B7280">stop_reason → 응답 잘림</tspan></text>
+<rect x="605" y="345" width="160" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="685.0" y="370.6" text-anchor="middle"><tspan x="685.0" dy="0" font-size="13" fill="#1F2937">출력 자체가 틀림</tspan><tspan x="685.0" dy="14" font-size="11" fill="#6B7280">모델 출력 문제</tspan></text>
+<rect x="780" y="345" width="160" height="56" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="860.0" y="370.6" text-anchor="middle"><tspan x="860.0" dy="0" font-size="13" fill="#1F2937">출력은 정상</tspan><tspan x="860.0" dy="14" font-size="11" fill="#6B7280">자사 parser 문제</tspan></text>
+<path d="M700,301 L700,322" fill="none" stroke="#1F2937" stroke-width="1.5"/>
+<path d="M700,322 L515,322 L515,345" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-localize-defect)"/>
+<path d="M685,322 L685,345" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-localize-defect)"/>
+<path d="M700,322 L860,322 L860,345" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-localize-defect)"/>
+<rect x="20" y="350" width="300" height="56" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="170.0" y="375.6" text-anchor="middle"><tspan x="170.0" dy="0" font-size="13" fill="#1F2937">✗ max_tokens 올리기 · 더 큰 모델로</tspan><tspan x="170.0" dy="14" font-size="11" fill="#6B7280">400은 출력 길이·모델과 무관</tspan></text>
+<rect x="20" y="418" width="300" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="170.0" y="444.6" text-anchor="middle"><tspan x="170.0" dy="0" font-size="13" fill="#1F2937">✗ retry가 우연히 성공 = 해결로 봄</tspan></text>
+<text x="330" y="444" font-size="11" fill="#DC2626" text-anchor="start">← 근본 원인이 숨는다</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="620" viewBox="0 0 940 620" role="img" aria-label="오류 코드별 retry 판단 트리" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<title>오류 코드별 retry 판단 트리</title>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<defs><marker id="arr-retry-decision-tree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+<text x="470" y="28" font-size="14" text-anchor="middle" fill="#1F2937" font-weight="bold">오류는 일시적이면 backoff로 재시도, 영구적이면 재시도하지 않고 원인을 고친다</text>
+<rect x="380" y="48" width="180" height="40" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="470.0" y="72.5" font-size="13" text-anchor="middle" fill="#1F2937">API 오류 응답</text>
+<polyline points="470,88 470,110" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<polygon points="470,110.0 570.0,150 470,190.0 370.0,150" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="470" y="154.5" font-size="13" text-anchor="middle" fill="#1F2937">상태 코드?</text>
+<polyline points="370,150 190,150 190,195" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<rect x="197.6" y="141.0" width="154.8" height="18" fill="#FFFFFF"/>
+<text x="275" y="154.5" font-size="11" text-anchor="middle" fill="#6B7280">429 · 529 · 5xx · 연결 오류</text>
+<polyline points="570,150 720,150 720,195" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<rect x="578.2" y="141.0" width="133.7" height="18" fill="#FFFFFF"/>
+<text x="645" y="154.5" font-size="11" text-anchor="middle" fill="#6B7280">400 · 401 · 그 밖의 4xx</text>
+<rect x="30" y="195" width="320" height="44" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="190.0" y="221.5" font-size="13" text-anchor="middle" fill="#1F2937">일시적 오류 → 재시도 대상</text>
+<polyline points="190,239 190,265" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<polygon points="190,265.0 300.0,305 190,345.0 80.0,305" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="190" y="301.0" font-size="13" text-anchor="middle" fill="#1F2937">retry-after</text>
+<text x="190" y="318.0" font-size="13" text-anchor="middle" fill="#1F2937">header 있음?</text>
+<rect x="20" y="380" width="150" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="95.0" y="404.0" font-size="12" text-anchor="middle" fill="#1F2937">retry-after</text>
+<text x="95.0" y="421.0" font-size="12" text-anchor="middle" fill="#1F2937">초만큼 대기</text>
+<rect x="200" y="380" width="210" height="56" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="305.0" y="404.0" font-size="12" text-anchor="middle" fill="#1F2937">jitter를 넣은</text>
+<text x="305.0" y="421.0" font-size="12" text-anchor="middle" fill="#1F2937">exponential backoff</text>
+<polyline points="80,305 60,305 60,380" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<rect x="50.5" y="331.0" width="19.0" height="18" fill="#FFFFFF"/>
+<text x="60" y="344.5" font-size="11" text-anchor="middle" fill="#6B7280">예</text>
+<polyline points="300,305 320,305 320,380" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<rect x="299.5" y="331.0" width="41.0" height="18" fill="#FFFFFF"/>
+<text x="320" y="344.5" font-size="11" text-anchor="middle" fill="#6B7280">아니오</text>
+<rect x="40" y="470" width="340" height="46" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="210.0" y="497.5" font-size="13" text-anchor="middle" fill="#1F2937">재시도 (시도 횟수 상한)</text>
+<polyline points="95,436 95,470" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<polyline points="305,436 305,470" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<rect x="20" y="536" width="410" height="64" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="225.0" y="555.5" font-size="12" text-anchor="middle" fill="#1F2937">공식 SDK: 연결 오류·429·5xx를 기본 2회 자동 재시도</text>
+<text x="225.0" y="572.5" font-size="11" text-anchor="middle" fill="#6B7280">retry-after 준수 · max_retries로 횟수 조정</text>
+<text x="225.0" y="589.5" font-size="11" text-anchor="middle" fill="#6B7280">월 지출 한도 429는 retry-after 없음 → 회복까지 계속 실패, 별도 감지</text>
+<rect x="540" y="195" width="360" height="44" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="720.0" y="221.5" font-size="12" text-anchor="middle" fill="#1F2937">영구적 오류 → retry 금지 (매번 같은 이유로 실패)</text>
+<rect x="520" y="270" width="195" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="617.5" y="297.5" font-size="12" text-anchor="middle" fill="#1F2937">400 invalid_request_error</text>
+<text x="617.5" y="314.5" font-size="11" text-anchor="middle" fill="#6B7280">파라미터·요청 수정</text>
+<text x="617.5" y="331.5" font-size="11" text-anchor="middle" fill="#6B7280">prompt is too long 포함</text>
+<rect x="735" y="270" width="175" height="80" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+<text x="822.5" y="297.5" font-size="12" text-anchor="middle" fill="#1F2937">401 인증 오류</text>
+<text x="822.5" y="314.5" font-size="11" text-anchor="middle" fill="#6B7280">payload 말고 credential 점검</text>
+<text x="822.5" y="331.5" font-size="11" text-anchor="middle" fill="#6B7280">만료·rotation·권한 회수</text>
+<polyline points="617,239 617,270" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<polyline points="822,239 822,270" fill="none" stroke="#1F2937" stroke-width="1.5" marker-end="url(#arr-retry-decision-tree)"/>
+<text x="720" y="400" font-size="13" text-anchor="middle" fill="#DC2626" font-weight="bold">안티패턴</text>
+<rect x="500" y="412" width="420" height="120" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="710.0" y="442.5" font-size="12" text-anchor="middle" fill="#1F2937">즉시 반복 재시도 → 부하를 더 키움</text>
+<text x="710.0" y="459.5" font-size="12" text-anchor="middle" fill="#1F2937">고정 간격 재시도 → 재시도가 한꺼번에 몰림</text>
+<text x="710.0" y="476.5" font-size="12" text-anchor="middle" fill="#1F2937">429를 치명적 오류로 중단 → 복구 가능한 작업 버림</text>
+<text x="710.0" y="493.5" font-size="12" text-anchor="middle" fill="#1F2937">400을 backoff로 재시도 → 매번 실패</text>
+<text x="710.0" y="510.5" font-size="12" text-anchor="middle" fill="#1F2937">여러 API key로 한도 회피 → 설계가 아니라 회피</text>
+</svg>

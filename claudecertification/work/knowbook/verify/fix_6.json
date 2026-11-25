@@ -1,0 +1,85 @@
+{
+ "add": {},
+ "rep": [
+  [
+   "<br>⚠️ 변하는 정책 한정 · \"캐시 낭비\"는 해설 주장",
+   ""
+  ],
+  [
+   "⚠️ 모델 버전별로 상이<br>공식 `tool_choice` 문서의 모델별 표에서 재확인",
+   "모델 버전별로 상이"
+  ],
+  [
+   "prefill은 계속 400<br>⚠️ 4.6 이후 모델 기준 · 버전에 따라 바뀜",
+   "prefill은 계속 400 (4.6+)"
+  ],
+  [
+   "| ⚠️ 해설 | tool 강제 = \"가장 신뢰할 수 있는 방법\" |",
+   "| ⚠️ 해설 | tool 강제 = \"가장 신뢰할 수 있는 방법\"<br>공식 문서: tool 강제 = tool 호출 보장<br>입력 스키마 보장 = strict tool use |"
+  ],
+  [
+   "| ⚠️ 현재 공식 문서 |",
+   "| 현재 공식 문서 |"
+  ],
+  [
+   "| ⚠️ strict 없는 tool 강제 |",
+   "| strict 없는 tool 강제 |"
+  ],
+  [
+   "| ⚠️ 선택지에 structured outputs 있음 |",
+   "| 선택지에 structured outputs 있음 |"
+  ],
+  [
+   "- ⚠️ 해설의 prefill 정답은 위 표의 \"Claude 4.6부터 마지막 assistant 턴 prefill → 400 error\"와 충돌 · 구 모델 한정 해설로 읽을 것",
+   "- ⚠️ 공식 문서: Claude 4.6+ prefill → 400 error (thinking 무관) · 이전 모델만 지원 · 해설 정답은 구 모델 한정으로 읽을 것"
+  ],
+  [
+   "- ⚠️ 위 1.6 \"지시 · 질문 = 맨 끝\" 권고와 방향 상충 · 해설은 앱 측 끝 절단 전제",
+   "- ⚠️ 공식 문서: 긴 문서 상단 · 질문 · 지시 뒤 (끝 질문 최대 30% 향상) → 위 1.6과 일치 · 해설은 방향 상충 (앱 측 끝 절단 전제)"
+  ],
+  [
+   "- ⚠️ 공식 문서에 입력 절단 동작 서술 없음 · 한도 초과 시 Claude 4.5+ = `model_context_window_exceeded`로 생성 중단, 이전 모델 = validation error",
+   "- ⚠️ 공식 문서: 입력만으로 window 초과 → 절단 아닌 400 `invalid_request_error` (모든 모델)\n- input + `max_tokens` 초과: Claude 4.5+ = `model_context_window_exceeded`로 생성 중단, 이전 모델 = validation error"
+  ],
+  [
+   "| ⚠️ 모델별 window 크기 | 시점에 따라 변함<br>공식 문서(context windows)로 확인 |",
+   "| 모델별 window 크기 | 모델별로 상이 (1M 또는 200k token)<br>공식 문서(context windows)의 표 참조 |"
+  ],
+  [
+   "| ⚠️ 활성화 | beta header<br>`context-management-2025-06-27`<br>beta 단계 · 시점에 따라 변함 |",
+   "| 활성화 | beta header<br>`context-management-2025-06-27` |"
+  ],
+  [
+   "| ⚠️ 기존 1.8 \"매 턴 system prompt 반복 ✗\"와 구분 |",
+   "| 기존 1.8 \"매 턴 system prompt 반복 ✗\"와 구분 |"
+  ],
+  [
+   "| ⚠️ `keep_recent_turns` | 유지 turn 지정 파라미터 없음<br>compaction API는 beta · 시점에 따라 변함 |",
+   "| `keep_recent_turns` | 유지 turn 지정 파라미터 없음<br>compaction API는 beta |"
+  ],
+  [
+   "= 공식 문서 근거 없는 운영 관행",
+   "= 운영 관행 (공식 문서 미확인)"
+  ],
+  [
+   "⚠️ 1.6 \"질문 끝\" 권고와 상충 · 앱 측 절단 전제",
+   "⚠️ 공식 문서: 긴 문서 상단 · 질문 · 지시 뒤<br>1.6과 상충 · 해설은 앱 측 절단 전제"
+  ],
+  [
+   "⚠️ 구 모델 한정<br>Claude 4.6+ prefill = 400 error",
+   "⚠️ 공식 문서: Claude 4.6+ prefill = 400 error<br>이전 모델만 지원 · 대안 = system prompt 지시"
+  ],
+  [
+   "<br>⚠️ 해설 \"신모델은 기본값 외 지정 불가\" = 모델 버전 의존",
+   "<br>신모델은 기본값 외 지정 불가 (400 error)"
+  ],
+  [
+   "| ⚠️ `clear_tool_uses_20250919` | context editing 전략 (beta · 시점에 따라 변함)",
+   "| `clear_tool_uses_20250919` | context editing 전략 (beta)"
+  ],
+  [
+   "| ⚠️ `context-management-2025-06-27` |",
+   "| `context-management-2025-06-27` |"
+  ]
+ ]
+}

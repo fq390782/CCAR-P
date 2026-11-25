@@ -1,0 +1,117 @@
+| 필요한 쓰기 · 삭제 tool의 범위 제한<br>(코드 내 확인 · 영향 범위 상한 · 허용 대상) | ✓ |
+| 읽기 / 쓰기 권한 분리<br>쓰기는 역할상 필요한 곳만 + 명시적 승인 게이트 | ✓ |
+| 확인 대화상자 · 업무 시간 제한 | 보완 통제 · 권한은 활성 상태 |
+| 두 번째 모델의 호출 검토 | ✗ 같은 오해석 반복 · tool은 활성 |
+| 모든 tool 제거 | ✗ 최소 권한 아닌 권한 없음 |
+| 고빈도 + gate 정상인 민감 tool(`refund`) | 유지 · 민감성은 gate가 처리 |
+| 사고를 낸 `delete_account` | 제거 또는 범위 제한<br>(코드 확인 · 영향 범위 제한 · 허용 대상) |
+| 사고 대응에 실제로 필요한 삭제 tool | 유지 + 감시 + gate (반례) |
+
+| 구분 | 내용 |
+|---|---|
+| tool description · schema | 모델 입력 = 주입 경로<br>악의적 · 침해된 서버가 지시 주입 가능 |
+| 원격 설정 파일에서 description 로드 | 조용한 업데이트로 변조 가능 → 버전 고정 |
+| 완화책 | 버전 고정 · schema를 신뢰 불가로 취급<br>샌드박스 · 확인 게이트로 가로챈 호출의 영향 제한 |
+| 결함의 위치 | 프로토콜 ✗ · 신뢰할 수 없는 콘텐츠 |
+| 자금 이동 tool(closed-source 벤더 server) | 최소 권한 자격 증명 + 사람의 승인 |
+| 승인 강제 위치 | 효과를 수행하는 계층 |
+| 결제 결정 | 제3자 설명(description)에 의존 ✗ |
+
+| 상황 | 정답 |
+|---|---|
+| 감사에서 지시한 사람 특정 | per-user delegation<br>요청 사용자 ID로 동작 · 대상 시스템이 그 사용자 권한 강제 |
+| 팀 단위 귀속 | 팀별 credential · token |
+| remote MCP server가 요청 직원 기록 | 사용자별 OAuth token<br>→ `authorization_token`으로 전달 |
+| 사용자 데이터 읽기 | 마스터 API key ✗<br>좁은 scope의 사용자별 delegation token |
+| 공유 설정 속 개인 credential | scope 제한된 service identity |
+| 귀속 불필요한 read-only 내부 대시보드 | 공유 credential 허용 |
+| 방식 | 귀속 불가 이유 |
+|---|---|
+| 공유 credential | 로그에 공유 ID 하나로 합쳐짐 |
+| 프롬프트에 직원 이름 | 시스템이 검증 불가 · 인증 ✗ |
+| 앱 로그에 이름 기록 | 기록 시스템(ERP)은 단일 ID만 인가<br>두 로그가 어긋날 수 있음 |
+| 부서별 credential | 사람 특정 ✗ |
+| 공유 OAuth token + 로깅 프록시 | 로그인한 사용자를 식별하는 token ✗ |
+| `anthropic-workspace-id` 헤더 | 팀 workspace 지정 · 직원 식별 ✗ |
+| 마스터 키 | ambient authority → confused deputy<br>모든 사용자의 데이터 접근 |
+| 설정에 하드코딩된 개인 credential | 귀속 ✗ · 교체 ✗<br>개발자 이탈 시 credential도 이탈 |
+
+
+| 경계 통제 | 내용 |
+|---|---|
+| 경계 넘는 bearer token | audience 바인딩<br>수신 시 audience 확인 |
+| TLS | 전송 중 privacy · audience 증명 ✗ |
+| token 주기 교체 | 수명 위협 대응 · 바인딩 ✗ |
+| token · secret 보관 | 시스템 프롬프트 ✗ |
+| 환불 인가 | 소유 시스템(청구)에서 결정론 강제 · fail closed |
+| 캐시된 승인 | 승인자가 내리지 않은 승인 ✗ |
+| 검토용 두 번째 model | 같은 신뢰 못 할 입력을 읽음 |
+| 의존성 | 파트너의 바인딩 확인 협조<br>청구 시스템의 승인 통합 |
+| per-user delegation 비용 | IdP의 사용자별 token · 대상 시스템 권한 매핑<br>공유 secret보다 무거움 |
+| 읽기 · 쓰기 혼재 agent | 읽기 / 쓰기 분리 + 쓰기는 필요 역할만 + 승인 게이트 |
+| 서드파티 MCP 서버 연동 | 버전 고정 + description 신뢰 불가 취급<br>+ 샌드박스 · 확인 게이트 |
+| 서드파티 server의 결제 tool | 최소 권한 자격 증명 + 사람의 승인(효과 계층) |
+| 사용자 입력 값으로 tenant 필터 | 인증된 신원에서 tenant 도출 · 코드에서 필터 |
+| 부작용 tool 권한 검사 | 실행 전 코드에서 결정론적 검사 · fail closed |
+| 감사에서 사람 특정 | per-user delegation |
+| remote MCP server가 직원별 기록 | 사용자별 OAuth token → `authorization_token` |
+| 신뢰 경계를 넘는 bearer token | audience 바인딩 + 수신 시 확인 |
+| 확인 대화상자 · 업무 시간 제한 · 두 번째 검토 모델 | 보완일 뿐 · 권한 존재 · 노출 시간대만 축소 |
+| refund처럼 gate된 고빈도 tool 제거 | 정당한 사용 박탈 · 민감성은 gate 몫 |
+| 모든 tool 제거 후 context만으로 답변 | 정당한 기능 상실 |
+| 서드파티 주입 위험에 더 큰 모델 · 전체 재작성 · 유출 후 키 삭제 | 주입 경로 미해결 · MCP 가치 소실 · 증상만 처리 |
+| SOC 2 보고서 · prompt 지시로 결제 안전 확보 | 벤더 통제 설명일 뿐 · 우회 가능 |
+| 입력 clinic · `tenant_id`<br>드롭다운 · profile 필드로 필터 | 사용자 claim · 값 변경 한 번에 타 tenant 데이터 읽음 |
+| 응답 후 필터 · 사후 감사 로그만 | 읽기 · 변경이 이미 발생 |
+| 시스템 프롬프트 · 모델 판단 · 더 큰 모델로 인가 | 모델은 권한 보유자 모름<br>신뢰 경계를 성능 문제로 취급 |
+| 로그인만 확인하고 입력한 대상 조회 허용 | authN만 있고 authZ 없음 |
+| 프롬프트에 이름 · 앱 로그 · 부서별 credential로 귀속 | 시스템이 검증하는 사용자 ID ✗ |
+| 공유 OAuth token + 로깅 프록시<br>`anthropic-workspace-id` 헤더 | 직원별 귀속 수단 ✗ |
+| 마스터 API key를 agent에 부여 | ambient authority → confused deputy |
+| TLS · 주기 교체 · 두 번째 model로 token · 환불 통제 | audience 바인딩 · 소유 시스템 강제 ✗ |
+| token을 시스템 프롬프트에 보관 · 환불 승인 캐시 | secret 노출 · 승인자가 내리지 않은 승인 |
+| per-user delegation | 요청 사용자 ID로 동작 · 대상 시스템이 권한 강제 |
+| ambient authority | 마스터 키처럼 호출자와 무관하게 가진 넓은 권한 |
+| confused deputy | ambient authority를 가진 agent가 사용자 대신 접근 |
+| claim | 사용자가 주장한 값 · 인가 근거 ✗ |
+| audience 바인딩 | token을 특정 수신 서비스에 묶음 · 수신 시 확인 |
+| fail closed | 확인 불가 시 거부 |
+| system of record | 기록 · 권한 기준 시스템(예: ERP) |
+- [ ] 입력값(tenant · 이름 · 드롭다운) = claim → 인가는 코드에서 강제
+- [ ] 정적 카탈로그 = resource · 귀속 필요 = 사용자별 credential
+
+=== 1-25 subsection (whole, to be removed from ch8) ===
+### 1-25. 외부 통합의 신원 · 인가: 입력은 claim · 강제는 코드
+**사용자 입력은 claim · 인가는 코드에서 강제**
+
+| 값의 출처 | 판정 |
+|---|---|
+| 채팅에 입력한 clinic 이름 · `tenant_id` | claim ✗ |
+| 드롭다운에서 고른 자회사 | claim ✗ |
+| 사용자가 편집 가능한 profile JSON의 `company` | claim ✗ |
+| 시스템 프롬프트 속 사용자 role 주장 | 인가 ✗ |
+| 인증된 세션 · 신원에서 얻은 값 | 인가 근거 ✓ |
+| 서버가 설정한 편집 불가 필드 | 인가 근거 ✓ |
+
+| 구분 | 내용 |
+|---|---|
+| tenant 격리 필터 | 인증된 신원을 명단과 코드에서 대조<br>읽기 전에 실행 |
+| 응답 생성 후 필터 | ✗ 데이터를 이미 읽은 뒤 → 유출 |
+| 부작용 tool<br>(성적 변경 · 환불 · export) | 실행 전 코드에서 결정론적 검사<br>호출자 신원 + 대상 권한 확인 → 허용 · 거부 |
+| 정책 예 | 1,000행 초과 export<br>→ 승인 token 없으면 거부 |
+| 사후 감사 로그 | 보완용 · 단독 통제 ✗ |
+| 원본 시스템 ACL | 유지 |
+| 의존성 | 신원 ↔ 대상(학생 · tenant) 매핑 필요<br>명단이 오래되면 정당한 사용자 차단 · 이전 사용자 허용 |
+
+| 구분 | 내용 |
+|---|---|
+| authentication | 로그인 = 신원 증명 |
+| authorization | 입력한 대상(예: 학생)에 접근할 권리 확인<br>보호자 명단과 코드 대조 |
+| authN만 구현 | 대상 확인 누락 = 인가 결함 |
+| 모델의 역할 | 신원 · 정책 · 잠금장치 ✗<br>누가 권한을 가졌는지 모름 |
+
+![사용자 입력 claim과 코드 인가 검사의 흐름](svg/8-claim-vs-enforced.svg)
+*그림: 사용자 입력은 claim일 뿐이며, 인가는 인증된 신원을 대상 명단과 코드에서 읽기 전에 대조해 강제합니다.*
+
+<sub>근거: CCAR-P-jrajath94-0298, CCAR-P-jrajath94-0305, CCAR-P-jrajath94-0353, CCAR-P-jrajath94-0354, CCAR-P-jrajath94-0416, CCAR-P-jrajath94-0479, CCAR-P-jrajath94-0542</sub>
+

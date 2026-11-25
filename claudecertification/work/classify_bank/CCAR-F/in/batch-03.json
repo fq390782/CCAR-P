@@ -1,0 +1,397 @@
+[
+ {
+  "id": "CCAR-F-Udemy02-0057",
+  "question": "A law firm specializing in patent research is building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include one that searches the web, one that analyzes documents, one that synthesizes findings, and one that generates reports. The system researches a topic and produces a comprehensive report with cited sources.\n\nThe system's coordinator routes tasks to a web search subagent and a document analysis subagent implemented with MCP. During evaluation, many incorrect routings were observed, such as the following.\n\nSending a literature review task to the web search subagent even though the request asks for analysis of a patent specification PDF uploaded by the user\n\nSending a web-oriented task that requires checking the latest developments to the document analysis subagent\n\nThe tool implementations themselves work correctly once they are called correctly.\n\nWhich tool definition changes should the team make first to improve tool selection reliability? (Select two.)",
+  "choices": {
+   "A": "Force, through the model API, that on each research turn the model must call exactly one of the available tools before returning results to the coordinator.",
+   "B": "Rewrite each tool definition as a detailed description that covers its intended uses, unintended uses, inputs, returned data, and caveats.",
+   "C": "Add request examples to the JSON Schema field descriptions for web queries, PDF analysis, and citation lookup.",
+   "D": "Rename each tool so that the name makes clear whether it handles live web search results or uploaded documents."
+  },
+  "answer": [
+   "B",
+   "D"
+  ],
+  "explanation": "용도가 가까운 tool이 나란히 있으면 모델은 이름과 설명문을 단서로 호출할 대상을 정하므로, 그 부분이 모호하면 잘못된 선택이 일어납니다. 공식 tool 정의 가이드는 상세한 설명문(무엇을 하는지, 언제 쓰고 언제 쓰지 않는지, 반환하는 데이터, 주의점)을 가장 중요한 요소로 보며, 의미가 분명한 이름 짓기를 함께 권장합니다.\n\n이 문제는 tool의 구현 자체는 올바르게 동작하므로 고쳐야 할 것은 tool 정의 쪽이며, 설명문의 충실화와 대상을 나타내는 이름으로의 변경이 정답입니다.\n\n입력 예의 추가는 선택된 후의 인수를 다듬는 것이고, 호출의 강제는 \"무엇을 고르는가\"에 영향을 주지 않습니다.\n\n증상이 \"잘못된 tool의 선택\"인지 \"올바른 tool에 대한 잘못된 입력\"인지를 구분하면 효과가 있는 대책이 분명해집니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0058",
+  "question": "You operate an AI agent that supports customer support operations. The team has the agent decide which of the following actions to take for each inquiry.\n\nInvestigate the inquiry\n\nDraft a response plan\n\nWrite a direct reply\n\nThis decision logic is implemented as a custom command /triage. However, in evaluation tests, its behavior is inconsistent for ambiguous requests such as \"Take a look at this,\" \"Look into the error,\" and \"Can you improve this wording?\" Even after documenting and adding detailed rules, the decision criteria are not stable.\n\nWhat should you change next?",
+  "choices": {
+   "A": "Add a strong instruction to avoid writing direct replies for requests that might imply planning work.",
+   "B": "Add a longer checklist that exhaustively lists the phrases that should trigger each of investigation, planning, and direct reply.",
+   "C": "Add two to four similar examples of ambiguous requests, in tags, each with the action to choose and the reason the alternatives were rejected.",
+   "D": "Add a large amount of untagged past interactions and have Claude infer the team's preferences."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "규칙을 글로 자세히 써도 판단이 안정되지 않을 때는 판단의 경계를 \"예시\"로 보여 주는 것이 효과적입니다. 공식 모범 사례에서는 실제 용도에 가깝고 다양한 예시를 소수 제시하는 것이 출력의 형식과 판단을 안정시키는 확실한 방법이라고 하며, 예시는 ＜example＞ 태그로 지시와 구분하여 제시하도록 권장합니다.\n\n이 문제의 /triage는 \"조사·계획·직접 답장\" 중에서 고르는 분류 작업이며, 이미 상세한 규칙이 있는데도 모호한 요청에서 판단이 흔들리고 있으므로, 유사한 모호한 요청에 대한 정답 대응과 다른 대안을 물리치는 간결한 이유를 태그와 함께 보여 주는 것이 다음 수입니다.\n\n태그 없는 대량의 데이터는 본보기가 되지 못하고, 한 방향으로 강한 규칙은 판단을 편향시키며, 문구의 나열은 문맥의 차이를 다루지 못합니다.\n\n규칙을 추가해도 해결되지 않는 분류의 흔들림에는 경계에 놓인 구체적인 예시를 주는 선택지를 우선하면 실수하기 어렵습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0059",
+  "question": "You are building a multi-agent financial analysis report system using the Claude Agent SDK. A coordinator agent delegates work to specialized subagents. The subagents include one that collects market data, one that analyzes earnings materials, one that synthesizes findings, and one that generates reports.\n\nThe team has a custom /source-check slash command that asks Claude Code to verify claims in a report against their cited sources. An engineer has saved source-check.md under ~/.claude/commands/. The command works for that engineer, but not for teammates who clone the repository.\n\nWhat should the team do to make the same command available from the repository?",
+  "choices": {
+   "A": "Keep source-check.md in ~/.claude/commands/ and document the command in the project README.",
+   "B": "Add the source-check instructions to the root CLAUDE.md and invoke them manually.",
+   "C": "Keep source-check.md in .claude/commands/ but exclude the .claude directory from version control.",
+   "D": "Move source-check.md to .claude/commands/ in the repository and commit the file."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "Claude Code의 커스텀 명령과 스킬은 저장 위치에 따라 누가 사용할 수 있는지가 결정됩니다. ~/.claude/commands/나 ~/.claude/skills/는 개인 스코프로 자신의 모든 프로젝트에서 사용할 수 있고, 리포지토리 내의 .claude/commands/나 .claude/skills/는 프로젝트 스코프로 커밋하면 팀에서 공유됩니다(현재는 명령과 스킬이 동일하게 취급되며, 새로 만들 때는 스킬이 권장됩니다).\n\n이 문제는 엔지니어 개인의 홈 디렉터리에 있는 명령을 팀원도 사용할 수 있게 하고 싶은 상황이므로, 리포지토리 내의 .claude/commands/로 옮겨서 커밋하는 것이 정답입니다.\n\nREADME로 알리는 것은 파일을 공유하지 않고, .claude를 제외하면 공유가 불가능해지며, CLAUDE.md에 기재하는 것은 명령으로 호출할 수 없습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy02-0060",
+  "question": "A company developing a video streaming platform has integrated Claude Code into its automated code review pipeline. For each pull request, the system runs an automated review, generates test cases, and returns specific, actionable feedback. You need to design prompts that minimize false positives.\n\nWhile reviewing a PR, the main session read the changed files and noticed a failing test. It then delegated the work to a regular named security review subagent rather than a fork (a method that inherits the conversation).\n\nThis subagent returned only generic findings and overlooked PR-specific evidence that should have been available from the diff and the test output.\n\nWhich changes would most directly improve the reliability of the review? (Select two.)",
+  "choices": {
+   "A": "Delegate with a fork instead of a regular named subagent, branching from a state that inherits the parent conversation.",
+   "B": "Instruct the subagent to read the parent conversation's transcript before producing review results.",
+   "C": "Include the changed files and diff excerpts, the failing test output, and the review criteria in the subagent's prompt.",
+   "D": "Invoke a fresh named subagent and rely on the recorded transcript carried over from earlier CI steps."
+  },
+  "answer": [
+   "A",
+   "C"
+  ],
+  "explanation": "Claude Code의 서브에이전트는 원칙적으로 새로운 컨텍스트에서 시작하며 부모의 대화 기록을 보지 못합니다. 공식 문서에서도 부모에서 서브에이전트로 전달되는 것은 위임 시의 프롬프트 문자열뿐이므로, 필요한 파일 경로나 에러 메시지, 판단은 그 프롬프트에 직접 포함하도록 설명하고 있습니다. 예외가 fork이며, 부모의 대화를 그대로 이어받아 분기합니다.\n\n따라서 PR 고유의 증거를 프롬프트에 명시하여 전달하는 것과 fork로 위임하는 것, 이 2가지가 정답입니다. 전자는 상속에 의존하지 않고 정보를 전달하는 방법이고, 후자는 상속 자체를 사용하는 방법이라는 차이가 있습니다.\n\n오답은 둘 다 \"일반 서브에이전트라도 부모의 문맥이나 과거의 트랜스크립트에 접근할 수 있다\"는 전제에 서 있으며, 그 전제는 성립하지 않습니다.\n\n서브에이전트 문제에서는 위임받은 쪽이 시작 시점에 무엇을 가지고 있는지를 먼저 확인하면 정오를 판단하기 쉽습니다."
+ },
+ {
+  "id": "CCAR-F-Udemy03-0060",
+  "question": "The operations engineering team at a subscription video streaming service is building a customer support resolution agent using the Claude Agent SDK. The agent handles highly ambiguous requests such as returns, billing inquiries, and account issues. It accesses backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). The goal is to achieve a first-contact resolution rate of 80% or higher while recognizing when to escalate.\n\nThe team is implementing billing dispute handling as a tool loop on the lower-level Messages API. The pilot revealed that the orchestration layer assigns every billing dispute to the same fixed path. In reality, however, the response needed differs by case:\n\nCases that can be resolved with a policy explanation alone\n\nCases that require an order lookup\n\nCases that should be escalated before processing a refund\n\nWhich changes best fit Claude's tool-use model? (Select two.)",
+  "choices": {
+   "A": "Route each request through an intent classifier and select one predefined chain of support tools for that subtype.",
+   "B": "End the loop when a response with stop_reason \"end_turn\" is received, and treat that response's text as the final customer-facing answer.",
+   "C": "Run a loop based on stop_reason with tool_choice set to {\"type\":\"auto\"}, letting Claude choose on each turn between using a tool and giving a final answer.",
+   "D": "Set tool_choice to something like {\"type\":\"tool\",\"name\":\"process_refund\"} and force the next support tool on each turn according to workflow state managed by the application."
+  },
+  "answer": [
+   "B",
+   "C"
+  ],
+  "explanation": "고정 경로 오케스트레이션은 사전에 절차를 정할 수 있는 업무에는 적합하지만, 같은 종류의 요청이라도 필요한 대응이 달라지는 업무에서는 Claude의 판단력을 살리지 못합니다. Messages API에서의 tool use는 Claude가 tool_use 블록을 포함한 응답(stop_reason이 tool_use)을 반환하면 애플리케이션이 도구를 실행해 tool_result를 반환하고, stop_reason이 end_turn이 될 때까지 반복하는 루프로 이루어집니다. tool_choice의 기본값인 auto에서는 도구를 사용할지 직접 답할지를 Claude가 매 턴 판단합니다.\n\n이 모델에 맞는 것은 auto로 루프를 돌리는 것과 end_turn을 완료 신호로 취급하는 것의 두 가지입니다.\n\n애플리케이션 측 상태로 다음 도구를 강제하는 안과, 분류기로 정형 체인에 분기하는 안은 둘 다 판단을 애플리케이션 코드로 되돌려 버립니다.\n\n\"다음에 무엇을 할지 결정하는 것은 누구인가\"에 주목하면 Claude의 tool use 모델에 맞는 선택지를 구별할 수 있습니다.\n\n참고: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview"
+ },
+ {
+  "id": "CCAR-F-MyPractice-0001",
+  "question": "문서 분석 에이전트가 핵심 지표에 대해 두개의 신뢰할 수 있는 출처가 서로 정면으로 충돌하는 통계지표를 제시함을 발견했다.\n정부 보고서는 40%,산업분석은 12%라는 통계지표를 제시했다.\n두 출처 모두 신뢰할만한 기관에서 발행한 자료이며, 이 차이는 문서 분석 에이전트의 리서치 결론에 큰 영향을 줄 수 있습니다.\n문서 분석 에이전트는 이 상황을 어떻게 (효과적으로)처리해야 되나요?\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "confidence heuristic을 적용해 가장 맞을 가능성이 큰 숫자를 선택하고, 그 값으로 분석을 마치며 불일치를 언급하는 각주를 추가한다.",
+   "B": "두 숫자를 충돌로 표시하지 않고 분석 출력에 모두 포함해, 종합 Agent가 더 넓은 context를 기준으로 사용할 값을 결정하게 한다.",
+   "C": "분석을 중단하고 즉시 Coordinator에게 escalation해, 계속하기 전에 어느 source가 더 권위 있는지 결정해 달라고 요청한다.",
+   "D": "두 숫자를 모두 포함해 분석을 마무리하되 source attribution과 함께 충돌을 명시적으로 주석 처리하고, 종합 단계로 넘기기 전에 Coordinator가 데이터를 조정할 방법을 결정하게 한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "이 방식은 책임 분리를 유지합니다. 분석 Agent는 작업을 멈추지 않고 핵심 분석을 끝내고, 충돌하는 두 값을 명확한 attribution과 함께 보존하며, 더 넓은 context를 가진 Coordinator에게 조정 책임을 넘깁니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0002",
+  "question": "웹 검색 Agent와 문서 분석 Agent가 작업을 완료하고 결과를 Coordinator에게 반환했습니다. \n통합 research 보고서를 만들기 위한 다음 단계는 무엇인가요?\n\n가장 적절한 다음 단계는 무엇인가요?",
+  "choices": {
+   "A": "각 Agent가 Coordinator를 우회해 보고서 작성 Agent에게 직접 결과를 보낸다.",
+   "B": "문서 분석 Agent가 웹 검색 결과를 요청해 내부적으로 병합한다.",
+   "C": "Coordinator가 두 결과 집합을 종합 Agent에게 전달해 통합한다.",
+   "D": "Coordinator가 두 Agent의 원시 출력을 연결해 최종 결과로 반환한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "Coordinator-subagent architecture에서 Coordinator는 두 결과 집합을 중앙에서 통합할 종합 Agent에게 전달하여 제어권을 유지하고 품질 높은 병합을 수행할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0003",
+  "question": "(문서 분석 subagent)가 PDF 파일 처리에서 자주 실패합니다. \n일부 파일에는 parsing 예외를 유발하는 손상된 섹션이 있고, 일부는 암호로 보호되어 있으며, 때로는 parsing 라이브러리가 큰 파일에서 멈춥니다. 현재는 예외가 발생하면 즉시 subagent를 종료하고 Coordinator에게 오류를 반환하며, Coordinator가 retry, 건너뛰기, 전체 작업 실패 여부를 결정해야 합니다. \n\n이로 인해 일상적 오류 처리에 Coordinator가 과도하게 관여합니다. 가장 효과적인 architecture 개선은 무엇인가요?\n\n현재 흐름(문제 상황):",
+  "choices": {
+   "A": "공유 큐를 통해 모든 실패를 모니터링하고 복구 동작을 결정하며, subagent에게 직접 재시작 명령을 보내는 전담 오류 처리 Agent를 만든다.",
+   "B": "subagent가 항상 부분 결과를 성공 상태로 반환하고, 오류 세부사항은 metadata에 넣도록 구성한다. Coordinator는 모든 응답을 성공으로 처리한다.",
+   "C": "Coordinator가 모든 문서를 subagent로 보내기 전에 validation해 실패를 유발할 수 있는 문서를 거부한다.",
+   "D": "subagent에서 일시적 실패에 대한 로컬 복구를 구현하고, 해결할 수 없는 오류만 시도한 단계와 부분 결과를 포함해 Coordinator에게 escalation한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "오류는 해결할 수 있는 가장 낮은 수준에서 처리합니다. 로컬 복구는 Coordinator의 부담을 줄이면서, 실제로 복구할 수 없는 이슈는 전체 context와 부분 진행 상황을 포함해 escalation합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0004",
+  "question": "\"AI가 창작 산업에 미치는 영향\"에 대해 시스템을 실행한 후, 모든 subagent가 성공적으로 완료되는 것을 확인했습니다. \n웹 검색 Agent는 관련 기사를 찾고, 문서 분석 Agent는 이를 제대로 summary하며, 종합 Agent는 일관된 텍스트를 생성합니다. \n하지만 최종 보고서는 시각 예술만 다루고 음악, 문학, 영화를 전혀 다루지 못합니다. Coordinator 로그에는 주제가 \"디지털 아트의 AI\", \"그래픽 디자인의 AI\", \"사진의 AI\"라는 세 하위 작업으로 분해된 것이 보입니다. 가장 가능성이 높은 근본 원인은 무엇인가요?\n\n가장 가능성이 높은 근본 원인은 무엇인가요?",
+  "choices": {
+   "A": "종합 Agent에 커버리지 공백을 감지하라는 지시가 부족하다.",
+   "B": "문서 분석 Agent가 지나치게 엄격한 관련성 기준 때문에 비시각 자료를 필터링한다.",
+   "C": "Coordinator의 작업 분해가 너무 좁아 관련 영역 전체를 포괄하지 못하는 작업을 subagent에게 할당했다.",
+   "D": "웹 검색 Agent의 쿼리가 불충분하며 더 많은 분야를 포괄하도록 넓혀야 한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "Coordinator가 넓은 주제를 시각 예술 하위 작업으로만 분해해 음악, 문학, 영화를 완전히 놓쳤습니다. subagent는 할당된 작업을 올바르게 실행했으므로, 좁은 분해가 가장 직접적인 원인입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0005",
+  "question": "웹 검색 subagent가 요청된 5개 source 범주 중 3개에 대해서만 결과를 반환합니다(경쟁사 사이트와 산업 보고서는 성공했지만 뉴스 아카이브와 소셜 피드는 타임아웃). 문서 분석 subagent는 제공된 모든 문서를 성공적으로 처리했습니다. 종합 subagent는 품질이 섞인 upstream 입력으로 summary를 생성해야 합니다. 가장 효과적인 오류 전파 전략은 무엇인가요?\n\n가장 효과적인 오류 전파 전략은 무엇인가요?",
+  "choices": {
+   "A": "성공한 source만 사용해 종합을 계속하고 어떤 데이터를 사용할 수 없었는지 언급하지 않고 출력을 생성한다.",
+   "B": "종합 subagent가 Coordinator에게 오류를 반환해 불완전한 데이터 때문에 전체 retry나 작업 실패를 트리거한다.",
+   "C": "종합 subagent가 시작 전에 Coordinator에게 더 긴 타임아웃으로 시간 초과 source를 retry하도록 요청한다.",
+   "D": "사용할 수 없는 source로 인한 공백과 근거가 충분한 결론을 나타내는 커버리지 주석으로 종합 출력을 구조화한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "커버리지 주석은 투명성을 갖춘 graceful degradation을 구현합니다. 완료된 작업의 가치를 보존하면서 불확실성을 전파해 confidence를 근거 있게 판단할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0006",
+  "question": "문서 분석 subagent가 parsing할 수 없는 손상된 PDF 파일을 만났습니다. 시스템 오류 처리를 설계할 때 이 실패를 처리하는 가장 효과적인 방법은 무엇인가요?\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "Coordinator Agent에게 context를 담은 오류를 반환해 진행 방법을 결정할 수 있게 한다.",
+   "B": "workflow 중단을 피하기 위해 손상된 문서를 아무 알림 없이 건너뛰고 나머지 파일 처리를 계속한다.",
+   "C": "실패를 보고하기 전에 지수 백오프로 문서 parsing을 세 번 자동 retry한다.",
+   "D": "전체 research workflow를 종료하도록 예외를 전파한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "context를 담은 오류를 Coordinator에게 반환하는 것이 가장 효과적입니다. Coordinator가 파일을 건너뛸지, 대체 parsing 방법을 시도할지, 사용자에게 알릴지 근거를 갖고 결정할 수 있으며 실패가 보이도록 유지합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0007",
+  "question": "프로덕션 로그는 \"업로드된 분기 보고서를 분석해줘\" 같은 요청이 문서 분석 Agent 대신 웹 검색 Agent로 45% routing되는 지속적 패턴을 보여줍니다. \n\ntool 정의를 검토하니 \n웹 검색 Agent에는 \"콘텐츠를 분석하고 핵심 정보를 extraction한다\"라고 설명된 `analyze_content` tool이 있고,\n문서 분석 Agent에는 \"문서를 분석하고 핵심 정보를 extraction한다\"라고 설명된 `analyze_document` tool이 있습니다. \n\n잘못된 routing 문제를 어떻게 고쳐야 하나요?\n\n상황:내 버전",
+  "choices": {
+   "A": "Coordinator가 위임을 결정하기 전에 사용자가 업로드 파일을 말하는지 웹 콘텐츠를 말하는지 감지하는 사전 routing classifier를 추가한다.",
+   "B": "웹 검색 tool 이름을 `extract_web_results`로 바꾸고 설명을 \"웹 검색과 URL에서 검색된 정보를 처리하고 반환한다\"로 업데이트한다.",
+   "C": "Coordinator prompt에 올바른 routing을 보여주는 few-shot 예시를 추가한다: \"사용자가 분기 보고서를 업로드 -> 문서 분석 Agent\", \"사용자가 웹 페이지를 질문 -> 웹 검색 Agent\".",
+   "D": "문서 분석 tool 설명에 \"업로드된 PDF, Word 문서, 스프레드시트에 사용\" 같은 사용 예시를 추가하고 웹 검색 tool은 그대로 둔다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "웹 검색 tool 이름을 `extract_web_results`로 바꾸고 설명에 웹 검색과 URL을 명시하면 두 tool 이름과 설명 사이의 의미상 겹침을 제거해 근본 원인을 직접 해결합니다. 각 tool의 목적이 명확해져 Coordinator가 문서 분석과 웹 검색을 안정적으로 구분할 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0008",
+  "question": "동료가 문서 분석 Agent가 Coordinator를 우회해 종합 Agent에게 결과를 직접 보내야 한다고 제안합니다. subagent 간 모든 통신에서 Coordinator를 중앙 허브로 유지하는 핵심 장점은 무엇인가요?\n\nCoordinator를 중앙 허브로 유지하는 핵심 장점은 무엇인가요?",
+  "choices": {
+   "A": "Coordinator가 모든 상호작용을 관찰하고, 오류를 일관되게 처리하며, 각 subagent가 어떤 정보를 받을지 결정할 수 있다.",
+   "B": "Coordinator가 subagent에 대한 여러 요청을 batch 처리해 총 API 호출과 전체 지연 시간을 줄인다.",
+   "C": "Coordinator를 통한 routing은 직접 Agent 간 호출만으로는 어려운 자동 retry 로직을 제공한다.",
+   "D": "subagent는 격리된 memory를 사용하며, 직접 통신은 Coordinator만 수행할 수 있는 복잡한 직렬화를 요구한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "Coordinator 패턴은 모든 상호작용에 대한 중앙 가시성, 시스템 전반의 일관된 오류 처리, 각 subagent가 받는 정보에 대한 세밀한 제어를 제공합니다. 이것이 hub-and-spoke 통신 구조의 주요 장점입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0009",
+  "question": "웹 검색 subagent가 복잡한 주제를 조사하다 타임아웃됩니다. 이 실패 정보를 Coordinator에게 어떻게 돌려줄지 설계해야 합니다. 복구 판단에 가장 도움이 되는 오류 전파 접근 방식은 무엇인가요?\n\n복구 판단에 가장 도움이 되는 오류 전파 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "실패 유형, 실행된 쿼리, 부분 결과, 가능한 대안 접근법을 포함한 structured error context를 Coordinator에게 반환한다.",
+   "B": "subagent 내부에서 타임아웃을 잡고 빈 결과 집합을 성공으로 표시해 반환한다.",
+   "C": "subagent 내부에서 지수 백오프 자동 retry를 구현하고, retry를 모두 소진한 뒤 일반적인 \"search unavailable\" 상태만 반환한다.",
+   "D": "타임아웃 예외를 최상위 핸들러에 직접 전파해 전체 research workflow를 종료한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "실패 유형, 실행된 쿼리, 부분 결과, 대안 접근법을 포함한 structured error context를 반환하면 Coordinator가 수정된 쿼리로 retry할지, 부분 결과로 계속할지 같은 복구 방향을 판단하는 데 필요한 정보를 얻습니다. 이는 조정 수준의 근거 있는 의사결정을 위해 필요한 context를 최대한 유지합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0010",
+  "question": "시스템 설계에서 문서 분석 Agent가 URL로 문서를 다운로드할 수 있도록 범용 tool `fetch_url` 접근 권한을 부여했습니다. 프로덕션 로그는 이 Agent가 이제 임시 웹 검색을 수행하기 위해 검색 엔진 결과 페이지를 자주 다운로드한다는 것을 보여줍니다. 이 동작은 웹 검색 Agent를 통해 routing되어야 하며, 현재는 결과 불일치를 유발합니다. 가장 효과적인 수정안은 무엇인가요?\n\n가장 효과적인 수정안은 무엇인가요?",
+  "choices": {
+   "A": "`fetch_url`을 URL이 문서 형식을 가리키는지 validation하는 `load_document` tool로 교체한다.",
+   "B": "문서 분석 Agent에서 `fetch_url`을 제거하고 모든 URL 가져오기를 Coordinator를 통해 웹 검색 Agent로 routing한다.",
+   "C": "알려진 검색 엔진 도메인에 대한 `fetch_url` 호출을 차단하고 다른 URL은 허용하는 필터링을 구현한다.",
+   "D": "문서 분석 Agent prompt에 `fetch_url`은 검색이 아니라 문서 URL 다운로드에만 사용해야 한다는 지시를 추가한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "범용 `fetch_url`을 문서 형식 URL만 validation하는 전용 `load_document` tool로 바꾸면 interface 단계에서 기능 범위가 줄어듭니다. 최소 권한 원칙에 맞고, 원치 않는 검색 동작을 prompt 지시로 막는 대신 구조적으로 차단합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0011",
+  "question": "넓은 주제를 조사하는 동안 웹 검색 Agent와 문서 분석 Agent가 같은 하위 주제를 조사해 출력에 중복이 크게 발생합니다. token 사용량은 거의 두 배가 되지만 research 폭이나 깊이는 그만큼 늘지 않습니다. 이 문제를 가장 효과적으로 해결하려면 어떻게 해야 하나요?\n\n이 문제를 가장 효과적으로 해결하려면 어떻게 해야 하나요?",
+  "choices": {
+   "A": "두 Agent가 병렬로 끝나도록 허용한 뒤 Coordinator가 겹치는 결과를 중복 제거하고 종합 Agent에게 전달한다.",
+   "B": "Coordinator가 위임 전에 research 공간을 명시적으로 분할해 각 Agent에 서로 다른 하위 주제나 source 유형을 할당한다.",
+   "C": "Agent들이 현재 집중 영역을 기록해 다른 Agent가 실행 중 동적으로 중복을 피할 수 있도록 공유 상태 메커니즘을 구현한다.",
+   "D": "웹 검색이 완료된 뒤 문서 분석을 실행하는 순차 실행으로 전환하고, 웹 검색 결과를 context로 사용해 중복을 피한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "Coordinator가 위임 전에 research 공간을 명시적으로 분할하는 것이 가장 효과적입니다. 작업이 시작되기 전에 모호한 작업 경계라는 근본 원인을 해결하기 때문입니다. 병렬성을 보존하면서 중복 작업과 token 낭비를 방지합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0012",
+  "question": "research 중 웹 검색 subagent가 세 source 범주를 조회했으며 결과가 서로 다릅니다. 학술 데이터베이스는 관련 논문 15편을 반환하고, 산업 보고서는 \"0 results\"를 반환하며, 특허 데이터베이스는 \"Connection timeout\"을 반환합니다. Coordinator로의 오류 전파를 설계할 때 어떤 접근 방식이 복구 결정을 가장 잘 돕나요?\n\n어떤 접근 방식이 복구 결정을 가장 잘 돕나요?",
+  "choices": {
+   "A": "결과를 하나의 성공률 지표(예: \"67% source coverage\")로 집계하고 자세한 로그는 요청 시 제공한다.",
+   "B": "\"timeout\"과 \"0 results\"를 모두 Coordinator 개입이 필요한 실패로 보고한다.",
+   "C": "일시적 실패를 내부적으로 retry하고 지속적인 오류만 보고한다.",
+   "D": "retry 결정이 필요한 접속 실패(timeout)와 성공한 쿼리를 나타내는 유효한 빈 결과(\"0 results\")를 구분한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "타임아웃(접근 실패)과 \"0 results\"(유효한 빈 결과)는 의미적으로 다른 결과이며 서로 다른 대응이 필요합니다. 이를 구분하면 Coordinator가 특허 데이터베이스는 retry하고, 산업 보고서의 \"0 results\"는 유효하고 의미 있는 결과로 받아들일 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0013",
+  "question": "프로덕션 모니터링에서 종합 품질이 일관되지 않음을 확인했습니다. 집계 결과가 약 75K token일 때, 종합 Agent는 첫 15K token(웹 검색 헤드라인/스니펫)과 마지막 10K token(문서 분석 결론)의 정보는 안정적으로 citation으로 뒷받침하지만, 중간 50K token의 중요한 발견은 research 질문에 직접 답하더라도 자주 놓칩니다. 집계 입력을 어떻게 재구성해야 하나요?\n\n집계 입력을 어떻게 재구성해야 하나요?",
+  "choices": {
+   "A": "모델의 안정적 처리 범위 안에 콘텐츠를 유지하기 위해 모든 subagent 출력을 집계 전에 20K token 이하로 summary한다.",
+   "B": "subagent 결과를 종합 Agent에 점진적으로 스트리밍해 웹 검색 결과를 먼저 완전히 처리한 뒤 문서 분석 결과를 추가한다.",
+   "C": "집계 입력 시작 부분에 핵심 발견을 summary로 앞에 모으고, 세부 결과를 명시적 섹션 제목으로 구성해 탐색을 쉽게 한다.",
+   "D": "research 작업마다 어느 subagent 결과가 먼저 나오는지 번갈아 batch하는 회전을 구현해 두 source가 시간에 따라 동일하게 첫 위치를 얻도록 한다."
+  },
+  "answer": [
+   "C"
+  ],
+  "explanation": "핵심 발견 summary를 시작 부분에 두면 primacy 효과를 활용해 중요한 정보가 가장 안정적으로 처리되는 위치에 놓입니다. 전체에 명시적 섹션 제목을 추가하면 모델이 중간 입력 콘텐츠를 탐색하고 주의를 기울이는 데 도움이 되어 \"lost in the middle\" 현상을 직접 완화합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0014",
+  "question": "테스트에서 웹 검색 Agent 출력(페이지 콘텐츠 포함 85K token)과 문서 분석 Agent 출력(사고 과정 포함 70K token)을 합치면 155K token이지만, 종합 Agent는 50K token 미만 입력에서 가장 잘 동작합니다. 가장 효과적인 해결책은 무엇인가요?\n\n가장 효과적인 해결책은 무엇인가요?",
+  "choices": {
+   "A": "upstream Agent가 장황한 콘텐츠와 추론 대신 structured data(핵심 사실, citation, 관련성 점수)를 반환하도록 수정한다.",
+   "B": "종합에 전달하기 전에 발견 사항을 압축하는 중간 summary Agent를 추가한다.",
+   "C": "종합 Agent가 호출 사이에 상태를 유지하면서 발견 사항을 순차 batch로 처리하게 한다.",
+   "D": "발견 사항을 vector 데이터베이스에 저장하고 종합 Agent에게 작업 중 조회할 검색 tool을 제공한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "upstream Agent가 structured data를 반환하도록 수정하면 필수 정보를 보존하면서 token량을 source에서 줄여 근본 원인을 해결합니다. 종합 단계 개선에 기여하지 않는 분량이 큰 페이지 콘텐츠와 추론 흔적을 전달하는 것을 피합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0015",
+  "question": "테스트에서 종합 Agent가 결과를 병합하면서 특정 주장을 validation해야 하는 경우가 많다는 것을 관찰했습니다. 현재 validation이 필요하면 종합 Agent가 제어를 Coordinator에게 반환하고, Coordinator가 웹 검색 Agent를 호출한 뒤 결과와 함께 종합을 다시 호출합니다. 이로 인해 작업당 루프가 2-3회 추가되고 지연 시간이 40% 증가합니다. 평가 결과 이러한 validation의 85%는 단순 사실 확인(날짜, 이름, 통계)이고 15%는 더 깊은 research가 필요합니다. 시스템 안정성을 보존하면서 overhead를 가장 효과적으로 줄이는 접근 방식은 무엇인가요?\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "종합 Agent에 모든 웹 검색 tool 접근 권한을 부여해 Coordinator 루프 없이 모든 validation 필요를 직접 처리하게 한다.",
+   "B": "종합 Agent가 모든 validation 필요 사항을 모아 마지막에 batch로 Coordinator에게 반환하면, Coordinator가 이를 한 번에 웹 검색 Agent에게 보낸다.",
+   "C": "웹 검색 Agent가 초기 research 중 종합에서 validation이 필요할 것을 예상해 각 source 주변의 추가 context를 사전에 cache한다.",
+   "D": "단순 확인을 위한 제한 범위 `verify_fact` tool을 종합 Agent에게 제공하고, 복잡한 validation은 Coordinator를 통해 웹 검색 Agent로 routing한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "제한 범위 사실 validation tool은 종합 Agent가 단순 확인의 85%를 직접 처리하게 해 대부분의 추가 루프를 없애면서, 복잡한 validation 15%에는 Coordinator 위임 경로를 유지합니다. 이는 최소 권한 원칙을 지키면서 지연 시간을 크게 줄입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0016",
+  "question": "CI pipeline이 코드 리뷰를 위한 프로젝트 context를 제공하기 위해 CLAUDE.md를 사용하며, Claude Code CLI를 `--print` 모드로 실행합니다. \n개발자들은 대체로 리뷰가 실질적이라고 느낍니다. 하지만 발견 사항을 workflow에 통합하기 어렵다고 보고합니다. \nClaude가 서술형 문단을 출력해 PR 댓글로 수동 복사해야 하기 때문입니다. \n팀은 각 발견 사항을 코드의 관련 위치에 별도 인라인 PR 댓글로 자동 게시하고 싶어 하며, 이를 위해 파일 경로, 줄 번호, severity 수준, 제안 수정이 포함된 structured data가 필요합니다. \n\n> 해석:\n클로드한테 CI 를 위한 코드리뷰를 시켰는데, PR이 존나 문장으로 나와서 징징대고 있다.\nstructured data가 필요하다고 징징된다.\n어케하면 됨? \n\n> 답 :`--output-format json`과 `--json-schema`를 사용해서 답변 형식을 고정하게 한다.\n> 결론 : 이 개씹 푸씨새끼들이  \n\n\n\n가장 효과적인 접근 방법은 무엇인가요?\n\n가장 효과적인 접근 방법은 무엇인가요?",
+  "choices": {
+   "A": "CLAUDE.md에 \"Output Format for Review\" 섹션과 structured 발견 예시를 추가해 Claude가 프로젝트 context에서 기대 형식을 학습하게 한다.",
+   "B": "CLI 플래그 `--output-format json`과 `--json-schema`를 사용해 structured 발견을 강제한 뒤, 출력을 parsing해 GitHub API로 인라인 댓글을 게시한다.",
+   "C": "리뷰 prompt에 각 발견 사항이 `[FILE:path] [LINE:n] [SEVERITY:level] ...` 같은 parsing 가능한 template을 따르도록 명시적 형식 지시를 포함한다.",
+   "D": "서술형 리뷰 형식은 유지하되, Claude를 사용해 발견 사항의 structured JSON summary를 생성하는 summary 단계를 추가한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "`--json-schema`와 함께 `--output-format json`을 사용하면 CLI 수준에서 structured output을 강제한다.\nGitHub API로 인라인 PR 댓글을 게시하기 위해 안정적으로 parsing 가능한 필수 필드(파일 경로, 줄 번호, severity, 제안 수정)를 갖춘 올바른 JSON을 보장합니다. 이는 structured output에 맞게 설계된 내장 CLI 기능을 활용합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0017",
+  "question": "팀은 코드 제안 생성에 Claude Code를 사용하지만, 한 가지 패턴을 발견했습니다. \n엣지 케이스를 깨뜨리는 성능 최적화, 예상치 않게 동작을 바꾸는 정리 작업 같은 명확하지 않은 이슈는 다른 팀원이 PR을 리뷰할 때만 잡힙니다.\n생성 중 Claude의 추론을 보면 이러한 사례를 고려했지만 자신의 접근이 옳다고 결론 내렸습니다. \n이 자기 점검 한계의 근본 원인을 직접 다루는 접근 방식은 무엇인가요?\n\n근본 원인을 직접 다루는 접근 방식은 무엇인가요?",
+  "choices": {
+   "A": "생성자의 추론에 접근하지 않는 두 번째 독립 Claude Code instance를 실행해 변경 사항을 리뷰한다.",
+   "B": "제안 생성 전에 더 철저히 숙고할 수 있도록 생성 단계에 extended thinking 모드를 활성화한다.",
+   "C": "최종 출력 전에 Claude가 자신의 제안을 비판하도록 생성 prompt에 명시적 자기 리뷰 지시를 추가한다.",
+   "D": "생성 중 기대 동작을 더 잘 이해하도록 전체 테스트 파일과 문서를 prompt context에 포함한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "생성자의 추론에 접근하지 않는 두 번째 독립 Claude Code instance는 확증 편향을 피함으로써 근본 원인을 직접 해결합니다. 이 \"fresh eyes\" 관점은 작성자가 합리화한 이슈를 다른 리뷰어가 잡아내는 사람 동료 리뷰와 유사합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0018",
+  "question": "코드 리뷰 컴포넌트는 반복적입니다. Claude가 변경된 파일을 분석한 뒤 최종 피드백 전에 context 이해를 위해 관련 파일(import, base class, tests)을 tool 호출로 요청할 수 있습니다. 애플리케이션은 Claude가 파일 내용을 요청할 수 있는 tool을 정의합니다. Claude는 tool을 호출하고 결과를 받은 뒤 분석을 계속합니다. API 비용 절감을 위해 batch 처리를 평가하고 있습니다. 이 workflow에서 batch 처리를 고려할 때 주요 기술적 한계는 무엇인가요?\n\n주요 기술적 한계는 무엇인가요?",
+  "choices": {
+   "A": "batch 처리는 출력을 입력 요청에 다시 매핑하는 상관관계 ID를 포함하지 않는다.",
+   "B": "비동기 모델은 요청 중간에 tool을 실행하고 Claude가 분석을 계속할 수 있도록 결과를 반환할 수 없다.",
+   "C": "Batch API는 요청 매개변수의 tool 정의를 지원하지 않는다.",
+   "D": "최대 24시간의 batch 처리 지연이 풀 리퀘스트 피드백에는 너무 느리지만, 그 외에는 workflow가 작동한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "\"fire-and-forget\" 비동기 Batch API 모델에는 요청 중 tool 호출을 가로채고, tool을 실행한 후 Claude가 분석을 계속하도록 결과를 반환하는 메커니즘이 없습니다. 이는 단일 논리 상호작용 안에서 여러 tool 요청/응답 라운드가 필요한 반복적 tool 호출 workflow와 근본적으로 맞지 않습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0019",
+  "question": "CI/CD 시스템은 세 가지 Claude 기반 분석을 실행합니다. \n\n(1) 완료 전까지 병합을 차단하는 모든 PR의 빠른 스타일 검사, \n(2) 전체 코드베이스에 대한 포괄적인 주간 보안 감사, \n(3) 최근 변경된 module에 대한 야간 테스트 케이스 생성. \n\nMessage Batches API는 50% 절감을 제공하지만 처리에 최대 24시간이 걸릴 수 있습니다. \n허용 가능한 개발자 경험을 유지하면서 API 비용을 최적화하려고 합니다. 각 작업과 API 접근 방식을 올바르게 매칭한 조합은 무엇인가요?\n\n올바른 조합은 무엇인가요?",
+  "choices": {
+   "A": "50% 절감을 최대화하기 위해 세 작업 모두 Message Batches API를 사용하고, pipeline이 batch 완료를 polling하도록 구성한다.",
+   "B": "PR 스타일 검사는 동기 호출을 사용하고, 주간 보안 감사와 야간 테스트 생성에는 Message Batches API를 사용한다.",
+   "C": "세 작업 모두 동기 호출을 사용해 일관된 응답 시간을 유지하고, 워크로드 전반의 비용 절감은 prompt caching에 의존한다.",
+   "D": "PR 스타일 검사와 야간 테스트 생성은 동기 호출을 사용하고, 주간 보안 감사에만 Message Batches API를 사용한다."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "PR 스타일 검사는 개발자를 차단하며 동기 호출로 즉시 응답해야 합니다. 반면 주간 보안 감사와 야간 테스트 생성은 최대 24시간 batch window를 허용할 수 있는 마감이 비교적 유연한 예약 작업이므로 둘 다 50% 절감을 얻을 수 있습니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0020",
+  "question": "자동 리뷰가 실제 이슈를 찾지만 개발자들은 피드백이 실행 가능하지 않다고 보고합니다. 발견 사항에는 정확히 무엇을 바꿔야 하는지 지정하지 않은 채 \"복잡한 티켓 routing 로직\"이나 \"잠재적 null pointer\" 같은 문구가 포함됩니다. \"항상 구체적 수정 제안을 포함하라\" 같은 상세 지시를 추가해도 모델 출력은 여전히 어떤 때는 상세하지만 어떤 때는 모호해 일관성이 없습니다. 어떤 prompting 기법이 일관되게 실행 가능한 피드백을 가장 안정적으로 생성하나요?\n\n가장 신뢰할 수 있는 prompting 기법은 무엇인가요?",
+  "choices": {
+   "A": "피드백 형식의 각 부분(위치, 이슈, severity, 제안 수정)에 대해 더 명시적인 요구사항으로 지시를 더 다듬는다.",
+   "B": "모델이 구체적 수정을 제안할 충분한 정보를 갖도록 더 많은 주변 코드베이스를 context window에 포함한다.",
+   "C": "한 prompt는 이슈를 식별하고 두 번째 prompt는 수정을 생성하는 2패스 접근으로 전문화를 허용한다.",
+   "D": "식별된 이슈, 코드 위치, 구체적 수정 제안 등 정확히 필요한 형식을 보여주는 few-shot 예시 3-4개를 추가한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "Few-shot 예시는 지시만으로 출력이 가변적일 때 출력 형식을 일관되게 만드는 가장 효과적인 기법입니다. 원하는 구조(이슈, 위치, 구체적 수정)를 보여주는 예시 3-4개는 모델이 따를 구체적 패턴을 제공하며, 추상적인 지시만 쓰는 것보다 안정적입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0021",
+  "question": "CI pipeline에는 두 가지 Claude 기반 코드 리뷰 모드가 있습니다. 완료될 때까지 PR 병합을 차단하는 병합 전 커밋 hook과, 밤새 실행되어 batch 완료를 polling하고 PR에 자세한 제안을 게시하는 \"deep analysis\"입니다. 50% 절감을 제공하지만 polling이 필요하고 최대 24시간 걸릴 수 있는 Message Batches API를 사용해 API 비용을 줄이고 싶습니다. 어떤 모드가 batch 처리를 사용해야 하나요?\n\n어떤 모드가 batch 처리를 사용해야 하나요?",
+  "choices": {
+   "A": "병합 전 커밋 hook만.",
+   "B": "deep analysis만.",
+   "C": "두 모드 모두.",
+   "D": "어느 모드도 아님."
+  },
+  "answer": [
+   "B"
+  ],
+  "explanation": "Deep analysis는 이미 밤새 실행되고 지연을 허용하고 결과 게시 전에 polling하는 구조이므로 batch 처리에 이상적인 후보입니다. 이는 Message Batches API의 비동기 polling 기반 architecture와 잘 맞고 50% 절감을 제공합니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0022",
+  "question": "자동 리뷰가 댓글과 docstring을 분석합니다. 현재 prompt는 Claude에게 \"댓글이 정확하고 최신인지 확인하라\"고 지시합니다. 발견 사항은 TODO 표시나 단순 설명 같은 허용 가능한 패턴을 자주 문제로 표시하면서, 코드가 더 이상 구현하지 않는 동작을 설명하는 댓글은 놓칩니다. 이 일관되지 않은 분석의 근본 원인을 해결하려면 무엇을 바꿔야 하나요?\n\n근본 원인을 해결하려면 무엇을 바꿔야 하나요?",
+  "choices": {
+   "A": "Claude가 최근 코드 변경보다 오래된 댓글을 식별할 수 있도록 `git blame` 데이터를 포함한다.",
+   "B": "모델이 코드베이스의 유사 패턴을 인식하도록 오해를 부르는 댓글의 few-shot 예시를 추가한다.",
+   "C": "노이즈를 줄이기 위해 분석 전에 TODO, FIXME, 설명형 댓글 패턴을 필터링한다.",
+   "D": "명시적 기준을 지정한다. 댓글이 주장하는 동작이 코드의 실제 동작과 모순될 때만 표시한다."
+  },
+  "answer": [
+   "D"
+  ],
+  "explanation": "명시적 기준, 즉 댓글이 주장하는 동작이 실제 코드 동작과 모순될 때만 표시한다는 기준은 모호한 지시를 구체적인 판정 기준으로 바꿔 근본 원인을 해결합니다. 이는 허용 가능한 패턴에 대한 false positive과 실제로 잘못된 댓글을 놓치는 문제도 줄입니다."
+ },
+ {
+  "id": "CCAR-F-MyPractice-0023",
+  "question": "자동 코드 리뷰 시스템이 일관되지 않은 severity 평가를 보입니다. null pointer 위험 같은 유사 이슈가 어떤 PR에서는 \"critical\"로, 다른 PR에서는 \"medium\"으로 평가됩니다. 개발자 설문에서도 신뢰가 떨어졌다는 결과가 나왔습니다. 많은 개발자가 \"절반은 틀렸다\"고 느끼며 발견 사항을 읽지 않고 무시하기 시작합니다. false positive 비율이 높은 범주는 정확한 범주에 대한 신뢰까지 훼손합니다. 개발자 신뢰를 회복하면서 시스템을 개선하는 가장 좋은 접근은 무엇인가요?\n\n개발자 신뢰를 가장 잘 회복하는 접근은 무엇인가요?",
+  "choices": {
+   "A": "false positive 비율이 높은 범주(스타일, 명명, 문서화)를 일시적으로 비활성화하고, prompt를 개선하는 동안 정확도가 높은 범주만 유지한다.",
+   "B": "모든 범주를 활성화하되 각 발견 사항에 confidence 점수를 표시해 개발자가 조사할 대상을 결정하게 한다.",
+   "C": "모든 범주를 활성화한 채 다음 몇 주 동안 각 범주의 accuracy 개선을 위해 few-shot 예시를 추가한다.",
+   "D": "전체 false positive 비율을 낮추기 위해 모든 범주에 균일한 엄격도 완화를 적용한다."
+  },
+  "answer": [
+   "A"
+  ],
+  "explanation": "false positive 비율이 높은 범주를 일시적으로 비활성화하면 개발자가 모든 것을 무시하게 만드는 노이즈를 제거해 신뢰 하락을 즉시 멈출 수 있습니다. 동시에 보안과 정확성 같은 정확도가 높은 범주의 가치를 유지합니다. 또한 문제 범주를 다시 활성화하기 전에 prompt를 개선할 여지를 만듭니다."
+ }
+]

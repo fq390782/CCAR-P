@@ -1,0 +1,155 @@
+[
+  {
+    "number": "M3-Q30",
+    "heading": "M3-Q30 (V2-D3.7), Select TWO",
+    "question": "A team integrates: (1) an internal API used by one\nservice, (2) a device capability that exists only as a CLI.\n\nWhich TWO are correct? Select TWO.",
+    "choices": {
+      "A": "Direct API for the single internal pair.",
+      "B": "CLI wrapper for the CLI-only device capability.",
+      "C": "MCP server for the single pair.",
+      "D": "MCP server for the one-off CLI.",
+      "E": "Carrier pigeon."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"one service... exists only as a\nCLI.\" Why: one pair takes the direct API. LI-only takes the wrapper.\nC and D pay protocol tax for single uses. Counterfactual: none.",
+    "source_section": "V2-D3.7"
+  },
+  {
+    "number": "M3-Q31",
+    "heading": "M3-Q31 (V2-D3.8)",
+    "question": "A support agent uses 40 tools. The SLA is 15 seconds.\nToken costs are the top complaint. Wrong-tool picks climb.\n\nWhich strategy fits?",
+    "choices": {
+      "A": "Monolithic context.",
+      "B": "Progressive discovery: names first, schemas on demand. The loose\nSLA absorbs the round trip. Tokens and pick accuracy improve.",
+      "C": "Remove all tools.",
+      "D": "Add 40 more tools."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"40 tools... SLA is 15 seconds... Wrong-tool\npicks climb.\" Why: large surface plus loose SLA is the discovery\nwin condition. Counterfactual: A wins with 6 tools and a 1-second SLA.",
+    "source_section": "V2-D3.8"
+  },
+  {
+    "number": "M3-Q32",
+    "heading": "M3-Q32 (V2-D4.1)",
+    "question": "A fraud detector's requirement is \"catch fraud.\" The team\nmust set the acceptance threshold.\n\nWhat is the correct threshold shape?",
+    "choices": {
+      "A": "The team feels good.",
+      "B": "Recall on confirmed fraud is at or above 95%. The false-positive rate is at or below 2%. Measure this on a held-out set.",
+      "C": "A bigger model.",
+      "D": "100% on the training set."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"'catch fraud.'\" Why: vague requirements\nbecome measured thresholds with the metric, the line, and the\nmeasurement set named. D measures memorization. Counterfactual: A wins\nnever as a threshold.",
+    "source_section": "V2-D4.1"
+  },
+  {
+    "number": "M3-Q33",
+    "heading": "M3-Q33 (V2-D4.1)",
+    "question": "A voice bot needs fast responses. The team sets the p95 acceptance threshold under 2 seconds. No one answers for the threshold.\n\nWhich link of the Lesson 7-4A requirement chain is still\nmissing?",
+    "choices": {
+      "A": "Nothing. The requirement, the metric, the threshold, and the owner are all present.",
+      "B": "The owner. No one answers for the threshold.",
+      "C": "The requirement.\nNo one wrote \"fast responses.\"",
+      "D": "The metric. No one named latency."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"No one is named to answer for the\nthreshold.\" Why: the Lesson 7-4A chain runs requirement, metric,\nthreshold, owner. The scenario gives the first three. Without a named\nowner, the threshold drifts when the traffic mix changes. A is the\ntrap: \"the team\" is not a named owner. C and D contradict the stated\nscenario. Counterfactual: A wins when a named role owns the threshold\nand reviews it on a cadence.",
+    "source_section": "V2-D4.1"
+  },
+  {
+    "number": "M3-Q34",
+    "heading": "M3-Q34 (V2-D4.2)",
+    "question": "A team grades answers with a judge model. Human review of\n100 sampled grades shows the judge is right 60% of the time.\n\nWhat is the conclusion?",
+    "choices": {
+      "A": "The judge is fine.",
+      "B": "The judge is not calibrated. 60% agreement is near chance on graded scales. Do not trust its grades. Fix or replace the judge.\nOr grade with code and humans.",
+      "C": "Sample more. Hope for a good result.",
+      "D": "Use a bigger judge."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"right 60% of the time.\" Why: the grading\nladder requires calibrated judges. 60% agreement means the grades are\nnoise. Counterfactual: A wins at 95% agreement with the disagreements\ncharacterized.",
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "M3-Q35",
+    "heading": "M3-Q35 (V2-D4.2), Select TWO",
+    "question": "An eval set for a code assistant has only Python tasks.\n\nWhich TWO drawers are absent? Select TWO.",
+    "choices": {
+      "A": "Representative coverage of the other supported languages.",
+      "B": "Adversarial cases: prompts crafted to elicit insecure code.",
+      "C": "More Python tasks.",
+      "D": "The training set again.",
+      "E": "Blank files."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "The decisive phrase is \"only Python tasks.\" The representative drawer misses all other languages. The adversarial drawer is empty. The threat (insecure code) has a name. Counterfactual: E wins as the malformed drawer, a third addition.",
+    "source_section": "V2-D4.2"
+  },
+  {
+    "number": "M3-Q36",
+    "heading": "M3-Q36 (V2-D4.3)",
+    "question": "A team runs an A/B test on a risky auto-refund change\nwith full traffic on day one.\n\nWhat is wrong?",
+    "choices": {
+      "A": "Nothing. Fast tests are good.",
+      "B": "Risky changes go shadow first, then controlled exposure. Full\ntraffic on day one maximizes blast radius.",
+      "C": "A/B tests never apply to refunds.",
+      "D": "The test needs no hypothesis."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"risky auto-refund change with full\ntraffic on day one.\" Why: V2-D4.3's shadow-first rule for risky\nchanges. The experiment design must bound user harm. Counterfactual: A\nwins for a low-risk copy change.",
+    "source_section": "V2-D4.3"
+  },
+  {
+    "number": "M3-Q37",
+    "heading": "M3-Q37 (V2-D4.4)",
+    "question": "A vendor model update changed a support bot's tone. The tone became rude. Prompts, retrieval, and data are not changed.\n\nWhich layer failed?",
+    "choices": {
+      "A": "Retrieval.",
+      "B": "The model version: vendor behavior changed under the same prompt.\nPin or change the version and re-run regression.",
+      "C": "The prompt.",
+      "D": "The office culture."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"after a vendor model update... unchanged.\"\nWhy: the change log names the version. Version behavior is a layer in\nV2-D4.4. Fix it as a production change. Counterfactual: C wins when\nthe prompt changed.",
+    "source_section": "V2-D4.4"
+  },
+  {
+    "number": "M3-Q38",
+    "heading": "M3-Q38 (V2-D4.4), Select TWO",
+    "question": "A RAG bot hallucinates product specs. Traces show: chunks\narrive, but the top chunk is a forum post, not the spec sheet. The\nspec sheet ranks fifth.\n\nWhich TWO fixes match the layer? Select TWO.",
+    "choices": {
+      "A": "Boost authoritative sources in ranking (or filter to the spec\ncorpus).",
+      "B": "Add source-type metadata and prefer it at retrieval.",
+      "C": "Upgrade the model tier.",
+      "D": "Rewrite the system prompt.",
+      "E": "Add more forums."
+    },
+    "answer": ["A", "B"],
+    "select_count": 2,
+    "explanation": "Decisive phrase: \"top chunk is a forum post, not the\nspec sheet.\" Why: the retrieval layer returns the wrong authority.\nRanking and metadata fixes belong to that layer. C and D fix proxies.\nCounterfactual: C wins when the spec chunk is top-ranked and the\nanswer still errs.",
+    "source_section": "V2-D4.4"
+  },
+  {
+    "number": "M3-Q39",
+    "heading": "M3-Q39 (V2-D4.5)",
+    "question": "A nightly job re-embeds 1M documents. Only 2% change per\nnight.\n\nWhich optimization fits?",
+    "choices": {
+      "A": "Re-embed everything nightly.",
+      "B": "Incremental embedding: embed only changed documents, reuse the rest.",
+      "C": "A bigger model.",
+      "D": "Delete the index."
+    },
+    "answer": ["B"],
+    "select_count": 1,
+    "explanation": "Decisive phrase: \"Only 2% change per night.\" Why: call\nelimination is the V2-D4.5 lever. Re-embedding 98% unchanged documents\nis pure waste. Counterfactual: A wins when change detection costs more\nthan re-embedding.",
+    "source_section": "V2-D4.5"
+  }
+]

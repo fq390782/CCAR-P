@@ -1,0 +1,46 @@
+# CCDV-F 반드시 알아야 할 지식 (도메인별)
+
+`output/CCDV-F/Question`의 207문항(정답과 해설)에서 시험 가이드 8개 도메인별로 꼭 알아야 할 지식을 뽑아 정리했습니다.
+- 출처: Amey-Thakur 80, PatrickWiloak 44, preporato 30, Udemy 53
+- Udemy 53문항은 원본에 도메인이 없어서 새로 분류했습니다. 결과는 `udemy_domain_map.json`에 있고, 이 중 19문항은 분류 확신도가 낮음(low)입니다.
+
+## 학습 순서 (시험 비중순)
+
+| 비중 | 문항 | 도메인 | 파일 | 근거 문항 | ⚠️ |
+|---|---|---|---|---|---|
+| 33% | 10 | Applications and Integration (+ CCAR-P D3 · CCAR-F D4 일부 보강, 2026-11-24) | [2_Applications_and_Integration.md](2_Applications_and_Integration.md) | 115 (CCDV-F 65 · CCAR 50) | 4건 |
+| 17% | 5 | Model Selection and Optimization (+ CCAR-P D2·D4 일부 보강, 2026-11-24) | [5_Model_Selection_and_Optimization.md](5_Model_Selection_and_Optimization.md) | 110 (CCDV-F 28 · CCAR 82) | 16건 |
+| 15% | 4 | Agents and Workflows (+ CCAR-F D1 · CCAR-P D1 보강, 2026-11-24) | [1_Agents_and_Workflows.md](1_Agents_and_Workflows.md) | 218 (CCDV-F 27 · CCAR 191) | 4건 |
+| 11% | 3 | Prompt and Context Engineering (+ CCAR-F D4·D5 · CCAR-P D2 일부 보강, 2026-11-24) | [6_Prompt_and_Context_Engineering.md](6_Prompt_and_Context_Engineering.md) | 218 (CCDV-F 23 · CCAR 195) | 7건 |
+| 10% | 3 | Tools and MCPs (+ CCAR-F D2 · CCAR-P D3 일부 보강, 2026-11-24) | [8_Tools_and_MCPs.md](8_Tools_and_MCPs.md) | 178 (CCDV-F 21 · CCAR 157) | 3건 |
+| 8% | 3 | Security and Safety (+ CCAR-P D5·D3 일부 보강, 2026-11-25) | [7_Security_and_Safety.md](7_Security_and_Safety.md) | 136 (CCDV-F 17 · CCAR 119) | 4건 |
+| 3% | 1 | Claude Code (+ CCAR-F D3 · CCAR-P D7 보강, 2026-11-24) | [3_Claude_Code.md](3_Claude_Code.md) | 225 (CCDV-F 10 · CCAR 215) | 7건 |
+| 3% | 1 | Eval, Testing, and Debugging (+ CCAR-P D4·D3 일부 · CCAR-F D4 일부 보강, 2026-11-24) | [4_Eval_Testing_and_Debugging.md](4_Eval_Testing_and_Debugging.md) | 149 (CCDV-F 16 · CCAR 133) | 7건 |
+| — | — | RAG & Retrieval (CCAR-P D3 일부, 신규 작성 2026-11-25) | [9_RAG_and_Retrieval.md](9_RAG_and_Retrieval.md) | 44 (CCAR 44) | 1건 |
+| — | — | Reliability, Escalation & Human Oversight (CCAR-F D5 · CCAR-P D5 일부, 신규 작성 2026-11-24) | [10_Reliability_Escalation_and_Oversight.md](10_Reliability_Escalation_and_Oversight.md) | 84 (CCAR 84) | 0건 |
+| — | — | Solution Design & Stakeholder Communication (CCAR-P D1·D6 일부, 신규 작성 2026-11-25) | [11_Solution_Design_and_Stakeholder_Communication.md](11_Solution_Design_and_Stakeholder_Communication.md) | 155 (CCAR 155) | 1건 |
+
+## 파일 구성
+
+모든 파일은 같은 다섯 장으로 되어 있습니다.
+1. 핵심 개념
+2. 상황별 정답 판단 규칙 (표)
+3. 자주 나오는 오답 함정
+4. 암기 목록
+5. 시험 직전 체크리스트
+
+- **그림**: workflow, flowchart, dataflow, decision tree, sequence, before/after 비교 등 흐름이나 패턴이 있는 부분마다 `svg/` 폴더의 그림 129개를 넣었습니다. 2장 판단 규칙 표 아래에는 같은 내용을 decision tree로 그린 그림이 있습니다. 색 규칙은 다음과 같습니다.
+  - 파랑: 정답/권장
+  - 빨강: 오답/안티패턴
+  - 노랑 마름모: 판단 분기
+  - 초록: 종료/성공
+- **문체**: 표 중심 개조식입니다. 소절마다 "핵심 한 줄(bold) → 표 → 그림 → `근거:` 줄" 순서로 되어 있습니다.
+  - 기호: `→` 결과·인과, `✗` 오답·금지, ` · ` 나열
+  - 문체를 바꾸기 전 원본: `work/restyle_backup/orig/`
+- **근거 표기**: 각 소절 끝의 `근거:` 줄에 모았습니다. `Amey-0004`, `Patrick-0038`, `Preporato-0030`, `Udemy-0012`는 문항 id에서 `CCDV-F-`를 떼고 출처 이름을 줄인 것입니다. 207문항이 모두 한 번 이상 인용됩니다.
+- **⚠️ 표시**: 문항 해설이 공식 Anthropic 문서와 어긋나 보이거나, 모델 버전·가격처럼 시점에 따라 바뀌는 내용입니다. 시험 전에 공식 문서로 다시 확인하세요.
+
+## 멀티에이전트: coordinator 1개 + subagent n개
+
+- 정리하는 내용으로서: `1_Agents_and_Workflows.md`의 1.3절이 이 구조를 다룹니다. coordinator와 subagent가 각각 맡는 역할, subagent에게 넘길 것과 넘기지 말 것, 단일 에이전트나 workflow가 더 나은 경우를 정리했습니다.
+- 이 자료를 만든 방식으로서: coordinator 1개가 Udemy 문항 분류(classifier subagent 1개)와 도메인별 문항 분할을 맡았습니다. 이어서 도메인 subagent 8개가 병렬로 각 파일을 작성했고, coordinator가 검수했습니다. 검수 내용은 누락된 문항 인용, id 표기 통일, 빠진 ⚠️ 보완입니다.
