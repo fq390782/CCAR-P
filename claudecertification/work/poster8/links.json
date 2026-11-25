@@ -1,6 +1,0 @@
-{"L1": ["tool 정의", "description · schema", "→ tools에 포함"],
- "L2": ["상태 · 역할별", "허용 tool만 전달", "실행 전 게이트"],
- "L3": ["tools/list → 모델용 tool 정의로 변환", "모델이 고른 tool → tools/call 실행"],
- "L4": ["API가 tool 목록 조회 · 호출 대행", "앱의 tool_result 반환 불필요"],
- "L5": ["불필요한 쓰기 MCP tool 제거", "configs enabled: false · blocked"],
- "L6": ["MCP 서버 추가 후 성공률 하락", "→ 중복 · description 구별성 확인", "다수 server 선로드 → tool search"]}
